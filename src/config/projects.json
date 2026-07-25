@@ -1,0 +1,50 @@
+{
+  "headline": "Selected work",
+  "subheadline": "Custom platforms delivered for complex maritime environments.",
+  "items": [
+    {
+      "id": "fleet-command",
+      "title": "Fleet Command Hub",
+      "client": "Oceanic Fleet Group",
+      "summary": "Unified operations console for 80+ vessels with live AIS and crew scheduling.",
+      "tags": ["Fleet", "Realtime", "Operations"],
+      "year": "2025",
+      "image": "/projects/fleet-command.jpg",
+      "featured": true,
+      "href": "#"
+    },
+    {
+      "id": "berth-optimizer",
+      "title": "Berth Optimizer",
+      "client": "HarborOps International",
+      "summary": "AI-assisted berth planning that cut idle time across three major terminals.",
+      "tags": ["Ports", "Planning", "AI"],
+      "year": "2024",
+      "image": "/projects/berth-optimizer.jpg",
+      "featured": true,
+      "href": "#"
+    },
+    {
+      "id": "charter-desk",
+      "title": "Charter Desk Pro",
+      "client": "BlueLine Chartering",
+      "summary": "End-to-end fixture and commercial workflow for dry bulk desks.",
+      "tags": ["Chartering", "Commercial"],
+      "year": "2024",
+      "image": "/projects/charter-desk.jpg",
+      "featured": true,
+      "href": "#"
+    },
+    {
+      "id": "safety-ledger",
+      "title": "Safety Ledger",
+      "client": "Northstar Marine",
+      "summary": "Digital ISM and incident reporting across offshore assets.",
+      "tags": ["Compliance", "Safety"],
+      "year": "2023",
+      "image": "/projects/safety-ledger.jpg",
+      "featured": false,
+      "href": "#"
+    }
+  ]
+}

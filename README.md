@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# TailoredTech Website
 
-## Getting Started
+Professional portfolio site for **TailoredTech** — custom maritime software solutions.
 
-First, run the development server:
+## Stack
+
+- Next.js 16 (App Router) + TypeScript
+- Tailwind CSS v4 + shadcn/ui
+- Framer Motion + GSAP (scroll animations)
+- Lucide icons
+- Magic UI / Aceternity-inspired effects (customized to brand)
+
+## Configure content
+
+Edit JSON files in `src/config/`:
+
+| File | Purpose |
+|------|---------|
+| `company.json` | Name, SEO, contact, stats, logo paths |
+| `theme.json` | Color palette (injected as CSS variables) |
+| `clients.json` | Client logos / links / sectors |
+| `services.json` | Solutions for nav bento + services page |
+| `projects.json` | Portfolio / selected work |
+| `timeline.json` | Company history |
+| `navigation.json` | Nav links + CTA |
+
+### Replace the logo
+
+Put your files in `public/`:
+
+- `logo.svg` — used on light backgrounds
+- `logo-light.svg` — used on dark footer
+
+Update paths in `company.json` if needed.
+
+### Theme
+
+`theme.json` drives the maritime palette (navy + teal). Values are injected in the root layout via `buildThemeCss()`. Change tokens there — components use semantic classes (`bg-primary`, `text-accent`, etc.).
+
+## Develop
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Build
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build
+npm start
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Pages
 
-## Learn More
+- `/` — Home (alternating dark/light sections)
+- `/services` — Full solutions page (SEO-focused)
 
-To learn more about Next.js, take a look at the following resources:
+## SEO
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Metadata + Open Graph from `company.json`
+- JSON-LD Organization + ProfessionalService
+- `sitemap.xml` + `robots.txt`
+- Target keywords: maritime software solutions, maritime custom software solutions

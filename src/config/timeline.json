@@ -1,0 +1,31 @@
+{
+  "headline": "Our path",
+  "subheadline": "Built alongside maritime operators, year after year.",
+  "items": [
+    {
+      "year": "2014",
+      "title": "Founded",
+      "description": "Started as a specialized maritime software studio."
+    },
+    {
+      "year": "2017",
+      "title": "First fleet platform",
+      "description": "Shipped a multi-vessel operations system for a regional shipping group."
+    },
+    {
+      "year": "2020",
+      "title": "Port systems expansion",
+      "description": "Expanded into terminal and berth planning platforms."
+    },
+    {
+      "year": "2023",
+      "title": "$2B+ client portfolio",
+      "description": "Reached clients managing over two billion in fleet and cargo assets."
+    },
+    {
+      "year": "2026",
+      "title": "Global delivery",
+      "description": "Supporting maritime operators across Middle East, Europe, and Asia."
+    }
+  ]
+}

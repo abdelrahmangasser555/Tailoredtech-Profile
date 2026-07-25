@@ -1,0 +1,66 @@
+{
+  "headline": "Solutions built for maritime",
+  "subheadline": "Custom platforms that fit your fleet, port, and operations — not the other way around.",
+  "items": [
+    {
+      "id": "fleet-operations",
+      "title": "Fleet Operations",
+      "short": "Real-time vessel, crew, and voyage control.",
+      "description": "Custom fleet platforms for scheduling, tracking, compliance, and performance across your entire vessel portfolio.",
+      "icon": "Ship",
+      "href": "/services#fleet-operations",
+      "featured": true,
+      "span": "lg"
+    },
+    {
+      "id": "port-systems",
+      "title": "Port & Terminal Systems",
+      "short": "Berth, cargo, and yard orchestration.",
+      "description": "Integrated systems for berth planning, cargo handling, and terminal throughput with live operational visibility.",
+      "icon": "Anchor",
+      "href": "/services#port-systems",
+      "featured": true,
+      "span": "md"
+    },
+    {
+      "id": "chartering",
+      "title": "Chartering & Commercial",
+      "short": "Fixtures, contracts, and P&L clarity.",
+      "description": "Commercial tools for fixture management, contract workflows, and voyage economics tailored to your desk.",
+      "icon": "FileText",
+      "href": "/services#chartering",
+      "featured": true,
+      "span": "md"
+    },
+    {
+      "id": "compliance",
+      "title": "Compliance & Safety",
+      "short": "ISM, audits, and incident workflows.",
+      "description": "Digital compliance stacks for documentation, audits, safety reporting, and regulatory readiness.",
+      "icon": "ShieldCheck",
+      "href": "/services#compliance",
+      "featured": false,
+      "span": "sm"
+    },
+    {
+      "id": "data-platforms",
+      "title": "Maritime Data Platforms",
+      "short": "Unified data for decisions at sea and ashore.",
+      "description": "Data lakes, dashboards, and integrations that connect AIS, ERP, IoT, and operational systems.",
+      "icon": "Database",
+      "href": "/services#data-platforms",
+      "featured": false,
+      "span": "sm"
+    },
+    {
+      "id": "integrations",
+      "title": "Systems Integration",
+      "short": "Connect legacy and modern stacks.",
+      "description": "API layers and middleware that unify legacy maritime systems with modern cloud platforms.",
+      "icon": "Network",
+      "href": "/services#integrations",
+      "featured": false,
+      "span": "sm"
+    }
+  ]
+}

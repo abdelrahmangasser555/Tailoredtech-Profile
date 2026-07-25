@@ -1,0 +1,25 @@
+{
+  "links": [
+    {
+      "label": "Solutions",
+      "href": "/services",
+      "mega": true
+    },
+    {
+      "label": "Work",
+      "href": "/#work"
+    },
+    {
+      "label": "About",
+      "href": "/#about"
+    },
+    {
+      "label": "Contact",
+      "href": "/#contact"
+    }
+  ],
+  "cta": {
+    "label": "Talk to us",
+    "href": "/#contact"
+  }
+}
