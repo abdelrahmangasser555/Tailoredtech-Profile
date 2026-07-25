@@ -4,7 +4,6 @@ import { ArrowRight } from "lucide-react"
 import { Section } from "@/components/layout/section"
 import { Button } from "@/components/ui/button"
 import { site } from "@/lib/content"
-import { cn } from "@/lib/utils"
 
 export const metadata: Metadata = {
   title: "Maritime Software Solutions",
@@ -47,7 +46,7 @@ export default function ServicesPage() {
           </p>
           <Button
             asChild
-            className="mt-10 rounded-sm bg-accent text-accent-foreground hover:bg-accent/90 h-11 px-6"
+            className="mt-10 rounded-full bg-accent text-accent-foreground hover:bg-accent/90 h-11 px-6"
           >
             <Link href="/#contact">
               {company.contact.cta}
@@ -63,14 +62,15 @@ export default function ServicesPage() {
             <article
               key={service.id}
               id={service.id}
-              className={cn(
-                "scroll-mt-28 grid gap-4 border-t border-border py-12 md:grid-cols-[5rem_1fr] md:gap-12"
-              )}
+              className="group relative scroll-mt-28 py-12 md:py-14"
             >
-              <span className="font-mono text-xs text-muted-foreground">
+              <span
+                aria-hidden
+                className="pointer-events-none absolute -left-1 -top-1 font-display text-[clamp(3.5rem,8vw,5rem)] font-semibold leading-none text-foreground/[0.06] select-none"
+              >
                 {String(i + 1).padStart(2, "0")}
               </span>
-              <div>
+              <div className="relative pl-2 md:pl-8">
                 <h2 className="font-heading text-2xl md:text-3xl font-semibold tracking-tight">
                   {service.title}
                 </h2>

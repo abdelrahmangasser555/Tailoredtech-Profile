@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next"
-import { Syne, Manrope, Unbounded, Instrument_Serif, Geist_Mono } from "next/font/google"
+import { Space_Grotesk, Manrope, Geist_Mono } from "next/font/google"
 import { Toaster } from "@/components/ui/sonner"
 import { Navbar } from "@/components/layout/navbar"
 import { Footer } from "@/components/layout/footer"
@@ -8,13 +8,13 @@ import { site } from "@/lib/content"
 import { buildThemeCss } from "@/lib/theme"
 import "./globals.css"
 
-const display = Unbounded({
+const display = Space_Grotesk({
   variable: "--font-display",
   subsets: ["latin"],
   display: "swap",
 })
 
-const heading = Syne({
+const heading = Space_Grotesk({
   variable: "--font-heading",
   subsets: ["latin"],
   display: "swap",
@@ -23,13 +23,6 @@ const heading = Syne({
 const body = Manrope({
   variable: "--font-body",
   subsets: ["latin"],
-  display: "swap",
-})
-
-const serif = Instrument_Serif({
-  variable: "--font-serif",
-  subsets: ["latin"],
-  weight: "400",
   display: "swap",
 })
 
@@ -80,8 +73,8 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f5f6f8" },
-    { media: "(prefers-color-scheme: dark)", color: "#080b12" },
+    { media: "(prefers-color-scheme: light)", color: "#f5f5f0" },
+    { media: "(prefers-color-scheme: dark)", color: "#050505" },
   ],
   width: "device-width",
   initialScale: 1,
@@ -112,7 +105,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${display.variable} ${heading.variable} ${body.variable} ${serif.variable} ${geistMono.variable} h-full`}
+      className={`${display.variable} ${heading.variable} ${body.variable} ${geistMono.variable} h-full`}
     >
       <head>
         <style dangerouslySetInnerHTML={{ __html: buildThemeCss() }} />

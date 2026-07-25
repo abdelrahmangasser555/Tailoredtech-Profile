@@ -31,6 +31,7 @@
   "stats": [
     {
       "value": "$2B+",
+      "target": 2000000000,
       "label": "Client portfolio value"
     },
     {

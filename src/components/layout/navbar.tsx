@@ -13,6 +13,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
+import { ServiceVisual } from "@/components/ui/service-visual"
 import { site } from "@/lib/content"
 import { cn } from "@/lib/utils"
 
@@ -35,7 +36,7 @@ export function Navbar() {
           className={cn(
             "flex items-center justify-between gap-4 px-1 py-3 transition-all duration-500",
             scrolled &&
-              "rounded-sm border border-border/50 bg-background/80 px-4 backdrop-blur-xl shadow-sm"
+              "border border-border/50 bg-background/80 px-4 backdrop-blur-xl shadow-sm"
           )}
         >
           <Link href="/" className="shrink-0">
@@ -112,9 +113,12 @@ export function Navbar() {
             <Button
               asChild
               size="sm"
-              className="hidden sm:inline-flex rounded-sm bg-accent text-accent-foreground hover:bg-accent/90"
+              className="hidden sm:inline-flex rounded-none bg-accent text-accent-foreground hover:bg-accent/90 px-4"
             >
-              <Link href={navigation.cta.href}>{navigation.cta.label}</Link>
+              <Link href={navigation.cta.href}>
+                {navigation.cta.label}
+                <ArrowUpRight data-icon="inline-end" />
+              </Link>
             </Button>
 
             <Sheet>
@@ -145,19 +149,22 @@ export function Navbar() {
                       {link.label}
                     </Link>
                   ))}
-                  <div className="mt-4 flex flex-col gap-1 border-t border-border pt-4">
+                  <div className="mt-4 flex flex-col gap-1 pt-4">
                     <p className="px-3 mb-2 font-mono text-[10px] tracking-[0.2em] uppercase text-muted-foreground">
                       Solutions
                     </p>
-                    {services.items.map((s, i) => (
+                    {services.items.map((s) => (
                       <Link
                         key={s.id}
                         href={s.href}
                         className="flex items-center gap-3 rounded-sm px-3 py-2 hover:bg-muted"
                       >
-                        <span className="font-mono text-[10px] text-muted-foreground">
-                          {String(i + 1).padStart(2, "0")}
-                        </span>
+                        <ServiceVisual
+                          icon={s.icon}
+                          logo={s.logo}
+                          title={s.title}
+                          className="size-8"
+                        />
                         <span className="text-sm">{s.title}</span>
                       </Link>
                     ))}
@@ -179,7 +186,7 @@ function SolutionsMega({ onNavigate }: { onNavigate: () => void }) {
   const { services } = site
 
   return (
-    <div className="w-[min(92vw,36rem)] rounded-sm border border-border bg-background p-2 shadow-2xl text-foreground">
+    <div className="w-[min(92vw,38rem)] rounded-none border border-border bg-background p-2 shadow-2xl text-foreground">
       <div className="grid sm:grid-cols-2 gap-0.5">
         {services.items.map((s, i) => (
           <Link
@@ -187,16 +194,27 @@ function SolutionsMega({ onNavigate }: { onNavigate: () => void }) {
             href={s.href}
             onClick={onNavigate}
             className={cn(
-              "group flex flex-col gap-1 rounded-sm p-4 transition-colors hover:bg-muted",
-              i === 0 &&
-                "sm:col-span-2 sm:flex-row sm:items-end sm:justify-between sm:bg-muted/50"
+              "group relative flex gap-3 overflow-hidden rounded-none p-3.5 transition-colors hover:bg-muted",
+              i === 0 && "sm:col-span-2"
             )}
           >
-            <div>
-              <span className="font-mono text-[10px] text-muted-foreground">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <div className="mt-1 flex items-center gap-1.5 font-heading text-sm font-medium">
+            <span
+              aria-hidden
+              className="pointer-events-none absolute -left-0.5 -top-1 font-display text-4xl font-semibold text-foreground/[0.05] select-none"
+            >
+              {String(i + 1).padStart(2, "0")}
+            </span>
+            <span className="relative mt-0.5 flex size-5 shrink-0 items-center justify-center">
+              <ServiceVisual
+                icon={s.icon}
+                logo={s.logo}
+                title={s.title}
+                bare
+                className="opacity-0 scale-75 translate-y-1 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:opacity-100 group-hover:scale-100 group-hover:translate-y-0"
+              />
+            </span>
+            <div className="relative min-w-0">
+              <div className="flex items-center gap-1.5 font-heading text-sm font-medium">
                 {s.title}
                 <ArrowUpRight className="size-3 opacity-0 group-hover:opacity-100 transition-opacity" />
               </div>
@@ -207,11 +225,11 @@ function SolutionsMega({ onNavigate }: { onNavigate: () => void }) {
           </Link>
         ))}
       </div>
-      <div className="flex justify-end px-3 py-2 border-t border-border mt-1">
+      <div className="flex justify-end px-3 py-2 mt-1">
         <Link
           href="/services"
           onClick={onNavigate}
-          className="inline-flex items-center gap-1 text-xs font-medium text-accent hover:underline"
+          className="inline-flex items-center gap-1 text-xs font-medium text-accent-foreground bg-accent px-2.5 py-1 rounded-none hover:brightness-95 transition"
         >
           View all
           <ArrowUpRight className="size-3" />

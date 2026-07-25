@@ -51,62 +51,62 @@
 }
 
 :root {
-  --background: oklch(0.975 0.004 250);
-  --foreground: oklch(0.12 0.02 260);
+  --background: oklch(0.985 0.004 100);
+  --foreground: oklch(0.14 0.015 260);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.12 0.02 260);
+  --card-foreground: oklch(0.14 0.015 260);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.12 0.02 260);
-  --primary: oklch(0.12 0.02 260);
-  --primary-foreground: oklch(0.98 0.005 90);
-  --secondary: oklch(0.94 0.008 250);
-  --secondary-foreground: oklch(0.18 0.02 260);
-  --muted: oklch(0.94 0.006 250);
-  --muted-foreground: oklch(0.45 0.02 260);
-  --accent: oklch(0.72 0.155 55);
-  --accent-foreground: oklch(0.14 0.03 55);
-  --destructive: oklch(0.55 0.2 25);
-  --border: oklch(0.88 0.01 250);
-  --input: oklch(0.88 0.01 250);
-  --ring: oklch(0.72 0.155 55);
-  --chart-1: oklch(0.72 0.155 55);
+  --popover-foreground: oklch(0.14 0.015 260);
+  --primary: oklch(0.14 0.015 260);
+  --primary-foreground: oklch(0.985 0.004 100);
+  --secondary: oklch(0.945 0.006 100);
+  --secondary-foreground: oklch(0.2 0.015 260);
+  --muted: oklch(0.945 0.006 100);
+  --muted-foreground: oklch(0.4 0.02 260);
+  --accent: oklch(0.52 0.155 120);
+  --accent-foreground: oklch(0.98 0.02 115);
+  --destructive: oklch(0.5 0.2 25);
+  --border: oklch(0.86 0.01 100);
+  --input: oklch(0.86 0.01 100);
+  --ring: oklch(0.52 0.155 120);
+  --chart-1: oklch(0.52 0.155 120);
   --chart-2: oklch(0.4 0.04 260);
   --chart-3: oklch(0.25 0.03 260);
-  --chart-4: oklch(0.85 0.08 70);
+  --chart-4: oklch(0.85 0.12 115);
   --chart-5: oklch(0.15 0.02 260);
-  --radius: 0.25rem;
-  --section-dark: oklch(0.08 0.02 260);
-  --section-light: oklch(0.975 0.004 250);
-  --section-mesh: oklch(0.72 0.155 55 / 12%);
-  --sidebar: oklch(0.975 0.004 250);
-  --sidebar-foreground: oklch(0.12 0.02 260);
-  --sidebar-primary: oklch(0.12 0.02 260);
-  --sidebar-primary-foreground: oklch(0.98 0.005 90);
-  --sidebar-accent: oklch(0.94 0.008 250);
-  --sidebar-accent-foreground: oklch(0.18 0.02 260);
-  --sidebar-border: oklch(0.88 0.01 250);
-  --sidebar-ring: oklch(0.72 0.155 55);
+  --radius: 0rem;
+  --section-dark: oklch(0.05 0.005 260);
+  --section-light: oklch(0.985 0.004 100);
+  --section-mesh: oklch(0.93 0.21 115 / 14%);
+  --sidebar: oklch(0.985 0.004 100);
+  --sidebar-foreground: oklch(0.14 0.015 260);
+  --sidebar-primary: oklch(0.14 0.015 260);
+  --sidebar-primary-foreground: oklch(0.985 0.004 100);
+  --sidebar-accent: oklch(0.945 0.006 100);
+  --sidebar-accent-foreground: oklch(0.2 0.015 260);
+  --sidebar-border: oklch(0.86 0.01 100);
+  --sidebar-ring: oklch(0.52 0.155 120);
 }
 
 .dark {
-  --background: oklch(0.1 0.018 260);
-  --foreground: oklch(0.96 0.005 90);
-  --card: oklch(0.14 0.02 260);
-  --card-foreground: oklch(0.96 0.005 90);
-  --popover: oklch(0.14 0.02 260);
-  --popover-foreground: oklch(0.96 0.005 90);
-  --primary: oklch(0.96 0.005 90);
-  --primary-foreground: oklch(0.1 0.018 260);
-  --secondary: oklch(0.18 0.02 260);
-  --secondary-foreground: oklch(0.96 0.005 90);
-  --muted: oklch(0.18 0.02 260);
-  --muted-foreground: oklch(0.68 0.015 250);
-  --accent: oklch(0.78 0.16 55);
-  --accent-foreground: oklch(0.14 0.03 55);
+  --background: oklch(0.08 0.005 260);
+  --foreground: oklch(0.96 0.005 100);
+  --card: oklch(0.12 0.008 260);
+  --card-foreground: oklch(0.96 0.005 100);
+  --popover: oklch(0.12 0.008 260);
+  --popover-foreground: oklch(0.96 0.005 100);
+  --primary: oklch(0.96 0.005 100);
+  --primary-foreground: oklch(0.08 0.005 260);
+  --secondary: oklch(0.16 0.008 260);
+  --secondary-foreground: oklch(0.96 0.005 100);
+  --muted: oklch(0.16 0.008 260);
+  --muted-foreground: oklch(0.62 0.01 260);
+  --accent: oklch(0.93 0.21 115);
+  --accent-foreground: oklch(0.14 0.02 115);
   --destructive: oklch(0.65 0.18 25);
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 12%);
-  --ring: oklch(0.78 0.16 55);
+  --ring: oklch(0.93 0.21 115);
 }
 
 @layer utilities {
@@ -117,7 +117,7 @@
     font-family: var(--font-display), var(--font-heading), system-ui, sans-serif;
   }
   .font-serif {
-    font-family: var(--font-serif), Georgia, serif;
+    font-family: var(--font-serif), var(--font-display), system-ui, sans-serif;
   }
 }
 
@@ -140,13 +140,12 @@
     @apply bg-background text-foreground font-sans antialiased overflow-x-clip;
     max-width: 100%;
   }
-  #__next,
   main {
     overflow-x: clip;
     max-width: 100%;
   }
   ::selection {
-    background: color-mix(in oklch, var(--accent) 40%, transparent);
+    background: color-mix(in oklch, var(--accent) 45%, transparent);
     color: var(--foreground);
   }
 }

@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 210 40" fill="none">
-  <rect x="2" y="8" width="24" height="24" rx="3" fill="#E8A317"/>
-  <path d="M9 26V14h3.8c2.2 0 3.6 1.2 3.6 3.1 0 1.2-.6 2.2-1.7 2.6L17 26h-2.9l-2.3-4.9H12V26H9zm2.8-7h1c.85 0 1.35-.45 1.35-1.15S13.65 16.7 12.8 16.7h-1V19z" fill="#0C0E14"/>
-  <text x="36" y="27" font-family="system-ui,sans-serif" font-size="17" font-weight="700" fill="#0C0E14" letter-spacing="-0.03em">TailoredTech</text>
+  <rect x="2" y="8" width="24" height="24" rx="4" fill="#D4FF00"/>
+  <path d="M9 26V14h3.8c2.2 0 3.6 1.2 3.6 3.1 0 1.2-.6 2.2-1.7 2.6L17 26h-2.9l-2.3-4.9H12V26H9zm2.8-7h1c.85 0 1.35-.45 1.35-1.15S13.65 16.7 12.8 16.7h-1V19z" fill="#0A0A0A"/>
+  <text x="36" y="27" font-family="system-ui,sans-serif" font-size="17" font-weight="700" fill="#0A0A0A" letter-spacing="-0.03em">TailoredTech</text>
 </svg>

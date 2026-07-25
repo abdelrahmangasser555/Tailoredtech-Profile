@@ -31,7 +31,7 @@ export function Work() {
           <StaggerItem key={project.id}>
             <Link
               href={project.href}
-              className="group grid gap-4 border-t border-white/10 py-10 md:grid-cols-[8rem_1fr_auto] md:items-end md:gap-10"
+              className="group grid gap-4 py-10 md:grid-cols-[8rem_1fr_auto] md:items-end md:gap-10"
             >
               <span className="font-mono text-xs text-white/30">{project.year}</span>
               <div>

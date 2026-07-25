@@ -1,7 +1,8 @@
 import { Hero } from "@/components/sections/hero"
-import { FlashStat } from "@/components/sections/flash-stat"
+import { Bridge } from "@/components/sections/bridge"
 import { Clients } from "@/components/sections/clients"
 import { SolutionsBento } from "@/components/sections/solutions-bento"
+import { LayerCollapse } from "@/components/sections/layer-collapse"
 import { Stats } from "@/components/sections/stats"
 import { Work } from "@/components/sections/work"
 import { Timeline } from "@/components/sections/timeline"
@@ -30,9 +31,10 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareLd) }}
       />
       <Hero />
-      <FlashStat />
+      <Bridge />
       <Clients />
       <SolutionsBento />
+      <LayerCollapse />
       <Stats />
       <Work />
       <Timeline />

@@ -3,7 +3,6 @@
 import Link from "next/link"
 import { Section } from "@/components/layout/section"
 import { TextReveal, Stagger, StaggerItem } from "@/components/motion/reveal"
-import { ScrubLine } from "@/components/motion/gsap-reveal"
 import { site } from "@/lib/content"
 
 export function Clients() {
@@ -19,11 +18,9 @@ export function Clients() {
         {clients.subheadline}
       </p>
 
-      <ScrubLine className="mt-12 mb-10 bg-foreground/15" />
-
       <Stagger
         stagger={0.06}
-        className="flex flex-wrap items-baseline gap-x-10 gap-y-5 md:gap-x-14"
+        className="mt-12 flex flex-wrap items-baseline gap-x-10 gap-y-5 md:mt-14 md:gap-x-14"
       >
         {clients.items.map((client) => (
           <StaggerItem key={client.id}>

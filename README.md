@@ -6,9 +6,8 @@ Professional portfolio site for **TailoredTech** — custom maritime software so
 
 - Next.js 16 (App Router) + TypeScript
 - Tailwind CSS v4 + shadcn/ui
-- Framer Motion + GSAP (scroll animations)
+- Framer Motion + GSAP + Lenis
 - Lucide icons
-- Magic UI / Aceternity-inspired effects (customized to brand)
 
 ## Configure content
 
@@ -16,26 +15,34 @@ Edit JSON files in `src/config/`:
 
 | File | Purpose |
 |------|---------|
-| `company.json` | Name, SEO, contact, stats, logo paths |
-| `theme.json` | Color palette (injected as CSS variables) |
-| `clients.json` | Client logos / links / sectors |
-| `services.json` | Solutions for nav bento + services page |
+| `company.json` | Name, SEO, contact, stats (`target` for counter), logo, hero video |
+| `theme.json` | Color palette (CSS variables) |
+| `clients.json` | Client list + links |
+| `services.json` | Solutions — set `logo` path **or** `icon` (Lucide name) |
 | `projects.json` | Portfolio / selected work |
 | `timeline.json` | Company history |
 | `navigation.json` | Nav links + CTA |
 
-### Replace the logo
+### Service icons vs logos
 
-Put your files in `public/`:
+In `services.json`, each item can use an icon:
 
-- `logo.svg` — used on light backgrounds
-- `logo-light.svg` — used on dark footer
+```json
+"icon": "Ship",
+"logo": null
+```
 
-Update paths in `company.json` if needed.
+or a custom mark (wins over icon in the Solutions menu):
 
-### Theme
+```json
+"icon": "Ship",
+"logo": "/services/fleet.svg"
+```
 
-`theme.json` drives the maritime palette (navy + teal). Values are injected in the root layout via `buildThemeCss()`. Change tokens there — components use semantic classes (`bg-primary`, `text-accent`, etc.).
+### Replace the brand logo
+
+- `public/logo.svg` — light backgrounds
+- `public/logo-light.svg` — dark backgrounds / footer
 
 ## Develop
 
@@ -50,15 +57,3 @@ npm run dev
 npm run build
 npm start
 ```
-
-## Pages
-
-- `/` — Home (alternating dark/light sections)
-- `/services` — Full solutions page (SEO-focused)
-
-## SEO
-
-- Metadata + Open Graph from `company.json`
-- JSON-LD Organization + ProfessionalService
-- `sitemap.xml` + `robots.txt`
-- Target keywords: maritime software solutions, maritime custom software solutions
