@@ -22,7 +22,7 @@ const PLATES: Plate[] = [
     id: "operations",
     label: "Operations",
     kind: "anchor",
-    detail: "Fleet · port · commercial reality",
+    detail: "Fleet · port · commercial",
   },
   {
     id: "vendor",
@@ -63,8 +63,11 @@ const PLATES: Plate[] = [
 ]
 
 /**
- * Isometric 3D mechanism — whole deck is angled.
- * Scroll ejects friction plates; Operations + IT settle into a clear path.
+ * Story beats:
+ * 1) Complex stack + problem copy
+ * 2) Friction ejects; Ops rises / IT drops
+ * 3) Deck flattens to 2D
+ * 4) Quiet line draws Ops → IT while how-we-work copy settles
  */
 export function LayerCollapse() {
   const track = useRef<HTMLElement>(null)
@@ -75,35 +78,61 @@ export function LayerCollapse() {
     offset: ["start start", "end end"],
   })
 
+  // Soft ease-in story feel (not snappy bounce)
   const smooth = useSpring(scrollYProgress, {
-    stiffness: 55,
-    damping: 22,
-    mass: 0.4,
+    stiffness: 32,
+    damping: 30,
+    mass: 0.65,
   })
 
-  // Deck tilts from steep isometric → flatter as layers clear
+  // Isometric → flat 2D after the pair settles
   const deckRotateX = useTransform(
     smooth,
-    [0, 0.55, 0.9],
-    reduce ? [52, 52, 52] : [56, 48, 18]
+    [0, 0.28, 0.42, 0.55, 0.7],
+    reduce ? [0, 0, 0, 0, 0] : [54, 48, 26, 8, 0]
   )
   const deckRotateZ = useTransform(
     smooth,
-    [0, 0.55, 0.9],
-    reduce ? [-32, -32, -32] : [-34, -28, -8]
+    [0, 0.28, 0.42, 0.55, 0.7],
+    reduce ? [0, 0, 0, 0, 0] : [-32, -28, -14, -3, 0]
   )
   const deckRotateY = useTransform(
     smooth,
-    [0, 0.9],
-    reduce ? [12, 12] : [14, 4]
+    [0, 0.42, 0.55, 0.7],
+    reduce ? [0, 0, 0, 0] : [12, 6, 1, 0]
   )
 
-  const titleOpacity = useTransform(smooth, [0.65, 0.85], reduce ? [1, 1] : [0, 1])
-  const titleY = useTransform(smooth, [0.65, 0.85], reduce ? [0, 0] : [28, 0])
-  const bridgeOpacity = useTransform(smooth, [0.52, 0.75], reduce ? [1, 1] : [0, 1])
-  const bridgeScale = useSpring(
-    useTransform(smooth, [0.55, 0.88], reduce ? [1, 1] : [0.15, 1]),
-    { stiffness: 170, damping: 12 }
+  const chassisOpacity = useTransform(
+    smooth,
+    [0.35, 0.55],
+    reduce ? [0, 0] : [1, 0]
+  )
+
+  // Left copy — same column, fewer words, nudged right
+  const problemOpacity = useTransform(
+    smooth,
+    [0, 0.22, 0.38],
+    reduce ? [0, 0, 0] : [1, 0.55, 0]
+  )
+  const problemY = useTransform(smooth, [0, 0.38], reduce ? [0, 0] : [0, -20])
+
+  const answerOpacity = useTransform(
+    smooth,
+    [0.42, 0.55, 0.68],
+    reduce ? [1, 1, 1] : [0, 0.65, 1]
+  )
+  const answerY = useTransform(smooth, [0.42, 0.68], reduce ? [0, 0] : [18, 0])
+
+  // Long draw — most of the remaining scroll so the link is readable
+  const linkOpacity = useTransform(
+    smooth,
+    [0.52, 0.6],
+    reduce ? [1, 1] : [0, 1]
+  )
+  const linkScaleY = useTransform(
+    smooth,
+    [0.55, 0.88],
+    reduce ? [1, 1] : [0, 1]
   )
 
   const friction = PLATES.filter((p) => p.kind === "friction")
@@ -111,36 +140,62 @@ export function LayerCollapse() {
   return (
     <section
       ref={track}
-      className="relative bg-black text-white [--accent:oklch(0.93_0.21_115)] [--accent-foreground:oklch(0.14_0.02_115)]"
-      style={{ height: "250vh" }}
-      aria-label="Mechanism between operations and IT"
+      className="relative bg-black text-white [--accent:#D4FF00] [--accent-foreground:#0A0A0A]"
+      style={{ height: "460vh" }}
+      aria-label="How TailoredTech connects operations and IT"
     >
-      <div className="sticky top-0 flex h-svh flex-col overflow-hidden">
-        <div className="mx-auto flex w-full max-w-6xl shrink-0 items-end justify-between gap-6 px-5 pt-24 md:px-8 md:pt-28">
-          <div>
-            <p className="font-mono text-[11px] tracking-[0.22em] uppercase text-accent">
-              How we work
-            </p>
-            <h2 className="mt-3 max-w-lg font-heading text-3xl md:text-4xl font-semibold tracking-tight text-balance">
-              A complex stack — then we take it apart.
-            </h2>
+      <div className="sticky top-0 flex h-svh overflow-hidden">
+        {/* Left copy — shifted right, wider, fewer words; nudged down for Y center */}
+        <div className="pointer-events-none absolute inset-y-0 left-0 z-30 flex w-full max-w-6xl items-center pl-8 pt-16 md:pl-16 md:pt-20 lg:pl-24 xl:pl-28">
+          <div className="relative w-[min(88vw,32rem)] translate-y-6 md:translate-y-10">
+            <motion.div
+              style={{ opacity: problemOpacity, y: problemY }}
+              className="absolute inset-x-0 top-1/2 -translate-y-1/2"
+            >
+              <p className="font-mono text-[11px] tracking-[0.22em] uppercase text-accent">
+                The usual stack
+              </p>
+              <h2 className="mt-3 font-display text-3xl md:text-[2.75rem] font-semibold tracking-[-0.03em] leading-[1.1] text-balance">
+                Agency. Operations. Systems.
+              </h2>
+              <p className="mt-4 max-w-md text-sm md:text-[15px] leading-relaxed text-white/45">
+                Too many layers between the fleet and the build.
+              </p>
+            </motion.div>
+
+            <motion.div
+              style={{ opacity: answerOpacity, y: answerY }}
+              className="absolute inset-x-0 top-1/2 -translate-y-1/2"
+            >
+              <p className="font-mono text-[11px] tracking-[0.22em] uppercase text-accent">
+                How we work
+              </p>
+              <h2 className="mt-3 font-display text-3xl md:text-[2.75rem] font-semibold tracking-[-0.03em] leading-[1.1] text-balance">
+                Operations, linked to delivery.
+              </h2>
+              <p className="mt-4 max-w-md text-sm md:text-[15px] leading-relaxed text-white/45">
+                One clear line from decision to production.
+              </p>
+            </motion.div>
+
+            <div className="invisible" aria-hidden>
+              <p className="font-mono text-[11px] tracking-[0.22em] uppercase">
+                How we work
+              </p>
+              <h2 className="mt-3 font-display text-3xl md:text-[2.75rem] font-semibold tracking-[-0.03em] leading-[1.1]">
+                Operations, linked to delivery.
+              </h2>
+              <p className="mt-4 max-w-md text-sm md:text-[15px] leading-relaxed">
+                One clear line from decision to production.
+              </p>
+            </div>
           </div>
-          <p className="hidden max-w-[13rem] text-right text-xs text-white/40 md:block leading-relaxed">
-            Scroll to eject the friction between Operations and IT.
-          </p>
         </div>
 
-        {/* Stage with deep perspective */}
         <div
-          className="relative mx-auto flex min-h-0 flex-1 w-full max-w-6xl items-center justify-center px-4 pb-32 pt-4 md:px-8"
-          style={{ perspective: "1400px", perspectiveOrigin: "50% 45%" }}
+          className="relative mx-auto flex h-full w-full max-w-6xl items-center justify-center px-4 pb-10 pt-28 md:justify-end md:px-8 md:pb-12 md:pr-10 md:pt-32 lg:pr-14"
+          style={{ perspective: "1400px", perspectiveOrigin: "60% 50%" }}
         >
-          {/* Soft ground shadow under the deck */}
-          <div
-            aria-hidden
-            className="pointer-events-none absolute bottom-[18%] left-1/2 h-16 w-[min(70%,28rem)] -translate-x-1/2 rounded-[100%] bg-accent/15 blur-2xl"
-          />
-
           <motion.div
             style={{
               rotateX: deckRotateX,
@@ -148,23 +203,12 @@ export function LayerCollapse() {
               rotateZ: deckRotateZ,
               transformStyle: "preserve-3d",
             }}
-            className="relative h-[22rem] w-[min(92vw,34rem)] md:h-[26rem] md:w-[38rem] will-change-transform"
+            className="relative h-[24rem] w-[min(88vw,30rem)] translate-y-6 will-change-transform md:h-[28rem] md:w-[34rem] md:translate-y-10"
           >
-            {/* Chassis rails */}
-            <div
+            <motion.div
               aria-hidden
+              style={{ opacity: chassisOpacity, transform: "translateZ(-80px)" }}
               className="absolute inset-x-0 top-0 h-full border border-white/10 bg-gradient-to-b from-white/[0.04] to-transparent"
-              style={{ transform: "translateZ(-80px)", transformStyle: "preserve-3d" }}
-            />
-            <div
-              aria-hidden
-              className="absolute -left-3 top-0 h-full w-1.5 bg-white/15"
-              style={{ transform: "translateZ(-40px) rotateY(-8deg)" }}
-            />
-            <div
-              aria-hidden
-              className="absolute -right-3 top-0 h-full w-1.5 bg-white/15"
-              style={{ transform: "translateZ(-40px) rotateY(8deg)" }}
             />
 
             {PLATES.map((plate, i) => (
@@ -184,38 +228,25 @@ export function LayerCollapse() {
               />
             ))}
 
-            {/* Direct path beam */}
+            {/* Dashed connector: Ops bottom → IT top */}
             <motion.div
+              aria-hidden
               style={{
-                opacity: bridgeOpacity,
-                scaleX: bridgeScale,
-                transform: "translateZ(90px)",
+                opacity: linkOpacity,
+                scaleY: linkScaleY,
               }}
-              className="absolute left-[8%] right-[8%] top-1/2 z-[60] h-1.5 -translate-y-1/2 bg-accent origin-center shadow-[0_0_24px_color-mix(in_oklch,var(--accent)_70%,transparent)]"
-            />
-            <motion.p
-              style={{
-                opacity: bridgeOpacity,
-                transform: "translateZ(100px)",
-              }}
-              className="absolute left-1/2 top-[calc(50%+1.1rem)] z-[60] -translate-x-1/2 font-mono text-[10px] tracking-[0.22em] uppercase text-accent"
+              className="pointer-events-none absolute left-1/2 z-20 w-[3px] origin-top -translate-x-1/2 top-[calc(20%-78px+3.5rem-2px)] h-[calc(186px-3.5rem+4px)] md:top-[calc(20%-78px+4rem-2px)] md:h-[calc(186px-4rem+4px)]"
             >
-              TailoredTech
-            </motion.p>
+              <div
+                className="h-full w-full"
+                style={{
+                  backgroundImage:
+                    "repeating-linear-gradient(to bottom, #D4FF00 0 7px, transparent 7px 14px)",
+                }}
+              />
+            </motion.div>
           </motion.div>
         </div>
-
-        <motion.div
-          style={{ opacity: titleOpacity, y: titleY }}
-          className="pointer-events-none absolute inset-x-0 bottom-10 mx-auto max-w-lg px-5 text-center md:bottom-12"
-        >
-          <p className="font-heading text-xl md:text-2xl font-semibold tracking-tight">
-            Operations ↔ IT. No middle noise.
-          </p>
-          <p className="mt-2 text-sm text-white/40">
-            We remove the layers that slow maritime delivery.
-          </p>
-        </motion.div>
       </div>
     </section>
   )
@@ -241,7 +272,6 @@ function MechanismPlate({
   const isAnchor = plate.kind === "anchor"
   const isOps = plate.id === "operations"
 
-  // Stack along Z inside the tilted deck (like a deck of cards)
   const baseZ = (total - 1 - index) * 36
   const baseY = index * 8
   const baseX = index * 4
@@ -249,42 +279,45 @@ function MechanismPlate({
   let start = 0.12
   let end = 0.35
   if (plate.kind === "friction") {
-    start = 0.1 + (frictionIndex / Math.max(1, frictionCount)) * 0.42
-    end = start + 0.24
+    start = 0.06 + (frictionIndex / Math.max(1, frictionCount)) * 0.26
+    end = start + 0.2
   } else {
-    start = 0.5
-    end = 0.8
+    start = 0.28
+    end = 0.5
   }
 
   const rawZ = useTransform(progress, (p) => {
-    if (reduce) return baseZ
+    if (reduce) return 0
     if (plate.kind === "friction") {
       const t = clamp01((p - start) / (end - start))
-      return baseZ + bounceOut(t) * (220 + frictionIndex * 40)
+      return baseZ + easeInCubic(t) * (200 + frictionIndex * 36)
     }
-    // Anchors pull toward mid depth
     const t = clamp01((p - start) / (end - start))
-    const mid = ((total - 1) / 2) * 36
-    return baseZ + (mid - baseZ) * easeOutCubic(t) * 0.55
+    // Flatten depth toward 0 as story ends
+    const settle = easeOutCubic(t)
+    const flatten = clamp01((p - 0.48) / 0.22)
+    return baseZ * (1 - settle * 0.85) * (1 - easeInCubic(flatten))
   })
 
   const rawY = useTransform(progress, (p) => {
-    if (reduce) return baseY
+    if (reduce) return isOps ? -78 : 108
     if (plate.kind === "friction") {
       const t = clamp01((p - start) / (end - start))
       const dir = frictionIndex % 2 === 0 ? -1 : 1
-      return baseY + bounceOut(t) * dir * (40 + frictionIndex * 12)
+      return baseY + easeInCubic(t) * dir * (36 + frictionIndex * 10)
     }
     const t = clamp01((p - start) / (end - start))
-    return baseY * (1 - easeOutCubic(t) * 0.7)
+    // Must match connector top/height calc below
+    const target = isOps ? -78 : 108
+    return baseY + (target - baseY) * easeOutCubic(t)
   })
 
   const rawX = useTransform(progress, (p) => {
-    if (reduce) return baseX
+    if (reduce) return 0
     if (plate.kind === "friction") {
       const t = clamp01((p - start) / (end - start))
       const dir = frictionIndex % 2 === 0 ? -1 : 1
-      return baseX + bounceOut(t) * dir * (280 + frictionIndex * 50)
+      return baseX + easeInCubic(t) * dir * (260 + frictionIndex * 44)
     }
     const t = clamp01((p - start) / (end - start))
     return baseX * (1 - easeOutCubic(t))
@@ -294,27 +327,24 @@ function MechanismPlate({
     if (reduce || plate.kind !== "friction") return 0
     const t = clamp01((p - start) / (end - start))
     const dir = frictionIndex % 2 === 0 ? -1 : 1
-    return bounceOut(t) * dir * 36
+    return easeInCubic(t) * dir * 28
   })
 
   const opacity = useTransform(progress, (p) => {
     if (reduce || plate.kind !== "friction") return 1
     const t = clamp01((p - start) / (end - start))
-    return 1 - Math.pow(t, 1.15)
+    return 1 - Math.pow(t, 1.2)
   })
 
-  const z = useSpring(rawZ, { stiffness: 100, damping: 16, mass: 0.45 })
-  const y = useSpring(rawY, { stiffness: 110, damping: 15, mass: 0.45 })
-  const x = useSpring(rawX, { stiffness: 95, damping: 14, mass: 0.45 })
-  const rotateZ = useSpring(rawRotZ, { stiffness: 90, damping: 12 })
+  // Soften extrusion when flat
+  const edgeOpacity = useTransform(progress, [0.55, 0.8], [1, 0.15])
 
-  const bg = isAnchor
-    ? isOps
-      ? "color-mix(in oklch, var(--accent) 92%, black)"
-      : "color-mix(in oklch, var(--accent) 48%, white)"
-    : index % 2 === 0
-      ? "rgba(28,28,28,0.95)"
-      : "rgba(38,38,38,0.95)"
+  const z = useSpring(rawZ, { stiffness: 70, damping: 22, mass: 0.5 })
+  const y = useSpring(rawY, { stiffness: 70, damping: 22, mass: 0.5 })
+  const x = useSpring(rawX, { stiffness: 65, damping: 20, mass: 0.5 })
+  const rotateZ = useSpring(rawRotZ, { stiffness: 60, damping: 18 })
+
+  const bg = isAnchor ? "#D4FF00" : index % 2 === 0 ? "#1c1c1c" : "#262626"
   const color = isAnchor ? "#0a0a0a" : "rgba(255,255,255,0.9)"
 
   return (
@@ -327,19 +357,17 @@ function MechanismPlate({
         opacity,
         transformStyle: "preserve-3d",
       }}
-      className="absolute left-1/2 top-[12%] w-[88%] -translate-x-1/2 will-change-transform"
+      className="absolute left-1/2 top-[20%] w-[88%] -translate-x-1/2 will-change-transform"
     >
-      {/* Extruded edge for thickness */}
-      <div
+      <motion.div
         aria-hidden
-        className="absolute inset-x-1 top-full h-3 origin-top"
         style={{
-          background: isAnchor
-            ? "color-mix(in oklch, var(--accent) 40%, black)"
-            : "rgba(0,0,0,0.55)",
-          transform: "rotateX(-90deg) translateZ(0px)",
+          opacity: edgeOpacity,
+          background: isAnchor ? "#9ABB00" : "rgba(0,0,0,0.55)",
+          transform: "rotateX(-90deg)",
           transformOrigin: "top center",
         }}
+        className="absolute inset-x-1 top-full h-3 origin-top"
       />
 
       <div
@@ -348,25 +376,11 @@ function MechanismPlate({
           background: bg,
           color,
           boxShadow:
-            "0 25px 50px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.08)",
+            "0 20px 40px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.08)",
         }}
       >
-        {/* Bolt details */}
-        <span
-          aria-hidden
-          className={`absolute left-2 top-2 size-1.5 rounded-full ${
-            isAnchor ? "bg-black/35" : "bg-white/20"
-          }`}
-        />
-        <span
-          aria-hidden
-          className={`absolute right-2 top-2 size-1.5 rounded-full ${
-            isAnchor ? "bg-black/35" : "bg-white/20"
-          }`}
-        />
-
-        <div className="min-w-0 pl-2">
-          <p className="font-heading text-sm md:text-base font-semibold tracking-tight truncate">
+        <div className="min-w-0">
+          <p className="font-display text-sm md:text-base font-semibold tracking-tight truncate">
             {plate.label}
           </p>
           <p
@@ -397,11 +411,6 @@ function easeOutCubic(t: number) {
   return 1 - Math.pow(1 - t, 3)
 }
 
-function bounceOut(t: number) {
-  const n1 = 7.5625
-  const d1 = 2.75
-  if (t < 1 / d1) return n1 * t * t
-  if (t < 2 / d1) return n1 * (t -= 1.5 / d1) * t + 0.75
-  if (t < 2.5 / d1) return n1 * (t -= 2.25 / d1) * t + 0.9375
-  return n1 * (t -= 2.625 / d1) * t + 0.984375
+function easeInCubic(t: number) {
+  return t * t * t
 }

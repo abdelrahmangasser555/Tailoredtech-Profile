@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { Menu, ArrowUpRight, ChevronDown } from "lucide-react"
@@ -19,29 +19,64 @@ import { cn } from "@/lib/utils"
 
 export function Navbar() {
   const { company, navigation, services } = site
-  const [open, setOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
+  const [megaOpen, setMegaOpen] = useState(false)
+  const [hidden, setHidden] = useState(false)
+  const [atTop, setAtTop] = useState(true)
+  const lastY = useRef(0)
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40)
-    onScroll()
+    lastY.current = window.scrollY
+
+    const onScroll = () => {
+      const y = window.scrollY
+      const top = y < 24
+      setAtTop(top)
+
+      if (top) {
+        setHidden(false)
+        lastY.current = y
+        return
+      }
+
+      const delta = y - lastY.current
+      if (Math.abs(delta) < 8) return
+
+      if (delta > 0 && y > 90) {
+        setHidden(true)
+        setMegaOpen(false)
+      } else if (delta < 0) {
+        setHidden(false)
+      }
+      lastY.current = y
+    }
+
     window.addEventListener("scroll", onScroll, { passive: true })
     return () => window.removeEventListener("scroll", onScroll)
   }, [])
 
+  const solid = !atTop
+
   return (
-    <header className="fixed inset-x-0 top-0 z-50">
-      <div className="mx-auto max-w-6xl px-5 md:px-8 pt-4">
+    <motion.header
+      className="fixed inset-x-0 top-0 z-50"
+      initial={false}
+      animate={{
+        y: hidden ? "-110%" : "0%",
+        opacity: hidden ? 0 : 1,
+      }}
+      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+    >
+      <div className="mx-auto max-w-6xl px-5 md:px-8 pt-5">
         <nav
           className={cn(
-            "flex items-center justify-between gap-4 px-1 py-3 transition-all duration-500",
-            scrolled &&
-              "border border-border/50 bg-background/80 px-4 backdrop-blur-xl shadow-sm"
+            "flex items-center justify-between gap-4 px-1 py-2.5 transition-[background,border,padding,backdrop-filter] duration-500",
+            solid &&
+              "border border-white/10 bg-black/70 px-4 backdrop-blur-2xl"
           )}
         >
           <Link href="/" className="shrink-0">
             <Image
-              src={scrolled ? company.logo.light : company.logo.dark}
+              src={company.logo.dark}
               alt={company.logo.alt}
               width={140}
               height={32}
@@ -56,38 +91,33 @@ export function Navbar() {
                 <div
                   key={link.label}
                   className="relative"
-                  onMouseEnter={() => setOpen(true)}
-                  onMouseLeave={() => setOpen(false)}
+                  onMouseEnter={() => setMegaOpen(true)}
+                  onMouseLeave={() => setMegaOpen(false)}
                 >
                   <button
                     type="button"
-                    className={cn(
-                      "inline-flex items-center gap-1 px-3 py-2 text-sm transition-colors",
-                      scrolled
-                        ? "text-foreground/70 hover:text-foreground"
-                        : "text-white/75 hover:text-white"
-                    )}
-                    aria-expanded={open}
+                    className="inline-flex items-center gap-1 px-3 py-2 text-[13px] tracking-wide text-white/70 transition-colors hover:text-white"
+                    aria-expanded={megaOpen}
                   >
                     {link.label}
                     <ChevronDown
                       className={cn(
                         "size-3.5 transition-transform duration-300",
-                        open && "rotate-180"
+                        megaOpen && "rotate-180"
                       )}
                     />
                   </button>
 
                   <AnimatePresence>
-                    {open && (
+                    {megaOpen && (
                       <motion.div
-                        initial={{ opacity: 0, y: 10 }}
+                        initial={{ opacity: 0, y: 8 }}
                         animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 8 }}
+                        exit={{ opacity: 0, y: 6 }}
                         transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
                         className="absolute left-1/2 top-full z-50 pt-4 -translate-x-1/2"
                       >
-                        <SolutionsMega onNavigate={() => setOpen(false)} />
+                        <SolutionsMega onNavigate={() => setMegaOpen(false)} />
                       </motion.div>
                     )}
                   </AnimatePresence>
@@ -96,12 +126,7 @@ export function Navbar() {
                 <Link
                   key={link.label}
                   href={link.href}
-                  className={cn(
-                    "px-3 py-2 text-sm transition-colors",
-                    scrolled
-                      ? "text-foreground/70 hover:text-foreground"
-                      : "text-white/75 hover:text-white"
-                  )}
+                  className="px-3 py-2 text-[13px] tracking-wide text-white/70 transition-colors hover:text-white"
                 >
                   {link.label}
                 </Link>
@@ -113,7 +138,7 @@ export function Navbar() {
             <Button
               asChild
               size="sm"
-              className="hidden sm:inline-flex rounded-none bg-accent text-accent-foreground hover:bg-accent/90 px-4"
+              className="hidden sm:inline-flex rounded-none bg-accent text-accent-foreground hover:brightness-95 px-4"
             >
               <Link href={navigation.cta.href}>
                 {navigation.cta.label}
@@ -126,10 +151,7 @@ export function Navbar() {
                 <Button
                   variant="ghost"
                   size="icon"
-                  className={cn(
-                    "lg:hidden",
-                    !scrolled && "text-white hover:bg-white/10"
-                  )}
+                  className="lg:hidden text-white hover:bg-white/10"
                   aria-label="Open menu"
                 >
                   <Menu />
@@ -144,7 +166,7 @@ export function Navbar() {
                     <Link
                       key={link.label}
                       href={link.href}
-                      className="rounded-sm px-3 py-2.5 text-sm font-medium hover:bg-muted"
+                      className="rounded-none px-3 py-2.5 text-sm font-medium hover:bg-muted"
                     >
                       {link.label}
                     </Link>
@@ -157,7 +179,7 @@ export function Navbar() {
                       <Link
                         key={s.id}
                         href={s.href}
-                        className="flex items-center gap-3 rounded-sm px-3 py-2 hover:bg-muted"
+                        className="flex items-center gap-3 rounded-none px-3 py-2 hover:bg-muted"
                       >
                         <ServiceVisual
                           icon={s.icon}
@@ -169,7 +191,7 @@ export function Navbar() {
                       </Link>
                     ))}
                   </div>
-                  <Button asChild className="mt-4 mx-3 rounded-sm">
+                  <Button asChild className="mt-4 mx-3 rounded-none">
                     <Link href={navigation.cta.href}>{navigation.cta.label}</Link>
                   </Button>
                 </div>
@@ -178,7 +200,7 @@ export function Navbar() {
           </div>
         </nav>
       </div>
-    </header>
+    </motion.header>
   )
 }
 
@@ -186,7 +208,7 @@ function SolutionsMega({ onNavigate }: { onNavigate: () => void }) {
   const { services } = site
 
   return (
-    <div className="w-[min(92vw,38rem)] rounded-none border border-border bg-background p-2 shadow-2xl text-foreground">
+    <div className="w-[min(92vw,38rem)] rounded-none border border-white/10 bg-black/95 p-2 text-white shadow-2xl backdrop-blur-xl">
       <div className="grid sm:grid-cols-2 gap-0.5">
         {services.items.map((s, i) => (
           <Link
@@ -194,13 +216,13 @@ function SolutionsMega({ onNavigate }: { onNavigate: () => void }) {
             href={s.href}
             onClick={onNavigate}
             className={cn(
-              "group relative flex gap-3 overflow-hidden rounded-none p-3.5 transition-colors hover:bg-muted",
+              "group relative flex gap-3 overflow-hidden rounded-none p-3.5 transition-colors hover:bg-white/5",
               i === 0 && "sm:col-span-2"
             )}
           >
             <span
               aria-hidden
-              className="pointer-events-none absolute -left-0.5 -top-1 font-display text-4xl font-semibold text-foreground/[0.05] select-none"
+              className="pointer-events-none absolute -left-0.5 -top-1 font-display text-4xl font-semibold text-white/[0.06] select-none"
             >
               {String(i + 1).padStart(2, "0")}
             </span>
@@ -218,7 +240,7 @@ function SolutionsMega({ onNavigate }: { onNavigate: () => void }) {
                 {s.title}
                 <ArrowUpRight className="size-3 opacity-0 group-hover:opacity-100 transition-opacity" />
               </div>
-              <p className="mt-1 text-xs text-muted-foreground leading-relaxed">
+              <p className="mt-1 text-xs text-white/45 leading-relaxed">
                 {s.short}
               </p>
             </div>

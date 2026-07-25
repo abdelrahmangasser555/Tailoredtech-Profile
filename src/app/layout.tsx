@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next"
-import { Space_Grotesk, Manrope, Geist_Mono } from "next/font/google"
+import { Geist, Geist_Mono } from "next/font/google"
 import { Toaster } from "@/components/ui/sonner"
 import { Navbar } from "@/components/layout/navbar"
 import { Footer } from "@/components/layout/footer"
@@ -8,20 +8,8 @@ import { site } from "@/lib/content"
 import { buildThemeCss } from "@/lib/theme"
 import "./globals.css"
 
-const display = Space_Grotesk({
-  variable: "--font-display",
-  subsets: ["latin"],
-  display: "swap",
-})
-
-const heading = Space_Grotesk({
-  variable: "--font-heading",
-  subsets: ["latin"],
-  display: "swap",
-})
-
-const body = Manrope({
-  variable: "--font-body",
+const geist = Geist({
+  variable: "--font-geist",
   subsets: ["latin"],
   display: "swap",
 })
@@ -73,7 +61,7 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f5f5f0" },
+    { media: "(prefers-color-scheme: light)", color: "#f7f7f2" },
     { media: "(prefers-color-scheme: dark)", color: "#050505" },
   ],
   width: "device-width",
@@ -105,7 +93,15 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${display.variable} ${heading.variable} ${body.variable} ${geistMono.variable} h-full`}
+      className={`${geist.variable} ${geistMono.variable} h-full`}
+      style={
+        {
+          "--font-display": "var(--font-geist)",
+          "--font-heading": "var(--font-geist)",
+          "--font-body": "var(--font-geist)",
+          "--font-serif": "var(--font-geist)",
+        } as React.CSSProperties
+      }
     >
       <head>
         <style dangerouslySetInnerHTML={{ __html: buildThemeCss() }} />
@@ -114,7 +110,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="min-h-full flex flex-col overflow-x-clip">
+      <body className="min-h-full flex flex-col overflow-x-clip font-sans">
         <SmoothScroll>
           <Navbar />
           <main className="flex-1 w-full overflow-x-clip">{children}</main>

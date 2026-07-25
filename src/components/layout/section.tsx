@@ -22,7 +22,7 @@ export function Section({
       className={cn(
         "relative overflow-x-clip overflow-y-visible",
         tone === "dark"
-          ? "bg-[var(--section-dark)] text-[oklch(0.96_0.005_100)] [--background:var(--section-dark)] [--foreground:oklch(0.96_0.005_100)] [--muted-foreground:oklch(0.68_0.01_260)] [--border:oklch(1_0_0_/_10%)] [--accent:oklch(0.93_0.21_115)] [--accent-foreground:oklch(0.14_0.02_115)]"
+          ? "bg-[var(--section-dark)] text-[#f5f5f0] [--background:var(--section-dark)] [--foreground:#f5f5f0] [--muted-foreground:#a3a3a3] [--border:oklch(1_0_0_/_10%)] [--accent:#D4FF00] [--accent-foreground:#0A0A0A]"
           : "bg-[var(--section-light)] text-foreground",
         className
       )}
@@ -52,7 +52,8 @@ export function SectionHeader({
   return (
     <header className={cn("mb-14 md:mb-20 max-w-3xl", className)}>
       {eyebrow && (
-        <p className="mb-4 font-mono text-[11px] tracking-[0.22em] uppercase text-accent">
+        <p className="mb-4 flex items-center gap-2 font-mono text-[11px] tracking-[0.22em] uppercase text-foreground/70">
+          <span className="size-1.5 bg-accent" aria-hidden />
           {eyebrow}
         </p>
       )}

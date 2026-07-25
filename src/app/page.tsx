@@ -1,5 +1,4 @@
 import { Hero } from "@/components/sections/hero"
-import { Bridge } from "@/components/sections/bridge"
 import { Clients } from "@/components/sections/clients"
 import { SolutionsBento } from "@/components/sections/solutions-bento"
 import { LayerCollapse } from "@/components/sections/layer-collapse"
@@ -31,7 +30,6 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareLd) }}
       />
       <Hero />
-      <Bridge />
       <Clients />
       <SolutionsBento />
       <LayerCollapse />
