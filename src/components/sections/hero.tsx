@@ -1,70 +1,70 @@
-"use client"
+"use client";
 
-import { useEffect, useMemo, useRef, useState } from "react"
-import Link from "next/link"
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion"
-import { ArrowUpRight } from "lucide-react"
-import { Globe3D } from "@/components/ui/3d-globe"
-import { GlyphMatrix } from "@/components/ui/glyph-matrix"
-import { site, type HeroConfig } from "@/lib/content"
+import { useEffect, useMemo, useRef, useState } from "react";
+import Link from "next/link";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
+import { Globe3D } from "@/components/ui/3d-globe";
+import { GlyphMatrix } from "@/components/ui/glyph-matrix";
+import { site, type HeroConfig } from "@/lib/content";
 
-const EASE = [0.22, 1, 0.36, 1] as const
-const BRAND_COLOR = "#D4FF00"
-const GREY_COLOR = "#6B7280"
+const EASE = [0.22, 1, 0.36, 1] as const;
+const BRAND_COLOR = "#D4FF00";
+const GREY_COLOR = "#6B7280";
 
-type MorphVariant = HeroConfig["brandMorph"]["variant"]
+type MorphVariant = HeroConfig["brandMorph"]["variant"];
 
 /**
  * Tailored stays fixed.
  * Morph side cycles configured words (+ optional vessel) with a selectable variant.
  */
 function BrandMorph({ config }: { config: HeroConfig["brandMorph"] }) {
-  const reduce = useReducedMotion()
-  const words = config.words
-  const holdMs = config.holdMs
-  const showVessel = config.showVessel
-  const yoyo = config.yoyo
-  const variant = config.variant
-  const prefix = config.prefix
+  const reduce = useReducedMotion();
+  const words = config.words;
+  const holdMs = config.holdMs;
+  const showVessel = config.showVessel;
+  const yoyo = config.yoyo;
+  const variant = config.variant;
+  const prefix = config.prefix;
 
-  const maxPhase = showVessel ? words.length : Math.max(words.length - 1, 0)
-  const [phase, setPhase] = useState(0)
-  const dirRef = useRef<1 | -1>(1)
+  const maxPhase = showVessel ? words.length : Math.max(words.length - 1, 0);
+  const [phase, setPhase] = useState(0);
+  const dirRef = useRef<1 | -1>(1);
 
   useEffect(() => {
-    if (reduce || words.length === 0) return
+    if (reduce || words.length === 0) return;
 
     const id = window.setInterval(() => {
       setPhase((prev) => {
         if (!yoyo) {
-          return prev >= maxPhase ? 0 : prev + 1
+          return prev >= maxPhase ? 0 : prev + 1;
         }
 
-        const dir = dirRef.current
-        const next = prev + dir
+        const dir = dirRef.current;
+        const next = prev + dir;
         if (next > maxPhase) {
-          dirRef.current = -1
-          return Math.max(maxPhase - 1, 0)
+          dirRef.current = -1;
+          return Math.max(maxPhase - 1, 0);
         }
         if (next < 0) {
-          dirRef.current = 1
-          return Math.min(1, maxPhase)
+          dirRef.current = 1;
+          return Math.min(1, maxPhase);
         }
-        return next
-      })
-    }, holdMs)
+        return next;
+      });
+    }, holdMs);
 
-    return () => window.clearInterval(id)
-  }, [reduce, holdMs, maxPhase, words.length, yoyo])
+    return () => window.clearInterval(id);
+  }, [reduce, holdMs, maxPhase, words.length, yoyo]);
 
-  const vesselPhase = showVessel ? words.length : -1
-  const isVessel = phase === vesselPhase
-  const word = words[Math.min(phase, words.length - 1)] ?? ""
+  const vesselPhase = showVessel ? words.length : -1;
+  const isVessel = phase === vesselPhase;
+  const word = words[Math.min(phase, words.length - 1)] ?? "";
 
   const longest = useMemo(
     () => words.reduce((a, b) => (b.length > a.length ? b : a), ""),
     [words],
-  )
+  );
 
   return (
     <h1
@@ -117,16 +117,10 @@ function BrandMorph({ config }: { config: HeroConfig["brandMorph"] }) {
         )}
       </span>
     </h1>
-  )
+  );
 }
 
-function WordMorph({
-  word,
-  variant,
-}: {
-  word: string
-  variant: MorphVariant
-}) {
+function WordMorph({ word, variant }: { word: string; variant: MorphVariant }) {
   if (variant === "overflow") {
     return (
       <motion.span
@@ -140,7 +134,7 @@ function WordMorph({
         <span className="inline-block">{word}</span>
         <TagClose />
       </motion.span>
-    )
+    );
   }
 
   // slide (default)
@@ -156,7 +150,7 @@ function WordMorph({
       <span className="inline-block">{word}</span>
       <TagClose />
     </motion.span>
-  )
+  );
 }
 
 /** Brackets stay put; only the inner word jumps. Vessel replaces the whole slot. */
@@ -166,10 +160,10 @@ function JumpMorph({
   isVessel,
   showVessel,
 }: {
-  word: string
-  longest: string
-  isVessel: boolean
-  showVessel: boolean
+  word: string;
+  longest: string;
+  isVessel: boolean;
+  showVessel: boolean;
 }) {
   return (
     <AnimatePresence mode="wait" initial={false}>
@@ -215,7 +209,7 @@ function JumpMorph({
         </motion.span>
       )}
     </AnimatePresence>
-  )
+  );
 }
 
 function TagOpen() {
@@ -223,7 +217,7 @@ function TagOpen() {
     <span className="mr-[0.06em] font-mono text-[0.85em] font-medium text-accent/75">
       {"<"}
     </span>
-  )
+  );
 }
 
 function TagClose() {
@@ -231,7 +225,7 @@ function TagClose() {
     <span className="ml-[0.06em] font-mono text-[0.85em] font-medium text-accent/75">
       {" />"}
     </span>
-  )
+  );
 }
 
 /** Detailed vessel — sails with roll, bob, and wake */
@@ -339,17 +333,17 @@ function VesselMark() {
       <rect x="34" y="22" width="10" height="6" opacity="0.55" />
       <rect x="86" y="22" width="8" height="6" opacity="0.45" />
     </motion.svg>
-  )
+  );
 }
 
 function glyphColor(mode: HeroConfig["glyphMatrix"]["color"]) {
-  return mode === "grey" ? GREY_COLOR : BRAND_COLOR
+  return mode === "grey" ? GREY_COLOR : BRAND_COLOR;
 }
 
 export function Hero() {
-  const { company, hero } = site
-  const reduce = useReducedMotion()
-  const { glyphMatrix, brandMorph, globe } = hero
+  const { company, hero } = site;
+  const reduce = useReducedMotion();
+  const { glyphMatrix, brandMorph, globe } = hero;
 
   const glyphMask = glyphMatrix.fadeCenter
     ? {
@@ -358,10 +352,10 @@ export function Hero() {
         WebkitMaskImage:
           "radial-gradient(ellipse 52% 48% at 36% 44%, transparent 0%, rgba(0,0,0,0.35) 42%, black 72%)",
       }
-    : undefined
+    : undefined;
 
   return (
-    <section className="relative min-h-svh overflow-hidden bg-black text-white [--accent:#D4FF00] [--accent-foreground:#0A0A0A]">
+    <section className="relative h-svh overflow-hidden bg-black text-white [--accent:#D4FF00] [--accent-foreground:#0A0A0A]">
       {glyphMatrix.enabled && (
         <div
           aria-hidden
@@ -384,7 +378,7 @@ export function Hero() {
         </div>
       )}
 
-      <div className="relative z-10 mx-auto flex min-h-svh w-full max-w-7xl flex-col justify-center px-5 pt-20 pb-28 md:px-8 lg:grid lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-center lg:gap-2 lg:overflow-visible lg:pt-16 lg:pb-28 lg:-translate-y-6 xl:gap-6">
+      <div className="relative z-10 mx-auto flex h-full w-full max-w-7xl flex-col justify-center px-5 pt-20 pb-24 md:px-8 lg:grid lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-center lg:gap-2 lg:overflow-visible lg:pt-14 lg:pb-16 lg:-translate-y-4 xl:gap-6">
         <div className="relative z-20 flex flex-col lg:max-w-xl xl:max-w-2xl">
           <motion.div
             initial={{ opacity: 0, y: 28 }}
@@ -400,8 +394,20 @@ export function Hero() {
             initial={{ opacity: 0, y: 36 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.22, ease: EASE }}
-            className="relative z-10 mt-8 -mx-5 h-[34vh] min-h-[200px] w-screen overflow-hidden md:-mx-8 lg:mx-0 lg:mt-0 lg:h-[min(78vh,680px)] lg:min-h-0 lg:w-[min(62vw,760px)] lg:translate-x-[12%] lg:scale-[1.12] lg:justify-self-end lg:overflow-visible"
+            className="relative z-10 mt-8 -mx-5 h-[34vh] min-h-[200px] w-screen overflow-hidden md:-mx-8 lg:mx-0 lg:mt-0 lg:h-[min(72vh,620px)] lg:min-h-0 lg:w-[min(60vw,720px)] lg:translate-x-[28%] lg:scale-[1.08] lg:justify-self-end lg:overflow-visible"
           >
+            {/* Soft fade: clearer near the globe, denser as it leaves toward the copy */}
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-0 z-20"
+            >
+              <div className="absolute inset-y-0 left-0 w-[48%] bg-linear-to-r from-black/55 via-black/18 to-transparent" />
+              <div className="absolute inset-y-0 right-0 w-[18%] bg-linear-to-l from-black/35 to-transparent" />
+              <div className="absolute inset-x-0 top-0 h-[22%] bg-linear-to-b from-black/25 to-transparent" />
+              <div className="absolute inset-x-0 bottom-0 h-[24%] bg-linear-to-t from-black/30 to-transparent" />
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_58%_50%,transparent_48%,rgba(0,0,0,0.12)_72%,rgba(0,0,0,0.28)_100%)]" />
+            </div>
+
             <div className="absolute left-1/2 top-0 w-[145%] -translate-x-1/2 lg:relative lg:left-auto lg:top-auto lg:h-full lg:w-full lg:translate-x-0">
               <Globe3D
                 markers={globe.markers}
@@ -424,7 +430,7 @@ export function Hero() {
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, delay: 0.35, ease: EASE }}
-        className="absolute bottom-10 left-5 z-30 flex flex-wrap gap-3 md:bottom-14 md:left-8 lg:bottom-16 lg:left-10"
+        className="absolute bottom-8 left-5 z-30 flex flex-wrap gap-3 md:bottom-10 md:left-8 lg:bottom-10 lg:left-10"
       >
         <Link
           href="/#contact"
@@ -442,5 +448,5 @@ export function Hero() {
         </Link>
       </motion.div>
     </section>
-  )
+  );
 }
