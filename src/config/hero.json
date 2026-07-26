@@ -20,6 +20,13 @@
     "yoyo": false,
     "variant": "slide"
   },
+  "description": {
+    "enabled": true,
+    "before": "Operating on ",
+    "count": "107+",
+    "middle": " vessels around the ",
+    "word": "globe"
+  },
   "globe": {
     "enabled": true,
     "autoRotateSpeed": 0.28,

@@ -68,13 +68,13 @@ function BrandMorph({ config }: { config: HeroConfig["brandMorph"] }) {
 
   return (
     <h1
-      className="flex min-h-[1.1em] flex-nowrap items-center whitespace-nowrap font-display text-[clamp(2rem,7.2vw,6.25rem)] font-semibold leading-[0.92] tracking-[-0.04em]"
+      className="flex min-h-[1.1em] flex-col items-start gap-1 font-display text-[clamp(3.25rem,15vw,5rem)] font-semibold leading-[0.92] tracking-[-0.04em] lg:flex-row lg:flex-nowrap lg:items-center lg:gap-0 lg:whitespace-nowrap lg:text-[clamp(2.4rem,8.4vw,7.25rem)]"
       aria-label={`${prefix}${words[0] ?? ""}`}
     >
       <span className="text-white">{prefix}</span>
 
       <span
-        className={`relative ml-[0.02em] inline-flex h-[1em] min-w-[2.1em] shrink-0 items-center text-accent ${
+        className={`relative inline-flex h-[1em] min-w-[2.1em] shrink-0 items-center text-accent lg:ml-[0.02em] ${
           variant === "overflow" ? "overflow-hidden" : ""
         }`}
       >
@@ -341,9 +341,9 @@ function glyphColor(mode: HeroConfig["glyphMatrix"]["color"]) {
 }
 
 export function Hero() {
-  const { company, hero } = site;
-  const reduce = useReducedMotion();
-  const { glyphMatrix, brandMorph, globe } = hero;
+  const { company, hero } = site
+  const reduce = useReducedMotion()
+  const { glyphMatrix, brandMorph, globe, description } = hero
 
   const glyphMask = glyphMatrix.fadeCenter
     ? {
@@ -352,10 +352,30 @@ export function Hero() {
         WebkitMaskImage:
           "radial-gradient(ellipse 52% 48% at 36% 44%, transparent 0%, rgba(0,0,0,0.35) 42%, black 72%)",
       }
-    : undefined;
+    : undefined
+
+  const ctaPrimary = (
+    <Link
+      href="/#contact"
+      className="inline-flex h-11 w-full items-center justify-center gap-2 bg-accent px-5 text-sm font-medium text-accent-foreground transition hover:brightness-95 lg:w-auto"
+    >
+      {company.contact.cta}
+      <ArrowUpRight className="size-4" />
+    </Link>
+  )
+
+  const ctaSecondary = (
+    <Link
+      href="/services"
+      className="inline-flex h-11 w-full items-center justify-center gap-2 border border-white/25 px-5 text-sm font-medium text-white transition hover:bg-white/5 lg:w-auto"
+    >
+      Solutions
+      <ArrowUpRight className="size-4" />
+    </Link>
+  )
 
   return (
-    <section className="relative h-svh overflow-hidden bg-black text-white [--accent:#D4FF00] [--accent-foreground:#0A0A0A]">
+    <section className="relative flex h-svh flex-col overflow-hidden bg-black text-white [--accent:#D4FF00] [--accent-foreground:#0A0A0A] lg:block">
       {glyphMatrix.enabled && (
         <div
           aria-hidden
@@ -378,8 +398,8 @@ export function Hero() {
         </div>
       )}
 
-      <div className="relative z-10 mx-auto flex h-full w-full max-w-7xl flex-col justify-center px-5 pt-20 pb-24 md:px-8 lg:grid lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-center lg:gap-2 lg:overflow-visible lg:pt-14 lg:pb-16 lg:-translate-y-4 xl:gap-6">
-        <div className="relative z-20 flex flex-col lg:max-w-xl xl:max-w-2xl">
+      <div className="relative z-20 flex min-h-0 flex-1 flex-col px-5 pt-24 md:px-8 lg:absolute lg:inset-0 lg:grid lg:h-full lg:w-full lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:items-center lg:gap-2 lg:overflow-visible lg:px-10 lg:pt-14 lg:pb-16">
+        <div className="relative z-20 flex flex-col lg:-translate-y-10 xl:-translate-y-12">
           <motion.div
             initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
@@ -387,16 +407,39 @@ export function Hero() {
           >
             <BrandMorph config={brandMorph} />
           </motion.div>
+
+          {description.enabled && (
+            <motion.p
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.2, ease: EASE }}
+              className="mt-5 hidden max-w-md font-heading text-base font-medium leading-snug tracking-tight text-white/55 lg:block lg:text-lg"
+            >
+              {description.before}
+              <span className="text-accent">{description.count}</span>
+              {description.middle}
+              <span className="text-accent">{description.word}</span>
+            </motion.p>
+          )}
         </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.25, ease: EASE }}
+          className="mt-auto mb-5 flex w-full flex-col gap-3 lg:hidden"
+        >
+          {ctaPrimary}
+          {ctaSecondary}
+        </motion.div>
 
         {globe.enabled && (
           <motion.div
             initial={{ opacity: 0, y: 36 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.22, ease: EASE }}
-            className="relative z-10 mt-8 -mx-5 h-[34vh] min-h-[200px] w-screen overflow-hidden md:-mx-8 lg:mx-0 lg:mt-0 lg:h-[min(72vh,620px)] lg:min-h-0 lg:w-[min(60vw,720px)] lg:translate-x-[28%] lg:scale-[1.08] lg:justify-self-end lg:overflow-visible"
+            className="relative z-10 hidden lg:block lg:h-[min(72vh,620px)] lg:w-[min(60vw,720px)] lg:translate-x-[28%] lg:scale-[1.08] lg:justify-self-end lg:overflow-visible"
           >
-            {/* Soft fade: clearer near the globe, denser as it leaves toward the copy */}
             <div
               aria-hidden
               className="pointer-events-none absolute inset-0 z-20"
@@ -408,10 +451,10 @@ export function Hero() {
               <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_58%_50%,transparent_48%,rgba(0,0,0,0.12)_72%,rgba(0,0,0,0.28)_100%)]" />
             </div>
 
-            <div className="absolute left-1/2 top-0 w-[145%] -translate-x-1/2 lg:relative lg:left-auto lg:top-auto lg:h-full lg:w-full lg:translate-x-0">
+            <div className="h-full w-full">
               <Globe3D
                 markers={globe.markers}
-                className="h-[min(92vw,540px)] w-full lg:h-full"
+                className="h-full w-full"
                 config={{
                   showAtmosphere: globe.showAtmosphere,
                   bumpScale: globe.bumpScale,
@@ -426,27 +469,39 @@ export function Hero() {
         )}
       </div>
 
+      {globe.enabled && (
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, delay: 0.2, ease: EASE }}
+          className="relative z-10 h-[34%] min-h-[200px] w-full shrink-0 overflow-hidden lg:hidden"
+        >
+          <div className="absolute left-1/2 top-0 w-[130%] max-w-none -translate-x-1/2">
+            <Globe3D
+              markers={globe.markers}
+              className="h-[min(95vw,520px)] w-full"
+              config={{
+                showAtmosphere: globe.showAtmosphere,
+                bumpScale: globe.bumpScale,
+                autoRotateSpeed: reduce ? 0 : globe.autoRotateSpeed,
+                ambientIntensity: globe.ambientIntensity,
+                pointLightIntensity: globe.pointLightIntensity,
+                backgroundColor: null,
+              }}
+            />
+          </div>
+        </motion.div>
+      )}
+
       <motion.div
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, delay: 0.35, ease: EASE }}
-        className="absolute bottom-8 left-5 z-30 flex flex-wrap gap-3 md:bottom-10 md:left-8 lg:bottom-10 lg:left-10"
+        className="absolute bottom-8 left-5 z-30 hidden flex-wrap gap-3 md:bottom-10 md:left-8 lg:bottom-10 lg:left-10 lg:flex"
       >
-        <Link
-          href="/#contact"
-          className="inline-flex h-11 items-center gap-2 bg-accent px-5 text-sm font-medium text-accent-foreground transition hover:brightness-95"
-        >
-          {company.contact.cta}
-          <ArrowUpRight className="size-4" />
-        </Link>
-        <Link
-          href="/services"
-          className="inline-flex h-11 items-center gap-2 border border-white/25 px-5 text-sm font-medium text-white transition hover:bg-white/5"
-        >
-          Solutions
-          <ArrowUpRight className="size-4" />
-        </Link>
+        {ctaPrimary}
+        {ctaSecondary}
       </motion.div>
     </section>
-  );
+  )
 }
