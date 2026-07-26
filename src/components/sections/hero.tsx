@@ -49,12 +49,12 @@ function BrandMorph() {
 
   return (
     <h1
-      className="flex min-h-[1.1em] flex-wrap items-baseline font-display text-[clamp(3rem,11vw,7rem)] font-semibold leading-[0.92] tracking-[-0.04em]"
+      className="flex min-h-[1.1em] flex-wrap items-center font-display text-[clamp(3rem,11vw,7rem)] font-semibold leading-[0.92] tracking-[-0.04em]"
       aria-label="TailoredTech"
     >
       <span className="text-white">Tailored</span>
 
-      <span className="relative ml-[0.02em] inline-flex min-w-[2.1em] items-center text-accent">
+      <span className="relative ml-[0.02em] inline-flex h-[1em] min-w-[2.1em] items-center text-accent">
         <AnimatePresence mode="wait" initial={false}>
           {showVessel ? (
             <motion.span
@@ -63,7 +63,7 @@ function BrandMorph() {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: 36 }}
               transition={{ duration: 0.75, ease: EASE }}
-              className="inline-flex"
+              className="absolute inset-y-0 left-0 inline-flex items-center"
             >
               <VesselMark />
             </motion.span>
@@ -96,7 +96,7 @@ function VesselMark() {
   return (
     <motion.svg
       viewBox="0 0 140 56"
-      className="h-[0.92em] w-auto overflow-visible"
+      className="h-[0.78em] w-auto overflow-visible"
       fill="currentColor"
       aria-hidden
       animate={{
@@ -228,14 +228,14 @@ export function Hero() {
           muted
           loop
           playsInline
-          className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-[0.35]"
+          className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-[0.48]"
         >
           <source src="/assets/hero_section.mp4" type="video/mp4" />
         </video>
       )}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/80"
+        className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/65 via-black/55 to-black/75"
       />
       <div
         aria-hidden
@@ -248,13 +248,9 @@ export function Hero() {
             "radial-gradient(ellipse 80% 70% at 50% 40%, black 20%, transparent 75%)",
         }}
       />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -left-32 top-24 size-[28rem] rounded-full bg-[radial-gradient(circle,rgba(212,255,0,0.16),transparent_68%)]"
-      />
 
-      <div className="relative z-10 mx-auto flex min-h-[100svh] w-full max-w-6xl flex-col justify-between px-5 pb-10 pt-28 md:px-8 md:pb-12 md:pt-32">
-        <div className="flex flex-1 flex-col justify-center gap-8 md:gap-10">
+      <div className="relative z-10 mx-auto flex min-h-[100svh] w-full max-w-6xl flex-col justify-center px-5 pb-10 pt-28 md:px-8 md:pb-12 md:pt-32">
+        <div className="flex flex-col gap-8 md:gap-10">
           <motion.div
             initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
@@ -290,15 +286,6 @@ export function Hero() {
             </div>
           </motion.div>
         </div>
-
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.7, duration: 0.6 }}
-          className="font-mono text-[10px] tracking-[0.24em] uppercase text-white/30"
-        >
-          Scroll
-        </motion.p>
       </div>
     </section>
   )
