@@ -66,10 +66,15 @@ export function Navbar() {
       }}
       transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
     >
-      <div className="mx-auto max-w-6xl px-5 md:px-8 pt-5">
+      <div
+        className={cn(
+          "mx-auto px-5 pt-4 transition-[max-width,padding] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] md:px-8 md:pt-5",
+          atTop ? "max-w-[100rem]" : "max-w-5xl md:px-5"
+        )}
+      >
         <nav
           className={cn(
-            "flex items-center justify-between gap-4 px-1 py-2.5 transition-[background,border,padding,backdrop-filter] duration-500",
+            "flex items-center justify-between gap-4 px-1 py-2.5 transition-[background,border,padding,backdrop-filter,max-width] duration-500",
             solid &&
               "border border-white/10 bg-black/70 px-4 backdrop-blur-2xl"
           )}

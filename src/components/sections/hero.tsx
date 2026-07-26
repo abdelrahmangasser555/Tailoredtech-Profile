@@ -4,6 +4,8 @@ import { useEffect, useRef, useState } from "react"
 import Link from "next/link"
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion"
 import { ArrowUpRight } from "lucide-react"
+import { Globe3D, type GlobeMarker } from "@/components/ui/3d-globe"
+import { GlyphMatrix } from "@/components/ui/glyph-matrix"
 import { site } from "@/lib/content"
 
 type Phase = 0 | 1 | 2 | 3
@@ -11,6 +13,81 @@ type Phase = 0 | 1 | 2 | 3
 const EASE = [0.22, 1, 0.36, 1] as const
 const HOLD_MS = 1800
 const WORDS = ["tech", "code", "ship"] as const
+
+const HERO_MARKERS: GlobeMarker[] = [
+  {
+    lat: 51.9225,
+    lng: 4.4792,
+    src: "https://assets.aceternity.com/avatars/1.webp",
+    label: "Rotterdam",
+  },
+  {
+    lat: 1.3521,
+    lng: 103.8198,
+    src: "https://assets.aceternity.com/avatars/12.webp",
+    label: "Singapore",
+  },
+  {
+    lat: 25.2048,
+    lng: 55.2708,
+    src: "https://assets.aceternity.com/avatars/10.webp",
+    label: "Dubai",
+  },
+  {
+    lat: 31.2304,
+    lng: 121.4737,
+    src: "https://assets.aceternity.com/avatars/9.webp",
+    label: "Shanghai",
+  },
+  {
+    lat: 53.5511,
+    lng: 9.9937,
+    src: "https://assets.aceternity.com/avatars/2.webp",
+    label: "Hamburg",
+  },
+  {
+    lat: 33.7405,
+    lng: -118.271,
+    src: "https://assets.aceternity.com/avatars/4.webp",
+    label: "Los Angeles",
+  },
+  {
+    lat: 35.1796,
+    lng: 129.0756,
+    src: "https://assets.aceternity.com/avatars/13.webp",
+    label: "Busan",
+  },
+  {
+    lat: 29.7604,
+    lng: -95.3698,
+    src: "https://assets.aceternity.com/avatars/5.webp",
+    label: "Houston",
+  },
+  {
+    lat: -33.8688,
+    lng: 151.2093,
+    src: "https://assets.aceternity.com/avatars/4.webp",
+    label: "Sydney",
+  },
+  {
+    lat: 40.7128,
+    lng: -74.006,
+    src: "https://assets.aceternity.com/avatars/1.webp",
+    label: "New York",
+  },
+  {
+    lat: -22.9068,
+    lng: -43.1729,
+    src: "https://assets.aceternity.com/avatars/8.webp",
+    label: "Rio de Janeiro",
+  },
+  {
+    lat: 51.5074,
+    lng: -0.1278,
+    src: "https://assets.aceternity.com/avatars/2.webp",
+    label: "London",
+  },
+]
 
 /**
  * Tailored stays fixed.
@@ -49,12 +126,12 @@ function BrandMorph() {
 
   return (
     <h1
-      className="flex min-h-[1.1em] flex-wrap items-center font-display text-[clamp(3rem,11vw,7rem)] font-semibold leading-[0.92] tracking-[-0.04em]"
+      className="flex min-h-[1.1em] flex-nowrap items-center whitespace-nowrap font-display text-[clamp(2rem,7.2vw,6.25rem)] font-semibold leading-[0.92] tracking-[-0.04em]"
       aria-label="TailoredTech"
     >
       <span className="text-white">Tailored</span>
 
-      <span className="relative ml-[0.02em] inline-flex h-[1em] min-w-[2.1em] items-center text-accent">
+      <span className="relative ml-[0.02em] inline-flex h-[1em] min-w-[2.1em] shrink-0 items-center text-accent">
         <AnimatePresence mode="wait" initial={false}>
           {showVessel ? (
             <motion.span
@@ -220,37 +297,37 @@ export function Hero() {
   const reduce = useReducedMotion()
 
   return (
-    <section className="relative min-h-[100svh] overflow-hidden bg-black text-white [--accent:#D4FF00] [--accent-foreground:#0A0A0A]">
-      {!reduce && (
-        <video
-          aria-hidden
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-[0.48]"
-        >
-          <source src="/assets/hero_section.mp4" type="video/mp4" />
-        </video>
-      )}
+    <section className="relative min-h-svh overflow-hidden bg-black text-white [--accent:#D4FF00] [--accent-foreground:#0A0A0A]">
+      {/* Glyph field — readable on the edges, softens behind the copy */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/65 via-black/55 to-black/75"
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-40"
+        className="pointer-events-none absolute inset-0 z-0 opacity-90"
         style={{
-          backgroundImage:
-            "linear-gradient(rgba(255,255,255,0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.045) 1px, transparent 1px)",
-          backgroundSize: "72px 72px",
           maskImage:
-            "radial-gradient(ellipse 80% 70% at 50% 40%, black 20%, transparent 75%)",
+            "radial-gradient(ellipse 52% 48% at 36% 44%, transparent 0%, rgba(0,0,0,0.35) 42%, black 72%)",
+          WebkitMaskImage:
+            "radial-gradient(ellipse 52% 48% at 36% 44%, transparent 0%, rgba(0,0,0,0.35) 42%, black 72%)",
+          filter: "brightness(1.35) contrast(1.15)",
         }}
-      />
+      >
+        <GlyphMatrix
+          className="h-full w-full"
+          color="#D4FF00"
+          cellSize={15}
+          mutationRate={0.035}
+          interval={100}
+          fadeBottom={0.25}
+          glyphs="01·•<>/=+*"
+        />
+      </div>
 
-      <div className="relative z-10 mx-auto flex min-h-[100svh] w-full max-w-6xl flex-col justify-center px-5 pb-10 pt-28 md:px-8 md:pb-12 md:pt-32">
-        <div className="flex flex-col gap-8 md:gap-10">
+      {/*
+        Mobile: brand → globe peek
+        Desktop: brand left | oversized globe right
+        CTAs: bottom-left of the panel (not flush to the edge)
+      */}
+      <div className="relative z-10 mx-auto flex min-h-svh w-full max-w-7xl flex-col justify-center px-5 pt-20 pb-28 md:px-8 lg:grid lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-center lg:gap-2 lg:overflow-visible lg:pt-16 lg:pb-28 lg:-translate-y-6 xl:gap-6">
+        <div className="relative z-20 flex flex-col lg:max-w-xl xl:max-w-2xl">
           <motion.div
             initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
@@ -258,35 +335,52 @@ export function Hero() {
           >
             <BrandMorph />
           </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.15, ease: EASE }}
-            className="flex max-w-xl flex-col gap-6"
-          >
-            <p className="font-heading text-lg md:text-xl font-medium tracking-tight text-white/80 leading-snug">
-              {company.tagline}
-            </p>
-            <div className="flex flex-wrap gap-3">
-              <Link
-                href="/#contact"
-                className="inline-flex h-11 items-center gap-2 bg-accent px-5 text-sm font-medium text-accent-foreground transition hover:brightness-95"
-              >
-                {company.contact.cta}
-                <ArrowUpRight className="size-4" />
-              </Link>
-              <Link
-                href="/services"
-                className="inline-flex h-11 items-center gap-2 border border-white/25 px-5 text-sm font-medium text-white transition hover:bg-white/5"
-              >
-                Solutions
-                <ArrowUpRight className="size-4" />
-              </Link>
-            </div>
-          </motion.div>
         </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 36 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.22, ease: EASE }}
+          className="relative z-10 mt-8 -mx-5 h-[34vh] min-h-[200px] w-screen overflow-hidden md:-mx-8 lg:mx-0 lg:mt-0 lg:h-[min(78vh,680px)] lg:min-h-0 lg:w-[min(62vw,760px)] lg:translate-x-[12%] lg:scale-[1.12] lg:justify-self-end lg:overflow-visible"
+        >
+          <div className="absolute left-1/2 top-0 w-[145%] -translate-x-1/2 lg:relative lg:left-auto lg:top-auto lg:h-full lg:w-full lg:translate-x-0">
+            <Globe3D
+              markers={HERO_MARKERS}
+              className="h-[min(92vw,540px)] w-full lg:h-full"
+              config={{
+                showAtmosphere: false,
+                bumpScale: 5,
+                autoRotateSpeed: reduce ? 0 : 0.28,
+                ambientIntensity: 0.5,
+                pointLightIntensity: 1.6,
+                backgroundColor: null,
+              }}
+            />
+          </div>
+        </motion.div>
       </div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, delay: 0.35, ease: EASE }}
+        className="absolute bottom-10 left-5 z-30 flex flex-wrap gap-3 md:bottom-14 md:left-8 lg:bottom-16 lg:left-10"
+      >
+        <Link
+          href="/#contact"
+          className="inline-flex h-11 items-center gap-2 bg-accent px-5 text-sm font-medium text-accent-foreground transition hover:brightness-95"
+        >
+          {company.contact.cta}
+          <ArrowUpRight className="size-4" />
+        </Link>
+        <Link
+          href="/services"
+          className="inline-flex h-11 items-center gap-2 border border-white/25 px-5 text-sm font-medium text-white transition hover:bg-white/5"
+        >
+          Solutions
+          <ArrowUpRight className="size-4" />
+        </Link>
+      </motion.div>
     </section>
   )
 }
