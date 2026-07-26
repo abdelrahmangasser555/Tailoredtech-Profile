@@ -22,7 +22,7 @@
   },
   "description": {
     "enabled": true,
-    "before": "Operating on ",
+    "before": "Enterprise softwares on ",
     "count": "107+",
     "middle": " vessels around the ",
     "word": "globe"
@@ -34,6 +34,13 @@
     "bumpScale": 5,
     "ambientIntensity": 0.7,
     "pointLightIntensity": 1.6,
+    "desktop": {
+      "scale": 1.18,
+      "x": "28%",
+      "y": "0%",
+      "width": "min(60vw, 720px)",
+      "height": "min(72vh, 620px)"
+    },
     "markers": [
       {
         "lat": 42.0,
