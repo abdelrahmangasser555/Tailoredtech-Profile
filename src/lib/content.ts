@@ -5,6 +5,7 @@ import projects from "@/config/projects.json"
 import timeline from "@/config/timeline.json"
 import navigation from "@/config/navigation.json"
 import theme from "@/config/theme.json"
+import hero from "@/config/hero.json"
 
 export type Company = typeof company
 export type Clients = typeof clients
@@ -13,6 +14,7 @@ export type Projects = typeof projects
 export type Timeline = typeof timeline
 export type Navigation = typeof navigation
 export type ThemeConfig = typeof theme
+export type HeroConfig = typeof hero
 
 export const site = {
   company,
@@ -22,6 +24,7 @@ export const site = {
   timeline,
   navigation,
   theme,
+  hero,
 } as const
 
 export function getFeaturedClients() {

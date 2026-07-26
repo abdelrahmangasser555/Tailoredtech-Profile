@@ -1,0 +1,105 @@
+{
+  "glyphMatrix": {
+    "enabled": true,
+    "opacity": 0.6,
+    "color": "brand",
+    "fadeCenter": false,
+    "cellSize": 18,
+    "mutationRate": 0.035,
+    "interval": 100,
+    "fadeBottom": 0.85,
+    "glyphs": "01·•<>/=+*",
+    "brightness": 1.0,
+    "contrast": 1.15
+  },
+  "brandMorph": {
+    "prefix": "Tailored",
+    "words": ["tech", "code", "product"],
+    "holdMs": 1800,
+    "showVessel": true,
+    "yoyo": false,
+    "variant": "slide"
+  },
+  "globe": {
+    "enabled": true,
+    "autoRotateSpeed": 0.28,
+    "showAtmosphere": false,
+    "bumpScale": 5,
+    "ambientIntensity": 0.7,
+    "pointLightIntensity": 1.6,
+    "markers": [
+      {
+        "lat": 51.9225,
+        "lng": 4.4792,
+        "src": "https://assets.aceternity.com/avatars/1.webp",
+        "label": "Rotterdam"
+      },
+      {
+        "lat": 1.3521,
+        "lng": 103.8198,
+        "src": "https://assets.aceternity.com/avatars/12.webp",
+        "label": "Singapore"
+      },
+      {
+        "lat": 25.2048,
+        "lng": 55.2708,
+        "src": "https://assets.aceternity.com/avatars/10.webp",
+        "label": "Dubai"
+      },
+      {
+        "lat": 31.2304,
+        "lng": 121.4737,
+        "src": "https://assets.aceternity.com/avatars/9.webp",
+        "label": "Shanghai"
+      },
+      {
+        "lat": 53.5511,
+        "lng": 9.9937,
+        "src": "https://assets.aceternity.com/avatars/2.webp",
+        "label": "Hamburg"
+      },
+      {
+        "lat": 33.7405,
+        "lng": -118.271,
+        "src": "https://assets.aceternity.com/avatars/4.webp",
+        "label": "Los Angeles"
+      },
+      {
+        "lat": 35.1796,
+        "lng": 129.0756,
+        "src": "https://assets.aceternity.com/avatars/13.webp",
+        "label": "Busan"
+      },
+      {
+        "lat": 29.7604,
+        "lng": -95.3698,
+        "src": "https://assets.aceternity.com/avatars/5.webp",
+        "label": "Houston"
+      },
+      {
+        "lat": -33.8688,
+        "lng": 151.2093,
+        "src": "https://assets.aceternity.com/avatars/4.webp",
+        "label": "Sydney"
+      },
+      {
+        "lat": 40.7128,
+        "lng": -74.006,
+        "src": "https://assets.aceternity.com/avatars/1.webp",
+        "label": "New York"
+      },
+      {
+        "lat": -22.9068,
+        "lng": -43.1729,
+        "src": "https://assets.aceternity.com/avatars/8.webp",
+        "label": "Rio de Janeiro"
+      },
+      {
+        "lat": 51.5074,
+        "lng": -0.1278,
+        "src": "https://assets.aceternity.com/avatars/2.webp",
+        "label": "London"
+      }
+    ]
+  }
+}
