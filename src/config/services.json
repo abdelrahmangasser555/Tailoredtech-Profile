@@ -30,6 +30,74 @@
           { "value": "24/7", "label": "voyage visibility" },
           { "value": "0", "label": "spreadsheet handoffs" }
         ],
+        "comparison": {
+          "enabled": true,
+          "eyebrow": "Compare",
+          "title": "Fleet Operations vs the usual stack",
+          "columns": [
+            { "id": "tailored", "label": "Fleet Operations", "highlight": true },
+            { "id": "legacy", "label": "Legacy tools" },
+            { "id": "saas", "label": "Generic SaaS" }
+          ],
+          "rows": [
+            {
+              "label": "Live fleet-wide board",
+              "cells": [
+                { "type": "check", "value": true },
+                { "type": "x", "value": false },
+                { "type": "text", "value": "Partial" }
+              ]
+            },
+            {
+              "label": "Crew tied to vessel rotations",
+              "cells": [
+                { "type": "check", "value": true },
+                { "type": "text", "value": "Manual" },
+                { "type": "x", "value": false }
+              ]
+            },
+            {
+              "label": "Custom voyage rules",
+              "cells": [
+                { "type": "check", "value": true },
+                { "type": "x", "value": false },
+                { "type": "number", "value": 2 }
+              ]
+            },
+            {
+              "label": "Exception alerts in-flow",
+              "cells": [
+                { "type": "check", "value": true },
+                { "type": "x", "value": false },
+                { "type": "check", "value": true }
+              ]
+            },
+            {
+              "label": "Shore–ship handoff time",
+              "cells": [
+                { "type": "text", "value": "Minutes" },
+                { "type": "text", "value": "Hours" },
+                { "type": "text", "value": "Hours" }
+              ]
+            },
+            {
+              "label": "Integrations supported",
+              "cells": [
+                { "type": "number", "value": 12 },
+                { "type": "number", "value": 3 },
+                { "type": "number", "value": 6 }
+              ]
+            },
+            {
+              "label": "Fits your operating model",
+              "cells": [
+                { "type": "check", "value": true },
+                { "type": "x", "value": false },
+                { "type": "text", "value": "Config only" }
+              ]
+            }
+          ]
+        },
         "sections": [
           {
             "id": "overview",

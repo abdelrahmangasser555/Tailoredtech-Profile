@@ -9,19 +9,25 @@ declare global {
   }
 }
 
+function debounce(fn: () => void, ms: number) {
+  let t = 0
+  return () => {
+    window.clearTimeout(t)
+    t = window.setTimeout(fn, ms)
+  }
+}
+
 /**
- * Lenis smooth scroll — RAF-driven.
- * Exposes `window.__lenis` for programmatic scroll + resize after dynamic content.
+ * Lenis smooth scroll — lighter resize handling to avoid scroll glitches.
  */
 export function SmoothScroll({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 1.05,
+      duration: 0.85,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
-      touchMultiplier: 1.4,
+      touchMultiplier: 1.35,
       autoRaf: false,
-      // Don't fight nested horizontal scroll / lightbox regions
       prevent: (node) =>
         Boolean(
           node.closest("[data-lenis-prevent]") ||
@@ -40,22 +46,16 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
 
     document.documentElement.classList.add("lenis", "lenis-smooth")
 
-    const onResize = () => lenis.resize()
-    window.addEventListener("resize", onResize)
+    const resize = debounce(() => lenis.resize(), 120)
+    window.addEventListener("resize", resize)
 
-    // Recalc after fonts / late layout (mermaid, images)
-    const t1 = window.setTimeout(() => lenis.resize(), 400)
-    const t2 = window.setTimeout(() => lenis.resize(), 1200)
-
-    const ro = new ResizeObserver(() => lenis.resize())
-    ro.observe(document.documentElement)
+    // One late pass after fonts / heavy media — not on every layout tick
+    const t1 = window.setTimeout(() => lenis.resize(), 500)
 
     return () => {
       cancelAnimationFrame(frame)
       window.clearTimeout(t1)
-      window.clearTimeout(t2)
-      window.removeEventListener("resize", onResize)
-      ro.disconnect()
+      window.removeEventListener("resize", resize)
       lenis.destroy()
       if (window.__lenis === lenis) delete window.__lenis
       document.documentElement.classList.remove("lenis", "lenis-smooth")
@@ -65,20 +65,23 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
   return <>{children}</>
 }
 
-/** Scroll to a hash/id using Lenis when available (avoids stuck native scrollIntoView). */
 export function scrollToId(id: string, offset = -112) {
   const el = document.getElementById(id)
   if (!el) return
 
   const lenis = window.__lenis
   if (lenis) {
-    lenis.scrollTo(el, { offset, duration: 1.1 })
+    lenis.scrollTo(el, { offset, duration: 0.95 })
     return
   }
 
   el.scrollIntoView({ behavior: "smooth", block: "start" })
 }
 
+let refreshTimer = 0
 export function refreshSmoothScroll() {
-  window.__lenis?.resize()
+  window.clearTimeout(refreshTimer)
+  refreshTimer = window.setTimeout(() => {
+    window.__lenis?.resize()
+  }, 160)
 }

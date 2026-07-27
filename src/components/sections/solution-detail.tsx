@@ -19,6 +19,7 @@ import {
   SectionVideo,
 } from "@/components/sections/section-media"
 import { SectionLayerNav } from "@/components/sections/section-layer-nav"
+import { SolutionComparisonTable } from "@/components/sections/solution-comparison-table"
 import { Section } from "@/components/layout/section"
 import {
   getRelatedServices,
@@ -57,11 +58,13 @@ export function SolutionDetail({ service }: SolutionDetailProps) {
           .filter((e) => e.isIntersecting)
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio)
         const top = visible[0]?.target.id
-        if (top) setActiveId(top)
+        if (!top) return
+        // Avoid re-render thrash mid-scroll
+        setActiveId((prev) => (prev === top ? prev : top))
       },
       {
         rootMargin: "-28% 0px -48% 0px",
-        threshold: [0.15, 0.35, 0.55],
+        threshold: [0.2, 0.45],
       }
     )
 
@@ -123,6 +126,10 @@ export function SolutionDetail({ service }: SolutionDetailProps) {
             ))}
           </div>
         </Section>
+      )}
+
+      {page.comparison?.enabled && (
+        <SolutionComparisonTable data={page.comparison} />
       )}
 
       <Section tone="dark" className="!pt-16 md:!pt-20">

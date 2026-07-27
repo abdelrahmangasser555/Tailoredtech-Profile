@@ -96,7 +96,20 @@ Sitemap includes all enabled solution slugs (`src/app/sitemap.ts`).
 - `SectionImageStack` — fanned stack; keep for other surfaces / experiments
 - `SectionVideo`, `BrandedMermaid` — video + brand-themed diagrams
 
-Layer nav: desktop only; only the active plate floats.
+### Comparison table (`page.comparison`)
+
+Light section **above** detail sections (not inside them). Grey / black only — no accent lime.
+
+| Field | Notes |
+|--------|--------|
+| `enabled` | Show/hide |
+| `eyebrow`, `title` | Header copy |
+| `columns[]` | `{ id, label, highlight? }` — highlight = this solution |
+| `rows[]` | `{ label, cells[] }` |
+| `cells[].type` | `check` \| `x` \| `number` \| `text` |
+| `cells[].value` | boolean / number / string as needed |
+
+Sticky header + sticky capability column; scrolls inside a capped viewport on mobile.
 
 ## Preferences when changing UI
 
