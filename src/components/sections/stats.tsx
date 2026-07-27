@@ -26,7 +26,7 @@ export function Stats() {
                     "repeating-linear-gradient(to bottom, rgba(10,10,10,0.28) 0 5px, transparent 5px 10px)",
                 }}
               />
-              <p className="font-display text-3xl md:text-4xl font-medium tracking-tight">
+              <p className="font-pixel-circle text-3xl md:text-4xl font-medium tracking-tight">
                 {stat.value}
               </p>
               <p className="mt-2 text-sm text-muted-foreground">{stat.label}</p>

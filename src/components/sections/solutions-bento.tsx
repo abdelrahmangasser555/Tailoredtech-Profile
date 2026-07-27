@@ -22,7 +22,7 @@ export function SolutionsBento() {
           </p>
           <TextReveal
             text={services.headline}
-            className="font-heading text-4xl md:text-5xl font-semibold tracking-tight leading-[1.05]"
+            className="font-pixel-circle text-4xl md:text-5xl font-medium tracking-tight leading-[1.05]"
           />
           <p className="mt-5 max-w-xs text-sm text-white/45 leading-relaxed">
             {services.subheadline}
@@ -66,7 +66,7 @@ function ServiceRow({
       {/* Large low-opacity watermark number, nested into the text */}
       <span
         aria-hidden
-        className="pointer-events-none absolute -left-1 -top-1 font-display text-[clamp(3.5rem,8vw,5.5rem)] font-semibold leading-none text-white/[0.06] select-none md:-left-2 md:-top-3"
+        className="pointer-events-none absolute -left-1 -top-1 font-pixel-circle text-[clamp(3.5rem,8vw,5.5rem)] font-medium leading-none text-white/[0.06] select-none md:-left-2 md:-top-3"
       >
         {num}
       </span>

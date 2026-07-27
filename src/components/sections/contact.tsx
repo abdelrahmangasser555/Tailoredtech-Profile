@@ -38,7 +38,7 @@ export function Contact() {
           </p>
           <TextReveal
             text="Tell us what you're building"
-            className="font-heading text-4xl md:text-5xl font-semibold tracking-tight leading-[1.05]"
+            className="font-pixel-circle text-4xl md:text-5xl font-medium tracking-tight leading-[1.05]"
           />
           <Reveal delay={0.2}>
             <div className="mt-10 flex flex-col gap-2 text-sm text-white/45">
@@ -65,7 +65,7 @@ export function Contact() {
           {sent ? (
             <div className="flex flex-col items-start gap-3 py-4">
               <CheckCircle2 className="size-7 text-accent" />
-              <p className="font-heading text-2xl font-medium">Received</p>
+              <p className="font-pixel-circle text-2xl font-medium">Received</p>
               <p className="text-sm text-white/45">We'll follow up soon.</p>
               <button
                 type="button"

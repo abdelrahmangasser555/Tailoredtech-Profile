@@ -54,7 +54,7 @@ export function Timeline() {
           <p className="mb-3 font-mono text-[11px] tracking-[0.22em] uppercase text-foreground/45">
             Company
           </p>
-          <h2 className="font-heading text-4xl md:text-5xl font-semibold tracking-tight">
+          <h2 className="font-pixel-circle text-4xl md:text-5xl font-medium tracking-tight">
             {timeline.headline}
           </h2>
           <p className="mt-3 max-w-sm text-sm text-muted-foreground">
@@ -85,7 +85,7 @@ export function Timeline() {
                 >
                   <p
                     className={cn(
-                      "font-display text-6xl md:text-8xl font-semibold tracking-[-0.04em] leading-none transition-colors duration-500",
+                      "font-pixel-circle text-6xl md:text-8xl font-medium tracking-[-0.04em] leading-none transition-colors duration-500",
                       isActive ? "text-[#141414]" : "text-[#C4C4C4]"
                     )}
                   >

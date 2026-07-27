@@ -226,7 +226,7 @@ function SolutionsMega({ onNavigate }: { onNavigate: () => void }) {
           >
             <span
               aria-hidden
-              className="pointer-events-none absolute -left-0.5 -top-1 font-display text-4xl font-semibold text-white/[0.06] select-none"
+              className="pointer-events-none absolute -left-0.5 -top-1 font-pixel-circle text-4xl font-medium text-white/[0.06] select-none"
             >
               {String(i + 1).padStart(2, "0")}
             </span>

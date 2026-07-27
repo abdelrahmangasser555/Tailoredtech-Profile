@@ -68,7 +68,7 @@ function BrandMorph({ config }: { config: HeroConfig["brandMorph"] }) {
 
   return (
     <h1
-      className="flex min-h-[1.1em] w-full flex-col items-center gap-2 text-center font-display text-[clamp(3.75rem,18vw,6rem)] font-semibold leading-[0.92] tracking-[-0.04em] lg:w-auto lg:flex-row lg:flex-nowrap lg:items-center lg:gap-0 lg:text-left lg:whitespace-nowrap lg:text-[clamp(2.4rem,8.4vw,7.25rem)]"
+      className="flex min-h-[1.1em] w-full flex-col items-center gap-2 text-center font-pixel-circle text-[clamp(3.75rem,18vw,6rem)] font-medium leading-[0.92] tracking-[-0.04em] lg:w-auto lg:flex-row lg:flex-nowrap lg:items-center lg:gap-0 lg:text-left lg:whitespace-nowrap lg:text-[clamp(2.4rem,8.4vw,7.25rem)]"
       aria-label={`${prefix}${words[0] ?? ""}`}
     >
       <span className="text-white">{prefix}</span>
@@ -453,12 +453,12 @@ export function Hero() {
                   stiffness: 320,
                   damping: 16,
                 }}
-                className="mx-0.5 inline-block font-mono text-[1.15em] font-semibold tracking-tight text-accent [text-shadow:0_0_18px_rgba(212,255,0,0.35)]"
+                className="mx-0.5 inline-block font-pixel-circle text-[1.15em] font-medium tracking-tight text-accent [text-shadow:0_0_18px_rgba(212,255,0,0.35)]"
               >
                 {description.count}
               </motion.span>
               <span className="text-white/45">{description.middle}</span>
-              <span className="font-medium text-accent">
+              <span className="font-pixel-circle font-medium text-accent">
                 {description.word}
               </span>
             </motion.p>

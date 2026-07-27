@@ -155,7 +155,7 @@ export function LayerCollapse() {
               <p className="font-mono text-[11px] tracking-[0.22em] uppercase text-accent">
                 The usual stack
               </p>
-              <h2 className="mt-3 font-display text-3xl md:text-[2.75rem] font-semibold tracking-[-0.03em] leading-[1.1] text-balance">
+              <h2 className="mt-3 font-pixel-circle text-3xl md:text-[2.75rem] font-medium tracking-[-0.03em] leading-[1.1] text-balance">
                 Agency. Operations. Systems.
               </h2>
               <p className="mt-4 max-w-md text-sm md:text-[15px] leading-relaxed text-white/45">
@@ -170,7 +170,7 @@ export function LayerCollapse() {
               <p className="font-mono text-[11px] tracking-[0.22em] uppercase text-accent">
                 How we work
               </p>
-              <h2 className="mt-3 font-display text-3xl md:text-[2.75rem] font-semibold tracking-[-0.03em] leading-[1.1] text-balance">
+              <h2 className="mt-3 font-pixel-circle text-3xl md:text-[2.75rem] font-medium tracking-[-0.03em] leading-[1.1] text-balance">
                 Operations, linked to delivery.
               </h2>
               <p className="mt-4 max-w-md text-sm md:text-[15px] leading-relaxed text-white/45">
@@ -182,7 +182,7 @@ export function LayerCollapse() {
               <p className="font-mono text-[11px] tracking-[0.22em] uppercase">
                 How we work
               </p>
-              <h2 className="mt-3 font-display text-3xl md:text-[2.75rem] font-semibold tracking-[-0.03em] leading-[1.1]">
+              <h2 className="mt-3 font-pixel-circle text-3xl md:text-[2.75rem] font-medium tracking-[-0.03em] leading-[1.1]">
                 Operations, linked to delivery.
               </h2>
               <p className="mt-4 max-w-md text-sm md:text-[15px] leading-relaxed">
@@ -380,7 +380,7 @@ function MechanismPlate({
         }}
       >
         <div className="min-w-0">
-          <p className="font-display text-sm md:text-base font-semibold tracking-tight truncate">
+          <p className="font-pixel-circle text-sm md:text-base font-medium tracking-tight truncate">
             {plate.label}
           </p>
           <p

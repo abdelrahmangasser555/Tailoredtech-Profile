@@ -42,12 +42,12 @@ export default function ServicesPage() {
             >
               <span
                 aria-hidden
-                className="pointer-events-none absolute -left-1 -top-1 font-display text-[clamp(3.5rem,8vw,5rem)] font-semibold leading-none text-foreground/[0.06] select-none"
+                className="pointer-events-none absolute -left-1 -top-1 font-pixel-circle text-[clamp(3.5rem,8vw,5rem)] font-medium leading-none text-foreground/[0.06] select-none"
               >
                 {String(i + 1).padStart(2, "0")}
               </span>
               <div className="relative pl-2 md:pl-8">
-                <h2 className="font-heading text-2xl font-semibold tracking-tight md:text-3xl">
+                <h2 className="font-pixel-circle text-2xl font-medium tracking-tight md:text-3xl">
                   {service.title}
                 </h2>
                 <p className="mt-4 max-w-2xl leading-relaxed text-muted-foreground">
@@ -63,10 +63,10 @@ export default function ServicesPage() {
         <div className="grid gap-12 md:grid-cols-3">
           {["Discovery", "Build", "Operate"].map((step, i) => (
             <div key={step}>
-              <p className="font-mono text-[11px] tracking-wider text-accent">
+              <p className="font-pixel-circle text-[11px] tracking-wider text-accent">
                 0{i + 1}
               </p>
-              <h3 className="mt-3 font-heading text-2xl font-medium tracking-tight">
+              <h3 className="mt-3 font-pixel-circle text-2xl font-medium tracking-tight">
                 {step}
               </h3>
               <p className="mt-3 text-sm leading-relaxed text-white/40">
@@ -79,7 +79,7 @@ export default function ServicesPage() {
         </div>
         <div className="mt-20 flex flex-col justify-between gap-6 border-t border-white/10 pt-10 sm:flex-row sm:items-end">
           <div>
-            <p className="font-heading text-2xl font-medium tracking-tight md:text-3xl">
+            <p className="font-pixel-circle text-2xl font-medium tracking-tight md:text-3xl">
               Ready to scope a system?
             </p>
             <p className="mt-2 text-sm text-white/40">

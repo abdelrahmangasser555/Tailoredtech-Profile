@@ -90,7 +90,7 @@ export function ServicesHero() {
             className="max-w-sm text-sm leading-relaxed text-white/45 md:text-base"
           >
             Over{" "}
-            <span className="font-mono font-semibold text-accent">4+</span>{" "}
+            <span className="font-pixel-circle font-medium text-accent">4+</span>{" "}
             services for vessels, ports, and commercial desks.
           </motion.p>
 

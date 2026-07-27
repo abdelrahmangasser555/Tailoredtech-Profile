@@ -20,7 +20,7 @@ export function Footer() {
                 className="h-7 w-auto"
               />
             </Link>
-            <p className="max-w-xs font-heading text-2xl md:text-3xl font-medium tracking-tight leading-snug text-white/90">
+            <p className="max-w-xs font-pixel-circle text-2xl md:text-3xl font-medium tracking-tight leading-snug text-white/90">
               {company.tagline}
             </p>
             <div className="flex gap-5 text-xs tracking-wide uppercase text-white/40">

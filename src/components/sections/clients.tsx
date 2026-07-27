@@ -12,7 +12,7 @@ export function Clients() {
     <Section tone="light" id="clients" className="!py-20 md:!py-24">
       <TextReveal
         text={clients.headline}
-        className="font-heading text-3xl md:text-4xl font-semibold tracking-tight max-w-xl"
+        className="font-pixel-circle text-3xl md:text-4xl font-medium tracking-tight max-w-xl"
       />
       <p className="mt-4 max-w-md text-sm text-muted-foreground">
         {clients.subheadline}

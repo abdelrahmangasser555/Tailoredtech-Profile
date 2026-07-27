@@ -19,7 +19,7 @@ export function Work() {
         </p>
         <TextReveal
           text={projects.headline}
-          className="font-heading text-4xl md:text-5xl font-semibold tracking-tight"
+          className="font-pixel-circle text-4xl md:text-5xl font-medium tracking-tight"
         />
         <p className="mt-4 max-w-sm text-sm text-white/40">
           {projects.subheadline}
