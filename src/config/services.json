@@ -18,7 +18,7 @@
         "headline": "Fleet Operations",
         "headlineAccent": "for every vessel",
         "tagline": "One operational picture for scheduling, crew, voyages, and performance — built around how your fleet actually runs.",
-        "heroVisual": "engine",
+        "heroVisual": "ocean",
         "demo": {
           "label": "Book a demo",
           "title": "Book a Fleet Operations demo",
@@ -26,16 +26,24 @@
           "submitLabel": "Request demo"
         },
         "outcomes": [
-          { "value": "1", "label": "shared ops picture" },
-          { "value": "24/7", "label": "voyage visibility" },
-          { "value": "0", "label": "spreadsheet handoffs" }
+          { "value": "1", "label": "shared ops picture", "icon": "Broadcast" },
+          {
+            "value": "24/7",
+            "label": "voyage visibility",
+            "icon": "Binoculars"
+          },
+          { "value": "0", "label": "spreadsheet handoffs", "icon": "Table" }
         ],
         "comparison": {
           "enabled": true,
           "eyebrow": "Compare",
           "title": "Fleet Operations vs the usual stack",
           "columns": [
-            { "id": "tailored", "label": "Fleet Operations", "highlight": true },
+            {
+              "id": "tailored",
+              "label": "Fleet Operations",
+              "highlight": true
+            },
             { "id": "legacy", "label": "Legacy tools" },
             { "id": "saas", "label": "Generic SaaS" }
           ],

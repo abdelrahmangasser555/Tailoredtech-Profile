@@ -41,15 +41,32 @@ Brand-first maritime software marketing site (Next.js App Router). Content is JS
 3. Under `page`, customize:
    - `enabled` — show detail route
    - `eyebrow`, `headline`, `headlineAccent`, `tagline`
-   - `heroVisual` — `"engine"` \| `"glyph"`
+   - `heroVisual` — right-side hero shader (see **Solution hero visual** below)
    - `demo` — Book demo labels
-   - `outcomes[]` — `{ value, label }`
+   - `outcomes[]` — `{ value, label, icon? }` — optional Phosphor icon name (bold watermark behind the number)
+   - `comparison` — optional comparison table (see below); set `enabled: true` to show
    - `sections[]` — `{ id, title, body, bullets[] }` (drives content + layer nav)
    - `related[]` — other solution `id`s
-4. Optional logo: set `logo` to a public path (e.g. `/logos/fleet.svg`); icon fallback via Lucide name in `icon`.
+4. Optional logo: set `logo` to a public path (e.g. `/logos/fleet.svg`). Solution **hero** shows the logo only when set — otherwise just the `eyebrow` text (no Lucide/generic icon box). List cards may still use Lucide via top-level `icon`.
 5. New solution → new item + unique `id` + `href: "/services/your-id"`; route is generated from `getServiceSlugs()`.
 
+### Solution hero visual (`page.heroVisual`)
+
+Edit in `src/config/services.json` → each item’s `page.heroVisual`. Wired by `SolutionHeroVisual`.
+
+| Value | Visual |
+|--------|--------|
+| `"engine"` | ColorPanels engine (default) |
+| `"ocean"` | Dithering swirl — brand lime `#D4FF00` |
+| `"heatmap"` / `"heatmap-diamond"` | Heatmap through diamond shape |
+| `"heatmap-eyes"` | Heatmap through eyes (`/assets/heatmap-eyes.svg`) |
+| `"glyph"` / `"none"` | No right visual (glyph backdrop only) |
+
+Try variants by changing Fleet’s value, e.g. `"heroVisual": "ocean"`, then open `/services/fleet-operations`.
+
 Icons for the layer nav are mapped in `src/components/sections/section-layer-nav.tsx` (`SECTION_ICONS` by section `id`). Optional per-section `image` can print on the plate face.
+
+**Outcome watermark icons** use **Phosphor** (`@phosphor-icons/react`, `weight="bold"`) — thicker, modern strokes that fit the sharp/pixel brand better than Lucide for large backdrops. Curated names live in `src/components/sections/outcome-icon.tsx` (`Broadcast`, `Binoculars`, `Table`, `Boat`, `Eye`, …). Add a name there before using it in JSON.
 
 ## Routes
 
@@ -67,7 +84,10 @@ Sitemap includes all enabled solution slugs (`src/app/sitemap.ts`).
 |-----------|------|--------|
 | Home hero | `sections/hero.tsx` | Brand morph, globe, pixel type |
 | Services hero | `sections/services-hero.tsx` | Engine shader + CTAs |
-| Solution detail | `sections/solution-detail.tsx` | Hero, outcomes, dark sections, float CTA |
+| Solution detail | `sections/solution-detail.tsx` | Hero, outcomes (+ icons), comparison, dark sections, float CTA |
+| Solution hero visual | `sections/solution-hero-visual.tsx` | `page.heroVisual`: engine / ocean / heatmap / glyph |
+| Comparison table | `sections/solution-comparison-table.tsx` | Optional `page.comparison`; sticky heads; dashed divider |
+| Outcome icons | `sections/outcome-icon.tsx` | Phosphor bold watermarks for outcomes |
 | Layer nav | `sections/section-layer-nav.tsx` | Desktop-only isometric section deck |
 | Book demo | `sections/book-demo-dialog.tsx` | Dialog form; used in hero + sticky CTA |
 | Section shell | `layout/section.tsx` | `tone="light"\|"dark"`, shared header |
@@ -98,18 +118,26 @@ Sitemap includes all enabled solution slugs (`src/app/sitemap.ts`).
 
 ### Comparison table (`page.comparison`)
 
-Light section **above** detail sections (not inside them). Grey / black only — no accent lime.
+Optional light section **above** detail sections (not inside them). Grey / black only — no accent lime. When `enabled` and outcomes exist, a dashed divider renders between them.
 
 | Field | Notes |
 |--------|--------|
-| `enabled` | Show/hide |
+| `enabled` | Show/hide the whole block |
 | `eyebrow`, `title` | Header copy |
 | `columns[]` | `{ id, label, highlight? }` — highlight = this solution |
 | `rows[]` | `{ label, cells[] }` |
 | `cells[].type` | `check` \| `x` \| `number` \| `text` |
 | `cells[].value` | boolean / number / string as needed |
 
-Sticky header + sticky capability column; scrolls inside a capped viewport on mobile.
+Sticky column headers on **page scroll** at `top: 0` (no max-height). Horizontal scroll on narrow screens only. Toggle with `"enabled": false` to hide.
+
+### Outcomes (`page.outcomes[]`)
+
+| Field | Notes |
+|--------|--------|
+| `value` | Big pixel number / string |
+| `label` | Caption under the value |
+| `icon` | Optional Phosphor name (see `outcome-icon.tsx`) — bold grey watermark behind the number |
 
 ## Preferences when changing UI
 

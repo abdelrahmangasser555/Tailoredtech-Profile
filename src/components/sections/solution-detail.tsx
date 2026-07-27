@@ -9,7 +9,6 @@ import {
   motion,
   useReducedMotion,
 } from "framer-motion"
-import { ColorPanels } from "@paper-design/shaders-react"
 import { GlyphMatrix } from "@/components/ui/glyph-matrix"
 import { ServiceVisual } from "@/components/ui/service-visual"
 import { BookDemoDialog } from "@/components/sections/book-demo-dialog"
@@ -19,7 +18,12 @@ import {
   SectionVideo,
 } from "@/components/sections/section-media"
 import { SectionLayerNav } from "@/components/sections/section-layer-nav"
-import { SolutionComparisonTable } from "@/components/sections/solution-comparison-table"
+import {
+  ComparisonSectionDivider,
+  SolutionComparisonTable,
+} from "@/components/sections/solution-comparison-table"
+import { OutcomeIconBackdrop } from "@/components/sections/outcome-icon"
+import { SolutionHeroVisual, normalizeHeroVisual } from "@/components/sections/solution-hero-visual"
 import { Section } from "@/components/layout/section"
 import {
   getRelatedServices,
@@ -28,7 +32,6 @@ import {
 import { scrollToId } from "@/components/motion/smooth-scroll"
 
 const EASE = [0.22, 1, 0.36, 1] as const
-const ENGINE_COLORS = ["#D4FF00", "#A8E600", "#3F4A00", "#F0FF99"]
 
 type SolutionDetailProps = {
   service: ServiceItem
@@ -52,24 +55,39 @@ export function SolutionDetail({ service }: SolutionDetailProps) {
 
     if (nodes.length === 0) return
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)
-        const top = visible[0]?.target.id
-        if (!top) return
-        // Avoid re-render thrash mid-scroll
-        setActiveId((prev) => (prev === top ? prev : top))
-      },
-      {
-        rootMargin: "-28% 0px -48% 0px",
-        threshold: [0.2, 0.45],
+    // Scroll spy (not IntersectionObserver): tall sections with media never
+    // meet IO thresholds, so active nav would freeze. Marker = ~1/3 viewport.
+    const updateActive = () => {
+      const marker = window.innerHeight * 0.32
+      let current = nodes[0]?.id ?? ""
+      for (const node of nodes) {
+        if (node.getBoundingClientRect().top <= marker) {
+          current = node.id
+        }
       }
-    )
+      setActiveId((prev) => (prev === current ? prev : current))
+    }
 
-    nodes.forEach((n) => observer.observe(n))
-    return () => observer.disconnect()
+    updateActive()
+
+    window.addEventListener("scroll", updateActive, { passive: true })
+    window.addEventListener("resize", updateActive)
+
+    let offLenis: (() => void) | undefined
+    const attachLenis = () => {
+      const lenis = window.__lenis
+      if (!lenis || offLenis) return
+      offLenis = lenis.on("scroll", updateActive)
+    }
+    attachLenis()
+    const retry = window.setTimeout(attachLenis, 200)
+
+    return () => {
+      window.clearTimeout(retry)
+      window.removeEventListener("scroll", updateActive)
+      window.removeEventListener("resize", updateActive)
+      offLenis?.()
+    }
   }, [sectionIds])
 
   useEffect(() => {
@@ -101,7 +119,14 @@ export function SolutionDetail({ service }: SolutionDetailProps) {
       />
 
       {page.outcomes.length > 0 && (
-        <Section tone="light" className="!py-16 md:!py-20">
+        <Section
+          tone="light"
+          className={
+            page.comparison?.enabled
+              ? "!py-16 !pb-12 md:!pt-20 md:!pb-14"
+              : "!py-16 md:!py-20"
+          }
+        >
           <div className="grid gap-10 sm:grid-cols-3">
             {page.outcomes.map((outcome, i) => (
               <motion.div
@@ -110,16 +135,17 @@ export function SolutionDetail({ service }: SolutionDetailProps) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.5 }}
                 transition={{ duration: 0.55, delay: i * 0.08, ease: EASE }}
-                className="relative pl-5"
+                className="relative overflow-hidden pl-5 pr-2"
               >
                 <span
                   aria-hidden
                   className="absolute bottom-1 left-0 top-1 w-px bg-foreground/20"
                 />
-                <p className="font-pixel-circle text-3xl font-medium tracking-tight md:text-4xl">
+                <OutcomeIconBackdrop name={outcome.icon} />
+                <p className="relative font-pixel-circle text-3xl font-medium tracking-tight md:text-4xl">
                   {outcome.value}
                 </p>
-                <p className="mt-2 text-sm text-muted-foreground">
+                <p className="relative mt-2 text-sm text-muted-foreground">
                   {outcome.label}
                 </p>
               </motion.div>
@@ -129,7 +155,13 @@ export function SolutionDetail({ service }: SolutionDetailProps) {
       )}
 
       {page.comparison?.enabled && (
-        <SolutionComparisonTable data={page.comparison} />
+        <>
+          {page.outcomes.length > 0 && <ComparisonSectionDivider />}
+          <SolutionComparisonTable
+            data={page.comparison}
+            tightTop={page.outcomes.length > 0}
+          />
+        </>
       )}
 
       <Section tone="dark" className="!pt-16 md:!pt-20">
@@ -311,7 +343,6 @@ function SolutionHero({
   sectionRef: React.RefObject<HTMLElement | null>
 }) {
   const { page } = service
-  const showEngine = page.heroVisual === "engine"
 
   return (
     <section
@@ -355,16 +386,7 @@ function SolutionHero({
                 height={40}
                 className="size-10 object-contain"
               />
-            ) : (
-              <ServiceVisual
-                icon={service.icon}
-                logo={service.logo}
-                title={service.title}
-                className="size-10 rounded-none bg-accent/10 text-accent"
-                iconClassName="size-5"
-                bare={false}
-              />
-            )}
+            ) : null}
             <p className="font-mono text-[11px] tracking-[0.24em] uppercase text-accent">
               {page.eyebrow}
             </p>
@@ -413,30 +435,13 @@ function SolutionHero({
           </motion.div>
         </div>
 
-        {showEngine && (
+        {normalizeHeroVisual(page.heroVisual) !== "glyph" && (
           <motion.div
             initial={reduce ? false : { opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.9, delay: 0.18, ease: EASE }}
-            className="relative mx-auto aspect-square w-full max-w-md lg:max-w-none"
           >
-            <ColorPanels
-              colors={[...ENGINE_COLORS]}
-              colorBack="#ffffff00"
-              density={5.03}
-              angle1={0.68}
-              angle2={0.28}
-              length={1.13}
-              edges
-              blur={0.25}
-              fadeIn={0.85}
-              fadeOut={0.3}
-              gradient={0.56}
-              speed={reduce ? 0 : 2.4}
-              scale={0.96}
-              rotation={180}
-              style={{ width: "100%", height: "100%" }}
-            />
+            <SolutionHeroVisual kind={page.heroVisual} reduce={reduce} />
           </motion.div>
         )}
       </div>

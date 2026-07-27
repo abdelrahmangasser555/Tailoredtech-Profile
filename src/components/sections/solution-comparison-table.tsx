@@ -30,15 +30,18 @@ export type ComparisonTableData = {
 type SolutionComparisonTableProps = {
   data: ComparisonTableData
   className?: string
+  /** Skip top padding when a dashed separator sits above */
+  tightTop?: boolean
 }
 
 /**
  * Light-theme comparison matrix — grey / black only (no accent lime).
- * Sticky header + sticky feature column; horizontal scroll on narrow screens.
+ * Full-height table; column heads stick to the viewport on page scroll.
  */
 export function SolutionComparisonTable({
   data,
   className,
+  tightTop = false,
 }: SolutionComparisonTableProps) {
   if (!data.enabled || data.columns.length === 0 || data.rows.length === 0) {
     return null
@@ -51,7 +54,12 @@ export function SolutionComparisonTable({
         className
       )}
     >
-      <div className="mx-auto w-full max-w-6xl px-5 py-20 md:px-8 md:py-28">
+      <div
+        className={cn(
+          "mx-auto w-full max-w-6xl px-5 pb-20 md:px-8 md:pb-28",
+          tightTop ? "pt-10 md:pt-12" : "pt-20 md:pt-28"
+        )}
+      >
         <p className="mb-3 font-mono text-[11px] tracking-[0.22em] uppercase text-foreground/40">
           {data.eyebrow}
         </p>
@@ -59,16 +67,19 @@ export function SolutionComparisonTable({
           {data.title}
         </h2>
 
-        <div
-          data-lenis-prevent
-          className="mt-10 max-h-[min(70vh,40rem)] overflow-auto overscroll-contain border border-foreground/12 bg-white"
-        >
-          <table className="w-full min-w-[40rem] border-collapse text-left">
+        {/*
+          No max-height — table grows with rows. Column heads stick on page scroll.
+          overflow-x only on small screens so sticky top works on desktop
+          (overflow-x:auto creates a scrollport that breaks viewport sticky).
+          border-collapse:collapse also breaks sticky — use separate.
+        */}
+        <div className="mt-10 border border-foreground/12 bg-white max-md:overflow-x-auto">
+          <table className="w-full min-w-[42rem] border-separate border-spacing-0 text-left">
             <thead>
               <tr>
                 <th
                   scope="col"
-                  className="sticky left-0 top-0 z-30 min-w-[11rem] border-b border-foreground/12 bg-[#F7F7F5] px-4 py-3.5 font-mono text-[10px] font-medium tracking-[0.18em] uppercase text-foreground/45 md:min-w-[14rem] md:px-5"
+                  className="sticky left-0 top-0 z-40 min-w-[11rem] border-b border-r border-foreground/12 bg-[#F4F4F1] px-4 py-3.5 font-mono text-[10px] font-medium tracking-[0.18em] uppercase text-foreground/45 shadow-[0_1px_0_0_rgba(0,0,0,0.08)] md:min-w-[14rem] md:px-5"
                 >
                   Capability
                 </th>
@@ -77,10 +88,10 @@ export function SolutionComparisonTable({
                     key={col.id}
                     scope="col"
                     className={cn(
-                      "sticky top-0 z-20 min-w-[8.5rem] border-b border-l border-foreground/12 px-4 py-3.5 font-pixel-circle text-sm font-medium tracking-tight md:min-w-[10rem] md:px-5 md:text-[0.95rem]",
+                      "sticky top-0 z-30 min-w-[8.5rem] border-b border-l border-foreground/12 px-4 py-3.5 font-pixel-circle text-sm font-medium tracking-tight shadow-[0_1px_0_0_rgba(0,0,0,0.08)] md:min-w-[10rem] md:px-5 md:text-[0.95rem]",
                       col.highlight
-                        ? "bg-[#EFEFEA] text-foreground"
-                        : "bg-[#F7F7F5] text-foreground/70"
+                        ? "bg-[#EBEBE6] text-foreground"
+                        : "bg-[#F4F4F1] text-foreground/70"
                     )}
                   >
                     {col.label}
@@ -89,12 +100,12 @@ export function SolutionComparisonTable({
               </tr>
             </thead>
             <tbody>
-              {data.rows.map((row, ri) => (
+              {data.rows.map((row) => (
                 <tr key={row.label} className="group">
                   <th
                     scope="row"
                     className={cn(
-                      "sticky left-0 z-10 border-b border-foreground/8 bg-white px-4 py-3.5 text-left text-sm font-medium text-foreground/80 md:px-5",
+                      "sticky left-0 z-20 border-b border-r border-foreground/8 bg-white px-4 py-3.5 text-left text-sm font-medium text-foreground/80 shadow-[1px_0_0_0_rgba(0,0,0,0.04)] md:px-5",
                       "group-hover:bg-[#FAFAF8]"
                     )}
                   >
@@ -107,7 +118,7 @@ export function SolutionComparisonTable({
                         key={`${row.label}-${col?.id ?? ci}`}
                         className={cn(
                           "border-b border-l border-foreground/8 px-4 py-3.5 text-center md:px-5",
-                          col?.highlight ? "bg-[#F4F4F0]/55" : "bg-white",
+                          col?.highlight ? "bg-[#F6F6F2]" : "bg-white",
                           "group-hover:bg-[#FAFAF8]"
                         )}
                       >
@@ -129,7 +140,7 @@ function ComparisonCellView({ cell }: { cell: ComparisonCell }) {
   if (cell.type === "check") {
     return (
       <span
-        className="inline-flex items-center justify-center font-pixel-circle text-base leading-none text-foreground"
+        className="inline-flex items-center justify-center leading-none"
         aria-label="Yes"
         title="Yes"
       >
@@ -141,7 +152,7 @@ function ComparisonCellView({ cell }: { cell: ComparisonCell }) {
   if (cell.type === "x") {
     return (
       <span
-        className="inline-flex items-center justify-center font-pixel-circle text-base leading-none text-foreground/35"
+        className="inline-flex items-center justify-center leading-none"
         aria-label="No"
         title="No"
       >
@@ -171,9 +182,17 @@ function PixelCheck() {
       height="18"
       viewBox="0 0 18 18"
       aria-hidden
-      className="mx-auto"
+      className="mx-auto block"
     >
-      <rect x="1" y="1" width="16" height="16" fill="none" stroke="#1A1A1A" strokeWidth="1.5" />
+      <rect
+        x="1"
+        y="1"
+        width="16"
+        height="16"
+        fill="none"
+        stroke="#1A1A1A"
+        strokeWidth="1.5"
+      />
       <path
         d="M4 9h2v2H4V9Zm2 2h2v2H6v-2Zm2-2h2v2H8V9Zm2-2h2v2h-2V7Zm2-2h2v2h-2V5Z"
         fill="#1A1A1A"
@@ -182,20 +201,62 @@ function PixelCheck() {
   )
 }
 
+/** Pixel X — centered 2×2 blocks; both diagonals complete (includes center) */
 function PixelX() {
+  const cells: Array<[number, number]> = [
+    [4, 4],
+    [6, 6],
+    [8, 8],
+    [10, 10],
+    [12, 12],
+    [12, 4],
+    [10, 6],
+    [6, 10],
+    [4, 12],
+  ]
+
   return (
     <svg
       width="18"
       height="18"
       viewBox="0 0 18 18"
       aria-hidden
-      className="mx-auto opacity-50"
+      className="mx-auto block opacity-55"
     >
-      <rect x="1" y="1" width="16" height="16" fill="none" stroke="#6B6B6B" strokeWidth="1.5" />
-      <path
-        d="M5 5h2v2H5V5Zm2 2h2v2H7V7Zm2 2h2v2H9V9Zm2 2h2v2h-2v-2Zm2 2h2v2h-2v-2ZM5 13h2v2H5v-2Zm2-2h2v2H7v-2Zm6-6h2v2h-2V5Zm-2 2h2v2h-2V7Z"
-        fill="#6B6B6B"
+      <rect
+        x="1"
+        y="1"
+        width="16"
+        height="16"
+        fill="none"
+        stroke="#6B6B6B"
+        strokeWidth="1.5"
       />
+      {cells.map(([x, y]) => (
+        <rect key={`${x}-${y}`} x={x} y={y} width={2} height={2} fill="#6B6B6B" />
+      ))}
     </svg>
+  )
+}
+
+/** Modern dashed rule between outcomes and comparison — only render when table exists */
+export function ComparisonSectionDivider() {
+  return (
+    <div
+      aria-hidden
+      className="relative bg-[var(--section-light)] px-5 md:px-8"
+    >
+      <div className="mx-auto flex max-w-6xl items-center gap-4 py-1">
+        <span className="size-1.5 shrink-0 bg-foreground/25" />
+        <div
+          className="h-px flex-1"
+          style={{
+            backgroundImage:
+              "repeating-linear-gradient(90deg, rgba(10,10,10,0.22) 0 7px, transparent 7px 14px)",
+          }}
+        />
+        <span className="size-1.5 shrink-0 bg-foreground/25" />
+      </div>
+    </div>
   )
 }

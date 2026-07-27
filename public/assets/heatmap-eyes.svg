@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="none">
+  <!-- Two-eye silhouette for heatmap shader (high-contrast mask) -->
+  <ellipse cx="78" cy="128" rx="54" ry="36" fill="#fff"/>
+  <ellipse cx="178" cy="128" rx="54" ry="36" fill="#fff"/>
+  <circle cx="78" cy="128" r="18" fill="#000"/>
+  <circle cx="178" cy="128" r="18" fill="#000"/>
+</svg>
