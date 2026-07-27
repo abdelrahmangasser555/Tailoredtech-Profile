@@ -102,7 +102,7 @@ export function SolutionHeroVisual({
         height="100%"
         image={image}
         colors={[...HEATMAP_COLORS]}
-        colorBack="#000000"
+        colorBack="#00000000"
         contour={0.55}
         angle={visual === "heatmap-eyes" ? 25 : 0}
         noise={0.05}
@@ -110,7 +110,7 @@ export function SolutionHeroVisual({
         outerGlow={0.45}
         speed={reduce ? 0 : 1}
         scale={0.72}
-        style={{ width: "100%", height: "100%" }}
+        style={{ width: "100%", height: "100%", background: "transparent" }}
       />
     </div>
   )
