@@ -1,6 +1,6 @@
 "use client"
 
-import { useId, useState } from "react"
+import { useId, useMemo, useState } from "react"
 import {
   Eye,
   Layers,
@@ -12,6 +12,7 @@ import { AnimatePresence, motion } from "framer-motion"
 import { cn } from "@/lib/utils"
 
 const EASE = [0.22, 1, 0.36, 1] as const
+const ACCENT = "#D4FF00"
 
 const SECTION_ICONS: Record<string, LucideIcon> = {
   overview: Eye,
@@ -36,8 +37,8 @@ type SectionLayerNavProps = {
 }
 
 /**
- * Tall vertical isometric section deck.
- * Marks are projected onto the plate face; focus draws a dashed callout.
+ * Tall vertical isometric section deck (desktop).
+ * Brand lime plates + pixel callout for the focused section.
  */
 export function SectionLayerNav({
   sections,
@@ -56,9 +57,9 @@ export function SectionLayerNav({
   )
   const focusSection = sections[focusIndex]
 
-  const stride = spread ? 92 : 72
-  const openExtra = spread ? 36 : 24
-  const slideX = 40
+  const stride = spread ? 96 : 86
+  const openExtra = spread ? 32 : 20
+  const slideX = 36
   const plateH = 120
 
   const slots = sections.map((_, i) => {
@@ -74,7 +75,9 @@ export function SectionLayerNav({
 
   const totalH = (sections.length - 1) * stride + openExtra + plateH + 8
   const focusSlot = slots[focusIndex]
-  const calloutTop = (focusSlot?.y ?? 0) + plateH * 0.38
+  // Mid-right of the plate (not the top tip)
+  const calloutTop = (focusSlot?.y ?? 0) + 54
+  const calloutLeft = 10.85 + (focusSlot?.x ?? 0) / 16
 
   return (
     <nav
@@ -90,6 +93,7 @@ export function SectionLayerNav({
         {sections.map((section, i) => {
           const slot = slots[i]!
           const Icon = SECTION_ICONS[section.id] ?? Layers
+          const hovered = hoveredId === section.id
 
           return (
             <motion.button
@@ -104,13 +108,18 @@ export function SectionLayerNav({
                 setHoveredId(section.id)
               }}
               onBlur={() => setHoveredId(null)}
-              className="absolute left-0 top-0 h-[7.5rem] w-[11.5rem] outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+              className="absolute left-0 top-0 h-[7.5rem] w-[11.5rem] cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-black"
               style={{ zIndex: slot.focused ? 50 : 10 + i }}
               initial={false}
               animate={{
-                x: reduce && slot.focused ? 24 : slot.x,
+                x: reduce && slot.focused ? 22 : slot.x,
                 y: slot.y,
-                scale: slot.focused ? 1.03 : 1,
+                scale: hovered ? 1.05 : slot.focused ? 1.03 : 1,
+                filter: hovered
+                  ? "brightness(1.1)"
+                  : slot.focused
+                    ? "brightness(1.04)"
+                    : "brightness(1)",
               }}
               transition={{
                 type: "spring",
@@ -118,30 +127,51 @@ export function SectionLayerNav({
                 damping: 26,
                 mass: 0.85,
               }}
+              whileTap={reduce ? undefined : { scale: 0.98 }}
             >
-              <IsoPlate
-                focused={slot.focused}
-                depth={Math.min(i, 3)}
-                Icon={Icon}
-                image={section.image}
-              />
+              <motion.div
+                className="h-full w-full will-change-transform"
+                animate={
+                  reduce || !slot.focused
+                    ? { y: 0 }
+                    : { y: [0, -6, 0, 4, 0] }
+                }
+                transition={
+                  reduce || !slot.focused
+                    ? { type: "spring", stiffness: 320, damping: 28 }
+                    : {
+                        duration: 5.4,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                      }
+                }
+              >
+                <IsoPlate
+                  focused={slot.focused}
+                  depth={Math.min(i, 3)}
+                  Icon={Icon}
+                  image={section.image}
+                />
+              </motion.div>
             </motion.button>
           )
         })}
 
-        {/* Dashed breakline + section name from focused plate */}
         <AnimatePresence mode="wait">
           {focusSection && focusSlot && (
             <motion.div
               key={focusSection.id}
-              className="pointer-events-none absolute left-[11.75rem] z-[60] flex items-center gap-0"
-              style={{ top: calloutTop }}
-              initial={reduce ? false : { opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
+              className="pointer-events-none absolute z-60"
+              style={{
+                top: calloutTop,
+                left: `${calloutLeft}rem`,
+              }}
+              initial={reduce ? false : { opacity: 0, y: -4 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 4 }}
               transition={{ duration: 0.2 }}
             >
-              <DashedCallout reduce={reduce} label={focusSection.title} />
+              <PixelCallout reduce={reduce} label={focusSection.title} />
             </motion.div>
           )}
         </AnimatePresence>
@@ -150,64 +180,85 @@ export function SectionLayerNav({
   )
 }
 
-function DashedCallout({
+/** Chunky pixel L — text always under the horizontal run */
+function PixelCallout({
   label,
   reduce,
 }: {
   label: string
   reduce: boolean
 }) {
+  const hDashes = useMemo(() => {
+    const items: { x: number; delay: number }[] = []
+    for (let i = 0, x = 8; x <= 52; x += 7, i++) {
+      items.push({ x, delay: 0.04 + i * 0.035 })
+    }
+    return items
+  }, [])
+
+  const vDashes = useMemo(() => {
+    const items: { y: number; delay: number }[] = []
+    for (let i = 0, y = 8; y <= 22; y += 7, i++) {
+      items.push({ y, delay: 0.28 + i * 0.045 })
+    }
+    return items
+  }, [])
+
   return (
-    <div className="flex items-center">
+    <div className="flex w-40 flex-col items-start">
       <svg
-        width="56"
+        width="64"
         height="28"
-        viewBox="0 0 56 28"
-        className="shrink-0 overflow-visible"
+        viewBox="0 0 64 28"
+        className="overflow-visible"
         aria-hidden
       >
-        {/* Anchor tick */}
-        <motion.circle
-          cx="2"
-          cy="14"
-          r="2"
-          fill="#D4FF00"
+        {/* Square origin tick */}
+        <motion.rect
+          x="0"
+          y="1"
+          width="3"
+          height="3"
+          fill={ACCENT}
           initial={reduce ? false : { scale: 0, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.25, ease: EASE }}
+          transition={{ duration: 0.18, ease: EASE }}
         />
-        {/* Step: out → down → out */}
-        <motion.path
-          d="M4 14 H22 V22 H52"
-          fill="none"
-          stroke="rgba(212,255,0,0.55)"
-          strokeWidth="1.25"
-          strokeLinecap="square"
-          strokeDasharray="3.5 5"
-          initial={reduce ? false : { pathLength: 0, opacity: 0 }}
-          animate={{ pathLength: 1, opacity: 1 }}
-          transition={{ duration: 0.55, ease: EASE, delay: 0.04 }}
-        />
-        {/* Soft secondary dash for depth */}
-        <motion.path
-          d="M4 14 H22 V22 H52"
-          fill="none"
-          stroke="rgba(255,255,255,0.18)"
-          strokeWidth="1.25"
-          strokeLinecap="square"
-          strokeDasharray="3.5 5"
-          strokeDashoffset="4.25"
-          initial={reduce ? false : { pathLength: 0, opacity: 0 }}
-          animate={{ pathLength: 1, opacity: 1 }}
-          transition={{ duration: 0.55, ease: EASE, delay: 0.04 }}
-        />
+
+        {hDashes.map((d) => (
+          <motion.rect
+            key={`h-${d.x}`}
+            x={d.x}
+            y="1.5"
+            width="4"
+            height="2"
+            fill={ACCENT}
+            initial={reduce ? false : { opacity: 0 }}
+            animate={{ opacity: 0.85 }}
+            transition={{ duration: 0.15, delay: d.delay, ease: EASE }}
+          />
+        ))}
+
+        {vDashes.map((d) => (
+          <motion.rect
+            key={`v-${d.y}`}
+            x="53"
+            y={d.y}
+            width="2"
+            height="4"
+            fill={ACCENT}
+            initial={reduce ? false : { opacity: 0 }}
+            animate={{ opacity: 0.75 }}
+            transition={{ duration: 0.15, delay: d.delay, ease: EASE }}
+          />
+        ))}
       </svg>
 
       <motion.p
-        initial={reduce ? false : { opacity: 0, x: -8 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.35, delay: 0.28, ease: EASE }}
-        className="max-w-[7.5rem] font-pixel-circle text-[0.9rem] leading-tight tracking-tight text-white/80"
+        initial={reduce ? false : { opacity: 0, y: -4 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3, delay: 0.38, ease: EASE }}
+        className="mt-1.5 max-w-[8.5rem] pl-0.5 font-pixel-circle text-[0.9rem] leading-tight tracking-tight text-white/85"
       >
         {label}
       </motion.p>
@@ -229,9 +280,10 @@ function IsoPlate({
   const uid = useId().replace(/:/g, "")
   const shadowId = `iso-shadow-${uid}`
   const printId = `iso-print-${uid}`
+  const hatchId = `iso-hatch-${uid}`
 
   const face = focused
-    ? "#A8B400"
+    ? "#C8EF00"
     : depth === 0
       ? "#D4FF00"
       : depth === 1
@@ -240,17 +292,15 @@ function IsoPlate({
           ? "#B8E000"
           : "#A8C800"
 
-  const rimDeep = focused ? "#4E5600" : "#3F4A00"
-  const rimMid = focused ? "#6A7400" : "#5C6A00"
-
-  // Same isometric basis as the plate face — mark is projected with it
+  const rimDeep = focused ? "#3F4A00" : "#2A3200"
+  const rimMid = focused ? "#5C6A00" : "#4A5600"
   const iso = "translate(118, 68) matrix(1, 0.5, -1, 0.5, 0, 0)"
 
   return (
     <div className="relative h-full w-full">
       <svg
         viewBox="0 0 240 180"
-        className="h-full w-full overflow-visible"
+        className="relative h-full w-full overflow-visible"
         aria-hidden
       >
         <defs>
@@ -269,7 +319,6 @@ function IsoPlate({
               floodOpacity="0.5"
             />
           </filter>
-          {/* Slight ink / emboss so the mark reads as printed */}
           <filter id={printId} x="-20%" y="-20%" width="140%" height="140%">
             <feDropShadow
               dx="0.6"
@@ -279,14 +328,32 @@ function IsoPlate({
               floodOpacity="0.28"
             />
           </filter>
+          {/* Subtle glyph-like hatch — brand texture */}
+          <pattern
+            id={hatchId}
+            width="14"
+            height="14"
+            patternUnits="userSpaceOnUse"
+          >
+            <text
+              x="1"
+              y="10"
+              fontSize="7"
+              fontFamily="ui-monospace, monospace"
+              fill="#0A0A0A"
+              opacity="0.12"
+            >
+              ·
+            </text>
+          </pattern>
         </defs>
 
         <g filter={`url(#${shadowId})`}>
           <g transform="translate(118, 92) matrix(1, 0.5, -1, 0.5, 0, 0)">
-            <rect x={-56} y={-56} width={112} height={112} rx={22} fill={rimDeep} />
+            <rect x={-56} y={-56} width={112} height={112} rx={14} fill={rimDeep} />
           </g>
           <g transform="translate(118, 84) matrix(1, 0.5, -1, 0.5, 0, 0)">
-            <rect x={-56} y={-56} width={112} height={112} rx={22} fill={rimMid} />
+            <rect x={-56} y={-56} width={112} height={112} rx={14} fill={rimMid} />
           </g>
 
           <g transform={iso}>
@@ -295,16 +362,36 @@ function IsoPlate({
               y={-56}
               width={112}
               height={112}
-              rx={22}
+              rx={14}
               fill={face}
-              stroke="#111111"
+              stroke="#0A0A0A"
               strokeWidth={3.5}
             />
+            {/* Printed brand texture */}
+            <rect
+              x={-52}
+              y={-52}
+              width={104}
+              height={104}
+              rx={12}
+              fill={`url(#${hatchId})`}
+              opacity={0.9}
+            />
+            {/* Pixel corner ticks */}
+            <g fill="#0A0A0A" opacity="0.35">
+              <rect x={-48} y={-48} width="5" height="2" />
+              <rect x={-48} y={-48} width="2" height="5" />
+              <rect x={43} y={-48} width="5" height="2" />
+              <rect x={46} y={-48} width="2" height="5" />
+              <rect x={-48} y={46} width="5" height="2" />
+              <rect x={-48} y={43} width="2" height="5" />
+              <rect x={43} y={46} width="5" height="2" />
+              <rect x={46} y={43} width="2" height="5" />
+            </g>
 
-            {/* Printed mark — lives in the face plane */}
             <g
               transform="translate(-17, -17)"
-              opacity={0.82}
+              opacity={0.86}
               filter={`url(#${printId})`}
               style={{ mixBlendMode: "multiply" }}
             >
@@ -321,7 +408,7 @@ function IsoPlate({
                 <Icon
                   width={34}
                   height={34}
-                  color="#141414"
+                  color="#0A0A0A"
                   strokeWidth={2.35}
                 />
               )}

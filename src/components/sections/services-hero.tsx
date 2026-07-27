@@ -90,8 +90,8 @@ export function ServicesHero() {
             className="max-w-sm text-sm leading-relaxed text-white/45 md:text-base"
           >
             Over{" "}
-            <span className="font-pixel-circle font-medium text-accent">4+</span>{" "}
-            services for vessels, ports, and commercial desks.
+            <span className="font-pixel-circle font-medium text-accent">1</span>{" "}
+            focused solution for vessels, ports, and commercial desks.
           </motion.p>
 
           <motion.div

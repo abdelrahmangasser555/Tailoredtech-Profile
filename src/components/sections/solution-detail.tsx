@@ -13,13 +13,18 @@ import { ColorPanels } from "@paper-design/shaders-react"
 import { GlyphMatrix } from "@/components/ui/glyph-matrix"
 import { ServiceVisual } from "@/components/ui/service-visual"
 import { BookDemoDialog } from "@/components/sections/book-demo-dialog"
+import { BrandedMermaid } from "@/components/sections/branded-mermaid"
+import {
+  SectionImageGrid,
+  SectionVideo,
+} from "@/components/sections/section-media"
 import { SectionLayerNav } from "@/components/sections/section-layer-nav"
 import { Section } from "@/components/layout/section"
 import {
   getRelatedServices,
   type ServiceItem,
 } from "@/lib/content"
-import { cn } from "@/lib/utils"
+import { scrollToId } from "@/components/motion/smooth-scroll"
 
 const EASE = [0.22, 1, 0.36, 1] as const
 const ENGINE_COLORS = ["#D4FF00", "#A8E600", "#3F4A00", "#F0FF99"]
@@ -36,7 +41,7 @@ export function SolutionDetail({ service }: SolutionDetailProps) {
   const [activeId, setActiveId] = useState(page.sections[0]?.id ?? "")
   const [showFloatCta, setShowFloatCta] = useState(false)
   const contentRef = useRef<HTMLDivElement>(null)
-  const heroSentinelRef = useRef<HTMLDivElement>(null)
+  const heroRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
     const ids = sectionIds.split(",").filter(Boolean)
@@ -65,14 +70,15 @@ export function SolutionDetail({ service }: SolutionDetailProps) {
   }, [sectionIds])
 
   useEffect(() => {
-    const node = heroSentinelRef.current
+    const node = heroRef.current
     if (!node) return
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        setShowFloatCta(!entry.isIntersecting)
+        // Float CTA only after the hero has left the top of the viewport
+        setShowFloatCta(entry.boundingClientRect.bottom < 72)
       },
-      { threshold: 0, rootMargin: "0px 0px -10% 0px" }
+      { threshold: [0, 0.05, 0.15, 0.35, 0.55, 0.75, 1] }
     )
 
     observer.observe(node)
@@ -80,10 +86,7 @@ export function SolutionDetail({ service }: SolutionDetailProps) {
   }, [])
 
   function scrollToSection(id: string) {
-    document.getElementById(id)?.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    })
+    scrollToId(id, -112)
   }
 
   return (
@@ -91,7 +94,7 @@ export function SolutionDetail({ service }: SolutionDetailProps) {
       <SolutionHero
         service={service}
         reduce={!!reduce}
-        sentinelRef={heroSentinelRef}
+        sectionRef={heroRef}
       />
 
       {page.outcomes.length > 0 && (
@@ -141,24 +144,6 @@ export function SolutionDetail({ service }: SolutionDetailProps) {
             </div>
           </aside>
 
-          <div className="scrollbar-none -mx-5 flex gap-2 overflow-x-auto px-5 pb-2 lg:hidden">
-            {page.sections.map((section) => (
-              <button
-                key={section.id}
-                type="button"
-                onClick={() => scrollToSection(section.id)}
-                className={cn(
-                  "shrink-0 border px-3 py-1.5 font-pixel-circle text-xs tracking-tight transition",
-                  activeId === section.id
-                    ? "border-accent bg-accent text-accent-foreground"
-                    : "border-white/20 text-white/50"
-                )}
-              >
-                {section.title}
-              </button>
-            ))}
-          </div>
-
           <div className="min-w-0 space-y-20 md:space-y-28">
             {page.sections.map((section, i) => (
               <motion.article
@@ -166,7 +151,7 @@ export function SolutionDetail({ service }: SolutionDetailProps) {
                 id={section.id}
                 initial={reduce ? false : { opacity: 0, y: 28 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.25 }}
+                viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.7, delay: 0.04, ease: EASE }}
                 className="scroll-mt-28"
               >
@@ -197,6 +182,18 @@ export function SolutionDetail({ service }: SolutionDetailProps) {
                       </li>
                     ))}
                   </ul>
+                )}
+
+                {section.video && <SectionVideo src={section.video} />}
+                {section.images.length > 0 && (
+                  <SectionImageGrid images={section.images} />
+                )}
+                {section.mermaid && (
+                  <BrandedMermaid
+                    chart={section.mermaid}
+                    title={section.mermaidTitle ?? undefined}
+                    caption={section.mermaidCaption ?? undefined}
+                  />
                 )}
               </motion.article>
             ))}
@@ -283,7 +280,7 @@ export function SolutionDetail({ service }: SolutionDetailProps) {
               trigger={
                 <button
                   type="button"
-                  className="inline-flex h-12 items-center gap-2 bg-accent px-5 text-sm font-medium text-accent-foreground shadow-[0_12px_40px_rgba(212,255,0,0.28)] transition hover:brightness-95"
+                  className="inline-flex h-12 cursor-pointer items-center gap-2 bg-accent px-5 text-sm font-medium text-accent-foreground shadow-[0_12px_40px_rgba(212,255,0,0.28)] transition hover:brightness-95"
                 >
                   {page.demo.label}
                   <ArrowRight className="size-4" />
@@ -300,17 +297,20 @@ export function SolutionDetail({ service }: SolutionDetailProps) {
 function SolutionHero({
   service,
   reduce,
-  sentinelRef,
+  sectionRef,
 }: {
   service: ServiceItem
   reduce: boolean
-  sentinelRef: React.RefObject<HTMLDivElement | null>
+  sectionRef: React.RefObject<HTMLElement | null>
 }) {
   const { page } = service
   const showEngine = page.heroVisual === "engine"
 
   return (
-    <section className="relative flex min-h-[88svh] flex-col overflow-hidden bg-black text-white [--accent:#D4FF00] [--accent-foreground:#0A0A0A] lg:min-h-svh">
+    <section
+      ref={sectionRef}
+      className="relative flex min-h-[88svh] flex-col overflow-hidden bg-black text-white [--accent:#D4FF00] [--accent-foreground:#0A0A0A] lg:min-h-svh"
+    >
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 z-0 opacity-45"
@@ -433,8 +433,6 @@ function SolutionHero({
           </motion.div>
         )}
       </div>
-
-      <div ref={sentinelRef} className="pointer-events-none absolute inset-x-0 bottom-0 h-px" />
     </section>
   )
 }
