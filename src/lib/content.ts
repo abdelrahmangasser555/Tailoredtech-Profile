@@ -10,6 +10,8 @@ import hero from "@/config/hero.json"
 export type Company = typeof company
 export type Clients = typeof clients
 export type Services = typeof services
+export type ServiceItem = Services["items"][number]
+export type ServicePage = ServiceItem["page"]
 export type Projects = typeof projects
 export type Timeline = typeof timeline
 export type Navigation = typeof navigation
@@ -37,4 +39,18 @@ export function getFeaturedProjects() {
 
 export function getFeaturedServices() {
   return services.items.filter((s) => s.featured)
+}
+
+export function getServiceBySlug(slug: string): ServiceItem | undefined {
+  return services.items.find((s) => s.id === slug && s.page.enabled)
+}
+
+export function getServiceSlugs() {
+  return services.items.filter((s) => s.page.enabled).map((s) => s.id)
+}
+
+export function getRelatedServices(ids: readonly string[]) {
+  return ids
+    .map((id) => services.items.find((s) => s.id === id))
+    .filter((s): s is ServiceItem => Boolean(s))
 }

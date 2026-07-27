@@ -361,7 +361,7 @@ function VesselMark() {
       {/* Anchor mark */}
       <circle cx="136" cy="33" r="1.3" opacity="0.35" fill="#0A0A0A" />
     </motion.svg>
-  )
+  );
 }
 
 function glyphColor(mode: HeroConfig["glyphMatrix"]["color"]) {
@@ -441,7 +441,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.65, delay: 0.22, ease: EASE }}
-              className="mt-5 hidden w-fit text-nowrap font-mono text-[0.95rem] font-normal leading-relaxed tracking-[0.01em] text-white/50 lg:block lg:text-[1.05rem]"
+              className="mt-5 hidden w-fit text-nowrap font-mono text-[0.95rem] font-normal leading-relaxed tracking-[0.01em]  lg:block lg:text-[1.05rem]"
             >
               <span className="text-white/45">{description.before}</span>
               <motion.span

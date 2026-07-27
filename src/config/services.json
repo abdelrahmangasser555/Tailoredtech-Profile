@@ -9,9 +9,72 @@
       "description": "Custom fleet platforms for scheduling, tracking, compliance, and performance across your entire vessel portfolio.",
       "icon": "Ship",
       "logo": null,
-      "href": "/services#fleet-operations",
+      "href": "/services/fleet-operations",
       "featured": true,
-      "span": "lg"
+      "span": "lg",
+      "page": {
+        "enabled": true,
+        "eyebrow": "Solution",
+        "headline": "Fleet Operations",
+        "headlineAccent": "for every vessel",
+        "tagline": "One operational picture for scheduling, crew, voyages, and performance — built around how your fleet actually runs.",
+        "heroVisual": "engine",
+        "demo": {
+          "label": "Book a demo",
+          "title": "Book a Fleet Operations demo",
+          "subtitle": "Walk through a live operational view tailored to your fleet size and trade.",
+          "submitLabel": "Request demo"
+        },
+        "outcomes": [
+          { "value": "1", "label": "shared ops picture" },
+          { "value": "24/7", "label": "voyage visibility" },
+          { "value": "0", "label": "spreadsheet handoffs" }
+        ],
+        "sections": [
+          {
+            "id": "overview",
+            "title": "Overview",
+            "body": "Fleet Operations replaces fragmented tools with a single platform for vessel scheduling, crew coordination, voyage tracking, and performance. Designed for operators who need clarity across the portfolio — not another generic dashboard.",
+            "bullets": [
+              "Live vessel and voyage status across the fleet",
+              "Crew planning tied to vessel rotations",
+              "Performance signals that ops teams can act on"
+            ]
+          },
+          {
+            "id": "capabilities",
+            "title": "What you get",
+            "body": "Modules are assembled around your workflows — from noon reports to commercial handoffs — so the platform fits the desk, not the other way around.",
+            "bullets": [
+              "Scheduling and voyage planning",
+              "Crew and rotation coordination",
+              "Compliance checkpoints in the flow of work",
+              "KPI and exception alerting"
+            ]
+          },
+          {
+            "id": "fit",
+            "title": "Who it’s for",
+            "body": "Built for fleet managers, marine superintendents, and ops desks that run mixed fleets and need one reliable source of truth.",
+            "bullets": [
+              "Owners and managers with multi-vessel fleets",
+              "Ops teams coordinating shore and ship",
+              "Organizations retiring spreadsheet-heavy processes"
+            ]
+          },
+          {
+            "id": "delivery",
+            "title": "How we deliver",
+            "body": "We map your current stack, design the operating model, then ship in focused cycles with training and handover when you need it.",
+            "bullets": [
+              "Discovery on real voyages and constraints",
+              "Design and build in short delivery cycles",
+              "Operate with support and iteration as the fleet grows"
+            ]
+          }
+        ],
+        "related": ["port-systems", "data-platforms", "compliance"]
+      }
     },
     {
       "id": "port-systems",
@@ -20,9 +83,72 @@
       "description": "Integrated systems for berth planning, cargo handling, and terminal throughput with live operational visibility.",
       "icon": "Anchor",
       "logo": null,
-      "href": "/services#port-systems",
+      "href": "/services/port-systems",
       "featured": true,
-      "span": "md"
+      "span": "md",
+      "page": {
+        "enabled": true,
+        "eyebrow": "Solution",
+        "headline": "Port & Terminal",
+        "headlineAccent": "systems that move",
+        "tagline": "Berth planning, cargo flow, and yard visibility — connected so terminals can plan ahead instead of firefighting.",
+        "heroVisual": "engine",
+        "demo": {
+          "label": "Book a demo",
+          "title": "Book a Port Systems demo",
+          "subtitle": "See how berth, cargo, and yard views come together for your terminal.",
+          "submitLabel": "Request demo"
+        },
+        "outcomes": [
+          { "value": "Live", "label": "berth board" },
+          { "value": "Less", "label": "idle time" },
+          { "value": "One", "label": "ops feed" }
+        ],
+        "sections": [
+          {
+            "id": "overview",
+            "title": "Overview",
+            "body": "Port & Terminal Systems give planners and operators a shared view of berths, cargo moves, and yard state — so arrivals, shifts, and handoffs stay coordinated.",
+            "bullets": [
+              "Berth planning with live arrival context",
+              "Cargo and yard orchestration",
+              "Throughput visibility for supervisors"
+            ]
+          },
+          {
+            "id": "capabilities",
+            "title": "What you get",
+            "body": "Custom modules for the terminal workflows that matter — from gate to quay — integrated with the systems you already run.",
+            "bullets": [
+              "Berth and window planning",
+              "Cargo handling workflows",
+              "Yard and equipment visibility",
+              "Exception and delay signals"
+            ]
+          },
+          {
+            "id": "fit",
+            "title": "Who it’s for",
+            "body": "Built for port authorities, terminal operators, and stevedoring teams that need operational clarity under pressure.",
+            "bullets": [
+              "Terminal ops and planning desks",
+              "Ports modernizing legacy boards",
+              "Teams aligning gate, yard, and quay"
+            ]
+          },
+          {
+            "id": "delivery",
+            "title": "How we deliver",
+            "body": "We start from real call patterns and constraints, then deliver interfaces operators will actually use on shift.",
+            "bullets": [
+              "Map call patterns and bottlenecks",
+              "Prototype with planners on the floor",
+              "Integrate and harden for live ops"
+            ]
+          }
+        ],
+        "related": ["fleet-operations", "integrations", "data-platforms"]
+      }
     },
     {
       "id": "chartering",
@@ -31,9 +157,72 @@
       "description": "Commercial tools for fixture management, contract workflows, and voyage economics tailored to your desk.",
       "icon": "FileText",
       "logo": null,
-      "href": "/services#chartering",
+      "href": "/services/chartering",
       "featured": true,
-      "span": "md"
+      "span": "md",
+      "page": {
+        "enabled": true,
+        "eyebrow": "Solution",
+        "headline": "Chartering",
+        "headlineAccent": "& commercial clarity",
+        "tagline": "Fixtures, contracts, and voyage economics in one place — so the desk moves faster with fewer surprises.",
+        "heroVisual": "engine",
+        "demo": {
+          "label": "Book a demo",
+          "title": "Book a Chartering demo",
+          "subtitle": "Review fixture and P&L flows designed for your commercial desk.",
+          "submitLabel": "Request demo"
+        },
+        "outcomes": [
+          { "value": "Faster", "label": "fixture cycle" },
+          { "value": "Clear", "label": "voyage P&L" },
+          { "value": "Fewer", "label": "handoff gaps" }
+        ],
+        "sections": [
+          {
+            "id": "overview",
+            "title": "Overview",
+            "body": "Chartering & Commercial tools keep fixtures, contracts, and voyage economics aligned — from offer to close — with the context ops and finance need.",
+            "bullets": [
+              "Fixture pipelines with status you can trust",
+              "Contract workflows without email archaeology",
+              "Voyage P&L visibility for the desk"
+            ]
+          },
+          {
+            "id": "capabilities",
+            "title": "What you get",
+            "body": "A commercial layer tailored to how your brokers and operators work today — connected to the systems that settle and report.",
+            "bullets": [
+              "Fixture and offer management",
+              "Contract and clause workflows",
+              "Voyage economics and estimates",
+              "Handoffs to ops and finance"
+            ]
+          },
+          {
+            "id": "fit",
+            "title": "Who it’s for",
+            "body": "Built for commercial desks, brokers, and owners who need speed without losing control of the paper trail.",
+            "bullets": [
+              "Chartering and commercial teams",
+              "Owners with in-house desks",
+              "Operators bridging commercial and ops"
+            ]
+          },
+          {
+            "id": "delivery",
+            "title": "How we deliver",
+            "body": "We model your fixture lifecycle first, then ship tools that match desk rhythm — not a generic CRM shell.",
+            "bullets": [
+              "Map fixture and settlement flows",
+              "Design for desk speed",
+              "Integrate with finance and ops systems"
+            ]
+          }
+        ],
+        "related": ["fleet-operations", "data-platforms", "integrations"]
+      }
     },
     {
       "id": "compliance",
@@ -42,9 +231,72 @@
       "description": "Digital compliance stacks for documentation, audits, safety reporting, and regulatory readiness.",
       "icon": "ShieldCheck",
       "logo": null,
-      "href": "/services#compliance",
+      "href": "/services/compliance",
       "featured": false,
-      "span": "sm"
+      "span": "sm",
+      "page": {
+        "enabled": true,
+        "eyebrow": "Solution",
+        "headline": "Compliance",
+        "headlineAccent": "& safety, operational",
+        "tagline": "ISM, audits, and incidents in workflows people actually complete — so readiness is continuous, not seasonal.",
+        "heroVisual": "engine",
+        "demo": {
+          "label": "Book a demo",
+          "title": "Book a Compliance demo",
+          "subtitle": "See audit, document, and incident flows tailored to your SMS.",
+          "submitLabel": "Request demo"
+        },
+        "outcomes": [
+          { "value": "Audit", "label": "ready trails" },
+          { "value": "Less", "label": "paper chase" },
+          { "value": "Clear", "label": "incident path" }
+        ],
+        "sections": [
+          {
+            "id": "overview",
+            "title": "Overview",
+            "body": "Compliance & Safety digitizes the work behind ISM, audits, and incidents — so documentation, evidence, and follow-ups stay attached to the operation.",
+            "bullets": [
+              "Structured audit and finding workflows",
+              "Document control with clear ownership",
+              "Incident reporting that closes the loop"
+            ]
+          },
+          {
+            "id": "capabilities",
+            "title": "What you get",
+            "body": "A compliance stack shaped to your SMS and flag requirements — not a generic checklist app.",
+            "bullets": [
+              "ISM and audit modules",
+              "Safety reporting and CAPA",
+              "Evidence and document trails",
+              "Reminders tied to real deadlines"
+            ]
+          },
+          {
+            "id": "fit",
+            "title": "Who it’s for",
+            "body": "Built for DPA offices, HSEQ teams, and fleet managers who need readiness without drowning the vessel in forms.",
+            "bullets": [
+              "HSEQ and DPA teams",
+              "Fleets preparing for inspection seasons",
+              "Operators consolidating compliance tools"
+            ]
+          },
+          {
+            "id": "delivery",
+            "title": "How we deliver",
+            "body": "We start from your SMS and inspection reality, then build workflows that shore and ship can complete under time pressure.",
+            "bullets": [
+              "Map SMS and audit cycles",
+              "Design for shipboard usability",
+              "Train and iterate after first audits"
+            ]
+          }
+        ],
+        "related": ["fleet-operations", "data-platforms", "integrations"]
+      }
     },
     {
       "id": "data-platforms",
@@ -53,9 +305,72 @@
       "description": "Data lakes, dashboards, and integrations that connect AIS, ERP, IoT, and operational systems.",
       "icon": "Database",
       "logo": null,
-      "href": "/services#data-platforms",
+      "href": "/services/data-platforms",
       "featured": false,
-      "span": "sm"
+      "span": "sm",
+      "page": {
+        "enabled": true,
+        "eyebrow": "Solution",
+        "headline": "Maritime data",
+        "headlineAccent": "platforms",
+        "tagline": "AIS, ERP, IoT, and ops systems into one decision layer — dashboards and feeds that match how maritime teams decide.",
+        "heroVisual": "engine",
+        "demo": {
+          "label": "Book a demo",
+          "title": "Book a Data Platform demo",
+          "subtitle": "Explore a unified maritime data view built around your sources.",
+          "submitLabel": "Request demo"
+        },
+        "outcomes": [
+          { "value": "One", "label": "data layer" },
+          { "value": "Trusted", "label": "KPIs" },
+          { "value": "Faster", "label": "decisions" }
+        ],
+        "sections": [
+          {
+            "id": "overview",
+            "title": "Overview",
+            "body": "Maritime Data Platforms connect vessel, commercial, and shore systems into a governed layer for reporting, alerts, and downstream products.",
+            "bullets": [
+              "Unified models across AIS, ERP, and ops",
+              "Dashboards for shore and fleet stakeholders",
+              "Reliable feeds for other products"
+            ]
+          },
+          {
+            "id": "capabilities",
+            "title": "What you get",
+            "body": "Ingestion, modeling, and presentation shaped to maritime entities — vessels, voyages, ports, and desks — not generic BI alone.",
+            "bullets": [
+              "Pipelines from core maritime sources",
+              "Governed metrics and definitions",
+              "Role-based dashboards",
+              "APIs for apps and partners"
+            ]
+          },
+          {
+            "id": "fit",
+            "title": "Who it’s for",
+            "body": "Built for operators and digital teams drowning in reports but short on a single trusted picture.",
+            "bullets": [
+              "Fleet and commercial leadership",
+              "Data and digital transformation teams",
+              "Groups consolidating vendor reports"
+            ]
+          },
+          {
+            "id": "delivery",
+            "title": "How we deliver",
+            "body": "We prioritize the decisions that matter, wire the sources that feed them, then expand the platform without breaking trust in the numbers.",
+            "bullets": [
+              "Define decision use cases first",
+              "Connect and clean priority sources",
+              "Ship dashboards, then deepen the lake"
+            ]
+          }
+        ],
+        "related": ["fleet-operations", "integrations", "chartering"]
+      }
     },
     {
       "id": "integrations",
@@ -64,9 +379,72 @@
       "description": "API layers and middleware that unify legacy maritime systems with modern cloud platforms.",
       "icon": "Network",
       "logo": null,
-      "href": "/services#integrations",
+      "href": "/services/integrations",
       "featured": false,
-      "span": "sm"
+      "span": "sm",
+      "page": {
+        "enabled": true,
+        "eyebrow": "Solution",
+        "headline": "Systems",
+        "headlineAccent": "integration",
+        "tagline": "API layers and middleware that connect legacy maritime systems to modern cloud platforms — without a rip-and-replace.",
+        "heroVisual": "engine",
+        "demo": {
+          "label": "Book a demo",
+          "title": "Book an Integrations demo",
+          "subtitle": "Talk through your stack and the integration paths that fit.",
+          "submitLabel": "Request demo"
+        },
+        "outcomes": [
+          { "value": "Less", "label": "manual sync" },
+          { "value": "Stable", "label": "API layer" },
+          { "value": "Faster", "label": "rollouts" }
+        ],
+        "sections": [
+          {
+            "id": "overview",
+            "title": "Overview",
+            "body": "Systems Integration builds the connective tissue between legacy maritime software and modern products — so data and workflows move without brittle one-offs.",
+            "bullets": [
+              "API and middleware layers",
+              "Event and batch sync patterns",
+              "Monitoring for maritime uptime needs"
+            ]
+          },
+          {
+            "id": "capabilities",
+            "title": "What you get",
+            "body": "Integration architecture tailored to the systems you already run — ERP, fleet, port, and vendor platforms.",
+            "bullets": [
+              "API gateways and adapters",
+              "Mapping and transformation",
+              "Retry, logging, and observability",
+              "Secure connectivity patterns"
+            ]
+          },
+          {
+            "id": "fit",
+            "title": "Who it’s for",
+            "body": "Built for IT and ops leaders who need modern capability without discarding systems that still run the business.",
+            "bullets": [
+              "Teams with mixed legacy and cloud stacks",
+              "Operators connecting vendor products",
+              "Groups preparing for platform rollouts"
+            ]
+          },
+          {
+            "id": "delivery",
+            "title": "How we deliver",
+            "body": "We inventory interfaces, design resilient contracts, then ship integrations with monitoring from day one.",
+            "bullets": [
+              "Map systems and ownership",
+              "Design contracts and failure modes",
+              "Ship, observe, and harden under load"
+            ]
+          }
+        ],
+        "related": ["data-platforms", "fleet-operations", "port-systems"]
+      }
     }
   ]
 }

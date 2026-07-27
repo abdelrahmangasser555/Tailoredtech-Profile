@@ -1,10 +1,11 @@
-import type { Metadata } from "next";
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
-import { Section } from "@/components/layout/section";
-import { ServicesHero } from "@/components/sections/services-hero";
-import { Button } from "@/components/ui/button";
-import { site } from "@/lib/content";
+import type { Metadata } from "next"
+import Link from "next/link"
+import { ArrowRight, ArrowUpRight } from "lucide-react"
+import { Section } from "@/components/layout/section"
+import { ServicesHero } from "@/components/sections/services-hero"
+import { Button } from "@/components/ui/button"
+import { ServiceVisual } from "@/components/ui/service-visual"
+import { site } from "@/lib/content"
 
 export const metadata: Metadata = {
   title: "Maritime Software Solutions",
@@ -23,10 +24,10 @@ export const metadata: Metadata = {
     description:
       "Custom platforms for fleets, ports, and commercial maritime desks.",
   },
-};
+}
 
 export default function ServicesPage() {
-  const { services } = site;
+  const { services } = site
 
   return (
     <>
@@ -38,7 +39,7 @@ export default function ServicesPage() {
             <article
               key={service.id}
               id={service.id}
-              className="group relative scroll-mt-28 py-12 md:py-14"
+              className="group relative scroll-mt-28 border-b border-foreground/8 py-12 last:border-b-0 md:py-14"
             >
               <span
                 aria-hidden
@@ -46,13 +47,36 @@ export default function ServicesPage() {
               >
                 {String(i + 1).padStart(2, "0")}
               </span>
-              <div className="relative pl-2 md:pl-8">
-                <h2 className="font-pixel-circle text-2xl font-medium tracking-tight md:text-3xl">
-                  {service.title}
-                </h2>
-                <p className="mt-4 max-w-2xl leading-relaxed text-muted-foreground">
-                  {service.description}
-                </p>
+              <div className="relative flex flex-col gap-6 pl-2 md:flex-row md:items-end md:justify-between md:gap-10 md:pl-8">
+                <div className="max-w-2xl">
+                  <div className="mb-4">
+                    <ServiceVisual
+                      icon={service.icon}
+                      logo={service.logo}
+                      title={service.title}
+                      className="size-9 text-accent"
+                      iconClassName="size-5"
+                    />
+                  </div>
+                  <h2 className="font-pixel-circle text-2xl font-medium tracking-tight md:text-3xl">
+                    <Link
+                      href={service.href}
+                      className="transition hover:text-accent"
+                    >
+                      {service.title}
+                    </Link>
+                  </h2>
+                  <p className="mt-4 leading-relaxed text-muted-foreground">
+                    {service.description}
+                  </p>
+                </div>
+                <Link
+                  href={service.href}
+                  className="inline-flex h-11 shrink-0 items-center gap-2 border border-foreground/15 px-5 text-sm font-medium transition hover:border-accent hover:text-accent"
+                >
+                  View solution
+                  <ArrowUpRight className="size-4" />
+                </Link>
               </div>
             </article>
           ))}
@@ -98,5 +122,5 @@ export default function ServicesPage() {
         </div>
       </Section>
     </>
-  );
+  )
 }
