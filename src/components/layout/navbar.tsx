@@ -74,9 +74,8 @@ export function Navbar() {
       >
         <nav
           className={cn(
-            "flex items-center justify-between gap-4 px-1 py-2.5 transition-[background,border,padding,backdrop-filter,max-width] duration-500",
-            solid &&
-              "border border-white/10 bg-black/70 px-4 backdrop-blur-2xl"
+            "flex items-center justify-between gap-4 px-1 py-2.5 transition-[background,padding,backdrop-filter] duration-500",
+            solid && "bg-black/70 px-4 backdrop-blur-2xl"
           )}
         >
           <Link href="/" className="shrink-0">

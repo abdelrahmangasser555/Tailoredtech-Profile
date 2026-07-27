@@ -228,27 +228,28 @@ function TagClose() {
   );
 }
 
-/** Detailed vessel — sails with roll, bob, and wake */
+/** Container cargo ship — stacked boxes, aft bridge, long hull */
 function VesselMark() {
   return (
     <motion.svg
-      viewBox="0 0 140 56"
+      viewBox="0 0 160 56"
       className="h-[0.78em] w-auto overflow-visible"
       fill="currentColor"
       aria-hidden
       animate={{
-        x: [0, 16, 0],
-        y: [0, -3, 0, 2, 0],
-        rotate: [0, -2.8, 1.2, -1.8, 0],
+        x: [0, 14, 0],
+        y: [0, -2.5, 0, 1.5, 0],
+        rotate: [0, -1.8, 0.8, -1.2, 0],
       }}
       transition={{
-        duration: 4,
+        duration: 4.2,
         ease: "easeInOut",
         repeat: Infinity,
       }}
     >
+      {/* Water line */}
       <motion.path
-        d="M4 44c8 2 16-2 24 0s16 2 24 0 16-2 24 0 16 2 24 0 16-2 20 0"
+        d="M2 46c10 2 18-2 28 0s20 2 30 0 20-2 30 0 20 2 30 0 18-2 24 0"
         fill="none"
         stroke="currentColor"
         strokeWidth="1"
@@ -257,26 +258,27 @@ function VesselMark() {
         transition={{ duration: 2.8, ease: "easeInOut", repeat: Infinity }}
       />
 
+      {/* Wake */}
       <motion.g
-        animate={{ opacity: [0.12, 0.38, 0.12], x: [0, -10, 0] }}
+        animate={{ opacity: [0.12, 0.4, 0.12], x: [0, -12, 0] }}
         transition={{ duration: 2.4, ease: "easeInOut", repeat: Infinity }}
       >
         <path
-          d="M2 40h16"
+          d="M2 40h18"
           stroke="currentColor"
           strokeWidth="1.5"
           opacity="0.55"
           fill="none"
         />
         <path
-          d="M4 44h12"
+          d="M4 44h14"
           stroke="currentColor"
           strokeWidth="1.25"
           opacity="0.35"
           fill="none"
         />
         <path
-          d="M6 48h10"
+          d="M6 48h12"
           stroke="currentColor"
           strokeWidth="1"
           opacity="0.2"
@@ -284,56 +286,82 @@ function VesselMark() {
         />
       </motion.g>
 
-      <path d="M22 36h88l-10 12H34L22 36Z" opacity="0.35" />
-      <path d="M20 28h86l-6 10H30L20 28Z" />
+      {/* Hull depth / keel shadow */}
+      <path d="M18 36h118l-12 12H34L18 36Z" opacity="0.32" />
+
+      {/* Main cargo hull — long boxy profile */}
+      <path d="M16 28h112l-8 10H28L16 28Z" />
+
+      {/* Deck line */}
       <path
-        d="M28 28h70"
+        d="M24 28h96"
         fill="none"
         stroke="currentColor"
         strokeWidth="1"
-        opacity="0.35"
+        opacity="0.3"
       />
 
-      <rect x="48" y="14" width="34" height="14" />
-      <rect x="52" y="8" width="18" height="6" />
-      <g opacity="0.28" fill="#0A0A0A">
-        <rect x="54" y="17" width="5" height="4" />
-        <rect x="62" y="17" width="5" height="4" />
-        <rect x="70" y="17" width="5" height="4" />
+      {/* Stacked shipping containers — 3 rows */}
+      <g>
+        {/* Bottom row */}
+        <rect x="26" y="20" width="12" height="8" opacity="0.95" />
+        <rect x="40" y="20" width="12" height="8" opacity="0.8" />
+        <rect x="54" y="20" width="12" height="8" opacity="0.95" />
+        <rect x="68" y="20" width="12" height="8" opacity="0.8" />
+        <rect x="82" y="20" width="12" height="8" opacity="0.95" />
+        {/* Mid row */}
+        <rect x="26" y="12" width="12" height="8" opacity="0.75" />
+        <rect x="40" y="12" width="12" height="8" opacity="0.9" />
+        <rect x="54" y="12" width="12" height="8" opacity="0.75" />
+        <rect x="68" y="12" width="12" height="8" opacity="0.9" />
+        <rect x="82" y="12" width="12" height="8" opacity="0.75" />
+        {/* Top row (partial) */}
+        <rect x="40" y="4" width="12" height="8" opacity="0.85" />
+        <rect x="54" y="4" width="12" height="8" opacity="0.7" />
+        <rect x="68" y="4" width="12" height="8" opacity="0.85" />
+        {/* Container seams */}
+        <g opacity="0.22" fill="#0A0A0A">
+          <rect x="31" y="5" width="1" height="6" />
+          <rect x="45" y="5" width="1" height="6" />
+          <rect x="59" y="5" width="1" height="6" />
+          <rect x="73" y="5" width="1" height="6" />
+          <rect x="31" y="13" width="1" height="6" />
+          <rect x="45" y="13" width="1" height="6" />
+          <rect x="59" y="13" width="1" height="6" />
+          <rect x="73" y="13" width="1" height="6" />
+          <rect x="87" y="13" width="1" height="6" />
+        </g>
       </g>
 
-      <rect x="72" y="2" width="8" height="12" />
-      <rect x="72" y="2" width="8" height="2.5" opacity="0.55" />
+      {/* Aft superstructure / bridge house */}
+      <rect x="100" y="10" width="26" height="18" />
+      <rect x="104" y="4" width="16" height="6" />
+      {/* Bridge windows */}
+      <g opacity="0.28" fill="#0A0A0A">
+        <rect x="106" y="13" width="4" height="3.5" />
+        <rect x="113" y="13" width="4" height="3.5" />
+        <rect x="120" y="13" width="4" height="3.5" />
+        <rect x="107" y="5.5" width="3.5" height="2.5" />
+        <rect x="113.5" y="5.5" width="3.5" height="2.5" />
+      </g>
+
+      {/* Funnel */}
+      <rect x="112" y="0" width="7" height="10" />
+      <rect x="112" y="0" width="7" height="2" opacity="0.55" />
       <motion.g
-        animate={{ y: [0, -6, -10], opacity: [0.35, 0.2, 0] }}
+        animate={{ y: [0, -5, -9], opacity: [0.35, 0.18, 0] }}
         transition={{ duration: 2.2, ease: "easeOut", repeat: Infinity }}
       >
-        <circle cx="76" cy="0" r="2.2" opacity="0.4" />
-        <circle cx="79" cy="-3" r="1.6" opacity="0.25" />
+        <circle cx="115.5" cy="-1" r="2" opacity="0.4" />
+        <circle cx="118" cy="-4" r="1.4" opacity="0.25" />
       </motion.g>
 
-      <rect x="92" y="10" width="1.5" height="18" opacity="0.75" />
-      <path
-        d="M93 12h14"
-        stroke="currentColor"
-        strokeWidth="1.25"
-        fill="none"
-        opacity="0.55"
-      />
-      <path
-        d="M107 12v6"
-        stroke="currentColor"
-        strokeWidth="1"
-        fill="none"
-        opacity="0.4"
-      />
-
-      <path d="M106 28h16l-8 10h-14l6-10Z" />
-      <circle cx="114" cy="33" r="1.4" opacity="0.35" fill="#0A0A0A" />
-      <rect x="34" y="22" width="10" height="6" opacity="0.55" />
-      <rect x="86" y="22" width="8" height="6" opacity="0.45" />
+      {/* Bow flare */}
+      <path d="M128 28h18l-10 10H118l10-10Z" />
+      {/* Anchor mark */}
+      <circle cx="136" cy="33" r="1.3" opacity="0.35" fill="#0A0A0A" />
     </motion.svg>
-  );
+  )
 }
 
 function glyphColor(mode: HeroConfig["glyphMatrix"]["color"]) {

@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
+import { GeistPixelCircle } from "geist/font/pixel"
 import { Toaster } from "@/components/ui/sonner"
 import { Navbar } from "@/components/layout/navbar"
 import { Footer } from "@/components/layout/footer"
@@ -93,13 +94,14 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geist.variable} ${geistMono.variable} h-full`}
+      className={`${geist.variable} ${geistMono.variable} ${GeistPixelCircle.variable} h-full`}
       style={
         {
           "--font-display": "var(--font-geist)",
           "--font-heading": "var(--font-geist)",
           "--font-body": "var(--font-geist)",
           "--font-serif": "var(--font-geist)",
+          "--font-pixel-circle": "var(--font-geist-pixel-circle)",
         } as React.CSSProperties
       }
     >
