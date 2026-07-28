@@ -3,52 +3,12 @@
   "subheadline": "Systems built for operators managing over $2B in combined fleet and cargo value.",
   "items": [
     {
-      "id": "oceanic-fleet",
-      "name": "Oceanic Fleet Group",
-      "logo": "/clients/oceanic.svg",
-      "url": "https://example.com",
+      "id": "bahri",
+      "name": "Bahri",
+      "logo": "/clients/bahri-no-background.png",
+      "url": "https://www.bahri.sa",
       "sector": "Shipping",
       "featured": true
-    },
-    {
-      "id": "harbor-ops",
-      "name": "HarborOps International",
-      "logo": "/clients/harborops.svg",
-      "url": "https://example.com",
-      "sector": "Ports",
-      "featured": true
-    },
-    {
-      "id": "blue-line",
-      "name": "BlueLine Chartering",
-      "logo": "/clients/blueline.svg",
-      "url": "https://example.com",
-      "sector": "Chartering",
-      "featured": true
-    },
-    {
-      "id": "northstar-marine",
-      "name": "Northstar Marine",
-      "logo": "/clients/northstar.svg",
-      "url": "https://example.com",
-      "sector": "Offshore",
-      "featured": true
-    },
-    {
-      "id": "atlantic-cargo",
-      "name": "Atlantic Cargo Systems",
-      "logo": "/clients/atlantic.svg",
-      "url": "https://example.com",
-      "sector": "Logistics",
-      "featured": true
-    },
-    {
-      "id": "pacific-terminals",
-      "name": "Pacific Terminals",
-      "logo": "/clients/pacific.svg",
-      "url": "https://example.com",
-      "sector": "Terminals",
-      "featured": false
     }
   ]
 }

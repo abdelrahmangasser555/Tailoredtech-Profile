@@ -5,6 +5,7 @@ import Image from "next/image"
 import { AnimatePresence, motion } from "framer-motion"
 import { Expand, X } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { resetScrollState } from "@/components/motion/smooth-scroll"
 
 const EASE = [0.22, 1, 0.36, 1] as const
 
@@ -67,14 +68,12 @@ function ImageLightbox({
   const current = images[openIndex]
 
   useEffect(() => {
-    const lenis = window.__lenis
-    lenis?.stop()
-    const prev = document.documentElement.style.overflow
+    window.__lenis?.stop()
     document.documentElement.style.overflow = "hidden"
+    document.body.style.overflow = "hidden"
+
     return () => {
-      document.documentElement.style.overflow = prev
-      lenis?.start()
-      requestAnimationFrame(() => lenis?.resize())
+      resetScrollState()
     }
   }, [])
 

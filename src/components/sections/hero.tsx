@@ -228,12 +228,221 @@ function TagClose() {
   );
 }
 
-/** Container cargo ship — stacked boxes, aft bridge, long hull */
+const VESSEL_DOT = 2;
+const VESSEL_DOT_R = 0.88;
+
+type VesselDot = { x: number; y: number; opacity: number };
+
+function vesselXY(col: number, row: number): Pick<VesselDot, "x" | "y"> {
+  return {
+    x: col * VESSEL_DOT + VESSEL_DOT_R,
+    y: row * VESSEL_DOT + VESSEL_DOT_R,
+  };
+}
+
+function vesselRect(
+  col: number,
+  row: number,
+  width: number,
+  height: number,
+  opacity = 1,
+  skip = new Set<string>(),
+): VesselDot[] {
+  const dots: VesselDot[] = [];
+  for (let y = 0; y < height; y += 1) {
+    for (let x = 0; x < width; x += 1) {
+      const key = `${col + x},${row + y}`;
+      if (skip.has(key)) continue;
+      dots.push({ ...vesselXY(col + x, row + y), opacity });
+    }
+  }
+  return dots;
+}
+
+function vesselHullRow(
+  row: number,
+  left: number,
+  right: number,
+  opacity = 1,
+): VesselDot[] {
+  const dots: VesselDot[] = [];
+  for (let col = left; col <= right; col += 1) {
+    dots.push({ ...vesselXY(col, row), opacity });
+  }
+  return dots;
+}
+
+function vesselPoints(
+  coords: ReadonlyArray<readonly [number, number]>,
+  opacity = 1,
+): VesselDot[] {
+  return coords.map(([col, row]) => ({ ...vesselXY(col, row), opacity }));
+}
+
+function vesselFrame(
+  col: number,
+  row: number,
+  width: number,
+  height: number,
+  opacity = 1,
+): VesselDot[] {
+  const dots: VesselDot[] = [];
+  for (let x = 0; x < width; x += 1) {
+    dots.push({ ...vesselXY(col + x, row), opacity });
+    dots.push({ ...vesselXY(col + x, row + height - 1), opacity });
+  }
+  for (let y = 1; y < height - 1; y += 1) {
+    dots.push({ ...vesselXY(col, row + y), opacity });
+    dots.push({ ...vesselXY(col + width - 1, row + y), opacity });
+  }
+  return dots;
+}
+
+/** High-detail dot-matrix container ship */
+function buildVesselHullDots(): VesselDot[] {
+  const dots: VesselDot[] = [];
+  const skip = new Set<string>();
+
+  // Bridge window cutouts
+  [
+  [47, 10], [48, 10], [49, 10],
+  [51, 10], [52, 10], [53, 10],
+  [55, 10], [56, 10], [57, 10],
+  [48, 7], [49, 7], [52, 7], [53, 7],
+  [55, 7], [56, 7],
+  ].forEach(([c, r]) => skip.add(`${c},${r}`));
+
+  // 7 container stacks × 4 tiers
+  const containerCols = [5, 10, 15, 20, 25, 30, 35];
+  const containerRows = [4, 6, 8, 10];
+
+  containerCols.forEach((col, stackIdx) => {
+    containerRows.forEach((row, tierIdx) => {
+      const tone = (stackIdx + tierIdx) % 2 === 0 ? 1 : 0.82;
+      dots.push(...vesselRect(col, row, 4, 2, tone));
+      // Vertical container seam
+      dots.push({ ...vesselXY(col + 2, row), opacity: tone * 0.45 });
+      dots.push({ ...vesselXY(col + 2, row + 1), opacity: tone * 0.45 });
+      // Horizontal lid line
+      dots.push({ ...vesselXY(col, row), opacity: tone * 0.6 });
+      dots.push({ ...vesselXY(col + 1, row), opacity: tone * 0.6 });
+      dots.push({ ...vesselXY(col + 2, row), opacity: tone * 0.6 });
+      dots.push({ ...vesselXY(col + 3, row), opacity: tone * 0.6 });
+    });
+    // Stack corner accents
+    dots.push({ ...vesselXY(col, containerRows[0]), opacity: 0.55 });
+    dots.push({ ...vesselXY(col + 3, containerRows[0]), opacity: 0.55 });
+  });
+
+  // Aft superstructure — bridge house, wings, nav deck
+  dots.push(...vesselRect(44, 6, 16, 10, 1, skip));
+  dots.push(...vesselRect(46, 4, 12, 2, 0.92));
+  dots.push(...vesselRect(48, 2, 8, 2, 0.88));
+  dots.push(...vesselFrame(44, 6, 16, 10, 0.42));
+
+  // Bridge wing platforms
+  dots.push(...vesselHullRow(12, 42, 43, 0.9));
+  dots.push(...vesselHullRow(12, 60, 61, 0.9));
+  dots.push(...vesselPoints([[42, 11], [61, 11]], 0.75));
+
+  // Funnel + cap stripe
+  dots.push(...vesselRect(50, 0, 4, 4, 1));
+  dots.push(...vesselRect(50, 0, 4, 1, 0.5));
+  dots.push(...vesselRect(50, 2, 4, 1, 0.38));
+
+  // Radar mast + antenna
+  dots.push(...vesselPoints([[52, 0], [52, 1], [52, 2], [52, 3]], 0.95));
+  dots.push(...vesselHullRow(0, 53, 55, 0.7));
+  dots.push({ ...vesselXY(54, 1), opacity: 0.55 });
+
+  // Lifeboat davits
+  dots.push(...vesselPoints([[45, 8], [46, 8], [59, 8], [60, 8]], 0.65));
+  dots.push(...vesselRect(44, 9, 2, 1, 0.55));
+  dots.push(...vesselRect(58, 9, 2, 1, 0.55));
+
+  // Deck equipment between containers and bridge
+  dots.push(...vesselRect(40, 11, 3, 2, 0.72));
+  dots.push(...vesselPoints([[41, 10], [42, 10]], 0.5));
+
+  // Deck railing
+  dots.push(...vesselHullRow(13, 4, 61, 0.55));
+
+  // Main hull — layered plating
+  dots.push(...vesselHullRow(14, 3, 58, 1));
+  dots.push(...vesselHullRow(15, 2, 59, 1));
+  dots.push(...vesselHullRow(16, 1, 60, 0.96));
+  dots.push(...vesselHullRow(17, 1, 60, 0.88));
+  dots.push(...vesselHullRow(18, 2, 58, 0.72));
+
+  // Hull strakes / plate lines
+  [15, 17].forEach((row) => {
+    for (let col = 5; col <= 55; col += 4) {
+      dots.push({ ...vesselXY(col, row), opacity: 0.35 });
+    }
+  });
+
+  // Keel + bilge shadow
+  dots.push(...vesselHullRow(19, 4, 54, 0.34));
+  dots.push(...vesselPoints([[3, 16], [3, 17], [3, 18]], 0.5));
+
+  // Bow flare — stepped cutwater
+  dots.push(...vesselHullRow(15, 60, 63, 0.9));
+  dots.push(...vesselHullRow(16, 61, 65, 0.78));
+  dots.push(...vesselHullRow(17, 62, 67, 0.62));
+  dots.push(...vesselHullRow(18, 63, 68, 0.48));
+  dots.push(...vesselPoints([[64, 15], [66, 16], [67, 17]], 0.4));
+
+  // Bulbous bow
+  dots.push(...vesselPoints([[65, 19], [66, 19], [67, 19], [66, 20]], 0.3));
+
+  // Stern block + propeller hint
+  dots.push(...vesselRect(2, 14, 3, 5, 0.92));
+  dots.push(...vesselPoints([[1, 16], [1, 19]], 0.28));
+  dots.push({ ...vesselXY(0, 17), opacity: 0.4 });
+
+  // Anchor + hawse
+  dots.push({ ...vesselXY(64, 16), opacity: 0.38 });
+  dots.push({ ...vesselXY(63, 15), opacity: 0.28 });
+  dots.push(...vesselHullRow(14, 62, 63, 0.45));
+
+  return dots;
+}
+
+function buildVesselWakeDots(): VesselDot[] {
+  const dots: VesselDot[] = [];
+
+  // Wake trails
+  dots.push(
+    ...vesselPoints(
+      [
+        [0, 18], [2, 18], [4, 18],
+        [1, 19], [3, 19], [5, 19],
+        [0, 20], [2, 20], [4, 20], [6, 20],
+        [1, 21], [3, 21], [5, 21],
+      ],
+      0.32,
+    ),
+  );
+
+  // Waterline ripple
+  for (let col = 8; col <= 58; col += 3) {
+    dots.push({ ...vesselXY(col, 20), opacity: 0.18 });
+  }
+
+  return dots;
+}
+
+const VESSEL_HULL_DOTS = buildVesselHullDots();
+const VESSEL_WAKE_DOTS = buildVesselWakeDots();
+const VESSEL_WIDTH = 70 * VESSEL_DOT;
+const VESSEL_HEIGHT = 23 * VESSEL_DOT;
+
+/** Container cargo ship — dot-matrix silhouette (font-pixel-circle style) */
 function VesselMark() {
   return (
     <motion.svg
-      viewBox="0 0 160 56"
-      className="h-[0.78em] w-auto overflow-visible"
+      viewBox={`0 0 ${VESSEL_WIDTH} ${VESSEL_HEIGHT}`}
+      className="h-[0.88em] w-auto overflow-visible"
       fill="currentColor"
       aria-hidden
       animate={{
@@ -247,119 +456,47 @@ function VesselMark() {
         repeat: Infinity,
       }}
     >
-      {/* Water line */}
-      <motion.path
-        d="M2 46c10 2 18-2 28 0s20 2 30 0 20-2 30 0 20 2 30 0 18-2 24 0"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1"
-        opacity="0.2"
-        animate={{ x: [0, -10, 0] }}
-        transition={{ duration: 2.8, ease: "easeInOut", repeat: Infinity }}
-      />
-
-      {/* Wake */}
       <motion.g
-        animate={{ opacity: [0.12, 0.4, 0.12], x: [0, -12, 0] }}
+        animate={{ opacity: [0.12, 0.38, 0.12], x: [0, -5, 0] }}
         transition={{ duration: 2.4, ease: "easeInOut", repeat: Infinity }}
       >
-        <path
-          d="M2 40h18"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          opacity="0.55"
-          fill="none"
-        />
-        <path
-          d="M4 44h14"
-          stroke="currentColor"
-          strokeWidth="1.25"
-          opacity="0.35"
-          fill="none"
-        />
-        <path
-          d="M6 48h12"
-          stroke="currentColor"
-          strokeWidth="1"
-          opacity="0.2"
-          fill="none"
-        />
+        {VESSEL_WAKE_DOTS.map((dot, index) => (
+          <circle
+            key={`wake-${index}`}
+            cx={dot.x}
+            cy={dot.y}
+            r={VESSEL_DOT_R * 0.8}
+            opacity={dot.opacity}
+          />
+        ))}
       </motion.g>
 
-      {/* Hull depth / keel shadow */}
-      <path d="M18 36h118l-12 12H34L18 36Z" opacity="0.32" />
+      {VESSEL_HULL_DOTS.map((dot, index) => (
+        <circle
+          key={`hull-${index}`}
+          cx={dot.x}
+          cy={dot.y}
+          r={VESSEL_DOT_R}
+          opacity={dot.opacity}
+        />
+      ))}
 
-      {/* Main cargo hull — long boxy profile */}
-      <path d="M16 28h112l-8 10H28L16 28Z" />
-
-      {/* Deck line */}
-      <path
-        d="M24 28h96"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1"
-        opacity="0.3"
-      />
-
-      {/* Stacked shipping containers — 3 rows */}
-      <g>
-        {/* Bottom row */}
-        <rect x="26" y="20" width="12" height="8" opacity="0.95" />
-        <rect x="40" y="20" width="12" height="8" opacity="0.8" />
-        <rect x="54" y="20" width="12" height="8" opacity="0.95" />
-        <rect x="68" y="20" width="12" height="8" opacity="0.8" />
-        <rect x="82" y="20" width="12" height="8" opacity="0.95" />
-        {/* Mid row */}
-        <rect x="26" y="12" width="12" height="8" opacity="0.75" />
-        <rect x="40" y="12" width="12" height="8" opacity="0.9" />
-        <rect x="54" y="12" width="12" height="8" opacity="0.75" />
-        <rect x="68" y="12" width="12" height="8" opacity="0.9" />
-        <rect x="82" y="12" width="12" height="8" opacity="0.75" />
-        {/* Top row (partial) */}
-        <rect x="40" y="4" width="12" height="8" opacity="0.85" />
-        <rect x="54" y="4" width="12" height="8" opacity="0.7" />
-        <rect x="68" y="4" width="12" height="8" opacity="0.85" />
-        {/* Container seams */}
-        <g opacity="0.22" fill="#0A0A0A">
-          <rect x="31" y="5" width="1" height="6" />
-          <rect x="45" y="5" width="1" height="6" />
-          <rect x="59" y="5" width="1" height="6" />
-          <rect x="73" y="5" width="1" height="6" />
-          <rect x="31" y="13" width="1" height="6" />
-          <rect x="45" y="13" width="1" height="6" />
-          <rect x="59" y="13" width="1" height="6" />
-          <rect x="73" y="13" width="1" height="6" />
-          <rect x="87" y="13" width="1" height="6" />
-        </g>
-      </g>
-
-      {/* Aft superstructure / bridge house */}
-      <rect x="100" y="10" width="26" height="18" />
-      <rect x="104" y="4" width="16" height="6" />
-      {/* Bridge windows */}
-      <g opacity="0.28" fill="#0A0A0A">
-        <rect x="106" y="13" width="4" height="3.5" />
-        <rect x="113" y="13" width="4" height="3.5" />
-        <rect x="120" y="13" width="4" height="3.5" />
-        <rect x="107" y="5.5" width="3.5" height="2.5" />
-        <rect x="113.5" y="5.5" width="3.5" height="2.5" />
-      </g>
-
-      {/* Funnel */}
-      <rect x="112" y="0" width="7" height="10" />
-      <rect x="112" y="0" width="7" height="2" opacity="0.55" />
       <motion.g
-        animate={{ y: [0, -5, -9], opacity: [0.35, 0.18, 0] }}
+        animate={{ y: [0, -2.5, -6], opacity: [0.5, 0.24, 0] }}
         transition={{ duration: 2.2, ease: "easeOut", repeat: Infinity }}
       >
-        <circle cx="115.5" cy="-1" r="2" opacity="0.4" />
-        <circle cx="118" cy="-4" r="1.4" opacity="0.25" />
+        {vesselPoints([[51, -0.5], [52, -1.2], [53, -0.4]], 0.45).map(
+          (dot, index) => (
+            <circle
+              key={`smoke-${index}`}
+              cx={dot.x}
+              cy={dot.y}
+              r={VESSEL_DOT_R * (index === 1 ? 0.75 : 0.9)}
+              opacity={dot.opacity}
+            />
+          ),
+        )}
       </motion.g>
-
-      {/* Bow flare */}
-      <path d="M128 28h18l-10 10H118l10-10Z" />
-      {/* Anchor mark */}
-      <circle cx="136" cy="33" r="1.3" opacity="0.35" fill="#0A0A0A" />
     </motion.svg>
   );
 }
