@@ -4,9 +4,12 @@ import Image from "next/image"
 import Link from "next/link"
 import { Section } from "@/components/layout/section"
 import { TextReveal, Stagger, StaggerItem } from "@/components/motion/reveal"
+import {
+  NumberTicker,
+  type NumberTickerMode,
+} from "@/components/ui/number-ticker"
 import { site } from "@/lib/content"
 import { cn } from "@/lib/utils"
-
 
 function ClientLogoCard({
   name,
@@ -68,16 +71,33 @@ function ClientLogoCard({
 
 export function Clients() {
   const { clients } = site
+  const ticker = clients.ticker
 
   return (
     <Section tone="light" id="clients" className="!py-20 md:!py-24">
-      <TextReveal
-        text={clients.headline}
-        className="font-pixel-circle text-3xl md:text-4xl font-medium tracking-tight max-w-xl"
-      />
-      <p className="mt-4 max-w-md text-sm text-muted-foreground">
-        {clients.subheadline}
-      </p>
+      <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between sm:gap-10">
+        <TextReveal
+          text={clients.headline}
+          className="font-pixel-circle text-3xl md:text-4xl font-medium tracking-tight max-w-xl"
+        />
+
+        {ticker?.enabled && (
+          <div className="flex shrink-0 items-end gap-3 sm:pb-0.5">
+            <NumberTicker
+              to={ticker.to}
+              mode={ticker.mode as NumberTickerMode}
+              prefix={ticker.prefix}
+              decimals={ticker.decimals}
+              duration={ticker.duration}
+              ease="power1.out"
+              className="text-[clamp(2.5rem,7vw,3.75rem)] leading-none text-foreground"
+            />
+            <p className="mb-1 max-w-40 font-mono text-[11px] leading-snug tracking-[0.18em] uppercase text-foreground/45">
+              {ticker.label}
+            </p>
+          </div>
+        )}
+      </div>
 
       <Stagger
         stagger={0.08}

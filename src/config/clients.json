@@ -1,6 +1,15 @@
 {
   "headline": "Trusted by maritime leaders",
   "subheadline": "Systems built for operators managing over $2B in combined fleet and cargo value.",
+  "ticker": {
+    "enabled": true,
+    "to": 2000000000,
+    "mode": "compact",
+    "label": "clients portfolio",
+    "prefix": "",
+    "decimals": 1,
+    "duration": 10
+  },
   "items": [
     {
       "id": "bahri",
