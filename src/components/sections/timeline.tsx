@@ -10,10 +10,11 @@ import {
 } from "framer-motion"
 import { site } from "@/lib/content"
 import { cn } from "@/lib/utils"
+import { TimelineAmbient } from "@/components/sections/timeline-ambient"
 
 /**
  * Horizontal path — years enter from the right.
- * Active year: thick dark type + lime mark. Incoming stays dimmer until focused.
+ * Active year: thick dark type + lime mark. Scroll drives ambient scenes per year.
  */
 export function Timeline() {
   const track = useRef<HTMLElement>(null)
@@ -42,6 +43,8 @@ export function Timeline() {
     return `calc(${-i} * (min(82vw, 28rem) + 12vw))`
   })
 
+  const activeItem = items[active]
+
   return (
     <section
       ref={track}
@@ -50,19 +53,21 @@ export function Timeline() {
       style={{ height: `${Math.max(220, count * 95)}vh` }}
     >
       <div className="sticky top-0 flex h-svh flex-col justify-center overflow-hidden">
-        <div className="mx-auto w-full max-w-6xl px-5 md:px-8">
+        <TimelineAmbient item={activeItem} visible={!reduce} />
+
+        <div className="relative z-10 mx-auto w-full max-w-6xl px-5 md:px-8">
           <p className="mb-3 font-mono text-[11px] tracking-[0.22em] uppercase text-foreground/45">
             Company
           </p>
           <h2 className="font-pixel-circle text-4xl md:text-5xl font-medium tracking-tight">
             {timeline.headline}
           </h2>
-          <p className="mt-3 max-w-sm text-sm text-muted-foreground">
+          <p className="mt-3 max-w-md text-sm text-muted-foreground">
             {timeline.subheadline}
           </p>
         </div>
 
-        <div className="relative mt-14 md:mt-20">
+        <div className="relative z-10 mt-14 md:mt-20">
           <motion.div
             style={{ x }}
             className="flex w-max items-start gap-[12vw] pl-5 md:pl-[max(2rem,calc((100vw-72rem)/2+2rem))] will-change-transform"

@@ -1,25 +1,26 @@
 {
   "name": "TailoredTech",
   "legalName": "TailoredTech Maritime Solutions",
-  "tagline": "Custom software for modern maritime operations",
-  "description": "We design and build custom software solutions for maritime companies — from fleet operations to port systems.",
+  "tagline": "Tailored software for maritime companies",
+  "description": "We create tailored software solutions for maritime companies — from fleet operations and risk assessment to port systems and commercial workflows, built around how your operators actually work.",
   "seo": {
-    "title": "TailoredTech | Maritime Custom Software Solutions",
-    "description": "TailoredTech builds custom maritime software solutions for shipping, ports, and offshore operators. Enterprise-grade systems for fleets managing over $2B in assets.",
+    "title": "TailoredTech | Tailored Maritime Software Solutions",
+    "description": "TailoredTech builds custom maritime software for shipping operators, ports, and commercial desks. Live across 107+ vessels with risk assessment, fleet operations, and port platforms.",
     "keywords": [
       "maritime software solutions",
-      "maritime custom software solutions",
+      "tailored maritime software",
       "custom maritime software",
       "shipping software development",
       "fleet management software",
+      "maritime risk assessment software",
       "port operations software",
       "maritime digital transformation"
     ]
   },
   "contact": {
-    "email": "hello@tailoredtech.io",
-    "phone": "+1 (555) 010-2400",
-    "address": "Maritime Innovation Hub",
+    "email": "admin@tailoredtech.tech",
+    "phone": "",
+    "address": "",
     "city": "Dubai, UAE",
     "cta": "Start a project"
   },
@@ -30,17 +31,17 @@
   },
   "stats": [
     {
-      "value": "$2B+",
-      "target": 2000000000,
-      "label": "Client portfolio value"
+      "value": "107+",
+      "target": 107,
+      "label": "Vessels on platform"
     },
     {
-      "value": "40+",
-      "label": "Maritime systems shipped"
+      "value": "400+",
+      "label": "Office superintendents"
     },
     {
-      "value": "12",
-      "label": "Years in maritime tech"
+      "value": "4",
+      "label": "Software products live"
     },
     {
       "value": "24/7",

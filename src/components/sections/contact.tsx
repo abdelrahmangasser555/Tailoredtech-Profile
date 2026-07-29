@@ -48,15 +48,15 @@ export function Contact() {
               >
                 {company.contact.email}
               </a>
-              <a
-                href={`tel:${company.contact.phone.replace(/\s/g, "")}`}
-                className="hover:text-accent transition-colors w-fit"
-              >
-                {company.contact.phone}
-              </a>
-              <p>
-                {company.contact.city}
-              </p>
+              {company.contact.phone ? (
+                <a
+                  href={`tel:${company.contact.phone.replace(/\s/g, "")}`}
+                  className="hover:text-accent transition-colors w-fit"
+                >
+                  {company.contact.phone}
+                </a>
+              ) : null}
+              {company.contact.city ? <p>{company.contact.city}</p> : null}
             </div>
           </Reveal>
         </div>

@@ -1,31 +1,34 @@
 {
   "headline": "Our path",
-  "subheadline": "Built alongside maritime operators, year after year.",
+  "subheadline": "Tailored software built alongside maritime operators — from first line of code to fleet-scale delivery.",
   "items": [
     {
-      "year": "2014",
-      "title": "Founded",
-      "description": "Started as a specialized maritime software studio."
+      "year": "2024",
+      "title": "Company established",
+      "description": "TailoredTech founded to replace rigid vendor stacks and spreadsheet handoffs with custom software shaped around maritime operations.",
+      "scene": "founding"
     },
     {
-      "year": "2017",
-      "title": "First fleet platform",
-      "description": "Shipped a multi-vessel operations system for a regional shipping group."
-    },
-    {
-      "year": "2020",
-      "title": "Port systems expansion",
-      "description": "Expanded into terminal and berth planning platforms."
-    },
-    {
-      "year": "2023",
-      "title": "$2B+ client portfolio",
-      "description": "Reached clients managing over two billion in fleet and cargo assets."
+      "year": "2025",
+      "title": "Risk assessment platform",
+      "description": "Delivered our risk assessment platform and grew the live portfolio to 107 vessels and over 400 office superintendents across client fleets.",
+      "scene": "fleet",
+      "highlights": [
+        { "value": "107", "label": "vessels" },
+        { "value": "400+", "label": "superintendents" }
+      ]
     },
     {
       "year": "2026",
-      "title": "Global delivery",
-      "description": "Supporting maritime operators across Middle East, Europe, and Asia."
+      "title": "Four products in market",
+      "description": "Four tailored software products live — covering fleet operations, risk assessment, port systems, and commercial workflow for maritime operators end to end.",
+      "scene": "products",
+      "products": [
+        "Fleet Operations",
+        "Risk Assessment",
+        "Port Systems",
+        "Commercial Desk"
+      ]
     }
   ]
 }

@@ -1,50 +1,50 @@
 {
   "headline": "Selected work",
-  "subheadline": "Custom platforms delivered for complex maritime environments.",
+  "subheadline": "Tailored platforms shipped for maritime operators — from risk assessment to fleet-scale operations.",
   "items": [
     {
-      "id": "fleet-command",
-      "title": "Fleet Command Hub",
-      "client": "Oceanic Fleet Group",
-      "summary": "Unified operations console for 80+ vessels with live AIS and crew scheduling.",
-      "tags": ["Fleet", "Realtime", "Operations"],
+      "id": "risk-platform",
+      "title": "Risk Assessment Platform",
+      "client": "Bahri",
+      "summary": "Enterprise risk workflows for office superintendents — assessments, approvals, and fleet-wide visibility across 107+ vessels.",
+      "tags": ["Risk", "Compliance", "Fleet"],
       "year": "2025",
+      "image": "/projects/safety-ledger.jpg",
+      "featured": true,
+      "href": "/services/fleet-operations"
+    },
+    {
+      "id": "fleet-operations",
+      "title": "Fleet Operations",
+      "client": "Bahri",
+      "summary": "Unified operations console for vessel scheduling, crew rotations, voyages, and live fleet performance.",
+      "tags": ["Fleet", "Operations", "Realtime"],
+      "year": "2026",
       "image": "/projects/fleet-command.jpg",
       "featured": true,
-      "href": "#"
+      "href": "/services/fleet-operations"
     },
     {
-      "id": "berth-optimizer",
-      "title": "Berth Optimizer",
-      "client": "HarborOps International",
-      "summary": "AI-assisted berth planning that cut idle time across three major terminals.",
-      "tags": ["Ports", "Planning", "AI"],
-      "year": "2024",
+      "id": "port-systems",
+      "title": "Port Systems",
+      "client": "Regional terminal operator",
+      "summary": "Berth planning and terminal workflow tools tailored to port-specific constraints and berth allocation rules.",
+      "tags": ["Ports", "Planning", "Operations"],
+      "year": "2026",
       "image": "/projects/berth-optimizer.jpg",
       "featured": true,
-      "href": "#"
+      "href": "/services"
     },
     {
-      "id": "charter-desk",
-      "title": "Charter Desk Pro",
-      "client": "BlueLine Chartering",
-      "summary": "End-to-end fixture and commercial workflow for dry bulk desks.",
-      "tags": ["Chartering", "Commercial"],
-      "year": "2024",
+      "id": "commercial-desk",
+      "title": "Commercial Desk",
+      "client": "Dry bulk operator",
+      "summary": "Fixture and commercial workflow platform for chartering desks — from inquiry through execution.",
+      "tags": ["Commercial", "Chartering"],
+      "year": "2026",
       "image": "/projects/charter-desk.jpg",
-      "featured": true,
-      "href": "#"
-    },
-    {
-      "id": "safety-ledger",
-      "title": "Safety Ledger",
-      "client": "Northstar Marine",
-      "summary": "Digital ISM and incident reporting across offshore assets.",
-      "tags": ["Compliance", "Safety"],
-      "year": "2023",
-      "image": "/projects/safety-ledger.jpg",
       "featured": false,
-      "href": "#"
+      "href": "/services"
     }
   ]
 }
