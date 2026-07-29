@@ -1,0 +1,32 @@
+---
+description: Never use brand lime accent on light/white surfaces — black, grey, and brand fonts only
+alwaysApply: true
+---
+
+# Brand color on light surfaces
+
+Accent `#D4FF00` looks poor on white / near-white. **Never** use it on light sections.
+
+## On light / white (`tone="light"`, `--section-light`, pale backgrounds)
+
+- Use **black** (`#0A0A0A` / `foreground`) and **greys** only (muted, opacity steps)
+- Display type: `font-pixel-circle` for titles / numbers — still allowed
+- Eyebrows / labels: mono uppercase in grey
+- Dividers, marks, bullets, underlines, watermarks: black or grey — **not** accent
+- No lime tint washes, lime borders, or lime decorative pixels
+
+## Where accent is allowed
+
+- Dark heroes / dark sections (`bg-black`, `--section-dark`)
+- CTAs on dark (lime button + dark text)
+- GlyphMatrix / shader accents on dark
+
+```tsx
+// ❌ BAD — light timeline / stats / clients
+<span className="bg-accent" />
+<span className="text-accent/20">4</span>
+
+// ✅ GOOD — light surfaces
+<span className="bg-foreground" />
+<span className="text-foreground/15">4</span>
+```

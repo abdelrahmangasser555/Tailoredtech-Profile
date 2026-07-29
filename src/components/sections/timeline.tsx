@@ -7,14 +7,22 @@ import {
   useTransform,
   useMotionValueEvent,
   useReducedMotion,
+  AnimatePresence,
 } from "framer-motion"
 import { site } from "@/lib/content"
 import { cn } from "@/lib/utils"
-import { TimelineAmbient } from "@/components/sections/timeline-ambient"
+import {
+  TimelineAmbient,
+  TimeTunnel,
+  TimelineIntroEngine,
+} from "@/components/sections/timeline-ambient"
+
+const INTRO_END = 0.16
+const EASE = [0.22, 1, 0.36, 1] as const
 
 /**
- * Horizontal path — years enter from the right.
- * Active year: thick dark type + lime mark. Scroll drives ambient scenes per year.
+ * Intro headline → fades into time tunnel. Years travel through depth on scroll.
+ * Light surface: black / grey only.
  */
 export function Timeline() {
   const track = useRef<HTMLElement>(null)
@@ -23,114 +31,267 @@ export function Timeline() {
   const items = timeline.items
   const count = items.length
   const [active, setActive] = useState(0)
+  const [dir, setDir] = useState<1 | -1>(1)
+  const [pastIntro, setPastIntro] = useState(false)
+  const [travelP, setTravelP] = useState(0)
 
   const { scrollYProgress } = useScroll({
     target: track,
     offset: ["start start", "end end"],
   })
 
+  const travelProgress = useTransform(scrollYProgress, [INTRO_END, 1], [0, 1])
+
   useMotionValueEvent(scrollYProgress, "change", (p) => {
-    const next = Math.min(
-      count - 1,
-      Math.max(0, Math.round(p * (count - 1)))
-    )
-    setActive((prev) => (prev === next ? prev : next))
+    setPastIntro(p >= INTRO_END * 0.9)
   })
 
-  const x = useTransform(scrollYProgress, (p) => {
-    if (reduce) return "0px"
-    const i = p * (count - 1)
-    return `calc(${-i} * (min(82vw, 28rem) + 12vw))`
+  useMotionValueEvent(travelProgress, "change", (p) => {
+    setTravelP(p)
+    const next = Math.min(count - 1, Math.max(0, Math.round(p * (count - 1))))
+    setActive((prev) => {
+      if (prev === next) return prev
+      setDir(next > prev ? 1 : -1)
+      return next
+    })
   })
+
+  const introOpacity = useTransform(scrollYProgress, [0, INTRO_END * 0.55, INTRO_END], [1, 0.35, 0])
+  const introY = useTransform(scrollYProgress, [0, INTRO_END], [0, -100])
+  const introScale = useTransform(scrollYProgress, [0, INTRO_END], [1, 0.88])
+  const introBlur = useTransform(scrollYProgress, [0, INTRO_END], [0, 10])
+  const introZ = useTransform(scrollYProgress, [0, INTRO_END], [0, 280])
+  const introEngineOpacity = useTransform(
+    scrollYProgress,
+    [0, INTRO_END * 0.6, INTRO_END],
+    [1, 0.5, 0]
+  )
+
+  const introFilter = useTransform(introBlur, (b) => `blur(${b}px)`)
+  const introTranslate = useTransform(introZ, (z) => `0 0 ${z}px`)
+
+  const [introEngineOp, setIntroEngineOp] = useState(1)
+  useMotionValueEvent(introEngineOpacity, "change", setIntroEngineOp)
+
+  const yearsLift = useTransform(scrollYProgress, [0, INTRO_END, INTRO_END + 0.08], [80, 40, 0])
+  const yearsOpacity = useTransform(scrollYProgress, [INTRO_END * 0.4, INTRO_END + 0.06], [0, 1])
 
   const activeItem = items[active]
+  const introVh = 70
+  const travelVh = count * 115
 
   return (
     <section
       ref={track}
       id="about"
       className="relative bg-[var(--section-light)]"
-      style={{ height: `${Math.max(220, count * 95)}vh` }}
+      style={{ height: `${introVh + travelVh}vh` }}
     >
-      <div className="sticky top-0 flex h-svh flex-col justify-center overflow-hidden">
-        <TimelineAmbient item={activeItem} visible={!reduce} />
+      <div
+        className="sticky top-0 h-svh overflow-hidden"
+        style={{ perspective: "1400px", perspectiveOrigin: "50% 42%" }}
+      >
+        <TimeTunnel progress={scrollYProgress} reduce={reduce} introEnd={INTRO_END} />
+        <TimelineIntroEngine
+          visible={!reduce && introEngineOp > 0.02}
+          reduce={!!reduce}
+          opacity={reduce ? 0 : introEngineOp}
+        />
+        <TimelineAmbient
+          item={activeItem}
+          visible={!reduce}
+          reduce={!!reduce}
+          pastIntro={pastIntro}
+          travelProgress={travelP}
+        />
 
-        <div className="relative z-10 mx-auto w-full max-w-6xl px-5 md:px-8">
+        {/* Intro — visible at start, flies past camera into the tunnel */}
+        <motion.div
+          className="pointer-events-none absolute inset-x-0 top-[18%] z-20 mx-auto w-full max-w-6xl px-5 md:top-[20%] md:px-8"
+          style={
+            reduce
+              ? undefined
+              : {
+                  opacity: introOpacity,
+                  y: introY,
+                  scale: introScale,
+                  filter: introFilter,
+                  translate: introTranslate,
+                  transformStyle: "preserve-3d",
+                }
+          }
+        >
           <p className="mb-3 font-mono text-[11px] tracking-[0.22em] uppercase text-foreground/45">
             Company
           </p>
-          <h2 className="font-pixel-circle text-4xl md:text-5xl font-medium tracking-tight">
+          <h2 className="font-pixel-circle text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight text-[#141414]">
             {timeline.headline}
           </h2>
-          <p className="mt-3 max-w-md text-sm text-muted-foreground">
+          <p className="mt-4 max-w-md text-sm md:text-base text-muted-foreground">
             {timeline.subheadline}
           </p>
-        </div>
+        </motion.div>
 
-        <div className="relative z-10 mt-14 md:mt-20">
+        {/* Year stack — rises into view after intro exits */}
+        <motion.div
+          className="absolute inset-x-0 bottom-[10%] z-10 mx-auto w-full max-w-6xl px-5 md:bottom-[12%] md:px-8"
+          style={{
+            y: reduce ? 0 : yearsLift,
+            opacity: reduce ? 1 : yearsOpacity,
+          }}
+        >
+          <div
+            className="relative h-[min(44vh,20rem)] md:h-[min(48vh,22rem)]"
+            style={{ transformStyle: "preserve-3d" }}
+          >
+            {items.map((item, i) => {
+              const offset = i - active
+              const isActive = offset === 0
+              const scale = isActive
+                ? 1
+                : offset > 0
+                  ? Math.max(0.5, 0.75 - offset * 0.12)
+                  : 1.22 + Math.abs(offset) * 0.08
+              const blur = isActive ? 0 : Math.min(12, Math.abs(offset) * 4)
+              const opacity = isActive ? 1 : Math.abs(offset) === 1 ? 0.28 : 0
+              const translateZ = isActive
+                ? 0
+                : offset > 0
+                  ? -280 * offset
+                  : 200 * Math.abs(offset)
+
+              return (
+                <div
+                  key={item.year}
+                  className="absolute inset-x-0 top-0"
+                  style={{
+                    transform: reduce ? undefined : `translateZ(${translateZ}px)`,
+                    transformStyle: "preserve-3d",
+                    zIndex: isActive ? 30 : 15 - Math.abs(offset),
+                    pointerEvents: isActive ? "auto" : "none",
+                    transition: "transform 0.85s cubic-bezier(0.22, 1, 0.36, 1)",
+                  }}
+                >
+                  <motion.article
+                    className="will-change-transform"
+                    initial={false}
+                    animate={
+                      reduce
+                        ? { opacity: isActive ? 1 : 0, x: 0, y: 0, scale: 1, filter: "blur(0px)", rotateX: 0 }
+                        : {
+                            opacity,
+                            scale,
+                            filter: `blur(${blur}px)`,
+                            y: offset > 0 ? 44 * offset : offset < 0 ? -28 : 0,
+                            x: offset !== 0 ? dir * offset * 14 : 0,
+                            rotateX: offset > 0 ? 10 * offset : offset < 0 ? -6 : 0,
+                          }
+                    }
+                    transition={{ duration: 0.85, ease: EASE }}
+                    style={{ transformOrigin: "50% 35%" }}
+                  >
+                    <YearCard item={item} isActive={isActive} />
+                  </motion.article>
+                </div>
+              )
+            })}
+          </div>
+
           <motion.div
-            style={{ x }}
-            className="flex w-max items-start gap-[12vw] pl-5 md:pl-[max(2rem,calc((100vw-72rem)/2+2rem))] will-change-transform"
+            className="mt-6 flex items-center gap-3 md:mt-8"
+            style={{ opacity: reduce ? 1 : yearsOpacity }}
           >
             {items.map((item, i) => {
               const isActive = i === active
-              const isIncoming = i === active + 1
               const isPast = i < active
-
               return (
-                <article
-                  key={item.year}
-                  className={cn(
-                    "w-[min(82vw,28rem)] shrink-0 transition-opacity duration-500 ease-out",
-                    isActive && "opacity-100",
-                    isIncoming && "opacity-50",
-                    isPast && "opacity-20",
-                    !isActive && !isIncoming && !isPast && "opacity-25"
+                <div key={item.year} className="flex items-center gap-3">
+                  {i > 0 && (
+                    <span
+                      aria-hidden
+                      className={cn(
+                        "h-px w-8 md:w-12 transition-colors duration-500",
+                        isPast || isActive ? "bg-foreground/40" : "bg-foreground/12"
+                      )}
+                    />
                   )}
-                >
-                  <p
+                  <span
                     className={cn(
-                      "font-pixel-circle text-6xl md:text-8xl font-medium tracking-[-0.04em] leading-none transition-colors duration-500",
-                      isActive ? "text-[#141414]" : "text-[#C4C4C4]"
+                      "font-mono text-[10px] tracking-[0.18em] uppercase transition-colors duration-500",
+                      isActive ? "text-foreground" : isPast ? "text-foreground/45" : "text-foreground/22"
                     )}
                   >
                     {item.year}
-                  </p>
-
-                  <span
-                    aria-hidden
-                    className={cn(
-                      "mt-6 block h-1 origin-left bg-accent transition-all duration-500 ease-out",
-                      isActive
-                        ? "w-14 opacity-100 scale-x-100"
-                        : "w-14 opacity-0 scale-x-50"
-                    )}
-                  />
-
-                  <h3
-                    className={cn(
-                      "mt-6 font-heading text-xl md:text-2xl font-medium tracking-tight transition-colors duration-500",
-                      isActive ? "text-foreground" : "text-foreground/35"
-                    )}
-                  >
-                    {item.title}
-                  </h3>
-                  <p
-                    className={cn(
-                      "mt-3 max-w-sm text-sm md:text-base leading-relaxed transition-colors duration-500",
-                      isActive
-                        ? "text-muted-foreground"
-                        : "text-muted-foreground/40"
-                    )}
-                  >
-                    {item.description}
-                  </p>
-                </article>
+                  </span>
+                  {isActive && (
+                    <motion.span
+                      layoutId="year-tick"
+                      aria-hidden
+                      className="size-1.5 bg-foreground"
+                      transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                    />
+                  )}
+                </div>
               )
             })}
           </motion.div>
-        </div>
+        </motion.div>
       </div>
     </section>
+  )
+}
+
+function YearCard({
+  item,
+  isActive,
+}: {
+  item: (typeof site.timeline.items)[number]
+  isActive: boolean
+}) {
+  return (
+    <div className="max-w-xl">
+      <AnimatePresence mode="wait">
+        {isActive && (
+          <motion.div
+            key={item.year}
+            initial={{ opacity: 0, y: 32 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -24, scale: 0.96 }}
+            transition={{ duration: 0.5, ease: EASE }}
+          >
+            <p className="font-pixel-circle text-7xl md:text-8xl lg:text-9xl font-medium tracking-[-0.04em] leading-none text-[#141414]">
+              {item.year}
+            </p>
+
+            <motion.span
+              aria-hidden
+              className="mt-6 block h-1 origin-left bg-foreground"
+              initial={{ scaleX: 0 }}
+              animate={{ scaleX: 1 }}
+              transition={{ duration: 0.6, delay: 0.1, ease: EASE }}
+              style={{ width: "4rem" }}
+            />
+
+            <h3 className="mt-6 font-heading text-xl md:text-2xl font-medium tracking-tight text-foreground">
+              {item.title}
+            </h3>
+            <p className="mt-3 max-w-md text-sm md:text-base leading-relaxed text-muted-foreground">
+              {item.description}
+            </p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {!isActive && (
+        <div aria-hidden className="opacity-40">
+          <p className="font-pixel-circle text-7xl md:text-8xl font-medium tracking-[-0.04em] leading-none text-[#141414]">
+            {item.year}
+          </p>
+          <h3 className="mt-6 font-heading text-xl md:text-2xl font-medium tracking-tight">
+            {item.title}
+          </h3>
+        </div>
+      )}
+    </div>
   )
 }

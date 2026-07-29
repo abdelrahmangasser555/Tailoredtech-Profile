@@ -12,17 +12,19 @@ Brand-first maritime software marketing site (Next.js App Router). Content is JS
 
 | Token | Value | Use |
 |--------|--------|-----|
-| Accent | `#D4FF00` | CTAs, highlights, pixel accents |
+| Accent | `#D4FF00` | **Dark surfaces only** — CTAs, highlights, pixel accents |
 | Accent fg | `#0A0A0A` | Text on accent |
 | Dark | `#050505` / black | Heroes, dark sections |
-| Light | near-white section | Stats, clients, related |
+| Light | near-white section | Stats, clients, related, timeline |
 | Radius | `0` / sharp | Buttons, cards, dialogs |
 | Display type | `font-pixel-circle` | Heroes, section titles, key numbers |
 | Eyebrows | `font-mono` uppercase tracking | Labels only |
 | Body | Geist / muted opacity | Paragraphs, not pixel |
 
-**Prefer:** full-bleed dark heroes, GlyphMatrix atmosphere, lime accent, pixel headlines, no purple/glow/pill clutter.  
-**Avoid:** Inter/Roboto defaults, rounded-full pills, generic purple gradients, inset hero cards.
+**Light surfaces:** black + grey + brand fonts only. **Never** put `#D4FF00` on white / `--section-light` (looks washed). Marks, bullets, underlines, watermarks → black/grey.
+
+**Prefer:** full-bleed dark heroes, GlyphMatrix atmosphere, lime accent on dark, pixel headlines, no purple/glow/pill clutter.  
+**Avoid:** Inter/Roboto defaults, rounded-full pills, generic purple gradients, inset hero cards, lime on light.
 
 ## Content & config
 
