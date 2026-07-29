@@ -6,6 +6,7 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { Globe3D } from "@/components/ui/3d-globe";
 import { GlyphMatrix } from "@/components/ui/glyph-matrix";
+import { NumberTicker } from "@/components/ui/number-ticker";
 import { site, type HeroConfig } from "@/lib/content";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -590,9 +591,16 @@ export function Hero() {
                   stiffness: 320,
                   damping: 16,
                 }}
-                className="mx-0.5 inline-block font-pixel-circle text-[1.15em] font-medium tracking-tight text-accent [text-shadow:0_0_18px_rgba(212,255,0,0.35)]"
+                className="mx-0.5 inline-block text-accent [text-shadow:0_0_18px_rgba(212,255,0,0.35)]"
               >
-                {description.count}
+                <NumberTicker
+                  to={description.count}
+                  mode="direct"
+                  suffix={description.countSuffix}
+                  duration={3.2}
+                  ease="power1.out"
+                  className="font-pixel-circle text-[1.15em] font-medium tracking-tight text-accent"
+                />
               </motion.span>
               <span className="text-white/45">{description.middle}</span>
               <span className="font-pixel-circle font-medium text-accent">

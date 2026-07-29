@@ -26,6 +26,8 @@ export type NumberTickerProps = {
   suffix?: string
   /** Optional prefix (e.g. "$"). */
   prefix?: string
+  /** Pixel-font "+" after the number / unit (e.g. 2B+). */
+  plus?: boolean
   /** Decimal places for `direct` and while in compact units. Default 0. */
   decimals?: number
   /** Animation length in seconds. */
@@ -40,6 +42,7 @@ export type NumberTickerProps = {
   numberClassName?: string
   unitClassName?: string
   prefixClassName?: string
+  plusClassName?: string
 }
 
 type CompactParts = {
@@ -143,6 +146,7 @@ export function NumberTicker({
   mode = "compact",
   suffix = "",
   prefix = "",
+  plus = false,
   decimals = mode === "compact" ? 1 : 0,
   duration = 2.4,
   ease = "power3.out",
@@ -152,6 +156,7 @@ export function NumberTicker({
   numberClassName,
   unitClassName,
   prefixClassName,
+  plusClassName,
 }: NumberTickerProps) {
   const reduce = useReducedMotion()
   const rootRef = useRef<HTMLSpanElement>(null)
@@ -222,10 +227,10 @@ export function NumberTicker({
 
   const ariaValue =
     mode === "direct"
-      ? `${prefix}${formatAmount(to, decimals)}${suffix}`
+      ? `${prefix}${formatAmount(to, decimals)}${suffix}${plus ? "+" : ""}`
       : mode === "full"
-        ? `${prefix}${formatFull(to)}`
-        : `${prefix}${formatCompact(to, decimals).amount}${formatCompact(to, decimals).unit}`
+        ? `${prefix}${formatFull(to)}${plus ? "+" : ""}`
+        : `${prefix}${formatCompact(to, decimals).amount}${formatCompact(to, decimals).unit}${plus ? "+" : ""}`
 
   const showUnit = mode === "direct" ? Boolean(suffix) : Boolean(parts.unit)
 
@@ -271,6 +276,18 @@ export function NumberTicker({
                 {parts.unit || suffix}
               </span>
             )}
+          </span>
+        ) : null}
+
+        {plus ? (
+          <span
+            aria-hidden
+            className={cn(
+              "ml-[0.02em] inline-block font-pixel-circle font-medium tracking-tight",
+              plusClassName,
+            )}
+          >
+            +
           </span>
         ) : null}
       </span>

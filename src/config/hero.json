@@ -23,7 +23,8 @@
   "description": {
     "enabled": true,
     "before": "Enterprise softwares on ",
-    "count": "107+",
+    "count": 107,
+    "countSuffix": "+",
     "middle": " vessels around the ",
     "word": "globe"
   },

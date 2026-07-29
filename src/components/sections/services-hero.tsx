@@ -1,16 +1,16 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import Link from "next/link"
-import { ArrowUpRight } from "lucide-react"
-import { motion, useReducedMotion } from "framer-motion"
-import { ColorPanels } from "@paper-design/shaders-react"
-import { GlyphMatrix } from "@/components/ui/glyph-matrix"
-import { site } from "@/lib/content"
+import * as React from "react";
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
+import { motion, useReducedMotion } from "framer-motion";
+import { ColorPanels } from "@paper-design/shaders-react";
+import { GlyphMatrix } from "@/components/ui/glyph-matrix";
+import { site } from "@/lib/content";
 
-const EASE = [0.22, 1, 0.36, 1] as const
+const EASE = [0.22, 1, 0.36, 1] as const;
 
-const ENGINE_COLORS = ["#D4FF00", "#A8E600", "#3F4A00", "#F0FF99"]
+const ENGINE_COLORS = ["#D4FF00", "#A8E600", "#3F4A00", "#F0FF99"];
 
 const engineShader = {
   colors: ENGINE_COLORS,
@@ -27,16 +27,16 @@ const engineShader = {
   speed: 3.2,
   scale: 0.96,
   rotation: 180,
-}
+};
 
-const MemoizedColorPanels = React.memo(ColorPanels)
+const MemoizedColorPanels = React.memo(ColorPanels);
 
 /**
  * Services hero — home branding, dithered pixel heading, vessel-engine visual.
  */
 export function ServicesHero() {
-  const { company } = site
-  const reduce = useReducedMotion()
+  const { company } = site;
+  const reduce = useReducedMotion();
 
   return (
     <section className="relative flex h-svh flex-col overflow-hidden bg-black text-white [--accent:#D4FF00] [--accent-foreground:#0A0A0A] lg:block">
@@ -89,8 +89,7 @@ export function ServicesHero() {
             transition={{ duration: 0.65, delay: 0.16, ease: EASE }}
             className="max-w-sm text-sm leading-relaxed text-white/45 md:text-base"
           >
-            Over{" "}
-            <span className="font-pixel-circle font-medium text-accent">1</span>{" "}
+            <span className="font-pixel-circle font-medium text-accent">4</span>{" "}
             focused solution for vessels, ports, and commercial desks.
           </motion.p>
 
@@ -145,5 +144,5 @@ export function ServicesHero() {
         </motion.div>
       </div>
     </section>
-  )
+  );
 }

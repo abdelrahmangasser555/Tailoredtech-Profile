@@ -74,46 +74,49 @@ export function Clients() {
   const ticker = clients.ticker
 
   return (
-    <Section tone="light" id="clients" className="!py-20 md:!py-24">
-      <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between sm:gap-10">
-        <TextReveal
-          text={clients.headline}
-          className="font-pixel-circle text-3xl md:text-4xl font-medium tracking-tight max-w-xl"
-        />
+    <Section tone="light" id="clients" container={false}>
+      <div className="relative mx-auto w-full max-w-6xl px-5 py-10 md:px-8 md:py-12">
+        <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between sm:gap-10">
+          <TextReveal
+            text={clients.headline}
+            className="font-pixel-circle text-3xl md:text-4xl font-medium tracking-tight max-w-xl"
+          />
 
-        {ticker?.enabled && (
-          <div className="flex shrink-0 items-end gap-3 sm:pb-0.5">
-            <NumberTicker
-              to={ticker.to}
-              mode={ticker.mode as NumberTickerMode}
-              prefix={ticker.prefix}
-              decimals={ticker.decimals}
-              duration={ticker.duration}
-              ease="power1.out"
-              className="text-[clamp(2.5rem,7vw,3.75rem)] leading-none text-foreground"
-            />
-            <p className="mb-1 max-w-40 font-mono text-[11px] leading-snug tracking-[0.18em] uppercase text-foreground/45">
-              {ticker.label}
-            </p>
-          </div>
-        )}
+          {ticker?.enabled && (
+            <div className="flex shrink-0 items-end gap-3 sm:pb-0.5">
+              <NumberTicker
+                to={ticker.to}
+                mode={ticker.mode as NumberTickerMode}
+                prefix={ticker.prefix}
+                plus={ticker.plus}
+                decimals={ticker.decimals}
+                duration={ticker.duration}
+                ease="power1.out"
+                className="text-[clamp(2.5rem,7vw,3.75rem)] leading-none text-foreground"
+              />
+              <p className="mb-1 max-w-40 font-mono text-[11px] leading-snug tracking-[0.18em] uppercase text-foreground/45">
+                {ticker.label}
+              </p>
+            </div>
+          )}
+        </div>
+
+        <Stagger
+          stagger={0.08}
+          className="mt-8 flex flex-wrap items-center gap-x-14 gap-y-8 md:mt-10 md:gap-x-20"
+        >
+          {clients.items.map((client) => (
+            <StaggerItem key={client.id}>
+              <ClientLogoCard
+                name={client.name}
+                logo={client.logo}
+                url={client.url}
+                sector={client.sector}
+              />
+            </StaggerItem>
+          ))}
+        </Stagger>
       </div>
-
-      <Stagger
-        stagger={0.08}
-        className="mt-12 flex flex-wrap items-center gap-x-14 gap-y-10 md:mt-14 md:gap-x-20"
-      >
-        {clients.items.map((client) => (
-          <StaggerItem key={client.id}>
-            <ClientLogoCard
-              name={client.name}
-              logo={client.logo}
-              url={client.url}
-              sector={client.sector}
-            />
-          </StaggerItem>
-        ))}
-      </Stagger>
     </Section>
   )
 }
