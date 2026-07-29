@@ -3,9 +3,9 @@
   "subheadline": "Tailored platforms live across 107+ vessels and 400+ office superintendents in client fleets.",
   "ticker": {
     "enabled": true,
-    "to": 107,
+    "to": 2000000000,
     "mode": "compact",
-    "label": "vessels on platform",
+    "label": "client profile",
     "prefix": "",
     "plus": true,
     "decimals": 0,

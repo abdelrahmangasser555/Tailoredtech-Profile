@@ -14,7 +14,7 @@ import { cn } from "@/lib/utils"
 import {
   TimelineAmbient,
   TimeTunnel,
-  TimelineIntroEngine,
+  TimelineEngineOrb,
 } from "@/components/sections/timeline-ambient"
 
 const INTRO_END = 0.16
@@ -61,22 +61,15 @@ export function Timeline() {
   const introScale = useTransform(scrollYProgress, [0, INTRO_END], [1, 0.88])
   const introBlur = useTransform(scrollYProgress, [0, INTRO_END], [0, 10])
   const introZ = useTransform(scrollYProgress, [0, INTRO_END], [0, 280])
-  const introEngineOpacity = useTransform(
-    scrollYProgress,
-    [0, INTRO_END * 0.6, INTRO_END],
-    [1, 0.5, 0]
-  )
-
   const introFilter = useTransform(introBlur, (b) => `blur(${b}px)`)
   const introTranslate = useTransform(introZ, (z) => `0 0 ${z}px`)
-
-  const [introEngineOp, setIntroEngineOp] = useState(1)
-  useMotionValueEvent(introEngineOpacity, "change", setIntroEngineOp)
 
   const yearsLift = useTransform(scrollYProgress, [0, INTRO_END, INTRO_END + 0.08], [80, 40, 0])
   const yearsOpacity = useTransform(scrollYProgress, [INTRO_END * 0.4, INTRO_END + 0.06], [0, 1])
 
   const activeItem = items[active]
+  const engineVisible = !pastIntro || activeItem.scene === "founding"
+  const engineSpeed = 2.2 + travelP * 2.5
   const introVh = 70
   const travelVh = count * 115
 
@@ -92,17 +85,18 @@ export function Timeline() {
         style={{ perspective: "1400px", perspectiveOrigin: "50% 42%" }}
       >
         <TimeTunnel progress={scrollYProgress} reduce={reduce} introEnd={INTRO_END} />
-        <TimelineIntroEngine
-          visible={!reduce && introEngineOp > 0.02}
+        <TimelineEngineOrb
+          progress={scrollYProgress}
           reduce={!!reduce}
-          opacity={reduce ? 0 : introEngineOp}
+          introEnd={INTRO_END}
+          visible={!reduce && engineVisible}
+          speed={engineSpeed}
         />
         <TimelineAmbient
           item={activeItem}
           visible={!reduce}
           reduce={!!reduce}
           pastIntro={pastIntro}
-          travelProgress={travelP}
         />
 
         {/* Intro — visible at start, flies past camera into the tunnel */}
@@ -134,7 +128,7 @@ export function Timeline() {
 
         {/* Year stack — rises into view after intro exits */}
         <motion.div
-          className="absolute inset-x-0 bottom-[10%] z-10 mx-auto w-full max-w-6xl px-5 md:bottom-[12%] md:px-8"
+          className="absolute inset-x-0 bottom-[10%] z-20 mx-auto w-full max-w-6xl px-5 md:bottom-[12%] md:px-8"
           style={{
             y: reduce ? 0 : yearsLift,
             opacity: reduce ? 1 : yearsOpacity,
@@ -259,23 +253,26 @@ function YearCard({
             exit={{ opacity: 0, y: -24, scale: 0.96 }}
             transition={{ duration: 0.5, ease: EASE }}
           >
-            <p className="font-pixel-circle text-7xl md:text-8xl lg:text-9xl font-medium tracking-[-0.04em] leading-none text-[#141414]">
+            <p
+              className="font-pixel-circle text-7xl md:text-8xl lg:text-9xl font-medium tracking-[-0.04em] leading-none text-[#0A0A0A]"
+              style={{ WebkitTextStroke: "1px #0A0A0A", paintOrder: "stroke fill" }}
+            >
               {item.year}
             </p>
 
             <motion.span
               aria-hidden
-              className="mt-6 block h-1 origin-left bg-foreground"
+              className="mt-6 block h-1 origin-left bg-[#0A0A0A]"
               initial={{ scaleX: 0 }}
               animate={{ scaleX: 1 }}
               transition={{ duration: 0.6, delay: 0.1, ease: EASE }}
               style={{ width: "4rem" }}
             />
 
-            <h3 className="mt-6 font-heading text-xl md:text-2xl font-medium tracking-tight text-foreground">
+            <h3 className="mt-6 font-heading text-xl md:text-2xl font-medium tracking-tight text-[#141414]">
               {item.title}
             </h3>
-            <p className="mt-3 max-w-md text-sm md:text-base leading-relaxed text-muted-foreground">
+            <p className="mt-3 max-w-md text-sm md:text-base leading-relaxed text-[#141414]/80">
               {item.description}
             </p>
           </motion.div>

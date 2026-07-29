@@ -177,35 +177,21 @@ function TunnelStreak({
 
 /* ─── Animated engine orb (circular — no left wedge) ─── */
 
-function EngineOrb({
-  visible,
+function EngineOrbVisual({
   reduce,
-  className,
   speed = 2.4,
 }: {
-  visible: boolean
   reduce: boolean
-  className?: string
   speed?: number
 }) {
   return (
-    <motion.div
-      className={className}
-      initial={false}
-      animate={{
-        opacity: visible ? 1 : 0,
-        scale: visible ? 1 : 0.88,
-        y: visible ? 0 : 24,
-      }}
-      transition={{ duration: 0.7, ease: EASE }}
-    >
-      {/* Outer orbit — counter-rotate */}
+    <div className="relative h-full w-full">
       <motion.svg
         className="absolute inset-0 h-full w-full"
         viewBox="0 0 200 200"
         fill="none"
         aria-hidden
-        animate={visible && !reduce ? { rotate: -360 } : { rotate: 0 }}
+        animate={!reduce ? { rotate: -360 } : { rotate: 0 }}
         transition={{ duration: 32, repeat: Infinity, ease: "linear" }}
       >
         <circle cx="100" cy="100" r="96" stroke={INK} strokeOpacity="0.12" strokeWidth="0.8" />
@@ -221,16 +207,15 @@ function EngineOrb({
         />
       </motion.svg>
 
-      {/* Inner orbit — clockwise */}
       <motion.svg
         className="absolute inset-[6%]"
         viewBox="0 0 200 200"
         fill="none"
         aria-hidden
-        animate={visible && !reduce ? { rotate: 360 } : { rotate: 0 }}
+        animate={!reduce ? { rotate: 360 } : { rotate: 0 }}
         transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
       >
-        <motion.circle
+        <circle
           cx="100"
           cy="100"
           r="88"
@@ -238,9 +223,6 @@ function EngineOrb({
           strokeOpacity="0.18"
           strokeWidth="1"
           strokeDasharray="3 9"
-          initial={{ pathLength: 0 }}
-          animate={visible ? { pathLength: 1 } : { pathLength: 0 }}
-          transition={{ duration: 1.4, ease: EASE }}
         />
         {[0, 90, 180, 270].map((deg) => (
           <rect
@@ -256,11 +238,10 @@ function EngineOrb({
         ))}
       </motion.svg>
 
-      {/* Engine core */}
       <motion.div
         className="absolute inset-[14%] overflow-hidden rounded-full border border-foreground/12 bg-white/40 shadow-[0_16px_64px_rgba(0,0,0,0.06)]"
         animate={
-          visible && !reduce
+          !reduce
             ? { scale: [1, 1.04, 1], rotate: [0, 2, 0, -2, 0] }
             : { scale: 1, rotate: 0 }
         }
@@ -291,17 +272,56 @@ function EngineOrb({
         />
       </motion.div>
 
-      {/* Scan pulse */}
       <motion.div
         aria-hidden
         className="absolute inset-[14%] rounded-full border border-foreground/20"
         animate={
-          visible && !reduce
+          !reduce
             ? { scale: [1, 1.12, 1], opacity: [0.35, 0, 0.35] }
             : { opacity: 0 }
         }
         transition={{ duration: 2.8, repeat: Infinity, ease: "easeOut" }}
       />
+    </div>
+  )
+}
+
+/** Single engine instance — scroll morphs position from intro to founding year */
+export function TimelineEngineOrb({
+  progress,
+  reduce,
+  introEnd,
+  visible,
+  speed,
+}: {
+  progress: MotionValue<number>
+  reduce: boolean
+  introEnd: number
+  visible: boolean
+  speed: number
+}) {
+  const top = useTransform(progress, [0, introEnd], ["12%", "6%"])
+  const right = useTransform(progress, [0, introEnd], ["4%", "6%"])
+  const size = useTransform(
+    progress,
+    [0, introEnd],
+    ["min(38vw,300px)", "min(24vw,280px)"]
+  )
+
+  return (
+    <motion.div
+      className="pointer-events-none absolute z-[2] hidden md:block"
+      aria-hidden
+      style={{
+        top,
+        right,
+        width: size,
+        height: size,
+        opacity: visible ? 1 : 0,
+      }}
+      transition={{ opacity: { duration: 0.55, ease: EASE } }}
+    >
+      <EngineOrbVisual reduce={reduce} speed={speed} />
     </motion.div>
   )
 }
@@ -331,29 +351,59 @@ function FleetShader({ visible, reduce }: { visible: boolean; reduce: boolean })
   )
 }
 
-function ProductsShader({ visible, reduce }: { visible: boolean; reduce: boolean }) {
+function ProductsDiamond({ visible, reduce }: { visible: boolean; reduce: boolean }) {
   return (
-    <ShaderPlate
-      visible={visible}
-      className="absolute -right-[6%] top-[6%] h-[min(58vh,440px)] w-[min(54vw,500px)]"
-      mask="radial-gradient(ellipse 70% 65% at 58% 48%, black 0%, transparent 74%)"
+    <motion.div
+      className="pointer-events-none absolute left-1/2 top-[42%] z-0 h-[min(34vh,300px)] w-[min(34vh,300px)] -translate-x-1/2 -translate-y-1/2 md:h-[min(38vh,340px)] md:w-[min(38vh,340px)]"
+      aria-hidden
+      initial={false}
+      animate={{ opacity: visible ? 1 : 0, scale: visible ? 1 : 0.94 }}
+      transition={{ duration: 0.65, ease: EASE }}
     >
-      <MemoHeatmap
-        width={500}
-        height={440}
-        image="https://shaders.paper.design/images/logos/diamond.svg"
-        colors={[...HEATMAP_GREY]}
-        colorBack="#ffffff00"
-        contour={0.52}
-        angle={12}
-        noise={0.04}
-        innerGlow={0.45}
-        outerGlow={0.38}
-        speed={reduce ? 0 : 0.65}
-        scale={0.78}
-        style={{ width: "100%", height: "100%", opacity: 0.48 }}
-      />
-    </ShaderPlate>
+      <div
+        className="absolute inset-[10%]"
+        style={{
+          clipPath: "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)",
+          WebkitClipPath: "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)",
+        }}
+      >
+        <MemoHeatmap
+          width={320}
+          height={320}
+          image="https://shaders.paper.design/images/logos/diamond.svg"
+          colors={[...HEATMAP_GREY]}
+          colorBack="#ffffff00"
+          contour={0.48}
+          angle={0}
+          noise={0.03}
+          innerGlow={0.42}
+          outerGlow={0.38}
+          speed={reduce ? 0 : 0.55}
+          scale={0.82}
+          style={{ width: "100%", height: "100%", opacity: 0.65 }}
+        />
+      </div>
+
+      <svg className="absolute inset-0 h-full w-full" viewBox="0 0 200 200" fill="none">
+        <motion.polygon
+          points="100,8 192,100 100,192 8,100"
+          stroke={INK}
+          strokeWidth="1.4"
+          strokeOpacity="0.4"
+          fill="none"
+          {...draw(visible, 0.1, 0.9)}
+        />
+        <motion.polygon
+          points="100,20 180,100 100,180 20,100"
+          stroke={INK}
+          strokeWidth="0.8"
+          strokeOpacity="0.18"
+          strokeDasharray="4 6"
+          fill="none"
+          {...draw(visible, 0.35, 0.8)}
+        />
+      </svg>
+    </motion.div>
   )
 }
 
@@ -417,29 +467,98 @@ function FoundingScene({ visible }: { visible: boolean }) {
   )
 }
 
-function VesselSvg({ visible, delay, className }: { visible: boolean; delay: number; className?: string }) {
+const VESSEL_SRCS = [
+  "/vessels/vessel 1 illustration.svg",
+  "/vessels/vessel 2 illustration.svg",
+  "/vessels/vessel 3 illusration.svg",
+] as const
+
+/** Fleet convoy — both flanks, bow-left, sailing right → left */
+function FleetVessel({
+  src,
+  side,
+  row,
+  visible,
+  reduce,
+  delay,
+  duration,
+}: {
+  src: string
+  side: "left" | "right"
+  row: number
+  visible: boolean
+  reduce: boolean
+  delay: number
+  duration: number
+}) {
+  const isLeft = side === "left"
+  const enterX = isLeft ? 420 : 520
+  const exitX = isLeft ? -720 : -820
+
   return (
-    <svg viewBox="0 0 80 28" className={className} fill="none" aria-hidden>
-      <motion.path d="M8 18 L18 22 H62 L72 16 H48 L44 10 H36 L32 16 H8 Z" stroke={INK} strokeWidth="1.3" {...draw(visible, delay, 0.85)} />
-      <motion.path d="M8 18 L18 22 H62 L72 16 H48 L44 10 H36 L32 16 H8 Z" fill={INK} initial={{ opacity: 0 }} animate={{ opacity: visible ? 0.18 : 0 }} transition={{ delay: delay + 0.65, duration: 0.4 }} />
-      <motion.rect x="38" y="6" width="8" height="6" stroke={INK} strokeWidth="1" {...draw(visible, delay + 0.3, 0.45)} />
-      <motion.path d="M4 20 H12 M2 22 H10 M0 24 H8" stroke={INK} strokeWidth="1" strokeOpacity="0.4" {...draw(visible, delay + 0.5, 0.35)} />
-    </svg>
+    <motion.div
+      className="absolute will-change-transform"
+      style={{
+        top: `${14 + row * 13}%`,
+        left: isLeft ? "0" : undefined,
+        right: isLeft ? undefined : "0",
+        width: "46%",
+      }}
+      animate={
+        visible && !reduce
+          ? { x: [enterX, exitX], opacity: [0, 0.92, 0.92, 0] }
+          : { opacity: 0, x: enterX }
+      }
+      transition={{
+        duration,
+        delay,
+        repeat: visible && !reduce ? Infinity : 0,
+        ease: "linear",
+        times: [0, 0.05, 0.9, 1],
+      }}
+    >
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={encodeURI(src)}
+        alt=""
+        className="h-[min(14vh,88px)] w-auto min-w-[min(52vw,280px)] max-w-none object-contain opacity-90 md:h-[min(16vh,104px)] lg:h-[min(18vh,120px)]"
+        style={{
+          transform: "scaleX(-1)",
+          filter: "grayscale(1) contrast(1.05)",
+        }}
+      />
+    </motion.div>
   )
 }
 
-function FleetScene({ visible, highlights }: { visible: boolean; highlights?: TimelineItem["highlights"] }) {
-  const lanes = useMemo(
-    () =>
-      Array.from({ length: 14 }, (_, i) => ({
-        side: (i % 2 === 0 ? "left" : "right") as "left" | "right",
-        top: 8 + ((i * 7) % 72),
-        delay: 0.1 + i * 0.08,
-        scale: 0.65 + (i % 4) * 0.12,
-        drift: i % 2 === 0 ? 14 : -14,
-      })),
-    []
-  )
+function FleetScene({ visible, highlights, reduce }: { visible: boolean; highlights?: TimelineItem["highlights"]; reduce: boolean }) {
+  const convoy = useMemo(() => {
+    const lanes: Array<{
+      side: "left" | "right"
+      row: number
+      delay: number
+      duration: number
+      src: string
+    }> = []
+
+    for (let i = 0; i < 6; i++) {
+      lanes.push({
+        side: "left",
+        row: i,
+        delay: i * 1.1,
+        duration: 9 + (i % 3) * 1.2,
+        src: VESSEL_SRCS[i % VESSEL_SRCS.length],
+      })
+      lanes.push({
+        side: "right",
+        row: i,
+        delay: 0.55 + i * 1.1,
+        duration: 10 + (i % 3) * 1.1,
+        src: VESSEL_SRCS[(i + 1) % VESSEL_SRCS.length],
+      })
+    }
+    return lanes
+  }, [])
 
   return (
     <motion.div
@@ -448,32 +567,27 @@ function FleetScene({ visible, highlights }: { visible: boolean; highlights?: Ti
       animate={{ opacity: visible ? 1 : 0 }}
       transition={{ duration: 0.5, ease: EASE }}
     >
-      <svg className="absolute inset-x-0 top-[48%] h-32 w-full" viewBox="0 0 400 80" preserveAspectRatio="none" aria-hidden>
-        <motion.path d="M0 36 Q80 20 200 36 T400 36" stroke={INK} strokeWidth="1" strokeOpacity="0.28" fill="none" {...draw(visible, 0, 1.5)} />
-        <motion.path d="M0 48 Q100 32 220 48 T400 46" stroke={INK} strokeWidth="0.7" strokeOpacity="0.16" fill="none" {...draw(visible, 0.15, 1.5)} />
-        <motion.path d="M0 58 Q120 44 260 58 T400 56" stroke={INK} strokeWidth="0.5" strokeOpacity="0.1" fill="none" {...draw(visible, 0.3, 1.5)} />
+      {/* Horizon */}
+      <svg className="absolute inset-x-0 top-[22%] h-24 w-full" viewBox="0 0 400 60" preserveAspectRatio="none" aria-hidden>
+        <motion.path d="M0 40 H400" stroke={INK} strokeWidth="0.6" strokeOpacity="0.14" {...draw(visible, 0, 1)} />
+        <motion.path d="M0 48 H400" stroke={INK} strokeWidth="0.4" strokeOpacity="0.08" {...draw(visible, 0.1, 1)} />
       </svg>
 
-      {lanes.map((lane, i) => (
-        <motion.div
-          key={i}
-          className="absolute"
-          style={{
-            top: `${lane.top}%`,
-            left: lane.side === "left" ? "2%" : undefined,
-            right: lane.side === "right" ? "2%" : undefined,
-            scale: lane.scale,
-          }}
-          initial={{ x: lane.side === "left" ? -120 : 120, opacity: 0 }}
-          animate={
-            visible
-              ? { x: [lane.side === "left" ? -60 : 60, 0, lane.drift], opacity: [0, 0.85, 0.65] }
-              : { x: lane.side === "left" ? -120 : 120, opacity: 0 }
-          }
-          transition={{ duration: 2, delay: lane.delay, ease: EASE, opacity: { duration: 0.9, delay: lane.delay } }}
-        >
-          <VesselSvg visible={visible} delay={lane.delay} className="h-8 w-auto md:h-10" />
-        </motion.div>
+      {/* Flank lane guides */}
+      <div aria-hidden className="absolute left-0 top-[12%] h-[76%] w-[42%] border-r border-dashed border-foreground/8" />
+      <div aria-hidden className="absolute right-0 top-[12%] h-[76%] w-[42%] border-l border-dashed border-foreground/8" />
+
+      {convoy.map((lane, i) => (
+        <FleetVessel
+          key={`${lane.side}-${lane.row}-${i}`}
+          src={lane.src}
+          side={lane.side}
+          row={lane.row}
+          visible={visible}
+          reduce={reduce}
+          delay={lane.delay}
+          duration={lane.duration}
+        />
       ))}
 
       <AnimatePresence>
@@ -505,71 +619,82 @@ function FleetScene({ visible, highlights }: { visible: boolean; highlights?: Ti
   )
 }
 
-function ProductFrame({ name, visible, delay, side, top }: { name: string; visible: boolean; delay: number; side: "left" | "right"; top: string }) {
+function ProductCard({
+  index,
+  name,
+  visible,
+  delay,
+}: {
+  index: number
+  name: string
+  visible: boolean
+  delay: number
+}) {
+  const num = String(index + 1).padStart(2, "0")
+
   return (
     <motion.div
-      className="absolute w-[min(44vw,12rem)]"
-      style={{ top, left: side === "left" ? "3%" : undefined, right: side === "right" ? "3%" : undefined }}
-      initial={{ opacity: 0, x: side === "left" ? -30 : 30 }}
-      animate={visible ? { opacity: 1, x: 0 } : { opacity: 0, x: side === "left" ? -24 : 24 }}
-      transition={{ duration: 0.65, delay, ease: EASE }}
+      className="relative border border-foreground/15 bg-white/95 px-5 py-4 md:px-6 md:py-5"
+      initial={{ opacity: 0, x: 32 }}
+      animate={visible ? { opacity: 1, x: 0 } : { opacity: 0, x: 24 }}
+      transition={{ duration: 0.55, delay, ease: EASE }}
     >
-      <svg viewBox="0 0 160 56" className="h-auto w-full" fill="none" aria-hidden>
-        <motion.rect x="1" y="1" width="158" height="54" stroke={INK} strokeWidth="1.3" {...draw(visible, delay, 0.75)} />
-        <motion.path d="M1 14 V1 H14 M146 1 H159 V14 M159 42 V55 H146 M14 55 H1 V42" stroke={INK} strokeWidth="1.8" {...draw(visible, delay + 0.2, 0.5)} />
-        <motion.rect x="12" y="24" width="6" height="6" fill={INK} initial={{ opacity: 0, scale: 0 }} animate={visible ? { opacity: 0.75, scale: 1 } : { opacity: 0, scale: 0 }} transition={{ delay: delay + 0.65, duration: 0.35 }} />
-      </svg>
-      <p className="absolute inset-x-0 top-1/2 -translate-y-1/2 pl-8 font-mono text-[10px] tracking-[0.14em] uppercase text-foreground/60">
-        {name}
-      </p>
+      <div className="flex items-start gap-4">
+        <span className="font-pixel-circle text-2xl md:text-3xl font-medium tracking-tight text-foreground/25">
+          {num}
+        </span>
+        <div className="min-w-0 flex-1">
+          <p className="font-mono text-[11px] tracking-[0.18em] uppercase text-foreground/45">
+            Product
+          </p>
+          <p className="mt-1 font-heading text-sm md:text-base font-medium tracking-tight text-foreground">
+            {name}
+          </p>
+        </div>
+        <motion.span
+          aria-hidden
+          className="mt-1 size-2 shrink-0 bg-foreground"
+          initial={{ scale: 0 }}
+          animate={visible ? { scale: 1 } : { scale: 0 }}
+          transition={{ delay: delay + 0.35, duration: 0.3 }}
+        />
+      </div>
     </motion.div>
   )
 }
 
-function ProductsScene({ visible, products }: { visible: boolean; products?: TimelineItem["products"] }) {
+function ProductsScene({ visible, products, reduce }: { visible: boolean; products?: TimelineItem["products"]; reduce: boolean }) {
   const slots = products ?? []
 
   return (
-    <motion.div className="pointer-events-none absolute inset-0" initial={false} animate={{ opacity: visible ? 1 : 0 }} transition={{ duration: 0.5, ease: EASE }}>
-      <svg className="absolute inset-0 hidden h-full w-full md:block" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden>
-        <motion.path d="M18 26 L50 46 L82 26 M18 54 L50 46 L82 54 M18 26 L18 54 M82 26 L82 54" stroke={INK} strokeWidth="0.12" strokeOpacity="0.3" fill="none" vectorEffect="non-scaling-stroke" {...draw(visible, 0.8, 1.1)} />
-        <motion.circle cx="50" cy="46" r="1.5" fill={INK} initial={{ opacity: 0, scale: 0 }} animate={visible ? { opacity: 0.45, scale: 1 } : { opacity: 0, scale: 0 }} transition={{ delay: 1.5, duration: 0.4 }} />
-      </svg>
-
-      {slots.map((name, i) => (
-        <ProductFrame key={name} name={name} visible={visible} delay={0.12 + i * 0.13} side={i % 2 === 0 ? "left" : "right"} top={`${14 + Math.floor(i / 2) * 24}%`} />
-      ))}
-
-      <motion.p
-        aria-hidden
-        className="absolute bottom-[10%] left-1/2 -translate-x-1/2 font-pixel-circle text-7xl md:text-8xl font-medium tracking-tight text-foreground/[0.09]"
-        animate={visible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.88 }}
-        transition={{ delay: 1.1, duration: 0.65, ease: EASE }}
-      >
-        4
-      </motion.p>
-    </motion.div>
-  )
-}
-
-export function TimelineIntroEngine({
-  visible,
-  reduce,
-  opacity,
-}: {
-  visible: boolean
-  reduce: boolean
-  opacity: number
-}) {
-  if (!visible && opacity < 0.01) return null
-
-  return (
     <motion.div
-      className="pointer-events-none absolute right-[4%] top-[14%] z-[2] hidden h-[min(38vw,300px)] w-[min(38vw,300px)] md:block lg:right-[8%] lg:top-[12%] lg:h-[min(32vw,340px)] lg:w-[min(32vw,340px)]"
-      aria-hidden
-      style={{ opacity }}
+      className="pointer-events-none absolute inset-0"
+      initial={false}
+      animate={{ opacity: visible ? 1 : 0 }}
+      transition={{ duration: 0.5, ease: EASE }}
     >
-      <EngineOrb visible={visible} reduce={reduce} speed={2.8} className="relative h-full w-full" />
+      <ProductsDiamond visible={visible} reduce={reduce} />
+
+      {/* Product stack — right column */}
+      <div className="absolute right-[4%] top-[12%] flex w-[min(44vw,18rem)] flex-col gap-3 md:right-[6%] md:w-[min(36vw,20rem)] md:gap-3.5">
+        <motion.div
+          className="mb-1 border border-foreground/12 bg-white/95 px-4 py-3"
+          initial={{ opacity: 0, y: 8 }}
+          animate={visible ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
+          transition={{ delay: 0.1, duration: 0.45, ease: EASE }}
+        >
+          <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-foreground/50">
+            In market
+          </p>
+          <p className="mt-1 font-pixel-circle text-2xl font-medium tracking-tight text-[#141414]">
+            4 live
+          </p>
+        </motion.div>
+
+        {slots.map((name, i) => (
+          <ProductCard key={name} index={i} name={name} visible={visible} delay={0.18 + i * 0.12} />
+        ))}
+      </div>
     </motion.div>
   )
 }
@@ -579,36 +704,23 @@ export function TimelineAmbient({
   visible,
   reduce,
   pastIntro,
-  travelProgress = 0,
 }: {
   item: TimelineItem
   visible: boolean
   reduce: boolean
   pastIntro: boolean
-  travelProgress?: number
 }) {
   const scene = item.scene ?? "founding"
-  const engineSpeed = 2 + travelProgress * 2.5
 
   return (
     <div className="pointer-events-none absolute inset-0 z-[1]" aria-hidden>
-      {pastIntro && scene === "founding" && (
-        <EngineOrb
-          visible={visible}
-          reduce={reduce}
-          speed={engineSpeed}
-          className="absolute right-[3%] top-[8%] hidden h-[min(28vw,260px)] w-[min(28vw,260px)] md:block lg:right-[6%] lg:top-[6%] lg:h-[min(24vw,280px)] lg:w-[min(24vw,280px)]"
-        />
-      )}
-
       {pastIntro && (
         <>
           <FleetShader visible={visible && scene === "fleet"} reduce={reduce} />
-          <ProductsShader visible={visible && scene === "products"} reduce={reduce} />
 
           <FoundingScene visible={visible && scene === "founding"} />
-          <FleetScene visible={visible && scene === "fleet"} highlights={item.highlights} />
-          <ProductsScene visible={visible && scene === "products"} products={item.products} />
+          <FleetScene visible={visible && scene === "fleet"} highlights={item.highlights} reduce={reduce} />
+          <ProductsScene visible={visible && scene === "products"} products={item.products} reduce={reduce} />
         </>
       )}
     </div>
