@@ -63,6 +63,7 @@
   "logo": {
     "light": "/logo.svg",
     "dark": "/logo-light.svg",
+    "icon": "/icon.svg",
     "alt": "TailoredTech"
   },
   "heroVideo": "https://videos.pexels.com/video-files/2169880/2169880-hd_1280_720_30fps.mp4"

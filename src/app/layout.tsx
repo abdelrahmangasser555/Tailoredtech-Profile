@@ -50,9 +50,9 @@ export const metadata: Metadata = {
     description: company.seo.description,
     images: [
       {
-        url: "/logo-light.svg",
-        width: 512,
-        height: 512,
+        url: "/icon.png",
+        width: 2000,
+        height: 2000,
         alt: company.logo.alt,
       },
     ],
@@ -61,7 +61,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: company.seo.title,
     description: company.seo.description,
-    images: ["/logo-light.svg"],
+    images: ["/icon.png"],
   },
   robots: {
     index: true,
@@ -82,8 +82,11 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: "/logo.svg",
-    apple: "/logo.svg",
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/icon.png", type: "image/png", sizes: "512x512" },
+    ],
+    apple: "/apple-icon.png",
   },
 }
 

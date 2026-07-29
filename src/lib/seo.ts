@@ -42,9 +42,9 @@ export function buildPageMetadata({
       description,
       images: [
         {
-          url: absoluteUrl("/logo.svg"),
-          width: 512,
-          height: 512,
+          url: absoluteUrl("/icon.png"),
+          width: 2000,
+          height: 2000,
           alt: "TailoredTech maritime software",
         },
       ],
@@ -53,7 +53,7 @@ export function buildPageMetadata({
       card: "summary_large_image",
       title,
       description,
-      images: [absoluteUrl("/logo-light.svg")],
+      images: [absoluteUrl("/icon.png")],
     },
   }
 }
@@ -69,8 +69,8 @@ export function buildOrganizationJsonLd(company: Company) {
     url: SITE_URL,
     email: company.contact.email,
     ...(company.contact.phone ? { telephone: company.contact.phone } : {}),
-    logo: absoluteUrl("/logo.svg"),
-    image: absoluteUrl("/logo-light.svg"),
+    logo: absoluteUrl("/icon.png"),
+    image: absoluteUrl("/icon.png"),
     address: {
       "@type": "PostalAddress",
       addressLocality: company.contact.city?.replace(", UAE", "") ?? "Dubai",
