@@ -1,55 +1,103 @@
 {
   "headline": "Tailored solutions for maritime",
-  "subheadline": "Custom software shaped around your fleet, port, and commercial workflows — not rigid vendor templates.",
+  "subheadline": "Four live products — risk, change control, safety culture, and damage reporting — built around your workflows, not vendor templates.",
   "items": [
     {
-      "id": "fleet-operations",
-      "title": "Fleet Operations",
-      "short": "Real-time vessel, crew, and voyage control.",
-      "description": "Custom fleet platforms for scheduling, tracking, compliance, and performance across your entire vessel portfolio.",
-      "icon": "Ship",
+      "id": "digital-risk-assessments",
+      "title": "Digital Risk Assessments",
+      "short": "Tailored risk assessments for office and vessel — alerts, offline sync, and fleet-wide control.",
+      "description": "Customizable digital risk assessments with office and vessel roles, hazard-level auto-alerts, offline support with auto-sync, analytics, and company-branded deployment on your infrastructure.",
+      "icon": "ShieldCheck",
       "logo": null,
-      "href": "/services/fleet-operations",
+      "href": "/services/digital-risk-assessments",
       "featured": true,
       "span": "lg",
       "page": {
         "enabled": true,
         "eyebrow": "Solution",
-        "headline": "Fleet Operations",
-        "headlineAccent": "for every vessel",
-        "tagline": "One operational picture for scheduling, crew, voyages, and performance — built around how your fleet actually runs.",
-        "heroVisual": "heatmap-diamond",
+        "headline": "Digital Risk",
+        "headlineAccent": "Assessments",
+        "tagline": "Tailored risk assessments for office superintendents and vessel crews — custom forms, hazard alerts, offline sync, and fleet-wide visibility without seat limits.",
+        "heroVisual": "ocean",
         "demo": {
-          "label": "Book a demo",
-          "title": "Book a Fleet Operations demo",
-          "subtitle": "Walk through a live operational view tailored to your fleet size and trade.",
+          "label": "Request live demo",
+          "title": "Request a risk assessment demo",
+          "subtitle": "Live demo available upon request. We walk through office and vessel workflows on your hazard model.",
           "submitLabel": "Request demo"
         },
         "outcomes": [
-          { "value": "1", "label": "shared ops picture", "icon": "Broadcast" },
-          {
-            "value": "24/7",
-            "label": "voyage visibility",
-            "icon": "Binoculars"
-          },
-          { "value": "0", "label": "spreadsheet handoffs", "icon": "Table" }
+          { "value": "107+", "label": "vessels supported", "icon": "Boat" },
+          { "value": "∞", "label": "seats — no cap", "icon": "ShareNetwork" },
+          { "value": "24/7", "label": "offline + auto-sync", "icon": "Path" }
         ],
         "comparison": {
           "enabled": true,
           "eyebrow": "Compare",
-          "title": "Fleet Operations vs the usual stack",
+          "title": "Digital Risk Assessments vs market options",
           "columns": [
-            {
-              "id": "tailored",
-              "label": "Fleet Operations",
-              "highlight": true
-            },
-            { "id": "legacy", "label": "Legacy tools" },
-            { "id": "saas", "label": "Generic SaaS" }
+            { "id": "tailored", "label": "TailoredTech", "highlight": true },
+            { "id": "prime", "label": "PRIME Marine" },
+            { "id": "shipmanager", "label": "ShipManager QHSE" }
           ],
           "rows": [
             {
-              "label": "Live fleet-wide board",
+              "label": "Fully custom risk templates",
+              "cells": [
+                { "type": "check", "value": true },
+                { "type": "text", "value": "Templates" },
+                { "type": "text", "value": "Matrices" }
+              ]
+            },
+            {
+              "label": "Office + vessel role split",
+              "cells": [
+                { "type": "check", "value": true },
+                { "type": "check", "value": true },
+                { "type": "check", "value": true }
+              ]
+            },
+            {
+              "label": "Auto alerts on hazard levels",
+              "cells": [
+                { "type": "check", "value": true },
+                { "type": "check", "value": true },
+                { "type": "text", "value": "Partial" }
+              ]
+            },
+            {
+              "label": "Offline with auto-sync",
+              "cells": [
+                { "type": "check", "value": true },
+                { "type": "text", "value": "Limited" },
+                { "type": "text", "value": "Partial" }
+              ]
+            },
+            {
+              "label": "Unlimited seats",
+              "cells": [
+                { "type": "check", "value": true },
+                { "type": "x", "value": false },
+                { "type": "x", "value": false }
+              ]
+            },
+            {
+              "label": "SSO on your tenant",
+              "cells": [
+                { "type": "check", "value": true },
+                { "type": "text", "value": "Partial" },
+                { "type": "check", "value": true }
+              ]
+            },
+            {
+              "label": "Your branding + self-host",
+              "cells": [
+                { "type": "check", "value": true },
+                { "type": "x", "value": false },
+                { "type": "x", "value": false }
+              ]
+            },
+            {
+              "label": "Review chatroom per assessment",
               "cells": [
                 { "type": "check", "value": true },
                 { "type": "x", "value": false },
@@ -57,51 +105,11 @@
               ]
             },
             {
-              "label": "Crew tied to vessel rotations",
+              "label": "Pen + digital signatures",
               "cells": [
                 { "type": "check", "value": true },
-                { "type": "text", "value": "Manual" },
+                { "type": "text", "value": "Partial" },
                 { "type": "x", "value": false }
-              ]
-            },
-            {
-              "label": "Custom voyage rules",
-              "cells": [
-                { "type": "check", "value": true },
-                { "type": "x", "value": false },
-                { "type": "number", "value": 2 }
-              ]
-            },
-            {
-              "label": "Exception alerts in-flow",
-              "cells": [
-                { "type": "check", "value": true },
-                { "type": "x", "value": false },
-                { "type": "check", "value": true }
-              ]
-            },
-            {
-              "label": "Shore–ship handoff time",
-              "cells": [
-                { "type": "text", "value": "Minutes" },
-                { "type": "text", "value": "Hours" },
-                { "type": "text", "value": "Hours" }
-              ]
-            },
-            {
-              "label": "Integrations supported",
-              "cells": [
-                { "type": "number", "value": 12 },
-                { "type": "number", "value": 3 },
-                { "type": "number", "value": 6 }
-              ]
-            },
-            {
-              "label": "Fits your operating model",
-              "cells": [
-                { "type": "check", "value": true },
-                { "type": "x", "value": false },
-                { "type": "text", "value": "Config only" }
               ]
             }
           ]
@@ -110,83 +118,605 @@
           {
             "id": "overview",
             "title": "Overview",
-            "body": "Fleet Operations replaces fragmented tools with a single platform for vessel scheduling, crew coordination, voyage tracking, and performance. Designed for operators who need clarity across the portfolio — not another generic dashboard.",
+            "body": "Digital Risk Assessments replace rigid templates with tailored forms shaped around your hazard model. Office superintendents design assessments, assign vessels and superintendents by group, and track fleet-wide status — while vessel crews complete assessments offline with automatic sync when connectivity returns.",
             "bullets": [
-              "Live vessel and voyage status across the fleet",
-              "Crew planning tied to vessel rotations",
-              "Performance signals that ops teams can act on"
+              "Custom risk assessment builder for your operating model",
+              "Auto-alerting when hazard levels cross defined thresholds",
+              "Easy search across assessments, vessels, and review history",
+              "Analytics dashboard with Excel and PDF export",
+              "Live demo available upon request"
             ],
             "video": null,
-            "images": [
-              { "src": "/test/test-1.png", "label": "Home dashboard" },
-              { "src": "/test/test-2.png", "label": "Vessel dashboard" }
+            "images": [],
+            "mermaid": "flowchart LR\n  Office -.-> Build[Custom RA]\n  Vessel -.-> Complete[Complete RA]\n  Build -.-> Fleet[Fleet library]\n  Complete -.-> Fleet",
+            "mermaidTitle": "Office ↔ vessel flow",
+            "mermaidCaption": "One library — two roles"
+          },
+          {
+            "id": "roles",
+            "title": "Office & vessel roles",
+            "body": "Two primary roles — office side and vessel side — each with permissions tuned to how superintendents and crews actually work. Office users create and publish assessments, manage users and vessels, assign superintendents by vessel group, and oversee reviews. Vessel users execute assessments, attach evidence, and sign off with pen or digital signature.",
+            "bullets": [
+              "Office: create assessments, assign vessels, manage users",
+              "Vessel: complete assessments, sign, sync offline",
+              "Superintendent assignment by vessel group",
+              "User and vessel management in one place",
+              "Auto-serialization across the assessment lifecycle"
             ],
+            "video": null,
+            "images": [],
+            "mermaid": "flowchart TD\n  O[Office] -.-> Create\n  O -.-> Assign\n  V[Vessel] -.-> Execute\n  V -.-> Sign\n  Create -.-> Review\n  Review -.-> Close",
+            "mermaidTitle": "Role responsibilities",
+            "mermaidCaption": "Office builds — vessel executes"
+          },
+          {
+            "id": "platform",
+            "title": "Platform & licensing",
+            "body": "Deploy on our cloud or your own infrastructure with your branding. Authentication uses SSO on your tenant with company-specific preferences. Licence as a one-time payment or subscription — with no limit on seats. Review workflows and risk assessment templates are included in the package.",
+            "bullets": [
+              "Company branding and self-hosted deployment options",
+              "SSO authentication on your tenant",
+              "One-time or subscription licensing — unlimited seats",
+              "Automatic digital auditing and timestamping on every action",
+              "Data migration from legacy risk tools",
+              "Fine-tuned with superintendents and captains for usability and compliance"
+            ],
+            "video": null,
+            "images": [],
+            "mermaid": "flowchart LR\n  SSO -.-> App\n  Offline -.-> Sync\n  Sync -.-> Audit[Audit log]",
+            "mermaidTitle": "Trust layer",
+            "mermaidCaption": "SSO · offline sync · audit trail"
+          },
+          {
+            "id": "workflows",
+            "title": "Reviews & outputs",
+            "body": "Each assessment carries its own review chatroom so office and vessel teams resolve questions in context. Search finds assessments by vessel, hazard, status, or superintendent. Analytics surfaces trends; Excel and PDF printouts support audits and management reporting.",
+            "bullets": [
+              "Dedicated chatroom per risk assessment",
+              "Configurable review workflows included in package",
+              "Analytics dashboard for fleet-wide insight",
+              "Excel and PDF export for audits",
+              "Customization area for review workflows and templates"
+            ],
+            "video": null,
+            "images": [],
+            "mermaid": "flowchart LR\n  RA[Risk assessment] -.-> Chat[Review chat]\n  RA -.-> PDF[PDF / Excel]\n  RA -.-> Dash[Analytics]",
+            "mermaidTitle": "Outputs",
+            "mermaidCaption": "Review · export · analyse"
+          }
+        ],
+        "related": ["moc-pcr", "bbs", "sdr"]
+      }
+    },
+    {
+      "id": "moc-pcr",
+      "title": "MOC & PCR",
+      "short": "Management of change and procedure change requests — custom approval chains for your organisation.",
+      "description": "In-house management of change and procedure change request software with multi-level authorization, executive approvals, digital chatrooms, and workflows mapped to each company's internal approval flow.",
+      "icon": "ClipboardList",
+      "logo": null,
+      "href": "/services/moc-pcr",
+      "featured": true,
+      "span": "lg",
+      "page": {
+        "enabled": true,
+        "eyebrow": "Solution",
+        "headline": "MOC &",
+        "headlineAccent": "PCR",
+        "tagline": "Management of change and procedure change requests — authorization levels, message sync, and digital chatrooms on the same branded platform as our risk suite.",
+        "heroVisual": "engine",
+        "demo": {
+          "label": "Discuss your workflow",
+          "title": "Discuss MOC & PCR for your company",
+          "subtitle": "Our reference demo reflects one client's workflow. We build a separate flow for each organisation — never reused.",
+          "submitLabel": "Start conversation"
+        },
+        "outcomes": [
+          { "value": "Custom", "label": "approval chains", "icon": "Path" },
+          { "value": "Exec", "label": "level sign-off", "icon": "Gauge" },
+          { "value": "1×", "label": "build ownership option", "icon": "FileX" }
+        ],
+        "comparison": {
+          "enabled": true,
+          "eyebrow": "Compare",
+          "title": "MOC & PCR vs market options",
+          "columns": [
+            { "id": "tailored", "label": "TailoredTech", "highlight": true },
+            { "id": "unisea", "label": "UniSea MoC" },
+            { "id": "fortune", "label": "Fortune MOC" }
+          ],
+          "rows": [
+            {
+              "label": "Workflow mapped to your approval flow",
+              "cells": [
+                { "type": "check", "value": true },
+                { "type": "text", "value": "Configurable" },
+                { "type": "text", "value": "Configurable" }
+              ]
+            },
+            {
+              "label": "Executive-level authorization",
+              "cells": [
+                { "type": "check", "value": true },
+                { "type": "text", "value": "Partial" },
+                { "type": "text", "value": "Partial" }
+              ]
+            },
+            {
+              "label": "Client-owned workflow (exclusive build)",
+              "cells": [
+                { "type": "check", "value": true },
+                { "type": "x", "value": false },
+                { "type": "x", "value": false }
+              ]
+            },
+            {
+              "label": "Digital chatrooms per change",
+              "cells": [
+                { "type": "check", "value": true },
+                { "type": "text", "value": "Partial" },
+                { "type": "x", "value": false }
+              ]
+            },
+            {
+              "label": "Auto message synchronization",
+              "cells": [
+                { "type": "check", "value": true },
+                { "type": "check", "value": true },
+                { "type": "check", "value": true }
+              ]
+            },
+            {
+              "label": "Branding + self-hosted option",
+              "cells": [
+                { "type": "check", "value": true },
+                { "type": "x", "value": false },
+                { "type": "x", "value": false }
+              ]
+            },
+            {
+              "label": "One-time build — you own workflow",
+              "cells": [
+                { "type": "check", "value": true },
+                { "type": "x", "value": false },
+                { "type": "x", "value": false }
+              ]
+            },
+            {
+              "label": "Unlimited seats",
+              "cells": [
+                { "type": "check", "value": true },
+                { "type": "x", "value": false },
+                { "type": "x", "value": false }
+              ]
+            }
+          ]
+        },
+        "sections": [
+          {
+            "id": "overview",
+            "title": "Overview",
+            "body": "MOC & PCR digitises management of change and procedure change requests end to end — from proposal through authorization, implementation, and close-out. Built in house for a client fleet, the same platform now supports custom workflows for each organisation's internal approval flow.",
+            "bullets": [
+              "Complete management-of-change flow — customised per company",
+              "Procedure change requests with linked documentation",
+              "Several authorization levels configured on request",
+              "High-level approval paths including president and vice president tiers",
+              "Auto message synchronization across office and vessel"
+            ],
+            "video": null,
+            "images": [],
+            "mermaid": "flowchart LR\n  Proposal -.-> Review\n  Review -.-> Approve\n  Approve -.-> Implement\n  Implement -.-> Close",
+            "mermaidTitle": "Change lifecycle",
+            "mermaidCaption": "Proposal → close-out"
+          },
+          {
+            "id": "workflow",
+            "title": "Authorization & chat",
+            "body": "Authorization levels mirror your organisation — from department heads to executive sign-off. Digital chatrooms keep context on each change request so approvers, implementers, and vessel teams stay aligned without email chains.",
+            "bullets": [
+              "Multi-level authorization on request",
+              "President and vice president approval tiers",
+              "Digital chatrooms per change request",
+              "Notification at each workflow stage",
+              "Temporary, permanent, and emergency change types"
+            ],
+            "video": null,
+            "images": [],
+            "mermaid": "flowchart TD\n  Team -.-> Lead\n  Lead -.-> Exec[Executive]\n  Exec -.-> Chat[Chatroom]\n  Chat -.-> Action",
+            "mermaidTitle": "Approval chain",
+            "mermaidCaption": "Levels + chat in one thread"
+          },
+          {
+            "id": "exclusive",
+            "title": "Exclusive client builds",
+            "body": "Important: our reference demo was built for one company. That workflow is not sold or shown to other organisations. Each client receives their own approval flow, branding, and feature set — with the same infrastructure and platform capabilities as our risk assessments.",
+            "bullets": [
+              "Demo reflects one client — workflows are never reused",
+              "One-time payment option: you own name, branding, and workflow",
+              "We do not sell or demonstrate your workflow to other companies",
+              "Custom workflow design included in the build",
+              "Same SSO, branding, and hosting options as risk assessments"
+            ],
+            "video": null,
+            "images": [],
             "mermaid": null,
             "mermaidTitle": null,
             "mermaidCaption": null
           },
           {
-            "id": "capabilities",
-            "title": "What you get",
-            "body": "Modules are assembled around your workflows — from noon reports to commercial handoffs — so the platform fits the desk, not the other way around.",
+            "id": "platform",
+            "title": "Shared platform",
+            "body": "MOC & PCR runs on the same platform layer as our other products — automatic auditing, timestamping, unlimited seats, and data migration from legacy change-control tools. Every module is tested with superintendents and vessel officers for usability and compliance.",
             "bullets": [
-              "Scheduling and voyage planning",
-              "Crew and rotation coordination",
-              "Compliance checkpoints in the flow of work",
-              "KPI and exception alerting"
+              "Automatic digital auditing on every transaction",
+              "Automatic timestamping for traceability",
+              "No limit on seats",
+              "Customizations and migration from other systems",
+              "Modern dashboards — usability and fit as the primary goal"
             ],
-            "video": "/assets/hero_section.mp4",
+            "video": null,
             "images": [],
-            "mermaid": "flowchart LR\n  A[Vessel signals] -.-> B[Ops hub]\n  C[Crew desk] -.-> B\n  D[Commercial] -.-> B\n  B -.-> E[Live board]\n  B -.-> F[Alerts]\n  B -.-> G[Reports]",
-            "mermaidTitle": "Ops hub signal map",
-            "mermaidCaption": "Inputs converge; outputs stay live"
-          },
-          {
-            "id": "fit",
-            "title": "Who it’s for",
-            "body": "Built for fleet managers, marine superintendents, and ops desks that run mixed fleets and need one reliable source of truth.",
-            "bullets": [
-              "Owners and managers with multi-vessel fleets",
-              "Ops teams coordinating shore and ship",
-              "Organizations retiring spreadsheet-heavy processes"
-            ],
-            "video": null,
-            "images": [
-              { "src": "/test/test-1.png", "label": "Fleet overview" },
-              { "src": "/test/test-2.png", "label": "Voyage board" },
-              { "src": "/test/test-3.png", "label": "Crew planning" },
-              { "src": "/test/test-1.png", "label": "Exception inbox" }
-            ],
-            "mermaid": "sequenceDiagram\n  participant Bridge\n  participant Shore as Shore ops\n  participant Hub as Fleet hub\n  Bridge-->>Hub: Noon report\n  Hub-->>Shore: Exception flag\n  Shore-->>Hub: Decision\n  Hub-->>Bridge: Updated plan",
-            "mermaidTitle": "Shore–ship exception loop",
-            "mermaidCaption": "Reports in; decisions back out"
-          },
-          {
-            "id": "delivery",
-            "title": "How we deliver",
-            "body": "We map your current stack, design the operating model, then ship in focused cycles with training and handover when you need it.",
-            "bullets": [
-              "Discovery on real voyages and constraints",
-              "Design and build in short delivery cycles",
-              "Operate with support and iteration as the fleet grows"
-            ],
-            "video": null,
-            "images": [
-              { "src": "/test/test-1.png", "label": "Discovery board" },
-              { "src": "/test/test-2.png", "label": "Build sprint" },
-              { "src": "/test/test-3.png", "label": "UAT walkthrough" },
-              { "src": "/test/test-1.png", "label": "Ops handover" },
-              { "src": "/test/test-2.png", "label": "Training desk" },
-              { "src": "/test/test-3.png", "label": "Live support" },
-              { "src": "/test/test-1.png", "label": "KPI review" },
-              { "src": "/test/test-2.png", "label": "Next cycle" }
-            ],
-            "mermaid": "flowchart TD\n  D[Discovery] -.-> B[Build cycles]\n  B -.-> O[Operate]\n  O -.->|Feedback| B",
-            "mermaidTitle": "Delivery loop",
-            "mermaidCaption": "Discovery → Build → Operate"
+            "mermaid": "flowchart LR\n  Audit -.-> Timestamp\n  Timestamp -.-> Dashboard",
+            "mermaidTitle": "Platform layer",
+            "mermaidCaption": "Audit · timestamp · dashboard"
           }
         ],
-        "related": []
+        "related": ["digital-risk-assessments", "bbs", "sdr"]
+      }
+    },
+    {
+      "id": "bbs",
+      "title": "Behaviour Based Safety",
+      "short": "International BBS programme — dynamic ICP forms, red flags, and deep analytics.",
+      "description": "Behaviour-based safety software aligned with international BBS practice — dynamic ICP forms with attachments and comments, red flags, vessel and office parity, and custom analytics dashboards.",
+      "icon": "Activity",
+      "logo": null,
+      "href": "/services/bbs",
+      "featured": true,
+      "span": "lg",
+      "page": {
+        "enabled": true,
+        "eyebrow": "Solution",
+        "headline": "Behaviour Based",
+        "headlineAccent": "Safety",
+        "tagline": "International BBS on vessel and in office — dynamic ICP forms, red flags, attachments, and analytics dashboards built for safety culture, not just incident counts.",
+        "heroVisual": "heatmap-eyes",
+        "demo": {
+          "label": "Book a demo",
+          "title": "Book a BBS demo",
+          "subtitle": "See dynamic ICP forms, red-flag handling, and custom dashboards on your observation model.",
+          "submitLabel": "Request demo"
+        },
+        "outcomes": [
+          { "value": "ICP", "label": "dynamic forms", "icon": "Layout" },
+          { "value": "Deep", "label": "custom analytics", "icon": "ChartLine" },
+          { "value": "∞", "label": "seats — no cap", "icon": "ShareNetwork" }
+        ],
+        "comparison": {
+          "enabled": true,
+          "eyebrow": "Compare",
+          "title": "BBS vs market options",
+          "columns": [
+            { "id": "tailored", "label": "TailoredTech BBS", "highlight": true },
+            { "id": "smartqhse", "label": "SmartQHSE" },
+            { "id": "fennex", "label": "Fennex BBSS" }
+          ],
+          "rows": [
+            {
+              "label": "International BBS methodology",
+              "cells": [
+                { "type": "check", "value": true },
+                { "type": "check", "value": true },
+                { "type": "check", "value": true }
+              ]
+            },
+            {
+              "label": "Dynamic ICP forms + attachments",
+              "cells": [
+                { "type": "check", "value": true },
+                { "type": "text", "value": "Cards" },
+                { "type": "check", "value": true }
+              ]
+            },
+            {
+              "label": "Comments and red flags",
+              "cells": [
+                { "type": "check", "value": true },
+                { "type": "check", "value": true },
+                { "type": "check", "value": true }
+              ]
+            },
+            {
+              "label": "Custom analytics dashboards",
+              "cells": [
+                { "type": "check", "value": true },
+                { "type": "check", "value": true },
+                { "type": "check", "value": true }
+              ]
+            },
+            {
+              "label": "Vessel + office parity",
+              "cells": [
+                { "type": "check", "value": true },
+                { "type": "text", "value": "Partial" },
+                { "type": "text", "value": "Offshore" }
+              ]
+            },
+            {
+              "label": "Unlimited seats",
+              "cells": [
+                { "type": "check", "value": true },
+                { "type": "x", "value": false },
+                { "type": "text", "value": "Partial" }
+              ]
+            },
+            {
+              "label": "Branding + self-host",
+              "cells": [
+                { "type": "check", "value": true },
+                { "type": "x", "value": false },
+                { "type": "x", "value": false }
+              ]
+            },
+            {
+              "label": "Data migration support",
+              "cells": [
+                { "type": "check", "value": true },
+                { "type": "text", "value": "Partial" },
+                { "type": "text", "value": "Partial" }
+              ]
+            }
+          ]
+        },
+        "sections": [
+          {
+            "id": "overview",
+            "title": "Overview",
+            "body": "Our Behaviour Based Safety software follows international BBS practice — proactive observation, positive reinforcement, and data-driven intervention. Vessel crews and office teams use the same programme with dynamic ICP forms that support file attachments, threaded comments, and red flags for urgent conditions.",
+            "bullets": [
+              "Built on international BBS standards",
+              "Vessel and office roles with aligned permissions",
+              "Dynamic ICP forms — not static paper cards",
+              "File attachments on observations",
+              "Red flags for immediate escalation"
+            ],
+            "video": null,
+            "images": [],
+            "mermaid": "flowchart LR\n  Observe -.-> ICP[ICP form]\n  ICP -.-> Flag[Red flag?]\n  Flag -.-> Action",
+            "mermaidTitle": "Observation loop",
+            "mermaidCaption": "Observe → record → act"
+          },
+          {
+            "id": "observations",
+            "title": "ICP forms & culture",
+            "body": "ICP forms adapt to your behaviour categories, locations, and vessel types. Observers record safe and at-risk behaviours, attach photos or documents, and add comments for context. Red flags route severe observations to the right approvers without losing the non-punitive culture BBS depends on.",
+            "bullets": [
+              "Configurable behaviour categories and locations",
+              "Comments on every observation",
+              "File attachments for evidence",
+              "Red flag routing for urgent items",
+              "Stop-work and hazard observation support"
+            ],
+            "video": null,
+            "images": [],
+            "mermaid": "flowchart TD\n  Safe -.-> Record\n  AtRisk[At-risk] -.-> Record\n  Record -.-> Review\n  Review -.-> Talk[Toolbox talk]",
+            "mermaidTitle": "Behaviour capture",
+            "mermaidCaption": "Safe and at-risk — same flow"
+          },
+          {
+            "id": "analytics",
+            "title": "Analytics dashboards",
+            "body": "Deep analytics turn observation data into fleet-wide insight. Build custom dashboards for superintendents and safety teams — trend at-risk behaviours by vessel, location, or category, and measure intervention impact over time.",
+            "bullets": [
+              "Custom dashboard builder for safety teams",
+              "Trend analysis by vessel, team, and behaviour",
+              "Root-cause patterns across the fleet",
+              "Export for management and audit reporting",
+              "KPIs tuned with superintendents and captains"
+            ],
+            "video": null,
+            "images": [],
+            "mermaid": "flowchart LR\n  Data -.-> Trends\n  Trends -.-> Dash[Custom dash]\n  Dash -.-> Action",
+            "mermaidTitle": "Analytics path",
+            "mermaidCaption": "Data → insight → action"
+          },
+          {
+            "id": "platform",
+            "title": "Platform layer",
+            "body": "BBS shares the TailoredTech platform — automatic auditing, timestamping, unlimited seats, SSO, branding, and self-hosting. Data migrates from legacy BBS spreadsheets or third-party tools. Every feature is tested with vessel members and superintendents for ease of use and compliance.",
+            "bullets": [
+              "Automatic digital auditing and timestamping",
+              "Unlimited seats",
+              "Customizations and data migration",
+              "Company branding and infrastructure options",
+              "Usability and fit — tested with crews and captains"
+            ],
+            "video": null,
+            "images": [],
+            "mermaid": null,
+            "mermaidTitle": null,
+            "mermaidCaption": null
+          }
+        ],
+        "related": ["digital-risk-assessments", "moc-pcr", "sdr"]
+      }
+    },
+    {
+      "id": "sdr",
+      "title": "Stevedore Damage Report",
+      "short": "Full stevedore damage flow — sign-on, review, settlement, and records.",
+      "description": "Stevedore Damage Report software covering the entire damage flow — digital printout and sign-on, office review, chatroom, budget close-out, settlement control, and file attachments with full records.",
+      "icon": "FileWarning",
+      "logo": null,
+      "href": "/services/sdr",
+      "featured": true,
+      "span": "lg",
+      "page": {
+        "enabled": true,
+        "eyebrow": "Solution",
+        "headline": "Stevedore Damage",
+        "headlineAccent": "Report",
+        "tagline": "From damage discovery to settlement — digital sign-on, office review, chatroom, budget close-out, and full record attachments in one stevedore damage flow.",
+        "heroVisual": "heatmap-diamond",
+        "demo": {
+          "label": "Book a demo",
+          "title": "Book an SDR demo",
+          "subtitle": "Walk through damage reporting, sign-on, office review, and settlement control on your charterparty terms.",
+          "submitLabel": "Request demo"
+        },
+        "outcomes": [
+          { "value": "End", "label": "to-end flow", "icon": "Path" },
+          { "value": "Sign", "label": "on + printout", "icon": "FileX" },
+          { "value": "Close", "label": "out & settle", "icon": "Gauge" }
+        ],
+        "comparison": {
+          "enabled": true,
+          "eyebrow": "Compare",
+          "title": "SDR vs market options",
+          "columns": [
+            { "id": "tailored", "label": "TailoredTech SDR", "highlight": true },
+            { "id": "prime", "label": "PRIME Marine" },
+            { "id": "manual", "label": "Manual / email" }
+          ],
+          "rows": [
+            {
+              "label": "End-to-end stevedore damage flow",
+              "cells": [
+                { "type": "check", "value": true },
+                { "type": "text", "value": "Partial" },
+                { "type": "x", "value": false }
+              ]
+            },
+            {
+              "label": "Digital sign-on + printout",
+              "cells": [
+                { "type": "check", "value": true },
+                { "type": "text", "value": "Partial" },
+                { "type": "x", "value": false }
+              ]
+            },
+            {
+              "label": "Office review chatroom",
+              "cells": [
+                { "type": "check", "value": true },
+                { "type": "x", "value": false },
+                { "type": "x", "value": false }
+              ]
+            },
+            {
+              "label": "Budget close-out & settlement",
+              "cells": [
+                { "type": "check", "value": true },
+                { "type": "x", "value": false },
+                { "type": "x", "value": false }
+              ]
+            },
+            {
+              "label": "File attachments & records",
+              "cells": [
+                { "type": "check", "value": true },
+                { "type": "check", "value": true },
+                { "type": "text", "value": "Ad hoc" }
+              ]
+            },
+            {
+              "label": "Auto timestamping & audit trail",
+              "cells": [
+                { "type": "check", "value": true },
+                { "type": "text", "value": "Partial" },
+                { "type": "x", "value": false }
+              ]
+            },
+            {
+              "label": "Unlimited seats",
+              "cells": [
+                { "type": "check", "value": true },
+                { "type": "x", "value": false },
+                { "type": "x", "value": false }
+              ]
+            },
+            {
+              "label": "Custom workflow per company",
+              "cells": [
+                { "type": "check", "value": true },
+                { "type": "text", "value": "Partial" },
+                { "type": "x", "value": false }
+              ]
+            }
+          ]
+        },
+        "sections": [
+          {
+            "id": "overview",
+            "title": "Overview",
+            "body": "SDR (Stevedore Damage Report) covers the full flow when stevedoring damage occurs on vessel — from first notice through documentation, sign-on, office review, and financial close-out. Replace fragmented email and paper with one auditable record.",
+            "bullets": [
+              "Structured damage report from discovery to settlement",
+              "Digital printout for stevedore sign-on",
+              "Office review with full context",
+              "Chatroom per damage case",
+              "File attachments and permanent records"
+            ],
+            "video": null,
+            "images": [],
+            "mermaid": "flowchart LR\n  Damage -.-> Report\n  Report -.-> Sign[Sign-on]\n  Sign -.-> Office",
+            "mermaidTitle": "Damage intake",
+            "mermaidCaption": "Report → sign → office"
+          },
+          {
+            "id": "flow",
+            "title": "Vessel to office flow",
+            "body": "The master or chief officer records damage with photos and witness notes. A digital printout supports stevedore sign-on or documented refusal. Office teams review in context, discuss in the case chatroom, and route for superintendent or commercial approval.",
+            "bullets": [
+              "Vessel-side capture with timestamps",
+              "Digital and pen signature on printout",
+              "Stevedore sign-on or refusal recorded",
+              "Office review queue with status tracking",
+              "Dedicated chatroom per damage report"
+            ],
+            "video": null,
+            "images": [],
+            "mermaid": "sequenceDiagram\n  participant V as Vessel\n  participant O as Office\n  V-->>O: Damage report\n  O-->>V: Review request\n  V-->>O: Signed printout",
+            "mermaidTitle": "Shore–ship loop",
+            "mermaidCaption": "Report in — sign-off back"
+          },
+          {
+            "id": "settlement",
+            "title": "Close-out & settlement",
+            "body": "Budget close-out and settlement control tie the operational record to commercial outcomes. Track repair quotes, approvals, and recovery against stevedores or charterers with attachments and audit history at every step.",
+            "bullets": [
+              "Budget close-out workflow",
+              "Settlement control and recovery tracking",
+              "Invoice and survey attachments",
+              "Export for P&I and commercial desks",
+              "Full audit trail for disputes"
+            ],
+            "video": null,
+            "images": [],
+            "mermaid": "flowchart TD\n  Quote -.-> Approve\n  Approve -.-> Repair\n  Repair -.-> Settle[Settlement]",
+            "mermaidTitle": "Financial close-out",
+            "mermaidCaption": "Quote → repair → settle"
+          },
+          {
+            "id": "platform",
+            "title": "Platform layer",
+            "body": "SDR runs on the same TailoredTech platform — unlimited seats, automatic auditing, timestamping, SSO, branding, and self-hosting. Migrate from spreadsheets and email chains. Built with superintendents and vessel officers for usability and charterparty compliance.",
+            "bullets": [
+              "Automatic digital auditing on every transaction",
+              "Automatic timestamping",
+              "No limit on seats",
+              "Data migration from legacy tools",
+              "Usability and fit — tested with superintendents and captains"
+            ],
+            "video": null,
+            "images": [],
+            "mermaid": null,
+            "mermaidTitle": null,
+            "mermaidCaption": null
+          }
+        ],
+        "related": ["digital-risk-assessments", "moc-pcr", "bbs"]
       }
     }
   ]

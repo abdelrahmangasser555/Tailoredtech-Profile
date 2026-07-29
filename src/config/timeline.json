@@ -11,23 +11,23 @@
     {
       "year": "2025",
       "title": "Risk assessment platform",
-      "description": "Delivered our risk assessment platform and grew the live portfolio to 107 vessels and over 400 office superintendents across client fleets.",
+      "description": "Delivered our digital risk assessment platform and grew the live portfolio to 107+ vessels and over 400 office superintendents across client fleets.",
       "scene": "fleet",
       "highlights": [
-        { "value": "107", "label": "vessels" },
+        { "value": "107+", "label": "vessels" },
         { "value": "400+", "label": "superintendents" }
       ]
     },
     {
       "year": "2026",
       "title": "Four products in market",
-      "description": "Four tailored software products live — covering fleet operations, risk assessment, port systems, and commercial workflow for maritime operators end to end.",
+      "description": "Four tailored software products live — digital risk assessments, MOC & PCR, behaviour-based safety, and stevedore damage reporting for maritime operators end to end.",
       "scene": "products",
       "products": [
-        "Fleet Operations",
-        "Risk Assessment",
-        "Port Systems",
-        "Commercial Desk"
+        "Digital Risk Assessments",
+        "MOC & PCR",
+        "BBS",
+        "SDR"
       ]
     }
   ]

@@ -15,6 +15,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
+import { DemoContactPanel } from "@/components/sections/demo-contact-panel"
 import { cn } from "@/lib/utils"
 
 type BookDemoDialogProps = {
@@ -122,16 +123,17 @@ export function BookDemoDialog({
               <div className="flex flex-wrap gap-3 pt-1">
                 <Button
                   type="button"
+                  variant="accent"
                   onClick={() => setSent(false)}
-                  className="h-10 rounded-none bg-accent px-4 text-accent-foreground hover:brightness-95"
+                  className="h-10 rounded-none px-4"
                 >
                   Book another
                 </Button>
                 <Button
                   type="button"
-                  variant="outline"
+                  variant="brandOutline"
                   onClick={() => setOpen(false)}
-                  className="h-10 rounded-none border-white/20 bg-transparent text-white hover:bg-white/5"
+                  className="h-10 rounded-none"
                 >
                   Close
                 </Button>
@@ -187,7 +189,8 @@ export function BookDemoDialog({
               <Button
                 type="submit"
                 disabled={pending}
-                className="mt-1 h-11 w-fit rounded-none bg-accent px-6 text-accent-foreground hover:brightness-95"
+                variant="accent"
+                className="mt-1 h-11 w-fit rounded-none px-6"
               >
                 {pending ? "Sending…" : submitLabel}
                 {!pending && <ArrowRight data-icon="inline-end" />}
@@ -195,6 +198,8 @@ export function BookDemoDialog({
             </form>
           )}
         </div>
+
+        {!sent && <DemoContactPanel />}
       </DialogContent>
     </Dialog>
   )

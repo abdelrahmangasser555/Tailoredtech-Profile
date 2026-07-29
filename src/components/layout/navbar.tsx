@@ -142,7 +142,8 @@ export function Navbar() {
             <Button
               asChild
               size="sm"
-              className="hidden sm:inline-flex rounded-none bg-accent text-accent-foreground hover:brightness-95 px-4"
+              variant="accent"
+              className="hidden sm:inline-flex rounded-none px-4"
             >
               <Link href={navigation.cta.href}>
                 {navigation.cta.label}
@@ -195,7 +196,7 @@ export function Navbar() {
                       </Link>
                     ))}
                   </div>
-                  <Button asChild className="mt-4 mx-3 rounded-none">
+                  <Button asChild variant="accent" className="mt-4 mx-3 rounded-none">
                     <Link href={navigation.cta.href}>{navigation.cta.label}</Link>
                   </Button>
                 </div>

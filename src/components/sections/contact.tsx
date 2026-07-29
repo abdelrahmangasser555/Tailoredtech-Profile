@@ -131,7 +131,8 @@ export function Contact() {
               <Button
                 type="submit"
                 disabled={pending}
-                className="mt-2 w-fit rounded-sm bg-accent text-accent-foreground hover:bg-accent/90 h-11 px-6"
+                variant="accent"
+                className="mt-2 h-11 px-6 rounded-sm"
               >
                 {pending ? "Sending…" : "Send"}
                 {!pending && <ArrowRight data-icon="inline-end" />}

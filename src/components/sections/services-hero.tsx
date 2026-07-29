@@ -90,7 +90,7 @@ export function ServicesHero() {
             className="max-w-sm text-sm leading-relaxed text-white/45 md:text-base"
           >
             <span className="font-pixel-circle font-medium text-accent">4</span>{" "}
-            focused solution for vessels, ports, and commercial desks.
+            focused solutions for vessels, ports, and commercial desks.
           </motion.p>
 
           <motion.div
@@ -107,7 +107,7 @@ export function ServicesHero() {
               <ArrowUpRight className="size-4" />
             </Link>
             <Link
-              href="#fleet-operations"
+              href="/services#digital-risk-assessments"
               className="inline-flex h-11 w-full items-center justify-center gap-2 border border-white/25 px-5 text-sm font-medium text-white transition hover:bg-white/5 lg:w-auto"
             >
               View services

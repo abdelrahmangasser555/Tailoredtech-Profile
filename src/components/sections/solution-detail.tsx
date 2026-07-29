@@ -10,7 +10,7 @@ import {
   useReducedMotion,
 } from "framer-motion"
 import { GlyphMatrix } from "@/components/ui/glyph-matrix"
-import { ServiceVisual } from "@/components/ui/service-visual"
+import { RelatedSolutionCard } from "@/components/sections/related-solution-card"
 import { BookDemoDialog } from "@/components/sections/book-demo-dialog"
 import { BrandedMermaid } from "@/components/sections/branded-mermaid"
 import {
@@ -245,25 +245,9 @@ export function SolutionDetail({ service }: SolutionDetailProps) {
           <p className="mb-6 font-mono text-[11px] tracking-[0.22em] uppercase text-foreground/45">
             Related solutions
           </p>
-          <div className="grid gap-4 sm:grid-cols-3">
+          <div className="grid gap-6 sm:grid-cols-3 sm:gap-5">
             {related.map((item) => (
-              <Link
-                key={item.id}
-                href={item.href}
-                className="group border border-foreground/10 p-5 transition hover:border-accent/50"
-              >
-                <ServiceVisual
-                  icon={item.icon}
-                  logo={item.logo}
-                  title={item.title}
-                  className="mb-4 size-8 text-accent"
-                  iconClassName="size-5"
-                />
-                <p className="font-pixel-circle text-lg font-medium tracking-tight transition group-hover:text-accent">
-                  {item.title}
-                </p>
-                <p className="mt-2 text-sm text-muted-foreground">{item.short}</p>
-              </Link>
+              <RelatedSolutionCard key={item.id} item={item} />
             ))}
           </div>
         </Section>

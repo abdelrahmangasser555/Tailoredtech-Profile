@@ -10,7 +10,7 @@ import { site } from "@/lib/content"
 export const metadata: Metadata = {
   title: "Maritime Software Solutions",
   description:
-    "Custom maritime software solutions for fleet operations, port systems, chartering, compliance, and data platforms. Built by TailoredTech.",
+    "Digital risk assessments, MOC & PCR, behaviour-based safety, and stevedore damage reporting — tailored maritime software by TailoredTech.",
   keywords: [
     "maritime software solutions",
     "maritime custom software solutions",
@@ -112,7 +112,8 @@ export default function ServicesPage() {
           </div>
           <Button
             asChild
-            className="h-11 w-fit rounded-none bg-accent px-6 text-accent-foreground hover:brightness-95"
+            variant="accent"
+            className="h-11 w-fit rounded-none px-6"
           >
             <Link href="/#contact">
               Reach out

@@ -5,6 +5,9 @@ import {
   ShieldCheck,
   Database,
   Network,
+  ClipboardList,
+  Activity,
+  FileWarning,
   type LucideIcon,
 } from "lucide-react"
 
@@ -15,6 +18,9 @@ const icons: Record<string, LucideIcon> = {
   ShieldCheck,
   Database,
   Network,
+  ClipboardList,
+  Activity,
+  FileWarning,
 }
 
 export function getIcon(name: string): LucideIcon {

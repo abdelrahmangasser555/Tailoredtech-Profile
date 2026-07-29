@@ -1,50 +1,50 @@
 {
   "headline": "Selected work",
-  "subheadline": "Tailored platforms shipped for maritime operators — from risk assessment to fleet-scale operations.",
+  "subheadline": "Tailored platforms shipped for maritime operators — risk, change control, safety culture, and damage reporting.",
   "items": [
     {
       "id": "risk-platform",
-      "title": "Risk Assessment Platform",
+      "title": "Digital Risk Assessments",
       "client": "Bahri",
-      "summary": "Enterprise risk workflows for office superintendents — assessments, approvals, and fleet-wide visibility across 107+ vessels.",
+      "summary": "Tailored risk workflows for office superintendents and vessel crews — custom assessments, approvals, offline sync, and fleet-wide visibility across 107+ vessels.",
       "tags": ["Risk", "Compliance", "Fleet"],
       "year": "2025",
       "image": "/projects/safety-ledger.jpg",
       "featured": true,
-      "href": "/services/fleet-operations"
+      "href": "/services/digital-risk-assessments"
     },
     {
-      "id": "fleet-operations",
-      "title": "Fleet Operations",
+      "id": "moc-pcr",
+      "title": "MOC & PCR",
       "client": "Bahri",
-      "summary": "Unified operations console for vessel scheduling, crew rotations, voyages, and live fleet performance.",
-      "tags": ["Fleet", "Operations", "Realtime"],
+      "summary": "In-house management of change and procedure change request platform — multi-level authorization, digital chatrooms, and a workflow built for one client's approval chain.",
+      "tags": ["Change control", "Workflow", "Compliance"],
       "year": "2026",
       "image": "/projects/fleet-command.jpg",
       "featured": true,
-      "href": "/services/fleet-operations"
+      "href": "/services/moc-pcr"
     },
     {
-      "id": "port-systems",
-      "title": "Port Systems",
-      "client": "Regional terminal operator",
-      "summary": "Berth planning and terminal workflow tools tailored to port-specific constraints and berth allocation rules.",
-      "tags": ["Ports", "Planning", "Operations"],
+      "id": "bbs",
+      "title": "Behaviour Based Safety",
+      "client": "Fleet operator",
+      "summary": "International BBS programme with dynamic ICP forms, red flags, attachments, and custom analytics dashboards for vessel and office teams.",
+      "tags": ["Safety", "Analytics", "Culture"],
       "year": "2026",
       "image": "/projects/berth-optimizer.jpg",
       "featured": true,
-      "href": "/services"
+      "href": "/services/bbs"
     },
     {
-      "id": "commercial-desk",
-      "title": "Commercial Desk",
-      "client": "Dry bulk operator",
-      "summary": "Fixture and commercial workflow platform for chartering desks — from inquiry through execution.",
-      "tags": ["Commercial", "Chartering"],
+      "id": "sdr",
+      "title": "Stevedore Damage Report",
+      "client": "Commercial desk",
+      "summary": "End-to-end stevedore damage flow — digital sign-on, office review, chatroom, budget close-out, settlement control, and full record attachments.",
+      "tags": ["Damage", "Claims", "Operations"],
       "year": "2026",
       "image": "/projects/charter-desk.jpg",
-      "featured": false,
-      "href": "/services"
+      "featured": true,
+      "href": "/services/sdr"
     }
   ]
 }

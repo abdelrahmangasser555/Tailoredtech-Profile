@@ -2,10 +2,10 @@
   "name": "TailoredTech",
   "legalName": "TailoredTech Maritime Solutions",
   "tagline": "Tailored software for maritime companies",
-  "description": "We create tailored software solutions for maritime companies — from fleet operations and risk assessment to port systems and commercial workflows, built around how your operators actually work.",
+  "description": "We build tailored maritime software — digital risk assessments, management of change, behaviour-based safety, and stevedore damage reporting — shaped around how your office and vessels actually work.",
   "seo": {
     "title": "TailoredTech | Tailored Maritime Software Solutions",
-    "description": "TailoredTech builds custom maritime software for shipping operators, ports, and commercial desks. Live across 107+ vessels with risk assessment, fleet operations, and port platforms.",
+    "description": "TailoredTech builds custom maritime software for shipping operators and commercial desks. Four live products across 107+ vessels — risk assessment, MOC & PCR, BBS, and stevedore damage reporting.",
     "keywords": [
       "maritime software solutions",
       "tailored maritime software",
@@ -22,7 +22,14 @@
     "phone": "",
     "address": "",
     "city": "Dubai, UAE",
-    "cta": "Start a project"
+    "cta": "Start a project",
+    "availability": {
+      "timezone": "Asia/Dubai",
+      "timezoneLabel": "UTC+3",
+      "startHour": 10,
+      "endHour": 21,
+      "weekdaysOnly": false
+    }
   },
   "social": {
     "linkedin": "https://linkedin.com/company/tailoredtech",

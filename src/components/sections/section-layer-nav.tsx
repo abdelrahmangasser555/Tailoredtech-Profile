@@ -6,6 +6,8 @@ import {
   Layers,
   Route,
   Users,
+  BarChart3,
+  Shield,
   type LucideIcon,
 } from "lucide-react"
 import { AnimatePresence, motion } from "framer-motion"
@@ -17,6 +19,15 @@ const ACCENT = "#D4FF00"
 const SECTION_ICONS: Record<string, LucideIcon> = {
   overview: Eye,
   capabilities: Layers,
+  roles: Users,
+  platform: Layers,
+  workflows: Route,
+  workflow: Route,
+  observations: Eye,
+  analytics: BarChart3,
+  exclusive: Shield,
+  flow: Route,
+  settlement: BarChart3,
   fit: Users,
   delivery: Route,
 }
