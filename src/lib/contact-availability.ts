@@ -37,8 +37,8 @@ export function getContactAvailability(
   return {
     isOpen,
     statusLabel: isOpen
-      ? "Online — responding now"
-      : "Away — we respond next working window",
+      ? "Online, responding now"
+      : "Away. We respond next working window",
     detailLabel: `Hours ${start}–${end} (${config.timezoneLabel})`,
   }
 }

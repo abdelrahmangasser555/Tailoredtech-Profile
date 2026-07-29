@@ -5,32 +5,32 @@ import { Section } from "@/components/layout/section"
 import { ServicesHero } from "@/components/sections/services-hero"
 import { Button } from "@/components/ui/button"
 import { ServiceVisual } from "@/components/ui/service-visual"
+import { JsonLd } from "@/components/seo/json-ld"
 import { site } from "@/lib/content"
+import { buildItemListJsonLd, buildPageMetadata } from "@/lib/seo"
 
-export const metadata: Metadata = {
-  title: "Maritime Software Solutions",
-  description:
-    "Digital risk assessments, MOC & PCR, behaviour-based safety, and stevedore damage reporting — tailored maritime software by TailoredTech.",
+const description =
+  "Maritime software solutions: digital risk assessments, MOC & PCR, behaviour-based safety, and stevedore damage reporting. Tailored maritime software by TailoredTech."
+
+export const metadata: Metadata = buildPageMetadata({
+  title: "Maritime Software Solutions | TailoredTech",
+  description,
+  path: "/services",
   keywords: [
     "maritime software solutions",
-    "maritime custom software solutions",
-    "fleet management software",
-    "port operations software",
-    "shipping software development",
+    "maritime risk assessment software",
+    "custom maritime software",
+    "tailored maritime software",
+    "shipping software solutions",
   ],
-  alternates: { canonical: "/services" },
-  openGraph: {
-    title: "Maritime Software Solutions | TailoredTech",
-    description:
-      "Custom platforms for fleets, ports, and commercial maritime desks.",
-  },
-}
+})
 
 export default function ServicesPage() {
   const { services } = site
 
   return (
     <>
+      <JsonLd data={buildItemListJsonLd(services.items)} />
       <ServicesHero />
 
       <Section tone="light">

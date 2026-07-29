@@ -1,12 +1,12 @@
 {
   "headline": "Selected work",
-  "subheadline": "Tailored platforms shipped for maritime operators — risk, change control, safety culture, and damage reporting.",
+  "subheadline": "Tailored platforms shipped for maritime operators, risk, change control, safety culture, and damage reporting.",
   "items": [
     {
       "id": "risk-platform",
       "title": "Digital Risk Assessments",
       "client": "Bahri",
-      "summary": "Tailored risk workflows for office superintendents and vessel crews — custom assessments, approvals, offline sync, and fleet-wide visibility across 107+ vessels.",
+      "summary": "Tailored risk workflows for office superintendents and vessel crews, custom assessments, approvals, offline sync, and fleet-wide visibility across 107+ vessels.",
       "tags": ["Risk", "Compliance", "Fleet"],
       "year": "2025",
       "image": "/projects/safety-ledger.jpg",
@@ -17,7 +17,7 @@
       "id": "moc-pcr",
       "title": "MOC & PCR",
       "client": "Bahri",
-      "summary": "In-house management of change and procedure change request platform — multi-level authorization, digital chatrooms, and a workflow built for one client's approval chain.",
+      "summary": "In-house management of change and procedure change request platform, multi-level authorization, digital chatrooms, and a workflow built for one client's approval chain.",
       "tags": ["Change control", "Workflow", "Compliance"],
       "year": "2026",
       "image": "/projects/fleet-command.jpg",
@@ -39,7 +39,7 @@
       "id": "sdr",
       "title": "Stevedore Damage Report",
       "client": "Commercial desk",
-      "summary": "End-to-end stevedore damage flow — digital sign-on, office review, chatroom, budget close-out, settlement control, and full record attachments.",
+      "summary": "End-to-end stevedore damage flow, digital sign-on, office review, chatroom, budget close-out, settlement control, and full record attachments.",
       "tags": ["Damage", "Claims", "Operations"],
       "year": "2026",
       "image": "/projects/charter-desk.jpg",

@@ -263,7 +263,7 @@ export function SolutionDetail({ service }: SolutionDetailProps) {
               See {service.title} in action
             </h2>
             <p className="mt-3 text-sm text-white/45">
-              Book a focused demo — we reply within one business day.
+              Book a focused demo. We reply within one business day.
             </p>
           </div>
           <div className="flex flex-wrap gap-3">

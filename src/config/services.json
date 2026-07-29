@@ -1,11 +1,11 @@
 {
   "headline": "Tailored solutions for maritime",
-  "subheadline": "Four live products — risk, change control, safety culture, and damage reporting — built around your workflows, not vendor templates.",
+  "subheadline": "Four live products, risk, change control, safety culture, and damage reporting, built around your workflows, not vendor templates.",
   "items": [
     {
       "id": "digital-risk-assessments",
       "title": "Digital Risk Assessments",
-      "short": "Tailored risk assessments for office and vessel — alerts, offline sync, and fleet-wide control.",
+      "short": "Tailored risk assessments for office and vessel, alerts, offline sync, and fleet-wide control.",
       "description": "Customizable digital risk assessments with office and vessel roles, hazard-level auto-alerts, offline support with auto-sync, analytics, and company-branded deployment on your infrastructure.",
       "icon": "ShieldCheck",
       "logo": null,
@@ -17,7 +17,7 @@
         "eyebrow": "Solution",
         "headline": "Digital Risk",
         "headlineAccent": "Assessments",
-        "tagline": "Tailored risk assessments for office superintendents and vessel crews — custom forms, hazard alerts, offline sync, and fleet-wide visibility without seat limits.",
+        "tagline": "Tailored risk assessments for office superintendents and vessel crews, custom forms, hazard alerts, offline sync, and fleet-wide visibility without seat limits.",
         "heroVisual": "ocean",
         "demo": {
           "label": "Request live demo",
@@ -27,7 +27,7 @@
         },
         "outcomes": [
           { "value": "107+", "label": "vessels supported", "icon": "Boat" },
-          { "value": "∞", "label": "seats — no cap", "icon": "ShareNetwork" },
+          { "value": "∞", "label": "seats, no cap", "icon": "ShareNetwork" },
           { "value": "24/7", "label": "offline + auto-sync", "icon": "Path" }
         ],
         "comparison": {
@@ -118,7 +118,7 @@
           {
             "id": "overview",
             "title": "Overview",
-            "body": "Digital Risk Assessments replace rigid templates with tailored forms shaped around your hazard model. Office superintendents design assessments, assign vessels and superintendents by group, and track fleet-wide status — while vessel crews complete assessments offline with automatic sync when connectivity returns.",
+            "body": "Digital Risk Assessments replace rigid templates with tailored forms shaped around your hazard model. Office superintendents design assessments, assign vessels and superintendents by group, and track fleet-wide status, while vessel crews complete assessments offline with automatic sync when connectivity returns.",
             "bullets": [
               "Custom risk assessment builder for your operating model",
               "Auto-alerting when hazard levels cross defined thresholds",
@@ -130,12 +130,12 @@
             "images": [],
             "mermaid": "flowchart LR\n  Office -.-> Build[Custom RA]\n  Vessel -.-> Complete[Complete RA]\n  Build -.-> Fleet[Fleet library]\n  Complete -.-> Fleet",
             "mermaidTitle": "Office ↔ vessel flow",
-            "mermaidCaption": "One library — two roles"
+            "mermaidCaption": "One library, two roles"
           },
           {
             "id": "roles",
             "title": "Office & vessel roles",
-            "body": "Two primary roles — office side and vessel side — each with permissions tuned to how superintendents and crews actually work. Office users create and publish assessments, manage users and vessels, assign superintendents by vessel group, and oversee reviews. Vessel users execute assessments, attach evidence, and sign off with pen or digital signature.",
+            "body": "Two primary roles, office side and vessel side, each with permissions tuned to how superintendents and crews actually work. Office users create and publish assessments, manage users and vessels, assign superintendents by vessel group, and oversee reviews. Vessel users execute assessments, attach evidence, and sign off with pen or digital signature.",
             "bullets": [
               "Office: create assessments, assign vessels, manage users",
               "Vessel: complete assessments, sign, sync offline",
@@ -147,16 +147,16 @@
             "images": [],
             "mermaid": "flowchart TD\n  O[Office] -.-> Create\n  O -.-> Assign\n  V[Vessel] -.-> Execute\n  V -.-> Sign\n  Create -.-> Review\n  Review -.-> Close",
             "mermaidTitle": "Role responsibilities",
-            "mermaidCaption": "Office builds — vessel executes"
+            "mermaidCaption": "Office builds, vessel executes"
           },
           {
             "id": "platform",
             "title": "Platform & licensing",
-            "body": "Deploy on our cloud or your own infrastructure with your branding. Authentication uses SSO on your tenant with company-specific preferences. Licence as a one-time payment or subscription — with no limit on seats. Review workflows and risk assessment templates are included in the package.",
+            "body": "Deploy on our cloud or your own infrastructure with your branding. Authentication uses SSO on your tenant with company-specific preferences. Licence as a one-time payment or subscription, with no limit on seats. Review workflows and risk assessment templates are included in the package.",
             "bullets": [
               "Company branding and self-hosted deployment options",
               "SSO authentication on your tenant",
-              "One-time or subscription licensing — unlimited seats",
+              "One-time or subscription licensing, unlimited seats",
               "Automatic digital auditing and timestamping on every action",
               "Data migration from legacy risk tools",
               "Fine-tuned with superintendents and captains for usability and compliance"
@@ -191,7 +191,7 @@
     {
       "id": "moc-pcr",
       "title": "MOC & PCR",
-      "short": "Management of change and procedure change requests — custom approval chains for your organisation.",
+      "short": "Management of change and procedure change requests, custom approval chains for your organisation.",
       "description": "In-house management of change and procedure change request software with multi-level authorization, executive approvals, digital chatrooms, and workflows mapped to each company's internal approval flow.",
       "icon": "ClipboardList",
       "logo": null,
@@ -203,12 +203,12 @@
         "eyebrow": "Solution",
         "headline": "MOC &",
         "headlineAccent": "PCR",
-        "tagline": "Management of change and procedure change requests — authorization levels, message sync, and digital chatrooms on the same branded platform as our risk suite.",
+        "tagline": "Management of change and procedure change requests, authorization levels, message sync, and digital chatrooms on the same branded platform as our risk suite.",
         "heroVisual": "engine",
         "demo": {
           "label": "Discuss your workflow",
           "title": "Discuss MOC & PCR for your company",
-          "subtitle": "Our reference demo reflects one client's workflow. We build a separate flow for each organisation — never reused.",
+          "subtitle": "Our reference demo reflects one client's workflow. We build a separate flow for each organisation, never reused.",
           "submitLabel": "Start conversation"
         },
         "outcomes": [
@@ -275,7 +275,7 @@
               ]
             },
             {
-              "label": "One-time build — you own workflow",
+              "label": "One-time build, you own workflow",
               "cells": [
                 { "type": "check", "value": true },
                 { "type": "x", "value": false },
@@ -296,9 +296,9 @@
           {
             "id": "overview",
             "title": "Overview",
-            "body": "MOC & PCR digitises management of change and procedure change requests end to end — from proposal through authorization, implementation, and close-out. Built in house for a client fleet, the same platform now supports custom workflows for each organisation's internal approval flow.",
+            "body": "MOC & PCR digitises management of change and procedure change requests end to end, from proposal through authorization, implementation, and close-out. Built in house for a client fleet, the same platform now supports custom workflows for each organisation's internal approval flow.",
             "bullets": [
-              "Complete management-of-change flow — customised per company",
+              "Complete management-of-change flow, customised per company",
               "Procedure change requests with linked documentation",
               "Several authorization levels configured on request",
               "High-level approval paths including president and vice president tiers",
@@ -313,7 +313,7 @@
           {
             "id": "workflow",
             "title": "Authorization & chat",
-            "body": "Authorization levels mirror your organisation — from department heads to executive sign-off. Digital chatrooms keep context on each change request so approvers, implementers, and vessel teams stay aligned without email chains.",
+            "body": "Authorization levels mirror your organisation, from department heads to executive sign-off. Digital chatrooms keep context on each change request so approvers, implementers, and vessel teams stay aligned without email chains.",
             "bullets": [
               "Multi-level authorization on request",
               "President and vice president approval tiers",
@@ -330,9 +330,9 @@
           {
             "id": "exclusive",
             "title": "Exclusive client builds",
-            "body": "Important: our reference demo was built for one company. That workflow is not sold or shown to other organisations. Each client receives their own approval flow, branding, and feature set — with the same infrastructure and platform capabilities as our risk assessments.",
+            "body": "Important: our reference demo was built for one company. That workflow is not sold or shown to other organisations. Each client receives their own approval flow, branding, and feature set, with the same infrastructure and platform capabilities as our risk assessments.",
             "bullets": [
-              "Demo reflects one client — workflows are never reused",
+              "Demo reflects one client, workflows are never reused",
               "One-time payment option: you own name, branding, and workflow",
               "We do not sell or demonstrate your workflow to other companies",
               "Custom workflow design included in the build",
@@ -347,13 +347,13 @@
           {
             "id": "platform",
             "title": "Shared platform",
-            "body": "MOC & PCR runs on the same platform layer as our other products — automatic auditing, timestamping, unlimited seats, and data migration from legacy change-control tools. Every module is tested with superintendents and vessel officers for usability and compliance.",
+            "body": "MOC & PCR runs on the same platform layer as our other products, automatic auditing, timestamping, unlimited seats, and data migration from legacy change-control tools. Every module is tested with superintendents and vessel officers for usability and compliance.",
             "bullets": [
               "Automatic digital auditing on every transaction",
               "Automatic timestamping for traceability",
               "No limit on seats",
               "Customizations and migration from other systems",
-              "Modern dashboards — usability and fit as the primary goal"
+              "Modern dashboards, usability and fit as the primary goal"
             ],
             "video": null,
             "images": [],
@@ -368,8 +368,8 @@
     {
       "id": "bbs",
       "title": "Behaviour Based Safety",
-      "short": "International BBS programme — dynamic ICP forms, red flags, and deep analytics.",
-      "description": "Behaviour-based safety software aligned with international BBS practice — dynamic ICP forms with attachments and comments, red flags, vessel and office parity, and custom analytics dashboards.",
+      "short": "International BBS programme, dynamic ICP forms, red flags, and deep analytics.",
+      "description": "Behaviour-based safety software aligned with international BBS practice, dynamic ICP forms with attachments and comments, red flags, vessel and office parity, and custom analytics dashboards.",
       "icon": "Activity",
       "logo": null,
       "href": "/services/bbs",
@@ -380,7 +380,7 @@
         "eyebrow": "Solution",
         "headline": "Behaviour Based",
         "headlineAccent": "Safety",
-        "tagline": "International BBS on vessel and in office — dynamic ICP forms, red flags, attachments, and analytics dashboards built for safety culture, not just incident counts.",
+        "tagline": "International BBS on vessel and in office, dynamic ICP forms, red flags, attachments, and analytics dashboards built for safety culture, not just incident counts.",
         "heroVisual": "heatmap-eyes",
         "demo": {
           "label": "Book a demo",
@@ -391,7 +391,7 @@
         "outcomes": [
           { "value": "ICP", "label": "dynamic forms", "icon": "Layout" },
           { "value": "Deep", "label": "custom analytics", "icon": "ChartLine" },
-          { "value": "∞", "label": "seats — no cap", "icon": "ShareNetwork" }
+          { "value": "∞", "label": "seats, no cap", "icon": "ShareNetwork" }
         ],
         "comparison": {
           "enabled": true,
@@ -473,11 +473,11 @@
           {
             "id": "overview",
             "title": "Overview",
-            "body": "Our Behaviour Based Safety software follows international BBS practice — proactive observation, positive reinforcement, and data-driven intervention. Vessel crews and office teams use the same programme with dynamic ICP forms that support file attachments, threaded comments, and red flags for urgent conditions.",
+            "body": "Our Behaviour Based Safety software follows international BBS practice, proactive observation, positive reinforcement, and data-driven intervention. Vessel crews and office teams use the same programme with dynamic ICP forms that support file attachments, threaded comments, and red flags for urgent conditions.",
             "bullets": [
               "Built on international BBS standards",
               "Vessel and office roles with aligned permissions",
-              "Dynamic ICP forms — not static paper cards",
+              "Dynamic ICP forms, not static paper cards",
               "File attachments on observations",
               "Red flags for immediate escalation"
             ],
@@ -502,12 +502,12 @@
             "images": [],
             "mermaid": "flowchart TD\n  Safe -.-> Record\n  AtRisk[At-risk] -.-> Record\n  Record -.-> Review\n  Review -.-> Talk[Toolbox talk]",
             "mermaidTitle": "Behaviour capture",
-            "mermaidCaption": "Safe and at-risk — same flow"
+            "mermaidCaption": "Safe and at-risk, same flow"
           },
           {
             "id": "analytics",
             "title": "Analytics dashboards",
-            "body": "Deep analytics turn observation data into fleet-wide insight. Build custom dashboards for superintendents and safety teams — trend at-risk behaviours by vessel, location, or category, and measure intervention impact over time.",
+            "body": "Deep analytics turn observation data into fleet-wide insight. Build custom dashboards for superintendents and safety teams, trend at-risk behaviours by vessel, location, or category, and measure intervention impact over time.",
             "bullets": [
               "Custom dashboard builder for safety teams",
               "Trend analysis by vessel, team, and behaviour",
@@ -524,13 +524,13 @@
           {
             "id": "platform",
             "title": "Platform layer",
-            "body": "BBS shares the TailoredTech platform — automatic auditing, timestamping, unlimited seats, SSO, branding, and self-hosting. Data migrates from legacy BBS spreadsheets or third-party tools. Every feature is tested with vessel members and superintendents for ease of use and compliance.",
+            "body": "BBS shares the TailoredTech platform, automatic auditing, timestamping, unlimited seats, SSO, branding, and self-hosting. Data migrates from legacy BBS spreadsheets or third-party tools. Every feature is tested with vessel members and superintendents for ease of use and compliance.",
             "bullets": [
               "Automatic digital auditing and timestamping",
               "Unlimited seats",
               "Customizations and data migration",
               "Company branding and infrastructure options",
-              "Usability and fit — tested with crews and captains"
+              "Usability and fit, tested with crews and captains"
             ],
             "video": null,
             "images": [],
@@ -545,8 +545,8 @@
     {
       "id": "sdr",
       "title": "Stevedore Damage Report",
-      "short": "Full stevedore damage flow — sign-on, review, settlement, and records.",
-      "description": "Stevedore Damage Report software covering the entire damage flow — digital printout and sign-on, office review, chatroom, budget close-out, settlement control, and file attachments with full records.",
+      "short": "Full stevedore damage flow, sign-on, review, settlement, and records.",
+      "description": "Stevedore Damage Report software covering the entire damage flow, digital printout and sign-on, office review, chatroom, budget close-out, settlement control, and file attachments with full records.",
       "icon": "FileWarning",
       "logo": null,
       "href": "/services/sdr",
@@ -557,7 +557,7 @@
         "eyebrow": "Solution",
         "headline": "Stevedore Damage",
         "headlineAccent": "Report",
-        "tagline": "From damage discovery to settlement — digital sign-on, office review, chatroom, budget close-out, and full record attachments in one stevedore damage flow.",
+        "tagline": "From damage discovery to settlement, digital sign-on, office review, chatroom, budget close-out, and full record attachments in one stevedore damage flow.",
         "heroVisual": "heatmap-diamond",
         "demo": {
           "label": "Book a demo",
@@ -650,7 +650,7 @@
           {
             "id": "overview",
             "title": "Overview",
-            "body": "SDR (Stevedore Damage Report) covers the full flow when stevedoring damage occurs on vessel — from first notice through documentation, sign-on, office review, and financial close-out. Replace fragmented email and paper with one auditable record.",
+            "body": "SDR (Stevedore Damage Report) covers the full flow when stevedoring damage occurs on vessel, from first notice through documentation, sign-on, office review, and financial close-out. Replace fragmented email and paper with one auditable record.",
             "bullets": [
               "Structured damage report from discovery to settlement",
               "Digital printout for stevedore sign-on",
@@ -679,7 +679,7 @@
             "images": [],
             "mermaid": "sequenceDiagram\n  participant V as Vessel\n  participant O as Office\n  V-->>O: Damage report\n  O-->>V: Review request\n  V-->>O: Signed printout",
             "mermaidTitle": "Shore–ship loop",
-            "mermaidCaption": "Report in — sign-off back"
+            "mermaidCaption": "Report in, sign-off back"
           },
           {
             "id": "settlement",
@@ -701,13 +701,13 @@
           {
             "id": "platform",
             "title": "Platform layer",
-            "body": "SDR runs on the same TailoredTech platform — unlimited seats, automatic auditing, timestamping, SSO, branding, and self-hosting. Migrate from spreadsheets and email chains. Built with superintendents and vessel officers for usability and charterparty compliance.",
+            "body": "SDR runs on the same TailoredTech platform, unlimited seats, automatic auditing, timestamping, SSO, branding, and self-hosting. Migrate from spreadsheets and email chains. Built with superintendents and vessel officers for usability and charterparty compliance.",
             "bullets": [
               "Automatic digital auditing on every transaction",
               "Automatic timestamping",
               "No limit on seats",
               "Data migration from legacy tools",
-              "Usability and fit — tested with superintendents and captains"
+              "Usability and fit, tested with superintendents and captains"
             ],
             "video": null,
             "images": [],

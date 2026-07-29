@@ -3,9 +3,14 @@ import { notFound } from "next/navigation"
 import {
   getServiceBySlug,
   getServiceSlugs,
-  site,
 } from "@/lib/content"
 import { SolutionDetail } from "@/components/sections/solution-detail"
+import { JsonLd } from "@/components/seo/json-ld"
+import {
+  buildBreadcrumbJsonLd,
+  buildSoftwareApplicationJsonLd,
+  buildSolutionMetadata,
+} from "@/lib/seo"
 
 type PageProps = {
   params: Promise<{ slug: string }>
@@ -24,24 +29,7 @@ export async function generateMetadata({
     return { title: "Solution" }
   }
 
-  const title = `${service.title} | Maritime Software Solutions`
-  const description = service.page.tagline || service.description
-
-  return {
-    title,
-    description,
-    keywords: [
-      service.title,
-      "maritime software solutions",
-      "maritime custom software",
-      site.company.name,
-    ],
-    alternates: { canonical: service.href },
-    openGraph: {
-      title: `${service.title} | TailoredTech`,
-      description,
-    },
-  }
+  return buildSolutionMetadata(service)
 }
 
 export default async function SolutionPage({ params }: PageProps) {
@@ -52,5 +40,21 @@ export default async function SolutionPage({ params }: PageProps) {
     notFound()
   }
 
-  return <SolutionDetail service={service} />
+  const breadcrumb = buildBreadcrumbJsonLd([
+    { name: "Home", path: "/" },
+    { name: "Solutions", path: "/services" },
+    { name: service.title, path: service.href },
+  ])
+
+  return (
+    <>
+      <JsonLd
+        data={[
+          breadcrumb,
+          buildSoftwareApplicationJsonLd(service),
+        ]}
+      />
+      <SolutionDetail service={service} />
+    </>
+  )
 }

@@ -105,7 +105,7 @@ export function BookDemoDialog({
             </DialogTitle>
             <DialogDescription className="text-sm leading-relaxed text-white/45">
               {sent
-                ? "Thanks — we’ll follow up within one business day."
+                ? "Thanks. We'll follow up within one business day."
                 : subtitle}
             </DialogDescription>
           </DialogHeader>

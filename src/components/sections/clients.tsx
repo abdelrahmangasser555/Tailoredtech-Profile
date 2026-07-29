@@ -27,7 +27,7 @@ function ClientLogoCard({
       href={url}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label={`${name} — ${sector}`}
+      aria-label={`${name}, ${sector}`}
       className="group relative inline-flex outline-none"
     >
       <div className="relative flex h-20 items-center md:h-24">

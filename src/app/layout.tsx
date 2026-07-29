@@ -5,8 +5,14 @@ import { Toaster } from "@/components/ui/sonner"
 import { Navbar } from "@/components/layout/navbar"
 import { Footer } from "@/components/layout/footer"
 import { SmoothScroll } from "@/components/motion/smooth-scroll"
+import { JsonLd } from "@/components/seo/json-ld"
 import { site } from "@/lib/content"
 import { buildThemeCss } from "@/lib/theme"
+import {
+  buildOrganizationJsonLd,
+  buildWebSiteJsonLd,
+  SITE_URL,
+} from "@/lib/seo"
 import "./globals.css"
 
 const geist = Geist({
@@ -23,27 +29,39 @@ const geistMono = Geist_Mono({
 const { company } = site
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://tailoredtech.io"),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: company.seo.title,
     template: `%s | ${company.name}`,
   },
   description: company.seo.description,
   keywords: company.seo.keywords,
-  authors: [{ name: company.legalName }],
+  authors: [{ name: company.legalName, url: SITE_URL }],
   creator: company.name,
+  publisher: company.legalName,
+  category: "technology",
+  applicationName: company.name,
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://tailoredtech.io",
+    url: SITE_URL,
     siteName: company.name,
     title: company.seo.title,
     description: company.seo.description,
+    images: [
+      {
+        url: "/logo-light.svg",
+        width: 512,
+        height: 512,
+        alt: company.logo.alt,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: company.seo.title,
     description: company.seo.description,
+    images: ["/logo-light.svg"],
   },
   robots: {
     index: true,
@@ -53,10 +71,19 @@ export const metadata: Metadata = {
       follow: true,
       "max-image-preview": "large",
       "max-snippet": -1,
+      "max-video-preview": -1,
     },
   },
   alternates: {
     canonical: "/",
+    languages: {
+      "en-US": "/",
+      "x-default": "/",
+    },
+  },
+  icons: {
+    icon: "/logo.svg",
+    apple: "/logo.svg",
   },
 }
 
@@ -67,23 +94,6 @@ export const viewport: Viewport = {
   ],
   width: "device-width",
   initialScale: 1,
-}
-
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  name: company.legalName,
-  alternateName: company.name,
-  description: company.seo.description,
-  url: "https://tailoredtech.io",
-  email: company.contact.email,
-  telephone: company.contact.phone,
-  address: {
-    "@type": "PostalAddress",
-    addressLocality: company.contact.city,
-  },
-  sameAs: Object.values(company.social),
-  knowsAbout: company.seo.keywords,
 }
 
 export default function RootLayout({
@@ -107,9 +117,8 @@ export default function RootLayout({
     >
       <head>
         <style dangerouslySetInnerHTML={{ __html: buildThemeCss() }} />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        <JsonLd
+          data={[buildOrganizationJsonLd(company), buildWebSiteJsonLd()]}
         />
       </head>
       <body className="min-h-full flex flex-col overflow-x-clip font-sans">
