@@ -1,110 +1,110 @@
-"use client"
+"use client";
 
-import { useEffect, useRef, useState } from "react"
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion"
-import gsap from "gsap"
-import { useGSAP } from "@gsap/react"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
-import { cn } from "@/lib/utils"
+import { useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { cn } from "@/lib/utils";
 
-gsap.registerPlugin(ScrollTrigger, useGSAP)
+gsap.registerPlugin(ScrollTrigger, useGSAP);
 
-export type NumberTickerMode = "direct" | "full" | "compact"
+export type NumberTickerMode = "direct" | "full" | "compact";
 
 export type NumberTickerProps = {
   /** Target value. Absolute for `full` / `compact` (e.g. 2e9); display units for `direct` (e.g. 2). */
-  to: number
+  to: number;
   /** Start value. Defaults to 0. */
-  from?: number
+  from?: number;
   /**
    * - `direct` — count `from`→`to`, then append a static `suffix` (0→2 + "B")
    * - `full` — count the absolute number with separators (0→2,000,000,000)
    * - `compact` — count absolute value while the unit letter scales K→M→B
    */
-  mode?: NumberTickerMode
+  mode?: NumberTickerMode;
   /** Static suffix for `direct` mode (e.g. "B", "M+", "%"). */
-  suffix?: string
+  suffix?: string;
   /** Optional prefix (e.g. "$"). */
-  prefix?: string
+  prefix?: string;
   /** Pixel-font "+" after the number / unit (e.g. 2B+). */
-  plus?: boolean
+  plus?: boolean;
   /** Decimal places for `direct` and while in compact units. Default 0. */
-  decimals?: number
+  decimals?: number;
   /** Animation length in seconds. */
-  duration?: number
+  duration?: number;
   /** GSAP ease. */
-  ease?: string
+  ease?: string;
   /** Play once when scrolled into view. */
-  once?: boolean
+  once?: boolean;
   /** ScrollTrigger start. */
-  start?: string
-  className?: string
-  numberClassName?: string
-  unitClassName?: string
-  prefixClassName?: string
-  plusClassName?: string
-}
+  start?: string;
+  className?: string;
+  numberClassName?: string;
+  unitClassName?: string;
+  prefixClassName?: string;
+  plusClassName?: string;
+};
 
 type CompactParts = {
-  amount: string
-  unit: string
-}
+  amount: string;
+  unit: string;
+};
 
 function roundTo(value: number, decimals: number) {
-  const factor = 10 ** decimals
-  return Math.round(value * factor) / factor
+  const factor = 10 ** decimals;
+  return Math.round(value * factor) / factor;
 }
 
 function formatAmount(value: number, decimals: number) {
-  const rounded = roundTo(value, decimals)
+  const rounded = roundTo(value, decimals);
   if (decimals <= 0) {
-    return Math.round(rounded).toLocaleString("en-US")
+    return Math.round(rounded).toLocaleString("en-US");
   }
   return rounded.toLocaleString("en-US", {
     minimumFractionDigits: 0,
     maximumFractionDigits: decimals,
-  })
+  });
 }
 
 function formatFull(value: number) {
-  return Math.round(value).toLocaleString("en-US")
+  return Math.round(value).toLocaleString("en-US");
 }
 
 function formatCompact(value: number, decimals: number): CompactParts {
-  const abs = Math.abs(value)
-  let divisor = 1
-  let unit = ""
+  const abs = Math.abs(value);
+  let divisor = 1;
+  let unit = "";
 
   if (abs >= 1_000_000_000) {
-    divisor = 1_000_000_000
-    unit = "B"
+    divisor = 1_000_000_000;
+    unit = "B";
   } else if (abs >= 1_000_000) {
-    divisor = 1_000_000
-    unit = "M"
+    divisor = 1_000_000;
+    unit = "M";
   } else if (abs >= 1_000) {
-    divisor = 1_000
-    unit = "K"
+    divisor = 1_000;
+    unit = "K";
   }
 
-  let scaled = value / divisor
+  let scaled = value / divisor;
 
   // Promote unit when rounding would land on 1000K / 1000M
   if (unit && roundTo(Math.abs(scaled), decimals) >= 1000) {
     if (unit === "K") {
-      divisor = 1_000_000
-      unit = "M"
-      scaled = value / divisor
+      divisor = 1_000_000;
+      unit = "M";
+      scaled = value / divisor;
     } else if (unit === "M") {
-      divisor = 1_000_000_000
-      unit = "B"
-      scaled = value / divisor
+      divisor = 1_000_000_000;
+      unit = "B";
+      scaled = value / divisor;
     }
   }
 
   return {
     amount: formatAmount(scaled, unit ? decimals : 0),
     unit,
-  }
+  };
 }
 
 function formatParts(
@@ -114,15 +114,15 @@ function formatParts(
   suffix: string,
 ): CompactParts {
   if (mode === "full") {
-    return { amount: formatFull(value), unit: "" }
+    return { amount: formatFull(value), unit: "" };
   }
   if (mode === "direct") {
     return {
       amount: formatAmount(value, decimals),
       unit: suffix,
-    }
+    };
   }
-  return formatCompact(value, decimals)
+  return formatCompact(value, decimals);
 }
 
 /**
@@ -143,7 +143,7 @@ function formatParts(
 export function NumberTicker({
   to,
   from = 0,
-  mode = "compact",
+  mode = "compact", // direct, full, compact
   suffix = "",
   prefix = "",
   plus = false,
@@ -158,29 +158,29 @@ export function NumberTicker({
   prefixClassName,
   plusClassName,
 }: NumberTickerProps) {
-  const reduce = useReducedMotion()
-  const rootRef = useRef<HTMLSpanElement>(null)
-  const valueRef = useRef({ current: from })
+  const reduce = useReducedMotion();
+  const rootRef = useRef<HTMLSpanElement>(null);
+  const valueRef = useRef({ current: from });
   const [parts, setParts] = useState<CompactParts>(() =>
     formatParts(reduce ? to : from, mode, decimals, suffix),
-  )
+  );
 
   useEffect(() => {
-    if (mode !== "direct") return
-    setParts((prev) => ({ ...prev, unit: suffix }))
-  }, [mode, suffix])
+    if (mode !== "direct") return;
+    setParts((prev) => ({ ...prev, unit: suffix }));
+  }, [mode, suffix]);
 
   useGSAP(
     () => {
-      if (!rootRef.current) return
+      if (!rootRef.current) return;
 
       if (reduce) {
-        setParts(formatParts(to, mode, decimals, suffix))
-        return
+        setParts(formatParts(to, mode, decimals, suffix));
+        return;
       }
 
-      valueRef.current.current = from
-      setParts(formatParts(from, mode, decimals, suffix))
+      valueRef.current.current = from;
+      setParts(formatParts(from, mode, decimals, suffix));
 
       const tween = gsap.to(valueRef.current, {
         current: to,
@@ -190,23 +190,23 @@ export function NumberTicker({
         onUpdate: () => {
           setParts(
             formatParts(valueRef.current.current, mode, decimals, suffix),
-          )
+          );
         },
-      })
+      });
 
       const trigger = ScrollTrigger.create({
         trigger: rootRef.current,
         start,
         once,
         onEnter: () => {
-          tween.play(0)
+          tween.play(0);
         },
-      })
+      });
 
       return () => {
-        trigger.kill()
-        tween.kill()
-      }
+        trigger.kill();
+        tween.kill();
+      };
     },
     {
       scope: rootRef,
@@ -223,16 +223,16 @@ export function NumberTicker({
         reduce,
       ],
     },
-  )
+  );
 
   const ariaValue =
     mode === "direct"
       ? `${prefix}${formatAmount(to, decimals)}${suffix}${plus ? "+" : ""}`
       : mode === "full"
         ? `${prefix}${formatFull(to)}${plus ? "+" : ""}`
-        : `${prefix}${formatCompact(to, decimals).amount}${formatCompact(to, decimals).unit}${plus ? "+" : ""}`
+        : `${prefix}${formatCompact(to, decimals).amount}${formatCompact(to, decimals).unit}${plus ? "+" : ""}`;
 
-  const showUnit = mode === "direct" ? Boolean(suffix) : Boolean(parts.unit)
+  const showUnit = mode === "direct" ? Boolean(suffix) : Boolean(parts.unit);
 
   return (
     <span
@@ -292,5 +292,5 @@ export function NumberTicker({
         ) : null}
       </span>
     </span>
-  )
+  );
 }

@@ -18,7 +18,7 @@
         "headline": "Fleet Operations",
         "headlineAccent": "for every vessel",
         "tagline": "One operational picture for scheduling, crew, voyages, and performance — built around how your fleet actually runs.",
-        "heroVisual": "ocean",
+        "heroVisual": "heatmap-diamond",
         "demo": {
           "label": "Book a demo",
           "title": "Book a Fleet Operations demo",
