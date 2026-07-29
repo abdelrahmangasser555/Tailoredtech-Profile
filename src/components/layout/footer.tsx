@@ -30,7 +30,7 @@ export function Footer() {
                   href={url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-accent transition-colors"
+                  className="inline-flex items-center px-2 py-2 -mx-2 hover:text-accent transition-colors"
                 >
                   {key}
                 </a>
@@ -46,7 +46,7 @@ export function Footer() {
               <Link
                 key={link.label}
                 href={link.href}
-                className="text-sm text-white/55 hover:text-white transition-colors w-fit"
+                className="inline-flex py-1.5 text-sm text-white/55 hover:text-white transition-colors"
               >
                 {link.label}
               </Link>
@@ -61,7 +61,7 @@ export function Footer() {
               <Link
                 key={s.id}
                 href={s.href}
-                className="text-sm text-white/55 hover:text-accent transition-colors w-fit"
+                className="inline-flex py-1.5 text-sm text-white/55 hover:text-accent transition-colors"
               >
                 {s.title}
               </Link>
@@ -75,7 +75,7 @@ export function Footer() {
           </p>
           <a
             href={`mailto:${company.contact.email}`}
-            className="hover:text-accent transition-colors"
+            className="inline-flex py-1 hover:text-accent transition-colors"
           >
             {company.contact.email}
           </a>

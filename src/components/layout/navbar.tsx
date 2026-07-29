@@ -170,7 +170,7 @@ export function Navbar() {
                     <Link
                       key={link.label}
                       href={link.href}
-                      className="rounded-none px-3 py-2.5 text-sm font-medium hover:bg-muted"
+                      className="rounded-none px-3 py-3 text-sm font-medium hover:bg-muted"
                     >
                       {link.label}
                     </Link>
@@ -183,7 +183,7 @@ export function Navbar() {
                       <Link
                         key={s.id}
                         href={s.href}
-                        className="flex items-center gap-3 rounded-none px-3 py-2 hover:bg-muted"
+                        className="flex items-center gap-3 rounded-none px-3 py-3 hover:bg-muted"
                       >
                         <ServiceVisual
                           icon={s.icon}

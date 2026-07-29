@@ -144,10 +144,10 @@ export function LayerCollapse() {
       style={{ height: "460vh" }}
       aria-label="How TailoredTech connects operations and IT"
     >
-      <div className="sticky top-0 flex h-svh overflow-hidden">
-        {/* Left copy — shifted right, wider, fewer words; nudged down for Y center */}
-        <div className="pointer-events-none absolute inset-y-0 left-0 z-30 flex w-full max-w-6xl items-center pl-8 pt-16 md:pl-16 md:pt-20 lg:pl-24 xl:pl-28">
-          <div className="relative w-[min(88vw,32rem)] translate-y-6 md:translate-y-10">
+      <div className="sticky top-0 flex h-svh flex-col overflow-hidden lg:flex-row lg:overflow-hidden">
+        {/* Left copy — stacked above deck on mobile; overlay on desktop */}
+        <div className="pointer-events-none z-30 flex w-full max-w-6xl shrink-0 items-center pl-5 pt-24 pb-2 md:pl-16 md:pt-20 lg:absolute lg:inset-y-0 lg:left-0 lg:pb-0 lg:pl-24 lg:pt-20 xl:pl-28">
+          <div className="relative w-full max-w-md translate-y-0 md:translate-y-10 lg:w-[min(88vw,32rem)]">
             <motion.div
               style={{ opacity: problemOpacity, y: problemY }}
               className="absolute inset-x-0 top-1/2 -translate-y-1/2"
@@ -193,7 +193,7 @@ export function LayerCollapse() {
         </div>
 
         <div
-          className="relative mx-auto flex h-full w-full max-w-6xl items-center justify-center px-4 pb-10 pt-28 md:justify-end md:px-8 md:pb-12 md:pr-10 md:pt-32 lg:pr-14"
+          className="relative mx-auto flex min-h-0 w-full max-w-6xl flex-1 items-center justify-center px-4 pb-6 pt-2 md:justify-end md:px-8 md:pb-12 md:pr-10 md:pt-32 lg:h-full lg:w-full lg:flex-1 lg:pr-14"
           style={{ perspective: "1400px", perspectiveOrigin: "60% 50%" }}
         >
           <motion.div
@@ -203,7 +203,7 @@ export function LayerCollapse() {
               rotateZ: deckRotateZ,
               transformStyle: "preserve-3d",
             }}
-            className="relative h-[24rem] w-[min(88vw,30rem)] translate-y-6 will-change-transform md:h-[28rem] md:w-[34rem] md:translate-y-10"
+            className="relative h-[17rem] w-[min(92vw,21rem)] translate-y-0 will-change-transform sm:h-[20rem] md:h-[28rem] md:w-[34rem] md:translate-y-10 lg:h-[24rem] lg:w-[min(88vw,30rem)]"
           >
             <motion.div
               aria-hidden

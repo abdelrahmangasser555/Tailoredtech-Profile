@@ -39,6 +39,9 @@ function ClientLogoCard({
           className="h-full w-auto max-w-[min(100%,14rem)] object-contain object-left grayscale transition-[filter] duration-500 ease-out group-hover:grayscale-0 group-focus-visible:grayscale-0"
         />
       </div>
+      <p className="mt-2 font-mono text-[10px] tracking-[0.18em] uppercase text-foreground/45 md:hidden">
+        {sector}
+      </p>
 
       <div
         role="tooltip"

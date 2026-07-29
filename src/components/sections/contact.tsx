@@ -44,14 +44,14 @@ export function Contact() {
             <div className="mt-10 flex flex-col gap-2 text-sm text-white/45">
               <a
                 href={`mailto:${company.contact.email}`}
-                className="hover:text-accent transition-colors w-fit"
+                className="inline-flex py-1 hover:text-accent transition-colors"
               >
                 {company.contact.email}
               </a>
               {company.contact.phone ? (
                 <a
                   href={`tel:${company.contact.phone.replace(/\s/g, "")}`}
-                  className="hover:text-accent transition-colors w-fit"
+                  className="inline-flex py-1 hover:text-accent transition-colors"
                 >
                   {company.contact.phone}
                 </a>

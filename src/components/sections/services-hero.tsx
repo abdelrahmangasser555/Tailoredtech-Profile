@@ -39,7 +39,7 @@ export function ServicesHero() {
   const reduce = useReducedMotion();
 
   return (
-    <section className="relative flex h-svh flex-col overflow-hidden bg-black text-white [--accent:#D4FF00] [--accent-foreground:#0A0A0A] lg:block">
+    <section className="relative flex min-h-svh flex-col overflow-x-hidden bg-black text-white [--accent:#D4FF00] [--accent-foreground:#0A0A0A] lg:h-svh lg:overflow-hidden">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 z-0 opacity-50"
@@ -61,7 +61,7 @@ export function ServicesHero() {
         />
       </div>
 
-      <div className="relative z-10 mx-auto grid h-full w-full max-w-7xl items-center gap-8 px-5 pt-28 pb-10 md:px-8 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-6 lg:px-10 lg:pt-24 lg:pb-16">
+      <div className="relative z-10 mx-auto grid w-full max-w-7xl flex-1 items-center gap-6 px-5 pt-28 pb-10 md:gap-8 md:px-8 lg:grid lg:h-full lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-6 lg:px-10 lg:pt-24 lg:pb-16">
         <div className="relative z-20 flex max-w-xl flex-col gap-5 lg:-translate-y-6 lg:gap-6">
           <motion.p
             initial={{ opacity: 0, y: 12 }}
@@ -97,18 +97,18 @@ export function ServicesHero() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.28, ease: EASE }}
-            className="flex flex-wrap gap-3 pt-1"
+            className="flex flex-col gap-3 pt-1 lg:flex-row lg:flex-wrap"
           >
             <Link
               href="/#contact"
-              className="inline-flex h-11 items-center gap-2 bg-accent px-5 text-sm font-medium text-accent-foreground transition hover:brightness-95"
+              className="inline-flex h-11 w-full items-center justify-center gap-2 bg-accent px-5 text-sm font-medium text-accent-foreground transition hover:brightness-95 lg:w-auto"
             >
               {company.contact.cta}
               <ArrowUpRight className="size-4" />
             </Link>
             <Link
               href="#fleet-operations"
-              className="inline-flex h-11 items-center gap-2 border border-white/25 px-5 text-sm font-medium text-white transition hover:bg-white/5"
+              className="inline-flex h-11 w-full items-center justify-center gap-2 border border-white/25 px-5 text-sm font-medium text-white transition hover:bg-white/5 lg:w-auto"
             >
               View services
               <ArrowUpRight className="size-4" />
@@ -120,9 +120,9 @@ export function ServicesHero() {
           initial={{ opacity: 0, scale: 0.94 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, delay: 0.2, ease: EASE }}
-          className="relative z-10 mx-auto flex w-full max-w-130 items-center justify-center lg:mx-0 lg:max-w-none lg:justify-self-end"
+          className="relative z-10 mx-auto flex w-full max-w-130 items-center justify-center max-lg:mt-2 lg:mx-0 lg:max-w-none lg:justify-self-end"
         >
-          <div className="relative aspect-square w-full max-w-[min(88vw,480px)] lg:max-w-[min(46vw,560px)]">
+          <div className="relative aspect-square w-full max-w-[min(84vw,360px)] sm:max-w-[min(80vw,400px)] md:max-w-[min(88vw,480px)] lg:max-w-[min(46vw,560px)]">
             <div
               aria-hidden
               className="pointer-events-none absolute inset-[8%] rounded-full bg-[radial-gradient(circle,rgba(212,255,0,0.12),transparent_68%)]"

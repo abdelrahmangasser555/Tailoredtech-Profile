@@ -101,7 +101,7 @@ export function Timeline() {
 
         {/* Intro — visible at start, flies past camera into the tunnel */}
         <motion.div
-          className="pointer-events-none absolute inset-x-0 top-[18%] z-20 mx-auto w-full max-w-6xl px-5 md:top-[20%] md:px-8"
+          className="absolute inset-x-0 top-[14%] z-20 mx-auto w-full max-w-6xl px-5 md:top-[20%] md:px-8"
           style={
             reduce
               ? undefined
@@ -128,14 +128,14 @@ export function Timeline() {
 
         {/* Year stack — rises into view after intro exits */}
         <motion.div
-          className="absolute inset-x-0 bottom-[10%] z-20 mx-auto w-full max-w-6xl px-5 md:bottom-[12%] md:px-8"
+          className="absolute inset-x-0 bottom-[8%] z-20 mx-auto w-full max-w-6xl px-5 md:bottom-[12%] md:px-8"
           style={{
             y: reduce ? 0 : yearsLift,
             opacity: reduce ? 1 : yearsOpacity,
           }}
         >
           <div
-            className="relative h-[min(44vh,20rem)] md:h-[min(48vh,22rem)]"
+            className="relative h-[min(38vh,17rem)] md:h-[min(48vh,22rem)]"
             style={{ transformStyle: "preserve-3d" }}
           >
             {items.map((item, i) => {
@@ -254,7 +254,7 @@ function YearCard({
             transition={{ duration: 0.5, ease: EASE }}
           >
             <p
-              className="font-pixel-circle text-7xl md:text-8xl lg:text-9xl font-medium tracking-[-0.04em] leading-none text-[#0A0A0A]"
+              className="font-pixel-circle text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-medium tracking-[-0.04em] leading-none text-[#0A0A0A]"
               style={{ WebkitTextStroke: "1px #0A0A0A", paintOrder: "stroke fill" }}
             >
               {item.year}
@@ -281,7 +281,7 @@ function YearCard({
 
       {!isActive && (
         <div aria-hidden className="opacity-40">
-          <p className="font-pixel-circle text-7xl md:text-8xl font-medium tracking-[-0.04em] leading-none text-[#141414]">
+          <p className="font-pixel-circle text-5xl sm:text-6xl md:text-8xl font-medium tracking-[-0.04em] leading-none text-[#141414]">
             {item.year}
           </p>
           <h3 className="mt-6 font-heading text-xl md:text-2xl font-medium tracking-tight">

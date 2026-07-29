@@ -354,7 +354,7 @@ function FleetShader({ visible, reduce }: { visible: boolean; reduce: boolean })
 function ProductsDiamond({ visible, reduce }: { visible: boolean; reduce: boolean }) {
   return (
     <motion.div
-      className="pointer-events-none absolute left-1/2 top-[42%] z-0 h-[min(34vh,300px)] w-[min(34vh,300px)] -translate-x-1/2 -translate-y-1/2 md:h-[min(38vh,340px)] md:w-[min(38vh,340px)]"
+      className="pointer-events-none absolute left-1/2 top-[30%] z-0 h-[min(26vh,200px)] w-[min(26vh,200px)] -translate-x-1/2 -translate-y-1/2 md:top-[42%] md:h-[min(38vh,340px)] md:w-[min(38vh,340px)]"
       aria-hidden
       initial={false}
       animate={{ opacity: visible ? 1 : 0, scale: visible ? 1 : 0.94 }}
@@ -521,7 +521,7 @@ function FleetVessel({
       <img
         src={encodeURI(src)}
         alt=""
-        className="h-[min(14vh,88px)] w-auto min-w-[min(52vw,280px)] max-w-none object-contain opacity-90 md:h-[min(16vh,104px)] lg:h-[min(18vh,120px)]"
+        className="h-[min(10vh,56px)] w-auto min-w-[min(42vw,180px)] max-w-none object-contain opacity-90 md:h-[min(16vh,104px)] md:min-w-[min(52vw,280px)] lg:h-[min(18vh,120px)]"
         style={{
           transform: "scaleX(-1)",
           filter: "grayscale(1) contrast(1.05)",
@@ -599,7 +599,7 @@ function FleetScene({ visible, highlights, reduce }: { visible: boolean; highlig
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, y: -12 }}
               transition={{ duration: 0.6, delay: 1 + i * 0.14, ease: EASE }}
-              className="absolute border border-foreground/15 bg-white/95 px-5 py-4 shadow-[0_12px_48px_rgba(0,0,0,0.08)]"
+              className="absolute max-md:hidden border border-foreground/15 bg-white/95 px-5 py-4 shadow-[0_12px_48px_rgba(0,0,0,0.08)]"
               style={{
                 top: i === 0 ? "12%" : "54%",
                 left: i === 0 ? "5%" : undefined,
@@ -676,7 +676,7 @@ function ProductsScene({ visible, products, reduce }: { visible: boolean; produc
       <ProductsDiamond visible={visible} reduce={reduce} />
 
       {/* Product stack — right column */}
-      <div className="absolute right-[4%] top-[12%] flex w-[min(44vw,18rem)] flex-col gap-3 md:right-[6%] md:w-[min(36vw,20rem)] md:gap-3.5">
+      <div className="absolute right-[4%] top-[12%] flex w-[min(44vw,18rem)] flex-col gap-3 max-md:hidden md:right-[6%] md:w-[min(36vw,20rem)] md:gap-3.5">
         <motion.div
           className="mb-1 border border-foreground/12 bg-white/95 px-4 py-3"
           initial={{ opacity: 0, y: 8 }}

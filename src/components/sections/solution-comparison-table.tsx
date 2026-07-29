@@ -73,13 +73,13 @@ export function SolutionComparisonTable({
           (overflow-x:auto creates a scrollport that breaks viewport sticky).
           border-collapse:collapse also breaks sticky — use separate.
         */}
-        <div className="mt-10 border border-foreground/12 bg-white max-md:overflow-x-auto">
+        <div className="mt-10 -mx-5 border border-foreground/12 bg-white px-5 max-md:overflow-x-auto md:mx-0 md:px-0">
           <table className="w-full min-w-[42rem] border-separate border-spacing-0 text-left">
             <thead>
               <tr>
                 <th
                   scope="col"
-                  className="sticky left-0 top-0 z-40 min-w-[11rem] border-b border-r border-foreground/12 bg-[#F4F4F1] px-4 py-3.5 font-mono text-[10px] font-medium tracking-[0.18em] uppercase text-foreground/45 shadow-[0_1px_0_0_rgba(0,0,0,0.08)] md:min-w-[14rem] md:px-5"
+                  className="sticky left-0 top-0 z-40 min-w-[11rem] border-b border-r border-foreground/12 bg-[#F4F4F1] px-4 py-3.5 font-mono text-[10px] font-medium tracking-[0.18em] uppercase text-foreground/45 shadow-[0_1px_0_0_rgba(0,0,0,0.08)] max-md:static max-md:left-auto max-md:shadow-none md:min-w-[14rem] md:px-5"
                 >
                   Capability
                 </th>
@@ -88,7 +88,7 @@ export function SolutionComparisonTable({
                     key={col.id}
                     scope="col"
                     className={cn(
-                      "sticky top-0 z-30 min-w-[8.5rem] border-b border-l border-foreground/12 px-4 py-3.5 font-pixel-circle text-sm font-medium tracking-tight shadow-[0_1px_0_0_rgba(0,0,0,0.08)] md:min-w-[10rem] md:px-5 md:text-[0.95rem]",
+                      "sticky top-0 z-30 min-w-[8.5rem] border-b border-l border-foreground/12 px-4 py-3.5 font-pixel-circle text-sm font-medium tracking-tight shadow-[0_1px_0_0_rgba(0,0,0,0.08)] max-md:static max-md:shadow-none md:min-w-[10rem] md:px-5 md:text-[0.95rem]",
                       col.highlight
                         ? "bg-[#EBEBE6] text-foreground"
                         : "bg-[#F4F4F1] text-foreground/70"
@@ -105,7 +105,7 @@ export function SolutionComparisonTable({
                   <th
                     scope="row"
                     className={cn(
-                      "sticky left-0 z-20 border-b border-r border-foreground/8 bg-white px-4 py-3.5 text-left text-sm font-medium text-foreground/80 shadow-[1px_0_0_0_rgba(0,0,0,0.04)] md:px-5",
+                      "sticky left-0 z-20 border-b border-r border-foreground/8 bg-white px-4 py-3.5 text-left text-sm font-medium text-foreground/80 shadow-[1px_0_0_0_rgba(0,0,0,0.04)] max-md:static max-md:left-auto max-md:shadow-none md:px-5",
                       "group-hover:bg-[#FAFAF8]"
                     )}
                   >

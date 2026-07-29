@@ -579,7 +579,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.65, delay: 0.22, ease: EASE }}
-              className="mt-5 hidden w-fit text-nowrap font-mono text-[0.95rem] font-normal leading-relaxed tracking-[0.01em]  lg:block lg:text-[1.05rem]"
+              className="mt-4 max-w-sm mx-auto text-center text-sm font-mono font-normal leading-relaxed tracking-[0.01em] lg:mt-5 lg:mx-0 lg:block lg:w-fit lg:text-left lg:text-nowrap lg:text-[1.05rem]"
             >
               <span className="text-white/45">{description.before}</span>
               <motion.span

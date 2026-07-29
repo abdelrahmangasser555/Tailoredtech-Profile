@@ -308,7 +308,7 @@ export function SolutionDetail({ service }: SolutionDetailProps) {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 16, scale: 0.96 }}
             transition={{ duration: 0.35, ease: EASE }}
-            className="fixed bottom-5 right-5 z-50 md:bottom-8 md:right-8"
+            className="fixed bottom-5 right-5 z-50 max-md:bottom-[max(1.25rem,env(safe-area-inset-bottom))] md:bottom-8 md:right-8"
           >
             <BookDemoDialog
               solutionTitle={service.title}
