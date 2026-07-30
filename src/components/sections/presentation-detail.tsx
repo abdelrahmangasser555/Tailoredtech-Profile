@@ -12,6 +12,7 @@ import {
 } from "@/components/sections/section-media"
 import { SectionChart } from "@/components/sections/section-chart"
 import { SectionLayerNav } from "@/components/sections/section-layer-nav"
+import { SectionMarkdown } from "@/components/sections/section-markdown"
 import {
   ComparisonSectionDivider,
   SolutionComparisonTable,
@@ -180,9 +181,9 @@ export function PresentationDetail({ presentation }: PresentationDetailProps) {
                   <h2 className="font-pixel-circle text-3xl font-medium tracking-tight text-white md:text-4xl">
                     {section.title}
                   </h2>
-                  <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/45 md:text-[1.05rem]">
-                    {section.body}
-                  </p>
+                  {section.body?.trim() ? (
+                    <SectionMarkdown content={section.body} tone="dark" />
+                  ) : null}
                   {section.bullets.length > 0 && (
                     <ul className="mt-8 space-y-3">
                       {section.bullets.map((bullet) => (
@@ -250,6 +251,24 @@ function PresentationHero({
       ref={sectionRef}
       className="relative flex min-h-[88svh] flex-col overflow-hidden bg-[var(--section-dark)] text-[var(--section-dark-fg,#f5f5f0)] lg:min-h-svh"
     >
+      {clientLogo ? (
+        <motion.div
+          initial={reduce ? false : { opacity: 0, y: -8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: EASE }}
+          className="absolute top-5 left-5 z-30 md:top-7 md:left-8 lg:left-10"
+        >
+          <Image
+            src={clientLogo}
+            alt={clientName ?? "Client"}
+            width={320}
+            height={110}
+            className="h-20 w-auto max-w-[min(70vw,18rem)] object-contain object-left brightness-0 invert md:h-24 md:max-w-[20rem] lg:h-28 lg:max-w-[22rem]"
+            priority
+          />
+        </motion.div>
+      ) : null}
+
       {glyphBackdrop ? (
         <div
           aria-hidden
@@ -273,7 +292,7 @@ function PresentationHero({
         </div>
       ) : null}
 
-      <div className="relative z-10 mx-auto grid w-full max-w-7xl flex-1 items-center gap-10 px-5 pt-16 pb-14 md:px-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-8 lg:px-10 lg:pt-20 lg:pb-16">
+      <div className="relative z-10 mx-auto grid w-full max-w-7xl flex-1 items-center gap-10 px-5 pt-28 pb-14 md:px-8 md:pt-32 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-8 lg:px-10 lg:pt-36 lg:pb-16">
         <div className="relative z-20 flex max-w-xl flex-col gap-5 lg:-translate-y-4 lg:gap-6">
           <motion.div
             initial={reduce ? false : { opacity: 0, y: 12 }}
@@ -281,18 +300,6 @@ function PresentationHero({
             transition={{ duration: 0.55, ease: EASE }}
             className="flex flex-col gap-4"
           >
-            {clientLogo ? (
-              <div className="flex items-center gap-3">
-                <Image
-                  src={clientLogo}
-                  alt={clientName ?? "Client"}
-                  width={220}
-                  height={72}
-                  className="h-14 w-auto max-w-[14rem] object-contain object-left brightness-0 invert md:h-16 md:max-w-[16rem]"
-                  priority
-                />
-              </div>
-            ) : null}
             <p className="font-mono text-[11px] tracking-[0.24em] uppercase text-accent">
               {page.eyebrow}
             </p>

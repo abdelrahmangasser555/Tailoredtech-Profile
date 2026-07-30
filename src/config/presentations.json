@@ -1,92 +1,113 @@
 {
   "headline": "Presentations",
-  "subheadline": "Client-facing decks — direct URL only.",
+  "subheadline": "Client-facing decks. Direct URL only.",
   "items": [
     {
       "id": "bahri-bbs",
-      "title": "Bahri BBS",
-      "short": "In-house Behaviour Based Safety platform for Bahri — observations, ICP forms, red flags, and analytics.",
-      "description": "Presentation for the Bahri in-house Behaviour Based Safety (BBS) system: observation culture, dynamic ICP forms, red-flag escalation, vessel/office parity, and fleet analytics.",
+      "title": "Bahri In-house BBS",
+      "short": "Company-owned Behaviour Based Safety for Bahri vessels and shore teams.",
+      "description": "Presentation for Bahri in-house BBS: ICBS observations, observer accounts, vessel and office control, campaigns, and offline sync.",
       "createdAt": "2026-07-31",
       "updatedAt": "2026-07-31",
-      "brandClass": "",
+      "brandClass": "brand-bahri",
       "clientLogo": "/clients/bahri-no-background.png",
       "clientName": "Bahri",
       "href": "/presentations/bahri-bbs",
       "page": {
         "enabled": true,
-        "eyebrow": "In-house platform",
-        "headline": "Behaviour Based",
-        "headlineAccent": "Safety",
-        "tagline": "A Bahri-branded BBS programme for vessel and office — dynamic ICP forms, red flags, and analytics built around safety culture, not just counts.",
+        "eyebrow": "",
+        "headline": "In-house",
+        "headlineAccent": "Behaviour Based Safety",
+        "tagline": "A company-owned Behaviour Based Safety platform for ICBS observations, observer accountability, fleet visibility, and shore governance.",
         "heroVisual": "engine",
         "showExplore": false,
         "glyphBackdrop": false,
         "outcomes": [
-          { "value": "ICP", "label": "dynamic forms", "icon": "Layout" },
-          { "value": "Deep", "label": "fleet analytics", "icon": "ChartLine" },
           {
-            "value": "1",
-            "label": "culture, one programme",
+            "value": "4k",
+            "label": "crew accounts in scope",
             "icon": "ShareNetwork"
-          }
+          },
+          { "value": "1.5k", "label": "observer accounts", "icon": "Eye" },
+          { "value": "107", "label": "vessels", "icon": "Boat" }
         ],
         "comparison": {
           "enabled": true,
-          "eyebrow": "Fit",
-          "title": "Why an in-house BBS for Bahri",
+          "eyebrow": "Compare",
+          "title": "Bahri in-house BBS vs Dekra BBS",
           "columns": [
-            { "id": "bahri", "label": "Bahri BBS", "highlight": true },
-            { "id": "generic", "label": "Generic QHSE" },
-            { "id": "paper", "label": "Paper / spreadsheets" }
+            { "id": "bahri", "label": "Bahri in-house", "highlight": true },
+            { "id": "dekra", "label": "Dekra BBS" }
           ],
           "rows": [
             {
-              "label": "Bahri branding & identity",
+              "label": "Individual observer accounts and dashboards",
               "cells": [
                 { "type": "check", "value": true },
+                { "type": "x", "value": false }
+              ]
+            },
+            {
+              "label": "Responsive reporting under multi-organisation load",
+              "cells": [
+                { "type": "check", "value": true },
+                { "type": "text", "value": "Shared load" }
+              ]
+            },
+            {
+              "label": "Company ownership of data and hosting",
+              "cells": [
+                { "type": "check", "value": true },
+                { "type": "text", "value": "Third-party" }
+              ]
+            },
+            {
+              "label": "Strong authentication and vessel traceability",
+              "cells": [
+                { "type": "check", "value": true },
+                { "type": "text", "value": "Limited" }
+              ]
+            },
+            {
+              "label": "Annual multi-tenant subscription",
+              "cells": [
                 { "type": "x", "value": false },
+                { "type": "check", "value": true }
+              ]
+            },
+            {
+              "label": "Room to enhance without vendor gatekeeping",
+              "cells": [
+                { "type": "check", "value": true },
                 { "type": "x", "value": false }
               ]
             },
             {
-              "label": "International BBS methodology",
+              "label": "Admin control beyond end-user configuration",
               "cells": [
                 { "type": "check", "value": true },
-                { "type": "text", "value": "Partial" },
-                { "type": "x", "value": false }
+                { "type": "text", "value": "End user" }
               ]
             },
             {
-              "label": "Dynamic ICP + attachments",
+              "label": "Red Flag alerts from observer to office",
               "cells": [
                 { "type": "check", "value": true },
-                { "type": "text", "value": "Cards" },
-                { "type": "x", "value": false }
+                { "type": "text", "value": "Basic" }
               ]
             },
             {
-              "label": "Red flags & escalation",
+              "label": "Unique ICB numbering, feedback, and barriers",
               "cells": [
                 { "type": "check", "value": true },
-                { "type": "text", "value": "Partial" },
-                { "type": "x", "value": false }
+                { "type": "text", "value": "Partial" }
               ]
             },
             {
-              "label": "Vessel + office parity",
+              "label": "Add or edit ICBS categories and vessel-specific ops",
               "cells": [
                 { "type": "check", "value": true },
-                { "type": "text", "value": "Partial" },
-                { "type": "x", "value": false }
-              ]
-            },
-            {
-              "label": "Custom analytics for Bahri KPIs",
-              "cells": [
-                { "type": "check", "value": true },
-                { "type": "text", "value": "Limited" },
-                { "type": "x", "value": false }
+                { "type": "text", "value": "Limited" }
               ]
             }
           ]
@@ -94,129 +115,63 @@
         "sections": [
           {
             "id": "overview",
-            "title": "Overview",
-            "body": "Bahri BBS follows international behaviour-based safety practice — proactive observation, positive reinforcement, and data-driven intervention — tailored as an in-house platform with Bahri’s navy and orange identity across vessel and office.",
-            "bullets": [
-              "Built on international BBS standards",
-              "Vessel and office roles with aligned permissions",
-              "Dynamic ICP forms, not static paper cards",
-              "File attachments on observations",
-              "Red flags for immediate escalation"
-            ],
+            "title": "What we are building",
+            "body": "Bahri needs a **single BBS platform** that captures every ICBS observation, supports analysis and reporting, and fits local operating practice.\n\n### Programme requirements\n\n- One unified place for all Inventory of Critical Behaviors observations\n- Record against **individual users** or **vessels only**, based on configuration\n- Main Observer as free text when needed\n- Deep sorting, filtering, heat maps, and local customization\n- Mobile app for crew and observers, with shore office on web\n\nScale we design for: about **4,000 crew**, **1,500 observers**, and **107 vessels**.",
+            "bullets": [],
             "video": null,
             "images": [],
-            "mermaid": "flowchart LR\n  Observe -.-> ICP[ICP form]\n  ICP -.-> Flag[Red flag?]\n  Flag -.-> Action",
-            "mermaidTitle": "Observation loop",
-            "mermaidCaption": "Observe → record → act",
+            "mermaid": "flowchart LR\n  Form[ICBS form] -.-> Analysis[Deep analysis]\n  Analysis -.-> Sort[Data sorting]\n  Analysis -.-> Local[Local customization]\n  Analysis -.-> Filter[Filtering]\n  Analysis -.-> Heat[Heat maps]",
+            "mermaidTitle": "Observation to insight",
+            "mermaidCaption": "Form in, analysis out",
             "chart": null
           },
           {
-            "id": "observations",
-            "title": "ICP forms & culture",
-            "body": "ICP forms adapt to Bahri behaviour categories, locations, and vessel types. Observers record safe and at-risk behaviours, attach evidence, and comment for context. Red flags escalate urgent conditions without breaking the non-punitive culture BBS depends on.",
-            "bullets": [
-              "Configurable behaviour categories and locations",
-              "Comments on every observation",
-              "File attachments for evidence",
-              "Red flag routing for urgent items",
-              "Stop-work and hazard observation support"
-            ],
+            "id": "people",
+            "title": "Roles and hierarchy",
+            "body": "Three pillars sit in one ecosystem: **Office**, **Vessels**, and **Crew** (with a large observer subset).\n\n### Office\n\n- **Admin** for vessels, users, permissions, and broadcasts\n- General office users (HSEQ, superintendents, fleet)\n- **Office observers** who can observe shore-side or on vessel visits without a vessel sign-on dance\n\n### Vessels\n\n- Fleet and type-wise vessel profiles\n- Particulars feed analytics and filtering\n- Observation activity and lists move to **office approval** for wider visibility\n\n### Crew and observers\n\n- Crew accounts: name, nationality, rank, ID, vessel link\n- Dedicated **observer accounts** with verification, session, and personal dashboard\n- Sign-on and sign-off can start from office, vessel, or observer, with approval where needed\n\nApp surfaces for people: self-view account, observations plus schedule, activity, analysis, broadcast, chatroom.",
+            "bullets": [],
             "video": null,
             "images": [],
-            "mermaid": "flowchart TD\n  Safe -.-> Record\n  AtRisk[At-risk] -.-> Record\n  Record -.-> Review\n  Review -.-> Talk[Toolbox talk]",
-            "mermaidTitle": "Behaviour capture",
-            "mermaidCaption": "Safe and at-risk, same flow",
+            "mermaid": "flowchart TD\n  Office[Office] -.-> Vessel[Vessels]\n  Office -.-> Crew[Crew and observers]\n  Vessel -.-> Crew\n  Office -.-> Adm[Admin]\n  Office -.-> Users[Office users]\n  Office -.-> OffObs[Office observers]\n  OffObs -.-> ShoreObs[Shore observations]\n  OffObs -.-> VisitObs[Vessel visit observations]\n  Crew -.-> Acc[Personal accounts]\n  Crew -.-> Obs[Observers onboard]",
+            "mermaidTitle": "Three pillars",
+            "mermaidCaption": "Office, vessels, and people in one loop",
             "chart": null
           },
           {
-            "id": "analytics",
-            "title": "Analytics dashboards",
-            "body": "Deep analytics turn observation data into fleet-wide insight. Placeholder metrics below are illustrative — swap numbers and chart type in presentations.json as content firms up.",
-            "bullets": [
-              "Custom dashboards for safety and fleet teams",
-              "Trend analysis by vessel, team, and behaviour",
-              "Root-cause patterns across the fleet",
-              "Export for management and audit reporting",
-              "KPIs tuned with Bahri superintendents"
-            ],
+            "id": "fleet",
+            "title": "Vessel and observation flow",
+            "body": "### Vessel path\n\n1. Vessel profile and particulars\n2. Observation activity on board\n3. List of observations\n4. Office approval before wider sharing\n\n### Schedule guidance\n\n- Example target: **5 observations per month** per observer (configurable)\n- Company schedule and focus campaigns sit beside free observation\n- Observers stay free to record anything they see; schedule covers critical ops\n\n### Who adds whom\n\n- Office can sign on crew and assign observers\n- Vessel can add observers onboard\n- Sign-off can close from crew, vessel, or office with a full audit trail",
+            "bullets": [],
             "video": null,
             "images": [],
-            "mermaid": "flowchart LR\n  Data -.-> Trends\n  Trends -.-> Dash[Custom dash]\n  Dash -.-> Action",
-            "mermaidTitle": "Analytics path",
-            "mermaidCaption": "Data → insight → action",
-            "chart": {
-              "enabled": true,
-              "type": "area",
-              "title": "Fleet observations",
-              "description": "Illustrative monthly safe vs at-risk observations — replace with live Bahri data.",
-              "caption": "Sample data · editable in config",
-              "xKey": "month",
-              "series": [
-                {
-                  "key": "safe",
-                  "label": "Safe",
-                  "color": "var(--chart-2)"
-                },
-                {
-                  "key": "atRisk",
-                  "label": "At-risk",
-                  "color": "var(--chart-1)"
-                }
-              ],
-              "data": [
-                { "month": "Jan", "safe": 420, "atRisk": 48 },
-                { "month": "Feb", "safe": 455, "atRisk": 41 },
-                { "month": "Mar", "safe": 510, "atRisk": 52 },
-                { "month": "Apr", "safe": 538, "atRisk": 39 },
-                { "month": "May", "safe": 572, "atRisk": 44 },
-                { "month": "Jun", "safe": 601, "atRisk": 36 }
-              ],
-              "stacked": false,
-              "showLegend": true,
-              "showGrid": true,
-              "curve": "natural"
-            }
+            "mermaid": "flowchart TD\n  Vessel[Vessel] -.-> Part[Particulars]\n  Part -.-> Act[Observation activity]\n  Act -.-> List[Observation list]\n  List -.-> Appr[Office approval]\n  Sch[Schedule] -.-> Act\n  Sch -.-> Target[Monthly targets]\n  Sch -.-> Company[Company schedule]",
+            "mermaidTitle": "From vessel to approval",
+            "mermaidCaption": "Activity in, governance out",
+            "chart": null
           },
           {
-            "id": "platform",
-            "title": "Platform layer",
-            "body": "Bahri BBS sits on a modern delivery stack — auditing, timestamping, SSO-ready access, and migration from legacy BBS spreadsheets or third-party tools. Content and workflows will be refined with Bahri stakeholders.",
-            "bullets": [
-              "Automatic digital auditing and timestamping",
-              "Roles for vessel crews and office teams",
-              "Customizations and data migration path",
-              "Bahri branding end-to-end",
-              "Usability shaped with crews and captains"
-            ],
+            "id": "icb",
+            "title": "ICBS form extras",
+            "body": "Keep the familiar ICBS form shape, then add what the whiteboard called out as must-haves.\n\n### Additional form capabilities\n\n- **Red Flag** so the observer alerts the office immediately\n- Unique **ICB numbers** for search and audit\n- **Feedback** after the conversation with the person observed\n- **Barrier** identification for why the behaviour happened\n- Ability for office to **add or edit ICBS** categories\n- **Vessel-specific operations** to observe (mooring, cargo, pilot ladder, and more)\n\nOffice can run deep analysis with sorting, local customization, filtering, and heat maps on the collected set.",
+            "bullets": [],
             "video": null,
             "images": [],
-            "mermaid": null,
-            "mermaidTitle": null,
-            "mermaidCaption": null,
-            "chart": {
-              "enabled": true,
-              "type": "bar",
-              "title": "Observation mix by category",
-              "description": "Placeholder category split — adjust series and values in config.",
-              "caption": "Sample · bar chart",
-              "xKey": "category",
-              "series": [
-                {
-                  "key": "count",
-                  "label": "Observations",
-                  "color": "var(--chart-1)"
-                }
-              ],
-              "data": [
-                { "category": "PPE", "count": 186 },
-                { "category": "Housekeeping", "count": 142 },
-                { "category": "Tools", "count": 98 },
-                { "category": "Access", "count": 74 },
-                { "category": "Other", "count": 61 }
-              ],
-              "showLegend": false,
-              "showGrid": true
-            }
+            "mermaid": "flowchart LR\n  Obs[Observer] -.-> Form[ICBS form]\n  Form -.-> RF[Red Flag]\n  RF -.-> Office[Office alert]\n  Form -.-> ICB[ICB number]\n  Form -.-> FB[Feedback]\n  Form -.-> Barrier[Barrier]\n  Form -.-> VSpec[Vessel-specific op]",
+            "mermaidTitle": "Form extras",
+            "mermaidCaption": "Capture, escalate, explain",
+            "chart": null
+          },
+          {
+            "id": "connect",
+            "title": "Connect and operate",
+            "body": "### Always on the triangle\n\nOffice, observers, and vessels stay linked through broadcast, chatroom, and shared observation threads.\n\n### Day to day\n\n- Broadcast and alerts to crew, observers, or office groups\n- Chat for Red Flags and follow-up actions\n- Focus requests and safety campaigns with acknowledgement tracking\n- Cloud mobile and web, with **offline capture** and auto sync when the vessel reconnects\n\nThat closes the loop from form to fleet insight without leaving Bahri as a locked-in end user.",
+            "bullets": [],
+            "video": null,
+            "images": [],
+            "mermaid": "flowchart LR\n  Office[Office] -.-> Obs[Observers]\n  Obs -.-> Vessel[Vessel]\n  Vessel -.-> Office",
+            "mermaidTitle": "Office · observer · vessel",
+            "mermaidCaption": "One connected safety loop",
+            "chart": null
           }
         ]
       }

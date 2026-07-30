@@ -335,7 +335,7 @@ export function BrandedMermaid({
               Close
             </button>
           </div>
-          <div className="min-h-0 flex-1 overflow-auto overscroll-contain p-4 md:p-6">
+          <div className="mermaid-expand-scroll min-h-0 flex-1 overflow-auto overscroll-contain p-4 md:p-6">
             <div
               ref={expandedRef}
               className="mermaid-brand flex min-h-full items-center justify-center [&_svg]:mx-auto [&_svg]:max-h-[min(78vh,860px)]"

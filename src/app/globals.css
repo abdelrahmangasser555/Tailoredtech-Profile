@@ -261,3 +261,28 @@
   --chart-4: #a8a8aa;
   --chart-5: #001f3d;
 }
+
+/* Expanded mermaid — thin themed scrollbar (inherits --accent / --section-dark-fg) */
+.mermaid-expand-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in oklab, var(--accent) 55%, var(--section-dark-fg))
+    color-mix(in oklab, var(--section-dark-fg) 8%, transparent);
+}
+
+.mermaid-expand-scroll::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.mermaid-expand-scroll::-webkit-scrollbar-track {
+  background: color-mix(in oklab, var(--section-dark-fg) 6%, transparent);
+}
+
+.mermaid-expand-scroll::-webkit-scrollbar-thumb {
+  background: color-mix(in oklab, var(--accent) 50%, var(--section-dark-fg));
+  border: 1px solid color-mix(in oklab, var(--section-dark-fg) 12%, transparent);
+}
+
+.mermaid-expand-scroll::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in oklab, var(--accent) 75%, var(--section-dark-fg));
+}

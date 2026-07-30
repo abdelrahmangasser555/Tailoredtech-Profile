@@ -25,6 +25,7 @@ import {
 import { OutcomeIconBackdrop } from "@/components/sections/outcome-icon"
 import { SolutionHeroVisual, normalizeHeroVisual } from "@/components/sections/solution-hero-visual"
 import { SectionChart } from "@/components/sections/section-chart"
+import { SectionMarkdown } from "@/components/sections/section-markdown"
 import { Section } from "@/components/layout/section"
 import {
   getRelatedServices,
@@ -211,9 +212,9 @@ export function SolutionDetail({ service }: SolutionDetailProps) {
                 <h2 className="font-pixel-circle text-3xl font-medium tracking-tight text-white md:text-4xl">
                   {section.title}
                 </h2>
-                <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/45 md:text-[1.05rem]">
-                  {section.body}
-                </p>
+                {section.body?.trim() ? (
+                  <SectionMarkdown content={section.body} tone="dark" />
+                ) : null}
                 {section.bullets.length > 0 && (
                   <ul className="mt-8 space-y-3">
                     {section.bullets.map((bullet) => (

@@ -29,6 +29,12 @@ const SECTION_ICONS: Record<string, LucideIcon> = {
   settlement: BarChart3,
   fit: Users,
   delivery: Route,
+  ownership: Shield,
+  people: Users,
+  fleet: Layers,
+  icb: Eye,
+  connect: Route,
+  why: Shield,
 }
 
 type LayerSection = {
@@ -85,8 +91,8 @@ export function SectionLayerNav({
 
   const totalH = (sections.length - 1) * stride + openExtra + plateH + 8
   const focusSlot = slots[focusIndex]
-  // Mid-right of the plate (not the top tip)
-  const calloutTop = (focusSlot?.y ?? 0) + 54
+  // Vertically centered beside the active plate
+  const calloutTop = (focusSlot?.y ?? 0) + plateH / 2
   const calloutLeft = 10.85 + (focusSlot?.x ?? 0) / 16
 
   return (
@@ -171,7 +177,7 @@ export function SectionLayerNav({
           {focusSection && focusSlot && (
             <motion.div
               key={focusSection.id}
-              className="pointer-events-none absolute z-60"
+              className="pointer-events-none absolute z-60 -translate-y-1/2"
               style={{
                 top: calloutTop,
                 left: `${calloutLeft}rem`,
