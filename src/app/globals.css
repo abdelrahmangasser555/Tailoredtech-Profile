@@ -78,6 +78,8 @@
   --radius: 0rem;
   --section-dark: #050505;
   --section-light: #f7f7f2;
+  --section-dark-fg: #f5f5f0;
+  --section-dark-muted: #a3a3a3;
   --section-mesh: color-mix(in oklch, #D4FF00 14%, transparent);
   --sidebar: #f7f7f2;
   --sidebar-foreground: #0a0a0a;
@@ -87,6 +89,23 @@
   --sidebar-accent-foreground: #0a0a0a;
   --sidebar-border: #d4d4d4;
   --sidebar-ring: #D4FF00;
+
+  /* Layer nav defaults (TailoredTech lime plates) */
+  --layer-face-focus: color-mix(in oklab, var(--accent) 92%, white);
+  --layer-face-0: var(--accent);
+  --layer-face-1: color-mix(in oklab, var(--accent) 88%, black);
+  --layer-face-2: color-mix(in oklab, var(--accent) 78%, black);
+  --layer-face-3: color-mix(in oklab, var(--accent) 68%, black);
+  --layer-rim-mid: color-mix(in oklab, var(--accent) 42%, black);
+  --layer-rim-deep: color-mix(in oklab, var(--accent) 28%, black);
+  --layer-icon: #0a0a0a;
+  --layer-icon-focus: #0a0a0a;
+  --layer-icon-blend: multiply;
+  --layer-icon-blend-focus: multiply;
+
+  /* Mermaid / diagram accents */
+  --diagram-accent: var(--accent);
+  --diagram-line: var(--accent);
 }
 
 .dark {
@@ -152,4 +171,93 @@
     background: color-mix(in oklch, var(--accent) 45%, transparent);
     color: var(--foreground);
   }
+}
+
+/* ─── Presentation brand themes ─────────────────────────────────────────────
+ * Apply via presentations.json → brandClass (e.g. "brand-bahri").
+ * Cascades --accent / section / chart tokens into the presentation shell.
+ * Default TailoredTech lime stays on :root — these only scope when applied.
+ */
+
+.brand-bahri {
+  /* Core (from Bahri identity): Navy #003C71 · White #FFFFFF · Gray #A8A8AA · Orange #FF681D */
+  --accent: #e07040;
+  --accent-foreground: #ffffff;
+  --accent-soft: #c45a2a;
+  --ring: #e07040;
+
+  --background: #f4f6f9;
+  --foreground: #003c71;
+  --card: #ffffff;
+  --card-foreground: #003c71;
+  --popover: #ffffff;
+  --popover-foreground: #003c71;
+  --primary: #003c71;
+  --primary-foreground: #ffffff;
+  --secondary: #e8ecf1;
+  --secondary-foreground: #003c71;
+  --muted: #e8ecf1;
+  --muted-foreground: #5c6b7a;
+  --border: #c5ccd4;
+  --input: #c5ccd4;
+
+  --section-light: #ffffff;
+  --section-dark: #001f3d;
+  --section-dark-fg: #f4f6f9;
+  --section-dark-muted: #8fa3b8;
+  --section-mesh: color-mix(in oklab, #e07040 14%, transparent);
+
+  /* Layer nav: navy stack + one softer orange focus (not full neon plates) */
+  --layer-face-focus: #e07040;
+  --layer-face-0: #3d5f7a;
+  --layer-face-1: #31506a;
+  --layer-face-2: #274158;
+  --layer-face-3: #1e3346;
+  --layer-rim-mid: #152a3d;
+  --layer-rim-deep: #0d1c2b;
+  --layer-icon: #ffffff;
+  --layer-icon-focus: #ffffff;
+  --layer-icon-blend: normal;
+  --layer-icon-blend-focus: normal;
+
+  /* Diagrams: muted steel + soft orange, less neon border wash */
+  --diagram-accent: #c9784a;
+  --diagram-line: #8fa3b8;
+
+  /* Charts: soft coral + steel blue + gray (readable on navy) */
+  --chart-1: #e07040;
+  --chart-2: #6b9fc4;
+  --chart-3: #a8a8aa;
+  --chart-4: #c9784a;
+  --chart-5: #dce6ef;
+
+  color: var(--foreground);
+  background: var(--background);
+}
+
+/* Dark presentation surfaces inherit navy + orange without fighting Section */
+.brand-bahri [data-tone="dark"] {
+  --accent: #e07040;
+  --accent-foreground: #ffffff;
+  --accent-soft: #c45a2a;
+  --diagram-accent: #c9784a;
+  --diagram-line: #8fa3b8;
+  --chart-1: #e07040;
+  --chart-2: #6b9fc4;
+  --chart-3: #a8b4c0;
+  --chart-4: #c9784a;
+  --chart-5: #dce6ef;
+}
+
+.brand-bahri [data-tone="light"] {
+  /* Light: navy + gray; orange only as intentional accent (works on white) */
+  --accent: #e07040;
+  --accent-foreground: #ffffff;
+  --foreground: #003c71;
+  --muted-foreground: #5c6b7a;
+  --chart-1: #e07040;
+  --chart-2: #003c71;
+  --chart-3: #5b8db8;
+  --chart-4: #a8a8aa;
+  --chart-5: #001f3d;
 }

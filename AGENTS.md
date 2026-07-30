@@ -31,10 +31,11 @@ Brand-first maritime software marketing site (Next.js App Router). Content is JS
 | File | Role |
 |------|------|
 | `src/config/services.json` | Solutions list + each detail `page` |
+| `src/config/presentations.json` | Client presentations (direct URL; no nav/footer/CTAs) |
 | `src/config/hero.json` | Home hero morph, globe, glyphs |
 | `src/config/company.json` | Name, contact, stats, SEO |
 | `src/config/*.json` | clients, projects, timeline, navigation, theme |
-| `src/lib/content.ts` | `site` bag + `getServiceBySlug`, `getServiceSlugs`, `getRelatedServices` |
+| `src/lib/content.ts` | `site` bag + service/presentation helpers |
 
 ### Editing a solution
 
@@ -77,8 +78,10 @@ Icons for the layer nav are mapped in `src/components/sections/section-layer-nav
 | `/` | `src/app/page.tsx` — hero → clients → solutions → layer-collapse → stats → work → timeline → contact |
 | `/services` | `src/app/services/page.tsx` — services hero + index list |
 | `/services/[slug]` | `src/app/services/[slug]/page.tsx` — solution detail |
+| `/presentations` | `src/app/presentations/page.tsx` — direct-URL list (noindex, no nav/footer) |
+| `/presentations/[slug]` | `src/app/presentations/[slug]/page.tsx` — presentation detail |
 
-Sitemap includes all enabled solution slugs (`src/app/sitemap.ts`).
+Sitemap includes all enabled solution slugs (`src/app/sitemap.ts`). Presentations are **not** in the sitemap / robots (direct URL only).
 
 ## Main UI pieces
 
@@ -87,13 +90,16 @@ Sitemap includes all enabled solution slugs (`src/app/sitemap.ts`).
 | Home hero | `sections/hero.tsx` | Brand morph, globe, pixel type |
 | Services hero | `sections/services-hero.tsx` | Engine shader + CTAs |
 | Solution detail | `sections/solution-detail.tsx` | Hero, outcomes (+ icons), comparison, dark sections, float CTA |
+| Presentation detail | `sections/presentation-detail.tsx` | Like solution, no CTAs/related; `brandClass` + client logo |
+| Presentation list | `sections/presentation-list.tsx` | Mini-hero cards + created/updated dates |
 | Solution hero visual | `sections/solution-hero-visual.tsx` | `page.heroVisual`: engine / ocean / heatmap / glyph |
 | Comparison table | `sections/solution-comparison-table.tsx` | Optional `page.comparison`; sticky heads; dashed divider |
+| Section chart | `sections/section-chart.tsx` | Config-driven bar/line/area/pie/radar (shadcn + Recharts) |
 | Outcome icons | `sections/outcome-icon.tsx` | Phosphor bold watermarks for outcomes |
 | Layer nav | `sections/section-layer-nav.tsx` | Desktop-only isometric section deck |
 | Book demo | `sections/book-demo-dialog.tsx` | Dialog form; used in hero + sticky CTA |
 | Section shell | `layout/section.tsx` | `tone="light"\|"dark"`, shared header |
-| Nav / footer | `layout/navbar.tsx`, `footer.tsx` | Links use `service.href` |
+| Nav / footer | `layout/navbar.tsx`, `footer.tsx` | Hidden on `/presentations` via `SiteChrome` |
 | Motion | `motion/reveal.tsx`, `gsap-reveal.tsx` | Framer + GSAP; Lenis smooth scroll in layout |
 
 ## Solution detail behavior
@@ -112,11 +118,40 @@ Sitemap includes all enabled solution slugs (`src/app/sitemap.ts`).
 | `mermaid` | `string \| null` | Prefer dashed links (`-.->` / `-->>`) |
 | `mermaidTitle` | `string \| null` | Block title (not generic “Diagram”) |
 | `mermaidCaption` | `string \| null` | Optional line under the diagram |
+| `chart` | object \| `null` | Optional shadcn/Recharts chart — see below |
 
 **Components**
 - `SectionImageGrid` — default on solution pages
 - `SectionImageStack` — fanned stack; keep for other surfaces / experiments
 - `SectionVideo`, `BrandedMermaid` — video + brand-themed diagrams
+- `SectionChart` — config-driven charts (bar / line / area / pie / radar)
+
+### Section chart (`page.sections[].chart`)
+
+Works on **solutions and presentations**. Set `"enabled": false` or omit/`null` to hide.
+
+| Field | Notes |
+|--------|--------|
+| `type` | `bar` \| `line` \| `area` \| `pie` \| `radar` |
+| `title`, `description`, `caption` | Optional chrome around the chart |
+| `xKey` | Category field in each data row |
+| `valueKey` | Pie only — numeric field (defaults to first series key) |
+| `series[]` | `{ key, label, color? }` — `color` like `"var(--chart-1)"` |
+| `data[]` | Rows of numbers/strings keyed by `xKey` + series keys |
+| `stacked`, `showLegend`, `showGrid`, `curve` | Optional (`curve`: `natural` \| `linear` \| `step`) |
+
+### Presentations (`src/config/presentations.json`)
+
+Same section/outcomes/comparison shape as solutions, plus:
+
+| Field | Notes |
+|--------|--------|
+| `brandClass` | e.g. `"brand-bahri"` — CSS class in `globals.css` that remaps `--accent` / sections / charts |
+| `clientLogo`, `clientName` | Top-left hero logo |
+| `createdAt`, `updatedAt` | ISO dates — list page only, not inside the deck |
+| No `demo` / `related` | No Book demo, float CTA, related links, or site footer |
+
+Bahri brand tokens: navy `#003C71`, orange `#FF681D`, gray `#A8A8AA`, dark navy surfaces `#001F3D`.
 
 ### Comparison table (`page.comparison`)
 

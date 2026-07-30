@@ -2,12 +2,10 @@ import type { Metadata, Viewport } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
 import { GeistPixelCircle } from "geist/font/pixel"
 import { Toaster } from "@/components/ui/sonner"
-import { Navbar } from "@/components/layout/navbar"
-import { Footer } from "@/components/layout/footer"
+import { SiteChrome } from "@/components/layout/site-chrome"
 import { SmoothScroll } from "@/components/motion/smooth-scroll"
 import { JsonLd } from "@/components/seo/json-ld"
 import { site } from "@/lib/content"
-import { buildThemeCss } from "@/lib/theme"
 import {
   buildOrganizationJsonLd,
   buildWebSiteJsonLd,
@@ -117,18 +115,14 @@ export default function RootLayout({
           "--font-pixel-circle": "var(--font-geist-pixel-circle)",
         } as React.CSSProperties
       }
+      suppressHydrationWarning
     >
-      <head>
-        <style dangerouslySetInnerHTML={{ __html: buildThemeCss() }} />
+      <body className="min-h-full flex flex-col overflow-x-clip font-sans">
         <JsonLd
           data={[buildOrganizationJsonLd(company), buildWebSiteJsonLd()]}
         />
-      </head>
-      <body className="min-h-full flex flex-col overflow-x-clip font-sans">
         <SmoothScroll>
-          <Navbar />
-          <main className="flex-1 w-full overflow-x-clip">{children}</main>
-          <Footer />
+          <SiteChrome>{children}</SiteChrome>
           <Toaster />
         </SmoothScroll>
       </body>

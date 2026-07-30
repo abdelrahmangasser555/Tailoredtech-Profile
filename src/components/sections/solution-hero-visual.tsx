@@ -15,6 +15,24 @@ const HEATMAP_COLORS = [
   "#F5FFB0",
 ] as const
 
+/** Bahri-oriented ramp — deep navy → orange heat */
+export const BAHRI_HEATMAP_COLORS = [
+  "#001024",
+  "#001F3D",
+  "#003C71",
+  "#1A5A8A",
+  "#A85A30",
+  "#E07040",
+  "#F0B090",
+] as const
+
+export const BAHRI_ENGINE_COLORS = [
+  "#E07040",
+  "#C9784A",
+  "#003C71",
+  "#F0C4A8",
+] as const
+
 const HEATMAP_IMAGES = {
   diamond: "https://shaders.paper.design/images/logos/diamond.svg",
   eyes: "/assets/heatmap-eyes.svg",
@@ -28,10 +46,19 @@ export type HeroVisualKind =
   | "heatmap-eyes"
   | "glyph"
 
+export type HeroVisualPalette = {
+  engine?: string[]
+  heatmap?: string[]
+  oceanFront?: string
+  oceanBack?: string
+}
+
 type SolutionHeroVisualProps = {
   kind: string
   reduce?: boolean
   className?: string
+  /** Optional brand override — defaults keep TailoredTech lime */
+  palette?: HeroVisualPalette
 }
 
 /**
@@ -41,6 +68,7 @@ export function SolutionHeroVisual({
   kind,
   reduce = false,
   className,
+  palette,
 }: SolutionHeroVisualProps) {
   const visual = normalizeHeroVisual(kind)
   if (visual === "glyph") return null
@@ -49,11 +77,16 @@ export function SolutionHeroVisual({
     className ??
     "relative mx-auto aspect-square w-full max-w-md lg:max-w-none"
 
+  const engineColors = palette?.engine ?? [...ENGINE_COLORS]
+  const heatmapColors = palette?.heatmap ?? [...HEATMAP_COLORS]
+  const oceanFront = palette?.oceanFront ?? "#D4FF00"
+  const oceanBack = palette?.oceanBack ?? "#000000"
+
   if (visual === "engine") {
     return (
       <div className={shell}>
         <ColorPanels
-          colors={[...ENGINE_COLORS]}
+          colors={engineColors}
           colorBack="#ffffff00"
           density={5.03}
           angle1={0.68}
@@ -79,8 +112,8 @@ export function SolutionHeroVisual({
         <Dithering
           width="100%"
           height="100%"
-          colorBack="#000000"
-          colorFront="#D4FF00"
+          colorBack={oceanBack}
+          colorFront={oceanFront}
           shape="swirl"
           type="4x4"
           size={2}
@@ -101,7 +134,7 @@ export function SolutionHeroVisual({
         width="100%"
         height="100%"
         image={image}
-        colors={[...HEATMAP_COLORS]}
+        colors={heatmapColors}
         colorBack="#00000000"
         contour={0.55}
         angle={visual === "heatmap-eyes" ? 25 : 0}
@@ -144,3 +177,18 @@ export const HERO_VISUAL_OPTIONS = [
   "heatmap-eyes",
   "glyph",
 ] as const
+
+/** Resolve palette presets from brandClass */
+export function paletteForBrand(
+  brandClass: string | null | undefined
+): HeroVisualPalette | undefined {
+  if (brandClass === "brand-bahri") {
+    return {
+      engine: [...BAHRI_ENGINE_COLORS],
+      heatmap: [...BAHRI_HEATMAP_COLORS],
+      oceanFront: "#E07040",
+      oceanBack: "#001F3D",
+    }
+  }
+  return undefined
+}

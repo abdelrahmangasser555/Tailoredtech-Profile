@@ -22,7 +22,7 @@ export function Section({
       className={cn(
         "relative overflow-x-clip overflow-y-visible",
         tone === "dark"
-          ? "bg-[var(--section-dark)] text-[#f5f5f0] [--background:var(--section-dark)] [--foreground:#f5f5f0] [--muted-foreground:#a3a3a3] [--border:oklch(1_0_0_/_10%)] [--accent:#D4FF00] [--accent-foreground:#0A0A0A]"
+          ? "bg-[var(--section-dark)] text-[var(--section-dark-fg,#f5f5f0)] [--background:var(--section-dark)] [--foreground:var(--section-dark-fg,#f5f5f0)] [--muted-foreground:var(--section-dark-muted,#a3a3a3)] [--border:oklch(1_0_0_/_10%)] [--card:color-mix(in_oklab,var(--section-dark)_88%,white)] [--card-foreground:var(--section-dark-fg,#f5f5f0)]"
           : "bg-[var(--section-light)] text-foreground",
         className
       )}

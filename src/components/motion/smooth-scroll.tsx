@@ -30,11 +30,15 @@ export function resetScrollState() {
   lenis.resize()
 }
 
+/**
+ * Soft Lenis dimension refresh (e.g. after media inject).
+ * Prefer this over resetScrollState mid-scroll — start()/overflow churn causes hitches.
+ */
 let refreshTimer = 0
 export function refreshSmoothScroll() {
   window.clearTimeout(refreshTimer)
   refreshTimer = window.setTimeout(() => {
-    resetScrollState()
+    window.__lenis?.resize()
   }, 160)
 }
 

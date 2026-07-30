@@ -24,11 +24,13 @@ import {
 } from "@/components/sections/solution-comparison-table"
 import { OutcomeIconBackdrop } from "@/components/sections/outcome-icon"
 import { SolutionHeroVisual, normalizeHeroVisual } from "@/components/sections/solution-hero-visual"
+import { SectionChart } from "@/components/sections/section-chart"
 import { Section } from "@/components/layout/section"
 import {
   getRelatedServices,
   type ServiceItem,
 } from "@/lib/content"
+import { isSectionChart } from "@/lib/section-chart"
 import { scrollToId } from "@/components/motion/smooth-scroll"
 
 const EASE = [0.22, 1, 0.36, 1] as const
@@ -184,7 +186,13 @@ export function SolutionDetail({ service }: SolutionDetailProps) {
           </aside>
 
           <div className="min-w-0 space-y-20 md:space-y-28">
-            {page.sections.map((section, i) => (
+            {page.sections.map((section, i) => {
+              const chart =
+                "chart" in section && isSectionChart(section.chart)
+                  ? section.chart
+                  : null
+
+              return (
               <motion.article
                 key={section.id}
                 id={section.id}
@@ -227,6 +235,7 @@ export function SolutionDetail({ service }: SolutionDetailProps) {
                 {section.images.length > 0 && (
                   <SectionImageGrid images={section.images} />
                 )}
+                {chart && <SectionChart config={chart} tone="dark" />}
                 {section.mermaid && (
                   <BrandedMermaid
                     chart={section.mermaid}
@@ -235,7 +244,8 @@ export function SolutionDetail({ service }: SolutionDetailProps) {
                   />
                 )}
               </motion.article>
-            ))}
+              )
+            })}
           </div>
         </div>
       </Section>
@@ -327,32 +337,38 @@ function SolutionHero({
   sectionRef: React.RefObject<HTMLElement | null>
 }) {
   const { page } = service
+  const showExplore =
+    "showExplore" in page ? Boolean(page.showExplore) : true
+  const glyphBackdrop =
+    "glyphBackdrop" in page ? Boolean(page.glyphBackdrop) : true
 
   return (
     <section
       ref={sectionRef}
       className="relative flex min-h-[88svh] flex-col overflow-hidden bg-black text-white [--accent:#D4FF00] [--accent-foreground:#0A0A0A] lg:min-h-svh"
     >
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 z-0 opacity-45"
-        style={{
-          maskImage:
-            "radial-gradient(ellipse 55% 50% at 30% 40%, transparent 0%, rgba(0,0,0,0.3) 45%, black 75%)",
-          WebkitMaskImage:
-            "radial-gradient(ellipse 55% 50% at 30% 40%, transparent 0%, rgba(0,0,0,0.3) 45%, black 75%)",
-        }}
-      >
-        <GlyphMatrix
-          className="h-full w-full"
-          color="#D4FF00"
-          cellSize={16}
-          mutationRate={0.03}
-          interval={110}
-          fadeBottom={0.5}
-          glyphs="01·•<>/=+*"
-        />
-      </div>
+      {glyphBackdrop ? (
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 z-0 opacity-45"
+          style={{
+            maskImage:
+              "radial-gradient(ellipse 55% 50% at 30% 40%, transparent 0%, rgba(0,0,0,0.3) 45%, black 75%)",
+            WebkitMaskImage:
+              "radial-gradient(ellipse 55% 50% at 30% 40%, transparent 0%, rgba(0,0,0,0.3) 45%, black 75%)",
+          }}
+        >
+          <GlyphMatrix
+            className="h-full w-full"
+            color="#D4FF00"
+            cellSize={16}
+            mutationRate={0.03}
+            interval={110}
+            fadeBottom={0.5}
+            glyphs="01·•<>/=+*"
+          />
+        </div>
+      ) : null}
 
       <div className="relative z-10 mx-auto grid w-full max-w-7xl flex-1 items-center gap-10 px-5 pt-28 pb-14 md:px-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-8 lg:px-10 lg:pt-24 lg:pb-16">
         <div className="relative z-20 flex max-w-xl flex-col gap-5 lg:-translate-y-4 lg:gap-6">
@@ -409,13 +425,15 @@ function SolutionHero({
               subtitle={page.demo.subtitle}
               submitLabel={page.demo.submitLabel}
             />
-            <a
-              href={`#${page.sections[0]?.id ?? "overview"}`}
-              className="inline-flex h-11 items-center gap-2 border border-white/25 px-5 text-sm font-medium text-white transition hover:bg-white/5"
-            >
-              Explore
-              <ArrowUpRight className="size-4" />
-            </a>
+            {showExplore ? (
+              <a
+                href={`#${page.sections[0]?.id ?? "overview"}`}
+                className="inline-flex h-11 items-center gap-2 border border-white/25 px-5 text-sm font-medium text-white transition hover:bg-white/5"
+              >
+                Explore
+                <ArrowUpRight className="size-4" />
+              </a>
+            ) : null}
           </motion.div>
         </div>
 

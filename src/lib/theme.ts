@@ -12,7 +12,10 @@ function tokensToCss(tokens: ThemeTokens, prefix = "") {
     .join("\n  ")
 }
 
-/** Builds CSS custom properties from `src/config/theme.json` */
+/** Builds CSS custom properties from `src/config/theme.json`.
+ * Tokens also live in `globals.css` — prefer editing both in sync.
+ * Avoid injecting this via a layout `<style>` tag (conflicts with Next FOUC styles → hydration mismatch).
+ */
 export function buildThemeCss() {
   const light = tokensToCss(theme.light as ThemeTokens)
   const dark = tokensToCss(theme.dark as ThemeTokens)

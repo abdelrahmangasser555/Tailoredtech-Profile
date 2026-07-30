@@ -1,6 +1,7 @@
 import company from "@/config/company.json"
 import clients from "@/config/clients.json"
 import services from "@/config/services.json"
+import presentations from "@/config/presentations.json"
 import projects from "@/config/projects.json"
 import timeline from "@/config/timeline.json"
 import navigation from "@/config/navigation.json"
@@ -12,6 +13,9 @@ export type Clients = typeof clients
 export type Services = typeof services
 export type ServiceItem = Services["items"][number]
 export type ServicePage = ServiceItem["page"]
+export type Presentations = typeof presentations
+export type PresentationItem = Presentations["items"][number]
+export type PresentationPage = PresentationItem["page"]
 export type Projects = typeof projects
 export type Timeline = typeof timeline
 export type Navigation = typeof navigation
@@ -22,6 +26,7 @@ export const site = {
   company,
   clients,
   services,
+  presentations,
   projects,
   timeline,
   navigation,
@@ -53,4 +58,18 @@ export function getRelatedServices(ids: readonly string[]) {
   return ids
     .map((id) => services.items.find((s) => s.id === id))
     .filter((s): s is ServiceItem => Boolean(s))
+}
+
+export function getPresentations() {
+  return presentations.items.filter((p) => p.page.enabled)
+}
+
+export function getPresentationBySlug(
+  slug: string
+): PresentationItem | undefined {
+  return presentations.items.find((p) => p.id === slug && p.page.enabled)
+}
+
+export function getPresentationSlugs() {
+  return presentations.items.filter((p) => p.page.enabled).map((p) => p.id)
 }

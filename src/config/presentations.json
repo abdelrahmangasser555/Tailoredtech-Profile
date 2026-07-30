@@ -1,0 +1,225 @@
+{
+  "headline": "Presentations",
+  "subheadline": "Client-facing decks — direct URL only.",
+  "items": [
+    {
+      "id": "bahri-bbs",
+      "title": "Bahri BBS",
+      "short": "In-house Behaviour Based Safety platform for Bahri — observations, ICP forms, red flags, and analytics.",
+      "description": "Presentation for the Bahri in-house Behaviour Based Safety (BBS) system: observation culture, dynamic ICP forms, red-flag escalation, vessel/office parity, and fleet analytics.",
+      "createdAt": "2026-07-31",
+      "updatedAt": "2026-07-31",
+      "brandClass": "",
+      "clientLogo": "/clients/bahri-no-background.png",
+      "clientName": "Bahri",
+      "href": "/presentations/bahri-bbs",
+      "page": {
+        "enabled": true,
+        "eyebrow": "In-house platform",
+        "headline": "Behaviour Based",
+        "headlineAccent": "Safety",
+        "tagline": "A Bahri-branded BBS programme for vessel and office — dynamic ICP forms, red flags, and analytics built around safety culture, not just counts.",
+        "heroVisual": "engine",
+        "showExplore": false,
+        "glyphBackdrop": false,
+        "outcomes": [
+          { "value": "ICP", "label": "dynamic forms", "icon": "Layout" },
+          { "value": "Deep", "label": "fleet analytics", "icon": "ChartLine" },
+          {
+            "value": "1",
+            "label": "culture, one programme",
+            "icon": "ShareNetwork"
+          }
+        ],
+        "comparison": {
+          "enabled": true,
+          "eyebrow": "Fit",
+          "title": "Why an in-house BBS for Bahri",
+          "columns": [
+            { "id": "bahri", "label": "Bahri BBS", "highlight": true },
+            { "id": "generic", "label": "Generic QHSE" },
+            { "id": "paper", "label": "Paper / spreadsheets" }
+          ],
+          "rows": [
+            {
+              "label": "Bahri branding & identity",
+              "cells": [
+                { "type": "check", "value": true },
+                { "type": "x", "value": false },
+                { "type": "x", "value": false }
+              ]
+            },
+            {
+              "label": "International BBS methodology",
+              "cells": [
+                { "type": "check", "value": true },
+                { "type": "text", "value": "Partial" },
+                { "type": "x", "value": false }
+              ]
+            },
+            {
+              "label": "Dynamic ICP + attachments",
+              "cells": [
+                { "type": "check", "value": true },
+                { "type": "text", "value": "Cards" },
+                { "type": "x", "value": false }
+              ]
+            },
+            {
+              "label": "Red flags & escalation",
+              "cells": [
+                { "type": "check", "value": true },
+                { "type": "text", "value": "Partial" },
+                { "type": "x", "value": false }
+              ]
+            },
+            {
+              "label": "Vessel + office parity",
+              "cells": [
+                { "type": "check", "value": true },
+                { "type": "text", "value": "Partial" },
+                { "type": "x", "value": false }
+              ]
+            },
+            {
+              "label": "Custom analytics for Bahri KPIs",
+              "cells": [
+                { "type": "check", "value": true },
+                { "type": "text", "value": "Limited" },
+                { "type": "x", "value": false }
+              ]
+            }
+          ]
+        },
+        "sections": [
+          {
+            "id": "overview",
+            "title": "Overview",
+            "body": "Bahri BBS follows international behaviour-based safety practice — proactive observation, positive reinforcement, and data-driven intervention — tailored as an in-house platform with Bahri’s navy and orange identity across vessel and office.",
+            "bullets": [
+              "Built on international BBS standards",
+              "Vessel and office roles with aligned permissions",
+              "Dynamic ICP forms, not static paper cards",
+              "File attachments on observations",
+              "Red flags for immediate escalation"
+            ],
+            "video": null,
+            "images": [],
+            "mermaid": "flowchart LR\n  Observe -.-> ICP[ICP form]\n  ICP -.-> Flag[Red flag?]\n  Flag -.-> Action",
+            "mermaidTitle": "Observation loop",
+            "mermaidCaption": "Observe → record → act",
+            "chart": null
+          },
+          {
+            "id": "observations",
+            "title": "ICP forms & culture",
+            "body": "ICP forms adapt to Bahri behaviour categories, locations, and vessel types. Observers record safe and at-risk behaviours, attach evidence, and comment for context. Red flags escalate urgent conditions without breaking the non-punitive culture BBS depends on.",
+            "bullets": [
+              "Configurable behaviour categories and locations",
+              "Comments on every observation",
+              "File attachments for evidence",
+              "Red flag routing for urgent items",
+              "Stop-work and hazard observation support"
+            ],
+            "video": null,
+            "images": [],
+            "mermaid": "flowchart TD\n  Safe -.-> Record\n  AtRisk[At-risk] -.-> Record\n  Record -.-> Review\n  Review -.-> Talk[Toolbox talk]",
+            "mermaidTitle": "Behaviour capture",
+            "mermaidCaption": "Safe and at-risk, same flow",
+            "chart": null
+          },
+          {
+            "id": "analytics",
+            "title": "Analytics dashboards",
+            "body": "Deep analytics turn observation data into fleet-wide insight. Placeholder metrics below are illustrative — swap numbers and chart type in presentations.json as content firms up.",
+            "bullets": [
+              "Custom dashboards for safety and fleet teams",
+              "Trend analysis by vessel, team, and behaviour",
+              "Root-cause patterns across the fleet",
+              "Export for management and audit reporting",
+              "KPIs tuned with Bahri superintendents"
+            ],
+            "video": null,
+            "images": [],
+            "mermaid": "flowchart LR\n  Data -.-> Trends\n  Trends -.-> Dash[Custom dash]\n  Dash -.-> Action",
+            "mermaidTitle": "Analytics path",
+            "mermaidCaption": "Data → insight → action",
+            "chart": {
+              "enabled": true,
+              "type": "area",
+              "title": "Fleet observations",
+              "description": "Illustrative monthly safe vs at-risk observations — replace with live Bahri data.",
+              "caption": "Sample data · editable in config",
+              "xKey": "month",
+              "series": [
+                {
+                  "key": "safe",
+                  "label": "Safe",
+                  "color": "var(--chart-2)"
+                },
+                {
+                  "key": "atRisk",
+                  "label": "At-risk",
+                  "color": "var(--chart-1)"
+                }
+              ],
+              "data": [
+                { "month": "Jan", "safe": 420, "atRisk": 48 },
+                { "month": "Feb", "safe": 455, "atRisk": 41 },
+                { "month": "Mar", "safe": 510, "atRisk": 52 },
+                { "month": "Apr", "safe": 538, "atRisk": 39 },
+                { "month": "May", "safe": 572, "atRisk": 44 },
+                { "month": "Jun", "safe": 601, "atRisk": 36 }
+              ],
+              "stacked": false,
+              "showLegend": true,
+              "showGrid": true,
+              "curve": "natural"
+            }
+          },
+          {
+            "id": "platform",
+            "title": "Platform layer",
+            "body": "Bahri BBS sits on a modern delivery stack — auditing, timestamping, SSO-ready access, and migration from legacy BBS spreadsheets or third-party tools. Content and workflows will be refined with Bahri stakeholders.",
+            "bullets": [
+              "Automatic digital auditing and timestamping",
+              "Roles for vessel crews and office teams",
+              "Customizations and data migration path",
+              "Bahri branding end-to-end",
+              "Usability shaped with crews and captains"
+            ],
+            "video": null,
+            "images": [],
+            "mermaid": null,
+            "mermaidTitle": null,
+            "mermaidCaption": null,
+            "chart": {
+              "enabled": true,
+              "type": "bar",
+              "title": "Observation mix by category",
+              "description": "Placeholder category split — adjust series and values in config.",
+              "caption": "Sample · bar chart",
+              "xKey": "category",
+              "series": [
+                {
+                  "key": "count",
+                  "label": "Observations",
+                  "color": "var(--chart-1)"
+                }
+              ],
+              "data": [
+                { "category": "PPE", "count": 186 },
+                { "category": "Housekeeping", "count": 142 },
+                { "category": "Tools", "count": 98 },
+                { "category": "Access", "count": 74 },
+                { "category": "Other", "count": 61 }
+              ],
+              "showLegend": false,
+              "showGrid": true
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

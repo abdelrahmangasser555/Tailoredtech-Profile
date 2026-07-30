@@ -519,7 +519,30 @@
             "images": [],
             "mermaid": "flowchart LR\n  Data -.-> Trends\n  Trends -.-> Dash[Custom dash]\n  Dash -.-> Action",
             "mermaidTitle": "Analytics path",
-            "mermaidCaption": "Data → insight → action"
+            "mermaidCaption": "Data → insight → action",
+            "chart": {
+              "enabled": true,
+              "type": "line",
+              "title": "Observation trends",
+              "description": "Illustrative fleet observation volume — edit in services.json.",
+              "caption": "Sample data",
+              "xKey": "month",
+              "series": [
+                { "key": "observations", "label": "Observations", "color": "var(--chart-1)" },
+                { "key": "redFlags", "label": "Red flags", "color": "var(--chart-2)" }
+              ],
+              "data": [
+                { "month": "Jan", "observations": 210, "redFlags": 12 },
+                { "month": "Feb", "observations": 248, "redFlags": 9 },
+                { "month": "Mar", "observations": 265, "redFlags": 14 },
+                { "month": "Apr", "observations": 291, "redFlags": 8 },
+                { "month": "May", "observations": 320, "redFlags": 11 },
+                { "month": "Jun", "observations": 344, "redFlags": 7 }
+              ],
+              "showLegend": true,
+              "showGrid": true,
+              "curve": "natural"
+            }
           },
           {
             "id": "platform",

@@ -14,7 +14,6 @@ import { AnimatePresence, motion } from "framer-motion"
 import { cn } from "@/lib/utils"
 
 const EASE = [0.22, 1, 0.36, 1] as const
-const ACCENT = "#D4FF00"
 
 const SECTION_ICONS: Record<string, LucideIcon> = {
   overview: Eye,
@@ -230,7 +229,7 @@ function PixelCallout({
           y="1"
           width="3"
           height="3"
-          fill={ACCENT}
+          fill="var(--accent, #D4FF00)"
           initial={reduce ? false : { scale: 0, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.18, ease: EASE }}
@@ -243,7 +242,7 @@ function PixelCallout({
             y="1.5"
             width="4"
             height="2"
-            fill={ACCENT}
+            fill="var(--accent, #D4FF00)"
             initial={reduce ? false : { opacity: 0 }}
             animate={{ opacity: 0.85 }}
             transition={{ duration: 0.15, delay: d.delay, ease: EASE }}
@@ -257,7 +256,7 @@ function PixelCallout({
             y={d.y}
             width="2"
             height="4"
-            fill={ACCENT}
+            fill="var(--accent, #D4FF00)"
             initial={reduce ? false : { opacity: 0 }}
             animate={{ opacity: 0.75 }}
             transition={{ duration: 0.15, delay: d.delay, ease: EASE }}
@@ -294,17 +293,20 @@ function IsoPlate({
   const hatchId = `iso-hatch-${uid}`
 
   const face = focused
-    ? "#C8EF00"
+    ? "var(--layer-face-focus, var(--accent, #D4FF00))"
     : depth === 0
-      ? "#D4FF00"
+      ? "var(--layer-face-0, var(--accent, #D4FF00))"
       : depth === 1
-        ? "#C8F200"
+        ? "var(--layer-face-1, var(--accent, #D4FF00))"
         : depth === 2
-          ? "#B8E000"
-          : "#A8C800"
+          ? "var(--layer-face-2, var(--accent, #D4FF00))"
+          : "var(--layer-face-3, var(--accent, #D4FF00))"
 
-  const rimDeep = focused ? "#3F4A00" : "#2A3200"
-  const rimMid = focused ? "#5C6A00" : "#4A5600"
+  const rimDeep = "var(--layer-rim-deep, color-mix(in oklab, var(--accent, #D4FF00) 28%, black))"
+  const rimMid = "var(--layer-rim-mid, color-mix(in oklab, var(--accent, #D4FF00) 42%, black))"
+  const iconColor = focused
+    ? "var(--layer-icon-focus, #0A0A0A)"
+    : "var(--layer-icon, #0A0A0A)"
   const iso = "translate(118, 68) matrix(1, 0.5, -1, 0.5, 0, 0)"
 
   return (
@@ -402,9 +404,14 @@ function IsoPlate({
 
             <g
               transform="translate(-17, -17)"
-              opacity={0.86}
+              opacity={0.92}
               filter={`url(#${printId})`}
-              style={{ mixBlendMode: "multiply" }}
+              style={{
+                // multiply washes out light icons on Bahri plates — normal keeps white readable
+                mixBlendMode: focused
+                  ? "var(--layer-icon-blend-focus, multiply)"
+                  : "var(--layer-icon-blend, multiply)",
+              }}
             >
               {image ? (
                 <image
@@ -419,7 +426,7 @@ function IsoPlate({
                 <Icon
                   width={34}
                   height={34}
-                  color="#0A0A0A"
+                  color={iconColor}
                   strokeWidth={2.35}
                 />
               )}
