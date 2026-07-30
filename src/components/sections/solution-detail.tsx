@@ -197,10 +197,10 @@ export function SolutionDetail({ service }: SolutionDetailProps) {
               <motion.article
                 key={section.id}
                 id={section.id}
-                initial={reduce ? false : { opacity: 0, y: 28 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.7, delay: 0.04, ease: EASE }}
+                initial={reduce ? false : { opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true, amount: 0.15 }}
+                transition={{ duration: 0.55, ease: EASE }}
                 className="scroll-mt-28"
               >
                 <div className="mb-5 flex items-center gap-4">

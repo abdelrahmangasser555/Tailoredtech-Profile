@@ -18,7 +18,7 @@
         "eyebrow": "",
         "headline": "In-house",
         "headlineAccent": "Behaviour Based Safety",
-        "tagline": "A company-owned Behaviour Based Safety platform for ICBS observations, observer accountability, fleet visibility, and shore governance.",
+        "tagline": "Bahri-owned BBS for 4,000 crew and 1,500 observers across 107 vessels. ICBS capture, vessel sign-on, shore governance, deep analytics, and offline sync in one in-house platform.",
         "heroVisual": "engine",
         "showExplore": false,
         "glyphBackdrop": false,
@@ -151,67 +151,73 @@
           {
             "id": "overview",
             "title": "What we are building",
-            "body": "We are building a **single BBS platform** for Bahri — designed to support **1,500 observers** drawn from **4,000 crew members** across **107 vessels**. The programme is highly analytical at its core: every observation feeds deep analytics and fleet-wide insights, not just record-keeping.\n\n### ICP form — familiar shape, Bahri-owned\n\nThe ICP form follows the same structure as Dekra, with everything Bahri already relies on — **plus**:\n\n- **Unique account per observer** — personal identity, history, and accountability\n- **Red Flag support** — immediate escalation from observer to office\n- **Unique ICB numbering, feedback, and barriers** — searchable, auditable, explainable\n- **Add or edit ICBS categories and vessel-specific operations** — mooring, cargo, pilot ladder, and more, configured by office\n\nMobile for crew and observers at sea. Web for shore office. Offline capture with auto sync when connectivity returns.",
+            "icon": "LayoutGrid",
+            "body": "We are building a **single BBS platform** for Bahri, designed to support **1,500 observers** drawn from **4,000 crew members** across **107 vessels**. The programme is highly analytical at its core: every observation feeds deep analytics and fleet-wide insights, not just record-keeping.\n\n### ICP form: familiar shape, Bahri-owned\n\nThe ICP form follows the same structure as Dekra, with everything , plus:\n\n- **Unique account per observer:** personal identity, history, and accountability\n- **Red Flag support:** immediate escalation from observer to office\n- **Unique ICB numbering, feedback, and barriers:** searchable, auditable, explainable\n- **Add or edit ICBS categories and vessel-specific operations:** mooring, cargo, pilot ladder, and more, configured by office\n\nMobile for crew and observers at sea. Web for shore office. Offline capture with auto sync when connectivity returns.",
             "bullets": [],
             "video": null,
             "images": [],
-            "mermaid": "flowchart TB\n  subgraph Crew[\"Crew — 4,000 accounts\"]\n    Obs[\"Observers — 1,500\"]\n  end\n  Vessel[\"Vessels — 107\"]\n  subgraph Office[\"Office\"]\n    Members[\"Members\"]\n    Admins[\"Administrators\"]\n  end\n  Crew -.->|assigned to| Vessel\n  Vessel -.->|reports to| Office\n  Office -.->|governs| Crew",
+            "mermaid": "flowchart TB\n  subgraph Crew[\"Crew: 4,000 accounts\"]\n    Obs[\"Observers: 1,500\"]\n  end\n  Vessel[\"Vessels: 107\"]\n  subgraph Office[\"Office\"]\n    Members[\"Members\"]\n    Admins[\"Administrators\"]\n  end\n  Crew -.->|assigned to| Vessel\n  Vessel -.->|reports to| Office\n  Office -.->|governs| Crew",
             "mermaidTitle": "Four perspectives",
-            "mermaidCaption": "Crew, vessel, and office — one connected platform",
+            "mermaidCaption": "Crew, vessel, and office in one connected platform",
             "chart": null
           },
           {
             "id": "sign-on",
             "title": "Observer sign-on flow",
-            "body": "An observer **cannot submit an observation** until they are assigned to a vessel. Assignment can happen in three ways:\n\n1. **Observer-initiated** — the observer sends a sign-on request for a vessel; the vessel captain receives it by email and approves or declines\n2. **Captain-initiated** — the vessel captain (vessel account) directly assigns a crew member to the vessel\n3. **Office-initiated** — shore office assigns a crew member to a vessel from the admin panel\n\n### Office authentication\n\nOffice users sign in through one of two methods:\n\n- **Email verification OTP** — standard one-time password flow\n- **Authenticator app** — TOTP-based; works without internet once configured",
+            "icon": "LogIn",
+            "body": "An observer **cannot submit an observation** until they are assigned to a vessel. Assignment can happen in three ways:\n\n1. **Observer-initiated:** the observer sends a sign-on request for a vessel; the vessel captain receives it by email and approves or declines\n2. **Captain-initiated:** the vessel captain (vessel account) directly assigns a crew member to the vessel\n3. **Office-initiated:** shore office assigns a crew member to a vessel from the admin panel\n\n### Observers sign in\n\nObservers sign in through one of two methods:\n\n- **Email verification OTP:** standard one-time password flow\n- **Authenticator app:** TOTP-based; works without internet once configured",
             "bullets": [],
             "video": null,
             "images": [],
             "mermaid": "flowchart TD\n  Start([Observer needs vessel assignment]) --> Gate{How assigned?}\n  Gate --> Req[Observer requests sign-on]\n  Req --> Email[Captain receives email]\n  Email --> Approve{Approved?}\n  Approve -->|Yes| Assigned[Assigned to vessel]\n  Approve -->|No| Blocked[Cannot observe]\n  Gate --> Cap[Captain assigns crew member]\n  Cap --> Assigned\n  Gate --> Off[Office assigns to vessel]\n  Off --> Assigned\n  Assigned --> Form[Observer can submit ICP form]",
             "mermaidTitle": "Sign-on paths",
-            "mermaidCaption": "Three routes to vessel assignment — one gate before observation",
+            "mermaidCaption": "Three routes to vessel assignment, one gate before observation",
             "chart": null
           },
           {
             "id": "observer",
             "title": "Observer perspective",
-            "body": "When an observer first boards, they complete onboarding — profile details, rank, and a profile picture. From there, the observer hub gives them everything they need at sea.\n\n### What observers can do\n\n- **Create an observation** — submit a full ICP form against their assigned vessel\n- **View previous observations** — full personal history, searchable and filterable\n- **Receive announcements** — fleet-wide or targeted broadcasts from office\n- **Chat with office and vessel** — shared chatroom for follow-up, Red Flags, and coordination\n- **Personal analysis** — charts and trends on their own observation patterns\n- **Observation schedule** — monthly targets set by office (e.g. 5 observations required, 3 completed so far)\n- **Vessel track record** — complete history of every vessel they have worked on, with full records per assignment",
+            "icon": "Binoculars",
+            "body": "When an observer first boards, they complete onboarding: profile details, rank, and a profile picture. From there, the observer hub gives them everything they need .\n\n### What observers can do\n\n- **Create an observation:** submit a full ICP form against their assigned vessel\n- **View previous observations:** full personal history, searchable and filterable\n- **Receive announcements:** fleet-wide or targeted broadcasts from office\n- **Chat with office and vessel:** shared chatroom for follow-up, Red Flags, and coordination\n- **Personal analysis:** charts and trends on their own observation patterns\n- **Observation schedule:** monthly targets set by office (e.g. 5 observations required, 3 completed so far)\n- **Vessel track record:** complete history of every vessel they have worked on, with full records per assignment",
             "bullets": [],
             "video": null,
             "images": [],
             "mermaid": "flowchart LR\n  Onboard[Onboard profile] --> Hub[Observer hub]\n  Hub --> Create[Create observation]\n  Hub --> History[Previous observations]\n  Hub --> Ann[Announcements]\n  Hub --> Chat[Chat with office and vessel]\n  Hub --> Analysis[Personal analysis]\n  Hub --> Schedule[Observation schedule]\n  Hub --> Track[Vessel track record]",
             "mermaidTitle": "Observer hub",
-            "mermaidCaption": "Onboard once — observe, communicate, and track progress from one place",
+            "mermaidCaption": "Onboard once, then observe, communicate, and track progress from one place",
             "chart": null
           },
           {
             "id": "vessel",
             "title": "Vessel perspective",
-            "body": "Vessels do **not** create observations. The vessel account is focused on crew management and visibility.\n\n### Vessel responsibilities\n\n- Maintain **vessel profile and particulars** — type, flag, fleet assignment\n- **Sign on and sign off crew members** — approve observer requests or assign crew directly\n- **Optional observation preview** — administrators can enable or disable whether the vessel account can view observations created on that vessel\n\nThis keeps the vessel captain in control of who is on board, without adding observation overhead to the bridge.",
+            "icon": "Ship",
+            "body": "Vessels do **not** create observations. The vessel account is focused on crew management and visibility.\n\n### Vessel responsibilities\n\n- Maintain **vessel profile and particulars:** type, flag, fleet assignment\n- **Sign on and sign off crew members:** approve observer requests or assign crew directly\n- **Optional observation preview:** administrators can enable or disable whether the vessel account can view observations created on that vessel\n\nThis keeps the vessel captain in control of who is on board, without adding observation overhead to the bridge.",
             "bullets": [],
             "video": null,
             "images": [],
             "mermaid": "flowchart TD\n  Vessel[Vessel account] --> Info[Vessel profile and particulars]\n  Vessel --> SignOn[Sign on crew members]\n  Vessel --> SignOff[Sign off crew members]\n  Vessel --> Preview{Observation preview}\n  Preview -->|Enabled| View[View observations on vessel]\n  Preview -->|Disabled| Hidden[Observations hidden from vessel]",
             "mermaidTitle": "Vessel account",
-            "mermaidCaption": "Crew management and optional observation visibility — no observation creation",
+            "mermaidCaption": "Crew management and optional observation visibility. No observation creation.",
             "chart": null
           },
           {
             "id": "office",
             "title": "Office member perspective",
-            "body": "Office members are assigned as shore-side users and **do not require vessel sign-on** to create observations. They can observe during shore visits or fleet inspections without the captain approval flow.\n\n### Everything an observer has, plus\n\n- **Fleet overview** — preview their assigned fleet and vessel activity\n- **Fleet analytics** — access to analysis and reporting across their scope\n\n### Authentication\n\nOffice members sign in via **Microsoft Single Sign-On** — integrated with Bahri's existing identity provider.",
+            "icon": "Building2",
+            "body": "Office members are assigned as shore-side users and **do not require vessel sign-on** to create observations. They can observe during shore visits or fleet inspections without the captain approval flow.\n\n### Everything an observer has, plus\n\n- **Fleet overview:** preview their assigned fleet and vessel activity\n- **Fleet analytics:** access to analysis and reporting across their scope\n\n### Authentication\n\nOffice members sign in via **Microsoft Single Sign-On**, integrated with Bahri's existing identity provider.",
             "bullets": [],
             "video": null,
             "images": [],
             "mermaid": "flowchart LR\n  SSO[Microsoft SSO] --> Member[Office member]\n  Member --> Obs[Create observations]\n  Member --> Fleet[Assigned fleet view]\n  Member --> Analytics[Fleet analytics]\n  Member --> Hub[Observer features]\n  Hub --> Chat[Chat and announcements]\n  Hub --> Schedule[Schedule and history]",
             "mermaidTitle": "Office member",
-            "mermaidCaption": "SSO in — full observer toolkit plus fleet visibility",
+            "mermaidCaption": "SSO in, full observer toolkit plus fleet visibility",
             "chart": null
           },
           {
             "id": "admin",
             "title": "Administrator perspective",
-            "body": "Administrators hold the keys to the platform — **user management**, **vessel management**, **crew oversight**, and the **analytics engine** that ties the entire programme together. This is the most important surface in the application.\n\n### Deep analytics\n\n- **Compare observers** — side-by-side performance, volume, and quality metrics across the fleet\n- **Custom dashboards** — build, save, and **share** dashboards with other office users\n- **Excel export** — full analysis export for offline review and reporting\n- **ICP vs ICP analytics** — compare behaviour categories, trends, and patterns over time\n- **Custom filters on request** — any dimension Bahri needs (vessel type, rank, route, operation) can be added as the programme matures\n\nThe analytics page is the core that links every part of the app — observations in, insights out.",
+            "icon": "BarChart3",
+            "body": "Administrators previlidges to the platform: **user management**, **vessel management**, **crew oversight**, and the **analytics engine** that ties the entire programme together. This is the most important surface in the application.\n\n### Deep analytics\n\n- **Compare observers:** side-by-side performance, volume, and quality metrics across the fleet\n- **Custom dashboards:** build, save, and **share** dashboards with other office users\n- **Excel export:** full analysis export for offline review and reporting\n- **ICP vs ICP analytics:** compare behaviour categories, trends, and patterns over time\n- **Custom filters on request:** any dimension Bahri needs (vessel type, rank, route, operation) can be added as the programme matures\n\nThe analytics page is the core that links every part of the app. Observations in, insights out.",
             "bullets": [],
             "video": null,
             "images": [],
@@ -227,8 +233,16 @@
                 "description": "Fleet-wide monthly observations and red flags",
                 "xKey": "month",
                 "series": [
-                  { "key": "observations", "label": "Observations", "color": "var(--chart-1)" },
-                  { "key": "redFlags", "label": "Red flags", "color": "var(--chart-2)" }
+                  {
+                    "key": "observations",
+                    "label": "Observations",
+                    "color": "var(--chart-1)"
+                  },
+                  {
+                    "key": "redFlags",
+                    "label": "Red flags",
+                    "color": "var(--chart-2)"
+                  }
                 ],
                 "data": [
                   { "month": "Jan", "observations": 1840, "redFlags": 94 },
@@ -249,8 +263,16 @@
                 "description": "Top observers by monthly submissions",
                 "xKey": "observer",
                 "series": [
-                  { "key": "submitted", "label": "Submitted", "color": "var(--chart-1)" },
-                  { "key": "target", "label": "Target", "color": "var(--chart-3)" }
+                  {
+                    "key": "submitted",
+                    "label": "Submitted",
+                    "color": "var(--chart-1)"
+                  },
+                  {
+                    "key": "target",
+                    "label": "Target",
+                    "color": "var(--chart-3)"
+                  }
                 ],
                 "data": [
                   { "observer": "Obs A", "submitted": 28, "target": 25 },
@@ -270,7 +292,11 @@
                 "xKey": "category",
                 "series": [
                   { "key": "safe", "label": "Safe", "color": "var(--chart-1)" },
-                  { "key": "atRisk", "label": "At risk", "color": "var(--chart-2)" }
+                  {
+                    "key": "atRisk",
+                    "label": "At risk",
+                    "color": "var(--chart-2)"
+                  }
                 ],
                 "data": [
                   { "category": "PPE", "safe": 88, "atRisk": 12 },
@@ -289,17 +315,59 @@
                 "description": "Top barrier types over six months",
                 "xKey": "month",
                 "series": [
-                  { "key": "training", "label": "Training gap", "color": "var(--chart-1)" },
-                  { "key": "equipment", "label": "Equipment", "color": "var(--chart-2)" },
-                  { "key": "procedure", "label": "Procedure", "color": "var(--chart-4)" }
+                  {
+                    "key": "training",
+                    "label": "Training gap",
+                    "color": "var(--chart-1)"
+                  },
+                  {
+                    "key": "equipment",
+                    "label": "Equipment",
+                    "color": "var(--chart-2)"
+                  },
+                  {
+                    "key": "procedure",
+                    "label": "Procedure",
+                    "color": "var(--chart-4)"
+                  }
                 ],
                 "data": [
-                  { "month": "Jan", "training": 42, "equipment": 28, "procedure": 35 },
-                  { "month": "Feb", "training": 38, "equipment": 31, "procedure": 29 },
-                  { "month": "Mar", "training": 45, "equipment": 26, "procedure": 33 },
-                  { "month": "Apr", "training": 36, "equipment": 34, "procedure": 27 },
-                  { "month": "May", "training": 40, "equipment": 29, "procedure": 31 },
-                  { "month": "Jun", "training": 33, "equipment": 32, "procedure": 24 }
+                  {
+                    "month": "Jan",
+                    "training": 42,
+                    "equipment": 28,
+                    "procedure": 35
+                  },
+                  {
+                    "month": "Feb",
+                    "training": 38,
+                    "equipment": 31,
+                    "procedure": 29
+                  },
+                  {
+                    "month": "Mar",
+                    "training": 45,
+                    "equipment": 26,
+                    "procedure": 33
+                  },
+                  {
+                    "month": "Apr",
+                    "training": 36,
+                    "equipment": 34,
+                    "procedure": 27
+                  },
+                  {
+                    "month": "May",
+                    "training": 40,
+                    "equipment": 29,
+                    "procedure": 31
+                  },
+                  {
+                    "month": "Jun",
+                    "training": 33,
+                    "equipment": 32,
+                    "procedure": 24
+                  }
                 ],
                 "stacked": true,
                 "showLegend": true,
@@ -311,25 +379,27 @@
           {
             "id": "migration",
             "title": "Data migration and integration",
-            "body": "To migrate from Dekra, we need a structured data handoff and a purpose-built ingestion pipeline.\n\n### Process\n\n1. **Extract** historical data from Dekra — observations, crew records, and configuration\n2. **Analyse** the export to map fields, categories, and relationships to the new schema\n3. **Build** a data ingestion pipeline that loads validated records into the Bahri platform\n4. **Verify** migrated data against Dekra totals before go-live\n\n### Data required from Bahri / Dekra\n\n- **Observation data** — full historical ICP records from Dekra\n- **Crew member list** — all Bahri crew with observer status flagged for each user\n\nOnce ingested, historical observations feed the same analytics engine as new submissions — no gap in reporting continuity.",
+            "icon": "ArrowLeftRight",
+            "body": "To migrate from Dekra, we need a structured data handoff and a purpose-built ingestion pipeline.\n\n### Process\n\n1. **Extract** historical data from Dekra: observations, crew records, and configuration\n2. **Analyse** the export to map fields, categories, and relationships to the new schema\n3. **Build** a data ingestion pipeline that loads validated records into the Bahri platform\n4. **Verify** migrated data against Dekra totals before go-live\n\n### Data required from Bahri / Dekra\n\n- **Observation data:** full historical ICP records from Dekra\n- **Crew member list:** all Bahri crew with observer status flagged for each user\n\nOnce ingested, historical observations feed the same analytics engine as new submissions. No gap in reporting continuity.",
             "bullets": [],
             "video": null,
             "images": [],
             "mermaid": "flowchart LR\n  Dekra[Dekra export] --> Analyse[Data analysis]\n  Analyse --> Pipeline[Ingestion pipeline]\n  Pipeline --> Validate[Validation]\n  Validate --> Platform[Bahri BBS platform]\n  Platform --> Analytics[Analytics engine]",
             "mermaidTitle": "Migration pipeline",
-            "mermaidCaption": "Extract, map, ingest, verify — continuous reporting from day one",
+            "mermaidCaption": "Extract, map, ingest, verify. Continuous reporting from day one.",
             "chart": null
           },
           {
             "id": "delivery",
             "title": "Delivery timeline",
-            "body": "The platform will be **fully built and production-ready in three intensive development months**, targeting **1 November 2026** as the go-live date.\n\nDevelopment runs in focused milestones with **review loops between TailoredTech and Mr Joseph** (Bahri) after each phase — refining features until the product meets operational requirements.\n\n### Milestones\n\n| Phase | Window | Deliverable |\n|-------|--------|-------------|\n| **M1 — Core** | Month 1 (Aug 2026) | Auth, roles, ICP form, vessel and crew management, basic observations |\n| **M2 — Operations** | Month 2 (Sep 2026) | Sign-on flows, observer tools, chat, announcements, schedules, offline sync |\n| **M3 — Analytics** | Month 3 (Oct 2026) | Admin dashboards, deep analytics, custom filters, Excel export, data migration pipeline |\n| **Go-live** | 1 Nov 2026 | Production launch across fleet |\n| **Iteration** | Post-launch | Loop sessions with Mr Joseph — enhancements until final production sign-off |",
+            "icon": "CalendarCheck",
+            "body": "The platform will be **fully built and production-ready in three intensive development months**, targeting **1 November 2026** as the go-live date.\n\nDevelopment runs in focused milestones with **review loops between TailoredTech and Mr Joseph** (Bahri) after each phase, refining features until the product meets operational requirements.\n\n### Milestones\n\n| Phase | Window | Deliverable |\n|-------|--------|-------------|\n| **M1: Core** | Month 1 (Aug 2026) | Auth, roles, ICP form, vessel and crew management, basic observations |\n| **M2: Operations** | Month 2 (Sep 2026) | Sign-on flows, observer tools, chat, announcements, schedules, offline sync |\n| **M3: Analytics** | Month 3 (Oct 2026) | Admin dashboards, deep analytics, custom filters, Excel export, data migration pipeline |\n| **Go-live** | 1 Nov 2026 | Production launch across fleet |\n| **Iteration** | Post-launch | Loop sessions with Mr Joseph, enhancements until final production sign-off |",
             "bullets": [],
             "video": null,
             "images": [],
             "mermaid": "gantt\n  title BBS delivery milestones\n  dateFormat YYYY-MM-DD\n  axisFormat %b\n  section Core\n    Auth roles and ICP form           :m1a, 2026-08-01, 30d\n  section Operations\n    Sign-on flows and observer tools  :m2a, 2026-09-01, 30d\n  section Analytics\n    Dashboards migration and offline  :m3a, 2026-10-01, 31d\n  section Launch\n    Production go-live                :milestone, m4, 2026-11-01, 0d",
             "mermaidTitle": "Three months to production",
-            "mermaidCaption": "Core in month one — analytics and migration in month three — live 1 November",
+            "mermaidCaption": "Core in month one. Analytics and migration in month three. Live 1 November.",
             "chart": null
           }
         ]

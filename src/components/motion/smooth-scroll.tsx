@@ -39,7 +39,7 @@ export function refreshSmoothScroll() {
   window.clearTimeout(refreshTimer)
   refreshTimer = window.setTimeout(() => {
     window.__lenis?.resize()
-  }, 160)
+  }, 280)
 }
 
 /**

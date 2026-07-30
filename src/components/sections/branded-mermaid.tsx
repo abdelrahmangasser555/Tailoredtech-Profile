@@ -7,6 +7,7 @@ import {
   DialogContent,
   DialogTitle,
 } from "@/components/ui/dialog"
+import { refreshSmoothScroll } from "@/components/motion/smooth-scroll"
 import { cn } from "@/lib/utils"
 
 function readCssVar(el: Element, name: string, fallback: string) {
@@ -192,6 +193,8 @@ type BrandedMermaidProps = {
   /** Shown as the block title (not the generic “Diagram”) */
   title?: string
   caption?: string
+  /** Presentation brand scope (e.g. brand-bahri) — applied to expanded dialog portal */
+  brandClass?: string
 }
 
 export function BrandedMermaid({
@@ -199,6 +202,7 @@ export function BrandedMermaid({
   className,
   title,
   caption,
+  brandClass,
 }: BrandedMermaidProps) {
   const uid = useId().replace(/:/g, "")
   const shellRef = useRef<HTMLDivElement>(null)
@@ -206,7 +210,9 @@ export function BrandedMermaid({
   const expandedRef = useRef<HTMLDivElement>(null)
   const [error, setError] = useState<string | null>(null)
   const [expanded, setExpanded] = useState(false)
+  const [ready, setReady] = useState(false)
   const vertical = useMemo(() => isVerticalFlowchart(chart), [chart])
+  const inlineMinH = vertical ? "min-h-[min(380px,48vh)]" : "min-h-28"
 
   const paint = useCallback(
     async (target: HTMLDivElement | null, isExpanded: boolean) => {
@@ -221,10 +227,9 @@ export function BrandedMermaid({
           vertical,
           expanded: isExpanded,
         })
-        // Soft Lenis resize only — avoid start()/scroll resets that hitch mid-scroll
-        requestAnimationFrame(() => {
-          window.__lenis?.resize()
-        })
+        setReady(true)
+        // Debounced — avoid Lenis resize storms while scrolling past diagrams
+        refreshSmoothScroll()
       } catch (err) {
         setError(err instanceof Error ? err.message : "Diagram failed")
         target.innerHTML = ""
@@ -236,6 +241,7 @@ export function BrandedMermaid({
   useEffect(() => {
     let cancelled = false
     setError(null)
+    setReady(false)
     void (async () => {
       if (cancelled) return
       await paint(inlineRef.current, false)
@@ -246,7 +252,10 @@ export function BrandedMermaid({
   }, [paint])
 
   useEffect(() => {
-    if (!expanded) return
+    if (!expanded) {
+      setReady(false)
+      return
+    }
     let cancelled = false
     const t = window.setTimeout(() => {
       if (!cancelled) void paint(expandedRef.current, true)
@@ -265,19 +274,18 @@ export function BrandedMermaid({
       lenis.stop()
     } else {
       lenis.start()
-      requestAnimationFrame(() => lenis.resize())
+      refreshSmoothScroll()
     }
   }, [expanded])
 
   const heading = title?.trim() || "Diagram"
 
   return (
-    <figure className={cn("mt-10", className)}>
+    <figure className={cn("mt-10 [contain:layout]", className)}>
       <div
         ref={shellRef}
         className={cn(
-          // No data-lenis-prevent-* — that trapped the wheel and glitched at the box edge
-          "border border-white/10 bg-[#0A0A0A] p-4 md:p-5",
+          "overflow-hidden border border-white/10 bg-[var(--section-dark,#0A0A0A)] p-4 md:p-5",
           vertical ? "pb-5 md:pb-6" : "pb-5 md:pb-6"
         )}
       >
@@ -302,10 +310,11 @@ export function BrandedMermaid({
           <div
             ref={inlineRef}
             className={cn(
-              "mermaid-brand flex items-center justify-center overflow-visible",
-              vertical ? "min-h-24 pb-1" : "min-h-28 pb-1",
+              "mermaid-brand relative flex items-center justify-center overflow-hidden",
+              inlineMinH,
               "[&_svg]:mx-auto",
-              vertical && "[&_svg]:max-h-[min(380px,48vh)] [&_svg]:max-w-md"
+              vertical && "[&_svg]:max-h-[min(380px,48vh)] [&_svg]:max-w-md",
+              !ready && "animate-pulse bg-white/[0.03]"
             )}
           />
         )}
@@ -320,10 +329,14 @@ export function BrandedMermaid({
       <Dialog open={expanded} onOpenChange={setExpanded}>
         <DialogContent
           showCloseButton={false}
-          className="flex h-[min(92vh,960px)] w-[min(96vw,1100px)] max-w-none flex-col gap-0 overflow-hidden rounded-none border border-white/15 bg-[#0A0A0A] p-0 text-white ring-0 sm:max-w-none"
+          data-tone={brandClass ? "dark" : undefined}
+          className={cn(
+            brandClass,
+            "flex h-[min(92vh,960px)] w-[min(96vw,1100px)] max-w-none flex-col gap-0 overflow-hidden rounded-none border border-white/15 bg-[var(--section-dark,#0A0A0A)] p-0 text-[var(--section-dark-fg,#f5f5f0)] ring-0 sm:max-w-none"
+          )}
         >
           <div className="flex items-center justify-between gap-3 border-b border-white/10 px-4 py-3 md:px-5">
-            <DialogTitle className="font-mono text-[11px] tracking-[0.2em] uppercase text-accent">
+            <DialogTitle className="font-mono text-[10px] tracking-[0.22em] uppercase text-accent">
               {heading}
             </DialogTitle>
             <button
@@ -335,7 +348,10 @@ export function BrandedMermaid({
               Close
             </button>
           </div>
-          <div className="mermaid-expand-scroll min-h-0 flex-1 overflow-auto overscroll-contain p-4 md:p-6">
+          <div
+            data-lenis-prevent
+            className="mermaid-expand-scroll min-h-0 flex-1 overflow-auto overscroll-contain p-4 md:p-6"
+          >
             <div
               ref={expandedRef}
               className="mermaid-brand flex min-h-full items-center justify-center [&_svg]:mx-auto [&_svg]:max-h-[min(78vh,860px)]"

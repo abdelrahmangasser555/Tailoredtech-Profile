@@ -1,52 +1,18 @@
 "use client"
 
 import { useId, useMemo, useState } from "react"
-import {
-  Eye,
-  Layers,
-  Route,
-  Users,
-  BarChart3,
-  Shield,
-  type LucideIcon,
-} from "lucide-react"
+import { type LucideIcon } from "lucide-react"
 import { AnimatePresence, motion } from "framer-motion"
+import { resolveSectionNavIcon } from "@/components/sections/section-nav-icon"
 import { cn } from "@/lib/utils"
 
 const EASE = [0.22, 1, 0.36, 1] as const
 
-const SECTION_ICONS: Record<string, LucideIcon> = {
-  overview: Eye,
-  capabilities: Layers,
-  roles: Users,
-  platform: Layers,
-  workflows: Route,
-  workflow: Route,
-  observations: Eye,
-  analytics: BarChart3,
-  exclusive: Shield,
-  flow: Route,
-  settlement: BarChart3,
-  fit: Users,
-  delivery: Route,
-  ownership: Shield,
-  people: Users,
-  fleet: Layers,
-  icb: Eye,
-  connect: Route,
-  why: Shield,
-  "sign-on": Route,
-  observer: Eye,
-  vessel: Layers,
-  office: Users,
-  admin: BarChart3,
-  migration: Route,
-  delivery: Route,
-}
-
 type LayerSection = {
   id: string
   title: string
+  /** Lucide icon name — see section-nav-icon.tsx */
+  icon?: string | null
   /** Optional mark printed on the plate face (overrides icon) */
   image?: string | null
 }
@@ -115,7 +81,7 @@ export function SectionLayerNav({
       <div className="relative" style={{ height: totalH, width: "17.5rem" }}>
         {sections.map((section, i) => {
           const slot = slots[i]!
-          const Icon = SECTION_ICONS[section.id] ?? Layers
+          const Icon = resolveSectionNavIcon(section)
           const hovered = hoveredId === section.id
 
           return (
