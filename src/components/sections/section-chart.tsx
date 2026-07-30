@@ -327,3 +327,42 @@ function renderChart(
       return <></>
   }
 }
+
+type SectionChartsGridProps = {
+  charts: SectionChartConfig[]
+  className?: string
+  tone?: "dark" | "light"
+}
+
+/** Side-by-side chart grid for presentation / solution sections */
+export function SectionChartsGrid({
+  charts,
+  className,
+  tone = "dark",
+}: SectionChartsGridProps) {
+  const visible = charts.filter(
+    (c) => c.enabled !== false && c.data?.length && c.series?.length
+  )
+  if (visible.length === 0) return null
+
+  return (
+    <div
+      className={cn(
+        "mt-10 grid gap-4 md:grid-cols-2 md:gap-5",
+        className
+      )}
+    >
+      {visible.map((config, i) => (
+        <SectionChart
+          key={`${config.title ?? config.type}-${i}`}
+          config={{
+            ...config,
+            heightClass: config.heightClass ?? "aspect-[4/3] min-h-[220px] w-full",
+          }}
+          tone={tone}
+          className="mt-0"
+        />
+      ))}
+    </div>
+  )
+}

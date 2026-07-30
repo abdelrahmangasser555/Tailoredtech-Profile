@@ -51,3 +51,9 @@ export function isSectionChart(
     c.enabled !== false
   )
 }
+
+export function isSectionCharts(
+  value: unknown
+): value is SectionChartConfig[] {
+  return Array.isArray(value) && value.length > 0 && value.every(isSectionChart)
+}

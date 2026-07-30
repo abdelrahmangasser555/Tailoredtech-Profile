@@ -35,6 +35,13 @@ const SECTION_ICONS: Record<string, LucideIcon> = {
   icb: Eye,
   connect: Route,
   why: Shield,
+  "sign-on": Route,
+  observer: Eye,
+  vessel: Layers,
+  office: Users,
+  admin: BarChart3,
+  migration: Route,
+  delivery: Route,
 }
 
 type LayerSection = {

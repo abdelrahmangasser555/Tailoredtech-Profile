@@ -10,7 +10,10 @@ import {
   SectionImageGrid,
   SectionVideo,
 } from "@/components/sections/section-media"
-import { SectionChart } from "@/components/sections/section-chart"
+import {
+  SectionChart,
+  SectionChartsGrid,
+} from "@/components/sections/section-chart"
 import { SectionLayerNav } from "@/components/sections/section-layer-nav"
 import { SectionMarkdown } from "@/components/sections/section-markdown"
 import {
@@ -24,7 +27,7 @@ import {
   paletteForBrand,
 } from "@/components/sections/solution-hero-visual"
 import { Section } from "@/components/layout/section"
-import { isSectionChart } from "@/lib/section-chart"
+import { isSectionChart, isSectionCharts } from "@/lib/section-chart"
 import type { PresentationItem } from "@/lib/content"
 import { scrollToId } from "@/components/motion/smooth-scroll"
 import { cn } from "@/lib/utils"
@@ -161,6 +164,10 @@ export function PresentationDetail({ presentation }: PresentationDetailProps) {
                 "chart" in section && isSectionChart(section.chart)
                   ? section.chart
                   : null
+              const charts =
+                "charts" in section && isSectionCharts(section.charts)
+                  ? section.charts
+                  : null
 
               return (
                 <motion.article
@@ -205,7 +212,11 @@ export function PresentationDetail({ presentation }: PresentationDetailProps) {
                   {section.images.length > 0 && (
                     <SectionImageGrid images={section.images} />
                   )}
-                  {chart && <SectionChart config={chart} tone="dark" />}
+                  {charts ? (
+                    <SectionChartsGrid charts={charts} tone="dark" />
+                  ) : (
+                    chart && <SectionChart config={chart} tone="dark" />
+                  )}
                   {section.mermaid && (
                     <BrandedMermaid
                       chart={section.mermaid}
