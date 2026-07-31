@@ -204,13 +204,13 @@
             "id": "office",
             "title": "Office member perspective",
             "icon": "Building2",
-            "body": "Office members are assigned as shore-side users and **do not require vessel sign-on** to create observations. They can observe during shore visits or fleet inspections without the captain approval flow.\n\n### Everything an observer has, plus\n\n- **Fleet overview:** preview their assigned fleet and vessel activity\n- **Fleet analytics:** access to analysis and reporting across their scope\n\n### Authentication\n\nOffice members sign in via **Microsoft Single Sign-On**, integrated with Bahri's existing identity provider.",
+            "body": "Office members are assigned as shore-side users and **do not require vessel sign-on** to create observations. They can observe during shore visits or fleet inspections without the captain approval flow.\n\n### Everything an observer has, plus\n\n- **Fleet overview:** preview their assigned fleet and vessel activity\n- **Fleet analytics:** access to analysis and reporting across their scope\n\n### Interaction module\n\nA dedicated channel between **office administrators**, **STO**, and **ETS** for timely coordination on assigned vessels. Office can share what matters onboard without leaving the platform.\n\n- **Focus areas:** set and communicate priority behaviours or operations for a vessel or fleet group\n- **Inspection protocols:** publish and track protocols for upcoming inspections so shore and vessel stay aligned\n- **Announcements and Red Flags:** surface fleet broadcasts and Red Flags raised onboard in one place, with context on the assigned vessel\n\nThis keeps administrators, STO, and ETS working from the same picture when something needs attention at sea.\n\n### Authentication\n\nOffice members sign in via **Microsoft Single Sign-On**, integrated with Bahri's existing identity provider.",
             "bullets": [],
             "video": null,
             "images": [],
-            "mermaid": "flowchart LR\n  SSO[Microsoft SSO] --> Member[Office member]\n  Member --> Obs[Create observations]\n  Member --> Fleet[Assigned fleet view]\n  Member --> Analytics[Fleet analytics]\n  Member --> Hub[Observer features]\n  Hub --> Chat[Chat and announcements]\n  Hub --> Schedule[Schedule and history]",
+            "mermaid": "flowchart TB\n  SSO[Microsoft SSO] --> Member[Office member]\n  Member --> Obs[Create observations]\n  Member --> Fleet[Assigned fleet view]\n  Member --> Analytics[Fleet analytics]\n  Member --> Hub[Observer features]\n  Hub --> Chat[Chat and announcements]\n  Hub --> Schedule[Schedule and history]\n  subgraph Interaction[\"Interaction module\"]\n    Admin[Office administrator]\n    STO[STO]\n    ETS[ETS]\n  end\n  Member --> Interaction\n  Interaction --> Focus[Focus areas]\n  Interaction --> Protocol[Inspection protocols]\n  Interaction --> Alerts[Announcements and Red Flags]",
             "mermaidTitle": "Office member",
-            "mermaidCaption": "SSO in, full observer toolkit plus fleet visibility",
+            "mermaidCaption": "SSO in, observer toolkit, fleet visibility, and shore coordination via the interaction module",
             "chart": null
           },
           {
