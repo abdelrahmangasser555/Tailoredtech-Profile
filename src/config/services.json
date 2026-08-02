@@ -18,7 +18,7 @@
         "headline": "Digital Risk",
         "headlineAccent": "Assessments",
         "tagline": "Tailored risk assessments for office superintendents and vessel crews, custom forms, hazard alerts, offline sync, and fleet-wide visibility without seat limits.",
-        "heroVisual": "ocean",
+        "heroVisual": "engine",
         "demo": {
           "label": "Request live demo",
           "title": "Request a risk assessment demo",
@@ -26,90 +26,193 @@
           "submitLabel": "Request demo"
         },
         "outcomes": [
-          { "value": "107+", "label": "vessels supported", "icon": "Boat" },
-          { "value": "∞", "label": "seats, no cap", "icon": "ShareNetwork" },
-          { "value": "24/7", "label": "offline + auto-sync", "icon": "Path" }
+          {
+            "value": "107+",
+            "label": "vessels supported",
+            "icon": "Boat"
+          },
+          {
+            "value": "∞",
+            "label": "seats, no cap",
+            "icon": "ShareNetwork"
+          },
+          {
+            "value": "24/7",
+            "label": "offline + auto-sync",
+            "icon": "Path"
+          }
         ],
         "comparison": {
           "enabled": true,
           "eyebrow": "Compare",
           "title": "Digital Risk Assessments vs market options",
           "columns": [
-            { "id": "tailored", "label": "TailoredTech", "highlight": true },
-            { "id": "prime", "label": "PRIME Marine" },
-            { "id": "shipmanager", "label": "ShipManager QHSE" }
+            {
+              "id": "tailored",
+              "label": "TailoredTech",
+              "highlight": true
+            },
+            {
+              "id": "prime",
+              "label": "PRIME Marine"
+            },
+            {
+              "id": "shipmanager",
+              "label": "ShipManager QHSE"
+            }
           ],
           "rows": [
             {
               "label": "Fully custom risk templates",
               "cells": [
-                { "type": "check", "value": true },
-                { "type": "text", "value": "Templates" },
-                { "type": "text", "value": "Matrices" }
+                {
+                  "type": "check",
+                  "value": true
+                },
+                {
+                  "type": "text",
+                  "value": "Templates"
+                },
+                {
+                  "type": "text",
+                  "value": "Matrices"
+                }
               ]
             },
             {
               "label": "Office + vessel role split",
               "cells": [
-                { "type": "check", "value": true },
-                { "type": "check", "value": true },
-                { "type": "check", "value": true }
+                {
+                  "type": "check",
+                  "value": true
+                },
+                {
+                  "type": "check",
+                  "value": true
+                },
+                {
+                  "type": "check",
+                  "value": true
+                }
               ]
             },
             {
               "label": "Auto alerts on hazard levels",
               "cells": [
-                { "type": "check", "value": true },
-                { "type": "check", "value": true },
-                { "type": "text", "value": "Partial" }
+                {
+                  "type": "check",
+                  "value": true
+                },
+                {
+                  "type": "check",
+                  "value": true
+                },
+                {
+                  "type": "text",
+                  "value": "Partial"
+                }
               ]
             },
             {
               "label": "Offline with auto-sync",
               "cells": [
-                { "type": "check", "value": true },
-                { "type": "text", "value": "Limited" },
-                { "type": "text", "value": "Partial" }
+                {
+                  "type": "check",
+                  "value": true
+                },
+                {
+                  "type": "text",
+                  "value": "Limited"
+                },
+                {
+                  "type": "text",
+                  "value": "Partial"
+                }
               ]
             },
             {
               "label": "Unlimited seats",
               "cells": [
-                { "type": "check", "value": true },
-                { "type": "x", "value": false },
-                { "type": "x", "value": false }
+                {
+                  "type": "check",
+                  "value": true
+                },
+                {
+                  "type": "x",
+                  "value": false
+                },
+                {
+                  "type": "x",
+                  "value": false
+                }
               ]
             },
             {
               "label": "SSO on your tenant",
               "cells": [
-                { "type": "check", "value": true },
-                { "type": "text", "value": "Partial" },
-                { "type": "check", "value": true }
+                {
+                  "type": "check",
+                  "value": true
+                },
+                {
+                  "type": "text",
+                  "value": "Partial"
+                },
+                {
+                  "type": "check",
+                  "value": true
+                }
               ]
             },
             {
               "label": "Your branding + self-host",
               "cells": [
-                { "type": "check", "value": true },
-                { "type": "x", "value": false },
-                { "type": "x", "value": false }
+                {
+                  "type": "check",
+                  "value": true
+                },
+                {
+                  "type": "x",
+                  "value": false
+                },
+                {
+                  "type": "x",
+                  "value": false
+                }
               ]
             },
             {
               "label": "Review chatroom per assessment",
               "cells": [
-                { "type": "check", "value": true },
-                { "type": "x", "value": false },
-                { "type": "text", "value": "Partial" }
+                {
+                  "type": "check",
+                  "value": true
+                },
+                {
+                  "type": "x",
+                  "value": false
+                },
+                {
+                  "type": "text",
+                  "value": "Partial"
+                }
               ]
             },
             {
               "label": "Pen + digital signatures",
               "cells": [
-                { "type": "check", "value": true },
-                { "type": "text", "value": "Partial" },
-                { "type": "x", "value": false }
+                {
+                  "type": "check",
+                  "value": true
+                },
+                {
+                  "type": "text",
+                  "value": "Partial"
+                },
+                {
+                  "type": "x",
+                  "value": false
+                }
               ]
             }
           ]
@@ -185,7 +288,11 @@
             "mermaidCaption": "Review · export · analyse"
           }
         ],
-        "related": ["moc-pcr", "bbs", "sdr"]
+        "related": [
+          "moc-pcr",
+          "bbs",
+          "sdr"
+        ]
       }
     },
     {
@@ -212,82 +319,176 @@
           "submitLabel": "Start conversation"
         },
         "outcomes": [
-          { "value": "Custom", "label": "approval chains", "icon": "Path" },
-          { "value": "Exec", "label": "level sign-off", "icon": "Gauge" },
-          { "value": "1×", "label": "build ownership option", "icon": "FileX" }
+          {
+            "value": "Custom",
+            "label": "approval chains",
+            "icon": "Path"
+          },
+          {
+            "value": "Exec",
+            "label": "level sign-off",
+            "icon": "Gauge"
+          },
+          {
+            "value": "1×",
+            "label": "build ownership option",
+            "icon": "FileX"
+          }
         ],
         "comparison": {
           "enabled": true,
           "eyebrow": "Compare",
           "title": "MOC & PCR vs market options",
           "columns": [
-            { "id": "tailored", "label": "TailoredTech", "highlight": true },
-            { "id": "unisea", "label": "UniSea MoC" },
-            { "id": "fortune", "label": "Fortune MOC" }
+            {
+              "id": "tailored",
+              "label": "TailoredTech",
+              "highlight": true
+            },
+            {
+              "id": "unisea",
+              "label": "UniSea MoC"
+            },
+            {
+              "id": "fortune",
+              "label": "Fortune MOC"
+            }
           ],
           "rows": [
             {
               "label": "Workflow mapped to your approval flow",
               "cells": [
-                { "type": "check", "value": true },
-                { "type": "text", "value": "Configurable" },
-                { "type": "text", "value": "Configurable" }
+                {
+                  "type": "check",
+                  "value": true
+                },
+                {
+                  "type": "text",
+                  "value": "Configurable"
+                },
+                {
+                  "type": "text",
+                  "value": "Configurable"
+                }
               ]
             },
             {
               "label": "Executive-level authorization",
               "cells": [
-                { "type": "check", "value": true },
-                { "type": "text", "value": "Partial" },
-                { "type": "text", "value": "Partial" }
+                {
+                  "type": "check",
+                  "value": true
+                },
+                {
+                  "type": "text",
+                  "value": "Partial"
+                },
+                {
+                  "type": "text",
+                  "value": "Partial"
+                }
               ]
             },
             {
               "label": "Client-owned workflow (exclusive build)",
               "cells": [
-                { "type": "check", "value": true },
-                { "type": "x", "value": false },
-                { "type": "x", "value": false }
+                {
+                  "type": "check",
+                  "value": true
+                },
+                {
+                  "type": "x",
+                  "value": false
+                },
+                {
+                  "type": "x",
+                  "value": false
+                }
               ]
             },
             {
               "label": "Digital chatrooms per change",
               "cells": [
-                { "type": "check", "value": true },
-                { "type": "text", "value": "Partial" },
-                { "type": "x", "value": false }
+                {
+                  "type": "check",
+                  "value": true
+                },
+                {
+                  "type": "text",
+                  "value": "Partial"
+                },
+                {
+                  "type": "x",
+                  "value": false
+                }
               ]
             },
             {
               "label": "Auto message synchronization",
               "cells": [
-                { "type": "check", "value": true },
-                { "type": "check", "value": true },
-                { "type": "check", "value": true }
+                {
+                  "type": "check",
+                  "value": true
+                },
+                {
+                  "type": "check",
+                  "value": true
+                },
+                {
+                  "type": "check",
+                  "value": true
+                }
               ]
             },
             {
               "label": "Branding + self-hosted option",
               "cells": [
-                { "type": "check", "value": true },
-                { "type": "x", "value": false },
-                { "type": "x", "value": false }
+                {
+                  "type": "check",
+                  "value": true
+                },
+                {
+                  "type": "x",
+                  "value": false
+                },
+                {
+                  "type": "x",
+                  "value": false
+                }
               ]
             },
             {
               "label": "One-time build, you own workflow",
               "cells": [
-                { "type": "check", "value": true },
-                { "type": "x", "value": false },
-                { "type": "x", "value": false }
+                {
+                  "type": "check",
+                  "value": true
+                },
+                {
+                  "type": "x",
+                  "value": false
+                },
+                {
+                  "type": "x",
+                  "value": false
+                }
               ]
             },
             {
               "label": "Unlimited seats",
               "cells": [
-                { "type": "check", "value": true },
-                { "type": "x", "value": false },
-                { "type": "x", "value": false }
+                {
+                  "type": "check",
+                  "value": true
+                },
+                {
+                  "type": "x",
+                  "value": false
+                },
+                {
+                  "type": "x",
+                  "value": false
+                }
               ]
             }
           ]
@@ -362,7 +563,11 @@
             "mermaidCaption": "Audit · timestamp · dashboard"
           }
         ],
-        "related": ["digital-risk-assessments", "bbs", "sdr"]
+        "related": [
+          "digital-risk-assessments",
+          "bbs",
+          "sdr"
+        ]
       }
     },
     {
@@ -389,82 +594,176 @@
           "submitLabel": "Request demo"
         },
         "outcomes": [
-          { "value": "ICP", "label": "dynamic forms", "icon": "Layout" },
-          { "value": "Deep", "label": "custom analytics", "icon": "ChartLine" },
-          { "value": "∞", "label": "seats, no cap", "icon": "ShareNetwork" }
+          {
+            "value": "ICP",
+            "label": "dynamic forms",
+            "icon": "Layout"
+          },
+          {
+            "value": "Deep",
+            "label": "custom analytics",
+            "icon": "ChartLine"
+          },
+          {
+            "value": "∞",
+            "label": "seats, no cap",
+            "icon": "ShareNetwork"
+          }
         ],
         "comparison": {
           "enabled": true,
           "eyebrow": "Compare",
           "title": "BBS vs market options",
           "columns": [
-            { "id": "tailored", "label": "TailoredTech BBS", "highlight": true },
-            { "id": "smartqhse", "label": "SmartQHSE" },
-            { "id": "fennex", "label": "Fennex BBSS" }
+            {
+              "id": "tailored",
+              "label": "TailoredTech BBS",
+              "highlight": true
+            },
+            {
+              "id": "smartqhse",
+              "label": "SmartQHSE"
+            },
+            {
+              "id": "fennex",
+              "label": "Fennex BBSS"
+            }
           ],
           "rows": [
             {
               "label": "International BBS methodology",
               "cells": [
-                { "type": "check", "value": true },
-                { "type": "check", "value": true },
-                { "type": "check", "value": true }
+                {
+                  "type": "check",
+                  "value": true
+                },
+                {
+                  "type": "check",
+                  "value": true
+                },
+                {
+                  "type": "check",
+                  "value": true
+                }
               ]
             },
             {
               "label": "Dynamic ICP forms + attachments",
               "cells": [
-                { "type": "check", "value": true },
-                { "type": "text", "value": "Cards" },
-                { "type": "check", "value": true }
+                {
+                  "type": "check",
+                  "value": true
+                },
+                {
+                  "type": "text",
+                  "value": "Cards"
+                },
+                {
+                  "type": "check",
+                  "value": true
+                }
               ]
             },
             {
               "label": "Comments and red flags",
               "cells": [
-                { "type": "check", "value": true },
-                { "type": "check", "value": true },
-                { "type": "check", "value": true }
+                {
+                  "type": "check",
+                  "value": true
+                },
+                {
+                  "type": "check",
+                  "value": true
+                },
+                {
+                  "type": "check",
+                  "value": true
+                }
               ]
             },
             {
               "label": "Custom analytics dashboards",
               "cells": [
-                { "type": "check", "value": true },
-                { "type": "check", "value": true },
-                { "type": "check", "value": true }
+                {
+                  "type": "check",
+                  "value": true
+                },
+                {
+                  "type": "check",
+                  "value": true
+                },
+                {
+                  "type": "check",
+                  "value": true
+                }
               ]
             },
             {
               "label": "Vessel + office parity",
               "cells": [
-                { "type": "check", "value": true },
-                { "type": "text", "value": "Partial" },
-                { "type": "text", "value": "Offshore" }
+                {
+                  "type": "check",
+                  "value": true
+                },
+                {
+                  "type": "text",
+                  "value": "Partial"
+                },
+                {
+                  "type": "text",
+                  "value": "Offshore"
+                }
               ]
             },
             {
               "label": "Unlimited seats",
               "cells": [
-                { "type": "check", "value": true },
-                { "type": "x", "value": false },
-                { "type": "text", "value": "Partial" }
+                {
+                  "type": "check",
+                  "value": true
+                },
+                {
+                  "type": "x",
+                  "value": false
+                },
+                {
+                  "type": "text",
+                  "value": "Partial"
+                }
               ]
             },
             {
               "label": "Branding + self-host",
               "cells": [
-                { "type": "check", "value": true },
-                { "type": "x", "value": false },
-                { "type": "x", "value": false }
+                {
+                  "type": "check",
+                  "value": true
+                },
+                {
+                  "type": "x",
+                  "value": false
+                },
+                {
+                  "type": "x",
+                  "value": false
+                }
               ]
             },
             {
               "label": "Data migration support",
               "cells": [
-                { "type": "check", "value": true },
-                { "type": "text", "value": "Partial" },
-                { "type": "text", "value": "Partial" }
+                {
+                  "type": "check",
+                  "value": true
+                },
+                {
+                  "type": "text",
+                  "value": "Partial"
+                },
+                {
+                  "type": "text",
+                  "value": "Partial"
+                }
               ]
             }
           ]
@@ -528,16 +827,48 @@
               "caption": "Sample data",
               "xKey": "month",
               "series": [
-                { "key": "observations", "label": "Observations", "color": "var(--chart-1)" },
-                { "key": "redFlags", "label": "Red flags", "color": "var(--chart-2)" }
+                {
+                  "key": "observations",
+                  "label": "Observations",
+                  "color": "var(--chart-1)"
+                },
+                {
+                  "key": "redFlags",
+                  "label": "Red flags",
+                  "color": "var(--chart-2)"
+                }
               ],
               "data": [
-                { "month": "Jan", "observations": 210, "redFlags": 12 },
-                { "month": "Feb", "observations": 248, "redFlags": 9 },
-                { "month": "Mar", "observations": 265, "redFlags": 14 },
-                { "month": "Apr", "observations": 291, "redFlags": 8 },
-                { "month": "May", "observations": 320, "redFlags": 11 },
-                { "month": "Jun", "observations": 344, "redFlags": 7 }
+                {
+                  "month": "Jan",
+                  "observations": 210,
+                  "redFlags": 12
+                },
+                {
+                  "month": "Feb",
+                  "observations": 248,
+                  "redFlags": 9
+                },
+                {
+                  "month": "Mar",
+                  "observations": 265,
+                  "redFlags": 14
+                },
+                {
+                  "month": "Apr",
+                  "observations": 291,
+                  "redFlags": 8
+                },
+                {
+                  "month": "May",
+                  "observations": 320,
+                  "redFlags": 11
+                },
+                {
+                  "month": "Jun",
+                  "observations": 344,
+                  "redFlags": 7
+                }
               ],
               "showLegend": true,
               "showGrid": true,
@@ -562,7 +893,11 @@
             "mermaidCaption": null
           }
         ],
-        "related": ["digital-risk-assessments", "moc-pcr", "sdr"]
+        "related": [
+          "digital-risk-assessments",
+          "moc-pcr",
+          "sdr"
+        ]
       }
     },
     {
@@ -589,82 +924,176 @@
           "submitLabel": "Request demo"
         },
         "outcomes": [
-          { "value": "End", "label": "to-end flow", "icon": "Path" },
-          { "value": "Sign", "label": "on + printout", "icon": "FileX" },
-          { "value": "Close", "label": "out & settle", "icon": "Gauge" }
+          {
+            "value": "End",
+            "label": "to-end flow",
+            "icon": "Path"
+          },
+          {
+            "value": "Sign",
+            "label": "on + printout",
+            "icon": "FileX"
+          },
+          {
+            "value": "Close",
+            "label": "out & settle",
+            "icon": "Gauge"
+          }
         ],
         "comparison": {
           "enabled": true,
           "eyebrow": "Compare",
           "title": "SDR vs market options",
           "columns": [
-            { "id": "tailored", "label": "TailoredTech SDR", "highlight": true },
-            { "id": "prime", "label": "PRIME Marine" },
-            { "id": "manual", "label": "Manual / email" }
+            {
+              "id": "tailored",
+              "label": "TailoredTech SDR",
+              "highlight": true
+            },
+            {
+              "id": "prime",
+              "label": "PRIME Marine"
+            },
+            {
+              "id": "manual",
+              "label": "Manual / email"
+            }
           ],
           "rows": [
             {
               "label": "End-to-end stevedore damage flow",
               "cells": [
-                { "type": "check", "value": true },
-                { "type": "text", "value": "Partial" },
-                { "type": "x", "value": false }
+                {
+                  "type": "check",
+                  "value": true
+                },
+                {
+                  "type": "text",
+                  "value": "Partial"
+                },
+                {
+                  "type": "x",
+                  "value": false
+                }
               ]
             },
             {
               "label": "Digital sign-on + printout",
               "cells": [
-                { "type": "check", "value": true },
-                { "type": "text", "value": "Partial" },
-                { "type": "x", "value": false }
+                {
+                  "type": "check",
+                  "value": true
+                },
+                {
+                  "type": "text",
+                  "value": "Partial"
+                },
+                {
+                  "type": "x",
+                  "value": false
+                }
               ]
             },
             {
               "label": "Office review chatroom",
               "cells": [
-                { "type": "check", "value": true },
-                { "type": "x", "value": false },
-                { "type": "x", "value": false }
+                {
+                  "type": "check",
+                  "value": true
+                },
+                {
+                  "type": "x",
+                  "value": false
+                },
+                {
+                  "type": "x",
+                  "value": false
+                }
               ]
             },
             {
               "label": "Budget close-out & settlement",
               "cells": [
-                { "type": "check", "value": true },
-                { "type": "x", "value": false },
-                { "type": "x", "value": false }
+                {
+                  "type": "check",
+                  "value": true
+                },
+                {
+                  "type": "x",
+                  "value": false
+                },
+                {
+                  "type": "x",
+                  "value": false
+                }
               ]
             },
             {
               "label": "File attachments & records",
               "cells": [
-                { "type": "check", "value": true },
-                { "type": "check", "value": true },
-                { "type": "text", "value": "Ad hoc" }
+                {
+                  "type": "check",
+                  "value": true
+                },
+                {
+                  "type": "check",
+                  "value": true
+                },
+                {
+                  "type": "text",
+                  "value": "Ad hoc"
+                }
               ]
             },
             {
               "label": "Auto timestamping & audit trail",
               "cells": [
-                { "type": "check", "value": true },
-                { "type": "text", "value": "Partial" },
-                { "type": "x", "value": false }
+                {
+                  "type": "check",
+                  "value": true
+                },
+                {
+                  "type": "text",
+                  "value": "Partial"
+                },
+                {
+                  "type": "x",
+                  "value": false
+                }
               ]
             },
             {
               "label": "Unlimited seats",
               "cells": [
-                { "type": "check", "value": true },
-                { "type": "x", "value": false },
-                { "type": "x", "value": false }
+                {
+                  "type": "check",
+                  "value": true
+                },
+                {
+                  "type": "x",
+                  "value": false
+                },
+                {
+                  "type": "x",
+                  "value": false
+                }
               ]
             },
             {
               "label": "Custom workflow per company",
               "cells": [
-                { "type": "check", "value": true },
-                { "type": "text", "value": "Partial" },
-                { "type": "x", "value": false }
+                {
+                  "type": "check",
+                  "value": true
+                },
+                {
+                  "type": "text",
+                  "value": "Partial"
+                },
+                {
+                  "type": "x",
+                  "value": false
+                }
               ]
             }
           ]
@@ -739,7 +1168,11 @@
             "mermaidCaption": null
           }
         ],
-        "related": ["digital-risk-assessments", "moc-pcr", "bbs"]
+        "related": [
+          "digital-risk-assessments",
+          "moc-pcr",
+          "bbs"
+        ]
       }
     }
   ]

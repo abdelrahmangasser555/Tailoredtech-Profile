@@ -5,6 +5,7 @@ import Link from "next/link"
 import { ArrowUpRight } from "lucide-react"
 import { motion, useReducedMotion } from "framer-motion"
 import type { PresentationItem } from "@/lib/content"
+import { LocalEditLink } from "@/components/editor/local-edit-link"
 import { cn } from "@/lib/utils"
 
 const EASE = [0.22, 1, 0.36, 1] as const
@@ -25,12 +26,14 @@ type PresentationListProps = {
   items: PresentationItem[]
   headline: string
   subheadline: string
+  localEdit?: boolean
 }
 
 export function PresentationList({
   items,
   headline,
   subheadline,
+  localEdit = false,
 }: PresentationListProps) {
   const reduce = useReducedMotion()
 
@@ -61,6 +64,7 @@ export function PresentationList({
               item={item}
               index={i}
               reduce={!!reduce}
+              localEdit={localEdit}
             />
           ))}
         </div>
@@ -73,10 +77,12 @@ function PresentationCard({
   item,
   index,
   reduce,
+  localEdit,
 }: {
   item: PresentationItem
   index: number
   reduce: boolean
+  localEdit: boolean
 }) {
   const { page, brandClass } = item
 
@@ -85,7 +91,13 @@ function PresentationCard({
       initial={reduce ? false : { opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.55, delay: 0.06 + index * 0.07, ease: EASE }}
+      className="relative"
     >
+      {localEdit ? (
+        <div className="absolute top-3 right-3 z-20">
+          <LocalEditLink href={`/presentations/edit/${item.id}`} />
+        </div>
+      ) : null}
       <Link
         href={item.href}
         className={cn(
@@ -93,7 +105,6 @@ function PresentationCard({
           "hover:border-white/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
         )}
       >
-        {/* Mini hero preview */}
         <div
           className={cn(
             "relative aspect-[16/10] overflow-hidden",

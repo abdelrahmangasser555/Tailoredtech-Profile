@@ -33,14 +33,26 @@ import {
 } from "@/lib/content"
 import { isSectionChart } from "@/lib/section-chart"
 import { scrollToId } from "@/components/motion/smooth-scroll"
+import { EditTrigger } from "@/components/editor/edit-trigger"
 
 const EASE = [0.22, 1, 0.36, 1] as const
 
-type SolutionDetailProps = {
-  service: ServiceItem
+export type SolutionEditHandlers = {
+  onEditMeta?: () => void
+  onEditSection?: (sectionId: string) => void
 }
 
-export function SolutionDetail({ service }: SolutionDetailProps) {
+type SolutionDetailProps = {
+  service: ServiceItem
+  editMode?: boolean
+  editHandlers?: SolutionEditHandlers
+}
+
+export function SolutionDetail({
+  service,
+  editMode = false,
+  editHandlers,
+}: SolutionDetailProps) {
   const { page } = service
   const reduce = useReducedMotion()
   const related = getRelatedServices(page.related)
@@ -130,6 +142,14 @@ export function SolutionDetail({ service }: SolutionDetailProps) {
               : "!py-16 md:!py-20"
           }
         >
+          {editMode ? (
+            <div className="mb-6 flex justify-end">
+              <EditTrigger
+                label="Edit outcomes / brand"
+                onClick={() => editHandlers?.onEditMeta?.()}
+              />
+            </div>
+          ) : null}
           <div className="grid gap-10 sm:grid-cols-3">
             {page.outcomes.map((outcome, i) => (
               <motion.div
@@ -208,6 +228,14 @@ export function SolutionDetail({ service }: SolutionDetailProps) {
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <span aria-hidden className="h-px flex-1 bg-white/10" />
+                  {editMode ? (
+                    <EditTrigger
+                      label="Edit"
+                      onClick={() =>
+                        editHandlers?.onEditSection?.(section.id)
+                      }
+                    />
+                  ) : null}
                 </div>
                 <h2 className="font-pixel-circle text-3xl font-medium tracking-tight text-white md:text-4xl">
                   {section.title}

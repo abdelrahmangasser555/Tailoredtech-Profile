@@ -5,6 +5,8 @@ import {
   getPresentationSlugs,
 } from "@/lib/content"
 import { PresentationDetail } from "@/components/sections/presentation-detail"
+import { LocalEditLink } from "@/components/editor/local-edit-link"
+import { isLocalEditEnabled } from "@/lib/local-edit"
 
 type PageProps = {
   params: Promise<{ slug: string }>
@@ -45,5 +47,20 @@ export default async function PresentationPage({ params }: PageProps) {
     notFound()
   }
 
-  return <PresentationDetail presentation={presentation} />
+  const localEdit = isLocalEditEnabled()
+
+  return (
+    <>
+      {localEdit ? (
+        <div className="fixed right-4 bottom-4 z-50 md:right-6 md:bottom-6">
+          <LocalEditLink
+            href={`/presentations/edit/${presentation.id}`}
+            label="Edit presentation"
+            className="h-10 border-accent/40 bg-black/80 px-3 shadow-lg backdrop-blur-md"
+          />
+        </div>
+      ) : null}
+      <PresentationDetail presentation={presentation} />
+    </>
+  )
 }

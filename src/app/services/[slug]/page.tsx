@@ -5,7 +5,9 @@ import {
   getServiceSlugs,
 } from "@/lib/content"
 import { SolutionDetail } from "@/components/sections/solution-detail"
+import { LocalEditLink } from "@/components/editor/local-edit-link"
 import { JsonLd } from "@/components/seo/json-ld"
+import { isLocalEditEnabled } from "@/lib/local-edit"
 import {
   buildBreadcrumbJsonLd,
   buildSoftwareApplicationJsonLd,
@@ -46,6 +48,8 @@ export default async function SolutionPage({ params }: PageProps) {
     { name: service.title, path: service.href },
   ])
 
+  const localEdit = isLocalEditEnabled()
+
   return (
     <>
       <JsonLd
@@ -54,6 +58,15 @@ export default async function SolutionPage({ params }: PageProps) {
           buildSoftwareApplicationJsonLd(service),
         ]}
       />
+      {localEdit ? (
+        <div className="fixed right-4 bottom-4 z-50 md:right-6 md:bottom-6">
+          <LocalEditLink
+            href={`/services/edit/${service.id}`}
+            label="Edit solution"
+            className="h-10 border-accent/40 bg-black/80 px-3 shadow-lg backdrop-blur-md"
+          />
+        </div>
+      ) : null}
       <SolutionDetail service={service} />
     </>
   )

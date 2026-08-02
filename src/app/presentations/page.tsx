@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { site, getPresentations } from "@/lib/content"
 import { PresentationList } from "@/components/sections/presentation-list"
+import { isLocalEditEnabled } from "@/lib/local-edit"
 
 export const metadata: Metadata = {
   title: "Presentations",
@@ -20,6 +21,7 @@ export default function PresentationsIndexPage() {
       items={items}
       headline={site.presentations.headline}
       subheadline={site.presentations.subheadline}
+      localEdit={isLocalEditEnabled()}
     />
   )
 }

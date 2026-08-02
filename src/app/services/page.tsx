@@ -5,8 +5,10 @@ import { Section } from "@/components/layout/section"
 import { ServicesHero } from "@/components/sections/services-hero"
 import { Button } from "@/components/ui/button"
 import { ServiceVisual } from "@/components/ui/service-visual"
+import { LocalEditLink } from "@/components/editor/local-edit-link"
 import { JsonLd } from "@/components/seo/json-ld"
 import { site } from "@/lib/content"
+import { isLocalEditEnabled } from "@/lib/local-edit"
 import { buildItemListJsonLd, buildPageMetadata } from "@/lib/seo"
 
 const description =
@@ -27,6 +29,7 @@ export const metadata: Metadata = buildPageMetadata({
 
 export default function ServicesPage() {
   const { services } = site
+  const localEdit = isLocalEditEnabled()
 
   return (
     <>
@@ -70,13 +73,21 @@ export default function ServicesPage() {
                     {service.description}
                   </p>
                 </div>
-                <Link
-                  href={service.href}
-                  className="inline-flex h-11 shrink-0 items-center gap-2 border border-foreground/15 px-5 text-sm font-medium transition hover:border-accent hover:text-accent"
-                >
-                  View solution
-                  <ArrowUpRight className="size-4" />
-                </Link>
+                <div className="flex shrink-0 flex-wrap gap-2">
+                  {localEdit ? (
+                    <LocalEditLink
+                      href={`/services/edit/${service.id}`}
+                      className="h-11 border-foreground/15 bg-transparent text-foreground/70 hover:border-accent hover:text-accent"
+                    />
+                  ) : null}
+                  <Link
+                    href={service.href}
+                    className="inline-flex h-11 shrink-0 items-center gap-2 border border-foreground/15 px-5 text-sm font-medium transition hover:border-accent hover:text-accent"
+                  >
+                    View solution
+                    <ArrowUpRight className="size-4" />
+                  </Link>
+                </div>
               </div>
             </article>
           ))}

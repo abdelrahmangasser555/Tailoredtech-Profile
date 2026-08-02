@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { memo, useEffect, useMemo, useState, type ReactElement } from "react"
 import {
   Area,
   AreaChart,
@@ -39,6 +39,18 @@ const DEFAULT_COLORS = [
   "var(--chart-5)",
 ] as const
 
+/** Stable refs — Recharts treats new object/element props as updates and can loop. */
+const AXIS_TICK = { fontSize: 11 } as const
+const CARTESIAN_MARGIN = { left: 4, right: 8 } as const
+const RADAR_MARGIN = { top: 8, right: 24, bottom: 8, left: 24 } as const
+const ACTIVE_DOT = { r: 4 } as const
+/** Created once — same element identity across renders (Recharts content prop). */
+const DEFAULT_TOOLTIP = (<ChartTooltipContent />) as ReactElement
+// payload is injected by Recharts via cloneElement; [] satisfies the prop type
+const DEFAULT_LEGEND = <ChartLegendContent payload={[]} />
+const GRID_HEIGHT_CLASS = "aspect-[4/3] min-h-[220px] w-full"
+const DEFAULT_HEIGHT_CLASS = "aspect-video min-h-[240px] w-full"
+
 type SectionChartProps = {
   config: SectionChartConfig
   className?: string
@@ -46,7 +58,7 @@ type SectionChartProps = {
   tone?: "dark" | "light"
 }
 
-export function SectionChart({
+function SectionChartInner({
   config,
   className,
   tone = "dark",
@@ -57,14 +69,22 @@ export function SectionChart({
     setMounted(true)
   }, [])
 
-  if (config.enabled === false) return null
-  if (!config.data?.length || !config.series?.length) return null
+  const enabled =
+    config.enabled !== false &&
+    Boolean(config.data?.length) &&
+    Boolean(config.series?.length)
 
-  const chartConfig = buildChartConfig(config)
+  const chartConfig = useMemo(
+    () => (enabled ? buildChartConfig(config) : {}),
+    [config, enabled]
+  )
+
+  if (!enabled) return null
+
   const showLegend = config.showLegend !== false
   const showGrid = config.showGrid !== false
   const curve = config.curve ?? "natural"
-  const heightClass = config.heightClass ?? "aspect-video min-h-[240px] w-full"
+  const heightClass = config.heightClass ?? DEFAULT_HEIGHT_CLASS
 
   return (
     <figure
@@ -145,6 +165,20 @@ export function SectionChart({
   )
 }
 
+function chartPropsEqual(
+  prev: SectionChartProps,
+  next: SectionChartProps
+): boolean {
+  return (
+    prev.tone === next.tone &&
+    prev.className === next.className &&
+    prev.config === next.config
+  )
+}
+
+/** Memoized so parent live-preview re-renders skip Recharts when config is unchanged. */
+export const SectionChart = memo(SectionChartInner, chartPropsEqual)
+
 function buildChartConfig(config: SectionChartConfig): ChartConfig {
   const out: ChartConfig = {}
 
@@ -187,23 +221,34 @@ function renderChart(
   }
 ) {
   const { showGrid, showLegend, curve } = opts
-  const tick = { fontSize: 11 }
+  // Animations off: avoids layout thrash + smoother production paint
+  const anim = false
 
   switch (config.type) {
     case "bar":
       return (
-        <BarChart accessibilityLayer data={config.data} margin={{ left: 4, right: 8 }}>
+        <BarChart
+          accessibilityLayer
+          data={config.data}
+          margin={CARTESIAN_MARGIN}
+        >
           {showGrid && <CartesianGrid vertical={false} strokeDasharray="3 3" />}
           <XAxis
             dataKey={config.xKey}
             tickLine={false}
             axisLine={false}
             tickMargin={10}
-            tick={tick}
+            tick={AXIS_TICK}
           />
-          <YAxis tickLine={false} axisLine={false} tickMargin={8} tick={tick} width={40} />
-          <ChartTooltip content={<ChartTooltipContent />} />
-          {showLegend && <ChartLegend content={<ChartLegendContent />} />}
+          <YAxis
+            tickLine={false}
+            axisLine={false}
+            tickMargin={8}
+            tick={AXIS_TICK}
+            width={40}
+          />
+          <ChartTooltip content={DEFAULT_TOOLTIP} />
+          {showLegend && <ChartLegend content={DEFAULT_LEGEND} />}
           {config.series.map((s) => (
             <Bar
               key={s.key}
@@ -211,6 +256,7 @@ function renderChart(
               fill={`var(--color-${s.key})`}
               radius={0}
               stackId={config.stacked ? "stack" : undefined}
+              isAnimationActive={anim}
             />
           ))}
         </BarChart>
@@ -218,18 +264,28 @@ function renderChart(
 
     case "line":
       return (
-        <LineChart accessibilityLayer data={config.data} margin={{ left: 4, right: 8 }}>
+        <LineChart
+          accessibilityLayer
+          data={config.data}
+          margin={CARTESIAN_MARGIN}
+        >
           {showGrid && <CartesianGrid vertical={false} strokeDasharray="3 3" />}
           <XAxis
             dataKey={config.xKey}
             tickLine={false}
             axisLine={false}
             tickMargin={10}
-            tick={tick}
+            tick={AXIS_TICK}
           />
-          <YAxis tickLine={false} axisLine={false} tickMargin={8} tick={tick} width={40} />
-          <ChartTooltip content={<ChartTooltipContent />} />
-          {showLegend && <ChartLegend content={<ChartLegendContent />} />}
+          <YAxis
+            tickLine={false}
+            axisLine={false}
+            tickMargin={8}
+            tick={AXIS_TICK}
+            width={40}
+          />
+          <ChartTooltip content={DEFAULT_TOOLTIP} />
+          {showLegend && <ChartLegend content={DEFAULT_LEGEND} />}
           {config.series.map((s) => (
             <Line
               key={s.key}
@@ -238,7 +294,8 @@ function renderChart(
               stroke={`var(--color-${s.key})`}
               strokeWidth={2}
               dot={false}
-              activeDot={{ r: 4 }}
+              activeDot={ACTIVE_DOT}
+              isAnimationActive={anim}
             />
           ))}
         </LineChart>
@@ -246,18 +303,28 @@ function renderChart(
 
     case "area":
       return (
-        <AreaChart accessibilityLayer data={config.data} margin={{ left: 4, right: 8 }}>
+        <AreaChart
+          accessibilityLayer
+          data={config.data}
+          margin={CARTESIAN_MARGIN}
+        >
           {showGrid && <CartesianGrid vertical={false} strokeDasharray="3 3" />}
           <XAxis
             dataKey={config.xKey}
             tickLine={false}
             axisLine={false}
             tickMargin={10}
-            tick={tick}
+            tick={AXIS_TICK}
           />
-          <YAxis tickLine={false} axisLine={false} tickMargin={8} tick={tick} width={40} />
-          <ChartTooltip content={<ChartTooltipContent />} />
-          {showLegend && <ChartLegend content={<ChartLegendContent />} />}
+          <YAxis
+            tickLine={false}
+            axisLine={false}
+            tickMargin={8}
+            tick={AXIS_TICK}
+            width={40}
+          />
+          <ChartTooltip content={DEFAULT_TOOLTIP} />
+          {showLegend && <ChartLegend content={DEFAULT_LEGEND} />}
           {config.series.map((s) => (
             <Area
               key={s.key}
@@ -268,6 +335,7 @@ function renderChart(
               fillOpacity={0.28}
               strokeWidth={2}
               stackId={config.stacked ? "stack" : undefined}
+              isAnimationActive={anim}
             />
           ))}
         </AreaChart>
@@ -277,9 +345,19 @@ function renderChart(
       const valueKey = config.valueKey ?? config.series[0]?.key ?? "value"
       return (
         <PieChart>
-          <ChartTooltip content={<ChartTooltipContent nameKey={config.xKey} hideLabel />} />
+          <ChartTooltip
+            content={
+              (
+                <ChartTooltipContent nameKey={config.xKey} hideLabel />
+              ) as ReactElement
+            }
+          />
           {showLegend && (
-            <ChartLegend content={<ChartLegendContent nameKey={config.xKey} />} />
+            <ChartLegend
+              content={
+                <ChartLegendContent nameKey={config.xKey} payload={[]} />
+              }
+            />
           )}
           <Pie
             data={config.data}
@@ -289,15 +367,11 @@ function renderChart(
             outerRadius="72%"
             strokeWidth={2}
             stroke="var(--section-dark, #050505)"
+            isAnimationActive={anim}
           >
             {config.data.map((row, i) => {
               const name = String(row[config.xKey] ?? i)
-              return (
-                <Cell
-                  key={name}
-                  fill={`var(--color-${name})`}
-                />
-              )
+              return <Cell key={name} fill={`var(--color-${name})`} />
             })}
           </Pie>
         </PieChart>
@@ -306,11 +380,11 @@ function renderChart(
 
     case "radar":
       return (
-        <RadarChart data={config.data} margin={{ top: 8, right: 24, bottom: 8, left: 24 }}>
+        <RadarChart data={config.data} margin={RADAR_MARGIN}>
           <PolarGrid strokeDasharray="3 3" />
-          <PolarAngleAxis dataKey={config.xKey} tick={tick} />
-          <ChartTooltip content={<ChartTooltipContent />} />
-          {showLegend && <ChartLegend content={<ChartLegendContent />} />}
+          <PolarAngleAxis dataKey={config.xKey} tick={AXIS_TICK} />
+          <ChartTooltip content={DEFAULT_TOOLTIP} />
+          {showLegend && <ChartLegend content={DEFAULT_LEGEND} />}
           {config.series.map((s) => (
             <Radar
               key={s.key}
@@ -318,6 +392,7 @@ function renderChart(
               fill={`var(--color-${s.key})`}
               stroke={`var(--color-${s.key})`}
               fillOpacity={0.22}
+              isAnimationActive={anim}
             />
           ))}
         </RadarChart>
@@ -340,8 +415,18 @@ export function SectionChartsGrid({
   className,
   tone = "dark",
 }: SectionChartsGridProps) {
-  const visible = charts.filter(
-    (c) => c.enabled !== false && c.data?.length && c.series?.length
+  // Memoize so we don't allocate new config objects every parent render
+  // (that defeats SectionChart memo and re-inits Recharts).
+  const visible = useMemo(
+    () =>
+      charts
+        .filter(
+          (c) => c.enabled !== false && c.data?.length && c.series?.length
+        )
+        .map((c) =>
+          c.heightClass ? c : { ...c, heightClass: GRID_HEIGHT_CLASS }
+        ),
+    [charts]
   )
   if (visible.length === 0) return null
 
@@ -355,10 +440,7 @@ export function SectionChartsGrid({
       {visible.map((config, i) => (
         <SectionChart
           key={`${config.title ?? config.type}-${i}`}
-          config={{
-            ...config,
-            heightClass: config.heightClass ?? "aspect-[4/3] min-h-[220px] w-full",
-          }}
+          config={config}
           tone={tone}
           className="mt-0"
         />

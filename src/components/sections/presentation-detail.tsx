@@ -29,16 +29,28 @@ import {
 import { Section } from "@/components/layout/section"
 import { isSectionChart, isSectionCharts } from "@/lib/section-chart"
 import type { PresentationItem } from "@/lib/content"
+import { EditTrigger } from "@/components/editor/edit-trigger"
 import { scrollToId } from "@/components/motion/smooth-scroll"
 import { cn } from "@/lib/utils"
 
 const EASE = [0.22, 1, 0.36, 1] as const
 
-type PresentationDetailProps = {
-  presentation: PresentationItem
+export type PresentationEditHandlers = {
+  onEditMeta?: () => void
+  onEditSection?: (sectionId: string) => void
 }
 
-export function PresentationDetail({ presentation }: PresentationDetailProps) {
+type PresentationDetailProps = {
+  presentation: PresentationItem
+  editMode?: boolean
+  editHandlers?: PresentationEditHandlers
+}
+
+export function PresentationDetail({
+  presentation,
+  editMode = false,
+  editHandlers,
+}: PresentationDetailProps) {
   const { page, brandClass } = presentation
   const reduce = useReducedMotion()
   const sectionIds = page.sections.map((s) => s.id).join(",")
@@ -102,6 +114,14 @@ export function PresentationDetail({ presentation }: PresentationDetailProps) {
               : "!py-16 md:!py-20"
           }
         >
+          {editMode ? (
+            <div className="mb-6 flex justify-end">
+              <EditTrigger
+                label="Edit outcomes / brand"
+                onClick={() => editHandlers?.onEditMeta?.()}
+              />
+            </div>
+          ) : null}
           <div className="grid gap-10 sm:grid-cols-3">
             {page.outcomes.map((outcome, i) => (
               <motion.div
@@ -132,6 +152,14 @@ export function PresentationDetail({ presentation }: PresentationDetailProps) {
       {page.comparison?.enabled && (
         <>
           {page.outcomes.length > 0 && <ComparisonSectionDivider />}
+          {editMode ? (
+            <div className="flex justify-end bg-[var(--section-light)] px-5 pb-2 md:px-8 lg:px-10">
+              <EditTrigger
+                label="Edit comparison"
+                onClick={() => editHandlers?.onEditMeta?.()}
+              />
+            </div>
+          ) : null}
           <SolutionComparisonTable
             data={page.comparison}
             tightTop={page.outcomes.length > 0}
@@ -184,6 +212,14 @@ export function PresentationDetail({ presentation }: PresentationDetailProps) {
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     <span aria-hidden className="h-px flex-1 bg-white/10" />
+                    {editMode ? (
+                      <EditTrigger
+                        label="Edit"
+                        onClick={() =>
+                          editHandlers?.onEditSection?.(section.id)
+                        }
+                      />
+                    ) : null}
                   </div>
                   <h2 className="font-pixel-circle text-3xl font-medium tracking-tight text-white md:text-4xl">
                     {section.title}
