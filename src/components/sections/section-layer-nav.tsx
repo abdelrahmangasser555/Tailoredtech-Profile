@@ -1,29 +1,29 @@
-"use client"
+"use client";
 
-import { useId, useMemo, useState } from "react"
-import { type LucideIcon } from "lucide-react"
-import { AnimatePresence, motion } from "framer-motion"
-import { resolveSectionNavIcon } from "@/components/sections/section-nav-icon"
-import { cn } from "@/lib/utils"
+import { useId, useMemo, useState } from "react";
+import { type LucideIcon } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
+import { resolveSectionNavIcon } from "@/components/sections/section-nav-icon";
+import { cn } from "@/lib/utils";
 
-const EASE = [0.22, 1, 0.36, 1] as const
+const EASE = [0.22, 1, 0.36, 1] as const;
 
 type LayerSection = {
-  id: string
-  title: string
+  id: string;
+  title: string;
   /** Lucide icon name — see section-nav-icon.tsx */
-  icon?: string | null
+  icon?: string | null;
   /** Optional mark printed on the plate face (overrides icon) */
-  image?: string | null
-}
+  image?: string | null;
+};
 
 type SectionLayerNavProps = {
-  sections: readonly LayerSection[]
-  activeId: string
-  reduce?: boolean
-  onSelect: (id: string) => void
-  className?: string
-}
+  sections: readonly LayerSection[];
+  activeId: string;
+  reduce?: boolean;
+  onSelect: (id: string) => void;
+  className?: string;
+};
 
 /**
  * Tall vertical isometric section deck (desktop).
@@ -36,37 +36,37 @@ export function SectionLayerNav({
   onSelect,
   className,
 }: SectionLayerNavProps) {
-  const [spread, setSpread] = useState(false)
-  const [hoveredId, setHoveredId] = useState<string | null>(null)
+  const [spread, setSpread] = useState(false);
+  const [hoveredId, setHoveredId] = useState<string | null>(null);
 
-  const focusId = hoveredId ?? activeId
+  const focusId = hoveredId ?? activeId;
   const focusIndex = Math.max(
     0,
-    sections.findIndex((s) => s.id === focusId)
-  )
-  const focusSection = sections[focusIndex]
+    sections.findIndex((s) => s.id === focusId),
+  );
+  const focusSection = sections[focusIndex];
 
-  const stride = spread ? 96 : 86
-  const openExtra = spread ? 32 : 20
-  const slideX = 36
-  const plateH = 120
+  const stride = spread ? 96 : 86;
+  const openExtra = spread ? 32 : 20;
+  const slideX = 36;
+  const plateH = 120;
 
   const slots = sections.map((_, i) => {
-    let y = i * stride
-    if (i > focusIndex) y += openExtra
-    const focused = i === focusIndex
+    let y = i * stride;
+    if (i > focusIndex) y += openExtra;
+    const focused = i === focusIndex;
     return {
       y,
       x: focused ? slideX : 0,
       focused,
-    }
-  })
+    };
+  });
 
-  const totalH = (sections.length - 1) * stride + openExtra + plateH + 8
-  const focusSlot = slots[focusIndex]
+  const totalH = (sections.length - 1) * stride + openExtra + plateH + 8;
+  const focusSlot = slots[focusIndex];
   // Vertically centered beside the active plate
-  const calloutTop = (focusSlot?.y ?? 0) + plateH / 2
-  const calloutLeft = 10.85 + (focusSlot?.x ?? 0) / 16
+  const calloutTop = (focusSlot?.y ?? 0) + plateH / 2;
+  const calloutLeft = 10.85 + (focusSlot?.x ?? 0) / 16;
 
   return (
     <nav
@@ -74,15 +74,15 @@ export function SectionLayerNav({
       className={cn("relative w-[17.5rem] select-none", className)}
       onMouseEnter={() => setSpread(true)}
       onMouseLeave={() => {
-        setSpread(false)
-        setHoveredId(null)
+        setSpread(false);
+        setHoveredId(null);
       }}
     >
       <div className="relative" style={{ height: totalH, width: "17.5rem" }}>
         {sections.map((section, i) => {
-          const slot = slots[i]!
-          const Icon = resolveSectionNavIcon(section)
-          const hovered = hoveredId === section.id
+          const slot = slots[i]!;
+          const Icon = resolveSectionNavIcon(section);
+          const hovered = hoveredId === section.id;
 
           return (
             <motion.button
@@ -93,8 +93,8 @@ export function SectionLayerNav({
               onClick={() => onSelect(section.id)}
               onMouseEnter={() => setHoveredId(section.id)}
               onFocus={() => {
-                setSpread(true)
-                setHoveredId(section.id)
+                setSpread(true);
+                setHoveredId(section.id);
               }}
               onBlur={() => setHoveredId(null)}
               className="absolute left-0 top-0 h-[7.5rem] w-[11.5rem] cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-black"
@@ -121,9 +121,7 @@ export function SectionLayerNav({
               <motion.div
                 className="h-full w-full will-change-transform"
                 animate={
-                  reduce || !slot.focused
-                    ? { y: 0 }
-                    : { y: [0, -6, 0, 4, 0] }
+                  reduce || !slot.focused ? { y: 0 } : { y: [0, -6, 0, 4, 0] }
                 }
                 transition={
                   reduce || !slot.focused
@@ -143,7 +141,7 @@ export function SectionLayerNav({
                 />
               </motion.div>
             </motion.button>
-          )
+          );
         })}
 
         <AnimatePresence mode="wait">
@@ -166,32 +164,26 @@ export function SectionLayerNav({
         </AnimatePresence>
       </div>
     </nav>
-  )
+  );
 }
 
 /** Chunky pixel L — text always under the horizontal run */
-function PixelCallout({
-  label,
-  reduce,
-}: {
-  label: string
-  reduce: boolean
-}) {
+function PixelCallout({ label, reduce }: { label: string; reduce: boolean }) {
   const hDashes = useMemo(() => {
-    const items: { x: number; delay: number }[] = []
+    const items: { x: number; delay: number }[] = [];
     for (let i = 0, x = 8; x <= 52; x += 7, i++) {
-      items.push({ x, delay: 0.04 + i * 0.035 })
+      items.push({ x, delay: 0.04 + i * 0.035 });
     }
-    return items
-  }, [])
+    return items;
+  }, []);
 
   const vDashes = useMemo(() => {
-    const items: { y: number; delay: number }[] = []
+    const items: { y: number; delay: number }[] = [];
     for (let i = 0, y = 8; y <= 22; y += 7, i++) {
-      items.push({ y, delay: 0.28 + i * 0.045 })
+      items.push({ y, delay: 0.28 + i * 0.045 });
     }
-    return items
-  }, [])
+    return items;
+  }, []);
 
   return (
     <div className="flex w-40 flex-col items-start">
@@ -252,7 +244,7 @@ function PixelCallout({
         {label}
       </motion.p>
     </div>
-  )
+  );
 }
 
 function IsoPlate({
@@ -261,15 +253,15 @@ function IsoPlate({
   Icon,
   image,
 }: {
-  focused: boolean
-  depth: number
-  Icon: LucideIcon
-  image?: string | null
+  focused: boolean;
+  depth: number;
+  Icon: LucideIcon;
+  image?: string | null;
 }) {
-  const uid = useId().replace(/:/g, "")
-  const shadowId = `iso-shadow-${uid}`
-  const printId = `iso-print-${uid}`
-  const hatchId = `iso-hatch-${uid}`
+  const uid = useId().replace(/:/g, "");
+  const shadowId = `iso-shadow-${uid}`;
+  const printId = `iso-print-${uid}`;
+  const hatchId = `iso-hatch-${uid}`;
 
   const face = focused
     ? "var(--layer-face-focus, var(--accent, #D4FF00))"
@@ -279,14 +271,16 @@ function IsoPlate({
         ? "var(--layer-face-1, var(--accent, #D4FF00))"
         : depth === 2
           ? "var(--layer-face-2, var(--accent, #D4FF00))"
-          : "var(--layer-face-3, var(--accent, #D4FF00))"
+          : "var(--layer-face-3, var(--accent, #D4FF00))";
 
-  const rimDeep = "var(--layer-rim-deep, color-mix(in oklab, var(--accent, #D4FF00) 28%, black))"
-  const rimMid = "var(--layer-rim-mid, color-mix(in oklab, var(--accent, #D4FF00) 42%, black))"
+  const rimDeep =
+    "var(--layer-rim-deep, color-mix(in oklab, var(--accent, #D4FF00) 28%, black))";
+  const rimMid =
+    "var(--layer-rim-mid, color-mix(in oklab, var(--accent, #D4FF00) 42%, black))";
   const iconColor = focused
     ? "var(--layer-icon-focus, #0A0A0A)"
-    : "var(--layer-icon, #0A0A0A)"
-  const iso = "translate(118, 68) matrix(1, 0.5, -1, 0.5, 0, 0)"
+    : "var(--layer-icon, #0A0A0A)";
+  const iso = "translate(118, 68) matrix(1, 0.5, -1, 0.5, 0, 0)";
 
   return (
     <div className="relative h-full w-full">
@@ -296,13 +290,7 @@ function IsoPlate({
         aria-hidden
       >
         <defs>
-          <filter
-            id={shadowId}
-            x="-30%"
-            y="-30%"
-            width="160%"
-            height="160%"
-          >
+          <filter id={shadowId} x="-30%" y="-30%" width="160%" height="160%">
             <feDropShadow
               dx="0"
               dy="14"
@@ -342,10 +330,24 @@ function IsoPlate({
 
         <g filter={`url(#${shadowId})`}>
           <g transform="translate(118, 92) matrix(1, 0.5, -1, 0.5, 0, 0)">
-            <rect x={-56} y={-56} width={112} height={112} rx={14} fill={rimDeep} />
+            <rect
+              x={-56}
+              y={-56}
+              width={112}
+              height={112}
+              rx={14}
+              fill={rimDeep}
+            />
           </g>
           <g transform="translate(118, 84) matrix(1, 0.5, -1, 0.5, 0, 0)">
-            <rect x={-56} y={-56} width={112} height={112} rx={14} fill={rimMid} />
+            <rect
+              x={-56}
+              y={-56}
+              width={112}
+              height={112}
+              rx={14}
+              fill={rimMid}
+            />
           </g>
 
           <g transform={iso}>
@@ -414,5 +416,5 @@ function IsoPlate({
         </g>
       </svg>
     </div>
-  )
+  );
 }
