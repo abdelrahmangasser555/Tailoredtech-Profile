@@ -8,7 +8,7 @@
       "short": "Company-owned Behaviour Based Safety for Bahri vessels and shore teams.",
       "description": "Presentation for Bahri in-house BBS: ICBS observations, observer accounts, vessel and office control, campaigns, and offline sync.",
       "createdAt": "2026-07-31",
-      "updatedAt": "2026-07-31",
+      "updatedAt": "2026-08-06",
       "brandClass": "brand-bahri",
       "clientLogo": "/clients/bahri-no-background.png",
       "clientName": "Bahri",
@@ -28,121 +28,226 @@
             "label": "crew accounts in scope",
             "icon": "ShareNetwork"
           },
-          { "value": "1.5k", "label": "observer accounts", "icon": "Eye" },
-          { "value": "107", "label": "vessels", "icon": "Boat" }
+          {
+            "value": "2.9k",
+            "label": "observer accounts",
+            "icon": "Eye"
+          },
+          {
+            "value": "107",
+            "label": "vessels",
+            "icon": "Boat"
+          }
         ],
         "comparison": {
           "enabled": true,
           "eyebrow": "Compare",
           "title": "Bahri in-house BBS vs Dekra BBS",
           "columns": [
-            { "id": "bahri", "label": "Bahri in-house BBS", "highlight": true },
-            { "id": "dekra", "label": "Adaptive BBS" }
+            {
+              "id": "bahri",
+              "label": "Bahri in-house BBS",
+              "highlight": true
+            },
+            {
+              "id": "dekra",
+              "label": "Adaptive BBS"
+            }
           ],
           "rows": [
             {
               "label": "ICB form",
               "cells": [
-                { "type": "check", "value": true },
-                { "type": "check", "value": true }
+                {
+                  "type": "check",
+                  "value": true
+                },
+                {
+                  "type": "check",
+                  "value": true
+                }
               ]
             },
             {
               "label": "Barrier identification",
               "cells": [
-                { "type": "check", "value": true },
-                { "type": "check", "value": true }
+                {
+                  "type": "check",
+                  "value": true
+                },
+                {
+                  "type": "check",
+                  "value": true
+                }
               ]
             },
             {
               "label": "Caching and loading speed",
               "cells": [
-                { "type": "text", "value": "Fast" },
-                { "type": "text", "value": "Slow" }
+                {
+                  "type": "text",
+                  "value": "Fast"
+                },
+                {
+                  "type": "text",
+                  "value": "Slow"
+                }
               ]
             },
             {
               "label": "Action plan",
               "cells": [
-                { "type": "check", "value": true },
-                { "type": "check", "value": true }
+                {
+                  "type": "check",
+                  "value": true
+                },
+                {
+                  "type": "check",
+                  "value": true
+                }
               ]
             },
             {
               "label": "Deep analysis",
               "cells": [
-                { "type": "check", "value": true },
-                { "type": "check", "value": true }
+                {
+                  "type": "check",
+                  "value": true
+                },
+                {
+                  "type": "check",
+                  "value": true
+                }
               ]
             },
             {
               "label": "Customizable dashboard",
               "cells": [
-                { "type": "check", "value": true },
-                { "type": "check", "value": true }
+                {
+                  "type": "check",
+                  "value": true
+                },
+                {
+                  "type": "check",
+                  "value": true
+                }
               ]
             },
             {
               "label": "Offline support and auto sync",
               "cells": [
-                { "type": "check", "value": true },
-                { "type": "x", "value": false }
+                {
+                  "type": "check",
+                  "value": true
+                },
+                {
+                  "type": "check",
+                  "value": true
+                }
               ]
             },
             {
               "label": "Individual observer accounts and dashboards",
               "cells": [
-                { "type": "check", "value": true },
-                { "type": "x", "value": false }
+                {
+                  "type": "check",
+                  "value": true
+                },
+                {
+                  "type": "x",
+                  "value": false
+                }
               ]
             },
             {
               "label": "Company ownership of data and hosting",
               "cells": [
-                { "type": "check", "value": true },
-                { "type": "text", "value": "Third-party" }
+                {
+                  "type": "check",
+                  "value": true
+                },
+                {
+                  "type": "text",
+                  "value": "Third-party"
+                }
               ]
             },
             {
               "label": "Payment plan",
               "cells": [
-                { "type": "text", "value": "One-time payment" },
-                { "type": "text", "value": "Annual subscription" }
+                {
+                  "type": "text",
+                  "value": "One-time payment"
+                },
+                {
+                  "type": "text",
+                  "value": "Annual subscription"
+                }
               ]
             },
             {
               "label": "Room to enhance without vendor gatekeeping",
               "cells": [
-                { "type": "check", "value": true },
-                { "type": "x", "value": false }
+                {
+                  "type": "check",
+                  "value": true
+                },
+                {
+                  "type": "x",
+                  "value": false
+                }
               ]
             },
             {
               "label": "Admin control beyond end-user configuration",
               "cells": [
-                { "type": "check", "value": true },
-                { "type": "text", "value": "End user" }
+                {
+                  "type": "check",
+                  "value": true
+                },
+                {
+                  "type": "text",
+                  "value": "End user"
+                }
               ]
             },
             {
               "label": "Red Flag alerts from observer to office",
               "cells": [
-                { "type": "check", "value": true },
-                { "type": "text", "value": "Basic" }
+                {
+                  "type": "check",
+                  "value": true
+                },
+                {
+                  "type": "text",
+                  "value": "Basic"
+                }
               ]
             },
             {
               "label": "Unique ICB numbering, feedback, and barriers",
               "cells": [
-                { "type": "check", "value": true },
-                { "type": "text", "value": "Partial" }
+                {
+                  "type": "check",
+                  "value": true
+                },
+                {
+                  "type": "text",
+                  "value": "Partial"
+                }
               ]
             },
             {
               "label": "Add or edit ICBS categories and vessel-specific ops",
               "cells": [
-                { "type": "check", "value": true },
-                { "type": "text", "value": "Limited" }
+                {
+                  "type": "check",
+                  "value": true
+                },
+                {
+                  "type": "text",
+                  "value": "Limited"
+                }
               ]
             }
           ]
@@ -165,14 +270,15 @@
             "id": "sign-on",
             "title": "Observer sign-on flow",
             "icon": "LogIn",
-            "body": "An observer **cannot submit an observation** until they are assigned to a vessel. Assignment can happen in three ways:\n\n1. **Observer-initiated:** the observer sends a sign-on request for a vessel; the vessel captain receives it by email and approves or declines\n2. **Captain-initiated:** the vessel captain (vessel account) directly assigns a crew member to the vessel\n3. **Office-initiated:** shore office assigns a crew member to a vessel from the admin panel\n\n### Observers sign in\n\nObservers sign in through one of two methods:\n\n- **Email verification OTP:** standard one-time password flow\n- **Authenticator app:** TOTP-based; works without internet once configured",
+            "body": "An observer **cannot submit an observation** until they are assigned to a vessel. Assignment can happen in three ways:\n\n1. **Observer-initiated:** the observer sends a sign-on request for a vessel; the vessel captain receives it by email and approves or declines\n2. **Captain-initiated:** the vessel captain (vessel account) directly assigns a crew member to the vessel\n3. **Office-initiated:** shore office assigns a crew member to a vessel from the admin panel\n\n### Observers sign in\n\nObservers sign in through one of three methods:\n\n- **MIPS authentication gateway:** through MIPS using API integration\n- **Email verification OTP:** standard one-time password flow\n- **Authenticator app:** TOTP-based; works without internet once configured",
             "bullets": [],
-            "video": null,
+            "video": "",
             "images": [],
             "mermaid": "flowchart TD\n  Start([Observer needs vessel assignment]) --> Gate{How assigned?}\n  Gate --> Req[Observer requests sign-on]\n  Req --> Email[Captain receives email]\n  Email --> Approve{Approved?}\n  Approve -->|Yes| Assigned[Assigned to vessel]\n  Approve -->|No| Blocked[Cannot observe]\n  Gate --> Cap[Captain assigns crew member]\n  Cap --> Assigned\n  Gate --> Off[Office assigns to vessel]\n  Off --> Assigned\n  Assigned --> Form[Observer can submit ICB form]",
             "mermaidTitle": "Sign-on paths",
             "mermaidCaption": "Three routes to vessel assignment, one gate before observation",
-            "chart": null
+            "chart": null,
+            "charts": null
           },
           {
             "id": "observer",
@@ -191,14 +297,15 @@
             "id": "vessel",
             "title": "Vessel perspective",
             "icon": "Ship",
-            "body": "Vessels do **not** create observations. The vessel account is focused on crew management and visibility.\n\n### Vessel responsibilities\n\n- Maintain **vessel profile and particulars:** type, flag, fleet assignment\n- **Sign on and sign off crew members:** approve observer requests or assign crew directly\n- **Optional observation preview:** administrators can enable or disable whether the vessel account can view observations created on that vessel\n\nThis keeps the vessel captain in control of who is on board, without adding observation overhead to the bridge.",
+            "body": "Vessels do **not** create observations. The vessel account is focused on crew management and visibility.\n\n### Vessel responsibilities\n\n- Maintain **vessel profile and particulars:** type, flag, fleet assignment\n- **Sign on and sign off crew members:** approve observer requests or assign crew directly\n- **Interactive chatroom:** chatroom between STO , Master and Office\n- **Optional observation preview:** administrators can enable or disable whether the vessel account can view observations created on that vessel\n\nThis keeps the vessel captain in control of who is on board, without adding observation overhead to the bridge.",
             "bullets": [],
-            "video": null,
+            "video": "",
             "images": [],
             "mermaid": "flowchart TD\n  Vessel[Vessel account] --> Info[Vessel profile and particulars]\n  Vessel --> SignOn[Sign on crew members]\n  Vessel --> SignOff[Sign off crew members]\n  Vessel --> Preview{Observation preview}\n  Preview -->|Enabled| View[View observations on vessel]\n  Preview -->|Disabled| Hidden[Observations hidden from vessel]",
             "mermaidTitle": "Vessel account",
             "mermaidCaption": "Crew management and optional observation visibility. No observation creation.",
-            "chart": null
+            "chart": null,
+            "charts": null
           },
           {
             "id": "office",
@@ -228,7 +335,7 @@
             "charts": [
               {
                 "enabled": true,
-                "type": "line",
+                "type": "radar",
                 "title": "Observation volume",
                 "description": "Fleet-wide monthly observations and red flags",
                 "xKey": "month",
@@ -245,12 +352,36 @@
                   }
                 ],
                 "data": [
-                  { "month": "Jan", "observations": 1840, "redFlags": 94 },
-                  { "month": "Feb", "observations": 2105, "redFlags": 112 },
-                  { "month": "Mar", "observations": 2280, "redFlags": 88 },
-                  { "month": "Apr", "observations": 2410, "redFlags": 103 },
-                  { "month": "May", "observations": 2560, "redFlags": 76 },
-                  { "month": "Jun", "observations": 2695, "redFlags": 91 }
+                  {
+                    "month": "Jan",
+                    "observations": 1840,
+                    "redFlags": 94
+                  },
+                  {
+                    "month": "Feb",
+                    "observations": 2105,
+                    "redFlags": 112
+                  },
+                  {
+                    "month": "Mar",
+                    "observations": 2280,
+                    "redFlags": 88
+                  },
+                  {
+                    "month": "Apr",
+                    "observations": 2410,
+                    "redFlags": 103
+                  },
+                  {
+                    "month": "May",
+                    "observations": 2560,
+                    "redFlags": 76
+                  },
+                  {
+                    "month": "Jun",
+                    "observations": 2695,
+                    "redFlags": 91
+                  }
                 ],
                 "showLegend": true,
                 "showGrid": true,
@@ -275,11 +406,31 @@
                   }
                 ],
                 "data": [
-                  { "observer": "Obs A", "submitted": 28, "target": 25 },
-                  { "observer": "Obs B", "submitted": 24, "target": 25 },
-                  { "observer": "Obs C", "submitted": 31, "target": 25 },
-                  { "observer": "Obs D", "submitted": 19, "target": 25 },
-                  { "observer": "Obs E", "submitted": 27, "target": 25 }
+                  {
+                    "observer": "Obs A",
+                    "submitted": 28,
+                    "target": 25
+                  },
+                  {
+                    "observer": "Obs B",
+                    "submitted": 24,
+                    "target": 25
+                  },
+                  {
+                    "observer": "Obs C",
+                    "submitted": 31,
+                    "target": 25
+                  },
+                  {
+                    "observer": "Obs D",
+                    "submitted": 19,
+                    "target": 25
+                  },
+                  {
+                    "observer": "Obs E",
+                    "submitted": 27,
+                    "target": 25
+                  }
                 ],
                 "showLegend": true,
                 "showGrid": true
@@ -291,7 +442,11 @@
                 "description": "Safe vs at-risk by behaviour category",
                 "xKey": "category",
                 "series": [
-                  { "key": "safe", "label": "Safe", "color": "var(--chart-1)" },
+                  {
+                    "key": "safe",
+                    "label": "Safe",
+                    "color": "var(--chart-1)"
+                  },
                   {
                     "key": "atRisk",
                     "label": "At risk",
@@ -299,11 +454,31 @@
                   }
                 ],
                 "data": [
-                  { "category": "PPE", "safe": 88, "atRisk": 12 },
-                  { "category": "Lifting", "safe": 72, "atRisk": 28 },
-                  { "category": "Mooring", "safe": 65, "atRisk": 35 },
-                  { "category": "Housekeeping", "safe": 91, "atRisk": 9 },
-                  { "category": "Communication", "safe": 78, "atRisk": 22 }
+                  {
+                    "category": "PPE",
+                    "safe": 88,
+                    "atRisk": 12
+                  },
+                  {
+                    "category": "Lifting",
+                    "safe": 72,
+                    "atRisk": 28
+                  },
+                  {
+                    "category": "Mooring",
+                    "safe": 65,
+                    "atRisk": 35
+                  },
+                  {
+                    "category": "Housekeeping",
+                    "safe": 91,
+                    "atRisk": 9
+                  },
+                  {
+                    "category": "Communication",
+                    "safe": 78,
+                    "atRisk": 22
+                  }
                 ],
                 "showLegend": true,
                 "showGrid": true
