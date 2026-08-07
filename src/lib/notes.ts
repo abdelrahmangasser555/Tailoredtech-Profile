@@ -1,4 +1,8 @@
 import notesConfig from "@/config/notes.json"
+import {
+  gradRoadmapNotes,
+  gradRoadmapTree,
+} from "@/config/grad-roadmap"
 import type {
   NoteDocument,
   NotesConfig,
@@ -8,7 +12,13 @@ import type {
 
 export type { NoteDocument, NotesConfig, NotesTreeNode, NotesFolderNode }
 
-export const notes = notesConfig as NotesConfig
+const mergedConfig: NotesConfig = {
+  ...notesConfig,
+  tree: [...notesConfig.tree, gradRoadmapTree],
+  notes: { ...notesConfig.notes, ...gradRoadmapNotes },
+}
+
+export const notes = mergedConfig
 
 export type NotesBreadcrumb = {
   id: string
@@ -254,6 +264,49 @@ export function listMoveDestinations(opts: {
 
   const currentKey = opts.currentParentPathIds.join("/")
   return destinations.filter((d) => d.pathIds.join("/") !== currentKey)
+}
+
+export function getLessonNeighbors(noteId: string): {
+  prev: { id: string; name: string; href: string } | null
+  next: { id: string; name: string; href: string } | null
+} {
+  const path = findNodePath(noteId)
+  if (!path?.length) return { prev: null, next: null }
+
+  const topId = path[0]
+  const topNode = notes.tree.find((n) => n.id === topId)
+  const subtree =
+    topNode?.type === "folder"
+      ? topNode.children
+      : notes.tree.filter((n) => n.type === "file")
+
+  const order: { id: string; name: string; href: string }[] = []
+
+  function walk(nodes: NotesTreeNode[]) {
+    for (const node of nodes) {
+      if (node.type === "file") {
+        if (getNoteById(node.id)) {
+          order.push({
+            id: node.id,
+            name: node.name,
+            href: hrefForNode(node.id),
+          })
+        }
+      } else {
+        walk(node.children)
+      }
+    }
+  }
+
+  walk(subtree)
+
+  const idx = order.findIndex((n) => n.id === noteId)
+  if (idx === -1) return { prev: null, next: null }
+
+  return {
+    prev: idx > 0 ? order[idx - 1]! : null,
+    next: idx < order.length - 1 ? order[idx + 1]! : null,
+  }
 }
 
 export { findInTree, isFolder }

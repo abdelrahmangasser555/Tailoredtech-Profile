@@ -13,6 +13,7 @@ import { formatNotesDate } from "@/lib/notes"
 import { NoteBlockRenderer } from "@/components/notes/note-block-renderer"
 import { NoteExplainSheet } from "@/components/notes/note-explain-sheet"
 import { NoteQuestionnaireModal } from "@/components/notes/note-questionnaire-modal"
+import { NoteLessonNav } from "@/components/notes/note-lesson-nav"
 import { TrackNote } from "@/components/analytics/track-note"
 import { scrollToId } from "@/components/motion/smooth-scroll"
 import { cn } from "@/lib/utils"
@@ -41,50 +42,87 @@ export function NoteDetail({ note, breadcrumbs }: NoteDetailProps) {
     return map
   }, [note.questionnaires])
 
-  const sectionIds = note.sections.map((s) => s.id).join(",")
+  const sectionKey = note.sections.map((s) => s.id).join(",")
   const [activeId, setActiveId] = useState(note.sections[0]?.id ?? "")
   const [explainId, setExplainId] = useState<string | null>(null)
   const [quizId, setQuizId] = useState<string | null>(null)
 
   useEffect(() => {
-    const ids = sectionIds.split(",").filter(Boolean)
+    setActiveId(note.sections[0]?.id ?? "")
+    setExplainId(null)
+    setQuizId(null)
+  }, [note.id, note.sections])
+
+  useEffect(() => {
+    const ids = sectionKey.split(",").filter(Boolean)
+    if (ids.length === 0) return
+
     const nodes = ids
       .map((id) => document.getElementById(id))
       .filter((n): n is HTMLElement => Boolean(n))
 
     if (nodes.length === 0) return
 
-    const updateActive = () => {
+    const ratios = new Map<string, number>()
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          ratios.set(
+            entry.target.id,
+            entry.isIntersecting ? entry.intersectionRatio : 0
+          )
+        }
+
+        let bestId = nodes[0]?.id ?? ""
+        let bestRatio = -1
+        for (const node of nodes) {
+          const ratio = ratios.get(node.id) ?? 0
+          if (ratio > bestRatio) {
+            bestRatio = ratio
+            bestId = node.id
+          }
+        }
+
+        const marker = window.innerHeight * 0.3
+        let byPosition = nodes[0]?.id ?? bestId
+        for (const node of nodes) {
+          if (node.getBoundingClientRect().top <= marker) {
+            byPosition = node.id
+          }
+        }
+
+        const next = bestRatio > 0.08 ? byPosition : bestId
+        setActiveId((prev) => (prev === next ? prev : next))
+      },
+      {
+        root: null,
+        rootMargin: "-12% 0px -55% 0px",
+        threshold: [0, 0.1, 0.25, 0.5, 0.75, 1],
+      }
+    )
+
+    for (const node of nodes) observer.observe(node)
+
+    const onScroll = () => {
       const marker = window.innerHeight * 0.28
       let current = nodes[0]?.id ?? ""
       for (const node of nodes) {
-        if (node.getBoundingClientRect().top <= marker) {
-          current = node.id
-        }
+        if (node.getBoundingClientRect().top <= marker) current = node.id
       }
       setActiveId((prev) => (prev === current ? prev : current))
     }
 
-    updateActive()
-    window.addEventListener("scroll", updateActive, { passive: true })
-    window.addEventListener("resize", updateActive)
-
-    let offLenis: (() => void) | undefined
-    const attachLenis = () => {
-      const lenis = window.__lenis
-      if (!lenis || offLenis) return
-      offLenis = lenis.on("scroll", updateActive)
-    }
-    attachLenis()
-    const retry = window.setTimeout(attachLenis, 200)
+    onScroll()
+    window.addEventListener("scroll", onScroll, { passive: true })
+    window.addEventListener("resize", onScroll)
 
     return () => {
-      window.clearTimeout(retry)
-      window.removeEventListener("scroll", updateActive)
-      window.removeEventListener("resize", updateActive)
-      offLenis?.()
+      observer.disconnect()
+      window.removeEventListener("scroll", onScroll)
+      window.removeEventListener("resize", onScroll)
     }
-  }, [sectionIds])
+  }, [note.id, sectionKey])
 
   return (
     <div className="min-h-svh bg-[#050505] text-white">
@@ -228,6 +266,8 @@ export function NoteDetail({ note, breadcrumbs }: NoteDetailProps) {
           })}
         </div>
       </div>
+
+      <NoteLessonNav noteId={note.id} />
 
       <NoteExplainSheet
         term={explainId ? explainsById[explainId] ?? null : null}

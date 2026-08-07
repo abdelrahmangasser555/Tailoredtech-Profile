@@ -53,6 +53,7 @@ export function NoteYoutube({
     <div
       className={cn("mt-6 first:mt-0", className)}
       style={{ contentVisibility: "auto", containIntrinsicSize: "0 360px" }}
+      data-lenis-prevent={playing ? true : undefined}
     >
       {title ? (
         <p className="mb-3 font-mono text-[10px] tracking-[0.2em] text-white/40 uppercase">

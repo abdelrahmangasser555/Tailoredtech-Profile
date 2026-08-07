@@ -1,367 +1,539 @@
 "use client"
 
-import { useEffect, useState } from "react"
-import { Pause, Play, RotateCcw, StepForward } from "lucide-react"
+/**
+ * Command-driven git playground.
+ * Type real git commands and watch the commit graph update.
+ */
+
+import { useCallback, useMemo, useRef, useState } from "react"
+import { RotateCcw, Terminal } from "lucide-react"
 import { cn } from "@/lib/utils"
 
-type GitCommitFlowProps = {
+type GitPlaygroundProps = {
   className?: string
+  /** "first-repo" | "branches" | "free" */
+  mode?: "first-repo" | "branches" | "free"
 }
 
-type Mode = "linear" | "branch"
-
-type CommitNode = {
+type Commit = {
   id: string
   hash: string
-  label: string
-  lane: "main" | "feature"
+  message: string
+  branch: string
+  parents: string[]
 }
 
-const LINEAR: CommitNode[] = [
-  { id: "c1", hash: "a1c", label: "init", lane: "main" },
-  { id: "c2", hash: "b4e", label: "feat: auth", lane: "main" },
-  { id: "c3", hash: "c9f", label: "fix: edge", lane: "main" },
-  { id: "c4", hash: "d2a", label: "docs", lane: "main" },
-]
-
-const BRANCH: CommitNode[] = [
-  { id: "b1", hash: "a1c", label: "init", lane: "main" },
-  { id: "b2", hash: "b4e", label: "main tip", lane: "main" },
-  { id: "b3", hash: "f01", label: "feature start", lane: "feature" },
-  { id: "b4", hash: "f02", label: "feature work", lane: "feature" },
-  { id: "b5", hash: "m9a", label: "merge", lane: "main" },
-]
-
-const MODE_COPY: Record<Mode, { title: string; body: string }> = {
-  linear: {
-    title: "Linear history",
-    body: "Each commit points at one parent. HEAD walks forward as you commit.",
-  },
-  branch: {
-    title: "Branch + merge",
-    body: "Cut a feature lane, grow commits, then merge back onto main.",
-  },
+type GitState = {
+  initialized: boolean
+  branch: string
+  branches: string[]
+  commits: Commit[]
+  staged: string[]
+  untracked: string[]
+  headByBranch: Record<string, string | null>
+  log: { type: "in" | "out" | "ok" | "err" | "hint"; text: string }[]
 }
 
-/**
- * Interactive git flow — step / play through commits, toggle linear vs branch.
- */
-export function GitCommitFlow({ className }: GitCommitFlowProps) {
-  const [mode, setMode] = useState<Mode>("linear")
-  const [step, setStep] = useState(1)
-  const [playing, setPlaying] = useState(false)
+function hash() {
+  return Math.random().toString(16).slice(2, 5)
+}
 
-  const commits = mode === "linear" ? LINEAR : BRANCH
-  const visible = commits.slice(0, step)
-  const atEnd = step >= commits.length
-  const copy = MODE_COPY[mode]
-
-  useEffect(() => {
-    if (!playing) return
-    if (atEnd) {
-      setPlaying(false)
-      return
+function fresh(mode: GitPlaygroundProps["mode"]): GitState {
+  if (mode === "branches") {
+    const c0: Commit = {
+      id: "c0",
+      hash: "a1c",
+      message: "init",
+      branch: "main",
+      parents: [],
     }
-    const id = window.setTimeout(() => {
-      setStep((s) => Math.min(s + 1, commits.length))
-    }, 700)
-    return () => window.clearTimeout(id)
-  }, [playing, step, atEnd, commits.length])
-
-  function switchMode(next: Mode) {
-    setMode(next)
-    setStep(1)
-    setPlaying(false)
+    return {
+      initialized: true,
+      branch: "main",
+      branches: ["main"],
+      commits: [c0],
+      staged: [],
+      untracked: ["login.tsx"],
+      headByBranch: { main: c0.id },
+      log: [
+        {
+          type: "hint",
+          text: "Repo already has one commit on main. Create feature-login, switch to it, stage, commit, then merge back.",
+        },
+      ],
+    }
   }
 
-  function reset() {
-    setStep(1)
-    setPlaying(false)
+  return {
+    initialized: false,
+    branch: "main",
+    branches: ["main"],
+    commits: [],
+    staged: [],
+    untracked: ["README.md"],
+    headByBranch: { main: null },
+    log: [
+      {
+        type: "hint",
+        text: 'Start with: git init  then  git status  then  git add .  then  git commit -m "first commit"',
+      },
+    ],
+  }
+}
+
+function parseCommitMessage(cmd: string): string | null {
+  const m =
+    cmd.match(/-m\s+"([^"]+)"/) ||
+    cmd.match(/-m\s+'([^']+)'/) ||
+    cmd.match(/-m\s+(\S+)/)
+  return m?.[1] ?? null
+}
+
+function run(cmdRaw: string, state: GitState): GitState {
+  const cmd = cmdRaw.trim()
+  const lower = cmd.toLowerCase()
+  const push = (
+    lines: GitState["log"],
+    next: Partial<GitState> = {}
+  ): GitState => ({
+    ...state,
+    ...next,
+    log: [...state.log, { type: "in", text: `$ ${cmd}` }, ...lines],
+  })
+
+  if (!cmd) return state
+
+  if (lower === "help" || lower === "?") {
+    return push([
+      {
+        type: "hint",
+        text: "Commands: git init | status | add . | commit -m \"msg\" | branch NAME | checkout NAME | switch NAME | merge NAME | log | ls",
+      },
+    ])
   }
 
-  function stepOnce() {
-    setPlaying(false)
-    setStep((s) => Math.min(s + 1, commits.length))
+  if (lower === "clear") {
+    return { ...state, log: [] }
   }
+
+  if (lower === "ls" || lower === "dir") {
+    const files = [
+      ...state.untracked.map((f) => `? ${f}`),
+      ...state.staged.map((f) => `A ${f}`),
+    ]
+    return push([
+      {
+        type: "out",
+        text: files.length ? files.join("\n") : "(working tree empty of new files)",
+      },
+    ])
+  }
+
+  if (lower === "git init") {
+    if (state.initialized) {
+      return push([{ type: "err", text: "Already a git repository." }])
+    }
+    return push(
+      [
+        { type: "out", text: "Initialized empty Git repository in ./.git/" },
+        { type: "ok", text: "Ready. Run git status." },
+      ],
+      { initialized: true }
+    )
+  }
+
+  if (!state.initialized && lower.startsWith("git ")) {
+    return push([
+      {
+        type: "err",
+        text: "fatal: not a git repository (run git init first)",
+      },
+    ])
+  }
+
+  if (lower === "git status" || lower.startsWith("git status ")) {
+    const lines: string[] = [`On branch ${state.branch}`]
+    if (state.staged.length) {
+      lines.push("Changes to be committed:")
+      for (const f of state.staged) lines.push(`  new file:   ${f}`)
+    }
+    if (state.untracked.length) {
+      lines.push("Untracked files:")
+      for (const f of state.untracked) lines.push(`  ${f}`)
+    }
+    if (!state.staged.length && !state.untracked.length) {
+      lines.push(
+        state.commits.length
+          ? "nothing to commit, working tree clean"
+          : "No commits yet"
+      )
+    }
+    return push([{ type: "out", text: lines.join("\n") }])
+  }
+
+  if (lower.startsWith("git add")) {
+    if (!state.untracked.length && !state.staged.length) {
+      return push([{ type: "out", text: "Nothing specified, nothing added." }])
+    }
+    const staged = [...new Set([...state.staged, ...state.untracked])]
+    return push(
+      [
+        {
+          type: "out",
+          text: `Staged ${state.untracked.length || staged.length} file(s).`,
+        },
+        { type: "ok", text: "Next: git commit -m \"your message\"" },
+      ],
+      { staged, untracked: [] }
+    )
+  }
+
+  if (lower.startsWith("git commit")) {
+    const message = parseCommitMessage(cmd)
+    if (!message) {
+      return push([
+        {
+          type: "err",
+          text: 'Include a message: git commit -m "your message"',
+        },
+      ])
+    }
+    if (!state.staged.length && !lower.includes("-a") && !lower.includes("-am")) {
+      return push([
+        {
+          type: "err",
+          text: "nothing to commit (use git add . first)",
+        },
+      ])
+    }
+    const parent = state.headByBranch[state.branch]
+    const id = `c${state.commits.length + 1}`
+    const h = hash()
+    const commit: Commit = {
+      id,
+      hash: h,
+      message,
+      branch: state.branch,
+      parents: parent ? [parent] : [],
+    }
+    return push(
+      [
+        {
+          type: "out",
+          text: `[${state.branch} ${h}] ${message}`,
+        },
+        {
+          type: "ok",
+          text: `Commit saved. HEAD is now ${h}.`,
+        },
+      ],
+      {
+        commits: [...state.commits, commit],
+        staged: [],
+        untracked: [],
+        headByBranch: { ...state.headByBranch, [state.branch]: id },
+      }
+    )
+  }
+
+  if (lower.startsWith("git branch") && !lower.includes("checkout")) {
+    const parts = cmd.split(/\s+/).filter(Boolean)
+    if (parts.length === 2) {
+      const list = state.branches
+        .map((b) => `${b === state.branch ? "* " : "  "}${b}`)
+        .join("\n")
+      return push([{ type: "out", text: list }])
+    }
+    const name = parts[2]
+    if (!name) {
+      return push([{ type: "err", text: "usage: git branch <name>" }])
+    }
+    if (state.branches.includes(name)) {
+      return push([{ type: "err", text: `branch '${name}' already exists` }])
+    }
+    return push(
+      [
+        { type: "out", text: `Created branch ${name}` },
+        { type: "ok", text: `Run: git checkout ${name}` },
+      ],
+      {
+        branches: [...state.branches, name],
+        headByBranch: {
+          ...state.headByBranch,
+          [name]: state.headByBranch[state.branch] ?? null,
+        },
+      }
+    )
+  }
+
+  if (lower.startsWith("git checkout") || lower.startsWith("git switch")) {
+    const name = cmd.split(/\s+/).pop()!
+    if (!state.branches.includes(name)) {
+      return push([
+        {
+          type: "err",
+          text: `pathspec '${name}' did not match any known branch`,
+        },
+      ])
+    }
+    return push(
+      [
+        { type: "out", text: `Switched to branch '${name}'` },
+        { type: "ok", text: `You are now on ${name}.` },
+      ],
+      { branch: name }
+    )
+  }
+
+  if (lower.startsWith("git merge")) {
+    const name = cmd.split(/\s+/).pop()!
+    if (!state.branches.includes(name)) {
+      return push([{ type: "err", text: `merge: ${name} not found` }])
+    }
+    if (name === state.branch) {
+      return push([{ type: "err", text: "Cannot merge a branch into itself." }])
+    }
+    const otherHead = state.headByBranch[name]
+    if (!otherHead) {
+      return push([{ type: "err", text: `Branch ${name} has no commits.` }])
+    }
+    const parent = state.headByBranch[state.branch]
+    const id = `c${state.commits.length + 1}`
+    const h = hash()
+    const commit: Commit = {
+      id,
+      hash: h,
+      message: `Merge branch '${name}'`,
+      branch: state.branch,
+      parents: parent ? [parent, otherHead] : [otherHead],
+    }
+    return push(
+      [
+        { type: "out", text: `Updating ... Fast-forward` },
+        { type: "out", text: `Merged '${name}' into ${state.branch}` },
+        { type: "ok", text: "History is connected again." },
+      ],
+      {
+        commits: [...state.commits, commit],
+        headByBranch: { ...state.headByBranch, [state.branch]: id },
+      }
+    )
+  }
+
+  if (lower === "git log" || lower.startsWith("git log ")) {
+    if (!state.commits.length) {
+      return push([{ type: "out", text: "No commits yet." }])
+    }
+    const text = [...state.commits]
+      .reverse()
+      .map((c) => `${c.hash}  (${c.branch})  ${c.message}`)
+      .join("\n")
+    return push([{ type: "out", text }])
+  }
+
+  return push([
+    {
+      type: "err",
+      text: `Unknown or unsupported here: ${cmd}. Type help`,
+    },
+  ])
+}
+
+const LINE: Record<GitState["log"][0]["type"], string> = {
+  in: "text-white/90",
+  out: "text-white/55",
+  ok: "text-emerald-400/90",
+  err: "text-red-400/90",
+  hint: "text-white/40 italic",
+}
+
+export function GitCommitFlow({ className, mode = "first-repo" }: GitPlaygroundProps) {
+  const [state, setState] = useState(() => fresh(mode))
+  const [input, setInput] = useState("")
+  const inputRef = useRef<HTMLInputElement>(null)
+  const logRef = useRef<HTMLDivElement>(null)
+
+  const submit = useCallback(() => {
+    const next = run(input, state)
+    setState(next)
+    setInput("")
+    requestAnimationFrame(() => {
+      if (logRef.current) logRef.current.scrollTop = logRef.current.scrollHeight
+    })
+  }, [input, state])
+
+  const reset = useCallback(() => {
+    setState(fresh(mode))
+    setInput("")
+    inputRef.current?.focus()
+  }, [mode])
+
+  const tips = useMemo(() => {
+    if (mode === "branches") {
+      return [
+        "git branch feature-login",
+        "git checkout feature-login",
+        "git add .",
+        'git commit -m "add login form"',
+        "git checkout main",
+        "git merge feature-login",
+      ]
+    }
+    return [
+      "git init",
+      "git status",
+      "git add .",
+      'git commit -m "first commit"',
+      "git log",
+    ]
+  }, [mode])
 
   return (
-    <div className={cn("flex flex-col gap-5", className)}>
-      <div className="flex flex-wrap items-center gap-2">
-        <ModeButton
-          active={mode === "linear"}
-          onClick={() => switchMode("linear")}
-          label="Linear"
-        />
-        <ModeButton
-          active={mode === "branch"}
-          onClick={() => switchMode("branch")}
-          label="Branch"
-        />
-        <span className="mx-1 hidden h-4 w-px bg-white/15 sm:block" />
-        <ControlButton
-          onClick={() => {
-            if (atEnd) {
-              setStep(1)
-              setPlaying(true)
-            } else {
-              setPlaying((p) => !p)
-            }
-          }}
-          label={playing ? "Pause" : atEnd ? "Replay" : "Play"}
-          icon={
-            playing ? (
-              <Pause className="size-3.5" />
-            ) : (
-              <Play className="size-3.5" />
-            )
-          }
-        />
-        <ControlButton
-          onClick={stepOnce}
-          label="Step"
-          icon={<StepForward className="size-3.5" />}
-          disabled={atEnd}
-        />
-        <ControlButton
+    <div
+      className={cn("flex flex-col gap-4", className)}
+      data-lenis-prevent
+    >
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <p className="font-mono text-[10px] tracking-[0.16em] text-white/40 uppercase">
+          Live git graph
+        </p>
+        <button
+          type="button"
           onClick={reset}
-          label="Reset"
-          icon={<RotateCcw className="size-3.5" />}
-        />
+          className="inline-flex items-center gap-1.5 border border-white/15 px-2.5 py-1.5 font-mono text-[10px] tracking-[0.14em] text-white/55 uppercase transition hover:border-accent/40 hover:text-accent"
+        >
+          <RotateCcw className="size-3" />
+          Reset
+        </button>
       </div>
 
-      <div>
-        <p className="font-mono text-[10px] tracking-[0.18em] text-accent uppercase">
-          {copy.title}
-          <span className="ml-2 text-white/30">
-            {step}/{commits.length}
+      <CommitGraph state={state} />
+
+      <div className="border border-white/10 bg-[#0a0a0a]">
+        <div className="flex items-center gap-2 border-b border-white/10 px-3 py-2 font-mono text-[10px] text-white/35">
+          <Terminal className="size-3.5" />
+          <span>
+            {state.branch}
+            {state.initialized ? "" : " (not a repo yet)"}
           </span>
-        </p>
-        <p className="mt-1.5 max-w-md text-sm text-white/40">{copy.body}</p>
-      </div>
-
-      {mode === "linear" ? (
-        <LinearGraph commits={visible} total={commits.length} />
-      ) : (
-        <BranchGraph commits={visible} all={commits} />
-      )}
-
-      {visible.length > 0 ? (
-        <p className="font-mono text-[11px] text-white/35">
-          HEAD →{" "}
-          <span className="text-accent">
-            {visible[visible.length - 1]!.hash}
+          <span className="ml-auto text-white/25">
+            {state.commits.length} commit{state.commits.length === 1 ? "" : "s"}
           </span>
-          <span className="text-white/25"> · </span>
-          {visible[visible.length - 1]!.label}
-        </p>
-      ) : null}
-    </div>
-  )
-}
-
-function ModeButton({
-  active,
-  onClick,
-  label,
-}: {
-  active: boolean
-  onClick: () => void
-  label: string
-}) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      className={cn(
-        "border px-3 py-1.5 font-mono text-[10px] tracking-[0.16em] uppercase transition",
-        active
-          ? "border-accent bg-accent text-accent-foreground"
-          : "border-white/15 text-white/50 hover:border-white/30 hover:text-white/80"
-      )}
-    >
-      {label}
-    </button>
-  )
-}
-
-function ControlButton({
-  onClick,
-  label,
-  icon,
-  disabled,
-}: {
-  onClick: () => void
-  label: string
-  icon: React.ReactNode
-  disabled?: boolean
-}) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      disabled={disabled}
-      className="inline-flex items-center gap-1.5 border border-white/15 px-2.5 py-1.5 font-mono text-[10px] tracking-[0.14em] text-white/55 uppercase transition hover:border-accent/40 hover:text-accent disabled:pointer-events-none disabled:opacity-30"
-    >
-      {icon}
-      {label}
-    </button>
-  )
-}
-
-function LinearGraph({
-  commits,
-  total,
-}: {
-  commits: CommitNode[]
-  total: number
-}) {
-  return (
-    <div className="overflow-x-auto py-1">
-      <ol className="flex min-w-max items-center">
-        {Array.from({ length: total }).map((_, i) => {
-          const c = commits[i]
-          const revealed = Boolean(c)
-          return (
-            <li key={LINEAR[i]!.id} className="flex items-center">
-              <div
-                className={cn(
-                  "flex w-20 flex-col items-center gap-2 transition md:w-24",
-                  revealed ? "opacity-100" : "opacity-20"
-                )}
-              >
-                <span
-                  className={cn(
-                    "size-3 transition",
-                    revealed ? "bg-accent scale-100" : "bg-white/25 scale-75"
-                  )}
-                />
-                <span className="font-mono text-[10px] tracking-[0.12em] text-accent uppercase">
-                  {revealed ? c!.hash : "···"}
-                </span>
-                <span className="text-center text-xs text-white/45">
-                  {revealed ? c!.label : "—"}
-                </span>
-              </div>
-              {i < total - 1 ? (
-                <span
-                  className={cn(
-                    "mb-6 h-px w-8 transition md:w-12",
-                    commits.length > i + 1 ? "bg-accent/50" : "bg-white/15"
-                  )}
-                  aria-hidden
-                />
-              ) : null}
-            </li>
-          )
-        })}
-      </ol>
-    </div>
-  )
-}
-
-function BranchGraph({
-  commits,
-  all,
-}: {
-  commits: CommitNode[]
-  all: CommitNode[]
-}) {
-  const revealed = new Set(commits.map((c) => c.id))
-  const main = all.filter((c) => c.lane === "main")
-  const feature = all.filter((c) => c.lane === "feature")
-
-  return (
-    <div className="overflow-x-auto py-1">
-      <div className="flex min-w-max flex-col gap-6">
-        <Lane
-          label="main"
-          nodes={main}
-          revealed={revealed}
-          accent
-        />
-        <div className="flex items-center gap-2 pl-14">
-          <span className="h-px flex-1 border-t border-dashed border-white/20" />
-          <span className="font-mono text-[9px] tracking-[0.16em] text-white/30 uppercase">
-            branch off
-          </span>
-          <span className="h-px flex-1 border-t border-dashed border-white/20" />
         </div>
-        <Lane label="feature" nodes={feature} revealed={revealed} />
+
+        <div
+          ref={logRef}
+          className="max-h-44 overflow-y-auto px-4 py-3 font-mono text-xs leading-relaxed"
+          onClick={() => inputRef.current?.focus()}
+        >
+          {state.log.map((line, i) => (
+            <div key={i} className={cn("whitespace-pre-wrap", LINE[line.type])}>
+              {line.text}
+            </div>
+          ))}
+        </div>
+
+        <form
+          className="flex border-t border-white/10"
+          onSubmit={(e) => {
+            e.preventDefault()
+            submit()
+          }}
+        >
+          <span className="px-3 py-2.5 font-mono text-xs text-accent">$</span>
+          <input
+            ref={inputRef}
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            className="min-w-0 flex-1 bg-transparent py-2.5 pr-4 font-mono text-xs text-white outline-none placeholder:text-white/20"
+            placeholder='e.g. git commit -m "first commit"'
+            spellCheck={false}
+            autoComplete="off"
+          />
+        </form>
+      </div>
+
+      <div className="flex flex-wrap gap-1.5">
+        {tips.map((tip) => (
+          <button
+            key={tip}
+            type="button"
+            onClick={() => {
+              setInput(tip)
+              inputRef.current?.focus()
+            }}
+            className="border border-white/10 px-2 py-1 font-mono text-[10px] text-white/40 transition hover:border-white/25 hover:text-white/70"
+          >
+            {tip}
+          </button>
+        ))}
       </div>
     </div>
   )
 }
 
-function Lane({
-  label,
-  nodes,
-  revealed,
-  accent,
-}: {
-  label: string
-  nodes: CommitNode[]
-  revealed: Set<string>
-  accent?: boolean
-}) {
+function CommitGraph({ state }: { state: GitState }) {
+  if (!state.commits.length) {
+    return (
+      <div className="border border-dashed border-white/10 px-4 py-8 text-center font-mono text-xs text-white/30">
+        No commits yet. After git commit, nodes appear here.
+      </div>
+    )
+  }
+
+  // Chronological commit list with active HEAD highlight
   return (
-    <div className="flex items-center gap-3">
-      <span className="w-14 shrink-0 font-mono text-[10px] tracking-[0.14em] text-white/35 uppercase">
-        {label}
-      </span>
-      <ol className="flex items-center">
-        {nodes.map((c, i) => {
-          const on = revealed.has(c.id)
+    <div className="overflow-x-auto border border-white/10 bg-white/[0.02] px-4 py-5">
+      <ol className="flex min-w-max items-end gap-0">
+        {state.commits.map((c, i) => {
+          const isHead = Object.values(state.headByBranch).includes(c.id)
+          const onCurrent = c.id === state.headByBranch[state.branch]
           return (
-            <li key={c.id} className="flex items-center">
-              <div
-                className={cn(
-                  "flex w-[4.5rem] flex-col items-center gap-1.5 transition md:w-20",
-                  on ? "opacity-100" : "opacity-20"
-                )}
-              >
+            <li key={c.id} className="flex items-end">
+              <div className="flex w-[5.5rem] flex-col items-center gap-1.5 md:w-24">
                 <span
                   className={cn(
-                    "size-3",
-                    on
-                      ? accent
-                        ? "bg-accent"
-                        : "bg-white"
-                      : "bg-white/25"
+                    "size-3.5 transition",
+                    onCurrent
+                      ? "bg-accent scale-110"
+                      : c.branch === "main"
+                        ? "bg-white"
+                        : "bg-white/50"
                   )}
                 />
                 <span
                   className={cn(
-                    "font-mono text-[10px] tracking-[0.1em] uppercase",
-                    on
-                      ? accent
-                        ? "text-accent"
-                        : "text-white/70"
-                      : "text-white/25"
+                    "font-mono text-[10px] tracking-[0.12em] uppercase",
+                    onCurrent ? "text-accent" : "text-white/55"
                   )}
                 >
-                  {on ? c.hash : "···"}
+                  {c.hash}
                 </span>
-                <span className="text-center text-[11px] text-white/40">
-                  {on ? c.label : "—"}
+                <span className="line-clamp-2 text-center text-[11px] text-white/40">
+                  {c.message}
+                </span>
+                <span className="font-mono text-[9px] text-white/25">
+                  {c.branch}
+                  {isHead && onCurrent ? " · HEAD" : ""}
                 </span>
               </div>
-              {i < nodes.length - 1 ? (
-                <span
-                  className={cn(
-                    "mb-5 h-px w-6 md:w-8",
-                    on && revealed.has(nodes[i + 1]!.id)
-                      ? accent
-                        ? "bg-accent/45"
-                        : "bg-white/35"
-                      : "bg-white/12"
-                  )}
-                  aria-hidden
-                />
+              {i < state.commits.length - 1 ? (
+                <span className="mb-10 h-px w-6 bg-white/25 md:w-10" aria-hidden />
               ) : null}
             </li>
           )
         })}
       </ol>
+      <p className="mt-4 font-mono text-[10px] text-white/30">
+        Active branch:{" "}
+        <span className="text-accent">{state.branch}</span>
+        {state.staged.length ? (
+          <span className="text-white/40">
+            {" "}
+            · staged: {state.staged.join(", ")}
+          </span>
+        ) : null}
+      </p>
     </div>
   )
 }

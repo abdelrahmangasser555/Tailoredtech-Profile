@@ -9,6 +9,8 @@ import { NoteLinkBlock } from "@/components/notes/blocks/note-link-block"
 import { NoteCallout } from "@/components/notes/blocks/note-callout"
 import { NoteHtmlBlock } from "@/components/notes/blocks/note-html-block"
 import { NoteGallery } from "@/components/notes/blocks/note-gallery"
+import { NoteTerminal } from "@/components/notes/blocks/note-terminal"
+import { NotePlayground } from "@/components/notes/blocks/note-playground"
 import { NoteIllustration } from "@/components/notes/illustrations/registry"
 
 const BrandedMermaid = dynamic(
@@ -79,6 +81,7 @@ export function NoteBlockRenderer({
           component={block.component}
           title={block.title}
           caption={block.caption}
+          props={block.props}
         />
       )
     case "html":
@@ -107,6 +110,25 @@ export function NoteBlockRenderer({
           title={block.title}
           caption={block.caption}
           images={block.images}
+        />
+      )
+    case "terminal":
+      return (
+        <NoteTerminal
+          scenario={block.scenario}
+          title={block.title}
+          caption={block.caption}
+        />
+      )
+    case "playground":
+      return (
+        <NotePlayground
+          language={block.language}
+          initialCode={block.initialCode}
+          title={block.title}
+          caption={block.caption}
+          expectIncludes={block.expectIncludes}
+          hint={block.hint}
         />
       )
     default:

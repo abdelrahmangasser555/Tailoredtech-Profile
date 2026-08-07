@@ -114,6 +114,8 @@ export type NoteBlock =
       component: string
       title?: string
       caption?: string
+      /** Optional props forwarded to the registered component */
+      props?: Record<string, unknown>
     }
   | {
       type: "html"
@@ -143,6 +145,24 @@ export type NoteBlock =
       title?: string
       caption?: string
       images: { src: string; label: string }[]
+    }
+  | {
+      type: "terminal"
+      id: string
+      /** Key in terminal-scenarios registry */
+      scenario: string
+      title?: string
+      caption?: string
+    }
+  | {
+      type: "playground"
+      id: string
+      language?: string
+      initialCode: string
+      title?: string
+      caption?: string
+      expectIncludes?: string
+      hint?: string
     }
 
 export type NoteSection = {
