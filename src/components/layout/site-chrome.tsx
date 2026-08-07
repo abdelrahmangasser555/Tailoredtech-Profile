@@ -5,12 +5,13 @@ import { Navbar } from "@/components/layout/navbar"
 import { Footer } from "@/components/layout/footer"
 
 /**
- * Site chrome that hides Navbar + Footer on /presentations routes.
- * Presentations are direct-URL surfaces — no marketing chrome.
+ * Site chrome that hides Navbar + Footer on /presentations and /notes.
+ * Direct-URL surfaces — no marketing chrome (SEO-isolated learning docs).
  */
 export function SiteChrome({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
-  const bare = pathname.startsWith("/presentations")
+  const bare =
+    pathname.startsWith("/presentations") || pathname.startsWith("/notes")
 
   return (
     <>

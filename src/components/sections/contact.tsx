@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { ArrowRight, CheckCircle2 } from "lucide-react"
 import { toast } from "sonner"
+import { track } from "@/lib/analytics/track"
 import { Section } from "@/components/layout/section"
 import { TextReveal, Reveal } from "@/components/motion/reveal"
 import { Button } from "@/components/ui/button"
@@ -26,6 +27,9 @@ export function Contact() {
     setPending(false)
     setSent(true)
     form.reset()
+    track("contact_form_submitted", {
+      form_type: "general_contact",
+    })
     toast.success("Message sent. We'll be in touch shortly.")
   }
 

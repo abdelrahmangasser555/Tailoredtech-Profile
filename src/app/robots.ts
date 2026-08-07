@@ -13,6 +13,8 @@ export default function robots(): MetadataRoute.Robots {
         "/presentations",
         "/presentations/edit/",
         "/services/edit/",
+        "/notes/",
+        "/notes",
       ],
     },
     sitemap: `${SITE_URL}/sitemap.xml`,

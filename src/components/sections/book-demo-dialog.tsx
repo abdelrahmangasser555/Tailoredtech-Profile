@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { ArrowRight, CheckCircle2 } from "lucide-react"
 import { toast } from "sonner"
+import { track } from "@/lib/analytics/track"
 import {
   Dialog,
   DialogContent,
@@ -61,6 +62,9 @@ export function BookDemoDialog({
     setPending(false)
     setSent(true)
     form.reset()
+    track("demo_request_submitted", {
+      solution_title: solutionTitle,
+    })
     toast.success("Demo request received. We'll be in touch shortly.")
   }
 

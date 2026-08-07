@@ -33,6 +33,7 @@ import {
 } from "@/lib/content"
 import { isSectionChart } from "@/lib/section-chart"
 import { scrollToId } from "@/components/motion/smooth-scroll"
+import { TrackSolution } from "@/components/analytics/track-solution"
 import { EditTrigger } from "@/components/editor/edit-trigger"
 
 const EASE = [0.22, 1, 0.36, 1] as const
@@ -127,6 +128,14 @@ export function SolutionDetail({
 
   return (
     <>
+      <TrackSolution
+        solutionId={service.id}
+        solutionTitle={service.title}
+        sections={page.sections.map((s) => ({
+          id: s.id,
+          title: s.title,
+        }))}
+      />
       <SolutionHero
         service={service}
         reduce={!!reduce}

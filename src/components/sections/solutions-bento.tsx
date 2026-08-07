@@ -7,6 +7,7 @@ import { Section } from "@/components/layout/section"
 import { TextReveal, Stagger, StaggerItem } from "@/components/motion/reveal"
 import { getIcon } from "@/lib/icons"
 import { site } from "@/lib/content"
+import { trackSolutionClick } from "@/lib/analytics/track"
 import { cn } from "@/lib/utils"
 import Image from "next/image"
 
@@ -61,6 +62,14 @@ function ServiceRow({
   return (
     <Link
       href={service.href}
+      onClick={() =>
+        trackSolutionClick({
+          solutionId: service.id,
+          solutionTitle: service.title,
+          source: "home_bento",
+          href: service.href,
+        })
+      }
       className="group relative block py-8 md:py-10 first:pt-2"
     >
       {/* Large low-opacity watermark number, nested into the text */}

@@ -1,9 +1,11 @@
 import type { Metadata, Viewport } from "next"
+import { Suspense } from "react"
 import { Geist, Geist_Mono } from "next/font/google"
 import { GeistPixelCircle } from "geist/font/pixel"
 import { Toaster } from "@/components/ui/sonner"
 import { SiteChrome } from "@/components/layout/site-chrome"
 import { SmoothScroll } from "@/components/motion/smooth-scroll"
+import { PostHogPageView } from "@/components/analytics/posthog-pageview"
 import { JsonLd } from "@/components/seo/json-ld"
 import { site } from "@/lib/content"
 import {
@@ -118,6 +120,9 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col overflow-x-clip font-sans">
+        <Suspense fallback={null}>
+          <PostHogPageView />
+        </Suspense>
         <JsonLd
           data={[buildOrganizationJsonLd(company), buildWebSiteJsonLd()]}
         />

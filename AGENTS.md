@@ -32,10 +32,12 @@ Brand-first maritime software marketing site (Next.js App Router). Content is JS
 |------|------|
 | `src/config/services.json` | Solutions list + each detail `page` |
 | `src/config/presentations.json` | Client presentations (direct URL; no nav/footer/CTAs) |
+| `src/config/notes.json` | Nested notes tree + note documents (direct URL; noindex) |
 | `src/config/hero.json` | Home hero morph, globe, glyphs |
 | `src/config/company.json` | Name, contact, stats, SEO |
 | `src/config/*.json` | clients, projects, timeline, navigation, theme |
 | `src/lib/content.ts` | `site` bag + service/presentation helpers |
+| `src/lib/notes.ts` | Notes tree resolve, breadcrumbs, path helpers |
 
 ### Editing a solution
 
@@ -80,8 +82,47 @@ Icons for the layer nav are mapped in `src/components/sections/section-layer-nav
 | `/services/[slug]` | `src/app/services/[slug]/page.tsx` — solution detail |
 | `/presentations` | `src/app/presentations/page.tsx` — direct-URL list (noindex, no nav/footer) |
 | `/presentations/[slug]` | `src/app/presentations/[slug]/page.tsx` — presentation detail |
+| `/notes` · `/notes/[[...path]]` | Nested folder browser + note reader (noindex, bare chrome) |
 
-Sitemap includes all enabled solution slugs (`src/app/sitemap.ts`). Presentations are **not** in the sitemap / robots (direct URL only).
+Sitemap includes all enabled solution slugs (`src/app/sitemap.ts`). Presentations and **notes** are **not** in the sitemap / robots (direct URL only).
+
+### Notes (`src/config/notes.json`)
+
+Filesystem-style learning docs. Tree nodes are folders or file refs; full content lives in `notes[id]`.
+
+| Piece | Notes |
+|--------|--------|
+| Browser | Light surface — name / created / updated; right-click create (local edit); drag reorder |
+| Note hero | Compact title + breadcrumbs (+ optional meta dates) |
+| `variants` | `sidebarNav`, `compactHero`, `showMeta` |
+| Blocks | `markdown` (tables, Shiki + copy, `[[explain-id]]`), `youtube` (click-to-play), `gallery`, `stack`, `mermaid`, `illustration`, `html`, `link`, `callout` |
+| Explain | `explains[]` — `[[id]]` in markdown opens a side sheet |
+| Questionnaire | Per-section `questionnaireId` → “Take questionnaire” modal |
+| Icons | Curated map in `note-stack.tsx` (`@icons-pack/react-simple-icons`) — extend the map, don’t draw SVGs |
+| Illustrations | Register React comps in `illustrations/registry.tsx` (safe; no eval of JSON JSX) |
+| Edit | Local-only via `LOCAL_EDIT`; APIs under `/api/local-edit/notes-*` (tree, create, **move**) |
+| SEO | Bare chrome (no nav/footer), `robots` disallow `/notes`, page `noindex` |
+
+Example paths: `/notes`, `/notes/fundamentals/git`, `/notes/fundamentals/git/git-basics`.
+
+### PostHog analytics
+
+Client init: `instrumentation-client.ts`. Pageviews: `PostHogPageView` in root layout. Helpers: `src/lib/analytics/track.ts`, `use-engagement.ts`, `use-section-funnel.ts`.
+
+| Event | When | Key props |
+|--------|------|-----------|
+| `$pageview` | Route change | `$current_url` |
+| `home_opened` / `home_engagement_ended` | Home session | `duration_seconds` |
+| `section_reached` | Section scrolls into view | `scope` (`home` \| `note` \| `solution`), `section_id`, `section_index` |
+| `services_index_opened` / `…_ended` | `/services` session | `duration_seconds`, `solutions_count` |
+| `solution_card_viewed` | Card visible on index | `solution_id`, `source: services_index` |
+| `solution_link_clicked` | CTA click | `solution_id`, `source` (`home_bento`, `services_index`) |
+| `solution_opened` / `solution_engagement_ended` | Solution detail | `solution_id`, `duration_seconds` |
+| `note_opened` / `note_engagement_ended` | Note reader | `note_id`, `note_path`, `duration_seconds` |
+| `notes_browser_opened` / `…_ended` | Folder browser | `folder_path`, `item_count` |
+| `questionnaire_completed` | Quiz done | `note_id`, `questionnaire_id` |
+
+**PostHog funnels (suggested):** `note_opened` → `section_reached` (filter `scope=note`, group by `section_index`) → `questionnaire_completed`. Solution: `solution_opened` → `section_reached` (`scope=solution`) → `demo_request_submitted`.
 
 ## Main UI pieces
 
@@ -99,7 +140,7 @@ Sitemap includes all enabled solution slugs (`src/app/sitemap.ts`). Presentation
 | Layer nav | `sections/section-layer-nav.tsx` | Desktop-only isometric section deck |
 | Book demo | `sections/book-demo-dialog.tsx` | Dialog form; used in hero + sticky CTA |
 | Section shell | `layout/section.tsx` | `tone="light"\|"dark"`, shared header |
-| Nav / footer | `layout/navbar.tsx`, `footer.tsx` | Hidden on `/presentations` via `SiteChrome` |
+| Nav / footer | `layout/navbar.tsx`, `footer.tsx` | Hidden on `/presentations` and `/notes` via `SiteChrome` |
 | Motion | `motion/reveal.tsx`, `gsap-reveal.tsx` | Framer + GSAP; Lenis smooth scroll in layout |
 
 ## Solution detail behavior

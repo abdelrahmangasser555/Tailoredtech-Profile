@@ -2,6 +2,7 @@ import company from "@/config/company.json"
 import clients from "@/config/clients.json"
 import services from "@/config/services.json"
 import presentations from "@/config/presentations.json"
+import notes from "@/config/notes.json"
 import projects from "@/config/projects.json"
 import timeline from "@/config/timeline.json"
 import navigation from "@/config/navigation.json"
@@ -16,6 +17,7 @@ export type ServicePage = ServiceItem["page"]
 export type Presentations = typeof presentations
 export type PresentationItem = Presentations["items"][number]
 export type PresentationPage = PresentationItem["page"]
+export type NotesConfigJson = typeof notes
 export type Projects = typeof projects
 export type Timeline = typeof timeline
 export type Navigation = typeof navigation
@@ -27,6 +29,7 @@ export const site = {
   clients,
   services,
   presentations,
+  notes,
   projects,
   timeline,
   navigation,

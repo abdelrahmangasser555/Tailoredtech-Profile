@@ -7,6 +7,7 @@ import { Stats } from "@/components/sections/stats"
 import { Work } from "@/components/sections/work"
 import { Timeline } from "@/components/sections/timeline"
 import { Contact } from "@/components/sections/contact"
+import { TrackHome } from "@/components/analytics/track-home"
 import { JsonLd } from "@/components/seo/json-ld"
 import { site } from "@/lib/content"
 import {
@@ -31,6 +32,7 @@ export default function HomePage() {
           buildItemListJsonLd(site.services.items),
         ]}
       />
+      <TrackHome />
       <Hero />
       <Clients />
       <SolutionsBento />
