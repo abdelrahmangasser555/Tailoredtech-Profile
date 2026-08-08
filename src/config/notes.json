@@ -4,18 +4,53 @@
   "tree": [
     {
       "type": "folder",
-      "id": "bbs",
-      "name": "BBS",
+      "id": "brain",
+      "name": "Brain",
       "createdAt": "2026-08-08",
       "updatedAt": "2026-08-08",
-      "children": []
-    },
-    {
-      "type": "file",
-      "id": "technical-arch",
-      "name": "Technical Arch",
-      "createdAt": "2026-08-08",
-      "updatedAt": "2026-08-08"
+      "children": [
+        {
+          "type": "folder",
+          "id": "daily-notes",
+          "name": "Daily notes",
+          "createdAt": "2026-08-08",
+          "updatedAt": "2026-08-08",
+          "children": [
+            {
+              "type": "file",
+              "id": "08-08-2026",
+              "name": "08/08/2026",
+              "createdAt": "2026-08-08",
+              "updatedAt": "2026-08-08"
+            }
+          ]
+        },
+        {
+          "type": "folder",
+          "id": "projects",
+          "name": "Projects",
+          "createdAt": "2026-08-08",
+          "updatedAt": "2026-08-08",
+          "children": [
+            {
+              "type": "folder",
+              "id": "bbs",
+              "name": "BBS",
+              "createdAt": "2026-08-08",
+              "updatedAt": "2026-08-08",
+              "children": [
+                {
+                  "type": "file",
+                  "id": "technical-arch",
+                  "name": "Technical Arch",
+                  "createdAt": "2026-08-08",
+                  "updatedAt": "2026-08-08"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "notes": {
@@ -23,6 +58,35 @@
       "id": "technical-arch",
       "name": "Technical Arch",
       "title": "Technical Arch",
+      "description": "",
+      "createdAt": "2026-08-08",
+      "updatedAt": "2026-08-08",
+      "enabled": true,
+      "variants": {
+        "sidebarNav": true,
+        "compactHero": true,
+        "showMeta": true
+      },
+      "explains": [],
+      "questionnaires": [],
+      "sections": [
+        {
+          "id": "start",
+          "title": "Start",
+          "blocks": [
+            {
+              "type": "markdown",
+              "id": "start-md",
+              "content": "New note — replace this with your content."
+            }
+          ]
+        }
+      ]
+    },
+    "08-08-2026": {
+      "id": "08-08-2026",
+      "name": "08/08/2026",
+      "title": "08/08/2026",
       "description": "",
       "createdAt": "2026-08-08",
       "updatedAt": "2026-08-08",

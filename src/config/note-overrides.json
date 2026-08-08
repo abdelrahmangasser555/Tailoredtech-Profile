@@ -1,0 +1,160 @@
+{
+  "technical-arch": {
+    "sections": [
+      {
+        "id": "overview",
+        "title": "Overview & Philosophy",
+        "blocks": [
+          {
+            "type": "markdown",
+            "id": "overview-md",
+            "content": "# BBS — Technical Architecture\n\nThe BBS system architecture is designed as a **progression**, not three separate systems. The application and business logic stay largely the same — only the infrastructure evolves underneath.\n\n## Design Principle\n\nThe architecture follows a key principle: **abstract the infrastructure, keep the application portable.**\n\n```text\nNext.js\n   │\n   ├── API\n   ├── Business Logic\n   ├── Authentication\n   ├── Analytics\n   └── Queue Interface   ← abstracted, swapped per environment\n```\n\nRedis is treated as an **optimization, not a foundational dependency**. The core architecture is:\n\n> **Next.js → MongoDB → Object Storage → Queue → Worker**\n\nRedis enters only when monitoring proves caching is needed."
+          },
+          {
+            "type": "mermaid",
+            "id": "mermaid-msk9ky6l",
+            "title": "bbs arch",
+            "diagram": "flowchart LR\n    subgraph App[Next.js Application]\n        API[API]\n        BL[Business Logic]\n        Auth[Authentication]\n        An[Analytics]\n        QI[Queue Interface]\n    end\n\n    App --> Mongo[(MongoDB)]\n    Mongo --> Obj[Object Storage]\n    Obj --> Q[Queue]\n    Q --> W[Worker]\n\n    QI -.-> Q\n    Redis[(Redis)] -.-> App\n    Redis -.-> Mongo\n\n    style Redis fill:#f9f,stroke:#333,stroke-width:2px\n    style QI fill:#bbf,stroke:#333,stroke-width:2px"
+          }
+        ]
+      },
+      {
+        "id": "dev-env",
+        "title": "1. Development Environment",
+        "blocks": [
+          {
+            "type": "markdown",
+            "id": "dev-env-md",
+            "content": "**Goal: cheap, simple, fast development.** No Redis, no BullMQ — just enough to build and iterate quickly.\n\n## Architecture Diagram\n\n```text\n                         DEVELOPMENT\n                              │\n                       Next.js Application\n                              │\n              ┌───────────────┼────────────────┐\n              │               │                │\n              ▼               ▼                ▼\n          MongoDB         File Storage      Authentication\n           Atlas           Local/S3          Custom/Auth\n              │\n              ▼\n        Analytics Data\n              │\n              ▼\n        MongoDB Jobs\n```\n\n## Stack\n\n| Component | Technology |\n|-----------|------------|\n| Frontend | **Next.js + React** |\n| UI | **shadcn/ui + Tailwind** |\n| Server state | **TanStack Query** |\n| Client state | **Zustand** |\n| Backend/API | **Next.js Route Handlers** |\n| Database | **MongoDB Atlas** |\n| Files | **S3 / Azure Blob Storage** |\n| Authentication | **Custom authentication** |\n| Analytics | **MongoDB aggregation + analytics collections** |\n| Background jobs | **MongoDB jobs collection** (poll-based) |\n| Queue | MongoDB (no external queue) |\n| Development | Local machine |\n| Version control | Git + GitHub |"
+          }
+        ]
+      },
+      {
+        "id": "prod-vercel",
+        "title": "2. Production — Vercel (Non-Azure)",
+        "blocks": [
+          {
+            "type": "markdown",
+            "id": "prod-vercel-md",
+            "content": "This is the **initial real production deployment**. Vercel handles the application layer so you don't manage servers, Docker hosts, OS updates, load balancers, or deployment infrastructure.\n\n## Architecture Diagram\n\n```text\n                         INTERNET\n                            │\n                            ▼\n                    ┌──────────────┐\n                    │    Vercel    │\n                    │              │\n                    │   Next.js    │\n                    └──────┬───────┘\n                           │\n          ┌────────────────┼─────────────────┐\n          │                │                 │\n          ▼                ▼                 ▼\n      MongoDB Atlas     Object Storage    External Auth\n          │             S3 + CloudFront    / Custom\n          │\n          ├───────────────┐\n          │               │\n          ▼               ▼\n   Operational Data    Analytics Data\n          │\n          ▼\n      Jobs Queue\n          │\n          ▼\n    Vercel Cron / Worker\n```\n\n## Stack\n\n| Component | Technology |\n|-----------|------------|\n| Main hosting | **Vercel** |\n| Application | **Next.js** |\n| Frontend | React |\n| UI | shadcn/ui |\n| Server state | TanStack Query |\n| Client state | Zustand |\n| Database | MongoDB Atlas **M10 tier** |\n| File storage | **AWS S3 + CloudFront** (or Azure Blob) |\n| Authentication | Custom authentication |\n| Analytics | MongoDB aggregation + precomputed analytics |\n| Queue | MongoDB jobs collection (initially) |\n| Job execution | Vercel Cron / serverless worker |\n| Caching | **Redis — only if needed** |\n| CI/CD | GitHub → Vercel |\n| DNS | Your domain/DNS provider |\n\n## Cost Estimate (target ≤ $80/month)\n\n| Service | Est. Cost |\n|---------|-----------|\n| Vercel | ~$20 |\n| MongoDB Atlas M10 | ~$50–60 |\n| Object storage | ~$1–5 |\n| Redis | $0 (deferred) |\n| **Total** | **~$71–85** |\n\nRedis is deferred. Introduce only if monitoring proves you need caching."
+          }
+        ]
+      },
+      {
+        "id": "prod-azure",
+        "title": "3. Production — Azure (Enterprise)",
+        "blocks": [
+          {
+            "type": "markdown",
+            "id": "prod-azure-md",
+            "content": "The enterprise-oriented deployment. Application hosting and background processing move into Azure. MongoDB can remain on Atlas unless Bahri requires the database inside Azure.\n\n## Architecture Diagram\n\n```text\n                              INTERNET\n                                  │\n                                  ▼\n                         Azure Application\n                              Hosting\n                                  │\n                           ┌──────┴──────┐\n                           │             │\n                           ▼             ▼\n                      Next.js App     Worker\n                      App Service    Container Apps\n                           │             │\n                           │             │\n                           └──────┬──────┘\n                                  │\n                         Azure Service Bus\n                                  │\n                                  │\n                    ┌─────────────┴─────────────┐\n                    ▼                           ▼\n             MongoDB Atlas                Blob Storage\n             Operational DB               Files/Attachments\n                    │\n                    ▼\n             Analytics Collections\n```\n\n## Stack\n\n| Component | Technology |\n|-----------|------------|\n| Main application hosting | **Azure App Service** |\n| Next.js | Containerized Next.js |\n| Background workers | **Azure Container Apps** |\n| Queue | **Azure Service Bus** |\n| Database | **MongoDB Atlas** |\n| File storage | **Azure Blob Storage** |\n| CDN | **Azure Front Door/CDN** (if needed) |\n| Secrets | **Azure Key Vault** |\n| Authentication | **Microsoft Entra ID** / custom |\n| Monitoring | **Azure Application Insights + Azure Monitor** |\n| CI/CD | **GitHub Actions → Azure** |\n| Container registry | **Azure Container Registry** |\n| Caching | **Azure Cache for Redis** (only if needed) |\n| DNS | Azure DNS / existing provider |\n| Analytics | MongoDB + background workers |"
+          }
+        ]
+      },
+      {
+        "id": "queue-abstraction",
+        "title": "4. The Queue Abstraction",
+        "blocks": [
+          {
+            "type": "markdown",
+            "id": "queue-abstraction-md",
+            "content": "The queue is the most important abstraction in the system. The application code calls the same interface regardless of environment — what's underneath changes.\n\n## Queue Implementation Per Environment\n\n| Environment | Queue Backend | Worker |\n|-------------|---------------|--------|\n| **Development** | MongoDB jobs collection | Local worker (poll-based) |\n| **Initial Production** | MongoDB jobs collection | Vercel Cron / serverless |\n| **Azure Production** | Azure Service Bus | Azure Container Apps |\n\n## Why This Matters\n\n```text\nenqueueJob()          ← same call everywhere\n       ↓\n[Queue Interface]     ← abstracted\n       ↓\nMongoDB | Service Bus ← swapped per environment\n       ↓\nLocal | Vercel | ACA  ← swapped per environment\n```\n\nNo redesign needed when moving from Vercel to Azure. Swap the queue adapter and worker target."
+          }
+        ]
+      },
+      {
+        "id": "layers",
+        "title": "5. The Six Architecture Layers",
+        "blocks": [
+          {
+            "type": "markdown",
+            "id": "layers-md",
+            "content": "BBS is structured as **six major layers** that remain consistent across all environments:\n\n```text\n┌─────────────────────────────────────────────┐\n│                  FRONTEND                   │\n│         Next.js + React + shadcn            │\n│          TanStack Query + Zustand           │\n├─────────────────────────────────────────────┤\n│                 APPLICATION                 │\n│       Next.js API / Route Handlers          │\n│          Business Logic / Services          │\n├─────────────────────────────────────────────┤\n│                AUTHENTICATION               │\n│       Custom Auth → Entra ID eventually     │\n├─────────────────────────────────────────────┤\n│                 DATA LAYER                  │\n│          MongoDB Atlas + indexes            │\n│       Operational + Analytics collections  │\n├─────────────────────────────────────────────┤\n│                FILE STORAGE                 │\n│       S3/CloudFront → Azure Blob later      │\n├─────────────────────────────────────────────┤\n│             ASYNCHRONOUS LAYER              │\n│ MongoDB Jobs → Service Bus + Worker later   │\n└─────────────────────────────────────────────┘\n```\n\n## Layer Details\n\n### Frontend\n- Next.js + React with shadcn/ui + Tailwind\n- **TanStack Query** for server state (caching, refetching, optimistic updates)\n- **Zustand** for lightweight client-side state\n\n### Application\n- Next.js Route Handlers as the API layer\n- Business logic / services decoupled from route handlers\n- Queue interface abstracted behind a common API\n\n### Authentication\n- Start with custom auth for flexibility\n- Migrate to **Microsoft Entra ID** in the Azure enterprise phase\n\n### Data Layer\n- MongoDB Atlas with proper indexes\n- Split collections: **operational** (OLTP) and **analytics** (precomputed aggregates)\n- Designed for ~2,000 MAU / ~20,000 submissions/month / ~150,000 records/year\n\n### File Storage\n- Development: local or S3-compatible\n- Initial production: **AWS S3 + CloudFront**\n- Azure: **Azure Blob Storage + Front Door**\n\n### Asynchronous Layer\n- Queue abstraction: enqueue → process pattern\n- Starts as MongoDB polling, graduates to Azure Service Bus + Container Apps\n- Powers analytics, notifications, and background processing"
+          }
+        ]
+      },
+      {
+        "id": "decisions",
+        "title": "6. Key Design Decisions",
+        "blocks": [
+          {
+            "type": "markdown",
+            "id": "decisions-md",
+            "content": "## Why Not Redis as a Foundation?\n\nRedis is an **optimization**, not a dependency. The system is designed to work without it:\n\n- Next.js → MongoDB → Object Storage → Queue → Worker\n- Redis enters only when monitoring proves you need caching\n- For 2,000 MAU and ~20k submissions/month, the database alone is sufficient\n\n## Why MongoDB Atlas Across All Environments?\n\n- Managed, independently scalable\n- No need to move the database even when migrating application hosting to Azure\n- Consistent query patterns and data model across all stages\n- Atlas M10 (~$50–60/month) fits the cost target\n\n## Why Abstract the Queue?\n\n- The queue is the component that changes most between environments\n- A clean `enqueueJob()` / `processJob()` interface means zero business logic changes when migrating\n- MongoDB polling is fine for dev and early production; Azure Service Bus is ready when you need enterprise-grade messaging\n\n## Scale Target\n\n| Metric | Volume |\n|--------|--------|\n| Monthly Active Users | ~2,000 |\n| Submissions/month | ~20,000 |\n| Records/year | ~150,000 |\n\nThis architecture is **over-provisioned** for these numbers. Plenty of headroom before any scaling concerns arise."
+          }
+        ]
+      }
+    ],
+    "title": "BBS Technical Architecture",
+    "name": "BBS Technical Architecture",
+    "description": "Technical architecture for the BBS project — development, Vercel production, and Azure enterprise deployment with six-layer design.",
+    "explains": [],
+    "questionnaires": [],
+    "checklist": null,
+    "variants": {
+      "sidebarNav": true,
+      "compactHero": true,
+      "showMeta": true
+    },
+    "updatedAt": "2026-08-08"
+  },
+  "08-08-2026": {
+    "sections": [
+      {
+        "id": "summary",
+        "title": "Overview",
+        "blocks": [
+          {
+            "content": "Today was dedicated to laying the architectural foundation for **BBS (Bulletin Board System)** — a full-stack, real-time community application designed for ~2,000 MAU. The work centered on capturing the end-to-end architecture, defining layered abstractions, and modeling three distinct deployment environments with a consistent abstraction surface.",
+            "id": "overview-md",
+            "type": "markdown"
+          }
+        ]
+      },
+      {
+        "id": "created",
+        "title": "Created",
+        "blocks": [
+          {
+            "content": "### @BBS Technical Architecture (technical-arch)\n\nCreated the master architecture document covering:\n\n- **6-layer architecture**: Frontend → Application → Authentication → Data → File Storage → Asynchronous\n- **3 environment models**:\n  - *Development* — MongoDB-only, no queues, no object storage; code runs locally\n  - *Production Vercel* — Vercel serverless + MongoDB Atlas + Cloudinary + QStash (~$71–85/mo)\n  - *Production Azure* — AKS + MongoDB Atlas + Azure Blob + RabbitMQ on AKS (~$167–207/mo)\n- **Queue abstraction**: a typed `Queue` interface swapped via env config; Dev is synchronous passthrough, Vercel uses QStash over HTTP, Azure uses AMQP/RabbitMQ\n- **Key design decisions**: no Redis anywhere, MongoDB Atlas in all environments, queue abstraction over vendor lock-in, HTTP-only QStash (no TCP), scale target of 2,000 MAU\n- **Philosophy**: architecture as a *progression* — local simplicity, Vercel for speed to market, Azure for enterprise scale — not three separate apps",
+            "id": "created-md",
+            "type": "markdown"
+          }
+        ]
+      },
+      {
+        "id": "progress",
+        "title": "Key Progress",
+        "blocks": [
+          {
+            "content": "- **Architecture as a progression**: modeled environments as a deliberate ramp rather than one-size-fits-all\n- **Queue abstraction**: defined a `Queue` interface (`enqueue`, `dequeue`, `ack`, `nack`, `deadLetter`) with concrete adapters per environment — synchronous in dev, QStash HTTP on Vercel, AMQP on Azure\n- **MongoDB as single data store**: MongoDB Atlas used everywhere; no Redis, no SQL, no mix-and-match\n- **Cost modeling**: rough monthly estimates for each environment to inform decision-making\n- **Scale targets**: ~2,000 MAU with room to grow, guiding initial sizing without premature optimization",
+            "id": "kprogress-md",
+            "type": "markdown"
+          }
+        ]
+      },
+      {
+        "id": "next",
+        "title": "Next Steps",
+        "blocks": [
+          {
+            "content": "- Begin scaffolding the BBS monorepo with the six-layer structure\n- Implement the `Queue` interface and dev adapter first\n- Wire up NextAuth.js with MongoDB session store\n- Set up the Vercel environment as the initial production target\n- Draft the data models (User, Board, Post, etc.) in a separate note",
+            "id": "next-md",
+            "type": "markdown"
+          }
+        ]
+      }
+    ],
+    "title": "08/08/2026",
+    "name": "08/08/2026",
+    "description": "",
+    "explains": [],
+    "questionnaires": [],
+    "variants": {
+      "sidebarNav": true,
+      "compactHero": true,
+      "showMeta": true
+    },
+    "updatedAt": "2026-08-08"
+  }
+}

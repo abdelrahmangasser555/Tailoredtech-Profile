@@ -1,14 +1,20 @@
 "use client"
 
+import { useRouter } from "next/navigation"
 import { useState } from "react"
-import { Play } from "lucide-react"
+import { Pencil, Play } from "lucide-react"
+import { isLocalEditEnabled } from "@/lib/local-edit"
 import { cn } from "@/lib/utils"
+import { toast } from "sonner"
 
 type NoteYoutubeProps = {
   url: string
   title?: string
   caption?: string
   className?: string
+  noteId?: string
+  sectionId?: string
+  blockId?: string
 }
 
 function parseYoutubeId(url: string): string | null {
@@ -39,15 +45,49 @@ export function NoteYoutube({
   title,
   caption,
   className,
+  noteId,
+  sectionId,
+  blockId,
 }: NoteYoutubeProps) {
-  const id = parseYoutubeId(url)
+  const router = useRouter()
+  const localEdit = isLocalEditEnabled()
+  const canEdit = Boolean(localEdit && noteId && sectionId && blockId)
   const [playing, setPlaying] = useState(false)
+  const [busy, setBusy] = useState(false)
+
+  const id = parseYoutubeId(url)
   const embed = id
     ? `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0`
     : null
-  const poster = id
-    ? `https://i.ytimg.com/vi/${id}/hqdefault.jpg`
-    : null
+  const poster = id ? `https://i.ytimg.com/vi/${id}/hqdefault.jpg` : null
+
+  async function editUrl() {
+    if (!canEdit || busy) return
+    const next = window.prompt("YouTube URL", url)
+    if (!next?.trim() || next.trim() === url) return
+    setBusy(true)
+    try {
+      const res = await fetch("/api/local-edit/note-section-block", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          noteId,
+          sectionId,
+          action: "updateBlock",
+          blockId,
+          data: { url: next.trim() },
+        }),
+      })
+      if (!res.ok) throw new Error("Failed to update")
+      toast.success("YouTube URL updated")
+      setPlaying(false)
+      router.refresh()
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "Failed")
+    } finally {
+      setBusy(false)
+    }
+  }
 
   return (
     <div
@@ -55,11 +95,27 @@ export function NoteYoutube({
       style={{ contentVisibility: "auto", containIntrinsicSize: "0 360px" }}
       data-lenis-prevent={playing ? true : undefined}
     >
-      {title ? (
-        <p className="mb-3 font-mono text-[10px] tracking-[0.2em] text-white/40 uppercase">
-          {title}
-        </p>
-      ) : null}
+      <div className="mb-3 flex items-center justify-between gap-2">
+        {title ? (
+          <p className="font-mono text-[10px] tracking-[0.2em] text-white/40 uppercase">
+            {title}
+          </p>
+        ) : (
+          <span />
+        )}
+        {canEdit ? (
+          <button
+            type="button"
+            title="Edit YouTube URL"
+            aria-label="Edit YouTube URL"
+            disabled={busy}
+            onClick={() => void editUrl()}
+            className="flex size-7 items-center justify-center border border-white/15 text-white/35 transition hover:border-accent/40 hover:text-accent disabled:opacity-40"
+          >
+            <Pencil className="size-3" />
+          </button>
+        ) : null}
+      </div>
 
       {embed && poster ? (
         <div className="relative aspect-video w-full overflow-hidden border border-white/10 bg-black">

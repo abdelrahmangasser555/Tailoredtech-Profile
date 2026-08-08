@@ -164,6 +164,22 @@ export type NoteBlock =
       expectIncludes?: string
       hint?: string
     }
+  | {
+      type: "tasks"
+      id: string
+      title?: string
+      /** Nested checklist — check state overlays from localStorage / note-tasks.json */
+      items: NoteTaskItem[]
+    }
+
+export type NoteTaskItem = {
+  id: string
+  label: string
+  done?: boolean
+  /** ISO date when checked (YYYY-MM-DD) */
+  completedAt?: string | null
+  children?: NoteTaskItem[]
+}
 
 export type NoteSection = {
   id: string
@@ -182,6 +198,13 @@ export type NoteVariants = {
   showMeta?: boolean
 }
 
+export type NoteChatConfig = {
+  /** Limit @ references and browse scope to this subtree root id */
+  scopeRootId?: string
+  /** Disable chat for this note */
+  enabled?: boolean
+}
+
 export type NoteDocument = {
   id: string
   name: string
@@ -191,6 +214,15 @@ export type NoteDocument = {
   updatedAt: string
   enabled: boolean
   variants?: NoteVariants
+  chat?: NoteChatConfig
+  /**
+   * Note-wide checklist shown at the top (before sections).
+   * Progress still overlays via note-tasks / localStorage.
+   */
+  checklist?: {
+    title?: string
+    items: NoteTaskItem[]
+  } | null
   /** Inline explain terms — clickable labels open a side sheet */
   explains?: NoteExplainTerm[]
   questionnaires?: NoteQuestionnaire[]

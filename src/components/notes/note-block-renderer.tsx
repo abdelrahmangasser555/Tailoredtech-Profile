@@ -11,6 +11,7 @@ import { NoteHtmlBlock } from "@/components/notes/blocks/note-html-block"
 import { NoteGallery } from "@/components/notes/blocks/note-gallery"
 import { NoteTerminal } from "@/components/notes/blocks/note-terminal"
 import { NotePlayground } from "@/components/notes/blocks/note-playground"
+import { NoteTasks } from "@/components/notes/blocks/note-tasks"
 import { NoteIllustration } from "@/components/notes/illustrations/registry"
 
 const BrandedMermaid = dynamic(
@@ -28,12 +29,16 @@ const BrandedMermaid = dynamic(
 
 type NoteBlockRendererProps = {
   block: NoteBlock
+  noteId: string
+  sectionId?: string
   explainsById: Record<string, NoteExplainTerm>
   onExplain: (id: string) => void
 }
 
 export function NoteBlockRenderer({
   block,
+  noteId,
+  sectionId,
   explainsById,
   onExplain,
 }: NoteBlockRendererProps) {
@@ -52,6 +57,9 @@ export function NoteBlockRenderer({
           url={block.url}
           title={block.title}
           caption={block.caption}
+          noteId={noteId}
+          sectionId={sectionId}
+          blockId={block.id}
         />
       )
     case "stack":
@@ -129,6 +137,15 @@ export function NoteBlockRenderer({
           caption={block.caption}
           expectIncludes={block.expectIncludes}
           hint={block.hint}
+        />
+      )
+    case "tasks":
+      return (
+        <NoteTasks
+          noteId={noteId}
+          blockId={block.id}
+          title={block.title}
+          items={block.items}
         />
       )
     default:

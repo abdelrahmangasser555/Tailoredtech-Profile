@@ -1,0 +1,66 @@
+{
+  "notes-tasks:grad-start-beginner:checklist-start": [
+    {
+      "id": "tools",
+      "label": "Install tools",
+      "children": [
+        {
+          "id": "vscode",
+          "label": "Install VS Code",
+          "done": false,
+          "completedAt": null
+        },
+        {
+          "id": "node",
+          "label": "Install Node.js"
+        }
+      ],
+      "done": false,
+      "completedAt": null
+    },
+    {
+      "id": "git",
+      "label": "Set up Git + GitHub",
+      "children": [
+        {
+          "id": "git-account",
+          "label": "Create a GitHub account"
+        },
+        {
+          "id": "git-first",
+          "label": "Make your first commit"
+        }
+      ]
+    },
+    {
+      "id": "build",
+      "label": "Build the portfolio path",
+      "children": [
+        {
+          "id": "web",
+          "label": "HTML / CSS / JS mini page"
+        },
+        {
+          "id": "react",
+          "label": "React version"
+        },
+        {
+          "id": "next",
+          "label": "Next.js + API"
+        },
+        {
+          "id": "mongo",
+          "label": "MongoDB connected"
+        }
+      ]
+    }
+  ],
+  "notes-tasks:technical-arch:__note-checklist__": [
+    {
+      "id": "task-1",
+      "label": "technical arch part 1",
+      "children": []
+    }
+  ],
+  "notes-tasks:technical-arch:tasks-msk8yh1x": []
+}

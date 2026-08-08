@@ -6,6 +6,7 @@ import {
 import {
   stripGradRoadmapFromTree,
 } from "@/lib/notes-managed"
+import { mergeNoteWithOverride } from "@/lib/notes-chat/merge-overrides"
 import type {
   NoteDocument,
   NotesConfig,
@@ -16,15 +17,38 @@ import type {
 export type { NoteDocument, NotesConfig, NotesTreeNode, NotesFolderNode }
 export { GRAD_ROADMAP_ROOT_ID, isGradRoadmapPath } from "@/lib/notes-managed"
 
+function buildGradNotesWithScope(): Record<string, NoteDocument> {
+  const out: Record<string, NoteDocument> = {}
+  for (const [id, note] of Object.entries(gradRoadmapNotes)) {
+    out[id] = mergeNoteWithOverride({
+      ...note,
+      chat: {
+        scopeRootId: "grad-project-roadmap",
+        ...note.chat,
+      },
+    })
+  }
+  return out
+}
+
 function buildNotesTree(configTree: NotesTreeNode[]): NotesTreeNode[] {
   const custom = stripGradRoadmapFromTree(configTree)
   return [gradRoadmapTree, ...custom]
 }
 
+const gradNotes = buildGradNotesWithScope()
+const jsonNotes = Object.fromEntries(
+  Object.entries(notesConfig.notes as Record<string, NoteDocument>).map(
+    ([id, note]) => [id, mergeNoteWithOverride(note)]
+  )
+)
+
+const configTree = notesConfig.tree as unknown as NotesTreeNode[]
+
 const mergedConfig: NotesConfig = {
   ...notesConfig,
-  tree: buildNotesTree(notesConfig.tree),
-  notes: { ...notesConfig.notes, ...gradRoadmapNotes },
+  tree: buildNotesTree(configTree),
+  notes: { ...jsonNotes, ...gradNotes },
 }
 
 export const notes = mergedConfig
@@ -65,6 +89,9 @@ export function getNoteById(id: string): NoteDocument | undefined {
   if (!note || !note.enabled) return undefined
   return note
 }
+
+export { listMentionItems, getSiblingNoteIds, resolveChatScopeRootId } from "@/lib/notes-chat/context"
+export type { NoteMentionItem } from "@/lib/notes-chat/context"
 
 export function getAllNoteIds(): string[] {
   return Object.values(notes.notes)

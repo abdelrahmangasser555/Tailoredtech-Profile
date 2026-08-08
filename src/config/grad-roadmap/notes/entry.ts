@@ -55,6 +55,39 @@ You do **not** need to memorize syntax. AI can write code. Your job is to unders
             body: "Keep Next at the bottom of each lesson. Run real commands on your machine. Use the interactive terminals and editors inside the notes. When something breaks, fix it before moving on.",
           },
           {
+            type: "tasks",
+            id: "checklist-start",
+            title: "Getting started checklist",
+            items: [
+              {
+                id: "tools",
+                label: "Install tools",
+                children: [
+                  { id: "vscode", label: "Install VS Code" },
+                  { id: "node", label: "Install Node.js" },
+                ],
+              },
+              {
+                id: "git",
+                label: "Set up Git + GitHub",
+                children: [
+                  { id: "git-account", label: "Create a GitHub account" },
+                  { id: "git-first", label: "Make your first commit" },
+                ],
+              },
+              {
+                id: "build",
+                label: "Build the portfolio path",
+                children: [
+                  { id: "web", label: "HTML / CSS / JS mini page" },
+                  { id: "react", label: "React version" },
+                  { id: "next", label: "Next.js + API" },
+                  { id: "mongo", label: "MongoDB connected" },
+                ],
+              },
+            ],
+          },
+          {
             type: "link",
             id: "lr1",
             href: "https://roadmap.sh/fullstack",

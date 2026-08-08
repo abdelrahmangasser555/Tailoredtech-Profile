@@ -10,7 +10,11 @@ import type {
 } from "@/lib/notes-types"
 import type { NotesBreadcrumb } from "@/lib/notes"
 import { formatNotesDate } from "@/lib/notes"
+import type { NoteMentionItem } from "@/lib/notes-chat/context"
 import { NoteBlockRenderer } from "@/components/notes/note-block-renderer"
+import { NoteChatPanel } from "@/components/notes/note-chat-panel"
+import { NoteLevelChecklist } from "@/components/notes/note-level-checklist"
+import { NoteSectionActions } from "@/components/notes/note-section-actions"
 import { NoteExplainSheet } from "@/components/notes/note-explain-sheet"
 import { NoteQuestionnaireModal } from "@/components/notes/note-questionnaire-modal"
 import { NoteLessonNav } from "@/components/notes/note-lesson-nav"
@@ -21,9 +25,16 @@ import { cn } from "@/lib/utils"
 type NoteDetailProps = {
   note: NoteDocument
   breadcrumbs: NotesBreadcrumb[]
+  pathIds: string[]
+  mentionItems: NoteMentionItem[]
 }
 
-export function NoteDetail({ note, breadcrumbs }: NoteDetailProps) {
+export function NoteDetail({
+  note,
+  breadcrumbs,
+  pathIds,
+  mentionItems,
+}: NoteDetailProps) {
   const variants = {
     sidebarNav: note.variants?.sidebarNav !== false,
     compactHero: note.variants?.compactHero !== false,
@@ -226,10 +237,13 @@ export function NoteDetail({ note, breadcrumbs }: NoteDetailProps) {
         ) : null}
 
         <div className="min-w-0 flex-1">
+          <NoteLevelChecklist note={note} />
+
           {note.sections.map((section) => {
             const quiz = section.questionnaireId
               ? questionnairesById[section.questionnaireId]
               : undefined
+            const hasTasks = section.blocks.some((b) => b.type === "tasks")
 
             return (
               <section
@@ -246,11 +260,19 @@ export function NoteDetail({ note, breadcrumbs }: NoteDetailProps) {
                     <NoteBlockRenderer
                       key={block.id}
                       block={block}
+                      noteId={note.id}
+                      sectionId={section.id}
                       explainsById={explainsById}
                       onExplain={setExplainId}
                     />
                   ))}
                 </div>
+
+                <NoteSectionActions
+                  noteId={note.id}
+                  sectionId={section.id}
+                  hasTasks={hasTasks}
+                />
 
                 {quiz ? (
                   <button
@@ -285,6 +307,13 @@ export function NoteDetail({ note, breadcrumbs }: NoteDetailProps) {
         onOpenChange={(open) => {
           if (!open) setQuizId(null)
         }}
+      />
+
+      <NoteChatPanel
+        note={note}
+        pathIds={pathIds}
+        mentionItems={mentionItems}
+        activeSectionId={activeId}
       />
     </div>
   )
