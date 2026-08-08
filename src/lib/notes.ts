@@ -3,6 +3,9 @@ import {
   gradRoadmapNotes,
   gradRoadmapTree,
 } from "@/config/grad-roadmap"
+import {
+  stripGradRoadmapFromTree,
+} from "@/lib/notes-managed"
 import type {
   NoteDocument,
   NotesConfig,
@@ -11,10 +14,16 @@ import type {
 } from "@/lib/notes-types"
 
 export type { NoteDocument, NotesConfig, NotesTreeNode, NotesFolderNode }
+export { GRAD_ROADMAP_ROOT_ID, isGradRoadmapPath } from "@/lib/notes-managed"
+
+function buildNotesTree(configTree: NotesTreeNode[]): NotesTreeNode[] {
+  const custom = stripGradRoadmapFromTree(configTree)
+  return [gradRoadmapTree, ...custom]
+}
 
 const mergedConfig: NotesConfig = {
   ...notesConfig,
-  tree: [gradRoadmapTree, ...notesConfig.tree],
+  tree: buildNotesTree(notesConfig.tree),
   notes: { ...notesConfig.notes, ...gradRoadmapNotes },
 }
 

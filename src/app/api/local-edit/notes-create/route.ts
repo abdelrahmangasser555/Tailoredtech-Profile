@@ -2,6 +2,7 @@ import { NextResponse } from "next/server"
 import { promises as fs } from "fs"
 import path from "path"
 import { isLocalEditEnabled } from "@/lib/local-edit"
+import { isGradRoadmapPath } from "@/lib/notes-managed"
 import type {
   NoteDocument,
   NotesConfig,
@@ -82,6 +83,13 @@ export async function POST(request: Request) {
 
   if (!body?.node || !Array.isArray(body.pathIds)) {
     return NextResponse.json({ error: "Invalid payload" }, { status: 400 })
+  }
+
+  if (isGradRoadmapPath(body.pathIds)) {
+    return NextResponse.json(
+      { error: "Grad project roadmap is managed in src/config/grad-roadmap/" },
+      { status: 403 }
+    )
   }
 
   const filePath = path.join(process.cwd(), "src", "config", "notes.json")

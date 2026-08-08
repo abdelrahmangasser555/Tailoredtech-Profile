@@ -2,6 +2,10 @@ import { NextResponse } from "next/server"
 import { promises as fs } from "fs"
 import path from "path"
 import { isLocalEditEnabled } from "@/lib/local-edit"
+import {
+  GRAD_ROADMAP_ROOT_ID,
+  isGradRoadmapPath,
+} from "@/lib/notes-managed"
 import type {
   NotesConfig,
   NotesFolderNode,
@@ -69,6 +73,17 @@ export async function POST(request: Request) {
     return NextResponse.json(
       { error: "Already in that folder" },
       { status: 400 }
+    )
+  }
+
+  if (
+    body.nodeId === GRAD_ROADMAP_ROOT_ID ||
+    isGradRoadmapPath(body.fromPathIds) ||
+    isGradRoadmapPath(body.toPathIds)
+  ) {
+    return NextResponse.json(
+      { error: "Grad project roadmap is managed in src/config/grad-roadmap/" },
+      { status: 403 }
     )
   }
 

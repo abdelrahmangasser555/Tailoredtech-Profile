@@ -18,6 +18,10 @@ import type { NotesTreeNode } from "@/lib/notes-types"
 import type { NotesBreadcrumb } from "@/lib/notes"
 import { formatNotesDate, getParentPath } from "@/lib/notes"
 import { isLocalEditEnabled } from "@/lib/local-edit"
+import {
+  GRAD_ROADMAP_ROOT_ID,
+  isGradRoadmapPath,
+} from "@/lib/notes-managed"
 import { NotesMoveDialog } from "@/components/notes/notes-move-dialog"
 import { TrackNoteBrowser } from "@/components/analytics/track-note-browser"
 import { cn } from "@/lib/utils"
@@ -44,6 +48,9 @@ export function NotesBrowser({
 }: NotesBrowserProps) {
   const router = useRouter()
   const localEdit = isLocalEditEnabled()
+  const canEditHere = localEdit && !isGradRoadmapPath(pathIds)
+  const canReorderNode = (nodeId: string) =>
+    canEditHere && !(pathIds.length === 0 && nodeId === GRAD_ROADMAP_ROOT_ID)
   const [items, setItems] = useState(entries)
   const [menu, setMenu] = useState<ContextMenuState | null>(null)
   const [moveTarget, setMoveTarget] = useState<NotesTreeNode | null>(null)
@@ -86,7 +93,7 @@ export function NotesBrowser({
 
   const persistTree = useCallback(
     async (nextChildren: NotesTreeNode[]) => {
-      if (!localEdit) return
+      if (!canEditHere) return
       pendingOrderRef.current = nextChildren.map((n) => n.id)
       try {
         const res = await fetch("/api/local-edit/notes-tree", {
@@ -108,7 +115,7 @@ export function NotesBrowser({
         setItems(entries)
       }
     },
-    [entries, localEdit, pathIds, router]
+    [entries, canEditHere, pathIds, router]
   )
 
   function openHref(node: NotesTreeNode) {
@@ -121,7 +128,7 @@ export function NotesBrowser({
     target: NotesTreeNode | null
   ) {
     e.preventDefault()
-    if (!localEdit) return
+    if (!canEditHere) return
     setMenu({ x: e.clientX, y: e.clientY, target })
   }
 
@@ -161,7 +168,7 @@ export function NotesBrowser({
     const next = [...items, node]
     setItems(next)
 
-    if (!localEdit) return
+    if (!canEditHere) return
 
     try {
       const res = await fetch("/api/local-edit/notes-create", {
@@ -230,7 +237,7 @@ export function NotesBrowser({
   }
 
   function onDragStart(e: React.DragEvent, id: string) {
-    if (!localEdit) return
+    if (!canReorderNode(id)) return
     didDragRef.current = true
     e.dataTransfer.effectAllowed = "move"
     e.dataTransfer.setData("text/plain", id)
@@ -238,7 +245,7 @@ export function NotesBrowser({
   }
 
   function onDragOver(e: React.DragEvent, id: string) {
-    if (!localEdit || !dragId || dragId === id) return
+    if (!canEditHere || !dragId || dragId === id) return
     e.preventDefault()
     e.dataTransfer.dropEffect = "move"
     setOverId(id)
@@ -247,7 +254,7 @@ export function NotesBrowser({
   async function onDrop(e: React.DragEvent, targetId: string) {
     e.preventDefault()
     e.stopPropagation()
-    if (!localEdit) return
+    if (!canEditHere) return
 
     const sourceId = dragId || e.dataTransfer.getData("text/plain")
     if (!sourceId || sourceId === targetId) {
@@ -315,7 +322,7 @@ export function NotesBrowser({
               {folderName ?? "Notes"}
             </h1>
             <p className="mt-2 max-w-lg text-sm text-muted-foreground">
-              {localEdit
+              {canEditHere
                 ? "Right-click to create. Drag the handle to reorder."
                 : "Browse folders and open notes."}
             </p>
@@ -348,7 +355,7 @@ export function NotesBrowser({
           {items.length === 0 ? (
             <p className="mt-10 text-sm text-muted-foreground">
               Empty folder
-              {localEdit ? " — right-click to add something." : "."}
+              {canEditHere ? " — right-click to add something." : "."}
             </p>
           ) : (
             <ul className="divide-y divide-foreground/8">
@@ -384,7 +391,7 @@ export function NotesBrowser({
                       />
                     ) : null}
                     <div className="grid grid-cols-[1.25rem_minmax(0,1fr)_7rem_7rem] items-center gap-2 py-3.5 md:grid-cols-[1.25rem_minmax(0,1fr)_8rem_8rem_5rem]">
-                      {localEdit ? (
+                      {canReorderNode(node.id) ? (
                         <button
                           type="button"
                           draggable
@@ -437,7 +444,7 @@ export function NotesBrowser({
         </div>
       </div>
 
-      {menu && localEdit ? (
+      {menu && canEditHere ? (
         <div
           ref={menuRef}
           className="fixed z-50 min-w-48 border border-foreground/15 bg-[#f7f7f2] py-1 shadow-lg"

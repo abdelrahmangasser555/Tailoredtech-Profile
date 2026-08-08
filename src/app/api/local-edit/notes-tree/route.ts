@@ -2,6 +2,10 @@ import { NextResponse } from "next/server"
 import { promises as fs } from "fs"
 import path from "path"
 import { isLocalEditEnabled } from "@/lib/local-edit"
+import {
+  isGradRoadmapPath,
+  stripGradRoadmapFromTree,
+} from "@/lib/notes-managed"
 import type { NotesConfig, NotesFolderNode, NotesTreeNode } from "@/lib/notes-types"
 
 type Body = {
@@ -49,6 +53,13 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid payload" }, { status: 400 })
   }
 
+  if (isGradRoadmapPath(body.pathIds)) {
+    return NextResponse.json(
+      { error: "Grad project roadmap is managed in src/config/grad-roadmap/" },
+      { status: 403 }
+    )
+  }
+
   const filePath = path.join(process.cwd(), "src", "config", "notes.json")
 
   try {
@@ -56,7 +67,7 @@ export async function POST(request: Request) {
     const data = JSON.parse(raw) as NotesConfig
 
     if (body.pathIds.length === 0) {
-      data.tree = body.children
+      data.tree = stripGradRoadmapFromTree(body.children)
     } else {
       const located = getFolderAtPath(data.tree, body.pathIds)
       if (!located?.folder) {
