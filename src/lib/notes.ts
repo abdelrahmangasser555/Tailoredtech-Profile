@@ -14,7 +14,7 @@ export type { NoteDocument, NotesConfig, NotesTreeNode, NotesFolderNode }
 
 const mergedConfig: NotesConfig = {
   ...notesConfig,
-  tree: [...notesConfig.tree, gradRoadmapTree],
+  tree: [gradRoadmapTree, ...notesConfig.tree],
   notes: { ...notesConfig.notes, ...gradRoadmapNotes },
 }
 

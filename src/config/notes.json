@@ -4,257 +4,81 @@
   "tree": [
     {
       "type": "folder",
-      "id": "grad-project-roadmap",
-      "name": "Grad project roadmap",
-      "createdAt": "2026-08-07",
-      "updatedAt": "2026-08-07",
+      "id": "fundamentals",
+      "name": "Fundamentals",
+      "createdAt": "2026-07-01",
+      "updatedAt": "2026-08-05",
       "children": [
         {
-          "type": "file",
-          "id": "grad-start-beginner",
-          "name": "Start here (beginner)",
-          "createdAt": "2026-08-07",
-          "updatedAt": "2026-08-07"
-        },
-        {
-          "type": "file",
-          "id": "grad-start-intermediate",
-          "name": "Start here (intermediate)",
-          "createdAt": "2026-08-07",
-          "updatedAt": "2026-08-07"
-        },
-        {
-          "type": "file",
-          "id": "grad-jump-project",
-          "name": "Jump here (the project)",
-          "createdAt": "2026-08-07",
-          "updatedAt": "2026-08-07"
-        },
-        {
           "type": "folder",
-          "id": "grad-00-tools",
-          "name": "00 · Tools setup",
-          "createdAt": "2026-08-07",
+          "id": "git",
+          "name": "Git",
+          "createdAt": "2026-07-10",
           "updatedAt": "2026-08-07",
           "children": [
             {
               "type": "file",
-              "id": "grad-vscode-setup",
-              "name": "Install VS Code",
-              "createdAt": "2026-08-07",
-              "updatedAt": "2026-08-07"
+              "id": "git-basics",
+              "name": "Git basics",
+              "createdAt": "2026-07-12",
+              "updatedAt": "2026-08-06"
             },
             {
               "type": "file",
-              "id": "grad-node-setup",
-              "name": "Install Node.js",
-              "createdAt": "2026-08-07",
+              "id": "git-branching",
+              "name": "Branching model",
+              "createdAt": "2026-07-18",
+              "updatedAt": "2026-08-04"
+            },
+            {
+              "type": "file",
+              "id": "welcome",
+              "name": "Welcome",
+              "createdAt": "2026-07-01",
               "updatedAt": "2026-08-07"
             }
           ]
         },
         {
           "type": "folder",
-          "id": "grad-01-git",
-          "name": "01 · Git & GitHub",
-          "createdAt": "2026-08-07",
-          "updatedAt": "2026-08-07",
+          "id": "web",
+          "name": "Web stack",
+          "createdAt": "2026-07-15",
+          "updatedAt": "2026-08-03",
           "children": [
             {
               "type": "file",
-              "id": "grad-git-overview",
-              "name": "What Git does",
-              "createdAt": "2026-08-07",
-              "updatedAt": "2026-08-07"
-            },
-            {
-              "type": "file",
-              "id": "grad-github-setup",
-              "name": "GitHub account & clone",
-              "createdAt": "2026-08-07",
-              "updatedAt": "2026-08-07"
-            },
-            {
-              "type": "file",
-              "id": "grad-git-first-repo",
-              "name": "First repo (hands on)",
-              "createdAt": "2026-08-07",
-              "updatedAt": "2026-08-07"
-            },
-            {
-              "type": "file",
-              "id": "grad-git-branches",
-              "name": "Branches & merge",
-              "createdAt": "2026-08-07",
-              "updatedAt": "2026-08-07"
-            }
-          ]
-        },
-        {
-          "type": "folder",
-          "id": "grad-02-web",
-          "name": "02 · HTML, CSS & JS",
-          "createdAt": "2026-08-07",
-          "updatedAt": "2026-08-07",
-          "children": [
-            {
-              "type": "file",
-              "id": "grad-web-html-css",
-              "name": "HTML & CSS skeleton",
-              "createdAt": "2026-08-07",
-              "updatedAt": "2026-08-07"
-            },
-            {
-              "type": "file",
-              "id": "grad-web-javascript",
-              "name": "JavaScript basics",
-              "createdAt": "2026-08-07",
-              "updatedAt": "2026-08-07"
-            },
-            {
-              "type": "file",
-              "id": "grad-web-mini-project",
-              "name": "Mini landing page",
-              "createdAt": "2026-08-07",
-              "updatedAt": "2026-08-07"
-            }
-          ]
-        },
-        {
-          "type": "folder",
-          "id": "grad-03-react",
-          "name": "03 · React",
-          "createdAt": "2026-08-07",
-          "updatedAt": "2026-08-07",
-          "children": [
-            {
-              "type": "file",
-              "id": "grad-react-concepts",
-              "name": "Mental model",
-              "createdAt": "2026-08-07",
-              "updatedAt": "2026-08-07"
-            },
-            {
-              "type": "file",
-              "id": "grad-react-scaffold",
-              "name": "Scaffold the app",
-              "createdAt": "2026-08-07",
-              "updatedAt": "2026-08-07"
-            },
-            {
-              "type": "file",
-              "id": "grad-react-build-ui",
-              "name": "Build the UI",
-              "createdAt": "2026-08-07",
-              "updatedAt": "2026-08-07"
-            },
-            {
-              "type": "file",
-              "id": "grad-react-data",
-              "name": "State & data flow",
-              "createdAt": "2026-08-07",
-              "updatedAt": "2026-08-07"
-            }
-          ]
-        },
-        {
-          "type": "folder",
-          "id": "grad-04-nextjs",
-          "name": "04 · Next.js",
-          "createdAt": "2026-08-07",
-          "updatedAt": "2026-08-07",
-          "children": [
-            {
-              "type": "file",
-              "id": "grad-next-why",
-              "name": "Why Next.js",
-              "createdAt": "2026-08-07",
-              "updatedAt": "2026-08-07"
-            },
-            {
-              "type": "file",
-              "id": "grad-next-app-router",
-              "name": "App Router tour",
-              "createdAt": "2026-08-07",
-              "updatedAt": "2026-08-07"
-            },
-            {
-              "type": "file",
-              "id": "grad-next-api",
-              "name": "API routes & data",
-              "createdAt": "2026-08-07",
-              "updatedAt": "2026-08-07"
-            }
-          ]
-        },
-        {
-          "type": "folder",
-          "id": "grad-05-mongodb",
-          "name": "05 · MongoDB",
-          "createdAt": "2026-08-07",
-          "updatedAt": "2026-08-07",
-          "children": [
-            {
-              "type": "file",
-              "id": "grad-mongo-install",
-              "name": "Install MongoDB",
-              "createdAt": "2026-08-07",
-              "updatedAt": "2026-08-07"
-            },
-            {
-              "type": "file",
-              "id": "grad-mongo-connect",
-              "name": "Connect from Next.js",
-              "createdAt": "2026-08-07",
-              "updatedAt": "2026-08-07"
-            },
-            {
-              "type": "file",
-              "id": "grad-mongo-in-project",
-              "name": "Repo pattern in the project",
-              "createdAt": "2026-08-07",
-              "updatedAt": "2026-08-07"
-            }
-          ]
-        },
-        {
-          "type": "folder",
-          "id": "grad-06-structure",
-          "name": "06 · Codebase structure",
-          "createdAt": "2026-08-07",
-          "updatedAt": "2026-08-07",
-          "children": [
-            {
-              "type": "file",
-              "id": "grad-structure-features",
-              "name": "Feature folders",
-              "createdAt": "2026-08-07",
-              "updatedAt": "2026-08-07"
-            },
-            {
-              "type": "file",
-              "id": "grad-structure-layers",
-              "name": "Components, hooks, utils, actions",
-              "createdAt": "2026-08-07",
-              "updatedAt": "2026-08-07"
-            },
-            {
-              "type": "file",
-              "id": "grad-structure-tour",
-              "name": "Grad repo tour",
-              "createdAt": "2026-08-07",
-              "updatedAt": "2026-08-07"
-            },
-            {
-              "type": "file",
-              "id": "grad-structure-portfolio",
-              "name": "Portfolio feature deep dive",
-              "createdAt": "2026-08-07",
-              "updatedAt": "2026-08-07"
+              "id": "html-css-js",
+              "name": "HTML · CSS · JS",
+              "createdAt": "2026-07-16",
+              "updatedAt": "2026-08-03"
             }
           ]
         }
       ]
+    },
+    {
+      "type": "folder",
+      "id": "product",
+      "name": "product",
+      "createdAt": "2026-08-01",
+      "updatedAt": "2026-08-07",
+      "children": [
+        {
+          "type": "file",
+          "id": "sharing-notes",
+          "name": "How to share a note",
+          "createdAt": "2026-08-01",
+          "updatedAt": "2026-08-07"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "id": "features-guide",
+      "name": "Features guide",
+      "createdAt": "2026-08-07",
+      "updatedAt": "2026-08-07"
     }
   ],
   "notes": {
