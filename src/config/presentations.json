@@ -583,8 +583,8 @@
     {
       "id": "bahri-oop",
       "title": "Bahri Out of Policy",
-      "short": "In-house OOP inside the Approval module — vessel and office, multi-org, sequential approval.",
-      "description": "Presentation for Bahri Out of Policy (OOP): part of the Approval module alongside MOC and PCR. Vessel and office initiation, multiple organization support, sequential approval, close-out follow-up, and the path to a generic approval module and DOC sign.",
+      "short": "New OOP module on the MOC & PCR platform: vessel and office, multi-org, sequential approval.",
+      "description": "Presentation for Bahri Out of Policy (OOP): a new module on the MOC & PCR platform under the Approval module. Generic approval is included and under development. Vessel and office initiation, multi-org support, sequential approval, and operational follow-up.",
       "createdAt": "2026-08-09",
       "updatedAt": "2026-08-09",
       "brandClass": "brand-bahri",
@@ -593,13 +593,14 @@
       "href": "/presentations/bahri-oop",
       "page": {
         "enabled": true,
-        "eyebrow": "Approval module",
+        "eyebrow": "MOC & PCR platform",
         "headline": "Out of",
         "headlineAccent": "Policy",
-        "tagline": "OOP sits inside Bahri's Approval module — the same family as MOC and PCR. In-house control for vessel and shore, multi-organization IDs, sequential approval chains, and operational close-out that Teams policy cannot deliver.",
+        "tagline": "A new module on the MOC & PCR platform. Part of the Approval module. Generic approval is included and under development. Vessel and office, multi-org, sequential approval, full close-out.",
         "heroVisual": "engine",
         "showExplore": false,
         "glyphBackdrop": false,
+        "galleryEnhanced": true,
         "outcomes": [
           {
             "value": "VL/Office",
@@ -620,11 +621,11 @@
         "comparison": {
           "enabled": true,
           "eyebrow": "Compare",
-          "title": "Approval module · OOP vs Teams OOP policy",
+          "title": "OOP vs Teams OOP policy",
           "columns": [
             {
               "id": "approval-oop",
-              "label": "Approval module · OOP",
+              "label": "OOP · MOC & PCR",
               "highlight": true
             },
             {
@@ -892,197 +893,67 @@
                   "value": "Teams only"
                 }
               ]
-            },
-            {
-              "label": "Out-of-organization user access",
-              "cells": [
-                {
-                  "type": "text",
-                  "value": "Scoped to assigned requests"
-                },
-                {
-                  "type": "text",
-                  "value": "Limited to Teams users"
-                }
-              ]
             }
           ]
         },
         "sections": [
           {
-            "id": "overview",
-            "title": "OOP inside the Approval module",
+            "id": "product",
+            "title": "OOP in the platform",
             "icon": "Layers",
-            "body": "Out of Policy is not a standalone tool. It is a **first-class workflow inside Bahri's Approval module** — the same platform family that already carries **MOC** and **PCR**.\n\nThat matters operationally: one identity model, one request language, one audit posture. OOP inherits the approval DNA of management of change and procedure change, then specializes it for controlled deviations from policy.\n\n### Why this belongs with MOC & PCR\n\n- **Shared approval DNA:** levels, ownership, notifications, and close-out patterns stay consistent across change and deviation work\n- **One governance surface:** shore and vessel users learn one module family, not three disconnected tools\n- **Clear ownership:** Bahri-owned, in-house delivery — not an outsourced Teams policy bolted on the side\n\nOOP answers a simple question with enterprise rigor: *when policy must be temporarily exceeded, who authorized it, under what conditions, and what was the operational outcome?*",
-            "bullets": [],
-            "video": null,
-            "images": [],
-            "mermaid": "flowchart TB\n  subgraph Approval[\"Approval module\"]\n    MOC[\"MOC\"]\n    PCR[\"PCR\"]\n    OOP[\"OOP\"]\n  end\n  subgraph Future[\"Roadmap\"]\n    Generic[\"Generic approval\"]\n    DocSign[\"DOC sign\"]\n  end\n  Approval -.->|extends into| Future\n  OOP -.->|vessel + office| Ops[\"Operations\"]\n  OOP -.->|sequential levels| Auth[\"Authorization\"]\n  OOP -.->|close-out| Experience[\"Operational experience\"]",
-            "mermaidTitle": "Approval family",
-            "mermaidCaption": "OOP sits with MOC and PCR today — and opens the path to generic approval and DOC sign",
-            "chart": null
-          },
-          {
-            "id": "vessel-office",
-            "title": "Vessel and office initiation",
-            "icon": "Ship",
-            "body": "Policy deviations do not only start on shore. The Approval OOP workflow supports **initiation from vessel and from office**, so operational reality is captured where it happens.\n\n### What this unlocks\n\n- **Vessel-led requests:** bridge and technical teams raise OOP with vessel context, attachments, and risk assessment already in the record\n- **Office-led requests:** shore teams initiate when the deviation is planned from land or coordinated across the fleet\n- **Shared lifecycle:** wherever it starts, the same sequential approval, tracking, and close-out apply\n\nTeams OOP policy does not support this dual initiation model. That gap forces workarounds — email, parallel chats, or incomplete records when the event begins at sea.",
+            "body": "Out of Policy is a new module on the **MOC & PCR platform**, under the planned **Approval** module.\n\nHighlights: vessel and office initiation, multiple organization support, sequential approval, structured request intake, tracking with reminders and printouts, and operational follow-up after the event.",
             "bullets": [
-              "Mandatory vessel and location fields on every request",
-              "Same approval chain whether raised onboard or ashore",
-              "Operational titles tied to vessel identity in the tracking list"
+              "Vessel and office initiation",
+              "Multiple organization support",
+              "Sequential approval chains",
+              "Follow-up on OOP event"
             ],
             "video": null,
             "images": [
               {
                 "src": "/assets/presentations/bahri-oop/oop-request-form.png",
-                "label": "OOP request · vessel and location"
-              }
-            ],
-            "mermaid": "flowchart LR\n  Vessel[\"Vessel\"] -.-> Create[\"Create OOP\"]\n  Office[\"Office\"] -.-> Create\n  Create --> Chain[\"Sequential approval\"]\n  Chain --> Track[\"Tracking list\"]\n  Track --> Follow[\"Follow-up / close-out\"]",
-            "mermaidTitle": "Dual initiation",
-            "mermaidCaption": "One request model from vessel or office into the same approval spine",
-            "chart": null
-          },
-          {
-            "id": "multi-org",
-            "title": "Multiple organization support",
-            "icon": "Building2",
-            "body": "Bahri operations span organizational boundaries. OOP request IDs and governance are built for **multiple organizations** — visible in serialized prefixes such as organization-scoped OOP numbers in the tracking list.\n\n### Why multi-org matters\n\n- **Clear ownership:** each request carries organization context in its identity, not buried in free text\n- **Filterable scope:** lists, printouts, and follow-ups can be governed by organization without splitting into separate tools\n- **Enterprise readiness:** Teams OOP policy does not support multi-organization structure at this level\n\nThis is foundational for an Approval module that must scale across Bahri entities without losing audit clarity.",
-            "bullets": [
-              "Organization-aware request serialization",
-              "Tracking list visibility across org-scoped IDs",
-              "Aligned with the wider Approval module architecture"
-            ],
-            "video": null,
-            "images": [
-              {
-                "src": "/assets/presentations/bahri-oop/oop-tracking-list.png",
-                "label": "Tracking list · multi-org request IDs"
-              }
-            ],
-            "mermaid": null,
-            "mermaidTitle": null,
-            "mermaidCaption": null,
-            "chart": null
-          },
-          {
-            "id": "sequential",
-            "title": "Sequential approval",
-            "icon": "GitBranch",
-            "body": "OOP approvals are **ordered by design**. Approvers are arranged in levels — reorderable, extendable, and visible on every request — so authorization is a chain, not a flat chat reaction.\n\n### How the chain works\n\n- **Configurable levels:** add, remove, and reorder approvers before initiation\n- **Role-aware assignment:** VP, President, and supporting roles appear in sequence with clear accountability\n- **Progress in the list:** tracking shows who has already approved and who is next\n- **Close-out awareness:** the user handling close-out is notified after follow-up automatically\n\nTeams OOP policy does not support hierarchy / sequential approval. That is one of the clearest capability gaps versus the in-house Approval module.",
-            "bullets": [
-              "Numbered approval levels with up/down reordering",
-              "Initiate OOP only when the chain is defined",
-              "Approver progress visible as checkmarks in the tracking list"
-            ],
-            "video": null,
-            "images": [
+                "label": "Create OOP request"
+              },
               {
                 "src": "/assets/presentations/bahri-oop/oop-sequential-approval.png",
-                "label": "OOP sequential approval · levels"
-              }
-            ],
-            "mermaid": "flowchart TD\n  L1[\"Level 1\"] --> L2[\"Level 2\"]\n  L2 --> L3[\"Level 3\"]\n  L3 --> Ln[\"Level n\"]\n  Ln --> Initiate[\"Initiate OOP\"]\n  Initiate --> Follow[\"Follow-up & close-out notify\"]",
-            "mermaidTitle": "Approval spine",
-            "mermaidCaption": "Ordered levels before initiation — then operational follow-up",
-            "chart": null
-          },
-          {
-            "id": "request",
-            "title": "Request intake and required documents",
-            "icon": "ClipboardList",
-            "body": "Every OOP starts as a structured request: title, vessel, location, event description, and mandatory risk documentation.\n\n### Built for compliance, not free-form chat\n\n- **Rich description:** formatted narrative of the out-of-policy event\n- **Risk assessment:** mandatory upload — not optional context\n- **Required documents:** experience, drawings, and action plan called out at intake\n- **Attachments:** PDF, images, Word, Excel, and more in one evidence pack\n\nTeams policy does not identify required documents or keep uploaded evidence viewable in a proper request log. The Approval OOP form closes that gap at the front door.",
-            "bullets": [
-              "Mandatory title, vessel, and location",
-              "Risk assessment document required",
-              "Supporting attachments guided at creation"
-            ],
-            "video": null,
-            "images": [
-              {
-                "src": "/assets/presentations/bahri-oop/oop-request-form.png",
-                "label": "Create OOP request · risk and attachments"
-              }
-            ],
-            "mermaid": null,
-            "mermaidTitle": null,
-            "mermaidCaption": null,
-            "chart": null
-          },
-          {
-            "id": "tracking",
-            "title": "Tracking, reminders, and printouts",
-            "icon": "BarChart3",
-            "body": "Once live, OOP is managed from a **tracking list** with search, status, experience outcome, timestamps, approver progress, and attachments.\n\n### Governance surfaces\n\n- **Statuses:** Requested, Approved — Follow up, Closed, Declined, Cancelled\n- **Experience tags:** Safely, Potential hazard / red flag, Cancelled\n- **Filters:** request scope, experience, titles, types, and date range\n- **Reminders:** follow-up prompts so approved deviations do not go silent\n- **Printouts:** request printout plus filtered Excel / PDF log export\n\nWhere Teams is basic or limited, the Approval module gives operators a real control room for OOP — not a message thread pretending to be a register.",
-            "bullets": [
-              "Searchable multi-filter tracking list",
-              "Reminder follow-up on open commitments",
-              "Printout request and filtered Excel + PDF log"
-            ],
-            "video": null,
-            "images": [
+                "label": "Sequential approval"
+              },
               {
                 "src": "/assets/presentations/bahri-oop/oop-tracking-list.png",
-                "label": "OOP tracking list · status and approvers"
+                "label": "Tracking list"
+              },
+              {
+                "src": "/assets/presentations/bahri-oop/oop-follow-up.png",
+                "label": "Follow-up on OOP event"
               }
             ],
-            "mermaid": null,
-            "mermaidTitle": null,
-            "mermaidCaption": null,
+            "mermaid": "flowchart LR\n  Create[\"Create OOP\"] --> Approve[\"Sequential approve\"]\n  Approve --> Track[\"Track\"]\n  Track --> Follow[\"Follow-up\"]\n  Follow --> Closed[\"Closed\"]",
+            "mermaidTitle": "OOP control loop",
+            "mermaidCaption": "Create, approve, track, follow-up, closed",
             "chart": null
           },
           {
-            "id": "follow-up",
-            "title": "Follow-up on OOP event",
-            "icon": "Shield",
-            "body": "Approval is not the end of the story. **Follow-up on the OOP event** records the operational experience outcome — marked crucial in the capability gap analysis because Teams does not support it.\n\n### Close the loop\n\n- **Cancelled:** the event did not materialise after approval\n- **Safely:** completed without concerns, with required justification\n- **Potential hazard / red flag:** hazard observed, captured for learning and escalation\n- **Optional attachments:** photos, reports, or supporting documents on the follow-up itself\n\nThis turns OOP from a permission slip into an **operational learning record** — the same seriousness MOC and PCR expect after change is executed.",
+            "id": "included-in-development",
+            "title": "Included in development",
+            "icon": "CalendarCheck",
+            "body": "**Generic approval** is included in the current development scope and is under development now on the MOC & PCR platform.\n\n**DOC sign** is planned as a future capability on the same Approval module spine.\n\nBoth build on the OOP approval flow: levels, tracking, notifications, and close-out.",
             "bullets": [
-              "Experience outcome required on follow-up",
-              "Justification captured against the selected outcome",
-              "Close-out handler notified after follow-up"
+              "Generic approval: included, currently under development",
+              "DOC sign: future plans",
+              "Shared Approval module spine with OOP"
             ],
             "video": null,
             "images": [
               {
-                "src": "/assets/presentations/bahri-oop/oop-follow-up.png",
-                "label": "Follow up on OOP event · experience outcome"
+                "src": "/assets/uploads/presentations/bahri-oop/Screenshot-2026-08-10-013849-msmbs0mv.png",
+                "label": "Approval module plan"
               }
             ],
-            "mermaid": "flowchart LR\n  Approved[\"Approved\"] --> Execute[\"Event executed\"]\n  Execute --> Outcome{Experience}\n  Outcome --> Safe[\"Safely\"]\n  Outcome --> Hazard[\"Potential hazard\"]\n  Outcome --> Cancel[\"Cancelled\"]\n  Safe --> Closed[\"Closed\"]\n  Hazard --> Closed\n  Cancel --> Closed",
-            "mermaidTitle": "Operational close-out",
-            "mermaidCaption": "From approval to recorded experience — then closed",
-            "chart": null
-          },
-          {
-            "id": "platform",
-            "title": "What Teams cannot carry",
-            "icon": "ArrowLeftRight",
-            "body": "Teams OOP policy covers a thin slice: tracking list, reminders, and basic printout. The Approval module OOP is built for the full control loop.\n\n### Gaps closed by the in-house module\n\n- No multi-org model\n- No sequential / hierarchy approval\n- No vessel and office initiation\n- No cloning, close-out, or transition chatroom\n- No required-document identification or document viewing in log\n- No proper audit log\n- No follow-up on OOP event\n- Limited filtering and printout log options\n- Out-of-organization access constrained to Teams users\n\nKeeping OOP inside the **Approval module** means Bahri owns the workflow, the data, and the roadmap — alongside MOC and PCR — instead of stretching a collaboration tool into a compliance system.",
-            "bullets": [],
-            "video": null,
-            "images": [],
-            "mermaid": "flowchart TB\n  Teams[\"Teams OOP policy\"] -.->|basic| Track[\"Tracking + reminders\"]\n  Approval[\"Approval module OOP\"] --> Full[\"Full control loop\"]\n  Full --> Init[\"Vessel + office\"]\n  Full --> Orgs[\"Multi-org\"]\n  Full --> Seq[\"Sequential approval\"]\n  Full --> Close[\"Follow-up close-out\"]",
-            "mermaidTitle": "Capability contrast",
-            "mermaidCaption": "Teams covers the thin slice. Approval module owns the loop.",
-            "chart": null
-          },
-          {
-            "id": "roadmap",
-            "title": "Roadmap · generic approval and DOC sign",
-            "icon": "CalendarCheck",
-            "body": "OOP is the next proof point that the Approval module is a **platform**, not a one-off form.\n\n### Near-term direction\n\n- **Generic approval module:** reuse the sequential chain, tracking, notifications, and close-out patterns beyond OOP / MOC / PCR — so new approval types inherit the same spine\n- **DOC sign:** extend the approval and evidence model toward controlled document signing, keeping identity, audit, and attachment discipline intact\n\n### Strategic read\n\nEvery OOP request that runs through vessel/office initiation, multi-org identity, and sequential levels strengthens the case for a Bahri-owned approval fabric. The product already in MOC and PCR grows into a broader authorization layer — with OOP as a live, operational demonstration.",
-            "bullets": [
-              "OOP proves Approval module patterns in production use",
-              "Generic approval reuses the same chain and close-out DNA",
-              "DOC sign planned as the next controlled-evidence capability"
-            ],
-            "video": null,
-            "images": [],
-            "mermaid": "flowchart LR\n  MOC[\"MOC\"] --> Core[\"Approval core\"]\n  PCR[\"PCR\"] --> Core\n  OOP[\"OOP\"] --> Core\n  Core --> Generic[\"Generic approval\"]\n  Core --> DocSign[\"DOC sign\"]",
-            "mermaidTitle": "Platform trajectory",
-            "mermaidCaption": "MOC · PCR · OOP today — generic approval and DOC sign next",
-            "chart": null
+            "mermaid": "flowchart LR\n  OOP[\"OOP live\"] --> Approval[\"Approval module\"]\n  Generic[\"Generic approval\"] -.->|under development| Approval\n  DocSign[\"DOC sign\"] -.->|future plans| Approval",
+            "mermaidTitle": "Development scope",
+            "mermaidCaption": "Generic approval in development. DOC sign on the future roadmap.",
+            "chart": null,
+            "charts": null
           }
         ]
       }

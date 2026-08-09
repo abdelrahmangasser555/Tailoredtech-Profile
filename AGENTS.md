@@ -26,12 +26,15 @@ Brand-first maritime software marketing site (Next.js App Router). Content is JS
 **Prefer:** full-bleed dark heroes, GlyphMatrix atmosphere, lime accent on dark, pixel headlines, no purple/glow/pill clutter.  
 **Avoid:** Inter/Roboto defaults, rounded-full pills, generic purple gradients, inset hero cards, lime on light.
 
+**Copy voice:** Never use em dashes (`—`) or double hyphens (`--`) as punctuation in user-facing copy (site, presentations, PDF printouts, notes). Prefer commas, periods, colons, or short sentences. Em dashes read as AI-generated.
+
 ## Content & config
 
 | File | Role |
 |------|------|
 | `src/config/services.json` | Solutions list + each detail `page` |
 | `src/config/presentations.json` | Client presentations (direct URL; no nav/footer/CTAs) |
+| `src/config/finance.json` | Finance brands, proposal formats, proposals, invoices |
 | `src/config/notes.json` | Nested notes tree + note documents (direct URL; noindex) |
 | `src/config/hero.json` | Home hero morph, globe, glyphs |
 | `src/config/company.json` | Name, contact, stats, SEO |
@@ -82,9 +85,24 @@ Icons for the layer nav are mapped in `src/components/sections/section-layer-nav
 | `/services/[slug]` | `src/app/services/[slug]/page.tsx` — solution detail |
 | `/presentations` | `src/app/presentations/page.tsx` — direct-URL list (noindex, no nav/footer) |
 | `/presentations/[slug]` | `src/app/presentations/[slug]/page.tsx` — presentation detail |
+| `/finance` | Password-gated finance hub (proposals + invoices); noindex |
+| `/finance/proposals` · `/finance/proposals/[id]` | Proposal list + editor; PDF via `finance-pdf` |
+| `/finance/invoices` · `/finance/invoices/[id]` | Invoice list + editor; proforma PDF (EN/AR) |
 | `/notes` · `/notes/[[...path]]` | Nested folder browser + note reader (noindex, bare chrome) |
 
-Sitemap includes all enabled solution slugs (`src/app/sitemap.ts`). Presentations and **notes** are **not** in the sitemap / robots (direct URL only).
+Sitemap includes all enabled solution slugs (`src/app/sitemap.ts`). Presentations, **notes**, and **finance** are **not** in the sitemap / robots (direct URL only). Finance is PIN-gated (`FINANCE_PASSWORD_HASH` + session cookie).
+
+### Finance (`src/config/finance.json`)
+
+Internal proposals / invoices. Bare chrome, `noindex`, PIN unlock via `/api/finance/auth`.
+
+| Piece | Notes |
+|--------|--------|
+| Brands | `tailoredtech`, `bahri`, `marafei` — logo + color tokens |
+| Formats | `formal-breakdown`, `formal-features`, `formal-compact` |
+| Proposals | Markdown, features, multi-solution pricing, discounts, comparison, footer, page numbers |
+| PDF | One A4 page per proposal; multi-select stacks pages in one file (`finance-pdf`) |
+| Invoices | Proforma format `proforma-bilingual` (EN/AR or EN); white printout; VAT, discount, currency, custom money lines |
 
 ### Notes (`src/config/notes.json`)
 

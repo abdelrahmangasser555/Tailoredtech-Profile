@@ -15,6 +15,8 @@ export default function robots(): MetadataRoute.Robots {
         "/services/edit/",
         "/notes/",
         "/notes",
+        "/finance/",
+        "/finance",
       ],
     },
     sitemap: `${SITE_URL}/sitemap.xml`,

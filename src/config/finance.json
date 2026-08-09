@@ -1,0 +1,346 @@
+{
+  "brands": [
+    {
+      "id": "tailoredtech",
+      "name": "TailoredTech",
+      "logo": "/logo.svg",
+      "brandClass": "",
+      "colors": {
+        "primary": "#0A0A0A",
+        "accent": "#0A0A0A",
+        "muted": "#525252",
+        "border": "rgba(10,10,10,0.12)",
+        "soft": "#F4F4F1",
+        "ink": "#0A0A0A",
+        "paper": "#FFFFFF"
+      }
+    },
+    {
+      "id": "bahri",
+      "name": "Bahri",
+      "logo": "/clients/bahri-no-background.png",
+      "brandClass": "brand-bahri",
+      "colors": {
+        "primary": "#003C71",
+        "accent": "#E07040",
+        "muted": "#5C6B7A",
+        "border": "rgba(0,60,113,0.14)",
+        "soft": "#F4F6F9",
+        "ink": "#003C71",
+        "paper": "#FFFFFF"
+      }
+    },
+    {
+      "id": "marafei",
+      "name": "Marafei",
+      "logo": "/assets/uploads/finance/brand-marafei/logo-msma2gww.jpg",
+      "brandClass": "brand-marafei",
+      "colors": {
+        "primary": "#1A3A3A",
+        "accent": "#2F6F6F",
+        "muted": "#5A6E6E",
+        "border": "rgba(26,58,58,0.14)",
+        "soft": "#F3F6F6",
+        "ink": "#1A3A3A",
+        "paper": "#FFFFFF"
+      }
+    }
+  ],
+  "formats": [
+    {
+      "id": "formal-breakdown",
+      "label": "Formal breakdown",
+      "description": "Direct pricing table with line items, discounts, and totals."
+    },
+    {
+      "id": "formal-features",
+      "label": "Formal features",
+      "description": "Feature list first, then clear price summary."
+    },
+    {
+      "id": "formal-compact",
+      "label": "Formal compact",
+      "description": "Minimal one-page sheet: title, solutions, prices only."
+    }
+  ],
+  "invoiceFormats": [
+    {
+      "id": "proforma-bilingual",
+      "label": "Proforma (EN / AR)",
+      "description": "White bilingual proforma matching the Marafei printout layout. English-only mode available."
+    }
+  ],
+  "proposals": [
+    {
+      "id": "bbs-subscription",
+      "title": "BBS Platform Proposal",
+      "subtitle": "Subscription model",
+      "clientName": "Bahri",
+      "brandId": "marafei",
+      "format": "formal-breakdown",
+      "currency": "USD",
+      "icon": null,
+      "markdown": "### Scope\n\nReplacement for the current BBS system with **unlimited seats**, Bahri-specific workflows, and a path to future MIPS2 integration.\n\n- Data migration included\n- Bahri SSO integration\n- Hosted as agreed with IT",
+      "features": [
+        {
+          "id": "f1",
+          "title": "Unlimited seats",
+          "description": "Supports all trained observers without seat caps."
+        },
+        {
+          "id": "f2",
+          "title": "Bahri workflows",
+          "description": "Built around Bahri operational requirements, not a generic BBS product."
+        },
+        {
+          "id": "f3",
+          "title": "MIPS2 pathway",
+          "description": "Compatible with the MIPS2 and Azure stack for future integration."
+        }
+      ],
+      "solutions": [
+        {
+          "id": "sol-bbs",
+          "name": "BBS Platform",
+          "description": "Annual subscription with migration and unlimited seats.",
+          "lineItems": [
+            {
+              "id": "li-1",
+              "label": "BBS annual subscription",
+              "amount": 14000,
+              "quantity": 1
+            },
+            {
+              "id": "li-2",
+              "label": "Data migration",
+              "amount": 0,
+              "quantity": 1,
+              "note": "Included"
+            }
+          ],
+          "prices": [
+            {
+              "id": "p-annual",
+              "label": "Annual subscription",
+              "amount": 14000
+            }
+          ],
+          "discounts": [
+            {
+              "id": "d-mips",
+              "label": "First-year credit toward MIPS2 (if proceeding)",
+              "amount": 14000
+            }
+          ]
+        }
+      ],
+      "comparison": {
+        "enabled": true,
+        "eyebrow": "Options",
+        "title": "Commercial models",
+        "columns": [
+          {
+            "id": "sub",
+            "label": "Subscription",
+            "highlight": true
+          },
+          {
+            "id": "once",
+            "label": "One-time"
+          }
+        ],
+        "rows": [
+          {
+            "label": "BBS fee",
+            "cells": [
+              {
+                "type": "text",
+                "value": "$14,000 / year"
+              },
+              {
+                "type": "text",
+                "value": "$35,000 once"
+              }
+            ]
+          },
+          {
+            "label": "Unlimited seats",
+            "cells": [
+              {
+                "type": "check",
+                "value": true
+              },
+              {
+                "type": "check",
+                "value": true
+              }
+            ]
+          },
+          {
+            "label": "Hosted on Bahri infra",
+            "cells": [
+              {
+                "type": "text",
+                "value": "As agreed"
+              },
+              {
+                "type": "check",
+                "value": true
+              }
+            ]
+          }
+        ]
+      },
+      "display": {
+        "showFeatures": true,
+        "showBreakdown": true,
+        "showComparison": true,
+        "showMarkdown": true,
+        "showPrices": true,
+        "showPageNumbers": true,
+        "featuresStyle": "list",
+        "footer": {
+          "enabled": true,
+          "text": "Marafei · TailoredTech · Confidential commercial proposal"
+        }
+      },
+      "createdAt": "2026-08-01T10:00:00.000Z",
+      "updatedAt": "2026-08-09T10:00:00.000Z",
+      "enabled": true
+    },
+    {
+      "id": "bbs-onetime",
+      "title": "BBS Platform Proposal",
+      "subtitle": "One-time implementation",
+      "clientName": "Bahri",
+      "brandId": "bahri",
+      "format": "formal-features",
+      "currency": "USD",
+      "icon": null,
+      "markdown": "### Offer\n\nOne-time BBS implementation hosted on **Bahri infrastructure**, including migration, SSO, and unlimited seats.",
+      "features": [
+        {
+          "id": "f1",
+          "title": "One-time fee",
+          "description": "$35,000 implementation. No annual BBS subscription."
+        },
+        {
+          "id": "f2",
+          "title": "Bahri hosting",
+          "description": "Deployed on Bahri infrastructure under Bahri branding."
+        },
+        {
+          "id": "f3",
+          "title": "MIPS2 discount",
+          "description": "$25,000 credit toward a future MIPS2 track if it proceeds."
+        }
+      ],
+      "solutions": [
+        {
+          "id": "sol-bbs",
+          "name": "BBS Implementation",
+          "description": "One-time delivery on Bahri infrastructure.",
+          "lineItems": [
+            {
+              "id": "li-1",
+              "label": "BBS implementation",
+              "amount": 35000,
+              "quantity": 1
+            }
+          ],
+          "prices": [
+            {
+              "id": "p-once",
+              "label": "One-time implementation",
+              "amount": 35000
+            }
+          ],
+          "discounts": [
+            {
+              "id": "d-mips",
+              "label": "MIPS2 credit (if proceeding)",
+              "amount": 25000
+            }
+          ]
+        }
+      ],
+      "comparison": {
+        "enabled": false,
+        "eyebrow": "Comparison",
+        "title": "Options",
+        "columns": [],
+        "rows": []
+      },
+      "display": {
+        "showFeatures": true,
+        "showBreakdown": false,
+        "showComparison": false,
+        "showMarkdown": true,
+        "showPrices": true,
+        "showPageNumbers": false,
+        "featuresStyle": "list",
+        "footer": {
+          "enabled": true,
+          "text": "Prepared for Bahri · Confidential"
+        }
+      },
+      "createdAt": "2026-08-02T10:00:00.000Z",
+      "updatedAt": "2026-08-09T10:00:00.000Z",
+      "enabled": true
+    }
+  ],
+  "invoices": [
+    {
+      "id": "quo-000100",
+      "format": "proforma-bilingual",
+      "language": "bilingual",
+      "status": "draft",
+      "titleEn": "Proforma Invoice",
+      "titleAr": "فاتورة مبدئية",
+      "number": "QUO-000100",
+      "date": "2026-01-21",
+      "currency": "SAR",
+      "currencySymbol": "SAR",
+      "vatPercent": 0,
+      "issuer": {
+        "nameEn": "Marafe Almarefa Est For Information",
+        "nameAr": "مؤسسة مرافق المعرفة للاتصالات وتقنية المعلومات",
+        "addressEn": "Riyadh, Kingdom of Saudi Arabia",
+        "addressAr": "الرياض، المملكة العربية السعودية",
+        "vatNumber": "311953722000003",
+        "commercialNumber": "7003792888",
+        "logo": "/assets/uploads/finance/brand-marafei/logo-msma2gww.jpg"
+      },
+      "customer": {
+        "name": "The National Shipping Company of Saudi Arabia",
+        "address": "OneJLT-09-1A, One JLT Building, DMCC-EZ1-1A8, Jumeirah Lakes Towers, Dubai, 6653, UAE\nالإمارات العربية المتحدة",
+        "otherId": "TRN: 100575192800003\nC/O Bahri Ship Management DMCC"
+      },
+      "lineItems": [
+        {
+          "id": "line-1",
+          "description": "MOC&PCR platform\n- Phase 1 - Delivery of Current Software as is\n- Phase 2 - Update of Application as Per Bahri Comments\n- Phase 3 - Update of Application as Per Bahri Comments\n- Phase 4 - Update of Application as Per Bahri Comments",
+          "quantity": 1,
+          "unitPrice": 60000,
+          "vatPercent": 0,
+          "note": "Invoice in Saudi Riyal SAR"
+        }
+      ],
+      "discounts": [],
+      "display": {
+        "showSubtotal": true,
+        "showVat": true,
+        "showDiscount": false,
+        "showTotal": true,
+        "showPageNumbers": true,
+        "showInvoiceNumber": true,
+        "showDate": true,
+        "customMoneyLines": []
+      },
+      "createdAt": "2026-01-21T10:00:00.000Z",
+      "updatedAt": "2026-01-21T10:00:00.000Z",
+      "enabled": true
+    }
+  ]
+}
+

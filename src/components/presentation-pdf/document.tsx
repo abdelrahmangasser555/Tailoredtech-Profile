@@ -7,6 +7,7 @@ import {
   StyleSheet,
   Svg,
   Rect,
+  Line,
 } from "@react-pdf/renderer"
 import type { PreparedPresentationPdf } from "@/lib/presentation-pdf/prepare-assets"
 import { PdfMarkdownBody } from "@/lib/presentation-pdf/markdown"
@@ -70,8 +71,25 @@ function PdfPageFooter({
   )
 }
 
+function DashedRule({ color, width = 515 }: { color: string; width?: number }) {
+  return (
+    <Svg width={width} height={3} style={{ marginTop: 20, marginBottom: 20 }}>
+      <Line
+        x1={0}
+        y1={1.5}
+        x2={width}
+        y2={1.5}
+        stroke={color}
+        strokeWidth={1.25}
+        strokeDasharray="5 4"
+        strokeLinecap="round"
+      />
+    </Svg>
+  )
+}
+
 function CheckMark({ color }: { color: string }) {
-  // Drawn shapes — Unicode ✓ is missing from embedded TTF glyphs
+  // Drawn shapes: Unicode check is missing from embedded TTF glyphs
   const cells: Array<[number, number]> = [
     [4, 9],
     [6, 11],
@@ -80,7 +98,7 @@ function CheckMark({ color }: { color: string }) {
     [12, 5],
   ]
   return (
-    <Svg width={14} height={14} viewBox="0 0 18 18">
+    <Svg width={12} height={12} viewBox="0 0 18 18">
       <Rect
         x={1}
         y={1}
@@ -110,7 +128,7 @@ function XMark({ color }: { color: string }) {
     [4, 12],
   ]
   return (
-    <Svg width={14} height={14} viewBox="0 0 18 18">
+    <Svg width={12} height={12} viewBox="0 0 18 18">
       <Rect
         x={1}
         y={1}
@@ -143,7 +161,7 @@ function ComparisonCellPdf({
       <Text
         style={{
           fontFamily: "GeistPixel",
-          fontSize: 10,
+          fontSize: 8,
           color: ink,
         }}
       >
@@ -152,7 +170,7 @@ function ComparisonCellPdf({
     )
   }
   return (
-    <Text style={{ fontFamily: "GeistSans", fontSize: 8.5, color: muted, textAlign: "center" }}>
+    <Text style={{ fontFamily: "GeistSans", fontSize: 7, color: muted, textAlign: "center" }}>
       {String(cell.value)}
     </Text>
   )
@@ -236,20 +254,8 @@ export function PresentationPdfDocument({ data }: { data: PreparedPresentationPd
                 style={{
                   fontFamily: "GeistMono",
                   fontSize: 7,
-                  letterSpacing: 1.6,
-                  textTransform: "uppercase",
-                  color: brand.muted,
-                }}
-              >
-                Presentation printout
-              </Text>
-              <Text
-                style={{
-                  fontFamily: "GeistMono",
-                  fontSize: 7,
                   letterSpacing: 1.2,
                   color: brand.muted,
-                  marginTop: 4,
                 }}
               >
                 {generatedAt}
@@ -257,7 +263,7 @@ export function PresentationPdfDocument({ data }: { data: PreparedPresentationPd
             </View>
           </View>
 
-          <View style={{ marginTop: 72 }}>
+          <View style={{ marginTop: 64 }}>
             {page.eyebrow ? (
               <Text
                 style={{
@@ -266,7 +272,7 @@ export function PresentationPdfDocument({ data }: { data: PreparedPresentationPd
                   letterSpacing: 2.2,
                   textTransform: "uppercase",
                   color: brand.accent,
-                  marginBottom: 14,
+                  marginBottom: 16,
                 }}
               >
                 {page.eyebrow}
@@ -276,10 +282,10 @@ export function PresentationPdfDocument({ data }: { data: PreparedPresentationPd
             <Text
               style={{
                 fontFamily: "GeistPixel",
-                fontSize: 36,
-                lineHeight: 1.08,
+                fontSize: 52,
+                lineHeight: 1.02,
                 color: brand.ink,
-                maxWidth: 420,
+                maxWidth: 480,
               }}
             >
               {page.headline}
@@ -287,25 +293,17 @@ export function PresentationPdfDocument({ data }: { data: PreparedPresentationPd
             <Text
               style={{
                 fontFamily: "GeistPixel",
-                fontSize: 36,
-                lineHeight: 1.08,
+                fontSize: 52,
+                lineHeight: 1.02,
                 color: brand.accent,
-                marginTop: 4,
-                maxWidth: 420,
+                marginTop: 2,
+                maxWidth: 480,
               }}
             >
               {page.headlineAccent}
             </Text>
 
-            <View
-              style={{
-                width: 48,
-                height: 3,
-                backgroundColor: brand.accent,
-                marginTop: 22,
-                marginBottom: 22,
-              }}
-            />
+            <DashedRule color={brand.accent} width={515} />
 
             <Text
               style={{
@@ -313,7 +311,7 @@ export function PresentationPdfDocument({ data }: { data: PreparedPresentationPd
                 fontSize: 11,
                 lineHeight: 1.6,
                 color: brand.muted,
-                maxWidth: 380,
+                maxWidth: 400,
               }}
             >
               {page.tagline}
@@ -399,24 +397,33 @@ export function PresentationPdfDocument({ data }: { data: PreparedPresentationPd
                 color: brand.muted,
               }}
             >
-              Confidential · TailoredTech
+              TailoredTech
             </Text>
           </View>
         </View>
       </Page>
       ) : null}
 
-      {/* ── Comparison ──────────────────────────────────────────────────── */}
+      {/* ── Comparison (forced single page, compact) ───────────────────── */}
       {showComparison && comparison ? (
-        <Page size="A4" style={styles.page} wrap>
+        <Page
+          size="A4"
+          style={{
+            ...styles.page,
+            paddingTop: 28,
+            paddingBottom: 40,
+            paddingHorizontal: 28,
+          }}
+          wrap={false}
+        >
           <Text
             style={{
               fontFamily: "GeistMono",
-              fontSize: 8,
+              fontSize: 7,
               letterSpacing: 2,
               textTransform: "uppercase",
               color: brand.muted,
-              marginBottom: 8,
+              marginBottom: 4,
             }}
           >
             {comparison.eyebrow || "Compare"}
@@ -424,10 +431,10 @@ export function PresentationPdfDocument({ data }: { data: PreparedPresentationPd
           <Text
             style={{
               fontFamily: "GeistPixel",
-              fontSize: 22,
+              fontSize: 16,
               color: brand.ink,
-              marginBottom: 22,
-              maxWidth: 420,
+              marginBottom: 12,
+              maxWidth: 460,
             }}
           >
             {comparison.title}
@@ -439,6 +446,7 @@ export function PresentationPdfDocument({ data }: { data: PreparedPresentationPd
               borderColor: brand.border,
               backgroundColor: "#FFFFFF",
             }}
+            wrap={false}
           >
             <View
               style={{
@@ -450,10 +458,10 @@ export function PresentationPdfDocument({ data }: { data: PreparedPresentationPd
             >
               <View
                 style={{
-                  width: "34%",
+                  width: "36%",
                   backgroundColor: brand.headerBg,
-                  paddingVertical: 10,
-                  paddingHorizontal: 10,
+                  paddingVertical: 6,
+                  paddingHorizontal: 7,
                   borderRightWidth: 1,
                   borderRightColor: brand.border,
                 }}
@@ -461,8 +469,8 @@ export function PresentationPdfDocument({ data }: { data: PreparedPresentationPd
                 <Text
                   style={{
                     fontFamily: "GeistMono",
-                    fontSize: 7,
-                    letterSpacing: 1.4,
+                    fontSize: 6,
+                    letterSpacing: 1.2,
                     textTransform: "uppercase",
                     color: brand.muted,
                   }}
@@ -474,12 +482,12 @@ export function PresentationPdfDocument({ data }: { data: PreparedPresentationPd
                 <View
                   key={col.id}
                   style={{
-                    width: `${66 / comparison.columns.length}%`,
+                    width: `${64 / comparison.columns.length}%`,
                     backgroundColor: col.highlight
                       ? brand.headerHighlightBg
                       : brand.headerBg,
-                    paddingVertical: 10,
-                    paddingHorizontal: 8,
+                    paddingVertical: 6,
+                    paddingHorizontal: 6,
                     borderLeftWidth: 1,
                     borderLeftColor: brand.border,
                     justifyContent: "center",
@@ -488,7 +496,7 @@ export function PresentationPdfDocument({ data }: { data: PreparedPresentationPd
                   <Text
                     style={{
                       fontFamily: "GeistPixel",
-                      fontSize: 9,
+                      fontSize: 8,
                       color: col.highlight ? brand.ink : brand.muted,
                     }}
                   >
@@ -503,17 +511,18 @@ export function PresentationPdfDocument({ data }: { data: PreparedPresentationPd
                 key={row.label}
                 style={{
                   flexDirection: "row",
-                  borderBottomWidth: rowIndex === comparison.rows.length - 1 ? 0 : 1,
+                  borderBottomWidth:
+                    rowIndex === comparison.rows.length - 1 ? 0 : 1,
                   borderBottomColor: "rgba(10,10,10,0.08)",
-                  minHeight: 28,
+                  minHeight: 20,
                 }}
                 wrap={false}
               >
                 <View
                   style={{
-                    width: "34%",
-                    paddingVertical: 8,
-                    paddingHorizontal: 10,
+                    width: "36%",
+                    paddingVertical: 4,
+                    paddingHorizontal: 7,
                     borderRightWidth: 1,
                     borderRightColor: "rgba(10,10,10,0.08)",
                     justifyContent: "center",
@@ -523,10 +532,10 @@ export function PresentationPdfDocument({ data }: { data: PreparedPresentationPd
                   <Text
                     style={{
                       fontFamily: "GeistSans",
-                      fontSize: 8.5,
+                      fontSize: 7,
                       fontWeight: 500,
                       color: brand.ink,
-                      opacity: 0.85,
+                      opacity: 0.88,
                     }}
                   >
                     {row.label}
@@ -538,9 +547,9 @@ export function PresentationPdfDocument({ data }: { data: PreparedPresentationPd
                     <View
                       key={`${row.label}-${ci}`}
                       style={{
-                        width: `${66 / comparison.columns.length}%`,
-                        paddingVertical: 8,
-                        paddingHorizontal: 6,
+                        width: `${64 / comparison.columns.length}%`,
+                        paddingVertical: 4,
+                        paddingHorizontal: 4,
                         borderLeftWidth: 1,
                         borderLeftColor: "rgba(10,10,10,0.08)",
                         alignItems: "center",
@@ -548,7 +557,11 @@ export function PresentationPdfDocument({ data }: { data: PreparedPresentationPd
                         backgroundColor: col?.highlight ? brand.soft : "#FFFFFF",
                       }}
                     >
-                      <ComparisonCellPdf cell={cell} ink={brand.ink} muted={brand.muted} />
+                      <ComparisonCellPdf
+                        cell={cell}
+                        ink={brand.ink}
+                        muted={brand.muted}
+                      />
                     </View>
                   )
                 })}

@@ -170,15 +170,18 @@ function parseSvgSize(svg: string): { width: number; height: number } {
   }
 }
 
+/**
+ * Rasterize Mermaid SVG for PDF.
+ * Keep <style> (fills/strokes). Prefer native SVG text labels (htmlLabels: false)
+ * so canvas can paint text. Stripping styles caused solid black node blobs.
+ */
 async function svgStringToPngDataUrl(svg: string, scale = 2): Promise<string> {
   let cleaned = svg.includes("xmlns=")
     ? svg
     : svg.replace("<svg", '<svg xmlns="http://www.w3.org/2000/svg"')
 
-  // Strip foreignObject / HTML labels — canvas cannot paint them
-  cleaned = cleaned
-    .replace(/<foreignObject[\s\S]*?<\/foreignObject>/gi, "")
-    .replace(/<style[\s\S]*?<\/style>/gi, "")
+  // foreignObject HTML labels cannot paint to canvas; drop those only
+  cleaned = cleaned.replace(/<foreignObject[\s\S]*?<\/foreignObject>/gi, "")
 
   const { width: vbW, height: vbH } = parseSvgSize(cleaned)
   if (!/viewBox=/i.test(cleaned)) {
@@ -188,24 +191,48 @@ async function svgStringToPngDataUrl(svg: string, scale = 2): Promise<string> {
     )
   }
 
-  const blob = new Blob([cleaned], { type: "image/svg+xml;charset=utf-8" })
-  const url = URL.createObjectURL(blob)
+  // Mount in DOM so computed styles and layout resolve before capture
+  const host = document.createElement("div")
+  host.setAttribute("data-pdf-mermaid-host", "true")
+  host.style.cssText =
+    "position:fixed;left:-12000px;top:0;z-index:-1;background:#ffffff;padding:16px;display:inline-block;"
+  host.innerHTML = cleaned
+  document.body.appendChild(host)
 
   try {
-    const img = await loadHtmlImage(url)
-    const width = Math.max(img.naturalWidth || vbW, 320)
-    const height = Math.max(img.naturalHeight || vbH, 180)
-    const canvas = document.createElement("canvas")
-    canvas.width = Math.round(width * scale)
-    canvas.height = Math.round(height * scale)
-    const ctx = canvas.getContext("2d")
-    if (!ctx) throw new Error("Canvas unavailable")
-    ctx.fillStyle = "#FFFFFF"
-    ctx.fillRect(0, 0, canvas.width, canvas.height)
-    ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
-    return canvas.toDataURL("image/png")
+    await new Promise<void>((resolve) => {
+      requestAnimationFrame(() => requestAnimationFrame(() => resolve()))
+    })
+
+    const svgEl = host.querySelector("svg")
+    if (!svgEl) throw new Error("Mermaid SVG missing after mount")
+
+    const bbox = svgEl.getBoundingClientRect()
+    const width = Math.max(bbox.width || vbW, 320)
+    const height = Math.max(bbox.height || vbH, 180)
+
+    const serialized = new XMLSerializer().serializeToString(svgEl)
+    const blob = new Blob([serialized], {
+      type: "image/svg+xml;charset=utf-8",
+    })
+    const url = URL.createObjectURL(blob)
+
+    try {
+      const img = await loadHtmlImage(url)
+      const canvas = document.createElement("canvas")
+      canvas.width = Math.round(width * scale)
+      canvas.height = Math.round(height * scale)
+      const ctx = canvas.getContext("2d")
+      if (!ctx) throw new Error("Canvas unavailable")
+      ctx.fillStyle = "#FFFFFF"
+      ctx.fillRect(0, 0, canvas.width, canvas.height)
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
+      return canvas.toDataURL("image/png")
+    } finally {
+      URL.revokeObjectURL(url)
+    }
   } finally {
-    URL.revokeObjectURL(url)
+    host.remove()
   }
 }
 
@@ -218,10 +245,9 @@ async function renderMermaidToPng(
       const mermaid = (await import("mermaid")).default
       const renderId = `pdf-mmd-${uid}`.replace(/[^a-zA-Z0-9-_]/g, "-")
       const { svg } = await mermaid.render(renderId, chart.trim())
-      // Clean temp nodes mermaid may leave on body
       document.getElementById(renderId)?.remove()
       document.getElementById(`d${renderId}`)?.remove()
-      return await svgStringToPngDataUrl(svg)
+      return await svgStringToPngDataUrl(svg, 2.25)
     } catch (err) {
       console.warn("Mermaid PDF render failed", uid, err)
       return null
@@ -261,9 +287,9 @@ export async function preparePresentationPdfAssets(
         htmlLabels: false,
         curve: "basis",
         useMaxWidth: true,
-        padding: 12,
-        nodeSpacing: 28,
-        rankSpacing: 32,
+        padding: 14,
+        nodeSpacing: 30,
+        rankSpacing: 36,
       },
       sequence: {
         useMaxWidth: true,

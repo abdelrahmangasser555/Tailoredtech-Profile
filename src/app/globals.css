@@ -262,6 +262,38 @@
   --chart-5: #001f3d;
 }
 
+/* Marafei — formal teal for finance / presentations */
+.brand-marafei {
+  --accent: #2f6f6f;
+  --accent-foreground: #ffffff;
+  --accent-soft: #245959;
+  --ring: #2f6f6f;
+
+  --background: #f3f6f6;
+  --foreground: #1a3a3a;
+  --card: #ffffff;
+  --card-foreground: #1a3a3a;
+  --popover: #ffffff;
+  --popover-foreground: #1a3a3a;
+  --primary: #1a3a3a;
+  --primary-foreground: #ffffff;
+  --secondary: #e6eeee;
+  --secondary-foreground: #1a3a3a;
+  --muted: #e6eeee;
+  --muted-foreground: #5a6e6e;
+  --border: #c5d2d2;
+  --input: #c5d2d2;
+
+  --section-light: #ffffff;
+  --section-dark: #122828;
+  --section-dark-fg: #f3f6f6;
+  --section-dark-muted: #8aa3a3;
+  --section-mesh: color-mix(in oklab, #2f6f6f 12%, transparent);
+
+  color: var(--foreground);
+  background: var(--background);
+}
+
 /* Expanded mermaid — thin themed scrollbar (inherits --accent / --section-dark-fg) */
 .mermaid-expand-scroll {
   scrollbar-width: thin;
