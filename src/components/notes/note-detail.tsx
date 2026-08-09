@@ -20,6 +20,7 @@ import { NoteQuestionnaireModal } from "@/components/notes/note-questionnaire-mo
 import { NoteLessonNav } from "@/components/notes/note-lesson-nav"
 import { TrackNote } from "@/components/analytics/track-note"
 import { scrollToId } from "@/components/motion/smooth-scroll"
+import { cleanupMermaidOrphans } from "@/components/sections/mermaid-cleanup"
 import { cn } from "@/lib/utils"
 
 type NoteDetailProps = {
@@ -63,6 +64,11 @@ export function NoteDetail({
     setExplainId(null)
     setQuizId(null)
   }, [note.id, note.sections])
+
+  // Clear leftover Mermaid bomb SVGs from prior failed renders (safe — bombs only)
+  useEffect(() => {
+    cleanupMermaidOrphans()
+  }, [note.id])
 
   useEffect(() => {
     const ids = sectionKey.split(",").filter(Boolean)

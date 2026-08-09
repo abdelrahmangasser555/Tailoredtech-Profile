@@ -171,6 +171,33 @@ export type NoteBlock =
       /** Nested checklist — check state overlays from localStorage / note-tasks.json */
       items: NoteTaskItem[]
     }
+  | {
+      type: "comparison"
+      id: string
+      title?: string
+      caption?: string
+      /** Optional left-column header (default: Capability) */
+      rowHeader?: string
+      columns: NoteComparisonColumn[]
+      rows: NoteComparisonRow[]
+    }
+
+export type NoteComparisonColumn = {
+  id: string
+  label: string
+  /** Emphasize this column */
+  highlight?: boolean
+}
+
+export type NoteComparisonCell = {
+  type: "check" | "x" | "number" | "text"
+  value: string | number | boolean
+}
+
+export type NoteComparisonRow = {
+  label: string
+  cells: NoteComparisonCell[]
+}
 
 export type NoteTaskItem = {
   id: string

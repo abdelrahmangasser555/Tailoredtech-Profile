@@ -1,6 +1,5 @@
 "use client"
 
-import dynamic from "next/dynamic"
 import type { NoteBlock, NoteExplainTerm } from "@/lib/notes-types"
 import { NoteMarkdown } from "@/components/notes/blocks/note-markdown"
 import { NoteYoutube } from "@/components/notes/blocks/note-youtube"
@@ -12,20 +11,9 @@ import { NoteGallery } from "@/components/notes/blocks/note-gallery"
 import { NoteTerminal } from "@/components/notes/blocks/note-terminal"
 import { NotePlayground } from "@/components/notes/blocks/note-playground"
 import { NoteTasks } from "@/components/notes/blocks/note-tasks"
+import { NoteComparison } from "@/components/notes/blocks/note-comparison"
+import { NoteMermaidBlock } from "@/components/notes/blocks/note-mermaid-block"
 import { NoteIllustration } from "@/components/notes/illustrations/registry"
-
-const BrandedMermaid = dynamic(
-  () =>
-    import("@/components/sections/branded-mermaid").then(
-      (m) => m.BrandedMermaid
-    ),
-  {
-    ssr: false,
-    loading: () => (
-      <div className="mt-6 h-40 border border-white/10 bg-white/[0.02]" />
-    ),
-  }
-)
 
 type NoteBlockRendererProps = {
   block: NoteBlock
@@ -75,13 +63,14 @@ export function NoteBlockRenderer({
       )
     case "mermaid":
       return (
-        <div className="mt-6 first:mt-0">
-          <BrandedMermaid
-            chart={block.diagram}
-            title={block.title}
-            caption={block.caption}
-          />
-        </div>
+        <NoteMermaidBlock
+          noteId={noteId}
+          sectionId={sectionId}
+          blockId={block.id}
+          diagram={block.diagram}
+          title={block.title}
+          caption={block.caption}
+        />
       )
     case "illustration":
       return (
@@ -146,6 +135,16 @@ export function NoteBlockRenderer({
           blockId={block.id}
           title={block.title}
           items={block.items}
+        />
+      )
+    case "comparison":
+      return (
+        <NoteComparison
+          title={block.title}
+          caption={block.caption}
+          rowHeader={block.rowHeader}
+          columns={block.columns}
+          rows={block.rows}
         />
       )
     default:

@@ -37,7 +37,7 @@
               "id": "bbs",
               "name": "BBS",
               "createdAt": "2026-08-08",
-              "updatedAt": "2026-08-08",
+              "updatedAt": "2026-08-09",
               "children": [
                 {
                   "type": "file",
@@ -45,6 +45,13 @@
                   "name": "Technical Arch",
                   "createdAt": "2026-08-08",
                   "updatedAt": "2026-08-08"
+                },
+                {
+                  "type": "file",
+                  "id": "proposal",
+                  "name": "proposal",
+                  "createdAt": "2026-08-09",
+                  "updatedAt": "2026-08-09"
                 }
               ]
             }
@@ -90,6 +97,35 @@
       "description": "",
       "createdAt": "2026-08-08",
       "updatedAt": "2026-08-08",
+      "enabled": true,
+      "variants": {
+        "sidebarNav": true,
+        "compactHero": true,
+        "showMeta": true
+      },
+      "explains": [],
+      "questionnaires": [],
+      "sections": [
+        {
+          "id": "start",
+          "title": "Start",
+          "blocks": [
+            {
+              "type": "markdown",
+              "id": "start-md",
+              "content": "New note — replace this with your content."
+            }
+          ]
+        }
+      ]
+    },
+    "proposal": {
+      "id": "proposal",
+      "name": "proposal",
+      "title": "proposal",
+      "description": "",
+      "createdAt": "2026-08-09",
+      "updatedAt": "2026-08-09",
       "enabled": true,
       "variants": {
         "sidebarNav": true,

@@ -24,7 +24,11 @@ export async function validateMermaid(source: string): Promise<string | null> {
   if (!chart) return null
   try {
     const mermaid = (await import("mermaid")).default
-    mermaid.initialize({ startOnLoad: false, securityLevel: "strict" })
+    mermaid.initialize({
+      startOnLoad: false,
+      securityLevel: "strict",
+      suppressErrorRendering: true,
+    })
     await mermaid.parse(chart)
     return null
   } catch (err) {
@@ -65,6 +69,7 @@ export function MermaidField({
         mermaid.initialize({
           startOnLoad: false,
           securityLevel: "strict",
+          suppressErrorRendering: true,
           theme: "dark",
         })
         await mermaid.parse(chart)
@@ -72,16 +77,23 @@ export function MermaidField({
         setError(null)
         setOk(true)
         const id = `mermaid-edit-${uid}-${Date.now()}`
-        const { svg } = await mermaid.render(id, chart)
-        if (cancelled || !previewRef.current) return
-        previewRef.current.innerHTML = svg
-        const el = previewRef.current.querySelector("svg")
-        if (el) {
-          el.setAttribute("width", "100%")
-          el.removeAttribute("height")
-          el.style.width = "100%"
-          el.style.height = "auto"
-          el.style.maxHeight = "220px"
+        try {
+          const { svg } = await mermaid.render(id, chart)
+          if (cancelled || !previewRef.current) return
+          if (svg.includes("Syntax error in text")) {
+            throw new Error("Syntax error in mermaid diagram")
+          }
+          previewRef.current.innerHTML = svg
+          const el = previewRef.current.querySelector("svg")
+          if (el) {
+            el.setAttribute("width", "100%")
+            el.removeAttribute("height")
+            el.style.width = "100%"
+            el.style.height = "auto"
+            el.style.maxHeight = "220px"
+          }
+        } finally {
+          document.getElementById(`d${id}`)?.remove()
         }
       } catch (err) {
         if (cancelled) return

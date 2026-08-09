@@ -30,6 +30,7 @@ import { Section } from "@/components/layout/section"
 import { isSectionChart, isSectionCharts } from "@/lib/section-chart"
 import type { PresentationItem } from "@/lib/content"
 import { EditTrigger } from "@/components/editor/edit-trigger"
+import { PresentationPdfExportButton } from "@/components/presentation-pdf/export-button"
 import { scrollToId } from "@/components/motion/smooth-scroll"
 import { cn } from "@/lib/utils"
 
@@ -103,6 +104,12 @@ export function PresentationDetail({
 
   return (
     <div className={cn("min-h-svh", brandClass)}>
+      {!editMode ? (
+        <div className="fixed bottom-4 left-4 z-50 md:bottom-6 md:left-6">
+          <PresentationPdfExportButton presentation={presentation} />
+        </div>
+      ) : null}
+
       <PresentationHero presentation={presentation} reduce={!!reduce} />
 
       {page.outcomes.length > 0 && (
@@ -246,7 +253,14 @@ export function PresentationDetail({
 
                   {section.video && <SectionVideo src={section.video} />}
                   {section.images.length > 0 && (
-                    <SectionImageGrid images={section.images} />
+                    <SectionImageGrid
+                      images={section.images}
+                      enhanced={
+                        "galleryEnhanced" in page
+                          ? page.galleryEnhanced !== false
+                          : true
+                      }
+                    />
                   )}
                   {charts ? (
                     <SectionChartsGrid charts={charts} tone="dark" />

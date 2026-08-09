@@ -6,6 +6,7 @@ import { useChat } from "@ai-sdk/react";
 import {
   DefaultChatTransport,
   isFileUIPart,
+  isReasoningUIPart,
   isToolUIPart,
   type FileUIPart,
   type UIMessage,
@@ -13,8 +14,10 @@ import {
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import {
+  Brain,
   Check,
   ChevronDown,
+  ChevronRight,
   Folder,
   ImagePlus,
   Loader2,
@@ -77,6 +80,154 @@ function hasActiveTool(message: UIMessage | undefined): boolean {
         p.state === "input-available" ||
         p.state === "approval-requested"),
   );
+}
+
+const TOOL_LABELS: Record<
+  string,
+  { running: string; done: string; failed: string }
+> = {
+  readNote: {
+    running: "Re-reading note…",
+    done: "Note re-read",
+    failed: "Could not read note",
+  },
+  updateNote: {
+    running: "Rewriting note…",
+    done: "Note updated",
+    failed: "Note update failed",
+  },
+  addBlock: {
+    running: "Adding block…",
+    done: "Block added",
+    failed: "Could not add block",
+  },
+  addMermaidBlock: {
+    running: "Adding mermaid diagram…",
+    done: "Mermaid added",
+    failed: "Mermaid failed",
+  },
+  updateMermaidBlock: {
+    running: "Fixing mermaid…",
+    done: "Mermaid fixed",
+    failed: "Mermaid still broken",
+  },
+  replaceBlockWithMarkdown: {
+    running: "Replacing with text…",
+    done: "Replaced with text",
+    failed: "Replace failed",
+  },
+  addStackBlock: {
+    running: "Adding stack diagram…",
+    done: "Stack added",
+    failed: "Stack failed",
+  },
+  addComparisonBlock: {
+    running: "Adding comparison table…",
+    done: "Comparison table added",
+    failed: "Comparison failed",
+  },
+  addMarkdownBlock: {
+    running: "Adding markdown…",
+    done: "Markdown added",
+    failed: "Markdown failed",
+  },
+  addCalloutBlock: {
+    running: "Adding callout…",
+    done: "Callout added",
+    failed: "Callout failed",
+  },
+};
+
+function toolName(part: { type: string }): string {
+  return part.type.replace(/^tool-/, "");
+}
+
+function describeToolPart(part: {
+  type: string;
+  state: string;
+  input?: unknown;
+  output?: unknown;
+  errorText?: string;
+}): { label: string; detail?: string } {
+  const name = toolName(part);
+  const labels = TOOL_LABELS[name];
+  const failed =
+    part.state === "output-error" ||
+    (part.state === "output-available" &&
+      typeof part.output === "object" &&
+      part.output !== null &&
+      (part.output as { ok?: boolean }).ok === false);
+  const done = part.state === "output-available" && !failed;
+
+  let label = labels
+    ? failed
+      ? labels.failed
+      : done
+        ? labels.done
+        : labels.running
+    : failed
+      ? `Failed ${name}`
+      : done
+        ? `Ran ${name}`
+        : `Running ${name}…`;
+
+  if (
+    done &&
+    typeof part.output === "object" &&
+    part.output &&
+    "message" in part.output &&
+    typeof (part.output as { message?: string }).message === "string"
+  ) {
+    label = (part.output as { message: string }).message;
+  }
+
+  const input = part.input as Record<string, unknown> | undefined;
+  const detailParts: string[] = [];
+  if (typeof input?.type === "string") detailParts.push(input.type);
+  if (typeof input?.title === "string") detailParts.push(input.title);
+  if (typeof input?.sectionId === "string") {
+    detailParts.push(`section:${input.sectionId}`);
+  }
+  if (failed) {
+    const soft =
+      typeof part.output === "object" &&
+      part.output &&
+      "error" in part.output
+        ? String((part.output as { error?: string }).error ?? "")
+        : "";
+    const err = part.errorText || soft;
+    if (err) detailParts.push(err);
+  }
+
+  return {
+    label,
+    detail: detailParts.length ? detailParts.join(" · ") : undefined,
+  };
+}
+
+function activeToolStatus(message: UIMessage | undefined): string | null {
+  if (!message) return null;
+  const active = message.parts.find(
+    (p) =>
+      isToolUIPart(p) &&
+      (p.state === "input-streaming" ||
+        p.state === "input-available" ||
+        p.state === "approval-requested"),
+  );
+  if (!active || !isToolUIPart(active)) return null;
+  return describeToolPart(active).label;
+}
+
+function toolWroteToNote(part: {
+  type: string;
+  state: string;
+  output?: unknown;
+}) {
+  if (part.state !== "output-available") return false;
+  if (!part.type.startsWith("tool-")) return false;
+  if (part.type === "tool-readNote") return false;
+  const out = part.output as { ok?: boolean } | undefined;
+  return out?.ok !== false;
 }
 
 function loadLocalSession(noteId: string): NotesChatSession | null {
@@ -157,6 +308,10 @@ export function NoteChatPanel({
   const [hydrated, setHydrated] = useState(false);
   const [pendingFiles, setPendingFiles] = useState<FileUIPart[]>([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const stickToBottomRef = useRef(true);
+  const [reasoningOpen, setReasoningOpen] = useState<Record<string, boolean>>(
+    {},
+  );
 
   const availableCommands = useMemo(
     () => (localEdit ? NOTES_CHAT_COMMANDS : []),
@@ -238,16 +393,20 @@ export function NoteChatPanel({
       if (mode === "edit") {
         const last = next[next.length - 1];
         const tools = last?.parts.filter(isToolUIPart) ?? [];
-        const wrote = tools.some(
+        const wrote = tools.some(toolWroteToNote);
+        const failedHard = tools.some((p) => p.state === "output-error");
+        const failedSoft = tools.some(
           (p) =>
             p.state === "output-available" &&
-            (p.type === "tool-updateNote" ||
-              p.type === "tool-addMermaidBlock" ||
-              p.type === "tool-addStackBlock"),
+            typeof p.output === "object" &&
+            p.output !== null &&
+            (p.output as { ok?: boolean }).ok === false,
         );
         if (wrote) {
           toast.success("Note updated");
           router.refresh();
+        } else if (failedHard || failedSoft) {
+          toast.error("Edit stopped after failures");
         }
       }
     },
@@ -312,9 +471,17 @@ export function NoteChatPanel({
   useEffect(() => {
     if (!hydrated) return;
     const el = scrollRef.current;
-    if (!el) return;
+    if (!el || !stickToBottomRef.current) return;
     el.scrollTo({ top: el.scrollHeight, behavior: "smooth" });
   }, [messages, status, hydrated]);
+
+  function handleChatScroll() {
+    const el = scrollRef.current;
+    if (!el) return;
+    const distanceFromBottom =
+      el.scrollHeight - el.scrollTop - el.clientHeight;
+    stickToBottomRef.current = distanceFromBottom < 80;
+  }
 
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
@@ -388,6 +555,7 @@ export function NoteChatPanel({
       setPendingFiles([]);
     }
     clearError();
+    stickToBottomRef.current = true;
 
     if (files.length > 0 && !modelSupportsVision(model)) {
       toast.message("Using vision fallback", {
@@ -416,6 +584,7 @@ export function NoteChatPanel({
     setInput("");
     setPendingFiles([]);
     clearError();
+    stickToBottomRef.current = true;
 
     const prompt =
       command.id === "summarize-today"
@@ -458,6 +627,7 @@ export function NoteChatPanel({
     .reverse()
     .find((m) => m.role === "assistant");
   const editingNow = mode === "edit" && hasActiveTool(lastAssistant);
+  const liveToolLabel = activeToolStatus(lastAssistant);
   const referenced = mentionItems.filter((m) => referenceIds.includes(m.id));
 
   if (note.chat?.enabled === false) return null;
@@ -658,6 +828,8 @@ export function NoteChatPanel({
           ref={scrollRef}
           data-lenis-prevent
           data-lenis-prevent-wheel
+          onScroll={handleChatScroll}
+          onWheel={(e) => e.stopPropagation()}
           className="notes-panel-scroll min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 py-4"
         >
           {!hydrated ? (
@@ -699,10 +871,24 @@ export function NoteChatPanel({
               {messages.map((message) => {
                 const text = messageText(message);
                 const tools = message.parts.filter(isToolUIPart);
+                const reasoningParts = message.parts.filter(isReasoningUIPart);
+                const reasoningText = reasoningParts
+                  .map((p) => p.text)
+                  .join("\n\n")
+                  .trim();
                 const images = messageImages(message);
-                if (!text && tools.length === 0 && images.length === 0) {
+                if (
+                  !text &&
+                  tools.length === 0 &&
+                  images.length === 0 &&
+                  !reasoningText
+                ) {
                   return null;
                 }
+
+                const reasoningExpanded =
+                  reasoningOpen[message.id] ??
+                  reasoningParts.some((p) => p.state === "streaming");
 
                 return (
                   <li
@@ -736,42 +922,83 @@ export function NoteChatPanel({
                       </div>
                     ) : (
                       <div className="min-w-0 overflow-hidden border border-white/10 bg-white/2 px-3 py-2.5 text-[13px] leading-relaxed text-white/75">
+                        {reasoningText ? (
+                          <div className="mb-2 border border-white/10 bg-black/30">
+                            <button
+                              type="button"
+                              onClick={() =>
+                                setReasoningOpen((prev) => ({
+                                  ...prev,
+                                  [message.id]: !reasoningExpanded,
+                                }))
+                              }
+                              className="flex w-full items-center gap-2 px-2 py-1.5 text-left font-mono text-[10px] tracking-wider text-white/45 uppercase transition hover:text-white/70"
+                            >
+                              <Brain className="size-3 shrink-0 text-accent/70" />
+                              <span className="flex-1">
+                                {reasoningParts.some(
+                                  (p) => p.state === "streaming",
+                                )
+                                  ? "Thinking…"
+                                  : "Thinking"}
+                              </span>
+                              {reasoningExpanded ? (
+                                <ChevronDown className="size-3" />
+                              ) : (
+                                <ChevronRight className="size-3" />
+                              )}
+                            </button>
+                            {reasoningExpanded ? (
+                              <div className="max-h-48 overflow-y-auto border-t border-white/10 px-2 py-2 font-mono text-[11px] leading-relaxed whitespace-pre-wrap text-white/40">
+                                {reasoningText}
+                              </div>
+                            ) : null}
+                          </div>
+                        ) : null}
                         {tools.map((part) => {
-                          const done = part.state === "output-available";
-                          const failed = part.state === "output-error";
-                          const toolLabel = part.type.replace("tool-", "");
+                          const softFail =
+                            part.state === "output-available" &&
+                            typeof part.output === "object" &&
+                            part.output !== null &&
+                            (part.output as { ok?: boolean }).ok === false;
+                          const failed =
+                            part.state === "output-error" || softFail;
+                          const done =
+                            part.state === "output-available" && !failed;
+                          const running = !done && !failed;
+                          const { label, detail } = describeToolPart(part);
                           return (
                             <div
                               key={part.toolCallId}
                               className={cn(
-                                "mb-2 flex items-center gap-2 border px-2 py-1.5 font-mono text-[10px]",
+                                "mb-2 border px-2 py-1.5 font-mono text-[10px]",
                                 done
                                   ? "border-accent/30 text-accent/90"
                                   : failed
                                     ? "border-red-400/30 text-red-300"
-                                    : "border-white/15 text-white/50",
+                                    : "border-white/15 text-white/55",
                               )}
                             >
-                              {done ? (
-                                <Check className="size-3" />
-                              ) : (
-                                <Loader2 className="size-3 animate-spin" />
-                              )}
-                              {toolLabel === "updateNote"
-                                ? done
-                                  ? "Note updated"
-                                  : "Updating note…"
-                                : toolLabel === "addMermaidBlock"
-                                  ? done
-                                    ? "Mermaid added"
-                                    : "Adding mermaid…"
-                                  : toolLabel === "addStackBlock"
-                                    ? done
-                                      ? "Stack added"
-                                      : "Adding stack…"
-                                    : done
-                                      ? `Ran ${toolLabel}`
-                                      : `Running ${toolLabel}…`}
+                              <div className="flex items-center gap-2">
+                                {done ? (
+                                  <Check className="size-3 shrink-0" />
+                                ) : failed ? (
+                                  <X className="size-3 shrink-0" />
+                                ) : (
+                                  <Loader2 className="size-3 shrink-0 animate-spin" />
+                                )}
+                                <span className="min-w-0 flex-1">{label}</span>
+                                {running ? (
+                                  <span className="shrink-0 text-white/25">
+                                    live
+                                  </span>
+                                ) : null}
+                              </div>
+                              {detail ? (
+                                <p className="mt-1 pl-5 text-[9px] leading-snug text-white/35">
+                                  {detail}
+                                </p>
+                              ) : null}
                             </div>
                           );
                         })}
@@ -789,16 +1016,26 @@ export function NoteChatPanel({
               })}
 
               {thinking ? (
-                <li className="flex items-center gap-2 px-1 py-1 text-xs text-white/45">
-                  <span className="relative flex size-2">
-                    <span className="absolute inline-flex size-full animate-ping rounded-full bg-accent opacity-40" />
-                    <span className="relative inline-flex size-2 rounded-full bg-accent" />
-                  </span>
-                  {editingNow
-                    ? "Editing note…"
-                    : status === "submitted"
-                      ? "Starting…"
-                      : "Thinking…"}
+                <li className="flex flex-col gap-1 px-1 py-1 text-xs text-white/45">
+                  <div className="flex items-center gap-2">
+                    <span className="relative flex size-2">
+                      <span className="absolute inline-flex size-full animate-ping rounded-full bg-accent opacity-40" />
+                      <span className="relative inline-flex size-2 rounded-full bg-accent" />
+                    </span>
+                    {liveToolLabel
+                      ? liveToolLabel
+                      : editingNow
+                        ? "Preparing edit…"
+                        : status === "submitted"
+                          ? "Starting…"
+                          : "Thinking…"}
+                  </div>
+                  {mode === "edit" && !liveToolLabel ? (
+                    <p className="pl-4 font-mono text-[9px] tracking-wide text-white/25">
+                      Edit tools can rewrite sections, tables, diagrams, and
+                      more
+                    </p>
+                  ) : null}
                 </li>
               ) : null}
             </ul>

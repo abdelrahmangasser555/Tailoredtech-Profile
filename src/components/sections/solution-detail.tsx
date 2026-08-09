@@ -271,7 +271,14 @@ export function SolutionDetail({
 
                 {section.video && <SectionVideo src={section.video} />}
                 {section.images.length > 0 && (
-                  <SectionImageGrid images={section.images} />
+                  <SectionImageGrid
+                    images={section.images}
+                    enhanced={
+                      "galleryEnhanced" in page
+                        ? page.galleryEnhanced !== false
+                        : true
+                    }
+                  />
                 )}
                 {chart && <SectionChart config={chart} tone="dark" />}
                 {section.mermaid && (

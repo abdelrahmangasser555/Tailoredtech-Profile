@@ -56,7 +56,12 @@ export async function POST(request: Request) {
               ? "gif"
               : "svg"
 
-    const folder = kind === "services" ? "services" : "presentations"
+    const folder =
+      kind === "services"
+        ? "services"
+        : kind === "notes"
+          ? "notes"
+          : "presentations"
     const dir = path.join(
       process.cwd(),
       "public",

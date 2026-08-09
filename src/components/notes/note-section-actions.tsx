@@ -1,7 +1,7 @@
 "use client"
 
+import { useRef, useState } from "react"
 import { useRouter } from "next/navigation"
-import { useState } from "react"
 import {
   CirclePlay,
   ImagePlus,
@@ -9,8 +9,13 @@ import {
   ListChecks,
   Loader2,
   Sparkles,
+  Table2,
   Trash2,
 } from "lucide-react"
+import {
+  NoteImagePicker,
+  type NoteImagePickerHandle,
+} from "@/components/notes/note-image-picker"
 import { isLocalEditEnabled } from "@/lib/local-edit"
 import { cn } from "@/lib/utils"
 import { toast } from "sonner"
@@ -21,7 +26,7 @@ type NoteSectionActionsProps = {
   hasTasks: boolean
 }
 
-type ModalKind = "mermaid" | "youtube" | "link" | "images" | null
+type ModalKind = "mermaid" | "comparison" | "youtube" | "link" | "images" | null
 
 export function NoteSectionActions({
   noteId,
@@ -34,6 +39,8 @@ export function NoteSectionActions({
   const [modal, setModal] = useState<ModalKind>(null)
   const [fieldA, setFieldA] = useState("")
   const [fieldB, setFieldB] = useState("")
+  const [imageCount, setImageCount] = useState(0)
+  const imagePickerRef = useRef<NoteImagePickerHandle | null>(null)
 
   if (!localEdit) return null
 
@@ -92,6 +99,8 @@ export function NoteSectionActions({
   function openModal(kind: ModalKind) {
     setFieldA("")
     setFieldB("")
+    setImageCount(0)
+    imagePickerRef.current?.reset()
     setModal(kind)
   }
 
@@ -143,18 +152,8 @@ export function NoteSectionActions({
         })
         toast.success("Link added")
       } else if (modal === "images") {
-        const lines = fieldA
-          .split("\n")
-          .map((l) => l.trim())
-          .filter(Boolean)
-        if (!lines.length) throw new Error("Add at least one image URL")
-        const images = lines.map((line, i) => {
-          const [src, ...rest] = line.split("|").map((s) => s.trim())
-          return {
-            src: src!,
-            label: rest.join("|") || `Image ${i + 1}`,
-          }
-        })
+        const images = await imagePickerRef.current?.collectImages()
+        if (!images?.length) throw new Error("Add at least one image")
         await postBlock({
           noteId,
           sectionId,
@@ -165,7 +164,9 @@ export function NoteSectionActions({
             images,
           },
         })
-        toast.success("Images added")
+        toast.success(
+          images.length === 1 ? "Image added" : `${images.length} images added`
+        )
       } else if (modal === "mermaid") {
         const prompt = fieldA.trim()
         if (!prompt) throw new Error("Describe the diagram")
@@ -184,9 +185,28 @@ export function NoteSectionActions({
         } | null
         if (!res.ok) throw new Error(data?.error || "Failed to generate")
         toast.success("Mermaid diagram added")
+      } else if (modal === "comparison") {
+        const prompt = fieldA.trim()
+        if (!prompt) throw new Error("Describe the comparison")
+        const res = await fetch("/api/local-edit/note-comparison", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            noteId,
+            sectionId,
+            prompt,
+            title: fieldB.trim() || undefined,
+          }),
+        })
+        const data = (await res.json().catch(() => null)) as {
+          error?: string
+        } | null
+        if (!res.ok) throw new Error(data?.error || "Failed to generate")
+        toast.success("Comparison table added")
       }
 
       setModal(null)
+      imagePickerRef.current?.reset()
       router.refresh()
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Failed")
@@ -194,6 +214,28 @@ export function NoteSectionActions({
       setBusy(false)
     }
   }
+
+  const modalTitle =
+    modal === "mermaid"
+      ? "Generate mermaid"
+      : modal === "comparison"
+        ? "Generate comparison"
+        : modal === "youtube"
+          ? "Add YouTube"
+          : modal === "link"
+            ? "Add link"
+            : "Add images"
+
+  const modalHint =
+    modal === "mermaid"
+      ? "Describe the diagram. AI uses this note and the current section."
+      : modal === "comparison"
+        ? "Describe what to compare. AI builds a check/x table from this note and section."
+        : modal === "youtube"
+          ? "Paste a YouTube URL. Title is optional."
+          : modal === "link"
+            ? "Paste a URL. Preview metadata is fetched when possible."
+            : "Paste, drop, browse files, or type a public path. Files save under /assets/uploads/notes/{noteId}/"
 
   return (
     <>
@@ -218,6 +260,13 @@ export function NoteSectionActions({
           disabled={busy}
         >
           <ImagePlus className="size-3.5" />
+        </ActionIcon>
+        <ActionIcon
+          label="Add comparison (AI)"
+          onClick={() => openModal("comparison")}
+          disabled={busy}
+        >
+          <Table2 className="size-3.5" />
         </ActionIcon>
         <ActionIcon
           label="Add mermaid (AI)"
@@ -251,59 +300,58 @@ export function NoteSectionActions({
           onClick={() => !busy && setModal(null)}
         >
           <div
-            className="w-full max-w-md border border-white/15 bg-[#0a0a0a] p-4 shadow-2xl"
+            className={cn(
+              "w-full border border-white/15 bg-[#0a0a0a] p-4 shadow-2xl",
+              modal === "images" ? "max-w-lg" : "max-w-md"
+            )}
             onClick={(e) => e.stopPropagation()}
           >
-            <h3 className="font-pixel-circle text-lg text-white">
-              {modal === "mermaid"
-                ? "Generate mermaid"
-                : modal === "youtube"
-                  ? "Add YouTube"
-                  : modal === "link"
-                    ? "Add link"
-                    : "Add images"}
-            </h3>
-            <p className="mt-1 text-[12px] text-white/40">
-              {modal === "mermaid"
-                ? "Describe the diagram. AI uses this note and the current section."
-                : modal === "youtube"
-                  ? "Paste a YouTube URL. Title is optional."
-                  : modal === "link"
-                    ? "Paste a URL. Preview metadata is fetched when possible."
-                    : "One image per line: url or url|label"}
-            </p>
+            <h3 className="font-pixel-circle text-lg text-white">{modalTitle}</h3>
+            <p className="mt-1 text-[12px] text-white/40">{modalHint}</p>
 
-            <textarea
-              autoFocus
-              value={fieldA}
-              onChange={(e) => setFieldA(e.target.value)}
-              rows={modal === "images" || modal === "mermaid" ? 5 : 2}
-              placeholder={
-                modal === "mermaid"
-                  ? "Architecture of auth → API → database…"
-                  : modal === "youtube"
-                    ? "https://www.youtube.com/watch?v=…"
-                    : modal === "link"
-                      ? "https://…"
-                      : "/assets/shot.png|Dashboard"
-              }
-              className="mt-4 w-full resize-none border border-white/15 bg-black/40 px-3 py-2 text-sm text-white placeholder:text-white/30 focus:border-accent/40 focus:outline-none"
-            />
-
-            <input
-              value={fieldB}
-              onChange={(e) => setFieldB(e.target.value)}
-              placeholder={
-                modal === "mermaid"
-                  ? "Title (optional)"
-                  : modal === "youtube"
-                    ? "Title (optional)"
-                    : modal === "link"
-                      ? "Label (optional)"
-                      : "Gallery title (optional)"
-              }
-              className="mt-2 w-full border border-white/15 bg-black/40 px-3 py-2 text-sm text-white placeholder:text-white/30 focus:border-accent/40 focus:outline-none"
-            />
+            {modal === "images" ? (
+              <>
+                <NoteImagePicker
+                  noteId={noteId}
+                  disabled={busy}
+                  handleRef={imagePickerRef}
+                  onReadyChange={setImageCount}
+                />
+                <input
+                  value={fieldB}
+                  onChange={(e) => setFieldB(e.target.value)}
+                  placeholder="Gallery title (optional)"
+                  className="mt-3 w-full border border-white/15 bg-black/40 px-3 py-2 text-sm text-white placeholder:text-white/30 focus:border-accent/40 focus:outline-none"
+                />
+              </>
+            ) : (
+              <>
+                <textarea
+                  autoFocus
+                  value={fieldA}
+                  onChange={(e) => setFieldA(e.target.value)}
+                  rows={modal === "mermaid" || modal === "comparison" ? 5 : 2}
+                  placeholder={
+                    modal === "mermaid"
+                      ? "Architecture of auth → API → database…"
+                      : modal === "comparison"
+                        ? "Compare REST vs GraphQL for this section…"
+                        : modal === "youtube"
+                          ? "https://www.youtube.com/watch?v=…"
+                          : "https://…"
+                  }
+                  className="mt-4 w-full resize-none border border-white/15 bg-black/40 px-3 py-2 text-sm text-white placeholder:text-white/30 focus:border-accent/40 focus:outline-none"
+                />
+                <input
+                  value={fieldB}
+                  onChange={(e) => setFieldB(e.target.value)}
+                  placeholder={
+                    modal === "link" ? "Label (optional)" : "Title (optional)"
+                  }
+                  className="mt-2 w-full border border-white/15 bg-black/40 px-3 py-2 text-sm text-white placeholder:text-white/30 focus:border-accent/40 focus:outline-none"
+                />
+              </>
+            )}
 
             <div className="mt-4 flex justify-end gap-2">
               <button
@@ -316,12 +364,14 @@ export function NoteSectionActions({
               </button>
               <button
                 type="button"
-                disabled={busy}
+                disabled={busy || (modal === "images" && imageCount === 0)}
                 onClick={() => void submitModal()}
                 className="inline-flex items-center gap-1.5 bg-accent px-3 py-1.5 font-mono text-[10px] tracking-wider text-[#0a0a0a] uppercase disabled:opacity-40"
               >
                 {busy ? <Loader2 className="size-3 animate-spin" /> : null}
-                {modal === "mermaid" ? "Generate" : "Add"}
+                {modal === "mermaid" || modal === "comparison"
+                  ? "Generate"
+                  : "Add"}
               </button>
             </div>
           </div>

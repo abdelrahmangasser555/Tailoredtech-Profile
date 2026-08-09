@@ -156,5 +156,492 @@
       "showMeta": true
     },
     "updatedAt": "2026-08-08"
+  },
+  "proposal": {
+    "sections": [
+      {
+        "id": "background",
+        "title": "Project Background",
+        "blocks": [
+          {
+            "id": "bg-md",
+            "type": "markdown",
+            "content": "## 1. Project Background\n\nBahri currently uses **DEKRA** as its provider for the Behavioral Based Safety (BBS) system.\n\nDEKRA's solution is subscription-based at approximately **$9,000 per year**. The existing solution is a generic BBS product rather than a solution specifically tailored to Bahri.\n\nDEKRA's solution is considered:\n\n- **Software quality:** 8/10\n- **Customizability for Bahri:** 3/10\n\nThe existing commercial model is based on a limited number of seats, with crew members not necessarily requiring individual accounts.\n\n**DEKRA is going out of service at the end of 2026**, creating a requirement for Bahri to replace the system before the DEKRA sunset.\n\nBahri has approximately **1,460 trained BBS observers** who need to be supported by the replacement system."
+          }
+        ]
+      },
+      {
+        "id": "competing-providers",
+        "title": "Competing Providers",
+        "blocks": [
+          {
+            "id": "comp-md",
+            "type": "markdown",
+            "content": "## 2. Competing Providers\n\nDEKRA presented Bahri with alternative BBS providers.\n\n### DEKRA\n\n- Annual subscription: **$9,000**\n- Software rating: **8/10**\n- Customizability: **3/10**\n- Limited-seat model\n- Existing Bahri records are available\n- Generic solution\n- Going out of service at the end of 2026\n\n### RabbitLink\n\n- Annual subscription: **$14,000 + migration cost**\n- Software rating: **6–7/10**\n- Customizability: **2/10**\n- Limited seats\n- Migration from DEKRA is an additional consideration\n- Additional costs for tickets and maintenance\n- Has been in the market for several years\n- Product is relatively mature, but UX is considered weak\n\n### Athena AI\n\n- Annual subscription: **$18,000 + migration**\n- Software rating: **6/10**\n- Customizability: **3/10**\n- Limited seats\n- Additional costs for tickets and maintenance\n- In-house implementation is uncertain\n\n### Benchmark Gensuite\n\n- One-time payment model: **$45,000**\n- Software rating: **8/10**\n- Customizability: **4/10**\n- Not an in-house implementation\n- Additional costs for tickets and maintenance\n- The $45,000 figure represents the **one-time payment model**"
+          }
+        ]
+      },
+      {
+        "id": "marafei-solution",
+        "title": "Marafei / TailoredTech BBS Solution",
+        "blocks": [
+          {
+            "id": "marafei-md",
+            "type": "markdown",
+            "content": "## 3. Marafei / TailoredTech BBS Solution\n\nMarafei, working with TailoredTech, is proposing a new BBS platform specifically designed around Bahri's requirements.\n\nThe planned solution is intended to provide:\n\n- Unlimited seats\n- Bahri-specific workflows\n- High customizability\n- Modern UX\n- Advanced BBS functionality\n- Bahri SSO\n- Deployment on Bahri infrastructure\n- API compatibility\n- Compatibility with the MIPS2/Azure ecosystem\n- Future MIPS2 integration capability\n- Continued product development\n- Ability to support approximately **1,460 trained observers** and additional users without seat-based limitations\n\nThe original development plan was approximately **three months** for the initial BBS solution.\n\nThe business stakeholders responsible for BBS showed strong interest in the Marafei solution and were favorably considering it against the alternative vendors."
+          }
+        ]
+      },
+      {
+        "id": "it-meeting",
+        "title": "IT Meeting & MIPS2 Discussion",
+        "blocks": [
+          {
+            "id": "it-md",
+            "type": "markdown",
+            "content": "## 4. IT Meeting and MIPS2 Discussion\n\nAfter the BBS stakeholders showed strong interest in the Marafei solution, a meeting was held with Bahri IT.\n\nThe original Marafei technical proposal was to build BBS as an **independent web-based application** deployed on Bahri infrastructure and integrated into the Bahri ecosystem through APIs and SSO.\n\nThe system would remain independent from MIPS2 while being compatible with the MIPS2/Azure environment and capable of future integration."
+          },
+          {
+            "id": "it-callout",
+            "type": "callout",
+            "tone": "warn",
+            "title": "IT Concerns",
+            "body": "During the IT meeting, the head of IT raised concerns regarding the proposed development timeline and questioned whether the three-month implementation could realistically be achieved. The alternative direction proposed by IT was to build BBS as a **native MIPS2 module on the MIPS2/Azure stack** — a significantly larger development effort that would introduce dependency on the MIPS2 development timeline."
+          },
+          {
+            "id": "it-clarify-md",
+            "type": "markdown",
+            "content": "The BBS project owner subsequently clarified that the MIPS2-native implementation should not delay the immediate replacement of DEKRA."
+          }
+        ]
+      },
+      {
+        "id": "bahri-direction",
+        "title": "Current Bahri Direction",
+        "blocks": [
+          {
+            "id": "dir-md",
+            "type": "markdown",
+            "content": "## 5. Current Bahri Direction\n\nJoseph, the person responsible for the BBS project at Bahri, summarized the current direction following the IT meeting.\n\nThe MIPS2-integrated BBS implementation cannot realistically be expected to be ready before DEKRA's hard stop on **31 December 2026**.\n\nTherefore:\n\n- The immediate DEKRA replacement should **not** depend on the completion of the MIPS2-native implementation\n- The replacement should be evaluated through the bidding process closing on **14 August 2026**\n- All offers, including Marafei's, should be evaluated like-for-like as **plug-and-play, web-based BBS solutions**\n- MIPS2 integration should **not** be a deciding criterion for the immediate replacement\n- Any MIPS2 compatibility or future integration capability in Marafei's solution would instead be an additional advantage\n- The immediate priority is to have a working BBS system available for approximately **1,460 trained observers before the DEKRA sunset**"
+          },
+          {
+            "id": "dir-callout",
+            "type": "callout",
+            "tone": "info",
+            "title": "Key Deadline",
+            "body": "The bidding process closes **14 August 2026** and the replacement must be operational before **31 December 2026** when DEKRA sunsets."
+          }
+        ]
+      },
+      {
+        "id": "marafei-opt1",
+        "title": "Marafei Commercial Option 1 — Subscription",
+        "blocks": [
+          {
+            "id": "opt1-detail-md",
+            "type": "markdown",
+            "content": "## 6. Marafei Commercial Option 1 — Subscription Model\n\n### Initial BBS Subscription: **$14,000/year**\n\nThe proposed subscription model provides Bahri with the BBS platform on an annual subscription basis.\n\nThe proposal includes:\n\n- Unlimited seats\n- Data migration\n- Bahri-specific solution\n- Future MIPS2 implementation pathway\n- Subscription-based access\n\n### MIPS2 Future Implementation\n\nThe MIPS2 implementation is valued at approximately **$60,000**.\n\nUnder this commercial model, **$14,000 from the first year of the BBS subscription would be deducted** from the MIPS2 implementation cost if the MIPS2 implementation proceeds.\n\n| | |\n|---|---|\n| MIPS2 implementation | $60,000 |\n| Less first-year BBS subscription | −$14,000 |\n| **Remaining MIPS2 cost** | **~$46,000** |\n\nThe MIPS2 implementation would involve approximately **six months of development**.\n\n### Marafei/TailoredTech Economics\n\nThe subscription model involves approximately:\n\n- **20% of subscription revenue allocated to Marafei**\n- Approximately **$2,000/year hosting cost**\n- Remaining revenue after these costs represents the available revenue for TailoredTech/product operations"
+          },
+          {
+            "id": "opt1-bahri-md",
+            "type": "markdown",
+            "content": "### Bahri Perspective — Advantages\n\n- Lower initial financial commitment\n- $14,000 annual cost\n- Unlimited seats\n- Data migration included\n- More tailored solution than generic alternatives\n- Future MIPS2 implementation pathway\n- $14,000 first-year subscription can be deducted from the future MIPS2 implementation cost\n- Faster path to replacing DEKRA without waiting for the MIPS2-native system\n- No requirement for Bahri to make a large one-time BBS investment\n\n### Bahri Perspective — Disadvantages\n\n- Recurring annual subscription\n- Continued dependency on annual payments\n- BBS remains subscription-based\n- Future MIPS2 implementation remains a separate development track\n- The solution is not initially a native MIPS2 module\n- Long-term cumulative cost increases over time"
+          },
+          {
+            "id": "opt1-tt-md",
+            "type": "markdown",
+            "content": "### TailoredTech / Marafei Perspective — Advantages\n\n- Recurring annual revenue\n- Lower initial barrier for Bahri\n- Opportunity to maintain a long-term commercial relationship\n- Provides a pathway toward the future MIPS2 implementation\n- Product remains a reusable software product\n- Potential recurring revenue from future customers\n\n### TailoredTech / Marafei Perspective — Disadvantages\n\n- 20% of subscription revenue is allocated to Marafei\n- Approximately $2,000/year hosting cost\n- Lower net revenue than a one-time enterprise sale\n- Creates an ongoing maintenance and support expectation\n- Recurring operational responsibility\n- Long-term revenue may not adequately compensate for maintenance and product development costs\n- Risk of additional enhancement requests being associated with the subscription\n- Lower immediate cash flow"
+          }
+        ]
+      },
+      {
+        "id": "marafei-opt2",
+        "title": "Marafei Commercial Option 2 — One-Time Payment",
+        "blocks": [
+          {
+            "id": "opt2-detail-md",
+            "type": "markdown",
+            "content": "## 7. Marafei Commercial Option 2 — One-Time Payment Model\n\n### One-Time BBS Implementation: **$35,000**\n\nThe proposed solution would:\n\n- Be hosted on **Bahri infrastructure**\n- Be a one-time payment rather than a subscription\n- Be Bahri-branded\n- Include migration\n- Support unlimited seats\n- Integrate with Bahri SSO\n- Be compatible with the MIPS2/Azure stack without being built directly inside MIPS2\n- Remain an independent BBS application\n- Support future API-based MIPS2 integration\n\n### MIPS2 Implementation\n\nThe future MIPS2 implementation is valued at approximately **$60,000**.\n\nA **$25,000 discount** toward the MIPS2 implementation is proposed if the MIPS2 implementation proceeds within the defined period.\n\n| | |\n|---|---|\n| MIPS2 implementation | $60,000 |\n| Proposed discount | −$25,000 |\n| **Remaining MIPS2 cost** | **~$35,000** |\n\nThe MIPS2 implementation would involve approximately **six months of development**.\n\n### Additional Considerations\n\nThe one-time model includes:\n\n- Free maintenance during the first year\n- Future enhancements subject to the agreed commercial and technical scope\n- Deployment on Bahri infrastructure\n- No recurring BBS subscription\n- Unlimited users\n- Data migration"
+          },
+          {
+            "id": "opt2-bahri-md",
+            "type": "markdown",
+            "content": "### Bahri Perspective — Advantages\n\n- One-time payment of $35,000\n- No recurring BBS subscription\n- Hosted on Bahri infrastructure\n- Unlimited seats\n- Bahri-branded\n- Data migration included\n- Bahri receives a permanent operational solution\n- No recurring hosting charge to Bahri from the provider\n- Compatible with the MIPS2/Azure ecosystem\n- Future MIPS2 integration remains possible\n- First-year maintenance included\n- Significantly more tailored than the generic alternatives\n- Provides a long-term BBS solution without depending on MIPS2 completion\n\n### Bahri Perspective — Disadvantages\n\n- Higher upfront financial commitment than an annual subscription\n- Future MIPS2 implementation remains a separate project\n- Native MIPS2 implementation is not immediately included\n- Additional future enhancements may require separate commercial agreements"
+          },
+          {
+            "id": "opt2-tt-md",
+            "type": "markdown",
+            "content": "### TailoredTech / Marafei Perspective — Advantages\n\n- **$35,000 immediate revenue**\n- No annual hosting cost for TailoredTech if hosted on Bahri infrastructure\n- No recurring subscription management\n- Product remains owned by TailoredTech/Marafei\n- Product can continue to be developed and sold to other maritime companies\n- Creates a strong first commercial BBS deployment\n- Provides a potential future MIPS2 project\n- Allows TailoredTech to build a scalable BBS product rather than a one-off Bahri system\n- Removes dependence on Bahri's annual subscription budget\n- Stronger cash flow from the initial implementation\n\n### TailoredTech / Marafei Perspective — Disadvantages\n\n- No guaranteed recurring BBS subscription revenue\n- First-year maintenance is included\n- Future maintenance revenue depends on a separate agreement\n- Significant initial implementation responsibility\n- Future enhancement requests need to be clearly controlled through scope/change requests\n- Future MIPS2 work remains dependent on a separate commercial agreement\n- Higher initial delivery risk compared with a simple subscription service"
+          }
+        ]
+      },
+      {
+        "id": "comparison",
+        "title": "Comparison Table — All BBS Providers",
+        "blocks": [
+          {
+            "id": "comparison-main",
+            "type": "comparison",
+            "title": "Comparison of BBS Providers",
+            "columns": [
+              {
+                "id": "provider",
+                "label": "Provider",
+                "highlight": false
+              },
+              {
+                "id": "commercial_model",
+                "label": "Commercial Model",
+                "highlight": false
+              },
+              {
+                "id": "price",
+                "label": "Price",
+                "highlight": false
+              },
+              {
+                "id": "software_rating",
+                "label": "Software Rating",
+                "highlight": false
+              },
+              {
+                "id": "customizability",
+                "label": "Customizability",
+                "highlight": false
+              },
+              {
+                "id": "seats",
+                "label": "Seats",
+                "highlight": false
+              },
+              {
+                "id": "migration",
+                "label": "Migration",
+                "highlight": false
+              },
+              {
+                "id": "in_house_mips2",
+                "label": "In-House / MIPS2",
+                "highlight": false
+              },
+              {
+                "id": "infrastructure",
+                "label": "Infrastructure",
+                "highlight": false
+              }
+            ],
+            "rows": [
+              {
+                "label": "DEKRA",
+                "cells": [
+                  {
+                    "type": "text",
+                    "value": "DEKRA"
+                  },
+                  {
+                    "type": "text",
+                    "value": "Subscription"
+                  },
+                  {
+                    "type": "text",
+                    "value": "$9K/year"
+                  },
+                  {
+                    "type": "text",
+                    "value": "8/10"
+                  },
+                  {
+                    "type": "text",
+                    "value": "3/10"
+                  },
+                  {
+                    "type": "text",
+                    "value": "Limited"
+                  },
+                  {
+                    "type": "text",
+                    "value": "Existing data"
+                  },
+                  {
+                    "type": "text",
+                    "value": "No"
+                  },
+                  {
+                    "type": "text",
+                    "value": "Provider"
+                  }
+                ]
+              },
+              {
+                "label": "RabbitLink",
+                "cells": [
+                  {
+                    "type": "text",
+                    "value": "RabbitLink"
+                  },
+                  {
+                    "type": "text",
+                    "value": "Subscription"
+                  },
+                  {
+                    "type": "text",
+                    "value": "$14K/year + migration"
+                  },
+                  {
+                    "type": "text",
+                    "value": "6–7/10"
+                  },
+                  {
+                    "type": "text",
+                    "value": "2/10"
+                  },
+                  {
+                    "type": "text",
+                    "value": "Limited"
+                  },
+                  {
+                    "type": "text",
+                    "value": "Additional"
+                  },
+                  {
+                    "type": "text",
+                    "value": "No"
+                  },
+                  {
+                    "type": "text",
+                    "value": "Provider"
+                  }
+                ]
+              },
+              {
+                "label": "Athena AI",
+                "cells": [
+                  {
+                    "type": "text",
+                    "value": "Athena AI"
+                  },
+                  {
+                    "type": "text",
+                    "value": "Subscription"
+                  },
+                  {
+                    "type": "text",
+                    "value": "$18K + migration"
+                  },
+                  {
+                    "type": "text",
+                    "value": "6/10"
+                  },
+                  {
+                    "type": "text",
+                    "value": "3/10"
+                  },
+                  {
+                    "type": "text",
+                    "value": "Limited"
+                  },
+                  {
+                    "type": "text",
+                    "value": "Additional"
+                  },
+                  {
+                    "type": "text",
+                    "value": "Uncertain"
+                  },
+                  {
+                    "type": "text",
+                    "value": "Provider"
+                  }
+                ]
+              },
+              {
+                "label": "Benchmark Gensuite",
+                "cells": [
+                  {
+                    "type": "text",
+                    "value": "Benchmark Gensuite"
+                  },
+                  {
+                    "type": "text",
+                    "value": "One-time"
+                  },
+                  {
+                    "type": "text",
+                    "value": "$45K"
+                  },
+                  {
+                    "type": "text",
+                    "value": "8/10"
+                  },
+                  {
+                    "type": "text",
+                    "value": "4/10"
+                  },
+                  {
+                    "type": "text",
+                    "value": "—"
+                  },
+                  {
+                    "type": "text",
+                    "value": "Additional considerations"
+                  },
+                  {
+                    "type": "text",
+                    "value": "No"
+                  },
+                  {
+                    "type": "text",
+                    "value": "Provider"
+                  }
+                ]
+              },
+              {
+                "label": "Marafei — Option 1",
+                "cells": [
+                  {
+                    "type": "text",
+                    "value": "Marafei — Option 1"
+                  },
+                  {
+                    "type": "text",
+                    "value": "Subscription"
+                  },
+                  {
+                    "type": "text",
+                    "value": "$14K/year"
+                  },
+                  {
+                    "type": "text",
+                    "value": "Planned superior solution*"
+                  },
+                  {
+                    "type": "text",
+                    "value": "High"
+                  },
+                  {
+                    "type": "text",
+                    "value": "Unlimited"
+                  },
+                  {
+                    "type": "text",
+                    "value": "Included"
+                  },
+                  {
+                    "type": "text",
+                    "value": "Future MIPS2 path"
+                  },
+                  {
+                    "type": "text",
+                    "value": "As applicable"
+                  }
+                ]
+              },
+              {
+                "label": "Marafei — Option 2",
+                "cells": [
+                  {
+                    "type": "text",
+                    "value": "Marafei — Option 2"
+                  },
+                  {
+                    "type": "text",
+                    "value": "One-time"
+                  },
+                  {
+                    "type": "text",
+                    "value": "$35K"
+                  },
+                  {
+                    "type": "text",
+                    "value": "Planned superior solution*"
+                  },
+                  {
+                    "type": "text",
+                    "value": "High"
+                  },
+                  {
+                    "type": "text",
+                    "value": "Unlimited"
+                  },
+                  {
+                    "type": "text",
+                    "value": "Included"
+                  },
+                  {
+                    "type": "text",
+                    "value": "Future MIPS2 path"
+                  },
+                  {
+                    "type": "text",
+                    "value": "Bahri infrastructure"
+                  }
+                ]
+              }
+            ],
+            "caption": "* Planned product capabilities — not an independently verified benchmark. Existing providers' ratings reflect established, verifiable market track records."
+          }
+        ]
+      },
+      {
+        "id": "strategic-purpose",
+        "title": "Strategic Purpose of the BBS Product",
+        "blocks": [
+          {
+            "id": "strat-md",
+            "type": "markdown",
+            "content": "## 9. Strategic Purpose of the BBS Product\n\nThe objective is not simply to replace DEKRA for Bahri.\n\nThe BBS solution is intended to become a **reusable maritime software product** that TailoredTech/Marafei can continue developing and potentially offer to other maritime companies.\n\nBahri can therefore serve as the **first major enterprise implementation and reference customer** while TailoredTech/Marafei retains the underlying product and intellectual property.\n\nThe long-term strategy is to create a scalable BBS product that can generate additional implementations and revenue beyond the initial Bahri deployment."
+          }
+        ]
+      },
+      {
+        "id": "future-mips2",
+        "title": "Future MIPS2 Track",
+        "blocks": [
+          {
+            "id": "mips2-md",
+            "type": "markdown",
+            "content": "## 10. Future MIPS2 Track\n\nThe immediate BBS replacement and the future MIPS2-native implementation should be presented as **two separate tracks**.\n\n### Track 1 — Immediate DEKRA Replacement\nDeploy a working BBS solution before **31 December 2026**.\n\n### Track 2 — Future MIPS2 Integration\nDevelop a native MIPS2 BBS module once the MIPS2 environment is ready and the technical requirements are defined.\n\nThe future MIPS2 project is approximately:\n\n- **$60,000 baseline**\n- Approximately **six months development**\n- Commercial discounts depend on the selected BBS option\n- Migration and API integration considerations are included in the future planning\n\nThe separation of these two tracks allows Bahri to obtain a working BBS replacement without making the DEKRA replacement dependent on the MIPS2 development timeline."
+          },
+          {
+            "type": "markdown",
+            "id": "markdown-mslmipfj",
+            "content": "**Diagram unavailable** — Two-Track Approach\n\nThe mermaid diagram failed to render and was replaced with this summary.\n\n```\nParse error on line 10:\n...> MIGRATE[~6 months | ~$60K baseline]  \n-----------------------^\nExpecting 'SQE', 'TAGEND', 'UNICODE_TEXT', 'TEXT', 'TAGSTART', got 'PIPE'\n```\n\nOriginal source (for reference):\n\n```mermaid\nflowchart LR\n    subgraph TRACK1[Track 1: Immediate DEKRA Replacement]\n        BID[Bidding closes 14 Aug 2026] --> EVAL[Evaluate all offers]\n        EVAL --> DEPLOY[Deploy web-based BBS]\n        DEPLOY --> DEADLINE[Operational before 31 Dec 2026]\n    end\n\n    subgraph TRACK2[Track 2: Future MIPS2 Integration]\n        MIPS2_READY[MIPS2 environment ready] --> DEV[Native MIPS2 BBS Module]\n        DEV --> MIGRATE[~6 months | ~$60K baseline]\n    end\n\n    DEPLOY -.->|Future API integration| DEV\n\n    style DEADLINE fill:#f96,stroke:#333\n    style MIGRATE fill:#bbf,stroke:#333\n```"
+          },
+          {
+            "type": "markdown",
+            "id": "markdown-mslmlndp",
+            "content": "**Diagram unavailable** — Two-Track Approach\n\nThe mermaid diagram failed to render and was replaced with this summary.\n\n```\nParse error on line 10:\n...> MIGRATE[~6 months | ~$60K baseline]  \n-----------------------^\nExpecting 'SQE', 'TAGEND', 'UNICODE_TEXT', 'TEXT', 'TAGSTART', got 'PIPE'\n```\n\nOriginal source (for reference):\n\n```mermaid\nflowchart LR\n    subgraph TRACK1[Track 1: Immediate DEKRA Replacement]\n        BID[Bidding closes 14 Aug 2026] --> EVAL[Evaluate all offers]\n        EVAL --> DEPLOY[Deploy web-based BBS]\n        DEPLOY --> DEADLINE[Operational before 31 Dec 2026]\n    end\n\n    subgraph TRACK2[Track 2: Future MIPS2 Integration]\n        MIPS2_READY[MIPS2 environment ready] --> DEV[Native MIPS2 BBS Module]\n        DEV --> MIGRATE[~6 months | ~$60K baseline]\n    end\n\n    DEPLOY -.->|Future API integration| DEV\n\n    style DEADLINE fill:#f96,stroke:#333\n    style MIGRATE fill:#bbf,stroke:#333\n```"
+          },
+          {
+            "type": "markdown",
+            "id": "markdown-mslmoihx",
+            "content": "### Two-Track Approach\n\n**Track 1 — Immediate DEKRA Replacement:**\n```\nBidding closes 14 Aug 2026 → Evaluate all offers → Deploy web-based BBS → Operational before 31 Dec 2026\n```\n\n**Track 2 — Future MIPS2 Integration:**\n```\nMIPS2 environment ready → Native MIPS2 BBS Module → ~6 months / ~$60K baseline\n```\n\n> The Track 1 deployment supports future API integration into Track 2, without making the DEKRA replacement dependent on MIPS2."
+          },
+          {
+            "type": "mermaid",
+            "id": "mermaid-mslmq4bp",
+            "title": "two track diagram",
+            "diagram": "flowchart LR\n    subgraph TRACK1[Track 1: Immediate DEKRA Replacement]\n        BID[Bidding closes 14 Aug 2026] --> EVAL[Evaluate all offers]\n        EVAL --> DEPLOY[Deploy web-based BBS]\n        DEPLOY --> DEADLINE[Operational before 31 Dec 2026]\n    end\n\n    subgraph TRACK2[Track 2: Future MIPS2 Integration]\n        MIPS2_READY[MIPS2 environment ready] --> DEV[Native MIPS2 BBS Module]\n        DEV --> MIGRATE[~6 months, ~$60K baseline]\n    end\n\n    DEPLOY -.->|Future API integration| DEV\n\n    style DEADLINE fill:#f96,stroke:#333\n    style MIGRATE fill:#bbf,stroke:#333"
+          },
+          {
+            "type": "mermaid",
+            "id": "mermaid-mslobu5o",
+            "title": "two track",
+            "diagram": "flowchart LR\n    subgraph TRACK1[Track 1: Immediate DEKRA Replacement]\n        BID[Bidding closes 14 Aug 2026] --> EVAL[Evaluate all offers]\n        EVAL --> DEPLOY[Deploy web-based BBS]\n        DEPLOY --> DEADLINE[Operational before 31 Dec 2026]\n    end\n\n    subgraph TRACK2[Track 2: Future MIPS2 Integration]\n        MIPS2_READY[MIPS2 environment ready] --> DEV[Native MIPS2 BBS Module]\n        DEV --> MIGRATE[~6 months, ~$60K baseline]\n    end\n\n    DEPLOY -.->|Future API integration| DEV\n\n    style DEADLINE fill:#f96,stroke:#333\n    style MIGRATE fill:#bbf,stroke:#333"
+          }
+        ]
+      }
+    ],
+    "title": "BBS Project — Background, Market Comparison, and Commercial Proposals",
+    "name": "proposal",
+    "description": "Complete BBS proposal document with all sections",
+    "explains": [],
+    "questionnaires": [],
+    "variants": {
+      "sidebarNav": true,
+      "compactHero": true,
+      "showMeta": true
+    },
+    "updatedAt": "2026-08-09"
   }
 }

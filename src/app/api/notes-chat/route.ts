@@ -8,9 +8,7 @@ import {
   toUIMessageStream,
   type UIMessage,
 } from "ai"
-import { z } from "zod"
 import { getNoteById } from "@/lib/notes"
-import { applyNoteEdit } from "@/lib/notes-chat/apply-edit"
 import {
   buildSummarizeTodayContext,
   parseSlashCommand,
@@ -18,14 +16,15 @@ import {
 } from "@/lib/notes-chat/commands"
 import { buildNotesChatContext } from "@/lib/notes-chat/context"
 import {
+  consecutiveEditFailures,
+  createNotesEditTools,
+  EDIT_MODE_SYSTEM_RULES,
+} from "@/lib/notes-chat/edit-tools"
+import {
   resolveModelForMessages,
   NOTES_CHAT_SUMMARY_MODEL,
 } from "@/lib/notes-chat/models"
 import { serializeNoteJson } from "@/lib/notes-chat/serialize"
-import {
-  appendBlock,
-  newBlockId,
-} from "@/lib/notes-chat/section-blocks"
 import {
   messagesToTranscript,
   splitMessagesForSummary,
@@ -33,7 +32,6 @@ import {
 } from "@/lib/notes-chat/session"
 import { isLocalEditEnabled } from "@/lib/local-edit"
 import { getOpenRouter } from "@/lib/openrouter"
-import type { NoteDocument } from "@/lib/notes-types"
 
 export const maxDuration = 60
 
@@ -184,14 +182,7 @@ export async function POST(req: Request) {
 
     if (mode === "edit") {
       systemParts.push(`
-EDIT MODE RULES:
-- You can modify the open note with tools. Prefer specialized tools over dumping everything as markdown.
-- For architecture / layers / tech stacks: ALWAYS use addStackBlock (not ASCII art, not markdown tables).
-- For flows / sequences / relationships / system diagrams: ALWAYS use addMermaidBlock (not ASCII boxes).
-- Prefer dashed mermaid links (-.-> / -->>).
-- Use updateNote only for broad rewrites of markdown/copy or multi-section changes.
-- When adding to the note, prefer the ACTIVE SECTION if provided.
-- Valid block types: markdown, youtube, stack, mermaid, illustration, html, link, callout, gallery, terminal, playground, tasks.
+${EDIT_MODE_SYSTEM_RULES}
 ${command === "summarize-today" ? "- For /summarize-today you MUST call updateNote once with the full rewritten daily summary. Do not only reply in chat." : ""}
 
 Current note JSON:
@@ -199,141 +190,18 @@ ${serializeNoteJson(note)}
 `)
     }
 
-    const tools =
-      mode === "edit"
-        ? {
-            updateNote: {
-              description:
-                "Replace note content for broad edits. Prefer addStackBlock / addMermaidBlock for diagrams.",
-              inputSchema: z.object({
-                title: z.string().optional(),
-                name: z.string().optional(),
-                description: z.string().optional(),
-                sections: z.array(
-                  z.object({
-                    id: z.string(),
-                    title: z.string(),
-                    blocks: z.array(z.record(z.string(), z.unknown())),
-                    questionnaireId: z.string().nullable().optional(),
-                  })
-                ),
-              }),
-              execute: async (input: {
-                title?: string
-                name?: string
-                description?: string
-                sections: NoteDocument["sections"]
-              }) => {
-                await applyNoteEdit(noteId, input)
-                return { ok: true, message: "Note updated" }
-              },
-            },
-            addMermaidBlock: {
-              description:
-                "REQUIRED for architecture/flow/sequence diagrams. Appends a mermaid block to a section. Never draw ASCII diagrams in chat when this tool can be used.",
-              inputSchema: z.object({
-                sectionId: z
-                  .string()
-                  .describe("Target section id (prefer active section)"),
-                title: z.string().optional(),
-                caption: z.string().optional(),
-                diagram: z
-                  .string()
-                  .describe("Raw mermaid source only, no fences"),
-              }),
-              execute: async (input: {
-                sectionId: string
-                title?: string
-                caption?: string
-                diagram: string
-              }) => {
-                const fresh = getNoteById(noteId)
-                if (!fresh) throw new Error("Note not found")
-                const diagram = input.diagram
-                  .replace(/^```(?:mermaid)?\s*/i, "")
-                  .replace(/```\s*$/i, "")
-                  .trim()
-                const sections = appendBlock(fresh, input.sectionId, {
-                  type: "mermaid",
-                  id: newBlockId("mermaid"),
-                  title: input.title,
-                  caption: input.caption,
-                  diagram,
-                })
-                await applyNoteEdit(noteId, { sections })
-                return { ok: true, message: "Mermaid block added" }
-              },
-            },
-            addStackBlock: {
-              description:
-                "REQUIRED for tech stacks / layered architecture visuals. Appends a stack block with layers and optional dashed edges.",
-              inputSchema: z.object({
-                sectionId: z.string(),
-                title: z.string().optional(),
-                caption: z.string().optional(),
-                direction: z.enum(["vertical", "horizontal"]).optional(),
-                layers: z.array(
-                  z.object({
-                    id: z.string(),
-                    label: z.string(),
-                    items: z.array(
-                      z.object({
-                        icon: z
-                          .string()
-                          .describe(
-                            "simple-icons key like siReact, siNextdotjs, siMongodb"
-                          ),
-                        label: z.string(),
-                      })
-                    ),
-                  })
-                ),
-                edges: z
-                  .array(
-                    z.object({
-                      from: z.string(),
-                      to: z.string(),
-                      label: z.string().optional(),
-                    })
-                  )
-                  .optional(),
-              }),
-              execute: async (input: {
-                sectionId: string
-                title?: string
-                caption?: string
-                direction?: "vertical" | "horizontal"
-                layers: {
-                  id: string
-                  label: string
-                  items: { icon: string; label: string }[]
-                }[]
-                edges?: { from: string; to: string; label?: string }[]
-              }) => {
-                const fresh = getNoteById(noteId)
-                if (!fresh) throw new Error("Note not found")
-                const sections = appendBlock(fresh, input.sectionId, {
-                  type: "stack",
-                  id: newBlockId("stack"),
-                  title: input.title,
-                  caption: input.caption,
-                  direction: input.direction ?? "vertical",
-                  layers: input.layers,
-                  edges: input.edges,
-                })
-                await applyNoteEdit(noteId, { sections })
-                return { ok: true, message: "Stack block added" }
-              },
-            },
-          }
-        : undefined
+    const tools = mode === "edit" ? createNotesEditTools(noteId) : undefined
 
     const result = streamText({
       model,
       system: systemParts.join(""),
       messages: await convertToModelMessages(messages),
       tools,
-      stopWhen: mode === "edit" ? stepCountIs(5) : stepCountIs(1),
+      // Multi-step agentic loop: plan → tools → re-read → more tools
+      stopWhen:
+        mode === "edit"
+          ? [stepCountIs(14), consecutiveEditFailures(3)]
+          : stepCountIs(4),
     })
 
     return createUIMessageStreamResponse({
@@ -341,6 +209,7 @@ ${serializeNoteJson(note)}
         stream: result.stream,
         originalMessages: messages,
         generateMessageId: generateId,
+        sendReasoning: true,
       }),
     })
   } catch (err) {

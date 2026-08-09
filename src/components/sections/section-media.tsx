@@ -81,7 +81,7 @@ function ImageLightbox({
 
   return (
     <motion.div
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4 backdrop-blur-sm md:p-8"
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-black/92 p-4 md:p-8"
       data-lenis-prevent
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -98,21 +98,22 @@ function ImageLightbox({
       </button>
 
       <motion.div
-        className="relative flex max-h-[min(88vh,900px)] w-full max-w-4xl flex-col"
-        initial={{ opacity: 0, scale: 0.94, y: 12 }}
+        className="relative flex max-h-[min(90vh,960px)] w-full max-w-5xl flex-col"
+        initial={{ opacity: 0, scale: 0.96, y: 10 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
-        exit={{ opacity: 0, scale: 0.97, y: 8 }}
-        transition={{ duration: 0.32, ease: EASE }}
+        exit={{ opacity: 0, scale: 0.98, y: 6 }}
+        transition={{ duration: 0.28, ease: EASE }}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="relative min-h-0 flex-1 overflow-hidden border border-accent/35 bg-black">
-          <div className="relative mx-auto h-[min(72vh,720px)] w-full">
+        <div className="relative min-h-0 flex-1 overflow-hidden border border-white/15 bg-[#070707]">
+          <div className="relative mx-auto h-[min(74vh,780px)] w-full">
             <Image
               src={current.src}
               alt={current.label || ""}
               fill
-              sizes="(max-width: 1024px) 100vw, 896px"
-              className="object-contain p-2 md:p-4"
+              sizes="(max-width: 1024px) 100vw, 1024px"
+              quality={95}
+              className="object-contain p-3 md:p-5"
               priority
             />
           </div>
@@ -156,17 +157,119 @@ function ImageLightbox({
 type SectionImageGridProps = {
   images: readonly GalleryImage[]
   className?: string
+  /**
+   * Crisp modern gallery (no bottom fade, contain fit, sharp chrome).
+   * Set false for the classic cover + overlay style.
+   */
+  enhanced?: boolean
 }
 
-/** Default solution gallery — flat grid with hover labels (pixel font). */
+/** Default solution / presentation gallery. */
 export function SectionImageGrid({
   images,
   className,
+  enhanced = true,
 }: SectionImageGridProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
   const count = images.length
   if (count === 0) return null
 
+  if (!enhanced) {
+    return (
+      <ClassicImageGrid
+        images={images}
+        className={className}
+        openIndex={openIndex}
+        setOpenIndex={setOpenIndex}
+      />
+    )
+  }
+
+  const cols =
+    count === 1
+      ? "grid-cols-1"
+      : count === 2
+        ? "grid-cols-1 lg:grid-cols-2"
+        : "grid-cols-1 sm:grid-cols-2"
+
+  return (
+    <div className={cn("mt-10", className)}>
+      <p className="mb-4 font-mono text-[10px] tracking-[0.22em] uppercase text-accent">
+        Gallery · {count}
+      </p>
+
+      <div className={cn("grid gap-4 md:gap-5", cols)}>
+        {images.map((image, i) => (
+          <motion.button
+            key={`${image.src}-${i}`}
+            type="button"
+            onClick={() => setOpenIndex(i)}
+            className="group flex cursor-pointer flex-col overflow-hidden border border-white/12 bg-[#080808] text-left outline-none transition-[border-color,box-shadow] duration-300 hover:border-accent/45 hover:shadow-[0_0_0_1px_rgba(212,255,0,0.12)] focus-visible:ring-2 focus-visible:ring-accent"
+            whileHover={{ y: -2 }}
+            transition={{ type: "spring", stiffness: 380, damping: 30 }}
+          >
+            <div
+              className={cn(
+                "relative w-full bg-[#0c0c0c]",
+                count === 1 ? "aspect-[16/9] min-h-[220px] md:min-h-[320px]" : "aspect-[16/10]",
+              )}
+            >
+              <Image
+                src={image.src}
+                alt={image.label || ""}
+                fill
+                sizes={
+                  count === 1
+                    ? "(max-width: 1024px) 100vw, 900px"
+                    : "(max-width: 768px) 100vw, 50vw"
+                }
+                quality={95}
+                className="object-contain object-center p-2 md:p-3"
+              />
+              <span className="absolute right-2.5 top-2.5 inline-flex size-8 items-center justify-center border border-white/15 bg-black/70 text-accent opacity-0 transition duration-200 group-hover:opacity-100">
+                <Expand className="size-3.5" />
+              </span>
+            </div>
+            {image.label ? (
+              <span className="flex items-center justify-between gap-3 border-t border-white/10 px-3.5 py-3 md:px-4">
+                <span className="min-w-0 truncate font-pixel-circle text-[13px] tracking-tight text-white/80 md:text-sm">
+                  {image.label}
+                </span>
+                <span className="shrink-0 font-mono text-[10px] tracking-[0.18em] uppercase text-white/30">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+              </span>
+            ) : null}
+          </motion.button>
+        ))}
+      </div>
+
+      <AnimatePresence>
+        {openIndex !== null && (
+          <ImageLightbox
+            images={images}
+            openIndex={openIndex}
+            onClose={() => setOpenIndex(null)}
+            onChange={setOpenIndex}
+          />
+        )}
+      </AnimatePresence>
+    </div>
+  )
+}
+
+function ClassicImageGrid({
+  images,
+  className,
+  openIndex,
+  setOpenIndex,
+}: {
+  images: readonly GalleryImage[]
+  className?: string
+  openIndex: number | null
+  setOpenIndex: (i: number | null) => void
+}) {
+  const count = images.length
   const cols =
     count === 1
       ? "grid-cols-1"
@@ -291,6 +394,7 @@ export function SectionImageStack({
                   alt={image.label || ""}
                   fill
                   sizes="(max-width: 768px) 90vw, 320px"
+                  quality={95}
                   className="object-cover"
                 />
               </div>

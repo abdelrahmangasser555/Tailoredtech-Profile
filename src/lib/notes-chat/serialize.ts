@@ -36,9 +36,28 @@ function blockToText(block: NoteBlock): string {
           .join("\n")
       return `[Tasks] ${block.title ?? ""}\n${walk(block.items, 0)}`
     }
+    case "comparison": {
+      const header = [
+        block.rowHeader ?? "Capability",
+        ...block.columns.map((c) => c.label),
+      ].join(" | ")
+      const body = block.rows
+        .map((row) => {
+          const cells = row.cells
+            .map((c) => {
+              if (c.type === "check") return c.value ? "yes" : "no"
+              if (c.type === "x") return "no"
+              return String(c.value)
+            })
+            .join(" | ")
+          return `${row.label} | ${cells}`
+        })
+        .join("\n")
+      return `[Comparison] ${block.title ?? ""}\n${header}\n${body}`
+    }
     default:
       return `[Block ${(block as NoteBlock).type}]`
-  }
+    }
 }
 
 /** Compact text representation for LLM context */

@@ -8,7 +8,13 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog"
 import { refreshSmoothScroll } from "@/components/motion/smooth-scroll"
+import {
+  cleanupMermaidOrphans,
+  removeMermaidTempNodes,
+} from "@/components/sections/mermaid-cleanup"
 import { cn } from "@/lib/utils"
+
+export { cleanupMermaidOrphans } from "@/components/sections/mermaid-cleanup"
 
 function readCssVar(el: Element, name: string, fallback: string) {
   const value = getComputedStyle(el).getPropertyValue(name).trim()
@@ -84,6 +90,18 @@ type RenderOpts = {
   expanded: boolean
 }
 
+/** Mermaid is not safe for overlapping render() calls — serialize them. */
+let mermaidQueue: Promise<unknown> = Promise.resolve()
+
+function enqueueMermaid<T>(task: () => Promise<T>): Promise<T> {
+  const next = mermaidQueue.then(task, task)
+  mermaidQueue = next.then(
+    () => undefined,
+    () => undefined
+  )
+  return next
+}
+
 async function renderMermaidInto({
   host,
   target,
@@ -101,33 +119,49 @@ async function renderMermaidInto({
   const darkFg = readCssVar(host, "--section-dark-fg", "#F5F5F0")
   const fontSize = expanded ? (vertical ? "15px" : "16px") : vertical ? "12px" : "13px"
   const mermaidTheme = buildMermaidTheme(host, fontSize)
+  const source = chart.trim()
+  if (!source) return
 
-  const mermaid = (await import("mermaid")).default
-  mermaid.initialize({
-    startOnLoad: false,
-    securityLevel: "strict",
-    flowchart: {
-      curve: "basis",
-      padding: expanded ? (vertical ? 16 : 20) : vertical ? 10 : 14,
-      htmlLabels: true,
-      nodeSpacing: expanded ? (vertical ? 40 : 48) : vertical ? 26 : 34,
-      rankSpacing: expanded ? (vertical ? 44 : 52) : vertical ? 30 : 40,
-      useMaxWidth: true,
-    },
-    sequence: {
-      actorMargin: expanded ? 64 : 48,
-      messageMargin: expanded ? 48 : 36,
-      boxMargin: 10,
-      bottomMarginAdj: expanded ? 48 : 40,
-      mirrorActors: false,
-      useMaxWidth: true,
-    },
-    ...mermaidTheme,
+  await enqueueMermaid(async () => {
+    const mermaid = (await import("mermaid")).default
+    mermaid.initialize({
+      startOnLoad: false,
+      securityLevel: "strict",
+      // Prevents Mermaid from appending "bomb" error SVGs to document.body
+      suppressErrorRendering: true,
+      flowchart: {
+        curve: "basis",
+        padding: expanded ? (vertical ? 16 : 20) : vertical ? 10 : 14,
+        htmlLabels: true,
+        nodeSpacing: expanded ? (vertical ? 40 : 48) : vertical ? 26 : 34,
+        rankSpacing: expanded ? (vertical ? 44 : 52) : vertical ? 30 : 40,
+        useMaxWidth: true,
+      },
+      sequence: {
+        actorMargin: expanded ? 64 : 48,
+        messageMargin: expanded ? 48 : 36,
+        boxMargin: 10,
+        bottomMarginAdj: expanded ? 48 : 40,
+        mirrorActors: false,
+        useMaxWidth: true,
+      },
+      ...mermaidTheme,
+    })
+
+    // Parse first so invalid source never calls render()
+    await mermaid.parse(source)
+
+    const id = `mermaid-${uid}-${expanded ? "xl" : "sm"}-${Date.now()}`
+    try {
+      const { svg } = await mermaid.render(id, source)
+      if (svg.includes("Syntax error in text")) {
+        throw new Error("Syntax error in mermaid diagram")
+      }
+      target.innerHTML = svg
+    } finally {
+      removeMermaidTempNodes(id)
+    }
   })
-
-  const id = `mermaid-${uid}-${expanded ? "xl" : "sm"}-${Date.now()}`
-  const { svg } = await mermaid.render(id, chart.trim())
-  target.innerHTML = svg
 
   const el = target.querySelector("svg")
   if (el) {
@@ -195,6 +229,8 @@ type BrandedMermaidProps = {
   caption?: string
   /** Presentation brand scope (e.g. brand-bahri) — applied to expanded dialog portal */
   brandClass?: string
+  /** Optional: replace broken diagram with markdown via local-edit */
+  onReplaceWithText?: (errorMessage: string) => Promise<void> | void
 }
 
 export function BrandedMermaid({
@@ -203,6 +239,7 @@ export function BrandedMermaid({
   title,
   caption,
   brandClass,
+  onReplaceWithText,
 }: BrandedMermaidProps) {
   const uid = useId().replace(/:/g, "")
   const shellRef = useRef<HTMLDivElement>(null)
@@ -211,11 +248,16 @@ export function BrandedMermaid({
   const [error, setError] = useState<string | null>(null)
   const [expanded, setExpanded] = useState(false)
   const [ready, setReady] = useState(false)
+  const [replacing, setReplacing] = useState(false)
   const vertical = useMemo(() => isVerticalFlowchart(chart), [chart])
   const inlineMinH = vertical ? "min-h-[min(380px,48vh)]" : "min-h-28"
 
   const paint = useCallback(
-    async (target: HTMLDivElement | null, isExpanded: boolean) => {
+    async (
+      target: HTMLDivElement | null,
+      isExpanded: boolean,
+      isCancelled?: () => boolean
+    ) => {
       const host = shellRef.current
       if (!host || !target || !chart.trim()) return
       try {
@@ -227,25 +269,43 @@ export function BrandedMermaid({
           vertical,
           expanded: isExpanded,
         })
+        if (isCancelled?.() || !target.isConnected) return
+        setError(null)
         setReady(true)
-        // Debounced — avoid Lenis resize storms while scrolling past diagrams
         refreshSmoothScroll()
       } catch (err) {
-        setError(err instanceof Error ? err.message : "Diagram failed")
+        if (isCancelled?.() || !target.isConnected) return
+        const message =
+          err instanceof Error ? err.message : "Diagram failed to render"
+        setError(message)
+        setReady(false)
         target.innerHTML = ""
+        cleanupMermaidOrphans()
       }
     },
     [chart, uid, vertical]
   )
 
   useEffect(() => {
+    cleanupMermaidOrphans()
+    return () => cleanupMermaidOrphans()
+  }, [])
+
+  async function handleReplace() {
+    if (!onReplaceWithText || !error || replacing) return
+    setReplacing(true)
+    try {
+      await onReplaceWithText(error)
+    } finally {
+      setReplacing(false)
+    }
+  }
+
+  useEffect(() => {
     let cancelled = false
     setError(null)
     setReady(false)
-    void (async () => {
-      if (cancelled) return
-      await paint(inlineRef.current, false)
-    })()
+    void paint(inlineRef.current, false, () => cancelled)
     return () => {
       cancelled = true
     }
@@ -258,7 +318,7 @@ export function BrandedMermaid({
     }
     let cancelled = false
     const t = window.setTimeout(() => {
-      if (!cancelled) void paint(expandedRef.current, true)
+      void paint(expandedRef.current, true, () => cancelled)
     }, 40)
     return () => {
       cancelled = true
@@ -305,7 +365,32 @@ export function BrandedMermaid({
         </div>
 
         {error ? (
-          <p className="font-mono text-sm text-red-400">{error}</p>
+          <div className="border border-red-400/25 bg-red-500/5 px-3 py-3">
+            <p className="font-mono text-[10px] tracking-[0.16em] uppercase text-red-300/80">
+              Diagram error
+            </p>
+            <p className="mt-2 font-mono text-[12px] leading-relaxed text-red-300/90 break-words">
+              {error}
+            </p>
+            {/\|/.test(error) || /PIPE|label/i.test(error) ? (
+              <p className="mt-2 text-[11px] leading-relaxed text-white/35">
+                Mermaid labels cannot contain{" "}
+                <code className="text-white/50">|</code> inside node brackets.
+                Prefer short labels (e.g.{" "}
+                <code className="text-white/50">MIGRATE ~6mo</code>).
+              </p>
+            ) : null}
+            {onReplaceWithText ? (
+              <button
+                type="button"
+                disabled={replacing}
+                onClick={() => void handleReplace()}
+                className="mt-3 inline-flex items-center gap-1.5 border border-white/15 px-2.5 py-1.5 font-mono text-[10px] tracking-wider text-white/55 uppercase transition hover:border-white/30 hover:text-white disabled:opacity-40"
+              >
+                {replacing ? "Replacing…" : "Replace with text"}
+              </button>
+            ) : null}
+          </div>
         ) : (
           <div
             ref={inlineRef}
