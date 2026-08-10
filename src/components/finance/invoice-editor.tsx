@@ -251,11 +251,30 @@ export function InvoiceEditor({
                   disabled={invoice.language === "en"}
                 />
               </Field>
-              <Field label="Proforma number">
+              <Field label="Reference label (English)">
+                <Input
+                  value={invoice.numberLabelEn ?? "Proforma number"}
+                  onChange={(e) => patch({ numberLabelEn: e.target.value })}
+                  className="rounded-none"
+                  placeholder="Proforma number"
+                />
+              </Field>
+              <Field label="Reference label (Arabic)">
+                <Input
+                  value={invoice.numberLabelAr ?? "رقم الفاتورة المبدئية"}
+                  onChange={(e) => patch({ numberLabelAr: e.target.value })}
+                  className="rounded-none"
+                  dir="rtl"
+                  placeholder="رقم الفاتورة المبدئية"
+                  disabled={invoice.language === "en"}
+                />
+              </Field>
+              <Field label="Reference value">
                 <Input
                   value={invoice.number}
                   onChange={(e) => patch({ number: e.target.value })}
                   className="rounded-none"
+                  placeholder="QUO-000100"
                 />
               </Field>
               <Field label="Date">
@@ -853,7 +872,7 @@ export function InvoiceEditor({
                   ["showVat", "Total VAT"],
                   ["showDiscount", "Discounts"],
                   ["showTotal", "Grand total"],
-                  ["showInvoiceNumber", "Proforma number"],
+                  ["showInvoiceNumber", "Reference number row"],
                   ["showDate", "Date"],
                   ["showPageNumbers", "Page numbers"],
                 ] as const

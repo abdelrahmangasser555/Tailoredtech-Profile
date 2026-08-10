@@ -33,6 +33,7 @@ type ComparisonCell = {
 
 type ComparisonRow = {
   label: string
+  star?: boolean
   cells: ComparisonCell[]
 }
 
@@ -648,6 +649,18 @@ export function PresentationMetaSheet({
                           if (!c) return c
                           const rows = [...c.rows]
                           rows[ri] = { ...row, label: e.target.value }
+                          return { ...c, rows }
+                        })
+                      }
+                    />
+                    <CompactCheck
+                      label="Star"
+                      checked={Boolean(row.star)}
+                      onCheckedChange={(star) =>
+                        setComparisonDraft((c) => {
+                          if (!c) return c
+                          const rows = [...c.rows]
+                          rows[ri] = { ...row, star: star || undefined }
                           return { ...c, rows }
                         })
                       }

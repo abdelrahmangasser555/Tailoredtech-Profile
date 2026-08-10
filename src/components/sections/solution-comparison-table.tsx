@@ -1,5 +1,6 @@
 "use client"
 
+import { Star } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 export type ComparisonColumn = {
@@ -16,6 +17,8 @@ export type ComparisonCell = {
 
 export type ComparisonRow = {
   label: string
+  /** Show a primary-colored star tag beside the row label */
+  star?: boolean
   cells: readonly ComparisonCell[]
 }
 
@@ -109,7 +112,7 @@ export function SolutionComparisonTable({
                       "group-hover:bg-[#FAFAF8]"
                     )}
                   >
-                    {row.label}
+                    <ComparisonRowLabel label={row.label} star={row.star} />
                   </th>
                   {row.cells.map((cell, ci) => {
                     const col = data.columns[ci]
@@ -133,6 +136,29 @@ export function SolutionComparisonTable({
         </div>
       </div>
     </section>
+  )
+}
+
+function ComparisonRowLabel({
+  label,
+  star,
+}: {
+  label: string
+  star?: boolean
+}) {
+  if (!star) return <>{label}</>
+
+  return (
+    <span className="inline-flex flex-wrap items-center gap-2">
+      <span>{label}</span>
+      <span
+        className="inline-flex items-center gap-1 bg-primary px-1.5 py-0.5 font-mono text-[9px] font-medium tracking-[0.14em] uppercase text-primary-foreground"
+        title="Highlighted capability"
+      >
+        <Star className="size-2.5 shrink-0 fill-current" aria-hidden />
+        Star
+      </span>
+    </span>
   )
 }
 
@@ -174,34 +200,37 @@ function ComparisonCellView({ cell }: { cell: ComparisonCell }) {
   )
 }
 
-/** Blocky pixel check — charcoal, no brand lime */
+
+/** Blocky pixel check — uses --comparison-check when set, else charcoal */
 function PixelCheck() {
   return (
-    <svg
-      width="18"
-      height="18"
-      viewBox="0 0 18 18"
-      aria-hidden
-      className="mx-auto block"
-    >
-      <rect
-        x="1"
-        y="1"
-        width="16"
-        height="16"
-        fill="none"
-        stroke="#1A1A1A"
-        strokeWidth="1.5"
-      />
-      <path
-        d="M4 9h2v2H4V9Zm2 2h2v2H6v-2Zm2-2h2v2H8V9Zm2-2h2v2h-2V7Zm2-2h2v2h-2V5Z"
-        fill="#1A1A1A"
-      />
-    </svg>
+    <span className="inline-flex text-[var(--comparison-check,#1A1A1A)]">
+      <svg
+        width="18"
+        height="18"
+        viewBox="0 0 18 18"
+        aria-hidden
+        className="mx-auto block"
+      >
+        <rect
+          x="1"
+          y="1"
+          width="16"
+          height="16"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+        />
+        <path
+          d="M4 9h2v2H4V9Zm2 2h2v2H6v-2Zm2-2h2v2H8V9Zm2-2h2v2h-2V7Zm2-2h2v2h-2V5Z"
+          fill="currentColor"
+        />
+      </svg>
+    </span>
   )
 }
 
-/** Pixel X — centered 2×2 blocks; both diagonals complete (includes center) */
+/** Pixel X — uses --comparison-x-mark when set, else grey */
 function PixelX() {
   const cells: Array<[number, number]> = [
     [4, 4],
@@ -216,26 +245,35 @@ function PixelX() {
   ]
 
   return (
-    <svg
-      width="18"
-      height="18"
-      viewBox="0 0 18 18"
-      aria-hidden
-      className="mx-auto block opacity-55"
-    >
-      <rect
-        x="1"
-        y="1"
-        width="16"
-        height="16"
-        fill="none"
-        stroke="#6B6B6B"
-        strokeWidth="1.5"
-      />
-      {cells.map(([x, y]) => (
-        <rect key={`${x}-${y}`} x={x} y={y} width={2} height={2} fill="#6B6B6B" />
-      ))}
-    </svg>
+    <span className="inline-flex text-[var(--comparison-x-mark,#6B6B6B)] opacity-90">
+      <svg
+        width="18"
+        height="18"
+        viewBox="0 0 18 18"
+        aria-hidden
+        className="mx-auto block"
+      >
+        <rect
+          x="1"
+          y="1"
+          width="16"
+          height="16"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+        />
+        {cells.map(([x, y]) => (
+          <rect
+            key={`${x}-${y}`}
+            x={x}
+            y={y}
+            width={2}
+            height={2}
+            fill="currentColor"
+          />
+        ))}
+      </svg>
+    </span>
   )
 }
 

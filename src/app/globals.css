@@ -231,6 +231,10 @@
   --chart-4: #c9784a;
   --chart-5: #dce6ef;
 
+  /* Comparison table marks (light surfaces) */
+  --comparison-check: #003c71;
+  --comparison-x-mark: #ff681d;
+
   color: var(--foreground);
   background: var(--background);
 }

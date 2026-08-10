@@ -123,6 +123,7 @@ export function PresentationEditShell({
               columns: item.page.comparison.columns.map((c) => ({ ...c })),
               rows: item.page.comparison.rows.map((r) => ({
                 label: r.label,
+                star: (r as { star?: boolean }).star,
                 cells: r.cells.map((cell) => ({ ...cell })),
               })),
             }

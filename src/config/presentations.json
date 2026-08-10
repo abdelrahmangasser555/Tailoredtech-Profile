@@ -584,9 +584,9 @@
       "id": "bahri-oop",
       "title": "Bahri Out of Policy",
       "short": "New OOP module on the MOC & PCR platform: vessel and office, multi-org, sequential approval.",
-      "description": "Presentation for Bahri Out of Policy (OOP): a new module on the MOC & PCR platform under the Approval module. Generic approval is included and under development. Vessel and office initiation, multi-org support, sequential approval, and operational follow-up.",
+      "description": "Presentation for Bahri Out of Policy (OOP): a new module on the MOC & PCR platform under the Approval module.",
       "createdAt": "2026-08-09",
-      "updatedAt": "2026-08-09",
+      "updatedAt": "2026-08-10",
       "brandClass": "brand-bahri",
       "clientLogo": "/clients/bahri-no-background.png",
       "clientName": "Bahri",
@@ -596,7 +596,7 @@
         "eyebrow": "MOC & PCR platform",
         "headline": "Out of",
         "headlineAccent": "Policy",
-        "tagline": "A new module on the MOC & PCR platform. Part of the Approval module. Generic approval is included and under development. Vessel and office, multi-org, sequential approval, full close-out.",
+        "tagline": "A new module on the MOC & PCR platform. Part of the Approval module. Vessel and office, multi-org, sequential approval, full close-out.",
         "heroVisual": "engine",
         "showExplore": false,
         "glyphBackdrop": false,
@@ -886,11 +886,24 @@
               "cells": [
                 {
                   "type": "text",
-                  "value": "Email platform"
+                  "value": "Email & MOC&PCR platform"
                 },
                 {
                   "type": "text",
                   "value": "Teams only"
+                }
+              ]
+            },
+            {
+              "label": "Approval Tiers",
+              "cells": [
+                {
+                  "type": "text",
+                  "value": "Freedom to allocate & add approval tiers"
+                },
+                {
+                  "type": "text",
+                  "value": "limited"
                 }
               ]
             }
@@ -901,13 +914,8 @@
             "id": "product",
             "title": "OOP in the platform",
             "icon": "Layers",
-            "body": "Out of Policy is a new module on the **MOC & PCR platform**, under the planned **Approval** module.\n\nHighlights: vessel and office initiation, multiple organization support, sequential approval, structured request intake, tracking with reminders and printouts, and operational follow-up after the event.",
-            "bullets": [
-              "Vessel and office initiation",
-              "Multiple organization support",
-              "Sequential approval chains",
-              "Follow-up on OOP event"
-            ],
+            "body": "Out of Policy is a new module on the **MOC & PCR platform**, under the planned **Approval** module.",
+            "bullets": [],
             "video": null,
             "images": [
               {
@@ -930,28 +938,56 @@
             "mermaid": "flowchart LR\n  Create[\"Create OOP\"] --> Approve[\"Sequential approve\"]\n  Approve --> Track[\"Track\"]\n  Track --> Follow[\"Follow-up\"]\n  Follow --> Closed[\"Closed\"]",
             "mermaidTitle": "OOP control loop",
             "mermaidCaption": "Create, approve, track, follow-up, closed",
-            "chart": null
+            "chart": null,
+            "charts": null
           },
           {
             "id": "included-in-development",
             "title": "Included in development",
             "icon": "CalendarCheck",
-            "body": "**Generic approval** is included in the current development scope and is under development now on the MOC & PCR platform.\n\n**DOC sign** is planned as a future capability on the same Approval module spine.\n\nBoth build on the OOP approval flow: levels, tracking, notifications, and close-out.",
+            "body": "The **Approval module** on the MOC & PCR platform builds on the OOP approval flow: levels, tracking, notifications, and close-out.\n\nAdditional capabilities on the same spine are shown in the roadmap diagram below.",
             "bullets": [
-              "Generic approval: included, currently under development",
-              "DOC sign: future plans",
-              "Shared Approval module spine with OOP"
+              "Shared Approval module spine with OOP",
+              "Levels, tracking, notifications, and close-out",
+              "Roadmap items shown in the diagram below"
+            ],
+            "video": "",
+            "images": [
+              {
+                "src": "/assets/uploads/presentations/bahri-oop/Screenshot-2026-08-10-085725-msmrgh2a.png",
+                "label": "Approval Module Plan"
+              }
+            ],
+            "mermaid": "flowchart LR\n  OOP[\"OOP live\"] --> Approval[\"Approval module\"]\n  Generic[\"Generic approval\"] -.->|under development| Approval\n  Safety[\"Safety champion\"] -.->|under development| Approval",
+            "mermaidTitle": "Development scope",
+            "mermaidCaption": "Generic approval and Safety champion are under development on the Approval module.",
+            "chart": null,
+            "charts": null
+          },
+          {
+            "id": "safety-champion",
+            "title": "Safety champion",
+            "icon": "Shield",
+            "body": "**Safety champion** on the MOC & PCR platform replaces manual processes with a fully digital workflow. It runs on the same vessel and user base already in the system, so rollout does not start from scratch.\n\nCapabilities driven by Safety champion:",
+            "bullets": [
+              "Digitalized solution replacing manual implementation",
+              "Built into the platform with all vessels and users already in place",
+              "Campaign announcements and automated messages: vessel notifications in the system and by email",
+              "Digital vessel nomination for Safety champion",
+              "Automatic presentation creation and sharing",
+              "List printout and tracking log in one place",
+              "No manual steps end to end"
             ],
             "video": null,
             "images": [
               {
-                "src": "/assets/uploads/presentations/bahri-oop/Screenshot-2026-08-10-013849-msmbs0mv.png",
-                "label": "Approval module plan"
+                "src": "/assets/uploads/presentations/bahri-oop/Screenshot-2026-08-10-085847-msmrhsg5.png",
+                "label": "Saftey Champion Flow"
               }
             ],
-            "mermaid": "flowchart LR\n  OOP[\"OOP live\"] --> Approval[\"Approval module\"]\n  Generic[\"Generic approval\"] -.->|under development| Approval\n  DocSign[\"DOC sign\"] -.->|future plans| Approval",
-            "mermaidTitle": "Development scope",
-            "mermaidCaption": "Generic approval in development. DOC sign on the future roadmap.",
+            "mermaid": "flowchart LR\n  Create[\"Create campaign\"] --> Announce[\"Announce campaign\"]\n  Announce --> Notify[\"Vessel notified\"]\n  Notify --> Nominate[\"Vessel nominates Safety champion\"]\n  Nominate --> Presentation[\"Presentation\"]",
+            "mermaidTitle": "Safety champion flow",
+            "mermaidCaption": "Create campaign, announce, notify vessel, nominate Safety champion, presentation",
             "chart": null,
             "charts": null
           }

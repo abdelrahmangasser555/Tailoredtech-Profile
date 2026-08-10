@@ -672,15 +672,15 @@ function InvoicePage({ data }: { data: PreparedInvoicePdf }) {
                 ]}
               >
                 <MetaLabel
-                  en="Proforma number"
-                  ar="رقم الفاتورة المبدئية"
+                  en={invoice.numberLabelEn || "Proforma number"}
+                  ar={invoice.numberLabelAr || "رقم الفاتورة المبدئية"}
                   showAr={showAr}
                   side="en"
                 />
                 <MetaValueCell text={invoice.number} />
                 <MetaLabel
-                  en="Proforma number"
-                  ar="رقم الفاتورة المبدئية"
+                  en={invoice.numberLabelEn || "Proforma number"}
+                  ar={invoice.numberLabelAr || "رقم الفاتورة المبدئية"}
                   showAr={showAr}
                   side="ar"
                 />

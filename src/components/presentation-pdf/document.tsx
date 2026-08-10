@@ -11,7 +11,7 @@ import {
 } from "@react-pdf/renderer"
 import type { PreparedPresentationPdf } from "@/lib/presentation-pdf/prepare-assets"
 import { PdfMarkdownBody } from "@/lib/presentation-pdf/markdown"
-import type { ComparisonCell } from "@/components/sections/solution-comparison-table"
+import type { ComparisonCell, ComparisonRow } from "@/components/sections/solution-comparison-table"
 
 const PAGE = {
   width: "A4" as const,
@@ -145,17 +145,88 @@ function XMark({ color }: { color: string }) {
   )
 }
 
+function ComparisonRowLabelPdf({
+  label,
+  star,
+  primary,
+  primaryForeground,
+}: {
+  label: string
+  star?: boolean
+  primary: string
+  primaryForeground: string
+}) {
+  if (!star) {
+    return (
+      <Text
+        style={{
+          fontFamily: "GeistSans",
+          fontSize: 7,
+          fontWeight: 500,
+          color: primary,
+          opacity: 0.88,
+        }}
+      >
+        {label}
+      </Text>
+    )
+  }
+
+  return (
+    <View style={{ flexDirection: "row", flexWrap: "wrap", alignItems: "center", gap: 4 }}>
+      <Text
+        style={{
+          fontFamily: "GeistSans",
+          fontSize: 7,
+          fontWeight: 500,
+          color: primary,
+          opacity: 0.88,
+        }}
+      >
+        {label}
+      </Text>
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+          gap: 2,
+          backgroundColor: primary,
+          paddingHorizontal: 4,
+          paddingVertical: 2,
+        }}
+      >
+        <Text style={{ fontSize: 6, color: primaryForeground }}>★</Text>
+        <Text
+          style={{
+            fontFamily: "GeistMono",
+            fontSize: 5.5,
+            letterSpacing: 0.8,
+            textTransform: "uppercase",
+            color: primaryForeground,
+          }}
+        >
+          Star
+        </Text>
+      </View>
+    </View>
+  )
+}
+
 function ComparisonCellPdf({
   cell,
   ink,
   muted,
+  comparisonCheck,
+  comparisonXMark,
 }: {
   cell: ComparisonCell
   ink: string
   muted: string
+  comparisonCheck: string
+  comparisonXMark: string
 }) {
-  if (cell.type === "check") return <CheckMark color={ink} />
-  if (cell.type === "x") return <XMark color={muted} />
+  if (cell.type === "check") return <CheckMark color={comparisonCheck} />
+  if (cell.type === "x") return <XMark color={comparisonXMark} />
   if (cell.type === "number") {
     return (
       <Text
@@ -506,7 +577,7 @@ export function PresentationPdfDocument({ data }: { data: PreparedPresentationPd
               ))}
             </View>
 
-            {comparison.rows.map((row, rowIndex) => (
+            {(comparison.rows as readonly ComparisonRow[]).map((row, rowIndex) => (
               <View
                 key={row.label}
                 style={{
@@ -529,17 +600,12 @@ export function PresentationPdfDocument({ data }: { data: PreparedPresentationPd
                     backgroundColor: "#FFFFFF",
                   }}
                 >
-                  <Text
-                    style={{
-                      fontFamily: "GeistSans",
-                      fontSize: 7,
-                      fontWeight: 500,
-                      color: brand.ink,
-                      opacity: 0.88,
-                    }}
-                  >
-                    {row.label}
-                  </Text>
+                  <ComparisonRowLabelPdf
+                    label={row.label}
+                    star={row.star}
+                    primary={brand.primary}
+                    primaryForeground={brand.accentForeground}
+                  />
                 </View>
                 {row.cells.map((cell, ci) => {
                   const col = comparison.columns[ci]
@@ -561,6 +627,8 @@ export function PresentationPdfDocument({ data }: { data: PreparedPresentationPd
                         cell={cell}
                         ink={brand.ink}
                         muted={brand.muted}
+                        comparisonCheck={brand.comparisonCheck ?? brand.ink}
+                        comparisonXMark={brand.comparisonXMark ?? brand.muted}
                       />
                     </View>
                   )

@@ -295,10 +295,12 @@
       "format": "proforma-bilingual",
       "language": "bilingual",
       "status": "draft",
-      "titleEn": "Proforma Invoice",
-      "titleAr": "فاتورة مبدئية",
-      "number": "QUO-000100",
-      "date": "2026-01-21",
+      "titleEn": "Commercial Quotation",
+      "titleAr": "عرض سعر تجاري",
+      "number": "01-10082026",
+      "numberLabelEn": "Quotation No",
+      "numberLabelAr": "رقم العرض",
+      "date": "2026-08-10",
       "currency": "SAR",
       "currencySymbol": "SAR",
       "vatPercent": 0,
@@ -319,9 +321,9 @@
       "lineItems": [
         {
           "id": "line-1",
-          "description": "MOC&PCR platform\n- Phase 1 - Delivery of Current Software as is\n- Phase 2 - Update of Application as Per Bahri Comments\n- Phase 3 - Update of Application as Per Bahri Comments\n- Phase 4 - Update of Application as Per Bahri Comments",
+          "description": "Approval Module \n- Out Of Policy OOP \n- Generic Sequential Approval request \n- Saftey Champion ",
           "quantity": 1,
-          "unitPrice": 60000,
+          "unitPrice": 17000,
           "vatPercent": 0,
           "note": "Invoice in Saudi Riyal SAR"
         }
@@ -338,9 +340,8 @@
         "customMoneyLines": []
       },
       "createdAt": "2026-01-21T10:00:00.000Z",
-      "updatedAt": "2026-01-21T10:00:00.000Z",
+      "updatedAt": "2026-08-10T05:03:00.719Z",
       "enabled": true
     }
   ]
 }
-

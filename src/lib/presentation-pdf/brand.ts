@@ -16,6 +16,10 @@ export type PresentationPdfBrand = {
   headerBg: string
   headerHighlightBg: string
   darkSurface: string
+  /** Comparison check mark — defaults to ink when unset */
+  comparisonCheck?: string
+  /** Comparison X mark — defaults to muted when unset */
+  comparisonXMark?: string
 }
 
 const DEFAULT_BRAND: PresentationPdfBrand = {
@@ -48,6 +52,8 @@ const BAHRI_BRAND: PresentationPdfBrand = {
   headerBg: "#F4F6F9",
   headerHighlightBg: "#E8ECF1",
   darkSurface: "#001F3D",
+  comparisonCheck: "#003C71",
+  comparisonXMark: "#FF681D",
 }
 
 export function brandForPresentation(

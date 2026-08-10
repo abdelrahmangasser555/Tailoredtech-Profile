@@ -177,7 +177,12 @@ export type FinanceInvoice = {
   /** Document title, e.g. "Proforma Invoice" */
   titleEn: string
   titleAr: string
+  /** Value shown in the reference / number row */
   number: string
+  /** EN label for the number row (e.g. Proforma number, Quote no.) */
+  numberLabelEn?: string
+  /** AR label for the number row */
+  numberLabelAr?: string
   date: string
   currency: string
   /** Display symbol next to totals (e.g. ﷼ or SAR) */
@@ -289,6 +294,8 @@ export function emptyInvoice(partial?: Partial<FinanceInvoice>): FinanceInvoice 
     titleEn: partial?.titleEn ?? "Proforma Invoice",
     titleAr: partial?.titleAr ?? "فاتورة مبدئية",
     number: partial?.number ?? `QUO-${String(Date.now()).slice(-6)}`,
+    numberLabelEn: partial?.numberLabelEn ?? "Proforma number",
+    numberLabelAr: partial?.numberLabelAr ?? "رقم الفاتورة المبدئية",
     date: partial?.date ?? date,
     currency: partial?.currency ?? "SAR",
     currencySymbol: partial?.currencySymbol ?? "SAR",
