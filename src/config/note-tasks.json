@@ -62,5 +62,105 @@
       "children": []
     }
   ],
-  "notes-tasks:technical-arch:tasks-msk8yh1x": []
+  "notes-tasks:technical-arch:tasks-msk8yh1x": [],
+  "notes-tasks:13-08-2026:__note-checklist__": [
+    {
+      "id": "task-1",
+      "label": "OOP requested edits",
+      "children": [
+        {
+          "id": "1-office-added-in-the-form-with-vessels-yqo1",
+          "label": "1) office added in the form with vessels",
+          "done": false,
+          "completedAt": null,
+          "children": []
+        },
+        {
+          "id": "2-print-out-the-log-as-excel-or-pdf-z4o0",
+          "label": "2) print out the log as excel or pdf",
+          "done": false,
+          "completedAt": null,
+          "children": []
+        },
+        {
+          "id": "3-log-visible-for-everyone-user-in-flow--00gv",
+          "label": "3) log visible for everyone (user in flow only can edit and follow up )",
+          "done": false,
+          "completedAt": null,
+          "children": []
+        },
+        {
+          "id": "4-approved-pending-follow-up-instead-of--1vwv",
+          "label": "4) approved -  pending follow up instead of approved - follow up",
+          "done": false,
+          "completedAt": null,
+          "children": []
+        },
+        {
+          "id": "5-remove-the-notes-under-each-title-of-t-3af9",
+          "label": "5) remove the notes under each title of the oop",
+          "done": false,
+          "completedAt": null,
+          "children": []
+        },
+        {
+          "id": "6-load-vessels-of-all-organizations-not--55je",
+          "label": "6) load vessels of all organizations not just current organization",
+          "done": false,
+          "completedAt": null,
+          "children": []
+        },
+        {
+          "id": "7-field-underneath-the-title-in-the-form-7xlz",
+          "label": "7) field underneath the title in the form  - first for manual  - second for the procedure and both are required",
+          "done": false,
+          "completedAt": null,
+          "children": []
+        },
+        {
+          "id": "8-add-option-for-oop-requested-at-to-hav-czmy",
+          "label": "8) add option for oop requested at to have office too",
+          "done": false,
+          "completedAt": null,
+          "children": []
+        },
+        {
+          "id": "9-role-for-closeout-added-to-pamela-e726",
+          "label": "9) role for closeout added to pamela",
+          "done": false,
+          "completedAt": null,
+          "children": [
+            {
+              "id": "role-for-closeout-in-the-user-management-eeie",
+              "label": "role for closeout in the user management",
+              "done": false,
+              "completedAt": null,
+              "children": []
+            },
+            {
+              "id": "assign-pamela-to-that-role-ekd8",
+              "label": "assign pamela to that role",
+              "done": false,
+              "completedAt": null,
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "modelling-and-roles-of-the-bbs-kvh7",
+      "label": "Modelling and roles of the BBS",
+      "done": false,
+      "completedAt": null,
+      "children": []
+    },
+    {
+      "id": "received-the-sofa-lkd4",
+      "label": "received the sofa",
+      "done": true,
+      "completedAt": "2026-08-13",
+      "children": []
+    }
+  ]
 }

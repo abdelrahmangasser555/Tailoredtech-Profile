@@ -527,5 +527,204 @@
       "showMeta": true
     },
     "updatedAt": "2026-08-13"
+  },
+  "work-and-health": {
+    "sections": [
+      {
+        "id": "start",
+        "title": "Start",
+        "blocks": [
+          {
+            "type": "markdown",
+            "id": "markdown-msrcgg2p",
+            "content": "# Work & health system\n\nA simple system to work seriously, eat well, train, and still have a life — built around your actual equipment and schedule.\n\n**Your equipment**\n- Double induction cooker\n- Steamer / rice cooker\n- Countertop oven / air-fryer\n\n**The rules**\n- Max 30 min cooking per day\n- One primary + one secondary project per day\n- 2 protected deep-work blocks most days\n- 3–4 workouts per week\n- One proper day off"
+          }
+        ]
+      },
+      {
+        "id": "work",
+        "title": "Work priorities & schedule",
+        "blocks": [
+          {
+            "type": "markdown",
+            "id": "markdown-msrcgq45",
+            "content": "## Priorities\n\n**Week 1 — finish the emergency first**\n- Mon–Tue → OOP/MOC + PCR (finish it)\n- Wed–Fri → BBS (build the foundation)\n- Sat → buffer / personal, Sun → off\n\n**After OOP/MOC + PCR ships**\n- BBS → primary, 5 days/week\n- Risk Assessment → secondary, 2 days/week\n- Client / legal / meetings → fit around deep-work blocks\n\n## Daily rhythm\n- 09:00–10:30 → deep work (primary project)\n- 10:45–12:15 → deep work\n- 12:15–13:15 → lunch / walk\n- 13:15–15:00 → project work (secondary)\n- 15:00–17:30 → meetings / client / legal / admin\n\nProtect 2 deep-work blocks most days. Phone away. If a meeting lands in a block, move the block — don't drop it."
+          }
+        ]
+      },
+      {
+        "id": "food",
+        "title": "30-minute food system",
+        "blocks": [
+          {
+            "type": "markdown",
+            "id": "markdown-msrcgq45",
+            "content": "## Cook once, eat several ways\n\nBatch cook (Sun or Mon):\n- **Chicken** → countertop oven/air-fryer (salt, pepper, paprika, garlic, lemon)\n- **Rice** → rice cooker\n- **Vegetables** → steamer\n\nThen recombine: chicken + rice + veg → bowl, wrap, salad, or with potatoes.\n\n## Example day\n- **Breakfast (5 min):** 2–3 eggs, toast, fruit, coffee/tea\n- **Lunch (5 min):** chicken + rice + veg + yogurt/lemon sauce\n- **Snack:** Greek yogurt + fruit\n- **Dinner (15–20 min):** fish or chicken + potatoes + veg\n\n## Plate rule\n½ veg/fruit · ¼ protein · ¼ carbs + a moderate amount of healthy fat."
+          }
+        ]
+      },
+      {
+        "id": "grocery-list",
+        "title": "Grocery list",
+        "blocks": [
+          {
+            "type": "markdown",
+            "id": "markdown-msrcgq45",
+            "content": "One small shop every 5–7 days (Lulu is downstairs).\n\n**Protein**\n- 1–1.5 kg chicken\n- 4–6 fish portions\n- 18 eggs\n- Greek yogurt, cottage cheese\n- Tuna, chickpeas/beans\n- Small amount lean beef\n\n**Carbs**\n- Oats, rice, potatoes\n- Whole-grain bread, whole-wheat wraps\n\n**Vegetables**\n- Broccoli, spinach, bell peppers, tomatoes\n- Cucumbers, carrots, onions, lettuce\n- Frozen mixed vegetables\n\n**Fruit**\n- Bananas, apples, oranges, berries (whatever is cheap that week)\n\n**Fats**\n- Olive oil, almonds/walnuts, peanut butter, avocado"
+          }
+        ]
+      },
+      {
+        "id": "health",
+        "title": "Exercise & minimum viable day",
+        "blocks": [
+          {
+            "type": "markdown",
+            "id": "markdown-msrcgq45",
+            "content": "## Exercise\n3–4 × 30–40 min per week. Prioritize strength + mobility (your gymnastics base).\n\n- Mon → strength\n- Wed → strength\n- Fri → strength\n- Weekend → optional walk / cardio / sport\n\n**40-min workout**\n- 5 min warm-up / mobility\n- 25 min strength — 3 rounds: squats 10–15, push-ups 8–15, lunges 8/leg, pull-ups/rows 5–12, plank 30–60 sec\n- 10 min cardio (walk / bike / jog)\n\n## Weight\nEat well → train → sleep → lose fat gradually. No starving. Weigh 1–2×/week under similar conditions.\n\n## Minimum viable day\n- Work: 2 × 60–90 min focused blocks\n- Food: protein at each meal, fruit/veg, mostly water\n- Movement: 20–40 min walk or workout\n- Life: stop working at a reasonable time\n\nHit those four = a successful day."
+          }
+        ]
+      }
+    ],
+    "title": "work and health",
+    "name": "work and health",
+    "description": "",
+    "explains": [],
+    "questionnaires": [],
+    "variants": {
+      "sidebarNav": true,
+      "compactHero": true,
+      "showMeta": true
+    },
+    "updatedAt": "2026-08-13"
+  },
+  "13-08-2026": {
+    "sections": [
+      {
+        "id": "start",
+        "title": "Start",
+        "blocks": [
+          {
+            "type": "markdown",
+            "id": "start-md",
+            "content": "New note — replace this with your content."
+          }
+        ]
+      }
+    ],
+    "title": "13/08/2026",
+    "name": "13/08/2026",
+    "description": "",
+    "explains": [],
+    "questionnaires": [],
+    "checklist": {
+      "title": "Checklist",
+      "items": [
+        {
+          "id": "task-1",
+          "label": "OOP requested edits",
+          "children": [
+            {
+              "id": "1-office-added-in-the-form-with-vessels-yqo1",
+              "label": "1) office added in the form with vessels",
+              "done": false,
+              "completedAt": null,
+              "children": []
+            },
+            {
+              "id": "2-print-out-the-log-as-excel-or-pdf-z4o0",
+              "label": "2) print out the log as excel or pdf",
+              "done": false,
+              "completedAt": null,
+              "children": []
+            },
+            {
+              "id": "3-log-visible-for-everyone-user-in-flow--00gv",
+              "label": "3) log visible for everyone (user in flow only can edit and follow up )",
+              "done": false,
+              "completedAt": null,
+              "children": []
+            },
+            {
+              "id": "4-approved-pending-follow-up-instead-of--1vwv",
+              "label": "4) approved -  pending follow up instead of approved - follow up",
+              "done": false,
+              "completedAt": null,
+              "children": []
+            },
+            {
+              "id": "5-remove-the-notes-under-each-title-of-t-3af9",
+              "label": "5) remove the notes under each title of the oop",
+              "done": false,
+              "completedAt": null,
+              "children": []
+            },
+            {
+              "id": "6-load-vessels-of-all-organizations-not--55je",
+              "label": "6) load vessels of all organizations not just current organization",
+              "done": false,
+              "completedAt": null,
+              "children": []
+            },
+            {
+              "id": "7-field-underneath-the-title-in-the-form-7xlz",
+              "label": "7) field underneath the title in the form  - first for manual  - second for the procedure and both are required",
+              "done": false,
+              "completedAt": null,
+              "children": []
+            },
+            {
+              "id": "8-add-option-for-oop-requested-at-to-hav-czmy",
+              "label": "8) add option for oop requested at to have office too",
+              "done": false,
+              "completedAt": null,
+              "children": []
+            },
+            {
+              "id": "9-role-for-closeout-added-to-pamela-e726",
+              "label": "9) role for closeout added to pamela",
+              "done": false,
+              "completedAt": null,
+              "children": [
+                {
+                  "id": "role-for-closeout-in-the-user-management-eeie",
+                  "label": "role for closeout in the user management",
+                  "done": false,
+                  "completedAt": null,
+                  "children": []
+                },
+                {
+                  "id": "assign-pamela-to-that-role-ekd8",
+                  "label": "assign pamela to that role",
+                  "done": false,
+                  "completedAt": null,
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "modelling-and-roles-of-the-bbs-kvh7",
+          "label": "Modelling and roles of the BBS",
+          "done": false,
+          "completedAt": null,
+          "children": []
+        },
+        {
+          "id": "received-the-sofa-lkd4",
+          "label": "received the sofa",
+          "done": true,
+          "completedAt": "2026-08-13",
+          "children": []
+        }
+      ]
+    },
+    "variants": {
+      "sidebarNav": true,
+      "compactHero": true,
+      "showMeta": true
+    },
+    "updatedAt": "2026-08-13"
   }
 }
