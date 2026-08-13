@@ -8,6 +8,8 @@ import {
   resolveChatScopeRootId,
   resolveNotesPath,
 } from "@/lib/notes"
+import { readFreshNote } from "@/lib/notes-chat/apply-edit"
+import { isLocalEditEnabled } from "@/lib/local-edit"
 import { NotesBrowser } from "@/components/notes/notes-browser"
 import { NoteDetail } from "@/components/notes/note-detail"
 
@@ -77,15 +79,18 @@ export default async function NotesPathPage({ params }: PageProps) {
   if (!resolved) notFound()
 
   if (resolved.kind === "file") {
-    const scopeRootId = resolveChatScopeRootId(
-      resolved.note,
-      resolved.pathIds
-    )
+    // In local-edit (dev) mode, read the live note from disk so chatbot edits
+    // show up immediately without a server restart. The in-memory note built
+    // at module load is a stale snapshot of note-overrides.json.
+    const note = isLocalEditEnabled()
+      ? ((await readFreshNote(resolved.note.id)) ?? resolved.note)
+      : resolved.note
+    const scopeRootId = resolveChatScopeRootId(note, resolved.pathIds)
     const mentionItems = listMentionItems(scopeRootId)
 
     return (
       <NoteDetail
-        note={resolved.note}
+        note={note}
         breadcrumbs={resolved.breadcrumbs}
         pathIds={resolved.pathIds}
         mentionItems={mentionItems}

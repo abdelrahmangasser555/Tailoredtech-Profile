@@ -79,7 +79,36 @@ export function serializeNoteForContext(note: NoteDocument): string {
   return lines.filter(Boolean).join("\n")
 }
 
-/** Full JSON for edit mode */
+/** Compact outline for edit-mode system prompt (never dump full JSON). */
+export function serializeNoteOutline(note: NoteDocument): string {
+  const lines = [
+    `# ${note.title} (${note.id})`,
+    note.description ? `Description: ${note.description}` : "",
+    `Sections (${note.sections.length}):`,
+  ]
+  for (const section of note.sections) {
+    const blocks = section.blocks
+      .map((b) => `${b.type}:${b.id}`)
+      .join(", ")
+    lines.push(`- [${section.id}] ${section.title} { ${blocks || "empty"} }`)
+  }
+  return lines.filter(Boolean).join("\n")
+}
+
+export function noteOutlinePayload(note: NoteDocument) {
+  return {
+    id: note.id,
+    title: note.title,
+    sectionCount: note.sections.length,
+    sections: note.sections.map((s) => ({
+      id: s.id,
+      title: s.title,
+      blocks: s.blocks.map((b) => ({ id: b.id, type: b.type })),
+    })),
+  }
+}
+
+/** Full JSON for readNote(format=json) — live disk state, not a system-prompt dump. */
 export function serializeNoteJson(note: NoteDocument): string {
   return JSON.stringify(
     {

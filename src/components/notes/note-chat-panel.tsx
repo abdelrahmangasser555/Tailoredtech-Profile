@@ -1,7 +1,6 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { useRouter } from "next/navigation";
 import { useChat } from "@ai-sdk/react";
 import {
   DefaultChatTransport,
@@ -53,6 +52,7 @@ import {
   type NotesChatCommand,
 } from "@/lib/notes-chat/commands";
 import { isLocalEditEnabled } from "@/lib/local-edit";
+import { fetchAndPublishNote } from "@/lib/notes-live";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
 import Image from "next/image";
@@ -130,6 +130,21 @@ const TOOL_LABELS: Record<
     running: "Adding markdown…",
     done: "Markdown added",
     failed: "Markdown failed",
+  },
+  generateMermaidBlock: {
+    running: "Generating mermaid…",
+    done: "Mermaid generated",
+    failed: "Mermaid generation failed",
+  },
+  generateComparisonBlock: {
+    running: "Generating comparison…",
+    done: "Comparison generated",
+    failed: "Comparison generation failed",
+  },
+  addSection: {
+    running: "Adding section…",
+    done: "Section added",
+    failed: "Could not add section",
   },
   addCalloutBlock: {
     running: "Adding callout…",
@@ -295,7 +310,6 @@ export function NoteChatPanel({
   mentionItems,
   activeSectionId,
 }: NoteChatPanelProps) {
-  const router = useRouter();
   const localEdit = isLocalEditEnabled();
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -404,7 +418,7 @@ export function NoteChatPanel({
         );
         if (wrote) {
           toast.success("Note updated");
-          router.refresh();
+          void fetchAndPublishNote(note.id).catch(() => undefined);
         } else if (failedHard || failedSoft) {
           toast.error("Edit stopped after failures");
         }

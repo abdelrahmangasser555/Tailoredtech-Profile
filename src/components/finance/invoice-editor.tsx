@@ -25,6 +25,7 @@ import {
   invoiceSubtotal,
   invoiceVatTotal,
 } from "@/lib/finance/invoice-pricing"
+import { CloneInvoiceButton } from "@/components/finance/clone-button"
 import { InvoicePdfExportButton } from "@/components/finance-pdf/invoice-export-button"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -204,16 +205,19 @@ export function InvoiceEditor({
         <div className="flex flex-wrap items-center gap-2">
           <InvoicePdfExportButton invoices={[invoice]} label="Download PDF" />
           {!isNew ? (
-            <Button
-              type="button"
-              variant="ghost"
-              className="rounded-none text-destructive"
-              onClick={() => void remove()}
-              disabled={saving}
-            >
-              <Trash2 className="size-4" />
-              Delete
-            </Button>
+            <>
+              <CloneInvoiceButton invoice={invoice} variant="outline" />
+              <Button
+                type="button"
+                variant="ghost"
+                className="rounded-none text-destructive"
+                onClick={() => void remove()}
+                disabled={saving}
+              >
+                <Trash2 className="size-4" />
+                Delete
+              </Button>
+            </>
           ) : null}
           <Button
             type="button"

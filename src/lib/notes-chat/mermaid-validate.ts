@@ -1,19 +1,24 @@
-let mermaidModule: typeof import("mermaid") | null = null
+/**
+ * Server-side mermaid validation — DOM-free.
+ *
+ * We deliberately do NOT import `mermaid` here. Mermaid 11 imports `dompurify`,
+ * whose ESM build calls `createDOMPurify()` at module load. In a Node server
+ * runtime (no `window`/`document`) that returns a partial mock object that is
+ * missing `addHook`, so `mermaid.parse(...)` throws
+ * `dompurify.default.addHook is not a function`. Rendering already happens in
+ * the browser, which surfaces real syntax errors visually; this validator is
+ * only a cheap guardrail to catch obvious mistakes before we persist a block.
+ */
 
-async function getMermaid() {
-  if (mermaidModule) return mermaidModule.default
-  mermaidModule = await import("mermaid")
-  mermaidModule.default.initialize({
-    startOnLoad: false,
-    securityLevel: "strict",
-    suppressErrorRendering: true,
-  })
-  return mermaidModule.default
+export function sanitizeMermaidSource(diagram: string): string {
+  return diagram
+    .replace(/^```(?:mermaid)?\s*/i, "")
+    .replace(/```\s*$/i, "")
+    .trim()
 }
 
 /** Catch common label mistakes Mermaid rejects (e.g. PIPE in [labels]). */
 function heuristicMermaidIssues(source: string): string | null {
-  // Node / stadium / cylinder style labels with a raw pipe
   if (/\[[^\]\n]*\|[^\]\n]*\]/.test(source)) {
     return "Node label contains '|' which Mermaid rejects. Use short labels without pipes (e.g. MIGRATE ~6mo)."
   }
@@ -26,41 +31,11 @@ function heuristicMermaidIssues(source: string): string | null {
   return null
 }
 
-/** Validate mermaid source without rendering SVG. Returns error message or null. */
+/** Validate mermaid source without rendering. Returns error message or null. */
 export async function validateMermaidSource(
   diagram: string
 ): Promise<string | null> {
   const source = sanitizeMermaidSource(diagram)
   if (!source) return "Empty mermaid diagram"
-
-  const heuristic = heuristicMermaidIssues(source)
-  if (heuristic) return heuristic
-
-  try {
-    const mermaid = await getMermaid()
-    await mermaid.parse(source)
-    return null
-  } catch (err) {
-    const message =
-      err instanceof Error
-        ? err.message
-        : typeof err === "string"
-          ? err
-          : "Invalid mermaid diagram"
-    const cleaned = message
-      .replace(/^Error:\s*/i, "")
-      .split("\n")
-      .map((l) => l.trim())
-      .filter(Boolean)
-      .slice(0, 4)
-      .join(" ")
-    return cleaned || "Invalid mermaid diagram"
-  }
-}
-
-export function sanitizeMermaidSource(diagram: string): string {
-  return diagram
-    .replace(/^```(?:mermaid)?\s*/i, "")
-    .replace(/```\s*$/i, "")
-    .trim()
+  return heuristicMermaidIssues(source)
 }

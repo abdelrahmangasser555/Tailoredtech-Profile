@@ -5,6 +5,8 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import {
   ArrowLeft,
+  ChevronDown,
+  ChevronUp,
   Loader2,
   Plus,
   Trash2,
@@ -15,10 +17,13 @@ import { toast } from "sonner"
 import type {
   FinanceBrand,
   FinanceProposal,
+  InvoiceLanguageMode,
   ProposalFormatId,
   ProposalSolution,
 } from "@/lib/finance/types"
 import { emptyProposal } from "@/lib/finance/types"
+import { formatMoney, solutionTotal } from "@/lib/finance/pricing"
+import { CloneProposalButton } from "@/components/finance/clone-button"
 import { ProposalPdfExportButton } from "@/components/finance-pdf/export-button"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -57,12 +62,28 @@ export function ProposalEditor({
 }) {
   const router = useRouter()
   const fileRef = useRef<HTMLInputElement>(null)
+  const issuerLogoRef = useRef<HTMLInputElement>(null)
   const [proposal, setProposal] = useState<FinanceProposal>(initial)
   const [saving, setSaving] = useState(false)
   const [uploading, setUploading] = useState(false)
 
   function patch(partial: Partial<FinanceProposal>) {
     setProposal((prev) => ({ ...prev, ...partial }))
+  }
+
+  function patchIssuer(partial: Partial<FinanceProposal["issuer"]>) {
+    setProposal((prev) => ({
+      ...prev,
+      issuer: { ...prev.issuer, ...partial },
+    }))
+  }
+
+  function patchCustomer(partial: Partial<FinanceProposal["customer"]>) {
+    setProposal((prev) => ({
+      ...prev,
+      customer: { ...prev.customer, ...partial },
+      clientName: partial.name ?? prev.customer.name ?? prev.clientName,
+    }))
   }
 
   function patchDisplay(partial: Partial<FinanceProposal["display"]>) {
@@ -87,10 +108,14 @@ export function ProposalEditor({
     }
     setSaving(true)
     try {
+      const payload = {
+        ...proposal,
+        clientName: proposal.customer.name || proposal.clientName,
+      }
       const res = await fetch("/api/finance/proposals", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ proposal }),
+        body: JSON.stringify({ proposal: payload }),
       })
       const data = (await res.json()) as {
         error?: string
@@ -134,6 +159,30 @@ export function ProposalEditor({
       toast.error("Delete failed")
     } finally {
       setSaving(false)
+    }
+  }
+
+  async function onUploadIssuerLogo(file: File) {
+    setUploading(true)
+    try {
+      const form = new FormData()
+      form.set("file", file)
+      form.set("slug", `proposal-issuer-${proposal.id}`)
+      const res = await fetch("/api/finance/upload", {
+        method: "POST",
+        body: form,
+      })
+      const data = (await res.json()) as { path?: string; error?: string }
+      if (!res.ok || !data.path) {
+        toast.error(data.error || "Upload failed")
+        return
+      }
+      patchIssuer({ logo: data.path })
+      toast.success("Issuer logo uploaded")
+    } catch {
+      toast.error("Upload failed")
+    } finally {
+      setUploading(false)
     }
   }
 
@@ -182,16 +231,19 @@ export function ProposalEditor({
         <div className="flex flex-wrap items-center gap-2">
           <ProposalPdfExportButton proposals={[proposal]} label="Download PDF" />
           {!isNew ? (
-            <Button
-              type="button"
-              variant="ghost"
-              className="rounded-none text-destructive"
-              onClick={() => void remove()}
-              disabled={saving}
-            >
-              <Trash2 className="size-4" />
-              Delete
-            </Button>
+            <>
+              <CloneProposalButton proposal={proposal} variant="outline" />
+              <Button
+                type="button"
+                variant="ghost"
+                className="rounded-none text-destructive"
+                onClick={() => void remove()}
+                disabled={saving}
+              >
+                <Trash2 className="size-4" />
+                Delete
+              </Button>
+            </>
           ) : null}
           <Button
             type="button"
@@ -211,7 +263,7 @@ export function ProposalEditor({
 
       <div className="grid gap-6 lg:grid-cols-[1fr_280px]">
         <div className="space-y-6">
-          <Panel title="Basics">
+          <Panel title="Document">
             <div className="grid gap-4 sm:grid-cols-2">
               <Field label="Title">
                 <Input
@@ -228,12 +280,52 @@ export function ProposalEditor({
                   placeholder="Optional"
                 />
               </Field>
-              <Field label="Client">
+              <Field label="Reference label (English)">
                 <Input
-                  value={proposal.clientName}
-                  onChange={(e) => patch({ clientName: e.target.value })}
+                  value={proposal.numberLabelEn ?? "Proposal reference"}
+                  onChange={(e) => patch({ numberLabelEn: e.target.value })}
                   className="rounded-none"
                 />
+              </Field>
+              <Field label="Reference label (Arabic)">
+                <Input
+                  value={proposal.numberLabelAr ?? "مرجع العرض"}
+                  onChange={(e) => patch({ numberLabelAr: e.target.value })}
+                  className="rounded-none"
+                  dir="rtl"
+                  disabled={proposal.language === "en"}
+                />
+              </Field>
+              <Field label="Reference value">
+                <Input
+                  value={proposal.number}
+                  onChange={(e) => patch({ number: e.target.value })}
+                  className="rounded-none"
+                />
+              </Field>
+              <Field label="Date">
+                <Input
+                  type="date"
+                  value={proposal.date}
+                  onChange={(e) => patch({ date: e.target.value })}
+                  className="rounded-none"
+                />
+              </Field>
+              <Field label="Language">
+                <Select
+                  value={proposal.language}
+                  onValueChange={(v) =>
+                    patch({ language: v as InvoiceLanguageMode })
+                  }
+                >
+                  <SelectTrigger className="rounded-none">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent className="rounded-none">
+                    <SelectItem value="bilingual">English + Arabic</SelectItem>
+                    <SelectItem value="en">English only</SelectItem>
+                  </SelectContent>
+                </Select>
               </Field>
               <Field label="Currency">
                 <Input
@@ -338,6 +430,134 @@ export function ProposalEditor({
             </div>
           </Panel>
 
+          <Panel title="Issuer (letterhead)">
+            <div className="mb-4 flex flex-wrap items-center gap-3">
+              {proposal.issuer.logo ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={proposal.issuer.logo}
+                  alt=""
+                  className="h-14 max-w-[120px] border border-foreground/10 object-contain bg-white p-1"
+                />
+              ) : (
+                <div className="flex h-14 items-center justify-center border border-dashed border-foreground/15 px-4 text-[10px] text-foreground/35">
+                  Logo
+                </div>
+              )}
+              <input
+                ref={issuerLogoRef}
+                type="file"
+                accept="image/*"
+                className="hidden"
+                onChange={(e) => {
+                  const file = e.target.files?.[0]
+                  if (file) void onUploadIssuerLogo(file)
+                  e.target.value = ""
+                }}
+              />
+              <Button
+                type="button"
+                variant="outline"
+                className="rounded-none"
+                disabled={uploading}
+                onClick={() => issuerLogoRef.current?.click()}
+              >
+                {uploading ? (
+                  <Loader2 className="size-4 animate-spin" />
+                ) : (
+                  <Upload className="size-4" />
+                )}
+                Upload logo
+              </Button>
+              {proposal.issuer.logo ? (
+                <Button
+                  type="button"
+                  variant="ghost"
+                  className="rounded-none"
+                  onClick={() => patchIssuer({ logo: null })}
+                >
+                  Remove
+                </Button>
+              ) : null}
+            </div>
+            <div className="grid gap-4 sm:grid-cols-2">
+              <Field label="Company name (EN)">
+                <Input
+                  value={proposal.issuer.nameEn}
+                  onChange={(e) => patchIssuer({ nameEn: e.target.value })}
+                  className="rounded-none"
+                />
+              </Field>
+              <Field label="Company name (AR)">
+                <Input
+                  value={proposal.issuer.nameAr}
+                  onChange={(e) => patchIssuer({ nameAr: e.target.value })}
+                  className="rounded-none"
+                  dir="rtl"
+                  disabled={proposal.language === "en"}
+                />
+              </Field>
+              <Field label="Address (EN)">
+                <Textarea
+                  value={proposal.issuer.addressEn}
+                  onChange={(e) => patchIssuer({ addressEn: e.target.value })}
+                  className="min-h-16 rounded-none"
+                />
+              </Field>
+              <Field label="Address (AR)">
+                <Textarea
+                  value={proposal.issuer.addressAr}
+                  onChange={(e) => patchIssuer({ addressAr: e.target.value })}
+                  className="min-h-16 rounded-none"
+                  dir="rtl"
+                  disabled={proposal.language === "en"}
+                />
+              </Field>
+              <Field label="VAT number">
+                <Input
+                  value={proposal.issuer.vatNumber}
+                  onChange={(e) => patchIssuer({ vatNumber: e.target.value })}
+                  className="rounded-none"
+                />
+              </Field>
+              <Field label="700 number">
+                <Input
+                  value={proposal.issuer.commercialNumber}
+                  onChange={(e) =>
+                    patchIssuer({ commercialNumber: e.target.value })
+                  }
+                  className="rounded-none"
+                />
+              </Field>
+            </div>
+          </Panel>
+
+          <Panel title="Customer">
+            <div className="grid gap-4">
+              <Field label="Customer name">
+                <Input
+                  value={proposal.customer.name}
+                  onChange={(e) => patchCustomer({ name: e.target.value })}
+                  className="rounded-none"
+                />
+              </Field>
+              <Field label="Address">
+                <Textarea
+                  value={proposal.customer.address}
+                  onChange={(e) => patchCustomer({ address: e.target.value })}
+                  className="min-h-20 rounded-none"
+                />
+              </Field>
+              <Field label="Other ID (TRN, C/O, …)">
+                <Textarea
+                  value={proposal.customer.otherId}
+                  onChange={(e) => patchCustomer({ otherId: e.target.value })}
+                  className="min-h-16 rounded-none"
+                />
+              </Field>
+            </div>
+          </Panel>
+
           <Panel title="Markdown">
             <p className="mb-2 text-xs text-foreground/45">
               Same light markdown as presentation printouts: headings, bold, lists.
@@ -398,19 +618,49 @@ export function ProposalEditor({
                     className="rounded-none"
                     placeholder="Description"
                   />
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    size="icon"
-                    className="rounded-none"
-                    onClick={() =>
-                      patch({
-                        features: proposal.features.filter((x) => x.id !== f.id),
-                      })
-                    }
-                  >
-                    <Trash2 className="size-4" />
-                  </Button>
+                  <div className="flex items-center gap-0.5">
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="icon"
+                      className="rounded-none"
+                      disabled={i === 0}
+                      onClick={() => {
+                        const features = [...proposal.features]
+                        ;[features[i - 1], features[i]] = [features[i]!, features[i - 1]!]
+                        patch({ features })
+                      }}
+                    >
+                      <ChevronUp className="size-4" />
+                    </Button>
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="icon"
+                      className="rounded-none"
+                      disabled={i === proposal.features.length - 1}
+                      onClick={() => {
+                        const features = [...proposal.features]
+                        ;[features[i + 1], features[i]] = [features[i]!, features[i + 1]!]
+                        patch({ features })
+                      }}
+                    >
+                      <ChevronDown className="size-4" />
+                    </Button>
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="icon"
+                      className="rounded-none"
+                      onClick={() =>
+                        patch({
+                          features: proposal.features.filter((x) => x.id !== f.id),
+                        })
+                      }
+                    >
+                      <Trash2 className="size-4" />
+                    </Button>
+                  </div>
                 </div>
               ))}
               {proposal.features.length === 0 ? (
@@ -584,8 +834,11 @@ export function ProposalEditor({
             <div className="space-y-2.5">
               {(
                 [
+                  ["showHeader", "Letterhead header"],
+                  ["showProposalNumber", "Reference number"],
+                  ["showDate", "Date in meta row"],
                   ["showMarkdown", "Markdown body"],
-                  ["showFeatures", "Features"],
+                  ["showFeatures", "Features list"],
                   ["showBreakdown", "Price breakdown"],
                   ["showPrices", "Price summary"],
                   ["showComparison", "Comparison"],
@@ -601,7 +854,29 @@ export function ProposalEditor({
                 />
               ))}
             </div>
+            <div className="mt-4 space-y-4 border-t border-foreground/8 pt-4">
+              <Field label="Features section label">
+                <Input
+                  value={proposal.display.featuresLabel}
+                  onChange={(e) =>
+                    patchDisplay({ featuresLabel: e.target.value })
+                  }
+                  className="rounded-none"
+                />
+              </Field>
+              <Field label="Offer section label">
+                <Input
+                  value={proposal.display.offerLabel}
+                  onChange={(e) => patchDisplay({ offerLabel: e.target.value })}
+                  className="rounded-none"
+                />
+              </Field>
+            </div>
             <p className="mt-4 text-xs leading-relaxed text-foreground/45">
+              Each proposal prints on one A4 page. Trim sections or copy if content
+              overflows.
+            </p>
+            <p className="mt-2 text-xs leading-relaxed text-foreground/45">
               {formats.find((f) => f.id === proposal.format)?.description}
             </p>
           </Panel>
@@ -800,6 +1075,58 @@ function SolutionEditor({
         ))}
       </SubBlock>
 
+      <SubBlock title="Total">
+        <div className="grid gap-3 sm:grid-cols-[1fr_120px_120px]">
+          <Field label="Total label">
+            <Input
+              value={solution.totalLabel ?? ""}
+              onChange={(e) =>
+                onChange({ ...solution, totalLabel: e.target.value })
+              }
+              className="rounded-none"
+              placeholder="Total"
+            />
+          </Field>
+          <Field label="Calculation">
+            <Select
+              value={solution.totalMode ?? "auto"}
+              onValueChange={(v) =>
+                onChange({ ...solution, totalMode: v as "auto" | "manual" })
+              }
+            >
+              <SelectTrigger className="rounded-none">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent className="rounded-none">
+                <SelectItem value="auto">Auto</SelectItem>
+                <SelectItem value="manual">Manual</SelectItem>
+              </SelectContent>
+            </Select>
+          </Field>
+          {solution.totalMode === "manual" ? (
+            <Field label="Manual total">
+              <Input
+                type="number"
+                value={solution.manualTotal ?? 0}
+                onChange={(e) =>
+                  onChange({
+                    ...solution,
+                    manualTotal: Number(e.target.value) || 0,
+                  })
+                }
+                className="rounded-none"
+              />
+            </Field>
+          ) : (
+            <div className="flex items-end">
+              <p className="pb-2 font-mono text-[10px] tracking-wide text-foreground/40 uppercase">
+                {formatMoney(solutionTotal(solution), "")}
+              </p>
+            </div>
+          )}
+        </div>
+      </SubBlock>
+
       <SubBlock
         title="Discounts"
         onAdd={() =>
@@ -813,64 +1140,75 @@ function SolutionEditor({
         }
       >
         {solution.discounts.map((d, i) => (
-          <div
-            key={d.id}
-            className="grid grid-cols-[1fr_88px_88px_auto] gap-2"
-          >
-            <Input
-              value={d.label}
-              onChange={(e) => {
-                const discounts = [...solution.discounts]
-                discounts[i] = { ...d, label: e.target.value }
-                onChange({ ...solution, discounts })
-              }}
-              className="rounded-none"
-              placeholder="Label"
-            />
-            <Input
-              type="number"
-              value={d.amount ?? ""}
-              onChange={(e) => {
-                const discounts = [...solution.discounts]
-                const val = e.target.value
-                discounts[i] = {
-                  ...d,
-                  amount: val === "" ? undefined : Number(val) || 0,
+          <div key={d.id} className="space-y-1.5">
+            <div className="grid grid-cols-[1fr_88px_88px_auto] gap-2">
+              <Input
+                value={d.label}
+                onChange={(e) => {
+                  const discounts = [...solution.discounts]
+                  discounts[i] = { ...d, label: e.target.value }
+                  onChange({ ...solution, discounts })
+                }}
+                className="rounded-none"
+                placeholder="Label"
+              />
+              <Input
+                type="number"
+                value={d.amount ?? ""}
+                onChange={(e) => {
+                  const discounts = [...solution.discounts]
+                  const val = e.target.value
+                  discounts[i] = {
+                    ...d,
+                    amount: val === "" ? undefined : Number(val) || 0,
+                  }
+                  onChange({ ...solution, discounts })
+                }}
+                className="rounded-none"
+                placeholder="Amount"
+              />
+              <Input
+                type="number"
+                value={d.percent ?? ""}
+                onChange={(e) => {
+                  const discounts = [...solution.discounts]
+                  const val = e.target.value
+                  discounts[i] = {
+                    ...d,
+                    percent: val === "" ? undefined : Number(val) || 0,
+                  }
+                  onChange({ ...solution, discounts })
+                }}
+                className="rounded-none"
+                placeholder="% off"
+              />
+              <Button
+                type="button"
+                variant="ghost"
+                size="icon"
+                className="rounded-none"
+                onClick={() =>
+                  onChange({
+                    ...solution,
+                    discounts: solution.discounts.filter((x) => x.id !== d.id),
+                  })
                 }
-                onChange({ ...solution, discounts })
-              }}
-              className="rounded-none"
-              placeholder="Amount"
-            />
-            <Input
-              type="number"
-              value={d.percent ?? ""}
-              onChange={(e) => {
-                const discounts = [...solution.discounts]
-                const val = e.target.value
-                discounts[i] = {
-                  ...d,
-                  percent: val === "" ? undefined : Number(val) || 0,
-                }
-                onChange({ ...solution, discounts })
-              }}
-              className="rounded-none"
-              placeholder="% off"
-            />
-            <Button
-              type="button"
-              variant="ghost"
-              size="icon"
-              className="rounded-none"
-              onClick={() =>
-                onChange({
-                  ...solution,
-                  discounts: solution.discounts.filter((x) => x.id !== d.id),
-                })
-              }
-            >
-              <Trash2 className="size-3.5" />
-            </Button>
+              >
+                <Trash2 className="size-3.5" />
+              </Button>
+            </div>
+            <label className="flex items-center gap-2 text-xs text-muted-foreground">
+              <input
+                type="checkbox"
+                checked={Boolean(d.optional)}
+                onChange={(e) => {
+                  const discounts = [...solution.discounts]
+                  discounts[i] = { ...d, optional: e.target.checked }
+                  onChange({ ...solution, discounts })
+                }}
+              />
+              Optional (show as credit, do not reduce total)
+            </label>
           </div>
         ))}
       </SubBlock>

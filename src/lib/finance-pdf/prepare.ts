@@ -2,11 +2,12 @@ import type { FinanceProposal } from "@/lib/finance/types"
 import type { ProposalPdfBrand } from "@/lib/finance-pdf/brand"
 import { getFinanceBrand } from "@/lib/finance/content"
 import { brandForProposalPdf } from "@/lib/finance-pdf/brand"
+import { normalizeProposal } from "@/lib/finance/normalize-proposal"
 
 export type PreparedProposalPdf = {
   proposal: FinanceProposal
   brand: ProposalPdfBrand
-  brandLogoDataUrl: string | null
+  issuerLogoDataUrl: string | null
   iconDataUrl: string | null
 }
 
@@ -78,13 +79,21 @@ export async function prepareProposalPdfAssets(
 ): Promise<PreparedProposalPdf[]> {
   return Promise.all(
     proposals.map(async (proposal) => {
-      const financeBrand = getFinanceBrand(proposal.brandId)
+      const normalized = normalizeProposal(proposal)
+      const financeBrand = getFinanceBrand(normalized.brandId)
       const brand = brandForProposalPdf(financeBrand)
-      const [brandLogoDataUrl, iconDataUrl] = await Promise.all([
-        fetchAsDataUrl(brand.logo),
-        fetchAsDataUrl(proposal.icon),
+      const logoSource =
+        normalized.issuer.logo || financeBrand.logo || brand.logo
+      const [issuerLogoDataUrl, iconDataUrl] = await Promise.all([
+        fetchAsDataUrl(logoSource),
+        fetchAsDataUrl(normalized.icon),
       ])
-      return { proposal, brand, brandLogoDataUrl, iconDataUrl }
+      return {
+        proposal: normalized,
+        brand,
+        issuerLogoDataUrl,
+        iconDataUrl,
+      }
     })
   )
 }

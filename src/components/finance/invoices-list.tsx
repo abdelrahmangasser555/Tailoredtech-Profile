@@ -4,6 +4,7 @@ import { useMemo, useState } from "react"
 import Link from "next/link"
 import { Plus, Receipt } from "lucide-react"
 import type { FinanceInvoice } from "@/lib/finance/types"
+import { CloneInvoiceButton } from "@/components/finance/clone-button"
 import { InvoicePdfExportButton } from "@/components/finance-pdf/invoice-export-button"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Button } from "@/components/ui/button"
@@ -130,6 +131,12 @@ export function InvoicesList({ invoices }: { invoices: FinanceInvoice[] }) {
                       {formatDate(inv.date)} · {inv.status}
                     </p>
                   </Link>
+                  <CloneInvoiceButton
+                    invoice={inv}
+                    label="Clone"
+                    variant="ghost"
+                    className="h-8"
+                  />
                   <InvoicePdfExportButton
                     invoices={[inv]}
                     label="PDF"

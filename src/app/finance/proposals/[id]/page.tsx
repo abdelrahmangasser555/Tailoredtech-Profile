@@ -5,6 +5,7 @@ import {
   getProposalById,
 } from "@/lib/finance/content"
 import { ProposalEditor } from "@/components/finance/proposal-editor"
+import { normalizeProposal } from "@/lib/finance/normalize-proposal"
 
 export default async function FinanceProposalEditPage({
   params,
@@ -17,7 +18,7 @@ export default async function FinanceProposalEditPage({
 
   return (
     <ProposalEditor
-      initial={proposal}
+      initial={normalizeProposal(proposal)}
       brands={getFinanceBrands()}
       formats={getFinanceFormats()}
     />

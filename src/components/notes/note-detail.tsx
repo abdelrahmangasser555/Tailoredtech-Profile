@@ -11,8 +11,10 @@ import type {
 import type { NotesBreadcrumb } from "@/lib/notes"
 import { formatNotesDate } from "@/lib/notes"
 import type { NoteMentionItem } from "@/lib/notes-chat/context"
+import { subscribeNoteUpdates } from "@/lib/notes-live"
 import { NoteBlockRenderer } from "@/components/notes/note-block-renderer"
 import { NoteChatPanel } from "@/components/notes/note-chat-panel"
+import { NoteHistorySheet } from "@/components/notes/note-history-sheet"
 import { NoteLevelChecklist } from "@/components/notes/note-level-checklist"
 import { NoteSectionActions } from "@/components/notes/note-section-actions"
 import { NoteExplainSheet } from "@/components/notes/note-explain-sheet"
@@ -31,11 +33,21 @@ type NoteDetailProps = {
 }
 
 export function NoteDetail({
-  note,
+  note: serverNote,
   breadcrumbs,
   pathIds,
   mentionItems,
 }: NoteDetailProps) {
+  const [note, setNote] = useState(serverNote)
+
+  useEffect(() => {
+    setNote(serverNote)
+  }, [serverNote.id])
+
+  useEffect(() => {
+    return subscribeNoteUpdates(serverNote.id, setNote)
+  }, [serverNote.id])
+
   const variants = {
     sidebarNav: note.variants?.sidebarNav !== false,
     compactHero: note.variants?.compactHero !== false,
@@ -60,10 +72,14 @@ export function NoteDetail({
   const [quizId, setQuizId] = useState<string | null>(null)
 
   useEffect(() => {
-    setActiveId(note.sections[0]?.id ?? "")
+    setActiveId((prev) =>
+      note.sections.some((s) => s.id === prev)
+        ? prev
+        : (note.sections[0]?.id ?? "")
+    )
     setExplainId(null)
     setQuizId(null)
-  }, [note.id, note.sections])
+  }, [note.id])
 
   // Clear leftover Mermaid bomb SVGs from prior failed renders (safe — bombs only)
   useEffect(() => {
@@ -203,12 +219,19 @@ export function NoteDetail({
           ) : null}
 
           {variants.showMeta ? (
-            <p className="mt-5 font-mono text-[10px] tracking-[0.16em] text-white/30 uppercase">
-              Created {formatNotesDate(note.createdAt)}
-              <span className="mx-2 text-white/15">·</span>
-              Updated {formatNotesDate(note.updatedAt)}
-            </p>
-          ) : null}
+            <div className="mt-5 flex flex-wrap items-center gap-3">
+              <p className="font-mono text-[10px] tracking-[0.16em] text-white/30 uppercase">
+                Created {formatNotesDate(note.createdAt)}
+                <span className="mx-2 text-white/15">·</span>
+                Updated {formatNotesDate(note.updatedAt)}
+              </p>
+              <NoteHistorySheet noteId={note.id} />
+            </div>
+          ) : (
+            <div className="mt-5">
+              <NoteHistorySheet noteId={note.id} />
+            </div>
+          )}
         </div>
       </header>
 

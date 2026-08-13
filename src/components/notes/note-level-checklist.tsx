@@ -1,11 +1,14 @@
 "use client"
 
-import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { ListChecks, Plus, Trash2 } from "lucide-react"
 import type { NoteDocument, NoteTaskItem } from "@/lib/notes-types"
 import { NoteTasks } from "@/components/notes/blocks/note-tasks"
 import { isLocalEditEnabled } from "@/lib/local-edit"
+import {
+  fetchAndPublishNote,
+  publishNoteFromPayload,
+} from "@/lib/notes-live"
 import { toast } from "sonner"
 
 export const NOTE_CHECKLIST_BLOCK_ID = "__note-checklist__"
@@ -15,7 +18,6 @@ type NoteLevelChecklistProps = {
 }
 
 export function NoteLevelChecklist({ note }: NoteLevelChecklistProps) {
-  const router = useRouter()
   const localEdit = isLocalEditEnabled()
   const [busy, setBusy] = useState(false)
 
@@ -36,14 +38,16 @@ export function NoteLevelChecklist({ note }: NoteLevelChecklistProps) {
           checklist: { title: "Checklist", items },
         }),
       })
+      const data = (await res.json().catch(() => null)) as {
+        error?: string
+      } | null
       if (!res.ok) {
-        const data = (await res.json().catch(() => null)) as {
-          error?: string
-        } | null
         throw new Error(data?.error || "Failed to add checklist")
       }
       toast.success("Checklist added")
-      router.refresh()
+      if (!publishNoteFromPayload(data)) {
+        await fetchAndPublishNote(note.id)
+      }
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Failed")
     } finally {
@@ -61,9 +65,14 @@ export function NoteLevelChecklist({ note }: NoteLevelChecklistProps) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ noteId: note.id, checklist: null }),
       })
-      if (!res.ok) throw new Error("Failed to remove")
+      const data = (await res.json().catch(() => null)) as {
+        error?: string
+      } | null
+      if (!res.ok) throw new Error(data?.error || "Failed to remove")
       toast.success("Checklist removed")
-      router.refresh()
+      if (!publishNoteFromPayload(data)) {
+        await fetchAndPublishNote(note.id)
+      }
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Failed")
     } finally {

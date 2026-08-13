@@ -1,8 +1,8 @@
 "use client"
 
-import { useRouter } from "next/navigation"
 import { toast } from "sonner"
 import { isLocalEditEnabled } from "@/lib/local-edit"
+import { fetchAndPublishNote } from "@/lib/notes-live"
 import { BrandedMermaid } from "@/components/sections/branded-mermaid"
 import { cleanupMermaidOrphans } from "@/components/sections/mermaid-cleanup"
 
@@ -23,7 +23,6 @@ export function NoteMermaidBlock({
   title,
   caption,
 }: NoteMermaidBlockProps) {
-  const router = useRouter()
   const localEdit = isLocalEditEnabled()
 
   async function replaceWithText(errorMessage: string) {
@@ -75,7 +74,7 @@ export function NoteMermaidBlock({
 
     toast.success("Diagram replaced with text")
     cleanupMermaidOrphans()
-    router.refresh()
+    await fetchAndPublishNote(noteId)
   }
 
   return (

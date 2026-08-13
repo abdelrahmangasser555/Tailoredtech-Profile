@@ -1,7 +1,6 @@
 "use client"
 
 import { useRef, useState } from "react"
-import { useRouter } from "next/navigation"
 import {
   CirclePlay,
   ImagePlus,
@@ -17,6 +16,10 @@ import {
   type NoteImagePickerHandle,
 } from "@/components/notes/note-image-picker"
 import { isLocalEditEnabled } from "@/lib/local-edit"
+import {
+  fetchAndPublishNote,
+  publishNoteFromPayload,
+} from "@/lib/notes-live"
 import { cn } from "@/lib/utils"
 import { toast } from "sonner"
 
@@ -33,7 +36,6 @@ export function NoteSectionActions({
   sectionId,
   hasTasks,
 }: NoteSectionActionsProps) {
-  const router = useRouter()
   const localEdit = isLocalEditEnabled()
   const [busy, setBusy] = useState(false)
   const [modal, setModal] = useState<ModalKind>(null)
@@ -54,6 +56,9 @@ export function NoteSectionActions({
       error?: string
     } | null
     if (!res.ok) throw new Error(data?.error || "Failed")
+    if (!publishNoteFromPayload(data)) {
+      await fetchAndPublishNote(noteId)
+    }
   }
 
   async function addChecklist() {
@@ -68,7 +73,6 @@ export function NoteSectionActions({
         data: { title: "Checklist" },
       })
       toast.success("Checklist added")
-      router.refresh()
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Failed")
     } finally {
@@ -88,7 +92,6 @@ export function NoteSectionActions({
         blockType: "tasks",
       })
       toast.success("Checklist removed")
-      router.refresh()
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Failed")
     } finally {
@@ -184,6 +187,9 @@ export function NoteSectionActions({
           error?: string
         } | null
         if (!res.ok) throw new Error(data?.error || "Failed to generate")
+        if (!publishNoteFromPayload(data)) {
+          await fetchAndPublishNote(noteId)
+        }
         toast.success("Mermaid diagram added")
       } else if (modal === "comparison") {
         const prompt = fieldA.trim()
@@ -202,12 +208,14 @@ export function NoteSectionActions({
           error?: string
         } | null
         if (!res.ok) throw new Error(data?.error || "Failed to generate")
+        if (!publishNoteFromPayload(data)) {
+          await fetchAndPublishNote(noteId)
+        }
         toast.success("Comparison table added")
       }
 
       setModal(null)
       imagePickerRef.current?.reset()
-      router.refresh()
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Failed")
     } finally {

@@ -1,9 +1,12 @@
 "use client"
 
-import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { Pencil, Play } from "lucide-react"
 import { isLocalEditEnabled } from "@/lib/local-edit"
+import {
+  fetchAndPublishNote,
+  publishNoteFromPayload,
+} from "@/lib/notes-live"
 import { cn } from "@/lib/utils"
 import { toast } from "sonner"
 
@@ -49,7 +52,6 @@ export function NoteYoutube({
   sectionId,
   blockId,
 }: NoteYoutubeProps) {
-  const router = useRouter()
   const localEdit = isLocalEditEnabled()
   const canEdit = Boolean(localEdit && noteId && sectionId && blockId)
   const [playing, setPlaying] = useState(false)
@@ -78,10 +80,15 @@ export function NoteYoutube({
           data: { url: next.trim() },
         }),
       })
-      if (!res.ok) throw new Error("Failed to update")
+      const data = (await res.json().catch(() => null)) as {
+        error?: string
+      } | null
+      if (!res.ok) throw new Error(data?.error || "Failed to update")
       toast.success("YouTube URL updated")
       setPlaying(false)
-      router.refresh()
+      if (noteId && !publishNoteFromPayload(data)) {
+        await fetchAndPublishNote(noteId)
+      }
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Failed")
     } finally {

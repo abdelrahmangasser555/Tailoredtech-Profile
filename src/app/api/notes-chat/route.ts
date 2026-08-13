@@ -9,6 +9,7 @@ import {
   type UIMessage,
 } from "ai"
 import { getNoteById } from "@/lib/notes"
+import { readFreshNote } from "@/lib/notes-chat/apply-edit"
 import {
   buildSummarizeTodayContext,
   parseSlashCommand,
@@ -24,7 +25,7 @@ import {
   resolveModelForMessages,
   NOTES_CHAT_SUMMARY_MODEL,
 } from "@/lib/notes-chat/models"
-import { serializeNoteJson } from "@/lib/notes-chat/serialize"
+import { serializeNoteOutline } from "@/lib/notes-chat/serialize"
 import {
   messagesToTranscript,
   splitMessagesForSummary,
@@ -102,10 +103,18 @@ export async function POST(req: Request) {
     return Response.json({ error: "Invalid payload" }, { status: 400 })
   }
 
-  const note = getNoteById(noteId)
-  if (!note || note.chat?.enabled === false) {
+  // Existence + chat-enabled check uses the in-memory note (cheap). For the
+  // actual conversation context we read the live note from disk when local
+  // edit is on, so the chatbot (and its edit tools) see the latest state
+  // instead of a stale module-load snapshot.
+  const existsNote = getNoteById(noteId)
+  if (!existsNote || existsNote.chat?.enabled === false) {
     return Response.json({ error: "Note not found" }, { status: 404 })
   }
+
+  const note = isLocalEditEnabled()
+    ? ((await readFreshNote(noteId)) ?? existsNote)
+    : existsNote
 
   const command =
     bodyCommand ?? parseSlashCommand(lastUserText(body.messages))
@@ -185,8 +194,8 @@ export async function POST(req: Request) {
 ${EDIT_MODE_SYSTEM_RULES}
 ${command === "summarize-today" ? "- For /summarize-today you MUST call updateNote once with the full rewritten daily summary. Do not only reply in chat." : ""}
 
-Current note JSON:
-${serializeNoteJson(note)}
+Current note outline (ids only — call readNote for live content, never rewrite from this snapshot):
+${serializeNoteOutline(note)}
 `)
     }
 

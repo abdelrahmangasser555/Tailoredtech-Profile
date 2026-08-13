@@ -1,8 +1,7 @@
 import { NextResponse } from "next/server"
 import { isLocalEditEnabled } from "@/lib/local-edit"
-import { applyNoteEdit } from "@/lib/notes-chat/apply-edit"
+import { mutateNote } from "@/lib/notes-chat/apply-edit"
 import { buildNoteBlock } from "@/lib/notes-chat/build-block"
-import { getNoteById } from "@/lib/notes"
 import {
   appendBlock,
   removeBlockById,
@@ -39,53 +38,66 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid payload" }, { status: 400 })
   }
 
-  const note = getNoteById(body.noteId)
-  if (!note) {
-    return NextResponse.json({ error: "Note not found" }, { status: 404 })
-  }
-
-  const section = note.sections.find((s) => s.id === body.sectionId)
-  if (!section) {
-    return NextResponse.json({ error: "Section not found" }, { status: 404 })
-  }
-
   try {
-    let sections = note.sections
+    const updated = await mutateNote(
+      body.noteId,
+      (note) => {
+        const section = note.sections.find((s) => s.id === body.sectionId)
+        if (!section) throw new Error("Section not found")
 
-    if (body.action === "removeType" && body.blockType) {
-      sections = removeBlocksOfType(note, body.sectionId, body.blockType)
-    } else if (body.action === "removeBlock" && body.blockId) {
-      sections = removeBlockById(note, body.sectionId, body.blockId)
-    } else if (body.action === "updateBlock" && body.blockId && body.data) {
-      sections = updateBlock(
-        note,
-        body.sectionId,
-        body.blockId,
-        body.data as Partial<NoteBlock>
-      )
-    } else if (body.action === "append" && body.blockType) {
-      const block = buildNoteBlock(body.blockType, body.data ?? {})
-      if (!block) {
-        return NextResponse.json({ error: "Invalid block data" }, { status: 400 })
+        if (body.action === "removeType" && body.blockType) {
+          return {
+            sections: removeBlocksOfType(note, body.sectionId, body.blockType),
+          }
+        }
+        if (body.action === "removeBlock" && body.blockId) {
+          return {
+            sections: removeBlockById(note, body.sectionId, body.blockId),
+          }
+        }
+        if (body.action === "updateBlock" && body.blockId && body.data) {
+          return {
+            sections: updateBlock(
+              note,
+              body.sectionId,
+              body.blockId,
+              body.data as Partial<NoteBlock>
+            ),
+          }
+        }
+        if (body.action === "append" && body.blockType) {
+          const block = buildNoteBlock(body.blockType, body.data ?? {})
+          if (!block) throw new Error("Invalid block data")
+          if (
+            block.type === "tasks" &&
+            section.blocks.some((b) => b.type === "tasks")
+          ) {
+            throw new Error("Section already has a checklist")
+          }
+          return { sections: appendBlock(note, body.sectionId, block) }
+        }
+        throw new Error("Invalid action")
+      },
+      {
+        source: `section-${body.action}`,
+        name:
+          body.action === "append"
+            ? `Added ${body.blockType ?? "block"}`
+            : body.action === "removeBlock" || body.action === "removeType"
+              ? "Removed block"
+              : "Updated block",
+        note: body.sectionId,
       }
-      if (
-        block.type === "tasks" &&
-        section.blocks.some((b) => b.type === "tasks")
-      ) {
-        return NextResponse.json(
-          { error: "Section already has a checklist" },
-          { status: 409 }
-        )
-      }
-      sections = appendBlock(note, body.sectionId, block)
-    } else {
-      return NextResponse.json({ error: "Invalid action" }, { status: 400 })
-    }
-
-    const updated = await applyNoteEdit(body.noteId, { sections })
+    )
     return NextResponse.json({ ok: true, note: updated })
   } catch (err) {
     const message = err instanceof Error ? err.message : "Save failed"
-    return NextResponse.json({ error: message }, { status: 500 })
+    const status =
+      message === "Section not found" || message === "Note not found"
+        ? 404
+        : message === "Section already has a checklist"
+          ? 409
+          : 500
+    return NextResponse.json({ error: message }, { status })
   }
 }

@@ -5,6 +5,7 @@ type Block =
   | { type: "h3"; text: string }
   | { type: "p"; parts: InlinePart[] }
   | { type: "ul"; items: InlinePart[][] }
+  | { type: "table"; headers: InlinePart[][]; rows: InlinePart[][][] }
 
 type InlinePart = { text: string; bold?: boolean }
 
@@ -30,6 +31,7 @@ export function parsePresentationMarkdown(source: string): Block[] {
   const blocks: Block[] = []
   let paragraph: string[] = []
   let listItems: string[] = []
+  let tableLines: string[] = []
 
   const flushParagraph = () => {
     if (!paragraph.length) return
@@ -47,9 +49,49 @@ export function parsePresentationMarkdown(source: string): Block[] {
     listItems = []
   }
 
+  const flushTable = () => {
+    if (tableLines.length < 2) {
+      // Not enough for a table; treat as paragraph
+      if (tableLines.length) {
+        paragraph.push(...tableLines)
+      }
+      tableLines = []
+      return
+    }
+
+    const parseRow = (line: string): string[] =>
+      line
+        .replace(/^\|/, "")
+        .replace(/\|$/, "")
+        .split("|")
+        .map((cell) => cell.trim())
+
+    const headers = parseRow(tableLines[0]!).map(parseInline)
+    // Skip separator row (line 1: |---|---|)
+    const rows = tableLines.slice(2).map((line) =>
+      parseRow(line).map(parseInline)
+    )
+
+    blocks.push({ type: "table", headers, rows })
+    tableLines = []
+  }
+
   for (const raw of lines) {
     const line = raw.trimEnd()
     const trimmed = line.trim()
+
+    // Table detection: line starts and ends with |
+    if (trimmed.startsWith("|") && trimmed.endsWith("|")) {
+      flushParagraph()
+      flushList()
+      tableLines.push(trimmed)
+      continue
+    }
+
+    // Non-table line: flush any accumulated table
+    if (tableLines.length) {
+      flushTable()
+    }
 
     if (!trimmed) {
       flushParagraph()
@@ -80,6 +122,7 @@ export function parsePresentationMarkdown(source: string): Block[] {
     paragraph.push(trimmed)
   }
 
+  flushTable()
   flushParagraph()
   flushList()
   return blocks
@@ -119,6 +162,38 @@ const styles = StyleSheet.create({
     fontSize: 10,
     lineHeight: 1.5,
   },
+  table: {
+    borderWidth: 0.75,
+    borderColor: "rgba(10,10,10,0.22)",
+    marginBottom: 10,
+    marginTop: 4,
+  },
+  tableHeaderRow: {
+    flexDirection: "row",
+    backgroundColor: "#F0F0EE",
+    borderBottomWidth: 0.75,
+    borderBottomColor: "rgba(10,10,10,0.22)",
+  },
+  tableRow: {
+    flexDirection: "row",
+    borderBottomWidth: 0.5,
+    borderBottomColor: "rgba(10,10,10,0.18)",
+  },
+  tableCell: {
+    flex: 1,
+    paddingVertical: 5,
+    paddingHorizontal: 6,
+    fontSize: 9,
+  },
+  tableHeaderText: {
+    fontFamily: "GeistSans",
+    fontWeight: 500,
+    fontSize: 9,
+  },
+  tableCellText: {
+    fontFamily: "GeistSans",
+    fontSize: 9,
+  },
 })
 
 export function PdfMarkdownBody({
@@ -138,6 +213,64 @@ export function PdfMarkdownBody({
             <Text key={i} style={[styles.h3, { color: brand.ink }]}>
               {block.text}
             </Text>
+          )
+        }
+
+        if (block.type === "table") {
+          const colCount = block.headers.length || 1
+          return (
+            <View key={i} style={styles.table} wrap={false}>
+              <View style={styles.tableHeaderRow}>
+                {block.headers.map((header, j) => (
+                  <View
+                    key={j}
+                    style={[styles.tableCell, { flex: 1 / colCount }]}
+                  >
+                    <Text style={[styles.tableHeaderText, { color: brand.ink }]}>
+                      {header.map((part, k) =>
+                        part.bold ? (
+                          <Text key={k} style={[styles.bold, { color: brand.ink }]}>
+                            {part.text}
+                          </Text>
+                        ) : (
+                          <Text key={k}>{part.text}</Text>
+                        )
+                      )}
+                    </Text>
+                  </View>
+                ))}
+              </View>
+              {block.rows.map((row, r) => (
+                <View
+                  key={r}
+                  style={[
+                    styles.tableRow,
+                    ...(r === block.rows.length - 1
+                      ? [{ borderBottomWidth: 0 }]
+                      : []),
+                  ]}
+                >
+                  {row.map((cell, j) => (
+                    <View
+                      key={j}
+                      style={[styles.tableCell, { flex: 1 / colCount }]}
+                    >
+                      <Text style={[styles.tableCellText, { color: brand.muted }]}>
+                        {cell.map((part, k) =>
+                          part.bold ? (
+                            <Text key={k} style={[styles.bold, { color: brand.ink }]}>
+                              {part.text}
+                            </Text>
+                          ) : (
+                            <Text key={k}>{part.text}</Text>
+                          )
+                        )}
+                      </Text>
+                    </View>
+                  ))}
+                </View>
+              ))}
+            </View>
           )
         }
 

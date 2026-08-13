@@ -37,6 +37,9 @@ yarn-error.log*
 # personal SEO walkthrough (local only)
 /seo-playbook/
 
+# note version snapshots (local dev only — never bundle or commit)
+/src/config/note-versions/
+
 # vercel
 .vercel
 

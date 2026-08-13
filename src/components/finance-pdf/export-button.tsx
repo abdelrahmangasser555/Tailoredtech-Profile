@@ -4,7 +4,7 @@ import { useState } from "react"
 import { FileDown, Loader2 } from "lucide-react"
 import { toast } from "sonner"
 import type { FinanceProposal } from "@/lib/finance/types"
-import { registerPresentationPdfFonts } from "@/lib/presentation-pdf/fonts"
+import { registerInvoicePdfFonts } from "@/lib/finance-pdf/invoice-fonts"
 import { prepareProposalPdfAssets } from "@/lib/finance-pdf/prepare"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
@@ -38,6 +38,10 @@ export function ProposalPdfExportButton({
 
     try {
       const origin = window.location.origin
+      await registerInvoicePdfFonts(origin)
+      const { registerPresentationPdfFonts } = await import(
+        "@/lib/presentation-pdf/fonts"
+      )
       await registerPresentationPdfFonts(origin)
 
       toast.loading("Preparing assets…", { id: toastId })

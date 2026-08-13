@@ -4,6 +4,7 @@ import { useMemo, useState } from "react"
 import Link from "next/link"
 import { Plus, FileText } from "lucide-react"
 import type { FinanceBrand, FinanceProposal } from "@/lib/finance/types"
+import { CloneProposalButton } from "@/components/finance/clone-button"
 import { ProposalPdfExportButton } from "@/components/finance-pdf/export-button"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Button } from "@/components/ui/button"
@@ -139,6 +140,12 @@ export function ProposalsList({
                       {formatDate(p.updatedAt)}
                     </p>
                   </Link>
+                  <CloneProposalButton
+                    proposal={p}
+                    label="Clone"
+                    variant="ghost"
+                    className="h-8"
+                  />
                   <ProposalPdfExportButton
                     proposals={[p]}
                     label="PDF"

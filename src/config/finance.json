@@ -72,220 +72,296 @@
   ],
   "proposals": [
     {
-      "id": "bbs-subscription",
-      "title": "BBS Platform Proposal",
-      "subtitle": "Subscription model",
-      "clientName": "Bahri",
+      "id": "bbs-bahri-option-1-subscription",
+      "title": "BBS Platform Proposal - Model 1",
+      "subtitle": "Annual subscription · Behavior-Based Safety for Bahri Ship Management",
+      "clientName": "The National Shipping Company of Saudi Arabia",
       "brandId": "marafei",
-      "format": "formal-breakdown",
+      "format": "formal-features",
       "currency": "USD",
+      "language": "bilingual",
+      "number": "01-12082026",
+      "numberLabelEn": "Proposal reference",
+      "numberLabelAr": "مرجع العرض",
+      "date": "2026-08-12",
+      "issuer": {
+        "nameEn": "Marafe Almarefa Est For Information",
+        "nameAr": "مؤسسة مرافق المعرفة للاتصالات وتقنية المعلومات",
+        "addressEn": "Riyadh, Kingdom of Saudi Arabia",
+        "addressAr": "الرياض، المملكة العربية السعودية",
+        "vatNumber": "311953722000003",
+        "commercialNumber": "7003792888",
+        "logo": "/assets/uploads/finance/brand-marafei/logo-msma2gww.jpg"
+      },
+      "customer": {
+        "name": "The National Shipping Company of Saudi Arabia",
+        "address": "OneJLT-09-1A, One JLT Building, DMCC-EZ1-1A8, Jumeirah Lakes Towers, Dubai, 6653, UAE\nالإمارات العربية المتحدة",
+        "otherId": "TRN: 100575192800003\nC/O Bahri Ship Management DMCC"
+      },
       "icon": null,
-      "markdown": "### Scope\n\nReplacement for the current BBS system with **unlimited seats**, Bahri-specific workflows, and a path to future MIPS2 integration.\n\n- Data migration included\n- Bahri SSO integration\n- Hosted as agreed with IT",
+      "markdown": "### Overview\n\nMarafei proposes  **Tailoredtech BBS(BBS)** platform for Bahri Ship Management, delivered in partnership with TailoredTech.\n\n**Model 1** is Tailoredtech BBS third-party platform provided under an **annual subscription**. The solution is **hosted and owned by Marafei** . The product includes **data migration** and **ongoing maintenance** for the software under the subscription.\n\n### MIPS2 pathway (optional)\n\nFull MIPS2 implementation is quoted separately. An optional **MIPS2 credit** apply if Bahri proceeds with MIPS2 with the annual plan. MIPS2 is **optional** and is **not required** for Model 1 delivery.\n\n### Timeline\n\n| Milestone | Target date |\n|-----------|------------|\n| Development started | **20 July 2026** |\n| Target readiness | **15 October 2026** |\n| Small batch releases + UAT | Ongoing until go-live |\n| Ready for roll-out | **Before 1 November 2026** |\n\nWork has already started. Before final release there will be **regular small batch releases** for updates and UAT so the product is ready for rolling out before **1 November 2026**.\n",
       "features": [
         {
           "id": "f1",
-          "title": "Unlimited seats",
-          "description": "Supports all trained observers without seat caps."
+          "title": "Marafei-hosted ",
+          "description": "Cloud delivery and hosting by Marafei."
         },
         {
           "id": "f2",
-          "title": "Bahri workflows",
-          "description": "Built around Bahri operational requirements, not a generic BBS product."
+          "title": "Data migration included",
+          "description": "Migration of existing BBS records and historical observations as part of delivery."
         },
         {
           "id": "f3",
-          "title": "MIPS2 pathway",
-          "description": "Compatible with the MIPS2 and Azure stack for future integration."
+          "title": "Ongoing maintenance included",
+          "description": "Software maintenance and support included under the annual subscription."
+        },
+        {
+          "id": "f4",
+          "title": "Unlimited seats",
+          "description": "All trained observers and vessel teams can use the platform without per-seat limits."
+        },
+        {
+          "id": "f-mspfxqe5-fo5o",
+          "title": "Compatible Tech Stack with Bahri Infrastructure ",
+          "description": "For future hosting availability on Bahri infrastructure"
         }
       ],
       "solutions": [
         {
-          "id": "sol-bbs",
-          "name": "BBS Platform",
-          "description": "Annual subscription with migration and unlimited seats.",
+          "id": "sol-subscription",
+          "name": "Model 1 · Annual subscription",
+          "description": "Marafei-hosted. Not on Bahri infrastructure. Data migration and ongoing maintenance included.",
           "lineItems": [
             {
-              "id": "li-1",
-              "label": "BBS annual subscription",
+              "id": "li-sub-y1",
+              "label": "BBS subscription - Year 1",
               "amount": 14000,
-              "quantity": 1
+              "quantity": 1,
+              "note": "First year (includes migration and maintenance)"
             },
             {
-              "id": "li-2",
+              "id": "li-mig-sub",
               "label": "Data migration",
               "amount": 0,
               "quantity": 1,
               "note": "Included"
+            },
+            {
+              "id": "li-maint-sub",
+              "label": "Ongoing software maintenance",
+              "amount": 0,
+              "quantity": 1,
+              "note": "Included in subscription"
             }
           ],
           "prices": [
             {
-              "id": "p-annual",
-              "label": "Annual subscription",
+              "id": "p-sub-y1",
+              "label": "Year 1 subscription",
               "amount": 14000
+            },
+            {
+              "id": "p-sub-y2",
+              "label": "Each subsequent year",
+              "amount": 10000
+            },
+            {
+              "id": "price-mspfztlv-0fxs",
+              "label": "(Optional) MIPS2 Native Development - $60,000 less $14,000 development credit = $46,000",
+              "amount": 46000
             }
           ],
-          "discounts": [
-            {
-              "id": "d-mips",
-              "label": "First-year credit toward MIPS2 (if proceeding)",
-              "amount": 14000
-            }
-          ]
+          "discounts": [],
+          "totalMode": "manual",
+          "manualTotal": 14000,
+          "totalLabel": "Total first Year"
         }
       ],
       "comparison": {
-        "enabled": true,
+        "enabled": false,
         "eyebrow": "Options",
-        "title": "Commercial models",
-        "columns": [
-          {
-            "id": "sub",
-            "label": "Subscription",
-            "highlight": true
-          },
-          {
-            "id": "once",
-            "label": "One-time"
-          }
-        ],
-        "rows": [
-          {
-            "label": "BBS fee",
-            "cells": [
-              {
-                "type": "text",
-                "value": "$14,000 / year"
-              },
-              {
-                "type": "text",
-                "value": "$35,000 once"
-              }
-            ]
-          },
-          {
-            "label": "Unlimited seats",
-            "cells": [
-              {
-                "type": "check",
-                "value": true
-              },
-              {
-                "type": "check",
-                "value": true
-              }
-            ]
-          },
-          {
-            "label": "Hosted on Bahri infra",
-            "cells": [
-              {
-                "type": "text",
-                "value": "As agreed"
-              },
-              {
-                "type": "check",
-                "value": true
-              }
-            ]
-          }
-        ]
+        "title": "Commercial model",
+        "columns": [],
+        "rows": []
       },
       "display": {
+        "showHeader": true,
+        "headerRepeat": "first",
+        "showProposalNumber": true,
+        "showDate": true,
+        "featuresLabel": "Scope and deliverables",
+        "offerLabel": "Commercial offer ",
         "showFeatures": true,
         "showBreakdown": true,
-        "showComparison": true,
+        "showComparison": false,
         "showMarkdown": true,
         "showPrices": true,
         "showPageNumbers": true,
         "featuresStyle": "list",
         "footer": {
           "enabled": true,
-          "text": "Marafei · TailoredTech · Confidential commercial proposal"
+          "text": "Marafe Almarefa Est · Model 1 Subscription · Bahri Ship Management"
         }
       },
-      "createdAt": "2026-08-01T10:00:00.000Z",
-      "updatedAt": "2026-08-09T10:00:00.000Z",
+      "createdAt": "2026-08-11T16:00:00.000Z",
+      "updatedAt": "2026-08-12T08:45:33.927Z",
       "enabled": true
     },
     {
-      "id": "bbs-onetime",
-      "title": "BBS Platform Proposal",
-      "subtitle": "One-time implementation",
-      "clientName": "Bahri",
-      "brandId": "bahri",
+      "id": "bbs-bahri-option-2-onetime",
+      "title": "BBS Platform Proposal - Model 2",
+      "subtitle": "One-time plan · Behavior-Based Safety for Bahri Ship Management",
+      "clientName": "The National Shipping Company of Saudi Arabia",
+      "brandId": "marafei",
       "format": "formal-features",
       "currency": "USD",
+      "language": "bilingual",
+      "number": "02-12082026",
+      "numberLabelEn": "Proposal reference",
+      "numberLabelAr": "مرجع العرض",
+      "date": "2026-08-12",
+      "issuer": {
+        "nameEn": "Marafe Almarefa Est For Information",
+        "nameAr": "مؤسسة مرافق المعرفة للاتصالات وتقنية المعلومات",
+        "addressEn": "Riyadh, Kingdom of Saudi Arabia",
+        "addressAr": "الرياض، المملكة العربية السعودية",
+        "vatNumber": "311953722000003",
+        "commercialNumber": "7003792888",
+        "logo": "/assets/uploads/finance/brand-marafei/logo-msma2gww.jpg"
+      },
+      "customer": {
+        "name": "The National Shipping Company of Saudi Arabia",
+        "address": "OneJLT-09-1A, One JLT Building, DMCC-EZ1-1A8, Jumeirah Lakes Towers, Dubai, 6653, UAE\nالإمارات العربية المتحدة",
+        "otherId": "TRN: 100575192800003\nC/O Bahri Ship Management DMCC"
+      },
       "icon": null,
-      "markdown": "### Offer\n\nOne-time BBS implementation hosted on **Bahri infrastructure**, including migration, SSO, and unlimited seats.",
+      "markdown": "### Overview\n\nMarafei proposes **Bahri Behavior-Based Safety (BBS)** platform for Bahri Ship Management, delivered in partnership with TailoredTech.\n\n**Model 2** is an Inhouse **one-time implementation** on **Bahri infrastructure**, **Bahri branded**, with **data migration** and **ongoing maintenance** for the software. This solution is **not MIPS2 native**.\n\n\n### Stack and MIPS2 \n\nThe technical stack is **compatible** with the MIPS2 / Azure ecosystem .\n\n**API integration** can be provided for any integrations required with MIPS2 to deliver the **same operational capabilities** expected from native MIPS2 features.\n\n\n### SSO independence \n\nThe product will be **finished independently** of whether it is integrated with **MIPS SSO**. Once SSO integration is in place, **no transition or migration** of the product itself is required - the same release date remains valid.\n\n\n### MIPS2 pathway (optional) \n\nFull MIPS2 implementation is quoted separately. An optional **MIPS2 credit** apply if Bahri proceeds with MIPS2 if proceeded with this plan. MIPS2 is **optional** and is **not required** for Model 2 delivery.\n\n\n\n### Timeline \n\n| Milestone | Date |\n|-----------|------|\n| Development started | **20 July 2026** |\n| Target readiness | **15 October 2026** |\n| Regular small batch releases + UAT | Ongoing until go-live |\n| Ready for roll-out | **Before 1 November 2026** |\n\nWork has already started. Before final release there will be **regular small batch releases** for updates and UAT so the product is ready for rolling out before **1 November 2026**. Because delivery is independent of MIPS SSO timing, the product can be released on the **same release date** with or without SSO; SSO can follow without product re-migration.\n",
       "features": [
         {
           "id": "f1",
-          "title": "One-time fee",
-          "description": "$35,000 implementation. No annual BBS subscription."
+          "title": "Deployed on Bahri infrastructure",
+          "description": "One-time implementation hosted on Bahri infrastructure under Bahri control."
         },
         {
           "id": "f2",
-          "title": "Bahri hosting",
-          "description": "Deployed on Bahri infrastructure under Bahri branding."
+          "title": "Bahri branded",
+          "description": "Full Bahri branding for the in-house BBS experience."
         },
         {
           "id": "f3",
-          "title": "MIPS2 discount",
-          "description": "$25,000 credit toward a future MIPS2 track if it proceeds."
+          "title": "Data migration included",
+          "description": "Migration of existing BBS records and historical observations as part of delivery."
+        },
+        {
+          "id": "f4",
+          "title": "Ongoing maintenance",
+          "description": "Ongoing software maintenance included with the one-time implementation track."
+        },
+        {
+          "id": "f6",
+          "title": "Compatible stack ",
+          "description": "Compatible with the MIPS2 / Azure ecosystem - not identical to the MIPS2 native stack."
+        },
+        {
+          "id": "f7",
+          "title": "API integration for MIPS2 feature parity",
+          "description": "API integration can be provided for required MIPS2 integrations to deliver the same operational capabilities as native MIPS2 features."
+        },
+        {
+          "id": "f8",
+          "title": "Finished independently of MIPS SSO / Hosting",
+          "description": "Product completion does not depend on MIPS SSO / Hosting. Once SSO is added and hosting is hooked up, no product transition or re-migration is required."
         }
       ],
       "solutions": [
         {
-          "id": "sol-bbs",
-          "name": "BBS Implementation",
-          "description": "One-time delivery on Bahri infrastructure.",
+          "id": "sol-onetime",
+          "name": "Model 2 · One-time plan",
+          "description": "On Bahri infrastructure. Bahri branded. Not MIPS2 native. Data migration and ongoing maintenance included.",
           "lineItems": [
             {
-              "id": "li-1",
-              "label": "BBS implementation",
+              "id": "li-impl",
+              "label": "BBS one-time plan",
               "amount": 35000,
+              "quantity": 1
+            },
+            {
+              "id": "li-mig-ot",
+              "label": "Data migration",
+              "amount": 0,
+              "quantity": 1,
+              "note": "Included"
+            },
+            {
+              "id": "li-maint-ot",
+              "label": "Ongoing software maintenance",
+              "amount": 0,
+              "quantity": 1,
+              "note": "Included"
+            },
+            {
+              "id": "li-mspgsr54-htea",
+              "label": "Integration with SSO",
+              "amount": 0,
+              "quantity": 1
+            },
+            {
+              "id": "li-mspgt27x-p54g",
+              "label": "Hosting on Bahri Infrastructure",
+              "amount": 0,
+              "quantity": 1
+            },
+            {
+              "id": "li-mspgtj8k-b5pe",
+              "label": "API API integration with MIPS for any requested features",
+              "amount": 0,
               "quantity": 1
             }
           ],
           "prices": [
             {
               "id": "p-once",
-              "label": "One-time implementation",
+              "label": "One-time plan",
+              "amount": 35000
+            },
+            {
+              "id": "price-msph2pds-z4m6",
+              "label": "(Optional) MIPS2 Native Development - $60,000 less $25,000 development credit = $35,000",
               "amount": 35000
             }
           ],
-          "discounts": [
-            {
-              "id": "d-mips",
-              "label": "MIPS2 credit (if proceeding)",
-              "amount": 25000
-            }
-          ]
+          "discounts": []
         }
       ],
       "comparison": {
         "enabled": false,
-        "eyebrow": "Comparison",
-        "title": "Options",
+        "eyebrow": "Options",
+        "title": "Commercial model",
         "columns": [],
         "rows": []
       },
       "display": {
+        "showHeader": true,
+        "headerRepeat": "first",
+        "showProposalNumber": true,
+        "showDate": true,
+        "featuresLabel": "Scope and deliverables ",
+        "offerLabel": "Commercial offer ",
         "showFeatures": true,
-        "showBreakdown": false,
+        "showBreakdown": true,
         "showComparison": false,
         "showMarkdown": true,
         "showPrices": true,
-        "showPageNumbers": false,
+        "showPageNumbers": true,
         "featuresStyle": "list",
         "footer": {
           "enabled": true,
-          "text": "Prepared for Bahri · Confidential"
+          "text": "Marafe Almarefa Est ·Model 2 One-time · Bahri Ship Management"
         }
       },
-      "createdAt": "2026-08-02T10:00:00.000Z",
-      "updatedAt": "2026-08-09T10:00:00.000Z",
+      "createdAt": "2026-08-11T16:00:00.000Z",
+      "updatedAt": "2026-08-12T08:46:57.715Z",
       "enabled": true
     }
   ],

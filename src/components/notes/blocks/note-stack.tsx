@@ -15,8 +15,21 @@ import {
   SiGo,
   SiPostgresql,
   SiMongodb,
+  SiMysql,
+  SiSqlite,
+  SiRedis,
+  SiPrisma,
+  SiExpress,
+  SiGraphql,
   SiTailwindcss,
   SiVercel,
+  SiGooglecloud,
+  SiKubernetes,
+  SiLinux,
+  SiNginx,
+  SiCloudflare,
+  SiFirebase,
+  SiSupabase,
 } from "@icons-pack/react-simple-icons"
 import type { ComponentType } from "react"
 import { cn } from "@/lib/utils"
@@ -25,6 +38,10 @@ import type {
   NoteStackItem,
   NoteStackLayer,
 } from "@/lib/notes-types"
+import {
+  resolveStackIconSlug,
+  type StackIconSlug,
+} from "@/lib/notes-stack-icons"
 
 type IconComp = ComponentType<{
   size?: number
@@ -32,40 +49,39 @@ type IconComp = ComponentType<{
   className?: string
 }>
 
-/** Curated Simple Icons map — extend here; never hand-roll SVGs. */
-const ICONS: Record<string, IconComp> = {
-  siHtml5: SiHtml5,
-  SiHtml5,
-  siCss: SiCss,
-  SiCss,
-  siJavascript: SiJavascript,
-  SiJavascript,
-  siTypescript: SiTypescript,
-  SiTypescript,
-  siReact: SiReact,
-  SiReact,
-  siNodedotjs: SiNodedotjs,
-  SiNodedotjs,
-  siNextdotjs: SiNextdotjs,
-  SiNextdotjs,
-  siGit: SiGit,
-  SiGit,
-  siGithub: SiGithub,
-  SiGithub,
-  siDocker: SiDocker,
-  SiDocker,
-  siPython: SiPython,
-  SiPython,
-  siGo: SiGo,
-  SiGo,
-  siPostgresql: SiPostgresql,
-  SiPostgresql,
-  siMongodb: SiMongodb,
-  SiMongodb,
-  siTailwindcss: SiTailwindcss,
-  SiTailwindcss,
-  siVercel: SiVercel,
-  SiVercel,
+const ICONS: Record<StackIconSlug, IconComp | undefined> = {
+  html5: SiHtml5,
+  css: SiCss,
+  javascript: SiJavascript,
+  typescript: SiTypescript,
+  react: SiReact,
+  nodedotjs: SiNodedotjs,
+  nextdotjs: SiNextdotjs,
+  git: SiGit,
+  github: SiGithub,
+  docker: SiDocker,
+  python: SiPython,
+  go: SiGo,
+  postgresql: SiPostgresql,
+  mongodb: SiMongodb,
+  mysql: SiMysql,
+  sqlite: SiSqlite,
+  redis: SiRedis,
+  prisma: SiPrisma,
+  express: SiExpress,
+  graphql: SiGraphql,
+  tailwindcss: SiTailwindcss,
+  vercel: SiVercel,
+  azure: undefined,
+  azuredevops: undefined,
+  aws: undefined,
+  googlecloud: SiGooglecloud,
+  kubernetes: SiKubernetes,
+  linux: SiLinux,
+  nginx: SiNginx,
+  cloudflare: SiCloudflare,
+  firebase: SiFirebase,
+  supabase: SiSupabase,
 }
 
 type NoteStackProps = {
@@ -79,7 +95,8 @@ type NoteStackProps = {
 }
 
 function StackIcon({ item }: { item: NoteStackItem }) {
-  const Icon = ICONS[item.icon]
+  const slug = resolveStackIconSlug(item.icon)
+  const Icon = slug ? ICONS[slug] : undefined
   return (
     <li className="flex flex-col items-center gap-2">
       <span className="flex size-10 items-center justify-center border border-white/15 bg-black/30 text-white">
@@ -98,7 +115,7 @@ function StackIcon({ item }: { item: NoteStackItem }) {
 
 function LayerBox({ layer }: { layer: NoteStackLayer }) {
   return (
-    <div className="min-w-[12rem] flex-1 border border-white/15 bg-white/[0.03]">
+    <div className="min-w-[12rem] flex-1 border border-white/15 bg-white/3">
       <div className="border-b border-white/10 px-3 py-2">
         <p className="font-mono text-[10px] tracking-[0.2em] text-accent uppercase">
           {layer.label}
@@ -174,7 +191,6 @@ export function NoteStack({
     (edges ?? []).map((e) => [e.from, e] as const)
   )
 
-  /** Sequential edges when none provided (layer[i] → layer[i+1]) */
   const sequenceEdges: NoteStackEdge[] =
     edges && edges.length > 0
       ? edges

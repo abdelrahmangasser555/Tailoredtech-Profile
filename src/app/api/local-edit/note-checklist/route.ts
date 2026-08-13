@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server"
 import { isLocalEditEnabled } from "@/lib/local-edit"
-import { applyNoteEdit } from "@/lib/notes-chat/apply-edit"
-import { getNoteById } from "@/lib/notes"
+import { mutateNote } from "@/lib/notes-chat/apply-edit"
 import type { NoteTaskItem } from "@/lib/notes-types"
 
 type Body = {
@@ -35,34 +34,38 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "noteId required" }, { status: 400 })
   }
 
-  const note = getNoteById(body.noteId)
-  if (!note) {
-    return NextResponse.json({ error: "Note not found" }, { status: 404 })
-  }
-
   try {
     if (body.appendSectionTasks) {
       const { sectionId, title, items } = body.appendSectionTasks
       const blockId = `tasks-${Date.now().toString(36)}`
-      const sections = note.sections.map((section) => {
-        if (section.id !== sectionId) return section
-        if (section.blocks.some((b) => b.type === "tasks")) return section
-        return {
-          ...section,
-          blocks: [
-            ...section.blocks,
-            {
-              type: "tasks" as const,
-              id: blockId,
-              title: title ?? "Checklist",
-              items: items ?? [
-                { id: "task-1", label: "New task", children: [] },
+      const updated = await mutateNote(
+        body.noteId,
+        (note) => ({
+          sections: note.sections.map((section) => {
+            if (section.id !== sectionId) return section
+            if (section.blocks.some((b) => b.type === "tasks")) return section
+            return {
+              ...section,
+              blocks: [
+                ...section.blocks,
+                {
+                  type: "tasks" as const,
+                  id: blockId,
+                  title: title ?? "Checklist",
+                  items: items ?? [
+                    { id: "task-1", label: "New task", children: [] },
+                  ],
+                },
               ],
-            },
-          ],
+            }
+          }),
+        }),
+        {
+          source: "add-tasks",
+          name: "Added checklist",
+          note: sectionId,
         }
-      })
-      const updated = await applyNoteEdit(body.noteId, { sections })
+      )
       return NextResponse.json({ ok: true, note: updated })
     }
 
@@ -73,9 +76,15 @@ export async function POST(request: Request) {
       )
     }
 
-    const updated = await applyNoteEdit(body.noteId, {
-      checklist: body.checklist,
-    })
+    const updated = await mutateNote(
+      body.noteId,
+      () => ({ checklist: body.checklist }),
+      {
+        source: "update-checklist",
+        name: "Updated checklist",
+        note: body.noteId,
+      }
+    )
     return NextResponse.json({ ok: true, note: updated })
   } catch (err) {
     const message = err instanceof Error ? err.message : "Save failed"

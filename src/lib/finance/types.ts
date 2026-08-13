@@ -38,6 +38,8 @@ export type ProposalDiscount = {
   amount?: number
   /** Percent off subtotal (0–100) */
   percent?: number
+  /** Shown on the proposal but not applied to the commercial total */
+  optional?: boolean
 }
 
 export type ProposalSolution = {
@@ -49,6 +51,12 @@ export type ProposalSolution = {
   /** Named price options (e.g. Annual, One-time) */
   prices: ProposalPriceLine[]
   discounts: ProposalDiscount[]
+  /** Custom label for the total row (default "Total") */
+  totalLabel?: string
+  /** "auto" = sum of line items minus discounts; "manual" = use manualTotal */
+  totalMode?: "auto" | "manual"
+  /** When totalMode is "manual", use this number instead of the calculated total */
+  manualTotal?: number
 }
 
 export type ProposalFeature = {
@@ -70,7 +78,16 @@ export type ProposalComparison = {
   rows: { label: string; cells: ProposalComparisonCell[] }[]
 }
 
+export type ProposalHeaderRepeat = "first" | "all"
+
 export type ProposalDisplay = {
+  showHeader: boolean
+  /** Repeat issuer letterhead on every page vs first page only */
+  headerRepeat: ProposalHeaderRepeat
+  showProposalNumber: boolean
+  showDate: boolean
+  featuresLabel: string
+  offerLabel: string
   showFeatures: boolean
   showBreakdown: boolean
   showComparison: boolean
@@ -89,10 +106,19 @@ export type FinanceProposal = {
   id: string
   title: string
   subtitle: string
+  /** Kept for list display; synced with customer.name */
   clientName: string
   brandId: FinanceBrandId
   format: ProposalFormatId
   currency: string
+  language: InvoiceLanguageMode
+  /** Reference shown in the meta row (e.g. PROP-001) */
+  number: string
+  numberLabelEn?: string
+  numberLabelAr?: string
+  date: string
+  issuer: InvoiceIssuer
+  customer: InvoiceCustomer
   /** Optional proposal icon (uploaded or public path) */
   icon: string | null
   markdown: string
@@ -212,6 +238,12 @@ export type FinanceConfig = {
 }
 
 export const DEFAULT_PROPOSAL_DISPLAY: ProposalDisplay = {
+  showHeader: true,
+  headerRepeat: "first",
+  showProposalNumber: true,
+  showDate: true,
+  featuresLabel: "Features",
+  offerLabel: "Pricing breakdown",
   showFeatures: true,
   showBreakdown: true,
   showComparison: false,
@@ -227,14 +259,27 @@ export const DEFAULT_PROPOSAL_DISPLAY: ProposalDisplay = {
 
 export function emptyProposal(partial?: Partial<FinanceProposal>): FinanceProposal {
   const now = new Date().toISOString()
+  const date = now.slice(0, 10)
+  const clientName = partial?.clientName ?? partial?.customer?.name ?? ""
   return {
     id: partial?.id ?? `proposal-${Date.now().toString(36)}`,
     title: partial?.title ?? "New proposal",
     subtitle: partial?.subtitle ?? "",
-    clientName: partial?.clientName ?? "",
+    clientName,
     brandId: partial?.brandId ?? "tailoredtech",
     format: partial?.format ?? "formal-breakdown",
     currency: partial?.currency ?? "USD",
+    language: partial?.language ?? "en",
+    number: partial?.number ?? `PROP-${String(Date.now()).slice(-6)}`,
+    numberLabelEn: partial?.numberLabelEn ?? "Proposal reference",
+    numberLabelAr: partial?.numberLabelAr ?? "مرجع العرض",
+    date: partial?.date ?? date,
+    issuer: { ...DEFAULT_INVOICE_ISSUER, ...partial?.issuer },
+    customer: partial?.customer ?? {
+      name: clientName,
+      address: "",
+      otherId: "",
+    },
     icon: partial?.icon ?? null,
     markdown: partial?.markdown ?? "",
     features: partial?.features ?? [],

@@ -40,11 +40,13 @@ export function discountAmount(
 }
 
 export function solutionTotal(solution: ProposalSolution): number {
+  if (solution.totalMode === "manual") {
+    return solution.manualTotal ?? 0
+  }
   const sub = solutionSubtotal(solution)
-  const off = solution.discounts.reduce(
-    (sum, d) => sum + discountAmount(d, sub),
-    0
-  )
+  const off = solution.discounts
+    .filter((d) => !d.optional)
+    .reduce((sum, d) => sum + discountAmount(d, sub), 0)
   return Math.max(0, sub - off)
 }
 
