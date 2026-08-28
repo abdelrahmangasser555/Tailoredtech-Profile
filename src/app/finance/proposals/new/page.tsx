@@ -2,15 +2,13 @@ import {
   getFinanceBrands,
   getFinanceFormats,
 } from "@/lib/finance/content"
-import {
-  ProposalEditor,
-  createBlankProposal,
-} from "@/components/finance/proposal-editor"
+import { emptyProposal } from "@/lib/finance/types"
+import { ProposalEditor } from "@/components/finance/proposal-editor"
 
 export default function FinanceProposalNewPage() {
   return (
     <ProposalEditor
-      initial={createBlankProposal()}
+      initial={emptyProposal()}
       brands={getFinanceBrands()}
       formats={getFinanceFormats()}
       isNew

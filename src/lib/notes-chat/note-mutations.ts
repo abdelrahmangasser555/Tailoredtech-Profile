@@ -3,6 +3,7 @@ import { mutateNote, type NoteEditMeta } from "@/lib/notes-chat/apply-edit"
 import { buildNoteBlock } from "@/lib/notes-chat/build-block"
 import {
   appendBlock,
+  ensureUniqueBlockId,
   removeBlockById,
   removeBlocksOfType,
   updateBlock,
@@ -24,9 +25,11 @@ export function mergeSectionsById(
     }
     const blockById = new Map(prev.blocks.map((b) => [b.id, b]))
     const blockOrder = prev.blocks.map((b) => b.id)
+    const seenIds = new Set(blockOrder)
     for (const block of section.blocks) {
-      if (!blockById.has(block.id)) blockOrder.push(block.id)
-      blockById.set(block.id, block)
+      const unique = ensureUniqueBlockId(block, seenIds)
+      if (!blockById.has(unique.id)) blockOrder.push(unique.id)
+      blockById.set(unique.id, unique)
     }
     byId.set(section.id, {
       ...prev,

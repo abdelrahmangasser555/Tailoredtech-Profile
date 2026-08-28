@@ -15,6 +15,7 @@ import {
   LetterheadTitle,
 } from "@/lib/finance-pdf/letterhead"
 import { PdfMarkdownBody } from "@/lib/presentation-pdf/markdown"
+import { BilingualFooterText } from "@/lib/finance-pdf/mixed-text"
 import type { PresentationPdfBrand } from "@/lib/presentation-pdf/brand"
 import type { ProposalPdfBrand } from "@/lib/finance-pdf/brand"
 import type {
@@ -604,7 +605,9 @@ function ProposalFooter({
         <Text style={styles.footerIssuer}>{proposal.issuer.nameEn}</Text>
         <View style={styles.footerCenter}>
           {display.footer.enabled ? (
-            <Text style={styles.footerText}>{display.footer.text}</Text>
+            <BilingualFooterText style={styles.footerText}>
+              {display.footer.text}
+            </BilingualFooterText>
           ) : null}
         </View>
         <View style={styles.footerRight}>

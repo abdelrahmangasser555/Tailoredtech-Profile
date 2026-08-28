@@ -4,6 +4,7 @@ import Link from "next/link"
 import { useEffect, useMemo, useState } from "react"
 import { ChevronRight } from "lucide-react"
 import type {
+  NoteBlock,
   NoteDocument,
   NoteExplainTerm,
   NoteQuestionnaire,
@@ -285,9 +286,9 @@ export function NoteDetail({
                 </h2>
 
                 <div className="mt-6 flex flex-col gap-1">
-                  {section.blocks.map((block) => (
+                  {section.blocks.map((block, blockIndex) => (
                     <NoteBlockRenderer
-                      key={block.id}
+                      key={`${section.id}-${block.id}-${blockIndex}`}
                       block={block}
                       noteId={note.id}
                       sectionId={section.id}
@@ -301,6 +302,10 @@ export function NoteDetail({
                   noteId={note.id}
                   sectionId={section.id}
                   hasTasks={hasTasks}
+                  markdownBlocks={section.blocks.filter(
+                    (b): b is Extract<NoteBlock, { type: "markdown" }> =>
+                      b.type === "markdown"
+                  )}
                 />
 
                 {quiz ? (

@@ -3,10 +3,13 @@
 import { useRef, useState } from "react"
 import {
   CirclePlay,
+  FileText,
   ImagePlus,
   Link2,
   ListChecks,
   Loader2,
+  Pencil,
+  Plus,
   Sparkles,
   Table2,
   Trash2,
@@ -15,11 +18,13 @@ import {
   NoteImagePicker,
   type NoteImagePickerHandle,
 } from "@/components/notes/note-image-picker"
+import { NoteMarkdownEditor } from "@/components/notes/note-markdown-editor"
 import { isLocalEditEnabled } from "@/lib/local-edit"
 import {
   fetchAndPublishNote,
   publishNoteFromPayload,
 } from "@/lib/notes-live"
+import type { NoteBlock } from "@/lib/notes-types"
 import { cn } from "@/lib/utils"
 import { toast } from "sonner"
 
@@ -27,14 +32,27 @@ type NoteSectionActionsProps = {
   noteId: string
   sectionId: string
   hasTasks: boolean
+  markdownBlocks?: Extract<NoteBlock, { type: "markdown" }>[]
 }
 
-type ModalKind = "mermaid" | "comparison" | "youtube" | "link" | "images" | null
+type ModalKind =
+  | "mermaid"
+  | "comparison"
+  | "youtube"
+  | "link"
+  | "images"
+  | "markdown"
+  | null
+
+type MarkdownEditTarget =
+  | { kind: "new" }
+  | { kind: "edit"; blockId: string; content: string }
 
 export function NoteSectionActions({
   noteId,
   sectionId,
   hasTasks,
+  markdownBlocks = [],
 }: NoteSectionActionsProps) {
   const localEdit = isLocalEditEnabled()
   const [busy, setBusy] = useState(false)
@@ -42,6 +60,10 @@ export function NoteSectionActions({
   const [fieldA, setFieldA] = useState("")
   const [fieldB, setFieldB] = useState("")
   const [imageCount, setImageCount] = useState(0)
+  const [markdownTarget, setMarkdownTarget] = useState<MarkdownEditTarget>({
+    kind: "new",
+  })
+  const [markdownOpen, setMarkdownOpen] = useState(false)
   const imagePickerRef = useRef<NoteImagePickerHandle | null>(null)
 
   if (!localEdit) return null
@@ -105,6 +127,16 @@ export function NoteSectionActions({
     setImageCount(0)
     imagePickerRef.current?.reset()
     setModal(kind)
+  }
+
+  function openMarkdownNew() {
+    setMarkdownTarget({ kind: "new" })
+    setMarkdownOpen(true)
+  }
+
+  function openMarkdownEdit(blockId: string, content: string) {
+    setMarkdownTarget({ kind: "edit", blockId, content })
+    setMarkdownOpen(true)
   }
 
   async function submitModal() {
@@ -297,10 +329,75 @@ export function NoteSectionActions({
         >
           <Link2 className="size-3.5" />
         </ActionIcon>
+        <div className="group relative">
+          <ActionIcon
+            label={
+              markdownBlocks.length
+                ? "Edit markdown"
+                : "Add markdown"
+            }
+            onClick={() => {
+              if (markdownBlocks.length === 1) {
+                openMarkdownEdit(
+                  markdownBlocks[0]!.id,
+                  markdownBlocks[0]!.content
+                )
+              } else if (markdownBlocks.length === 0) {
+                openMarkdownNew()
+              }
+            }}
+            disabled={busy}
+          >
+            {markdownBlocks.length ? (
+              <Pencil className="size-3.5" />
+            ) : (
+              <FileText className="size-3.5" />
+            )}
+          </ActionIcon>
+          {markdownBlocks.length > 1 ? (
+            <div className="invisible absolute left-0 top-full z-20 mt-1 w-56 border border-white/15 bg-[#0a0a0a] opacity-0 shadow-2xl transition group-hover:visible group-hover:opacity-100">
+              <button
+                type="button"
+                onClick={openMarkdownNew}
+                className="flex w-full items-center gap-2 border-b border-white/10 px-3 py-2 text-left text-[12px] text-white/70 transition hover:text-accent"
+              >
+                <Plus className="size-3.5" />
+                New markdown block
+              </button>
+              {markdownBlocks.map((block, i) => (
+                <button
+                  key={`${block.id}-${i}`}
+                  type="button"
+                  onClick={() => openMarkdownEdit(block.id, block.content)}
+                  className="flex w-full items-center gap-2 px-3 py-2 text-left text-[12px] text-white/60 transition hover:text-accent"
+                >
+                  <Pencil className="size-3.5 shrink-0" />
+                  <span className="truncate">
+                    {block.content.trim().split("\n")[0]?.slice(0, 40) ||
+                      `Markdown ${i + 1}`}
+                  </span>
+                </button>
+              ))}
+            </div>
+          ) : null}
+        </div>
         {busy ? (
           <Loader2 className="ml-1 size-3.5 animate-spin text-white/30" />
         ) : null}
       </div>
+
+      <NoteMarkdownEditor
+        noteId={noteId}
+        sectionId={sectionId}
+        blockId={
+          markdownTarget.kind === "edit" ? markdownTarget.blockId : undefined
+        }
+        initialContent={
+          markdownTarget.kind === "edit" ? markdownTarget.content : ""
+        }
+        open={markdownOpen}
+        onClose={() => setMarkdownOpen(false)}
+      />
 
       {modal ? (
         <div

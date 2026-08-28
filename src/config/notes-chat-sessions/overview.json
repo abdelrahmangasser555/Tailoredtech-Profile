@@ -1,0 +1,1887 @@
+{
+  "noteId": "overview",
+  "messages": [
+    {
+      "id": "rIaoqZToOCofFtI1",
+      "role": "assistant",
+      "parts": [
+        {
+          "type": "step-start"
+        },
+        {
+          "type": "tool-readNote",
+          "toolCallId": "call_47dbe4dae5764da3b4e8846b",
+          "state": "output-available",
+          "input": {
+            "format": "json"
+          },
+          "output": {
+            "ok": true,
+            "message": "Note loaded",
+            "note": {
+              "id": "overview",
+              "name": "overview",
+              "title": "overview",
+              "description": "",
+              "sections": [
+                {
+                  "id": "start",
+                  "title": "Start",
+                  "blocks": [
+                    {
+                      "type": "markdown",
+                      "id": "start-md",
+                      "content": "New note — replace this with your content."
+                    }
+                  ]
+                }
+              ],
+              "explains": [],
+              "questionnaires": [],
+              "variants": {
+                "sidebarNav": true,
+                "compactHero": true,
+                "showMeta": true
+              }
+            }
+          },
+          "callProviderMetadata": {
+            "openrouter": {
+              "reasoning_details": [
+                {
+                  "type": "reasoning.text",
+                  "text": "The user has shared a comprehensive technical FAQ document about the Bahri MOC-PCR Platform. They want me to help them set this up as a note in the system. Let me read the current note to see what we're working with, and then I'll structure this content properly.\n\nLet me first read the current note to understand its state, then build out the sections.",
+                  "format": "unknown",
+                  "index": 0
+                }
+              ]
+            }
+          },
+          "resultProviderMetadata": {
+            "openrouter": {
+              "reasoning_details": [
+                {
+                  "type": "reasoning.text",
+                  "text": "The user has shared a comprehensive technical FAQ document about the Bahri MOC-PCR Platform. They want me to help them set this up as a note in the system. Let me read the current note to see what we're working with, and then I'll structure this content properly.\n\nLet me first read the current note to understand its state, then build out the sections.",
+                  "format": "unknown",
+                  "index": 0
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "step-start"
+        },
+        {
+          "type": "text",
+          "text": "I'll structure this into a well-organized note. Let me start by updating the title and intro, then add each major section.\n\n",
+          "state": "done"
+        },
+        {
+          "type": "tool-updateNote",
+          "toolCallId": "call_b140413dc7ee4b748196977c",
+          "state": "output-available",
+          "input": {
+            "title": "Bahri MOC-PCR Platform — Architecture & Operations FAQ",
+            "description": "MOC, PCR, OOP, Users/Vessels, attachments, performance, and database design — compiled Aug 2026"
+          },
+          "output": {
+            "ok": true,
+            "message": "Note updated",
+            "outline": {
+              "id": "overview",
+              "title": "Bahri MOC-PCR Platform — Architecture & Operations FAQ",
+              "sectionCount": 1,
+              "sections": [
+                {
+                  "id": "start",
+                  "title": "Start",
+                  "blocks": [
+                    {
+                      "id": "start-md",
+                      "type": "markdown"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "callProviderMetadata": {
+            "openrouter": {
+              "reasoning_details": [
+                {
+                  "type": "reasoning.text",
+                  "text": "The note is essentially empty with just a \"Start\" section. The user has pasted a massive FAQ document. I need to structure this into proper sections. Let me plan the sections:\n\n1. First, let me update the note title/name to something appropriate\n2. Replace the \"start\" section with an intro\n3. Add sections for each major topic\n\nThe document has 7 major sections plus a summary matrix and source files. Let me structure it:\n\n1. Start → Intro/Overview\n2. Section 1: Vessel/User Name & Email Changes\n3. Section 2: MOC Cloning Workflow\n4. Section 3: Performance Optimization\n5. Section 4: Architectural Loopholes & Risks\n6. Section 5: Database Indexes by Schema\n7. Section 6: Attachment Deletion Permissions\n8. Section 7: MOC Data Loading\n9. Summary Matrix\n10. Key Source Files\n\nLet me start by updating the note title and the start section, then add the other sections. I'll use addMarkdownBlock for the content.\n\nActually, this is a LOT of content. Let me think about the best approach. I can:\n\n1. Update the note title\n2. Replace the start section content with an intro\n3. Add the 7 main sections with their content\n\nLet me do this step by step. First update note title and start section, then add sections one at a time.\n\nActually, I should batch more efficiently. Let me update the note title and replace the start block, then add sections.\n\nLet me start with updating the note and the start section.",
+                  "format": "unknown",
+                  "index": 0
+                }
+              ]
+            }
+          },
+          "resultProviderMetadata": {
+            "openrouter": {
+              "reasoning_details": [
+                {
+                  "type": "reasoning.text",
+                  "text": "The note is essentially empty with just a \"Start\" section. The user has pasted a massive FAQ document. I need to structure this into proper sections. Let me plan the sections:\n\n1. First, let me update the note title/name to something appropriate\n2. Replace the \"start\" section with an intro\n3. Add sections for each major topic\n\nThe document has 7 major sections plus a summary matrix and source files. Let me structure it:\n\n1. Start → Intro/Overview\n2. Section 1: Vessel/User Name & Email Changes\n3. Section 2: MOC Cloning Workflow\n4. Section 3: Performance Optimization\n5. Section 4: Architectural Loopholes & Risks\n6. Section 5: Database Indexes by Schema\n7. Section 6: Attachment Deletion Permissions\n8. Section 7: MOC Data Loading\n9. Summary Matrix\n10. Key Source Files\n\nLet me start by updating the note title and the start section, then add the other sections. I'll use addMarkdownBlock for the content.\n\nActually, this is a LOT of content. Let me think about the best approach. I can:\n\n1. Update the note title\n2. Replace the start section content with an intro\n3. Add the 7 main sections with their content\n\nLet me do this step by step. First update note title and start section, then add sections one at a time.\n\nActually, I should batch more efficiently. Let me update the note title and replace the start block, then add sections.\n\nLet me start with updating the note and the start section.",
+                  "format": "unknown",
+                  "index": 0
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "tool-replaceBlockWithMarkdown",
+          "toolCallId": "call_1dc12d87b1484cd4829f1105",
+          "state": "output-available",
+          "input": {
+            "sectionId": "start",
+            "blockId": "start-md",
+            "content": "**Generated:** August 19, 2026  \n**Scope:** MOC, PCR, OOP, Users/Vessels, attachments, performance, and database design  \n**Source:** Codebase analysis (`src/models/`, `src/modules/`, `src/app/api/`)\n\nUse the sections below to navigate each topic. The **Summary Matrix** at the end provides a quick-reference answer to all seven core questions."
+          },
+          "output": {
+            "ok": true,
+            "message": "Replaced broken block with markdown",
+            "outline": {
+              "id": "overview",
+              "title": "Bahri MOC-PCR Platform — Architecture & Operations FAQ",
+              "sectionCount": 1,
+              "sections": [
+                {
+                  "id": "start",
+                  "title": "Start",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0gz9mr-y0rt",
+                      "type": "markdown"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "step-start"
+        },
+        {
+          "type": "text",
+          "text": "Now let me add all 7 topic sections. I'll batch them in parallel since they're independent",
+          "state": "done"
+        },
+        {
+          "type": "tool-addSection",
+          "toolCallId": "call_c330336995514f76bcf87e46",
+          "state": "output-available",
+          "input": {
+            "id": "vessel-user-changes",
+            "title": "1. Vessel / User Name & Email Changes",
+            "afterSectionId": "start"
+          },
+          "output": {
+            "ok": true,
+            "message": "Section vessel-user-changes added",
+            "outline": {
+              "id": "overview",
+              "title": "Bahri MOC-PCR Platform — Architecture & Operations FAQ",
+              "sectionCount": 2,
+              "sections": [
+                {
+                  "id": "start",
+                  "title": "Start",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0gz9mr-y0rt",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "vessel-user-changes",
+                  "title": "1. Vessel / User Name & Email Changes",
+                  "blocks": []
+                }
+              ]
+            }
+          },
+          "callProviderMetadata": {
+            "openrouter": {
+              "reasoning_details": [
+                {
+                  "type": "reasoning.text",
+                  "text": "Good, the note is updated. Now let me add the 7 main sections. I'll add them all at once since they're independent calls. Let me add them after the start section.",
+                  "format": "unknown",
+                  "index": 0
+                }
+              ]
+            }
+          },
+          "resultProviderMetadata": {
+            "openrouter": {
+              "reasoning_details": [
+                {
+                  "type": "reasoning.text",
+                  "text": "Good, the note is updated. Now let me add the 7 main sections. I'll add them all at once since they're independent calls. Let me add them after the start section.",
+                  "format": "unknown",
+                  "index": 0
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "tool-addSection",
+          "toolCallId": "call_fcfedc57b3d74082ad4c50c4",
+          "state": "output-available",
+          "input": {
+            "id": "moc-cloning",
+            "title": "2. MOC Cloning Workflow",
+            "afterSectionId": "vessel-user-changes"
+          },
+          "output": {
+            "ok": true,
+            "message": "Section moc-cloning added",
+            "outline": {
+              "id": "overview",
+              "title": "Bahri MOC-PCR Platform — Architecture & Operations FAQ",
+              "sectionCount": 3,
+              "sections": [
+                {
+                  "id": "start",
+                  "title": "Start",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0gz9mr-y0rt",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "vessel-user-changes",
+                  "title": "1. Vessel / User Name & Email Changes",
+                  "blocks": []
+                },
+                {
+                  "id": "moc-cloning",
+                  "title": "2. MOC Cloning Workflow",
+                  "blocks": []
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "tool-addSection",
+          "toolCallId": "call_cb00ee1e65ed4a9ca9a50ba3",
+          "state": "output-available",
+          "input": {
+            "id": "performance",
+            "title": "3. Performance Optimization",
+            "afterSectionId": "moc-cloning"
+          },
+          "output": {
+            "ok": true,
+            "message": "Section performance added",
+            "outline": {
+              "id": "overview",
+              "title": "Bahri MOC-PCR Platform — Architecture & Operations FAQ",
+              "sectionCount": 4,
+              "sections": [
+                {
+                  "id": "start",
+                  "title": "Start",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0gz9mr-y0rt",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "vessel-user-changes",
+                  "title": "1. Vessel / User Name & Email Changes",
+                  "blocks": []
+                },
+                {
+                  "id": "moc-cloning",
+                  "title": "2. MOC Cloning Workflow",
+                  "blocks": []
+                },
+                {
+                  "id": "performance",
+                  "title": "3. Performance Optimization",
+                  "blocks": []
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "tool-addSection",
+          "toolCallId": "call_819619937ee044c49aa670e6",
+          "state": "output-available",
+          "input": {
+            "id": "architecture-risks",
+            "title": "4. Architectural Loopholes & Risks",
+            "afterSectionId": "performance"
+          },
+          "output": {
+            "ok": true,
+            "message": "Section architecture-risks added",
+            "outline": {
+              "id": "overview",
+              "title": "Bahri MOC-PCR Platform — Architecture & Operations FAQ",
+              "sectionCount": 5,
+              "sections": [
+                {
+                  "id": "start",
+                  "title": "Start",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0gz9mr-y0rt",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "vessel-user-changes",
+                  "title": "1. Vessel / User Name & Email Changes",
+                  "blocks": []
+                },
+                {
+                  "id": "moc-cloning",
+                  "title": "2. MOC Cloning Workflow",
+                  "blocks": []
+                },
+                {
+                  "id": "performance",
+                  "title": "3. Performance Optimization",
+                  "blocks": []
+                },
+                {
+                  "id": "architecture-risks",
+                  "title": "4. Architectural Loopholes & Risks",
+                  "blocks": []
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "tool-addSection",
+          "toolCallId": "call_74720b259ea9439c9346b92a",
+          "state": "output-available",
+          "input": {
+            "id": "db-indexes",
+            "title": "5. Database Indexes by Schema",
+            "afterSectionId": "architecture-risks"
+          },
+          "output": {
+            "ok": true,
+            "message": "Section db-indexes added",
+            "outline": {
+              "id": "overview",
+              "title": "Bahri MOC-PCR Platform — Architecture & Operations FAQ",
+              "sectionCount": 6,
+              "sections": [
+                {
+                  "id": "start",
+                  "title": "Start",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0gz9mr-y0rt",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "vessel-user-changes",
+                  "title": "1. Vessel / User Name & Email Changes",
+                  "blocks": []
+                },
+                {
+                  "id": "moc-cloning",
+                  "title": "2. MOC Cloning Workflow",
+                  "blocks": []
+                },
+                {
+                  "id": "performance",
+                  "title": "3. Performance Optimization",
+                  "blocks": []
+                },
+                {
+                  "id": "architecture-risks",
+                  "title": "4. Architectural Loopholes & Risks",
+                  "blocks": []
+                },
+                {
+                  "id": "db-indexes",
+                  "title": "5. Database Indexes by Schema",
+                  "blocks": []
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "tool-addSection",
+          "toolCallId": "call_f38b5f25ecd945e88ceb88e0",
+          "state": "output-available",
+          "input": {
+            "id": "attachment-deletion",
+            "title": "6. Attachment Deletion Permissions",
+            "afterSectionId": "db-indexes"
+          },
+          "output": {
+            "ok": true,
+            "message": "Section attachment-deletion added",
+            "outline": {
+              "id": "overview",
+              "title": "Bahri MOC-PCR Platform — Architecture & Operations FAQ",
+              "sectionCount": 7,
+              "sections": [
+                {
+                  "id": "start",
+                  "title": "Start",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0gz9mr-y0rt",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "vessel-user-changes",
+                  "title": "1. Vessel / User Name & Email Changes",
+                  "blocks": []
+                },
+                {
+                  "id": "moc-cloning",
+                  "title": "2. MOC Cloning Workflow",
+                  "blocks": []
+                },
+                {
+                  "id": "performance",
+                  "title": "3. Performance Optimization",
+                  "blocks": []
+                },
+                {
+                  "id": "architecture-risks",
+                  "title": "4. Architectural Loopholes & Risks",
+                  "blocks": []
+                },
+                {
+                  "id": "db-indexes",
+                  "title": "5. Database Indexes by Schema",
+                  "blocks": []
+                },
+                {
+                  "id": "attachment-deletion",
+                  "title": "6. Attachment Deletion Permissions",
+                  "blocks": []
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "tool-addSection",
+          "toolCallId": "call_aef7a2f2a4644a609582c30d",
+          "state": "output-available",
+          "input": {
+            "id": "moc-data-loading",
+            "title": "7. MOC Data Loading — What Gets Fetched",
+            "afterSectionId": "attachment-deletion"
+          },
+          "output": {
+            "ok": true,
+            "message": "Section moc-data-loading added",
+            "outline": {
+              "id": "overview",
+              "title": "Bahri MOC-PCR Platform — Architecture & Operations FAQ",
+              "sectionCount": 8,
+              "sections": [
+                {
+                  "id": "start",
+                  "title": "Start",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0gz9mr-y0rt",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "vessel-user-changes",
+                  "title": "1. Vessel / User Name & Email Changes",
+                  "blocks": []
+                },
+                {
+                  "id": "moc-cloning",
+                  "title": "2. MOC Cloning Workflow",
+                  "blocks": []
+                },
+                {
+                  "id": "performance",
+                  "title": "3. Performance Optimization",
+                  "blocks": []
+                },
+                {
+                  "id": "architecture-risks",
+                  "title": "4. Architectural Loopholes & Risks",
+                  "blocks": []
+                },
+                {
+                  "id": "db-indexes",
+                  "title": "5. Database Indexes by Schema",
+                  "blocks": []
+                },
+                {
+                  "id": "attachment-deletion",
+                  "title": "6. Attachment Deletion Permissions",
+                  "blocks": []
+                },
+                {
+                  "id": "moc-data-loading",
+                  "title": "7. MOC Data Loading — What Gets Fetched",
+                  "blocks": []
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "step-start"
+        },
+        {
+          "type": "text",
+          "text": "All sections created. Now let me populate each with content — batching all 7",
+          "state": "done"
+        },
+        {
+          "type": "tool-addMarkdownBlock",
+          "toolCallId": "call_a2d4b385d46b4eb7a01ee392",
+          "state": "output-available",
+          "input": {
+            "sectionId": "vessel-user-changes",
+            "content": "### Short answer\n\n**Assignments and access control are linked by MongoDB `ObjectId`, not by name or email.**  \nIf a vessel's name or email changes, MOC/PCR/OOP **assignments stay intact**. However, **denormalized copies** of names/emails embedded in forms, logs, and snapshots **will not update automatically** and can become stale.\n\n### How entities are linked\n\n| Entity | Link mechanism | Example fields |\n|--------|----------------|----------------|\n| **Vessels** | Stored as `User` documents with `type: 'vessel'` | `name`, `email`, `ssoEmail`, `imo`, `department` (fleet group) |\n| **MOC roles** | `ObjectId` refs on the MOC document | `originator_id`, `implementer_id`, `hseq_id`, `approver_id`, `verifier_id` |\n| **MOC membership** | `ObjectId` arrays | `all_users[]`, `viewers[]`, `planEditors[]` |\n| **MOC viewer grants** | `ObjectId` or string match | `viewerGrants.userId`, `viewerGrants.department`, `viewerGrants.vesselGroup` |\n| **PCR parties** | `ObjectId` on `originator_id`; embedded snapshots in `affectedParties[]` / `signatures[]` | `party.Name._id` used for access checks |\n| **OOP vessels** | `ObjectId` + denormalized string | `vesselId` (ref) + `vesselName` (snapshot) |\n| **MOC ↔ PCR** | **No direct link** | Independent collections sharing `User` and `Organization` |\n\n### What happens when name or email changes\n\n| Area | Behavior after change |\n|------|----------------------|\n| **Role assignments** (`originator_id`, `implementer_id`, etc.) | ✅ Unchanged — still points to same user/vessel by ID |\n| **Access control** (`all_users`, viewer grants by `userId`) | ✅ Unchanged |\n| **Login / SSO** | ⚠️ Login looks up by `email` (case-insensitive) or vessel `ssoEmail`. Changing primary `email` affects login |\n| **MOC form picker values** | ❌ Stale — forms store `{ _id, name, email }` at submit time; no cascade update |\n| **PCR `affectedParties` / `signatures`** | ❌ Stale — embedded `name`/`email` stay until PCR is re-saved |\n| **OOP list/search** | ❌ `vesselName` is denormalized — can show old name |\n| **Decline/audit log text** | ❌ Snapshots like `declinedByName` are frozen at event time |\n| **Viewer grant `label`** | ❌ Display-only string; may be stale |\n| **User update API** (`PUT /api/users`) | Updates only the `users` collection — **no propagation** to MOC/PCR/OOP |\n\n### Vessel group access (important nuance)\n\nVessel group viewer grants resolve by matching `viewerGrants.vesselGroup` against the vessel's `User.department` field — **not** by vessel name. Renaming a vessel does not break group-based access as long as `department` stays the same.\n\n### Recommended solutions\n\n| Priority | Solution | Effort |\n|----------|----------|--------|\n| **High** | On `PUT /api/users`, add a background job to update embedded name/email in active PCR `affectedParties`, OOP `vesselName`, and MOC form picker fields | Medium |\n| **High** | Stop relying on denormalized strings for display — resolve names at read time via `$lookup` / populate (like OOP summary already does for some fields) | Medium |\n| **Medium** | Add a `userProfileVersion` or `updatedAt` flag on User; show \"profile changed since submission\" warnings on stale form snapshots | Low |\n| **Low** | Document that audit logs intentionally snapshot names (correct for compliance) | Low |"
+          },
+          "output": {
+            "ok": true,
+            "message": "Markdown block added",
+            "outline": {
+              "id": "overview",
+              "title": "Bahri MOC-PCR Platform — Architecture & Operations FAQ",
+              "sectionCount": 8,
+              "sections": [
+                {
+                  "id": "start",
+                  "title": "Start",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0gz9mr-y0rt",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "vessel-user-changes",
+                  "title": "1. Vessel / User Name & Email Changes",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0h1hlk-y8lw",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "moc-cloning",
+                  "title": "2. MOC Cloning Workflow",
+                  "blocks": []
+                },
+                {
+                  "id": "performance",
+                  "title": "3. Performance Optimization",
+                  "blocks": []
+                },
+                {
+                  "id": "architecture-risks",
+                  "title": "4. Architectural Loopholes & Risks",
+                  "blocks": []
+                },
+                {
+                  "id": "db-indexes",
+                  "title": "5. Database Indexes by Schema",
+                  "blocks": []
+                },
+                {
+                  "id": "attachment-deletion",
+                  "title": "6. Attachment Deletion Permissions",
+                  "blocks": []
+                },
+                {
+                  "id": "moc-data-loading",
+                  "title": "7. MOC Data Loading — What Gets Fetched",
+                  "blocks": []
+                }
+              ]
+            }
+          },
+          "callProviderMetadata": {
+            "openrouter": {
+              "reasoning_details": [
+                {
+                  "type": "reasoning.text",
+                  "text": "All 7 sections are created. Now I need to populate each with content. Given the large amount of markdown, I'll add markdown blocks to each section. Let me batch these. The content is quite long for each section, so I'll need to be careful to include the full content.\n\nLet me add the content for each section now. I'll do them in parallel since they're all independent.",
+                  "format": "unknown",
+                  "index": 0
+                }
+              ]
+            }
+          },
+          "resultProviderMetadata": {
+            "openrouter": {
+              "reasoning_details": [
+                {
+                  "type": "reasoning.text",
+                  "text": "All 7 sections are created. Now I need to populate each with content. Given the large amount of markdown, I'll add markdown blocks to each section. Let me batch these. The content is quite long for each section, so I'll need to be careful to include the full content.\n\nLet me add the content for each section now. I'll do them in parallel since they're all independent.",
+                  "format": "unknown",
+                  "index": 0
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "tool-addMarkdownBlock",
+          "toolCallId": "call_9f9264ac82064c13be0c47aa",
+          "state": "output-available",
+          "input": {
+            "sectionId": "moc-cloning",
+            "content": "### Entry point\n\n| Layer | Location |\n|-------|----------|\n| UI | MOC Logs table → row menu → **Clone MOC** (`src/features/mocTable/components/mocTableWrapper.tsx`) |\n| API | `POST /api/cloneMoc` (`src/app/api/cloneMoc/route.ts`) |\n| Service | `cloneMoc()` in `src/modules/moc/moc.service.ts` |\n\n**Who can clone:** Any authenticated user (no additional role check beyond session).\n\n### Step-by-step workflow\n\n```\nUser clicks \"Clone MOC\" on MOC Logs page\n        │\n        ▼\nPOST /api/cloneMoc  { old_moc: { _id } }\n        │\n        ▼\ncloneMoc(oldMocId, sessionUserId)\n        │\n        ├─ 1. Load original MOC (populate originator_form, implementer_form, implementation)\n        ├─ 2. Clone originator form  → new doc, originator_id = cloner\n        ├─ 3. Clone implementer form → new doc, implementer_id = cloner\n        ├─ 4. Clone implementation   → new doc (internal user refs unchanged)\n        ├─ 5. Generate new serial number (cloner's organization prefix + year sequence)\n        ├─ 6. Create fresh chat (cloner only, empty messages)\n        ├─ 7. Compute department_serial from cloned originator form\n        ├─ 8. Create new MOC document (status = 'b')\n        └─ 9. Return new MOC → redirect to Track MOC page\n```\n\n### What gets cloned\n\n| Data | Cloned? | Details |\n|------|---------|---------|\n| **Originator form** | ✅ Yes | Full field spread; `originator_id` → cloner |\n| **Implementer form** | ✅ Yes | Full field spread; `implementer_id` → cloner |\n| **Implementation form** | ✅ Yes | Full document (dates, status, deviation data) |\n| **Risk assessment** | ✅ Yes | Same URL references (not re-uploaded) |\n| **Impact assessment** | ✅ Yes | Copied by reference |\n| **Manual plan** | ✅ Yes | Copied |\n| **Action plan** | ✅ Yes | Copied |\n| **Form attachments** | ✅ Yes | URLs inside forms copied (same blob files) |\n| **Traceability** | ✅ New values | `cloned: true`, `prevForkedMoc`, `prevCloningSerialNum`, `prevOriginatorForm`, `prevImplementerForm` |\n\n### What does NOT get cloned\n\n| Data | Behavior |\n|------|----------|\n| **HSEQ form** | `null` on new MOC |\n| **Verifier form** | Not copied |\n| **Approver form** | Not copied |\n| **`hseq_id`, `verifier_id`, `approver_id`** | Not set — must be reassigned |\n| **Original users** | Replaced — only cloner in `all_users` |\n| **Viewers / plan editors** | Not copied (`viewers`, `viewerGrants`, `planEditors`, `planEditorGrants`) |\n| **Chat history** | Fresh empty chat |\n| **Audit logs** | Only one new log entry (`action: 'cloned'`) |\n| **Serial number** | New org-scoped serial generated |\n| **Organization** | Set to **cloning user's** organization (not original MOC's org) |\n| **Completion state** | New MOC starts in active workflow |\n| **Email notifications** | None sent on clone |\n\n### Workflow stage after clone\n\nMOC workflow stages:\n\n| Status | Stage |\n|--------|-------|\n| `a` | Originator |\n| `b` | Implementer |\n| `c` | HSEQ |\n| `d` | Approver |\n| `e` | Implementation |\n| `f` / `e-completed` | Verification |\n\n**Cloned MOC starts at status `b` (Implementer stage).**  \nOriginator work is treated as done via the copied form; the cloner proceeds as implementer and must assign HSEQ, approver, and verifier through Track MOC.\n\n### Roles assigned to the person who clones\n\n| Field | Value |\n|-------|-------|\n| `originator_id` | Cloning user's ID |\n| `implementer_id` | Cloning user's ID |\n| `all_users` | `[cloning user only]` |\n| Chat `users` | `[cloning user only]` |\n| `hseq_id` | **Not assigned** |\n| `verifier_id` | **Not assigned** |\n| `approver_id` | **Not assigned** |\n\n**Special permission:** On cloned MOCs, the implementer (cloner) can add users even without full admin access — allowing them to assign HSEQ, verifiers, and approvers.\n\n### Attachment behavior on clone\n\nBlob files are **not duplicated in storage**. The clone points to the **same underlying file URLs** as the original. Deleting a file from the original's blob storage would affect the clone.\n\n### Recommended improvements\n\n| Issue | Suggestion |\n|-------|------------|\n| No role check on clone | Restrict clone to org admins or users with MOC access to the source |\n| Org changes on clone | Consider preserving original `organizationId` or prompting user |\n| Shared blob URLs | Optionally re-upload attachments on clone for isolation |\n| HSEQ/approver not copied | Document clearly in UI (already partially done in confirmation dialog) |"
+          },
+          "output": {
+            "ok": true,
+            "message": "Markdown block added",
+            "outline": {
+              "id": "overview",
+              "title": "Bahri MOC-PCR Platform — Architecture & Operations FAQ",
+              "sectionCount": 8,
+              "sections": [
+                {
+                  "id": "start",
+                  "title": "Start",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0gz9mr-y0rt",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "vessel-user-changes",
+                  "title": "1. Vessel / User Name & Email Changes",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0h1hlk-y8lw",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "moc-cloning",
+                  "title": "2. MOC Cloning Workflow",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0h1hlk-p9sq",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "performance",
+                  "title": "3. Performance Optimization",
+                  "blocks": []
+                },
+                {
+                  "id": "architecture-risks",
+                  "title": "4. Architectural Loopholes & Risks",
+                  "blocks": []
+                },
+                {
+                  "id": "db-indexes",
+                  "title": "5. Database Indexes by Schema",
+                  "blocks": []
+                },
+                {
+                  "id": "attachment-deletion",
+                  "title": "6. Attachment Deletion Permissions",
+                  "blocks": []
+                },
+                {
+                  "id": "moc-data-loading",
+                  "title": "7. MOC Data Loading — What Gets Fetched",
+                  "blocks": []
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "tool-addMarkdownBlock",
+          "toolCallId": "call_658f6205607d4b0a87b9d43b",
+          "state": "output-available",
+          "input": {
+            "sectionId": "performance",
+            "content": "### Current bottlenecks (ranked by impact)\n\n| # | Bottleneck | Impact |\n|---|------------|--------|\n| 1 | `GET /api/newmoc` loads **all** user MOCs with 9+ `.populate()` calls, no pagination | Critical — primary MOC list |\n| 2 | `GET /api/getAllMoc` with 13 populates; without `orgId` returns **entire collection** | Critical — archive/admin |\n| 3 | MOC list triple-fetch: `/api/newmoc` + `/api/users` (full directory) + `/api/myUser` | High |\n| 4 | `GET /api/getAllPcr?scope=logs` returns all PCRs cross-org, no limit | High |\n| 5 | Chat `messages[]` loaded wholesale for list previews | Medium |\n| 6 | `JSON.parse(JSON.stringify())` on every large API response | Medium |\n| 7 | No SWR/React Query — refetch on every navigation | Medium |\n\n### MOC vs PCR vs OOP loading comparison\n\n| Module | List endpoint | Pagination | Field projection |\n|--------|---------------|------------|------------------|\n| **MOC** | `/api/newmoc`, `/api/getAllMoc` | ❌ None | ❌ Full populate |\n| **PCR** | `/api/pcr/summary` | ✅ Yes (limit/offset) | ✅ Aggregation `$project` |\n| **OOP** | `/api/oop/summary` | ✅ Yes (default 25) | ✅ Aggregation pipeline |\n\nOOP and PCR already demonstrate the correct pattern. **MOC is the outlier.**\n\n### High-impact solutions\n\n#### 1. Add `GET /api/moc/summary` (mirror PCR/OOP)\n\n```\nAggregation pipeline:\n  - $match (user access query)\n  - $lookup originator User (name only)\n  - $project card-level fields: serial_num, status, createdAt, originator name,\n    implementer name, department, chat_id, completed, cloned\n  - $sort createdAt: -1\n  - $skip / $limit for pagination\n```\n\nUse `.lean()` throughout. Never populate forms on list views.\n\n#### 2. Split list from detail\n\n| Endpoint | Should return |\n|----------|---------------|\n| List (`/api/moc/summary`) | Card metadata only (~2–5 KB per MOC) |\n| Detail (`/api/singlemoc`) | Full populate chain (current behavior) |\n\n#### 3. Add missing database indexes\n\nSee [Section 5](#5-database-indexes-by-schema) for full list. Priority additions for MOC:\n\n```javascript\n{ all_users: 1, createdAt: -1 }\n{ viewers: 1 }\n{ 'viewerGrants.userId': 1 }\n{ chat_id: 1 }\n```\n\n#### 4. Scope user directory fetch\n\nMOC list currently calls `/api/users` without org filter. Pass `organizationId` (OOP already does this via `useOrgUsers`).\n\n#### 5. Introduce SWR or TanStack Query\n\n- Deduplicate concurrent requests\n- Stale-while-revalidate (30–60s TTL like PCR/OOP hooks)\n- Invalidate on mutation (form submit, status change)\n\n### Medium-impact solutions\n\n| Solution | Details |\n|----------|---------|\n| Replace `JSON.parse(JSON.stringify())` | Use `.lean()` + direct `NextResponse.json()` |\n| Fix N+1 in PCR clone | Batch `User.find({ _id: { $in: userIds } })` instead of loop |\n| Chat architecture | Store messages in separate collection; use `$slice` for previews |\n| Paginate archive endpoints | Route MOC Logs and PCR archive tables through summary endpoints |\n| Add `.sort({ createdAt: -1 }).lean()` | To all list queries |\n| Server-side search/filter | Move from client-side filtering in `useMocList.ts` to aggregation `$match` |\n\n### Lower-impact / hygiene\n\n- Configure Mongoose `maxPoolSize` in `dbConnection.ts`\n- Add `Cache-Control: private, max-age=30` on summary endpoints\n- Consolidate `/api/newmoc` and `/api/getAllMoc` behind one service with `scope` param (like PCR)\n- Lazy-load form data only when user opens a MOC card tab\n\n### Expected improvement\n\n| Change | Estimated impact |\n|--------|------------------|\n| MOC summary endpoint + pagination | **5–20× faster** initial load (depends on MOC count) |\n| Remove triple-fetch / scope users | **2–3× faster** network time |\n| Add indexes on `all_users`, `viewers` | **2–5× faster** query execution |\n| SWR caching | Near-instant repeat visits |"
+          },
+          "output": {
+            "ok": true,
+            "message": "Markdown block added",
+            "outline": {
+              "id": "overview",
+              "title": "Bahri MOC-PCR Platform — Architecture & Operations FAQ",
+              "sectionCount": 8,
+              "sections": [
+                {
+                  "id": "start",
+                  "title": "Start",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0gz9mr-y0rt",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "vessel-user-changes",
+                  "title": "1. Vessel / User Name & Email Changes",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0h1hlk-y8lw",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "moc-cloning",
+                  "title": "2. MOC Cloning Workflow",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0h1hlk-p9sq",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "performance",
+                  "title": "3. Performance Optimization",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0h1hlk-0kgx",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "architecture-risks",
+                  "title": "4. Architectural Loopholes & Risks",
+                  "blocks": []
+                },
+                {
+                  "id": "db-indexes",
+                  "title": "5. Database Indexes by Schema",
+                  "blocks": []
+                },
+                {
+                  "id": "attachment-deletion",
+                  "title": "6. Attachment Deletion Permissions",
+                  "blocks": []
+                },
+                {
+                  "id": "moc-data-loading",
+                  "title": "7. MOC Data Loading — What Gets Fetched",
+                  "blocks": []
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "tool-addMarkdownBlock",
+          "toolCallId": "call_6d4cd7c7d9d547229351cc2e",
+          "state": "output-available",
+          "input": {
+            "sectionId": "architecture-risks",
+            "content": "### Database & connection\n\n| Risk | Details | Severity |\n|------|---------|----------|\n| **No connection pool config** | `dbConnection.ts` uses basic `mongoose.connect()` — no `maxPoolSize`, retry, or timeout tuning | Medium |\n| **`strict: false` on all major schemas** | Allows arbitrary fields; indexes may not match actual query shapes; schema drift over time | Medium |\n| **No referential integrity** | Mongoose `ref` fields exist but no cascading deletes; deleted users leave dangling references | High |\n\n### Denormalization & dual sources of truth\n\n| Location | Problem |\n|----------|---------|\n| MOC `viewers[]` vs `viewerGrants[]` | Two systems; stale `viewers` triggers reactive repair in `getMocsByUser` |\n| MOC `planEditors[]` vs `planEditorGrants[]` | Same dual-source pattern |\n| PCR `affectedParties[]` | `Mixed` type embeds full user objects; stale after profile changes |\n| PCR `workflow` | `Mixed` with nested `userId` strings + embedded snapshots; no FK enforcement |\n| OOP `vesselName` | Denormalized alongside `vesselId`; can drift |\n\n### Type inconsistencies\n\n| Field | MOC | PCR |\n|-------|-----|-----|\n| Chat reference | `chat_id` (ObjectId) | `chatId` (String) |\n\n`getChatSummaries` must query both `{ chatId }` and `{ _id }` to handle this.\n\n### Chat as embedded document\n\nMessages are stored in an unbounded `messages[]` array inside a single MongoDB document (`src/models/chat.ts`). This will:\n- Hit the 16 MB document size limit on active MOCs\n- Degrade list-preview performance (entire array loaded, then sliced in memory)\n\n### Security gaps\n\n| Endpoint | Issue |\n|----------|-------|\n| `DELETE /api/upload` | Auth only — any logged-in user can delete a blob if they know the URL; no MOC role/ownership check |\n| `POST /api/risk_assessment` | Auth only — no implementer/role check |\n| `POST /api/cloneMoc` | Any authenticated user can clone any MOC they can see |\n\n### Orphaned references\n\n- Deleted users remain in `all_users`, `viewers`, workflow members, grants\n- PCR clone silently skips missing users (`if (!user) continue`)\n- MOC viewer repair is reactive (`syncMocViewersAndChat`), not preventive\n- No DB-level `$lookup` validation on write\n\n### Recommended architectural fixes\n\n| Priority | Fix |\n|----------|-----|\n| **P0** | Add role/ownership checks to `DELETE /api/upload` and `POST /api/risk_assessment` |\n| **P0** | Extract chat messages to separate `chat_messages` collection |\n| **P1** | Normalize `chatId` type across MOC/PCR (migration) |\n| **P1** | Consolidate viewer system — use `viewerGrants` as single source, derive `viewers[]` on write |\n| **P1** | Add user-deletion handler that cleans references in MOC/PCR/OOP |\n| **P2** | Incrementally enable `strict: true` on schemas with migration |\n| **P2** | Replace `Mixed` types in PCR with typed sub-schemas |\n| **P3** | Add MongoDB schema validation rules at collection level |"
+          },
+          "output": {
+            "ok": true,
+            "message": "Markdown block added",
+            "outline": {
+              "id": "overview",
+              "title": "Bahri MOC-PCR Platform — Architecture & Operations FAQ",
+              "sectionCount": 8,
+              "sections": [
+                {
+                  "id": "start",
+                  "title": "Start",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0gz9mr-y0rt",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "vessel-user-changes",
+                  "title": "1. Vessel / User Name & Email Changes",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0h1hlk-y8lw",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "moc-cloning",
+                  "title": "2. MOC Cloning Workflow",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0h1hlk-p9sq",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "performance",
+                  "title": "3. Performance Optimization",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0h1hlk-0kgx",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "architecture-risks",
+                  "title": "4. Architectural Loopholes & Risks",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0h1hlk-pn93",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "db-indexes",
+                  "title": "5. Database Indexes by Schema",
+                  "blocks": []
+                },
+                {
+                  "id": "attachment-deletion",
+                  "title": "6. Attachment Deletion Permissions",
+                  "blocks": []
+                },
+                {
+                  "id": "moc-data-loading",
+                  "title": "7. MOC Data Loading — What Gets Fetched",
+                  "blocks": []
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "tool-addMarkdownBlock",
+          "toolCallId": "call_7281834168ef4bf4b877146f",
+          "state": "output-available",
+          "input": {
+            "sectionId": "db-indexes",
+            "content": "> All schemas use Mongoose. Indexes declared in schema files are auto-created on model init.  \n> Models with `strict: false` may have additional runtime fields not listed here.\n\n### User (`src/models/users.ts`)\n\n| Index | Type |\n|-------|------|\n| `email` | Unique (schema field) |\n| `{ role: 1 }` | Single |\n| `{ access: 1 }` | Single |\n| `{ type: 1 }` | Single |\n| `{ organizationId: 1 }` | Single |\n| `{ organizationId: 1, type: 1 }` | Compound |\n| `{ vesselType: 1 }` | Single |\n| `{ oop_close_out: 1 }` | Single |\n| `{ name: 'text', email: 'text' }` | Text |\n| `{ name: 1 }` | Single |\n| `{ ssoEmail: 1 }` | Unique, sparse |\n\n### MOC (`src/models/moc.ts`)\n\n| Index | Type |\n|-------|------|\n| `serial_num` | Unique (schema field) |\n| `{ originator_id: 1 }` | Single |\n| `{ completed: 1, createdAt: -1 }` | Compound |\n| `{ status: 1, createdAt: -1 }` | Compound |\n| `{ organizationId: 1, createdAt: -1 }` | Compound |\n| `{ isDeleted: 1, completed: 1 }` | Compound |\n\n**Missing (recommended):**\n\n| Index | Reason |\n|-------|--------|\n| `{ all_users: 1, createdAt: -1 }` | Every user-scoped MOC query |\n| `{ viewers: 1 }` | Viewer access queries |\n| `{ 'viewerGrants.userId': 1 }` | Grant resolution |\n| `{ chat_id: 1 }` | Chat summary batch lookup |\n| `{ serial_num: 'text' }` or text index | Search |\n\n### PCR (`src/models/pcr.ts`)\n\n| Index | Type |\n|-------|------|\n| `{ status: 1 }` | Single |\n| `{ originator_id: 1 }` | Single |\n| `{ serial_num: 1 }` | Unique |\n| `{ status: 1, originator_id: 1 }` | Compound |\n| `{ organizationId: 1 }` | Single |\n| `{ createdAt: -1 }` | Single |\n| `{ organizationId: 1, status: 1, createdAt: -1 }` | Compound |\n| `{ workflowVersion: 1, status: 1, createdAt: -1 }` | Compound |\n\n**Missing (recommended):**\n\n| Index | Reason |\n|-------|--------|\n| `{ viewers: 1 }` | Viewer access |\n| `{ 'workflow.approvalCommittee.members.userId': 1 }` | Workflow member queries |\n| `{ 'affectedParties.Name._id': 1 }` | Party access checks |\n\n### OOP (`src/models/oop.ts`) — most complete\n\n| Index | Type |\n|-------|------|\n| `{ status: 1 }` | Single |\n| `{ originator_id: 1 }` | Single |\n| `{ serial_num: 1 }` | Unique |\n| `{ organizationId: 1 }` | Single |\n| `{ createdAt: -1 }` | Single |\n| `{ organizationId: 1, status: 1, createdAt: -1 }` | Compound |\n| `{ organizationId: 1, title: 1 }` | Compound |\n| `{ organizationId: 1, vesselId: 1 }` | Compound |\n| `{ organizationId: 1, vesselName: 1 }` | Compound |\n| `{ title: 1 }` | Single |\n| `{ vesselName: 1 }` | Single |\n| `{ 'workflow.levels.userId': 1, status: 1 }` | Compound |\n| `{ 'workflow.levels.userId': 1, createdAt: -1 }` | Compound |\n| `{ viewers: 1 }` | Single |\n| `{ status: 1, currentStage: 1, createdAt: -1 }` | Compound |\n| `{ experience: 1 }` | Single |\n| `{ title: 'text', vesselName: 'text', serial_num: 'text' }` | Text |\n\n### Organization (`src/models/organization.ts`)\n\n| Index | Type |\n|-------|------|\n| `shorthand` | Unique (schema field) |\n| `{ shorthand: 1 }` | Unique (explicit) |\n\n### Chat (`src/models/chat.ts`)\n\n| Index | Type |\n|-------|------|\n| `{ chatId: 1 }` | Sparse |\n\n**Missing:** `{ users: 1 }` for participant lookups.\n\n### Workflow form models (no indexes declared)\n\n| Model | File |\n|-------|------|\n| `originator` | `src/models/originator.ts` |\n| `implementer` | `src/models/implementer.ts` |\n| `approver` | `src/models/approver.ts` |\n| `verifier` | `src/models/verifier.ts` |\n| `hseq` | `src/models/hseq.ts` |\n| `implementaion` | `src/models/implementaion.ts` |\n\nThese are accessed via MOC populate (by `_ id`), so they inherit lookup via the MOC's form ref fields.\n\n### Other models (no indexes)\n\n| Model | File |\n|-------|------|\n| `actions` | `src/models/actions.ts` |\n| `channels` | `src/models/channels.ts` |\n| `notifications` | `src/models/notifications.tsx` |\n| `oldMoc` | `src/models/oldMoc.ts` |\n| `oldPcr` | `src/models/oldPcr.ts` |\n| `EndYear` | `src/models/end_year.ts` |"
+          },
+          "output": {
+            "ok": true,
+            "message": "Markdown block added",
+            "outline": {
+              "id": "overview",
+              "title": "Bahri MOC-PCR Platform — Architecture & Operations FAQ",
+              "sectionCount": 8,
+              "sections": [
+                {
+                  "id": "start",
+                  "title": "Start",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0gz9mr-y0rt",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "vessel-user-changes",
+                  "title": "1. Vessel / User Name & Email Changes",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0h1hlk-y8lw",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "moc-cloning",
+                  "title": "2. MOC Cloning Workflow",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0h1hlk-p9sq",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "performance",
+                  "title": "3. Performance Optimization",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0h1hlk-0kgx",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "architecture-risks",
+                  "title": "4. Architectural Loopholes & Risks",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0h1hlk-pn93",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "db-indexes",
+                  "title": "5. Database Indexes by Schema",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0h1hll-o2iv",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "attachment-deletion",
+                  "title": "6. Attachment Deletion Permissions",
+                  "blocks": []
+                },
+                {
+                  "id": "moc-data-loading",
+                  "title": "7. MOC Data Loading — What Gets Fetched",
+                  "blocks": []
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "tool-addMarkdownBlock",
+          "toolCallId": "call_faac866c16cd4241bb1eae59",
+          "state": "output-available",
+          "input": {
+            "sectionId": "attachment-deletion",
+            "content": "### Risk assessment attachments\n\n| Rule | Detail |\n|------|--------|\n| **Can be deleted?** | ❌ **No** — add-only in the entire application |\n| **Storage** | `moc.risk_assessment` array on MOC document |\n| **Add API** | `POST /api/risk_assessment` — uses `$push` only, no `$pull`/remove |\n| **UI** | Always `disabled={true}` on cards — no delete button |\n| **Who can add** | Any user from MOC status `b` onward (Risk tab) |\n| **Upload** | Tab allows adding more attachments after first upload |\n\n### Form-step attachments (originator, implementer, HSEQ, etc.)\n\n#### On MOC cards (Track MOC / list views)\n\n| Rule | Detail |\n|------|--------|\n| **Can be deleted?** | ❌ **No** — all card views pass `disabled={true}` with no `setState` |\n\n#### During form editing\n\nDeletion is controlled by `previewOrEdit()` in `src/features/moc_form/utilities/formHelpers.ts`.\n\n| User role / condition | Can delete form attachments? |\n|-----------------------|------------------------------|\n| MOC `completed` | ❌ No — always read-only |\n| Viewer / plan editor / responsible on plan | ❌ No |\n| **Primary step owner** at matching status | ✅ Yes — their active step |\n| **Privileged reviewer** (HSEQ, verifier, approver) | ✅ Yes — originator & implementer forms; implementaion form once implementaion phase is active |\n| **Approver** | ✅ Yes — originator, implementer, approver forms |\n| **Implementer / HSEQ / Verifier** | ✅ Yes — originator & implementer forms |\n| **Originator during initiation** | ✅ Yes — always `preview={false}` |\n\n**Primary step ownership mapping:**\n\n| Status | Stage | Owner |\n|--------|-------|-------|\n| `a` | Originator (form 0) | `originator_id` |\n| `b` | Implementer (form1) | `implementer_id` |\n| `c` | HSEQ (form2) | `hseq_id` |\n| `d` | Approver (form3) | `approver_id` |\n| `e` | Implementaion (form4) | `implementer_id` |\n| `f` / `e-completed` | Verification (form5) | verifier (`canVerifyMoc`) |\n\n### Whole MOC deletion (not individual attachments)\n\nOnly **org admins** can soft-delete an entire MOC (`MocDeleteCornerButton.tsx` → sets `isDeleted: true`).\n\n### API security gap\n\n`DELETE /api/upload` requires authentication but has **no MOC role or ownership check**. Any logged-in user who knows a blob URL can delete the file. The UI is the primary gate — this is a security risk.\n\n### Comparison with OOP\n\nOOP has an explicit `canDeleteAttachment` permission (`src/features/oop/utils/permissions.ts`). **MOC does not have an equivalent centralized permission function.**\n\n### Recommended solutions\n\n| Priority | Solution |\n|----------|----------|\n| **High** | Add ownership/role check to `DELETE /api/upload` — verify user has edit access to the MOC/PCR that owns the attachment |\n| **Medium** | Add risk assessment delete capability for implementer/HSEQ with audit log entry |\n| **Medium** | Create centralized `canDeleteMocAttachment(moc, user, attachmentType)` function (like OOP) |\n| **Low** | Add soft-delete for risk assessments (mark as removed, keep URL in audit log) |"
+          },
+          "output": {
+            "ok": true,
+            "message": "Markdown block added",
+            "outline": {
+              "id": "overview",
+              "title": "Bahri MOC-PCR Platform — Architecture & Operations FAQ",
+              "sectionCount": 8,
+              "sections": [
+                {
+                  "id": "start",
+                  "title": "Start",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0gz9mr-y0rt",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "vessel-user-changes",
+                  "title": "1. Vessel / User Name & Email Changes",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0h1hlk-y8lw",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "moc-cloning",
+                  "title": "2. MOC Cloning Workflow",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0h1hlk-p9sq",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "performance",
+                  "title": "3. Performance Optimization",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0h1hlk-0kgx",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "architecture-risks",
+                  "title": "4. Architectural Loopholes & Risks",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0h1hlk-pn93",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "db-indexes",
+                  "title": "5. Database Indexes by Schema",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0h1hll-o2iv",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "attachment-deletion",
+                  "title": "6. Attachment Deletion Permissions",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0h1hll-c8rc",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "moc-data-loading",
+                  "title": "7. MOC Data Loading — What Gets Fetched",
+                  "blocks": []
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "tool-addMarkdownBlock",
+          "toolCallId": "call_1f084b556462482e885472db",
+          "state": "output-available",
+          "input": {
+            "sectionId": "moc-data-loading",
+            "content": "### Overview of MOC API endpoints\n\n| Endpoint | Service function | Used by | Scope |\n|----------|-----------------|---------|-------|\n| `GET /api/newmoc?orgId=` | `getMocsByUser()` | Track MOC list, overview | User-scoped |\n| `GET /api/getAllMoc?orgId=` | `getAllMocs()` | MOC Logs / archive table | Admin / org-scoped |\n| `GET /api/singlemoc?moc_id=` | `getSingleMoc()` | MOC detail, print | Single MOC |\n\n### A. `GET /api/newmoc` — Track MOC list (primary)\n\n**Access query logic:**\n\n| User type | Query |\n|-----------|-------|\n| HSEQ email | All MOCs (`{}`) |\n| Regular user | `$or` of: `all_users` contains user ID, viewer grants, plan editor grants |\n| Org admin (with selected org) | Additionally all MOCs in that organization |\n| Non-admin | Excludes `isDeleted: true` |\n\n**Populated fields (9 populates):**\n\n| Path | Model | Notes |\n|------|-------|-------|\n| `originator_form` | originator | Full form document |\n| `all_users` | User | All enrolled users |\n| `originator_id` | User | |\n| `implementer_id` | User | |\n| `approver_id` | User | |\n| `verifier_id` | User | |\n| `hseq_id` | User | |\n| `logs.userId` | User | Log authors |\n| `implementer_form` | implementer | **Only** `target-timeline` field selected |\n\n**NOT populated on this endpoint:** `hseq_form`, `approver_form`, `verifier_form`, `implementaion`, `organizationId`\n\n**Post-processing:**\n1. Stale viewer repair (background `syncMocViewersAndChat` if grants empty but viewers populated)\n2. `getChatSummaries()` — attaches `chatPreview: { latestMessages, unreadCount, totalCount }` per MOC\n\n**Raw MOC document fields returned** (plus populated refs above):\n\n```\n_id, originator_id, implementer_id, approver_id, verifier_id, hseq_id,\nserial_num, originator_form, implementer_form, status, risk_assessment,\nimpact_assessment[], department, organizationId, viewers[], viewerGrants[],\nviewerExclusions[], planEditors[], planEditorGrants[], chat_id, all_users[],\nlogs[], completed, isDeleted, cloned, prevForkedMoc, prevCloningSerialNum,\ndepartment_serial, action_plan, manual_plan, createdAt, updatedAt\n+ chatPreview (enriched)\n```\n\n### B. `GET /api/getAllMoc` — Archive / admin list\n\n**Populated fields (13 populates) — heaviest endpoint:**\n\n| Path | Model |\n|------|-------|\n| `originator_form` | originator |\n| `all_users` | User |\n| `originator_id` | User |\n| `implementer_id` | User |\n| `approver_id` | User |\n| `verifier_id` | User |\n| `hseq_id` | User |\n| `logs.userId` | User |\n| `implementer_form` | implementer (full) |\n| `verifier_form` | verifier |\n| `implementaion` | implementaion |\n| `approver_form` | approver |\n| `hseq_form` | hseq |\n| `organizationId` | Organization |\n\nNo chat preview enrichment. No pagination.\n\n**Visibility logic** (with `orgId`):\n- Controlled by organization's `archive_visibility` setting: `ALL_ITEMS`, `ORG_ONLY`, `COMPLETED_GLOBAL_OWN_ACTIVE`, `OWN_ONLY`\n- HSEQ email / org admin / `access === 'full'` broaden visibility\n\n### C. `GET /api/singlemoc` — Detail view\n\nSame populate set as user list **plus** full `implementer_form`, `hseq_form`, `approver_form`, `verifier_form`, `implementaion`. No `organizationId` populate.\n\n### D. Client-side additional fetches (MOC list page)\n\nThe Track MOC list (`features_clean/list_moc/hooks/useMocList.ts`) makes **3 parallel API calls**:\n\n| Call | Endpoint | Data |\n|------|----------|------|\n| 1 | `/api/newmoc?orgId=` | All user MOCs (described above) |\n| 2 | `/api/myUser` | Current logged-in user |\n| 3 | `/api/users` | **Entire user directory** (no org filter) |\n\nClient-side sorting and filtering happens after all data is downloaded.\n\n### Payload size concern\n\nEach MOC in the list response includes:\n- Full `originator_form` document (all form fields + attachment URLs)\n- 6 populated User objects (role holders)\n- All `all_users` populated\n- All `logs` with populated authors\n- `risk_assessment`, `impact_assessment`, `action_plan`, `manual_plan` arrays\n\nFor 100 MOCs, this can easily be **5–20+ MB** of JSON.\n\n### What should be loaded vs what is loaded today\n\n| Data | Needed for list card? | Currently loaded? |\n|------|----------------------|-------------------|\n| `serial_num`, `status`, `createdAt` | ✅ Yes | ✅ Yes |\n| Originator/implementer **names** | ✅ Yes | ✅ Yes (via populate) |\n| `originator_form` (full) | ❌ No | ✅ Yes — wasteful |\n| `risk_assessment` | �️ Only for risk tab | ✅ Yes on list |\n| `action_plan`, `manual_plan` | ❌ No (detail only) | ✅ Yes on list |\n| All `logs` with authors | ❌ No | ✅ Yes on list |\n| `hseq_form`, `approver_form`, etc. | ❌ No | ❌ No (correct on newmoc) |\n| Chat preview | ✅ Yes | ✅ Yes (enriched) |"
+          },
+          "output": {
+            "ok": true,
+            "message": "Markdown block added",
+            "outline": {
+              "id": "overview",
+              "title": "Bahri MOC-PCR Platform — Architecture & Operations FAQ",
+              "sectionCount": 8,
+              "sections": [
+                {
+                  "id": "start",
+                  "title": "Start",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0gz9mr-y0rt",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "vessel-user-changes",
+                  "title": "1. Vessel / User Name & Email Changes",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0h1hlk-y8lw",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "moc-cloning",
+                  "title": "2. MOC Cloning Workflow",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0h1hlk-p9sq",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "performance",
+                  "title": "3. Performance Optimization",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0h1hlk-0kgx",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "architecture-risks",
+                  "title": "4. Architectural Loopholes & Risks",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0h1hlk-pn93",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "db-indexes",
+                  "title": "5. Database Indexes by Schema",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0h1hll-o2iv",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "attachment-deletion",
+                  "title": "6. Attachment Deletion Permissions",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0h1hll-c8rc",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "moc-data-loading",
+                  "title": "7. MOC Data Loading — What Gets Fetched",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0h1hll-demm",
+                      "type": "markdown"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "step-start"
+        },
+        {
+          "type": "text",
+          "text": "All 7 topic sections populated. Now let me add the Summary Matrix, Key Source Files, and a cloning",
+          "state": "done"
+        },
+        {
+          "type": "tool-addSection",
+          "toolCallId": "call_bdb38c0970184762af854461",
+          "state": "output-available",
+          "input": {
+            "id": "summary-matrix",
+            "title": "Summary Matrix",
+            "afterSectionId": "moc-data-loading"
+          },
+          "output": {
+            "ok": true,
+            "message": "Section summary-matrix added",
+            "outline": {
+              "id": "overview",
+              "title": "Bahri MOC-PCR Platform — Architecture & Operations FAQ",
+              "sectionCount": 9,
+              "sections": [
+                {
+                  "id": "start",
+                  "title": "Start",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0gz9mr-y0rt",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "vessel-user-changes",
+                  "title": "1. Vessel / User Name & Email Changes",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0h1hlk-y8lw",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "moc-cloning",
+                  "title": "2. MOC Cloning Workflow",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0h1hlk-p9sq",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "performance",
+                  "title": "3. Performance Optimization",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0h1hlk-0kgx",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "architecture-risks",
+                  "title": "4. Architectural Loopholes & Risks",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0h1hlk-pn93",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "db-indexes",
+                  "title": "5. Database Indexes by Schema",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0h1hll-o2iv",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "attachment-deletion",
+                  "title": "6. Attachment Deletion Permissions",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0h1hll-c8rc",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "moc-data-loading",
+                  "title": "7. MOC Data Loading — What Gets Fetched",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0h1hll-demm",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "summary-matrix",
+                  "title": "Summary Matrix",
+                  "blocks": []
+                }
+              ]
+            }
+          },
+          "callProviderMetadata": {
+            "openrouter": {
+              "reasoning_details": [
+                {
+                  "type": "reasoning.text",
+                  "text": "All 7 sections are populated. Now I need to add the Summary Matrix and Key Source Files sections, plus the MOC cloning workflow diagram. Let me add two more sections: one for the summary matrix and one for key source files. I'll also generate a mermaid diagram for the MOC cloning workflow.",
+                  "format": "unknown",
+                  "index": 0
+                }
+              ]
+            }
+          },
+          "resultProviderMetadata": {
+            "openrouter": {
+              "reasoning_details": [
+                {
+                  "type": "reasoning.text",
+                  "text": "All 7 sections are populated. Now I need to add the Summary Matrix and Key Source Files sections, plus the MOC cloning workflow diagram. Let me add two more sections: one for the summary matrix and one for key source files. I'll also generate a mermaid diagram for the MOC cloning workflow.",
+                  "format": "unknown",
+                  "index": 0
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "tool-addSection",
+          "toolCallId": "call_60652ad49de140b5a6a78e70",
+          "state": "output-available",
+          "input": {
+            "id": "source-files",
+            "title": "Key Source Files",
+            "afterSectionId": "summary-matrix"
+          },
+          "output": {
+            "ok": true,
+            "message": "Section source-files added",
+            "outline": {
+              "id": "overview",
+              "title": "Bahri MOC-PCR Platform — Architecture & Operations FAQ",
+              "sectionCount": 10,
+              "sections": [
+                {
+                  "id": "start",
+                  "title": "Start",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0gz9mr-y0rt",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "vessel-user-changes",
+                  "title": "1. Vessel / User Name & Email Changes",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0h1hlk-y8lw",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "moc-cloning",
+                  "title": "2. MOC Cloning Workflow",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0h1hlk-p9sq",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "performance",
+                  "title": "3. Performance Optimization",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0h1hlk-0kgx",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "architecture-risks",
+                  "title": "4. Architectural Loopholes & Risks",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0h1hlk-pn93",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "db-indexes",
+                  "title": "5. Database Indexes by Schema",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0h1hll-o2iv",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "attachment-deletion",
+                  "title": "6. Attachment Deletion Permissions",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0h1hll-c8rc",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "moc-data-loading",
+                  "title": "7. MOC Data Loading — What Gets Fetched",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0h1hll-demm",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "summary-matrix",
+                  "title": "Summary Matrix",
+                  "blocks": []
+                },
+                {
+                  "id": "source-files",
+                  "title": "Key Source Files",
+                  "blocks": []
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "tool-generateMermaidBlock",
+          "toolCallId": "call_08d2abfc54b8467aa6197575",
+          "state": "output-available",
+          "input": {
+            "sectionId": "moc-cloning",
+            "prompt": "Flowchart showing the MOC cloning workflow: User clicks Clone MOC -> POST /api/cloneMoc -> cloneMoc service loads original MOC, then 8 parallel steps: clone originator form, clone implementer form, clone implementation, generate new serial number, create fresh chat, compute department_serial, create new MOC with status b, return and redirect to Track MOC",
+            "title": "MOC Cloning — Visual Workflow"
+          },
+          "output": {
+            "ok": true,
+            "message": "Mermaid diagram generated",
+            "blockId": "mermaid-mt0h299u-wzgp",
+            "sectionId": "moc-cloning",
+            "outline": {
+              "id": "overview",
+              "title": "Bahri MOC-PCR Platform — Architecture & Operations FAQ",
+              "sectionCount": 10,
+              "sections": [
+                {
+                  "id": "start",
+                  "title": "Start",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0gz9mr-y0rt",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "vessel-user-changes",
+                  "title": "1. Vessel / User Name & Email Changes",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0h1hlk-y8lw",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "moc-cloning",
+                  "title": "2. MOC Cloning Workflow",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0h1hlk-p9sq",
+                      "type": "markdown"
+                    },
+                    {
+                      "id": "mermaid-mt0h299u-wzgp",
+                      "type": "mermaid"
+                    }
+                  ]
+                },
+                {
+                  "id": "performance",
+                  "title": "3. Performance Optimization",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0h1hlk-0kgx",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "architecture-risks",
+                  "title": "4. Architectural Loopholes & Risks",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0h1hlk-pn93",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "db-indexes",
+                  "title": "5. Database Indexes by Schema",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0h1hll-o2iv",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "attachment-deletion",
+                  "title": "6. Attachment Deletion Permissions",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0h1hll-c8rc",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "moc-data-loading",
+                  "title": "7. MOC Data Loading — What Gets Fetched",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0h1hll-demm",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "summary-matrix",
+                  "title": "Summary Matrix",
+                  "blocks": []
+                },
+                {
+                  "id": "source-files",
+                  "title": "Key Source Files",
+                  "blocks": []
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "step-start"
+        },
+        {
+          "type": "text",
+          "text": "Now let me populate the final two sections\n\n",
+          "state": "done"
+        },
+        {
+          "type": "tool-addMarkdownBlock",
+          "toolCallId": "call_a47b71930ea74f9c8a5e6c86",
+          "state": "output-available",
+          "input": {
+            "sectionId": "summary-matrix",
+            "content": "| Question | Key takeaway |\n|----------|-------------|\n| **1. Name/email changes** | IDs stay linked; embedded names/emails go stale |\n| **2. MOC cloning** | Cloner = originator + implementer; starts at status `b`; HSEQ/approver/verifier reset |\n| **3. Performance** | Add MOC summary endpoint + pagination; biggest win available |\n| **4. Architecture risks** | Dual viewer sources, unbounded chat messages, no FK enforcement, upload API gap |\n| **5. Indexes** | OOP best covered; MOC missing `all_users`, `viewers`, `chat_id` indexes |\n| **6. Attachment deletion** | Risk assessment = add-only; form attachments deletable during edit only; upload API unsecured |\n| **7. MOC loading** | Full documents with 9–13 populates, no pagination, triple client fetch |"
+          },
+          "output": {
+            "ok": true,
+            "message": "Markdown block added",
+            "outline": {
+              "id": "overview",
+              "title": "Bahri MOC-PCR Platform — Architecture & Operations FAQ",
+              "sectionCount": 10,
+              "sections": [
+                {
+                  "id": "start",
+                  "title": "Start",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0gz9mr-y0rt",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "vessel-user-changes",
+                  "title": "1. Vessel / User Name & Email Changes",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0h1hlk-y8lw",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "moc-cloning",
+                  "title": "2. MOC Cloning Workflow",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0h1hlk-p9sq",
+                      "type": "markdown"
+                    },
+                    {
+                      "id": "mermaid-mt0h299u-wzgp",
+                      "type": "mermaid"
+                    }
+                  ]
+                },
+                {
+                  "id": "performance",
+                  "title": "3. Performance Optimization",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0h1hlk-0kgx",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "architecture-risks",
+                  "title": "4. Architectural Loopholes & Risks",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0h1hlk-pn93",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "db-indexes",
+                  "title": "5. Database Indexes by Schema",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0h1hll-o2iv",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "attachment-deletion",
+                  "title": "6. Attachment Deletion Permissions",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0h1hll-c8rc",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "moc-data-loading",
+                  "title": "7. MOC Data Loading — What Gets Fetched",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0h1hll-demm",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "summary-matrix",
+                  "title": "Summary Matrix",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0h2g5p-tsfs",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "source-files",
+                  "title": "Key Source Files",
+                  "blocks": []
+                }
+              ]
+            }
+          },
+          "callProviderMetadata": {
+            "openrouter": {
+              "reasoning_details": [
+                {
+                  "type": "reasoning.text",
+                  "text": "Good, now let me populate the summary-matrix and source-files sections with markdown content.",
+                  "format": "unknown",
+                  "index": 0
+                }
+              ]
+            }
+          },
+          "resultProviderMetadata": {
+            "openrouter": {
+              "reasoning_details": [
+                {
+                  "type": "reasoning.text",
+                  "text": "Good, now let me populate the summary-matrix and source-files sections with markdown content.",
+                  "format": "unknown",
+                  "index": 0
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "tool-addMarkdownBlock",
+          "toolCallId": "call_6d9d49c3bf0543afb2a1d2ee",
+          "state": "output-available",
+          "input": {
+            "sectionId": "source-files",
+            "content": "| Topic | Files |\n|-------|-------|\n| Schemas & indexes | `src/models/moc.ts`, `pcr.ts`, `oop.ts`, `users.ts`, `organization.ts`, `chat.ts` |\n| MOC service | `src/modules/moc/moc.service.ts` |\n| MOC repository | `src/modules/moc/moc.repository.ts` |\n| MOC cloning | `src/app/api/cloneMoc/route.ts`, `moc.service.ts` → `cloneMoc()` |\n| MOC list client | `features_clean/list_moc/hooks/useMocList.ts` |\n| Attachment permissions | `src/features/moc_form/utilities/formHelpers.ts`, `src/components/display components/displayDocs.tsx` |\n| Risk assessment | `src/app/api/risk_assessment/route.ts`, `moc.service.ts` → `addRiskAssessment()` |\n| Viewer grants | `src/modules/moc/moc-viewers.service.ts` |\n| DB connection | `src/helpers/dbConnection.ts` |\n| PCR summary (reference pattern) | `src/app/api/pcr/summary/route.ts`, `src/modules/pcr/pcr.service.ts` |\n| OOP summary (reference pattern) | `src/app/api/oop/summary/route.ts`, `src/modules/oop/oop.service.ts` |"
+          },
+          "output": {
+            "ok": true,
+            "message": "Markdown block added",
+            "outline": {
+              "id": "overview",
+              "title": "Bahri MOC-PCR Platform — Architecture & Operations FAQ",
+              "sectionCount": 10,
+              "sections": [
+                {
+                  "id": "start",
+                  "title": "Start",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0gz9mr-y0rt",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "vessel-user-changes",
+                  "title": "1. Vessel / User Name & Email Changes",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0h1hlk-y8lw",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "moc-cloning",
+                  "title": "2. MOC Cloning Workflow",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0h1hlk-p9sq",
+                      "type": "markdown"
+                    },
+                    {
+                      "id": "mermaid-mt0h299u-wzgp",
+                      "type": "mermaid"
+                    }
+                  ]
+                },
+                {
+                  "id": "performance",
+                  "title": "3. Performance Optimization",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0h1hlk-0kgx",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "architecture-risks",
+                  "title": "4. Architectural Loopholes & Risks",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0h1hlk-pn93",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "db-indexes",
+                  "title": "5. Database Indexes by Schema",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0h1hll-o2iv",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "attachment-deletion",
+                  "title": "6. Attachment Deletion Permissions",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0h1hll-c8rc",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "moc-data-loading",
+                  "title": "7. MOC Data Loading — What Gets Fetched",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0h1hll-demm",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "summary-matrix",
+                  "title": "Summary Matrix",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0h2g5p-tsfs",
+                      "type": "markdown"
+                    }
+                  ]
+                },
+                {
+                  "id": "source-files",
+                  "title": "Key Source Files",
+                  "blocks": [
+                    {
+                      "id": "markdown-mt0h2g5p-vcyu",
+                      "type": "markdown"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "step-start"
+        },
+        {
+          "type": "text",
+          "text": "Everything is set up. Here's what was created:\n\n**Bahri MOC-PCR Platform — Architecture & Operations FAQ** — 10 sections total:\n\n| # | Section | Contents |\n|---|---------|----------|\n| — | **Start** | Intro & scope |\n| 1 | Vessel / User Name & Email Changes | ID-based linking, stale denormalized data, solutions |\n| 2 | MOC Cloning Workflow | Entry point, step-by-step, what gets/lost cloned, + **mermaid diagram** |\n| 3 | Performance Optimization | Bottlenecks ranked, MOC/PCR/OOP comparison, high/medium/low solutions |\n| 4 | Architectural Loopholes & Risks | DB risks, dual sources of truth, security gaps, P0–P3 fixes |\n| 5 | Database Indexes by Schema | All models (User, MOC, PCR, OOP, Chat, Org) with existing + missing indexes |\n| 6 | Attachment Deletion Permissions | Risk vs form attachments, role matrix, API security gap |\n| 7 | MOC Data Loading | 3 endpoints dissected, payload analysis, client triple-fetch |\n| — | **Summary Matrix** | One-row-per-question quick reference |\n| — | **Key Source Files** | File → topic mapping for follow-up |\n\nThe cloning workflow now has a visual mermaid diagram. You can navigate via the sidebar or scroll through each section.",
+          "state": "done"
+        }
+      ]
+    },
+    {
+      "parts": [
+        {
+          "type": "text",
+          "text": "if I changed the vessel name or email what is the areas that will keep the vessel name and the user name as is before it was updated and is their is anything that will not be resolved for the vessel like even after its name change will it still see the moc's and pcrs and oop's it is assigned to or not"
+        }
+      ],
+      "id": "cteKOa1LJnjRYiGF",
+      "role": "user"
+    },
+    {
+      "id": "jUtEwJgmbLjSZGDn",
+      "role": "assistant",
+      "parts": [
+        {
+          "type": "step-start"
+        },
+        {
+          "type": "text",
+          "text": "Here’s how name/email changes affect the platform, based on Section 1 of the FAQ.\n\n---\n\n### 1. Areas that **retain the old name/email** (stale data)\n\nThese are all *denormalized copies* – snapshots taken when a form was submitted, a log was written, or an assignment was displayed. They do **not** auto-update when the user/vessel profile changes.\n\n| Location | What goes stale |\n|----------|-----------------|\n| **MOC form picker values** | Name/email embedded inside originator, implementer, HSEQ, etc. forms at submit time |\n| **PCR `affectedParties[]` / `signatures[]`** | Embedded `name` and `email` snapshots stay until the PCR is manually re-saved |\n| **OOP `vesselName`** | Denormalized vessel name alongside `vesselId` – shows the old name in lists and search |\n| **Decline / audit logs** | Text like `declinedByName` or log entry descriptions are frozen at event time (intentional for compliance) |\n| **Viewer grant `label`** | Display-only string, not used for access, but may still show the old name |\n\n---\n\n### 2. Will the vessel/user still **see** its MOCs, PCRs, and OOPs?\n\n**Yes – access is preserved.** All assignments and access controls use the MongoDB `ObjectId`, not the name or email.\n\n- **Role assignments** (`originator_id`, `implementer_id`, `all_users[]`, viewer grants by `userId`) still point to the same user document by ID → the vessel appears in its MOCs, PCRs, and OOPs exactly as before.\n- **Login / SSO** continues to work as long as the primary `email` or vessel `ssoEmail` used for authentication is updated consistently (login looks up by email).\n- **Vessel group access** (viewer grants by fleet group) matches on the `department` field of the user, not the name. So renaming does not break group-based visibility unless `department` is also changed.\n\n**Bottom line:** The vessel/user will keep seeing all its MOCs, PCRs, and OOPs. The only side effect is that **stale name/email labels** may appear in certain displayed fields until those documents are re-saved, or until a background propagation job is implemented (recommended in the FAQ).",
+          "state": "done"
+        }
+      ]
+    },
+    {
+      "parts": [
+        {
+          "type": "text",
+          "text": "what speed optimizations is recomended"
+        }
+      ],
+      "id": "isoVM2L7ky8gHQlp",
+      "role": "user"
+    },
+    {
+      "id": "SQVEXVz6gULoxt2x",
+      "role": "assistant",
+      "parts": [
+        {
+          "type": "step-start"
+        },
+        {
+          "type": "text",
+          "text": "Here are the recommended speed optimizations from Section 3, ranked by impact.\n\n---\n\n### High-Impact (do these first)\n\n**1. Add `GET /api/moc/summary` endpoint** (mirror PCR/OOP pattern)\n\nUse an aggregation pipeline with `.lean()`:\n- `$match` user access query\n- `$lookup` only the originator user name\n- `$project` card-level fields only (serial_num, status, createdAt, names, department, chat_id)\n- `$sort` + `$skip`/`$limit` for pagination\n\nNever populate full forms on list views. **Estimated: 5–20× faster.**\n\n**2. Split list from detail**\n\n| Endpoint | Returns |\n|----------|---------|\n| `/api/moc/summary` | Card metadata only (~2–5 KB per MOC) |\n| `/api/singlemoc` | Full populate chain (kept as-is for detail view) |\n\n**3. Add missing database indexes** (priority ones for MOC):\n\n```javascript\n{ all_users: 1, createdAt: -1 }   // every user-scoped query\n{ viewers: 1 }                    // viewer access queries\n{ 'viewerGrants.userId': 1 }      // grant resolution\n{ chat_id: 1 }                    // chat summary batch lookup\n```\n\n**Estimated: 2–5× faster query execution.**\n\n**4. Scope the user directory fetch**\n\nMOC list currently calls `/api/users` with **no org filter** (loads the entire directory). Pass `organizationId` — OOP already does this via `useOrgUsers`.\n\n**5. Introduce SWR or TanStack Query**\n- Deduplicate concurrent requests\n- Stale-while-revalidate with 30–60s TTL\n- Invalidate on mutation (form submit, status change)\n\nRemoving the triple-fetch + adding caching: **2–3× faster network time**, near-instant repeat visits.\n\n---\n\n### Medium-Impact\n\n| Solution | Detail |\n|----------|--------|\n| Replace `JSON.parse(JSON.stringify())` | Use `.lean()` + direct `NextResponse.json()` |\n| Extract chat messages | Store in separate collection; use `$slice` for previews |\n| Fix N+1 in PCR clone | Batch `User.find({ _id: { $in: userIds } })` instead of per-user loop |\n| Paginate archive endpoints | Route MOC Logs and PCR archive through summary endpoints |\n| Server-side search/filter | Move from client-side filtering in `useMocList.ts` to aggregation `$match` |\n\n---\n\n### Lower-Impact / Hygiene\n\n- Configure Mongoose `maxPoolSize` in `dbConnection.ts`\n- Add `Cache-Control: private, max-age=30` on summary endpoints\n- Consolidate `/api/newmoc` and `/api/getAllMoc` behind one service with `scope` param (like PCR does)\n- Lazy-load form data only when user opens a MOC card tab\n\n---\n\n### Quick Reference Table\n\n| Change | Estimated impact |\n|--------|------------------|\n| MOC summary endpoint + pagination | **5–20×** faster initial load |\n| Remove triple-fetch / scope users | **2–3×** faster network time |\n| Add indexes on `all_users`, `viewers` | **2–5×** faster query execution |\n| SWR caching | Near-instant repeat visits |",
+          "state": "done"
+        }
+      ]
+    }
+  ],
+  "summary": "",
+  "model": "deepseek/deepseek-v4-pro",
+  "mode": "ask",
+  "extraReasoning": false,
+  "updatedAt": "2026-08-19T19:29:54.431Z"
+}

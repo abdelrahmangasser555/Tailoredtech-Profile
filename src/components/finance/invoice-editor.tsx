@@ -18,7 +18,6 @@ import type {
   InvoiceLanguageMode,
   InvoiceLineItem,
 } from "@/lib/finance/types"
-import { emptyInvoice } from "@/lib/finance/types"
 import {
   formatInvoiceMoney,
   invoiceGrandTotal,
@@ -994,6 +993,3 @@ function ToggleRow({
   )
 }
 
-export function createBlankInvoice(): FinanceInvoice {
-  return emptyInvoice()
-}

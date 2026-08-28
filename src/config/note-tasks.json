@@ -71,57 +71,65 @@
         {
           "id": "1-office-added-in-the-form-with-vessels-yqo1",
           "label": "1) office added in the form with vessels",
-          "done": false,
-          "completedAt": null,
-          "children": []
+          "done": true,
+          "completedAt": "2026-08-13",
+          "children": [
+            {
+              "id": "adding-subsection-for-office-departments-0nsf",
+              "label": "adding subsection for office departments",
+              "done": false,
+              "completedAt": null,
+              "children": []
+            }
+          ]
         },
         {
           "id": "2-print-out-the-log-as-excel-or-pdf-z4o0",
           "label": "2) print out the log as excel or pdf",
-          "done": false,
-          "completedAt": null,
+          "done": true,
+          "completedAt": "2026-08-13",
           "children": []
         },
         {
           "id": "3-log-visible-for-everyone-user-in-flow--00gv",
           "label": "3) log visible for everyone (user in flow only can edit and follow up )",
-          "done": false,
-          "completedAt": null,
+          "done": true,
+          "completedAt": "2026-08-13",
           "children": []
         },
         {
           "id": "4-approved-pending-follow-up-instead-of--1vwv",
           "label": "4) approved -  pending follow up instead of approved - follow up",
-          "done": false,
-          "completedAt": null,
+          "done": true,
+          "completedAt": "2026-08-13",
           "children": []
         },
         {
           "id": "5-remove-the-notes-under-each-title-of-t-3af9",
           "label": "5) remove the notes under each title of the oop",
-          "done": false,
-          "completedAt": null,
+          "done": true,
+          "completedAt": "2026-08-13",
           "children": []
         },
         {
           "id": "6-load-vessels-of-all-organizations-not--55je",
           "label": "6) load vessels of all organizations not just current organization",
-          "done": false,
-          "completedAt": null,
+          "done": true,
+          "completedAt": "2026-08-13",
           "children": []
         },
         {
           "id": "7-field-underneath-the-title-in-the-form-7xlz",
           "label": "7) field underneath the title in the form  - first for manual  - second for the procedure and both are required",
-          "done": false,
-          "completedAt": null,
+          "done": true,
+          "completedAt": "2026-08-13",
           "children": []
         },
         {
           "id": "8-add-option-for-oop-requested-at-to-hav-czmy",
           "label": "8) add option for oop requested at to have office too",
-          "done": false,
-          "completedAt": null,
+          "done": true,
+          "completedAt": "2026-08-13",
           "children": []
         },
         {
@@ -133,8 +141,8 @@
             {
               "id": "role-for-closeout-in-the-user-management-eeie",
               "label": "role for closeout in the user management",
-              "done": false,
-              "completedAt": null,
+              "done": true,
+              "completedAt": "2026-08-13",
               "children": []
             },
             {
@@ -145,8 +153,17 @@
               "children": []
             }
           ]
+        },
+        {
+          "id": "chatroom-for-each-oop-initatted-yz6f",
+          "label": "chatroom for each OOP iniated",
+          "done": false,
+          "completedAt": null,
+          "children": []
         }
-      ]
+      ],
+      "done": false,
+      "completedAt": null
     },
     {
       "id": "modelling-and-roles-of-the-bbs-kvh7",
@@ -161,6 +178,193 @@
       "done": true,
       "completedAt": "2026-08-13",
       "children": []
+    }
+  ],
+  "notes-tasks:15-08-2026:__note-checklist__": [
+    {
+      "id": "task-1",
+      "label": "BBS system",
+      "children": [
+        {
+          "id": "authentication-using-password-eh6j",
+          "label": "authentication using password",
+          "done": true,
+          "completedAt": "2026-08-15",
+          "children": [
+            {
+              "id": "authentication-using-oto-en9v",
+              "label": "authentication using otp",
+              "done": false,
+              "completedAt": null,
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "file-upload-f31r",
+          "label": "file upload",
+          "done": true,
+          "completedAt": "2026-08-15",
+          "children": []
+        },
+        {
+          "id": "observation-form-f8u1",
+          "label": "observation form",
+          "done": true,
+          "completedAt": "2026-08-15",
+          "children": []
+        },
+        {
+          "id": "observation-list-fcu3",
+          "label": "observation list",
+          "done": true,
+          "completedAt": "2026-08-15",
+          "children": []
+        },
+        {
+          "id": "user-management-fhs0",
+          "label": "user management",
+          "done": true,
+          "completedAt": "2026-08-15",
+          "children": []
+        },
+        {
+          "id": "vessel-management-flvy",
+          "label": "vessel management",
+          "done": true,
+          "completedAt": "2026-08-15",
+          "children": []
+        },
+        {
+          "id": "office-management-fqvw",
+          "label": "office management",
+          "done": true,
+          "completedAt": "2026-08-15",
+          "children": []
+        },
+        {
+          "id": "crew-management-fuc5",
+          "label": "crew management",
+          "done": true,
+          "completedAt": "2026-08-15",
+          "children": []
+        },
+        {
+          "id": "crew-sign-on-sign-off-g0hs",
+          "label": "crew sign on sign off",
+          "done": true,
+          "completedAt": "2026-08-15",
+          "children": []
+        },
+        {
+          "id": "analytics-dashboard-g5cs",
+          "label": "analytics dashboard",
+          "done": true,
+          "completedAt": "2026-08-15",
+          "children": []
+        },
+        {
+          "id": "customize-your-own-dashboard-geg4",
+          "label": "customize your own dashboard",
+          "done": true,
+          "completedAt": "2026-08-15",
+          "children": []
+        },
+        {
+          "id": "reports-gj1d",
+          "label": "reports",
+          "done": false,
+          "completedAt": null,
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "bbs-problems-for-latter-46iv",
+      "label": "BBS problems for latter",
+      "done": false,
+      "completedAt": null,
+      "children": [
+        {
+          "id": "printout-not-in-single-page-4dhb",
+          "label": "printout not in single page",
+          "done": false,
+          "completedAt": null,
+          "children": []
+        },
+        {
+          "id": "action-item-when-created-from-icb-it-goe-4s1o",
+          "label": "action item when created from ICB it goes to the other page and record of ICB is lost",
+          "done": false,
+          "completedAt": null,
+          "children": []
+        },
+        {
+          "id": "offline-is-not-supported-4wlu",
+          "label": "Offline is not supported",
+          "done": false,
+          "completedAt": null,
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "stuff-to-remember-tommorow-3nyn",
+      "label": "stuff to remember tommorow",
+      "done": false,
+      "completedAt": null,
+      "children": [
+        {
+          "id": "test-sign-on-sign-off-flow-3tdf",
+          "label": "test sign on sign off flow",
+          "done": false,
+          "completedAt": null,
+          "children": []
+        },
+        {
+          "id": "test-custom-dashboards-3ynz",
+          "label": "test custom dashboards",
+          "done": false,
+          "completedAt": null,
+          "children": []
+        },
+        {
+          "id": "create-comparison-list-43co",
+          "label": "create comparison list",
+          "done": false,
+          "completedAt": null,
+          "children": [
+            {
+              "id": "vessels-49d6",
+              "label": "vessels",
+              "done": false,
+              "completedAt": null,
+              "children": []
+            },
+            {
+              "id": "fleets-4bw9",
+              "label": "fleets",
+              "done": false,
+              "completedAt": null,
+              "children": []
+            },
+            {
+              "id": "observers-4f3f",
+              "label": "observers",
+              "done": false,
+              "completedAt": null,
+              "children": []
+            },
+            {
+              "id": "months-4imi",
+              "label": "months",
+              "done": false,
+              "completedAt": null,
+              "children": []
+            }
+          ]
+        }
+      ]
     }
   ]
 }

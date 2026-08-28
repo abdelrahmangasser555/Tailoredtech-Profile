@@ -21,7 +21,6 @@ import type {
   ProposalFormatId,
   ProposalSolution,
 } from "@/lib/finance/types"
-import { emptyProposal } from "@/lib/finance/types"
 import { formatMoney, solutionTotal } from "@/lib/finance/pricing"
 import { CloneProposalButton } from "@/components/finance/clone-button"
 import { ProposalPdfExportButton } from "@/components/finance-pdf/export-button"
@@ -1442,6 +1441,3 @@ function BrandLogoPanel({
   )
 }
 
-export function createBlankProposal(): FinanceProposal {
-  return emptyProposal()
-}

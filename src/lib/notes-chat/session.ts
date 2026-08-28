@@ -8,12 +8,14 @@ export type NotesChatSession = {
   summary?: string
   model?: string
   mode?: NotesChatMode
+  extraReasoning?: boolean
   updatedAt: string
 }
 
 export const NOTES_CHAT_SESSION_PREFIX = "notes-chat-session:"
 export const NOTES_CHAT_OPEN_KEY = "notes-chat-panel-open"
 export const NOTES_CHAT_MODE_KEY = "notes-chat-mode"
+export const NOTES_CHAT_EXTRA_REASONING_KEY = "notes-chat-extra-reasoning"
 
 export function sessionStorageKey(noteId: string) {
   return `${NOTES_CHAT_SESSION_PREFIX}${noteId}`

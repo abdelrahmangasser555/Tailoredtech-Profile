@@ -1,13 +1,11 @@
 import { getInvoiceFormats } from "@/lib/finance/content"
-import {
-  InvoiceEditor,
-  createBlankInvoice,
-} from "@/components/finance/invoice-editor"
+import { emptyInvoice } from "@/lib/finance/types"
+import { InvoiceEditor } from "@/components/finance/invoice-editor"
 
 export default function FinanceInvoiceNewPage() {
   return (
     <InvoiceEditor
-      initial={createBlankInvoice()}
+      initial={emptyInvoice()}
       formats={getInvoiceFormats()}
       isNew
     />

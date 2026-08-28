@@ -14,7 +14,7 @@
           "id": "daily-notes",
           "name": "Daily notes",
           "createdAt": "2026-08-08",
-          "updatedAt": "2026-08-13",
+          "updatedAt": "2026-08-15",
           "children": [
             {
               "type": "file",
@@ -29,6 +29,13 @@
               "name": "13/08/2026",
               "createdAt": "2026-08-13",
               "updatedAt": "2026-08-13"
+            },
+            {
+              "type": "file",
+              "id": "15-08-2026",
+              "name": "15/08/2026",
+              "createdAt": "2026-08-15",
+              "updatedAt": "2026-08-15"
             }
           ]
         },
@@ -37,7 +44,7 @@
           "id": "projects",
           "name": "Projects",
           "createdAt": "2026-08-08",
-          "updatedAt": "2026-08-08",
+          "updatedAt": "2026-08-19",
           "children": [
             {
               "type": "folder",
@@ -67,7 +74,7 @@
                   "id": "technical",
                   "name": "technical",
                   "createdAt": "2026-08-13",
-                  "updatedAt": "2026-08-13",
+                  "updatedAt": "2026-08-19",
                   "children": [
                     {
                       "type": "file",
@@ -82,8 +89,39 @@
                       "name": "permissions and roles",
                       "createdAt": "2026-08-13",
                       "updatedAt": "2026-08-13"
+                    },
+                    {
+                      "type": "file",
+                      "id": "1-8-2026-snapshot",
+                      "name": "19-8-2026 snapshot",
+                      "createdAt": "2026-08-19",
+                      "updatedAt": "2026-08-19"
                     }
                   ]
+                }
+              ]
+            },
+            {
+              "type": "folder",
+              "id": "moc-pcr",
+              "name": "MOC&PCR",
+              "createdAt": "2026-08-19",
+              "updatedAt": "2026-08-19",
+              "children": [
+                {
+                  "type": "folder",
+                  "id": "approval-module",
+                  "name": "approval module",
+                  "createdAt": "2026-08-19",
+                  "updatedAt": "2026-08-19",
+                  "children": []
+                },
+                {
+                  "type": "file",
+                  "id": "overview",
+                  "name": "overview",
+                  "createdAt": "2026-08-19",
+                  "updatedAt": "2026-08-19"
                 }
               ]
             }
@@ -261,6 +299,93 @@
       "description": "",
       "createdAt": "2026-08-13",
       "updatedAt": "2026-08-13",
+      "enabled": true,
+      "variants": {
+        "sidebarNav": true,
+        "compactHero": true,
+        "showMeta": true
+      },
+      "explains": [],
+      "questionnaires": [],
+      "sections": [
+        {
+          "id": "start",
+          "title": "Start",
+          "blocks": [
+            {
+              "type": "markdown",
+              "id": "start-md",
+              "content": "New note — replace this with your content."
+            }
+          ]
+        }
+      ]
+    },
+    "15-08-2026": {
+      "id": "15-08-2026",
+      "name": "15/08/2026",
+      "title": "15/08/2026",
+      "description": "",
+      "createdAt": "2026-08-15",
+      "updatedAt": "2026-08-15",
+      "enabled": true,
+      "variants": {
+        "sidebarNav": true,
+        "compactHero": true,
+        "showMeta": true
+      },
+      "explains": [],
+      "questionnaires": [],
+      "sections": [
+        {
+          "id": "start",
+          "title": "Start",
+          "blocks": [
+            {
+              "type": "markdown",
+              "id": "start-md",
+              "content": "New note — replace this with your content."
+            }
+          ]
+        }
+      ]
+    },
+    "1-8-2026-snapshot": {
+      "id": "1-8-2026-snapshot",
+      "name": "1-8-2026 snapshot",
+      "title": "1-8-2026 snapshot",
+      "description": "",
+      "createdAt": "2026-08-19",
+      "updatedAt": "2026-08-19",
+      "enabled": true,
+      "variants": {
+        "sidebarNav": true,
+        "compactHero": true,
+        "showMeta": true
+      },
+      "explains": [],
+      "questionnaires": [],
+      "sections": [
+        {
+          "id": "start",
+          "title": "Start",
+          "blocks": [
+            {
+              "type": "markdown",
+              "id": "start-md",
+              "content": "New note — replace this with your content."
+            }
+          ]
+        }
+      ]
+    },
+    "overview": {
+      "id": "overview",
+      "name": "overview",
+      "title": "overview",
+      "description": "",
+      "createdAt": "2026-08-19",
+      "updatedAt": "2026-08-19",
       "enabled": true,
       "variants": {
         "sidebarNav": true,

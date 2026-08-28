@@ -1,6 +1,6 @@
 import { z } from "zod"
 import { mutateNote, readFreshNote } from "@/lib/notes-chat/apply-edit"
-import { NOTE_BLOCK_TYPES, buildNoteBlock } from "@/lib/notes-chat/build-block"
+import { buildNoteBlock } from "@/lib/notes-chat/build-block"
 import {
   generateAndAppendComparison,
   generateAndAppendMermaid,
@@ -17,8 +17,7 @@ import {
   validateMermaidSource,
 } from "@/lib/notes-chat/mermaid-validate"
 import { serializeNoteForContext, serializeNoteJson } from "@/lib/notes-chat/serialize"
-import { appendBlock } from "@/lib/notes-chat/section-blocks"
-import { STACK_ICON_HINT } from "@/lib/notes-stack-icons"
+import { appendBlock, normalizeSectionBlockIds } from "@/lib/notes-chat/section-blocks"
 import type { NoteBlock, NoteDocument, NoteSection } from "@/lib/notes-types"
 import type { StopCondition, ToolSet } from "ai"
 
@@ -67,8 +66,7 @@ function asSections(
 export function createNotesEditTools(noteId: string) {
   return {
     readNote: {
-      description:
-        "Re-read the live note from disk (or one section). Use after edits. Never rewrite the whole note from memory.",
+      description: "Load live note or one section.",
       inputSchema: z.object({
         sectionId: z.string().optional(),
         format: z.enum(["summary", "json"]).optional(),
@@ -112,8 +110,7 @@ export function createNotesEditTools(noteId: string) {
     },
 
     addSection: {
-      description:
-        "Create a new section. Prefer this over updateNote when adding structure.",
+      description: "Add a section.",
       inputSchema: z.object({
         id: z.string().describe("kebab-case section id"),
         title: z.string(),
@@ -162,8 +159,7 @@ export function createNotesEditTools(noteId: string) {
     },
 
     updateNote: {
-      description:
-        "Patch title/description, or merge specific sections by id. Unmentioned sections are KEPT. Never pass a full stale sections array. Use replaceAll only when rewriting the entire note on purpose (rare).",
+      description: "Patch fields or merge sections by id.",
       inputSchema: z.object({
         title: z.string().optional(),
         name: z.string().optional(),
@@ -208,7 +204,7 @@ export function createNotesEditTools(noteId: string) {
               if (input.sections) {
                 const incoming = asSections(input.sections)
                 update.sections = input.replaceAll
-                  ? incoming
+                  ? incoming.map(normalizeSectionBlockIds)
                   : mergeSectionsById(fresh.sections, incoming)
               }
               return update
@@ -228,8 +224,7 @@ export function createNotesEditTools(noteId: string) {
     },
 
     addBlock: {
-      description:
-        "Append ANY supported block type to a section. For mermaid, prefer generateMermaidBlock.",
+      description: "Append a typed block.",
       inputSchema: z.object({
         sectionId: z.string(),
         type: z.enum([
@@ -293,8 +288,7 @@ export function createNotesEditTools(noteId: string) {
     },
 
     generateMermaidBlock: {
-      description:
-        "Generate a mermaid diagram from a description and append it. Same engine as the section Generate mermaid button. Prefer this over writing mermaid source yourself.",
+      description: "Generate and append a mermaid diagram.",
       inputSchema: z.object({
         sectionId: z.string(),
         prompt: z
@@ -328,8 +322,7 @@ export function createNotesEditTools(noteId: string) {
     },
 
     addMermaidBlock: {
-      description:
-        "Append mermaid from raw source you already wrote. Prefer generateMermaidBlock. Avoid | inside node labels.",
+      description: "Append mermaid from raw source.",
       inputSchema: z.object({
         sectionId: z.string(),
         title: z.string().optional(),
@@ -361,8 +354,7 @@ export function createNotesEditTools(noteId: string) {
     },
 
     updateMermaidBlock: {
-      description:
-        "Fix an existing mermaid block. Call at most once per block. If it still fails, use replaceBlockWithMarkdown.",
+      description: "Fix an existing mermaid block (one try).",
       inputSchema: z.object({
         sectionId: z.string(),
         blockId: z.string(),
@@ -412,8 +404,7 @@ export function createNotesEditTools(noteId: string) {
     },
 
     replaceBlockWithMarkdown: {
-      description:
-        "Remove a broken block and append markdown in the same section.",
+      description: "Replace a block with markdown.",
       inputSchema: z.object({
         sectionId: z.string(),
         blockId: z.string(),
@@ -464,8 +455,7 @@ export function createNotesEditTools(noteId: string) {
     },
 
     addStackBlock: {
-      description:
-        `Append a tech-stack / layered architecture visual block. Icon names: ${STACK_ICON_HINT}. Aliases like mongo, mongodb, azure, node, nextjs also work.`,
+      description: "Append a tech-stack visual block.",
       inputSchema: z.object({
         sectionId: z.string(),
         title: z.string().optional(),
@@ -521,8 +511,7 @@ export function createNotesEditTools(noteId: string) {
     },
 
     generateComparisonBlock: {
-      description:
-        "Generate a comparison table from a description and append it. Same engine as the section Generate comparison button.",
+      description: "Generate and append a comparison table.",
       inputSchema: z.object({
         sectionId: z.string(),
         prompt: z.string(),
@@ -549,8 +538,7 @@ export function createNotesEditTools(noteId: string) {
     },
 
     addComparisonBlock: {
-      description:
-        "Append a comparison table you already structured. Prefer generateComparisonBlock.",
+      description: "Append a comparison table.",
       inputSchema: z.object({
         sectionId: z.string(),
         title: z.string().optional(),
@@ -604,7 +592,7 @@ export function createNotesEditTools(noteId: string) {
     },
 
     addMarkdownBlock: {
-      description: "Append a markdown content block to a section.",
+      description: "Append markdown.",
       inputSchema: z.object({
         sectionId: z.string(),
         content: z.string(),
@@ -626,7 +614,7 @@ export function createNotesEditTools(noteId: string) {
     },
 
     addCalloutBlock: {
-      description: "Append an info/tip/warn callout block.",
+      description: "Append a callout.",
       inputSchema: z.object({
         sectionId: z.string(),
         tone: z.enum(["info", "tip", "warn"]).optional(),
@@ -681,20 +669,22 @@ export function consecutiveEditFailures(
   }
 }
 
-export const EDIT_MODE_SYSTEM_RULES = `
-EDIT MODE RULES (agentic — multi-step):
-- Tools write to disk immediately. Parallel tool calls are serialized. Do not reconstruct the whole note from chat memory.
-- NEVER call updateNote with a full sections list copied from earlier context. That wipes later edits. updateNote MERGES sections by id and keeps unmentioned sections.
-- New sections: addSection. New blocks: specialized add* / generate* tools.
-- Flows / sequences: ALWAYS generateMermaidBlock (plain-language prompt). Same engine as the UI Generate mermaid button. Only use addMermaidBlock if you already have valid source.
-- Never put "|" inside mermaid node label brackets. Prefer dashed links -.-> / -->>.
-- Mermaid errors: fix ONCE with updateMermaidBlock. If it still fails, replaceBlockWithMarkdown (do not loop).
-- Comparison matrices: generateComparisonBlock (or addComparisonBlock if you already have cells). Never markdown tables.
-- Architecture / tech stacks: addStackBlock. Use icon names like azure, mongodb, nodedotjs, nextdotjs (${STACK_ICON_HINT}).
-- Simple prose: addMarkdownBlock. Tips/warnings: addCalloutBlock.
-- Catch-all: addBlock with the correct type + data.
-- Prefer the ACTIVE SECTION when adding blocks.
-- After a successful add, trust the returned outline. Do not rebuild the note.
-- If a tool returns { ok: false }, fix once. After repeated soft failures the loop stops — explain and stop.
-- Valid block types: ${NOTE_BLOCK_TYPES.join(", ")}.
+export function buildEditModeSystemRules(extraReasoning = false): string {
+  const base = `
+EDIT MODE — act with tools, do not overthink:
+- Call tools directly. No long planning, no restating what each tool does, no rebuilding the note from memory.
+- updateNote merges sections by id only — never pass a full stale sections list.
+- Structure: addSection. Diagrams: generateMermaidBlock. Tables: generateComparisonBlock. Stacks: addStackBlock. Prose: addMarkdownBlock. Callouts: addCalloutBlock.
+- Mermaid: no "|" in node labels; prefer dashed links. One mermaid fix, then replaceBlockWithMarkdown.
+- Prefer ACTIVE SECTION. Trust tool results. One retry per failure, then stop.
 `
+
+  if (!extraReasoning) return base
+
+  return `${base}
+Extra reasoning is ON — you may think through structure before editing, but still write only via tools.
+`
+}
+
+/** @deprecated use buildEditModeSystemRules */
+export const EDIT_MODE_SYSTEM_RULES = buildEditModeSystemRules(false)

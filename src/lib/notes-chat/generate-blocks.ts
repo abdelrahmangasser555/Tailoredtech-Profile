@@ -144,6 +144,45 @@ export async function appendMermaidFromSource(input: {
   })
 }
 
+export async function generateMarkdownContent(input: {
+  noteId: string
+  sectionId: string
+  prompt: string
+  /** Existing markdown in the block being edited, so the model can extend/rewrite it */
+  currentContent?: string
+}): Promise<string> {
+  const { note, section } = await loadSection(input.noteId, input.sectionId)
+  const openrouter = getOpenRouter()
+  const { text } = await generateText({
+    model: openrouter(NOTES_CHAT_SUMMARY_MODEL),
+    prompt: `You write Markdown content for ONE section of a learning notes site.
+
+Rules:
+- Output ONLY Markdown. No code fences around the whole answer, no preamble, no closing remarks.
+- Use GitHub Flavored Markdown: headings (## / ###), **bold**, *italic*, lists (- and 1.), > blockquotes, tables, inline \`code\`, and fenced code blocks with a language tag.
+- Keep it focused and concise. Match the note and the CURRENT SECTION the user is editing.
+- Do NOT wrap the entire answer in backticks. Fenced code blocks are fine inside.
+- Plain text paragraphs are fine when no formatting is needed.
+
+NOTE CONTEXT:
+${serializeNoteForContext(note)}
+
+CURRENT SECTION JSON:
+${JSON.stringify(section, null, 2)}
+
+${input.currentContent?.trim() ? `EXISTING MARKDOWN IN THIS BLOCK (rewrite or extend it):\n${input.currentContent.trim()}\n` : ""}
+USER REQUEST:
+${input.prompt.trim()}`,
+  })
+
+  const cleaned = text
+    .replace(/^\s*```(?:markdown|md)?\s*\n/i, "")
+    .replace(/\n```\s*$/i, "")
+    .trim()
+  if (!cleaned) throw new Error("Model returned empty markdown")
+  return cleaned
+}
+
 export async function generateAndAppendComparison(input: {
   noteId: string
   sectionId: string

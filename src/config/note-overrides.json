@@ -607,7 +607,12 @@
           {
             "type": "markdown",
             "id": "start-md",
-            "content": "New note — replace this with your content."
+            "content": "---"
+          },
+          {
+            "type": "markdown",
+            "id": "markdown-msrqoas2",
+            "content": "some text in here \n\nsom ebold stuff \n\n\n## heading in here\n\n**some bold text**\n"
           }
         ]
       }
@@ -627,57 +632,65 @@
             {
               "id": "1-office-added-in-the-form-with-vessels-yqo1",
               "label": "1) office added in the form with vessels",
-              "done": false,
-              "completedAt": null,
-              "children": []
+              "done": true,
+              "completedAt": "2026-08-13",
+              "children": [
+                {
+                  "id": "adding-subsection-for-office-departments-0nsf",
+                  "label": "adding subsection for office departments",
+                  "done": false,
+                  "completedAt": null,
+                  "children": []
+                }
+              ]
             },
             {
               "id": "2-print-out-the-log-as-excel-or-pdf-z4o0",
               "label": "2) print out the log as excel or pdf",
-              "done": false,
-              "completedAt": null,
+              "done": true,
+              "completedAt": "2026-08-13",
               "children": []
             },
             {
               "id": "3-log-visible-for-everyone-user-in-flow--00gv",
               "label": "3) log visible for everyone (user in flow only can edit and follow up )",
-              "done": false,
-              "completedAt": null,
+              "done": true,
+              "completedAt": "2026-08-13",
               "children": []
             },
             {
               "id": "4-approved-pending-follow-up-instead-of--1vwv",
               "label": "4) approved -  pending follow up instead of approved - follow up",
-              "done": false,
-              "completedAt": null,
+              "done": true,
+              "completedAt": "2026-08-13",
               "children": []
             },
             {
               "id": "5-remove-the-notes-under-each-title-of-t-3af9",
               "label": "5) remove the notes under each title of the oop",
-              "done": false,
-              "completedAt": null,
+              "done": true,
+              "completedAt": "2026-08-13",
               "children": []
             },
             {
               "id": "6-load-vessels-of-all-organizations-not--55je",
               "label": "6) load vessels of all organizations not just current organization",
-              "done": false,
-              "completedAt": null,
+              "done": true,
+              "completedAt": "2026-08-13",
               "children": []
             },
             {
               "id": "7-field-underneath-the-title-in-the-form-7xlz",
               "label": "7) field underneath the title in the form  - first for manual  - second for the procedure and both are required",
-              "done": false,
-              "completedAt": null,
+              "done": true,
+              "completedAt": "2026-08-13",
               "children": []
             },
             {
               "id": "8-add-option-for-oop-requested-at-to-hav-czmy",
               "label": "8) add option for oop requested at to have office too",
-              "done": false,
-              "completedAt": null,
+              "done": true,
+              "completedAt": "2026-08-13",
               "children": []
             },
             {
@@ -689,8 +702,8 @@
                 {
                   "id": "role-for-closeout-in-the-user-management-eeie",
                   "label": "role for closeout in the user management",
-                  "done": false,
-                  "completedAt": null,
+                  "done": true,
+                  "completedAt": "2026-08-13",
                   "children": []
                 },
                 {
@@ -701,8 +714,17 @@
                   "children": []
                 }
               ]
+            },
+            {
+              "id": "chatroom-for-each-oop-initatted-yz6f",
+              "label": "chatroom for each OOP iniated",
+              "done": false,
+              "completedAt": null,
+              "children": []
             }
-          ]
+          ],
+          "done": false,
+          "completedAt": null
         },
         {
           "id": "modelling-and-roles-of-the-bbs-kvh7",
@@ -726,5 +748,1147 @@
       "showMeta": true
     },
     "updatedAt": "2026-08-13"
+  },
+  "15-08-2026": {
+    "sections": [
+      {
+        "id": "start",
+        "title": "Start",
+        "blocks": [
+          {
+            "type": "markdown",
+            "id": "start-md",
+            "content": "New note — replace this with your content."
+          }
+        ]
+      }
+    ],
+    "title": "15/08/2026",
+    "name": "15/08/2026",
+    "description": "",
+    "explains": [],
+    "questionnaires": [],
+    "checklist": {
+      "title": "Checklist",
+      "items": [
+        {
+          "id": "task-1",
+          "label": "BBS system",
+          "children": [
+            {
+              "id": "authentication-using-password-eh6j",
+              "label": "authentication using password",
+              "done": true,
+              "completedAt": "2026-08-15",
+              "children": [
+                {
+                  "id": "authentication-using-oto-en9v",
+                  "label": "authentication using otp",
+                  "done": false,
+                  "completedAt": null,
+                  "children": []
+                }
+              ]
+            },
+            {
+              "id": "file-upload-f31r",
+              "label": "file upload",
+              "done": true,
+              "completedAt": "2026-08-15",
+              "children": []
+            },
+            {
+              "id": "observation-form-f8u1",
+              "label": "observation form",
+              "done": true,
+              "completedAt": "2026-08-15",
+              "children": []
+            },
+            {
+              "id": "observation-list-fcu3",
+              "label": "observation list",
+              "done": true,
+              "completedAt": "2026-08-15",
+              "children": []
+            },
+            {
+              "id": "user-management-fhs0",
+              "label": "user management",
+              "done": true,
+              "completedAt": "2026-08-15",
+              "children": []
+            },
+            {
+              "id": "vessel-management-flvy",
+              "label": "vessel management",
+              "done": true,
+              "completedAt": "2026-08-15",
+              "children": []
+            },
+            {
+              "id": "office-management-fqvw",
+              "label": "office management",
+              "done": true,
+              "completedAt": "2026-08-15",
+              "children": []
+            },
+            {
+              "id": "crew-management-fuc5",
+              "label": "crew management",
+              "done": true,
+              "completedAt": "2026-08-15",
+              "children": []
+            },
+            {
+              "id": "crew-sign-on-sign-off-g0hs",
+              "label": "crew sign on sign off",
+              "done": true,
+              "completedAt": "2026-08-15",
+              "children": []
+            },
+            {
+              "id": "analytics-dashboard-g5cs",
+              "label": "analytics dashboard",
+              "done": true,
+              "completedAt": "2026-08-15",
+              "children": []
+            },
+            {
+              "id": "customize-your-own-dashboard-geg4",
+              "label": "customize your own dashboard",
+              "done": true,
+              "completedAt": "2026-08-15",
+              "children": []
+            },
+            {
+              "id": "reports-gj1d",
+              "label": "reports",
+              "done": false,
+              "completedAt": null,
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "bbs-problems-for-latter-46iv",
+          "label": "BBS problems for latter",
+          "done": false,
+          "completedAt": null,
+          "children": [
+            {
+              "id": "printout-not-in-single-page-4dhb",
+              "label": "printout not in single page",
+              "done": false,
+              "completedAt": null,
+              "children": []
+            },
+            {
+              "id": "action-item-when-created-from-icb-it-goe-4s1o",
+              "label": "action item when created from ICB it goes to the other page and record of ICB is lost",
+              "done": false,
+              "completedAt": null,
+              "children": []
+            },
+            {
+              "id": "offline-is-not-supported-4wlu",
+              "label": "Offline is not supported",
+              "done": false,
+              "completedAt": null,
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "stuff-to-remember-tommorow-3nyn",
+          "label": "stuff to remember tommorow",
+          "done": false,
+          "completedAt": null,
+          "children": [
+            {
+              "id": "test-sign-on-sign-off-flow-3tdf",
+              "label": "test sign on sign off flow",
+              "done": false,
+              "completedAt": null,
+              "children": []
+            },
+            {
+              "id": "test-custom-dashboards-3ynz",
+              "label": "test custom dashboards",
+              "done": false,
+              "completedAt": null,
+              "children": []
+            },
+            {
+              "id": "create-comparison-list-43co",
+              "label": "create comparison list",
+              "done": false,
+              "completedAt": null,
+              "children": [
+                {
+                  "id": "vessels-49d6",
+                  "label": "vessels",
+                  "done": false,
+                  "completedAt": null,
+                  "children": []
+                },
+                {
+                  "id": "fleets-4bw9",
+                  "label": "fleets",
+                  "done": false,
+                  "completedAt": null,
+                  "children": []
+                },
+                {
+                  "id": "observers-4f3f",
+                  "label": "observers",
+                  "done": false,
+                  "completedAt": null,
+                  "children": []
+                },
+                {
+                  "id": "months-4imi",
+                  "label": "months",
+                  "done": false,
+                  "completedAt": null,
+                  "children": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "variants": {
+      "sidebarNav": true,
+      "compactHero": true,
+      "showMeta": true
+    },
+    "updatedAt": "2026-08-15"
+  },
+  "1-8-2026-snapshot": {
+    "sections": [
+      {
+        "id": "start",
+        "title": "1. Product and branding",
+        "blocks": [
+          {
+            "type": "markdown",
+            "id": "markdown-mszx3f6q",
+            "content": "**Customer:** Bahri · **Product name in UI:** OASIS BBS (`src/lib/brand.ts`) · **Tagline:** Behavior-Based Safety · **Footer credit:** Powered by TailoredTech (sign-in and sidebar).\n\nThe app is observation-centric. An **observer** is either a **crew member** signed on a vessel or an **office member**. Unsigned crew can still sign in and request sign-on to a vessel; only signed-on crew create observations. Office users can create observations for any vessel in the tenant, and those rows are tagged `createdByOffice: true` for reporting."
+          },
+          {
+            "type": "callout",
+            "id": "callout-mszx3f6r",
+            "tone": "info",
+            "title": "Decision — volume first",
+            "body": "Many observations will be created. Indexes, denormalized fields on each observation, and monthly pre-aggregation (`main_analytics`) exist so reads never rescan the full collection. Log tables page server-side; dashboard widgets read stored months, not live `$facet` over all observations on every page load."
+          },
+          {
+            "type": "markdown",
+            "id": "markdown-mszx4z5j",
+            "content": "**Executive summary.** OASIS BBS (*Powered by TailoredTech*) is a data-intensive safety observation platform for Bahri. Observers (crew on vessels or office users) fill ICB checklists; the system denormalizes analytics on each observation, pre-aggregates monthly rollups in `main_analytics`, and serves dense logs, PDF/Excel exports, and configurable dashboards. The stack is Next.js 16 App Router, React 19, MongoDB via Mongoose 9, NextAuth v5, and env-switched adaptors for email and storage. Domain types are portable TypeScript; Mongoose stays behind repos so SQL can replace MongoDB later without rewriting features."
+          }
+        ]
+      },
+      {
+        "id": "agents-md",
+        "title": "2. AGENTS.md and the memory rule",
+        "blocks": [
+          {
+            "type": "markdown",
+            "id": "markdown-mszx4z5k",
+            "content": "`AGENTS.md` is the project's long-term memory for AI agents and developers. If anyone states a rule, convention, or product fact that should persist, it is added there immediately — not kept only in chat. Sections cover product, UI density, each domain (observations, action items, dashboards), domain models, architecture, error handling, stack notes, coding rules, and seed commands.\n\nThis note is an explanatory walkthrough. When the product changes, update `AGENTS.md` first for operational rules, then refresh this document for narrative context."
+          }
+        ]
+      },
+      {
+        "id": "tech-stack",
+        "title": "3. Technology stack",
+        "blocks": [
+          {
+            "type": "stack",
+            "id": "stack-mszx4z5k",
+            "title": "Core stack",
+            "layers": [
+              {
+                "id": "frontend",
+                "label": "Frontend",
+                "items": [
+                  {
+                    "icon": "nextdotjs",
+                    "label": "Next.js 16 App Router"
+                  },
+                  {
+                    "icon": "react",
+                    "label": "React 19"
+                  },
+                  {
+                    "icon": "tailwindcss",
+                    "label": "Tailwind 4 + shadcn"
+                  }
+                ]
+              },
+              {
+                "id": "data",
+                "label": "Data",
+                "items": [
+                  {
+                    "icon": "mongodb",
+                    "label": "MongoDB + Mongoose 9"
+                  }
+                ]
+              },
+              {
+                "id": "auth",
+                "label": "Auth",
+                "items": [
+                  {
+                    "icon": "nextdotjs",
+                    "label": "NextAuth v5 (JWT)"
+                  }
+                ]
+              },
+              {
+                "id": "deploy",
+                "label": "Deploy",
+                "items": [
+                  {
+                    "icon": "vercel",
+                    "label": "Vercel (phase 1)"
+                  },
+                  {
+                    "icon": "aws",
+                    "label": "AWS SES + S3"
+                  },
+                  {
+                    "icon": "azure",
+                    "label": "Azure adaptors (later)"
+                  }
+                ]
+              }
+            ],
+            "direction": "vertical"
+          },
+          {
+            "type": "comparison",
+            "id": "comparison-mszx4z5k",
+            "title": "Technology stack details",
+            "rowHeader": "Layer",
+            "columns": [
+              {
+                "id": "choice",
+                "label": "Choice",
+                "highlight": false
+              },
+              {
+                "id": "notes",
+                "label": "Notes",
+                "highlight": false
+              }
+            ],
+            "rows": [
+              {
+                "label": "Framework",
+                "cells": [
+                  {
+                    "type": "text",
+                    "value": "Next.js 16 App Router"
+                  },
+                  {
+                    "type": "text",
+                    "value": "Uses `proxy.ts` for request interception (not `middleware.ts`)"
+                  }
+                ]
+              },
+              {
+                "label": "UI",
+                "cells": [
+                  {
+                    "type": "text",
+                    "value": "React 19, Tailwind 4, shadcn (Base UI)"
+                  },
+                  {
+                    "type": "text",
+                    "value": "Primitives in `src/components/ui`; app shared UI in `src/components/ui/shared`"
+                  }
+                ]
+              },
+              {
+                "label": "Database",
+                "cells": [
+                  {
+                    "type": "text",
+                    "value": "MongoDB, Mongoose 9"
+                  },
+                  {
+                    "type": "text",
+                    "value": "Portable schemas in `src/db/schemas`; models only in `src/db/models`"
+                  }
+                ]
+              },
+              {
+                "label": "Auth",
+                "cells": [
+                  {
+                    "type": "text",
+                    "value": "NextAuth / Auth.js v5"
+                  },
+                  {
+                    "type": "text",
+                    "value": "JWT session strategy; same session shape for all providers"
+                  }
+                ]
+              },
+              {
+                "label": "Client cache",
+                "cells": [
+                  {
+                    "type": "text",
+                    "value": "TanStack Query v5"
+                  },
+                  {
+                    "type": "text",
+                    "value": "Observation logs, analytics sheet, paginated lists"
+                  }
+                ]
+              },
+              {
+                "label": "Client UI state",
+                "cells": [
+                  {
+                    "type": "text",
+                    "value": "Zustand"
+                  },
+                  {
+                    "type": "text",
+                    "value": "Layout/app state that would otherwise require deep prop drilling"
+                  }
+                ]
+              },
+              {
+                "label": "Charts",
+                "cells": [
+                  {
+                    "type": "text",
+                    "value": "recharts + shadcn ChartContainer"
+                  },
+                  {
+                    "type": "text",
+                    "value": "Colors driven by CSS variables for multi-tenant branding"
+                  }
+                ]
+              },
+              {
+                "label": "PDF",
+                "cells": [
+                  {
+                    "type": "text",
+                    "value": "@react-pdf/renderer"
+                  },
+                  {
+                    "type": "text",
+                    "value": "Observation printout, action item printout, analytics PDF"
+                  }
+                ]
+              },
+              {
+                "label": "Excel",
+                "cells": [
+                  {
+                    "type": "text",
+                    "value": "exceljs"
+                  },
+                  {
+                    "type": "text",
+                    "value": "Log export and analytics workbook with embedded chart images"
+                  }
+                ]
+              },
+              {
+                "label": "Dashboard grid",
+                "cells": [
+                  {
+                    "type": "text",
+                    "value": "react-grid-layout"
+                  },
+                  {
+                    "type": "text",
+                    "value": "12-column builder with drag-from-palette"
+                  }
+                ]
+              },
+              {
+                "label": "Package manager",
+                "cells": [
+                  {
+                    "type": "text",
+                    "value": "pnpm"
+                  },
+                  {
+                    "type": "text",
+                    "value": "`pnpm dev`, `pnpm seed`, `pnpm seed:intensive`"
+                  }
+                ]
+              },
+              {
+                "label": "Deploy (phase 1)",
+                "cells": [
+                  {
+                    "type": "text",
+                    "value": "Vercel + MongoDB Atlas"
+                  },
+                  {
+                    "type": "text",
+                    "value": "AWS SES + S3/CloudFront; Azure adaptors exist for later"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "callout",
+            "id": "callout-mszx4z5l",
+            "tone": "info",
+            "title": "Decision — no Mongoose in the browser or Edge",
+            "body": "Client components must not import `src/db`, `src/repo`, or the full auth adaptor. Server components and server actions compute data; env-only auth flags live in `src/lib/adapters/auth/auth-methods.ts`."
+          }
+        ]
+      },
+      {
+        "id": "folder-contract",
+        "title": "4. Folder contract and request flow",
+        "blocks": [
+          {
+            "type": "markdown",
+            "id": "markdown-mszx4z5l",
+            "content": "```\nsrc/features/<name>/\n  components/   # feature UI\n  hooks/        # feature client hooks\n  actions/      # Next.js server actions → services\n  utilities/    # feature helpers\n\nsrc/components/ui/           # shadcn primitives only\nsrc/components/ui/shared/    # reusable app UI (DatePicker, PageSheet, DistributionChart, …)\nsrc/components/errors/         # StatusPage, RouteError, role-specific not-found/error\n\nsrc/db/schemas/              # portable TypeScript domain types (string IDs)\nsrc/db/models/               # Mongoose models only\nsrc/db/seed/                 # seed scripts\nsrc/repo/<model>/\n  <model>.repo.ts           # DB access\n  <model>.service.ts        # business rules\n\nsrc/lib/adapters/            # auth, email, storage\nsrc/lib/icb.ts               # ICB rollups, completion %, red-flag detection\nsrc/app/                     # App Router routes and API routes\n```"
+          },
+          {
+            "type": "markdown",
+            "id": "markdown-mszx4z5q",
+            "content": "**Feature modules today:**\n\n- `auth` — sign-in (password + OTP), session helpers\n- `observations` — form, logs, filters, analytics sheet, PDF/Excel\n- `action-items` — corrective actions, list, form, audit, PDF\n- `dashboards` — builder, widget registry, public share links\n- `icb-checklists` — admin checklist editor with drag-and-drop\n- `notifications` — Outlook-style inbox per user\n- `sign-on` — crew sign-on requests and vessel crew lists\n- `admin` — users, vessels, organizations, crew management UIs\n- `file_upload` — proxy upload to storage adaptor\n- `profile` — user profile actions"
+          },
+          {
+            "type": "mermaid",
+            "id": "mermaid-mszx4z5r",
+            "title": "Request flow",
+            "diagram": "flowchart LR\n  UI[\"Feature UI / hooks\"] --> SA[\"Server actions / API routes\"]\n  SA --> SVC[\"repo/*.service\"]\n  SVC --> REPO[\"repo/*.repo\"]\n  REPO --> MODEL[\"db/models (mongoose)\"]\n  MODEL --> MONGO[(MongoDB)]\n  SA --> AD[\"Adaptors\"]\n  AD --> AWS[\"SES / S3\"]\n  AD --> AZ[\"Graph / Blob\"]\n  AD --> AUTH[\"NextAuth JWT\"]\n  UI --> TQ[\"TanStack Query cache\"]"
+          }
+        ]
+      },
+      {
+        "id": "domain-model",
+        "title": "5. Domain model and tenancy",
+        "blocks": [
+          {
+            "type": "markdown",
+            "id": "markdown-mszx4z5q",
+            "content": "A **tenant** is the top-level customer (e.g. Bahri BSM in seed data). Tenants have many **organizations** (BSM, BDSM), optional **branding** for theming and future auth overrides, many **vessel groups**, and many **vessels**. Office members are assigned to vessel *groups*, not individual vessels — that group membership defines which vessels they can access for sign-on and reporting."
+          },
+          {
+            "type": "markdown",
+            "id": "markdown-mszx4z5q",
+            "content": "### Identity and counters\nAtomic sequences live in the `counters` collection:\n\n- `obs:{tenantId}` — tenant-wide observation sequence (1, 2, 3…)\n- `obs:{tenantId}:{vesselId}:{year}` — per-vessel calendar-year sequence for serial suffix\n- `action:{tenantId}` — action item sequence\n\nObservation `serial` = `{organizationShorthand}-{vesselNameToken}-{vesselYearSeq}` (vessel name token strips spaces/punctuation). Action item `serial` = `{organizationShorthand}-AI-{paddedSequence}`."
+          },
+          {
+            "type": "markdown",
+            "id": "markdown-mszx4z5q",
+            "content": "### Observation document (write-time rollups)\nOn every create/update, the service computes and stores — never derived on read:\n\n- **Identity:** `serial`, `sequence`, `observedAt`, `task`\n- **Scope:** `vesselId`, `vesselGroupId`, `vesselName`, `organizationName`, `organizationShorthand`, `createdByOffice`\n- **Observer:** `observerRank`, observer name fields\n- **Rollups:** `safeCount`, `atRisk`, `atRiskCount`, `redFlag` (legacy `sif` still read), `riskCategories[]`, per-record `analytics`\n- **Log helpers:** `icbCompletionPercent` (0–100), `hasAttachments`, `logAttachments[]`, `searchText`\n- **Review:** `status` (`ready_for_review` | `reviewed`), `reviewerId`, `reviewerName`\n\nRollup logic is centralized in `src/lib/icb.ts` (`computeObservationRollups`)."
+          },
+          {
+            "type": "mermaid",
+            "id": "mermaid-mszx4z5r",
+            "title": "Domain model",
+            "diagram": "erDiagram\n  TENANT ||--o{ ORGANIZATION : has\n  TENANT ||--o| BRANDING : themes\n  ORGANIZATION ||--o{ OFFICE_MEMBER : employs\n  ORGANIZATION ||--o{ VESSEL : owns\n  VESSEL_GROUP ||--o{ VESSEL : groups\n  OFFICE_MEMBER }o--o{ VESSEL_GROUP : assigned\n  USER ||--o| OFFICE_MEMBER : actor\n  USER ||--o| CREW_MEMBER : actor\n  USER ||--o| VESSEL : actor\n  CREW_MEMBER }o--o| VESSEL : signed_on\n  FORM ||--o{ OBSERVATION : checklist_snapshot\n  OBSERVATION }o--|| VESSEL : scoped_to\n  OBSERVATION ||--o{ OBSERVATION_AUDIT : history\n  ACTION_ITEM }o--|| ORGANIZATION : scoped_to\n  DASHBOARD }o--|| TENANT : owned_by\n  MAIN_ANALYTICS }o--|| TENANT : monthly_blob"
+          }
+        ]
+      },
+      {
+        "id": "auth",
+        "title": "6. Authentication and sessions",
+        "blocks": [
+          {
+            "type": "markdown",
+            "id": "markdown-mszx6xmj",
+            "content": "NextAuth v5 with `session.strategy = \"jwt\"`. Two credential providers today: `credentials` (email + password) and `otp` (email + 6-digit code). Both call the auth adaptor and produce the **same session user shape**.\n\nSign-in page: left panel is `public/bahri/vlcc.png` only (full `h-svh`, mobile-safe). Bahri logo on the right above the form. User toggles Password vs Email code."
+          },
+          {
+            "type": "markdown",
+            "id": "markdown-mszx6xmq",
+            "content": "**Session contract** (future SSO must map into this):\n\n```\nid, email, name, actorType, actorId, tenantId, organizationId, roles, vesselId\n```\n\nEnabled methods: `AUTH_PROVIDER` / `NEXT_PUBLIC_AUTH_PROVIDER` (default `credentials,otp`). Tenant branding may override later. `/dashboard` redirects by `actorType` to `/crew`, `/office`, or `/vessel`. Unknown actors on a role layout redirect to `/dashboard`, not another role."
+          },
+          {
+            "type": "mermaid",
+            "id": "mermaid-mszx6xmt",
+            "title": "Sign-in flows",
+            "diagram": "sequenceDiagram\n  participant U as User\n  participant P as Sign-in page\n  participant A as Server action\n  participant AD as Auth adaptor\n  participant E as Email adaptor\n  participant N as NextAuth JWT\n  U->>P: Choose password or OTP\n  alt Password\n    P->>A: credentialsSignInAction\n    A->>AD: authenticatePassword\n    AD->>N: same session user\n  else Email OTP\n    P->>A: requestLoginOtpAction\n    A->>E: send code (SES or Graph)\n    E-->>A: notification record always\n    P->>A: otpSignInAction\n    A->>AD: authenticateOtp\n    AD->>N: same session user\n  end\n  N-->>U: /dashboard redirect by actorType"
+          }
+        ]
+      },
+      {
+        "id": "adaptors",
+        "title": "7. Adaptors (email, storage, auth)",
+        "blocks": [
+          {
+            "type": "markdown",
+            "id": "markdown-mszx6xmq",
+            "content": "- Implementations copied from RA_Hosting where applicable (`src/lib/email`, `src/lib/storage`).\n- **Every `sendEmail`** persists a `notification` row first, then marks sent or failed.\n- Uploads: browser → `POST /api/upload/proxy` → adaptor `uploadBuffer`. Do not set `Content-Type: multipart/form-data` on the client.\n- Reads: `GET /api/assets` via `buildSecureAssetUrl` / `src/lib/secure-asset.server.ts`.\n- Features never call AWS/Azure SDKs directly."
+          },
+          {
+            "type": "mermaid",
+            "id": "mermaid-mszx6xmu",
+            "title": "Adaptor switching",
+            "diagram": "flowchart TB\n  subgraph email [\"Email adaptor\"]\n    EP[\"EMAIL_PROVIDER\"] -->|aws| SES[\"AWS SES\"]\n    EP -->|graph| MSG[\"Microsoft Graph\"]\n  end\n  subgraph storage [\"Storage adaptor\"]\n    SP[\"STORAGE_PROVIDER\"] -->|s3| S3[\"S3 + CloudFront\"]\n    SP -->|azure| BLOB[\"Azure Blob\"]\n  end\n  subgraph auth [\"Auth adaptor\"]\n    AP[\"AUTH_PROVIDER / tenant branding\"] --> PW[\"Password\"]\n    AP --> OTP[\"OTP\"]\n    AP -.-> MSSO[\"Microsoft SSO later\"]\n    PW --> SESSION[\"Same JWT session\"]\n    OTP --> SESSION\n    MSSO -.-> SESSION\n  end"
+          }
+        ]
+      },
+      {
+        "id": "ui-system",
+        "title": "8. UI system, density, and theming",
+        "blocks": [
+          {
+            "type": "markdown",
+            "id": "markdown-mszx6xmq",
+            "content": "### Semantic color tokens (`globals.css`)\nAll brand colors are CSS variables — never hardcoded hex in components. Tenants override via branding."
+          },
+          {
+            "type": "comparison",
+            "id": "comparison-mszx6xmr",
+            "title": "Semantic color tokens",
+            "rowHeader": "Token",
+            "columns": [
+              {
+                "id": "usage",
+                "label": "Usage",
+                "highlight": false
+              }
+            ],
+            "rows": [
+              {
+                "label": "`--primary`",
+                "cells": [
+                  {
+                    "type": "text",
+                    "value": "Bahri navy (#003B71 family). Sidebar background, enabled barrier, safe series."
+                  }
+                ]
+              },
+              {
+                "label": "`--destructive`",
+                "cells": [
+                  {
+                    "type": "text",
+                    "value": "Bahri orange (#FF681D). Sidebar active item, difficult barrier, at-risk series."
+                  }
+                ]
+              },
+              {
+                "label": "`--critical`",
+                "cells": [
+                  {
+                    "type": "text",
+                    "value": "Semantic red — non-enabled barrier, red flag, ICB completion out of range. *Not* the same as destructive."
+                  }
+                ]
+              },
+              {
+                "label": "`--success`",
+                "cells": [
+                  {
+                    "type": "text",
+                    "value": "Positive states (e.g. open action item badge)."
+                  }
+                ]
+              },
+              {
+                "label": "`--chart-1…5`",
+                "cells": [
+                  {
+                    "type": "text",
+                    "value": "General chart palette (brand secondary blues/greens + primary + destructive)."
+                  }
+                ]
+              },
+              {
+                "label": "`--chart-barrier-*`, `--chart-safe`, `--chart-at-risk`",
+                "cells": [
+                  {
+                    "type": "text",
+                    "value": "Semantic chart colors; map to primary/destructive/critical for consistency."
+                  }
+                ]
+              },
+              {
+                "label": "`--avatar-1…8`",
+                "cells": [
+                  {
+                    "type": "text",
+                    "value": "Pastel avatar backgrounds with matching foreground hues."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "markdown",
+            "id": "markdown-mszx6xms",
+            "content": "### Density and shared components\n- Data-dense tables: compact padding, short rows, no hero sections on dashboards.\n- `UserAvatar` for every person; `IconTooltipButton` for icon-only controls.\n- `MultiSelect`, `SearchSelect`, `DatePicker` (date + time), `PageSheet` (inline split panel, not overlay).\n- `AttachmentThumbRow` for read-only attachment lists in tables; `FileThumb` in editable forms.\n- Page titles in the site header only — no duplicate title blocks in page bodies.\n- Management tables: 10 rows/page, expanding search bubble, skeleton tbody only on load.\n- Observation logs: custom 25-row server-paged table (not the management table pattern).\n\n### Navigation shells\nFour role dashboards: `/crew`, `/office`, `/vessel`, and admin (same `/office` shell with extra admin routes). Sidebar is navy; active item and user footer use orange. Main content sits on navy wrapper with `rounded-tl-2xl` inverted corner."
+          }
+        ]
+      },
+      {
+        "id": "observations",
+        "title": "9. Observations",
+        "blocks": [
+          {
+            "type": "markdown",
+            "id": "markdown-mszx6xms",
+            "content": "Feature root: `src/features/observations`. Routes include `/crew/observations`, `/office/observations`, new/edit paths per role."
+          },
+          {
+            "type": "markdown",
+            "id": "markdown-mszx6xms",
+            "content": "### Form layout and metadata\n- Desktop: metadata left (narrow), ICB right (wide), independent scroll. Mobile: single column, full page scroll.\n- Required metadata (client validation): task observed, location, day, weather, time of day, temperature, light — marked with red asterisks; submit shows toast \"Complete all required fields\".\n- Task observed: debounced typeahead from prior tasks for the vessel plus office-created tasks.\n- Crew: observation date is server \"now\" (not editable). Office: full date/time picker.\n- Office-only: area, department (from profile), vessel selector (all tenant vessels).\n- Weather icons per condition; \"Other\" reveals free-text input."
+          },
+          {
+            "type": "markdown",
+            "id": "markdown-mszx6xms",
+            "content": "### ICB panel\n- Categories as muted bars (no nested cards). Each behavior: Safe and At risk steppers.\n- Action icons (comments, attachments, action item) appear when Safe or At risk > 0. At risk 0→1 opens comment dialog immediately.\n- Comments: five fields — While, Was, Because, Solution, Try. At risk requires barrier + While + Was + Because (Solution/Try optional). Incomplete rows show red `*` with tooltip.\n- **Red flag** toggle with severity (Moderate / Severe / Fatal) and remarks. Replaces legacy SIF labeling in UI.\n- **Barrier** segmented control: Enabled (primary), Difficult (destructive/orange), Non-Enabled (critical red) + optional remarks.\n- Comment editor: Dialog on desktop, bottom Drawer on mobile (`useIsMobile`).\n- **ICB completion** bar in header (`IcbCompletionIndicator`): target band 35–60% (green); outside band is critical red. Stored as `icbCompletionPercent` on write.\n- Office/admin: reviewer stars + comments on whole form and per-ICB; saving reviewer input marks observation reviewed."
+          },
+          {
+            "type": "markdown",
+            "id": "markdown-mszx6xms",
+            "content": "### Observation logs\n- 25 rows/page, TanStack Query with prefetch N+1 and N+2. Sticky `serial` column.\n- Toolbar: search, date range, filters sheet (saved per-user chips), analytics sheet, Excel export.\n- Hover/right-click actions: Edit (office only), Printout (PDF), Audit log.\n- Excel: `POST /api/observations/export` with active filters — backend loads all matches, not current page.\n- Group-by columns, configurable column visibility, filters for red flag, ICB completion in/out of range, attachments, etc."
+          },
+          {
+            "type": "markdown",
+            "id": "markdown-mszx6xms",
+            "content": "### Observation analytics sheet\nRight `Sheet` using the **active log filter** (not just the current page). Server: `observationQuery.aggregateAnalytics` with `$match` + `$facet`. Cache: 5m stale, 30m gc.\n\n- Summary stat cards with period-over-period trend labels.\n- Safe vs at risk over time — safe = primary, at risk = destructive.\n- Barriers — pie uses semantic barrier colors; daily composed chart for enabled/difficult/non-enabled.\n- Distribution pies (vessel, org, status, source, checklist): pie/list toggle per chart; list mode shows name + bar + count. No useless side legend.\n- Top tasks observed — horizontal bars with distinct colors and visible count axis.\n- Export: Excel (tables + chart images via `html-to-image`) or PDF (`observation-analytics-pdf.tsx`)."
+          },
+          {
+            "type": "mermaid",
+            "id": "mermaid-mszx6xmu",
+            "title": "Observation analytics pipeline",
+            "diagram": "flowchart TB\n  LOG[\"Observation logs UI\"] --> FILTER[\"Active filter + date range\"]\n  FILTER --> AGG[\"aggregateAnalytics $facet\"]\n  AGG --> SHEET[\"Analytics sheet / PDF / Excel\"]\n  WRITE[\"Observation create/update\"] --> ROLL[\"computeObservationRollups\"]\n  ROLL --> OBS[(observation document)]\n  CRON[\"POST /api/cron/analytics\"] --> MA[(main_analytics monthly)]\n  OBS --> CRON"
+          }
+        ]
+      },
+      {
+        "id": "action-items",
+        "title": "10. Action items",
+        "blocks": [
+          {
+            "type": "markdown",
+            "id": "markdown-mt0f01im",
+            "content": "Feature: `src/features/action-items`. Corrective actions scoped to tenant + organization, optional vessel.\n\n- Fields: vessel, status (open/closed), target date, priority, areas, departments, summary, description, assignees (office + crew), exposures, hierarchy of control, severity, attachments.\n- List: 25 rows/page, inline status toggle, edit, PDF printout, audit log.\n- Crew may create; crew may edit only items they created.\n- Audit collection: `action_item_audit_logs`.\n\n*Note:* linking action items from ICB rows in the observation form still shows \"Feature not currently available\" toast — action items exist as a standalone module."
+          }
+        ]
+      },
+      {
+        "id": "checklists",
+        "title": "11. ICB checklists (admin)",
+        "blocks": [
+          {
+            "type": "markdown",
+            "id": "markdown-mt0f01in",
+            "content": "Admin-only: Administration → ICB Checklists. `@dnd-kit` drag-and-drop categories and behaviors.\n\n- One office default checklist; one default per vessel group (exclusive).\n- Empty `vesselGroupIds` = office-only checklist.\n- Crew load default for signed-on vessel's group; office loads office default.\n- Checklist audit log — same dialog pattern as observations."
+          }
+        ]
+      },
+      {
+        "id": "dashboards",
+        "title": "12. Dashboards and main_analytics",
+        "blocks": [
+          {
+            "type": "markdown",
+            "id": "markdown-mt0f01in",
+            "content": "### main_analytics (monthly blobs)\nOne document per tenant per calendar month (`yearMonth` = `yyyy-MM`). `metrics` is a typed `MonthlyAnalyticsMetrics` blob: summary, daily series, dimensional breakdowns (vessel, observer, barrier, weather, ratings, tasks, etc.)."
+          },
+          {
+            "type": "callout",
+            "id": "callout-mt0f01in",
+            "tone": "info",
+            "title": "Decision — incremental sync",
+            "body": "`POST /api/cron/analytics` (Bearer or `x-api-key` = `ANALYTICS_CRON_API_KEY`) rebuilds only months affected since `analytics_sync_state.lastSyncedAt`. Dashboard page load **never** runs a live 12-month observation aggregation. Refresh button in UI calls `analyticsService.syncTenant` via server action."
+          },
+          {
+            "type": "markdown",
+            "id": "markdown-mt0f01in",
+            "content": "### Custom dashboards\n- Routes: `/office/explore/dashboards`, builder at `…/new` and `…/[id]/edit`, viewer at `…/[id]`.\n- Public share: `isPublic` + `publicId` → `/public/dashboards/[publicId]`.\n- Widgets: `{ id, type, x, y, w, h }` on 12-column `react-grid-layout` grid.\n- Widget registry (`widget-registry.ts`): stats, daily charts, pies, barrier mixes, radar, oneliners, markdown, gallery.\n- Optional dashboard filter (vessel, organization, date range) applied to stored monthly data.\n- Share with office members; audit log in `dashboard_audit_logs`. One `isMain` dashboard per tenant (auto-created)."
+          }
+        ]
+      },
+      {
+        "id": "charts",
+        "title": "13. Chart colors and tenant branding",
+        "blocks": [
+          {
+            "type": "markdown",
+            "id": "markdown-mt0f01in",
+            "content": "Centralized in `src/features/dashboards/utilities/chart-colors.ts` and `globals.css`."
+          },
+          {
+            "type": "comparison",
+            "id": "comparison-mt0f01io",
+            "title": "Chart colors",
+            "rowHeader": "Context",
+            "columns": [
+              {
+                "id": "colors",
+                "label": "Colors",
+                "highlight": false
+              }
+            ],
+            "rows": [
+              {
+                "label": "General pie / distribution",
+                "cells": [
+                  {
+                    "type": "text",
+                    "value": "`--chart-1…5` (brand secondary blue, midnight green, dark green, primary, destructive)"
+                  }
+                ]
+              },
+              {
+                "label": "Barrier",
+                "cells": [
+                  {
+                    "type": "text",
+                    "value": "Enabled → primary; Difficult → destructive; Non-Enabled → critical"
+                  }
+                ]
+              },
+              {
+                "label": "Safe vs at risk",
+                "cells": [
+                  {
+                    "type": "text",
+                    "value": "Safe → primary; At risk → destructive"
+                  }
+                ]
+              },
+              {
+                "label": "Shared component",
+                "cells": [
+                  {
+                    "type": "text",
+                    "value": "`DistributionChart` in `src/components/ui/shared/distribution-chart.tsx` — pie/list toggle"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "callout",
+            "id": "callout-mt0f01io",
+            "tone": "info",
+            "title": "Decision — CSS variables only",
+            "body": "When a tenant branding document overrides `--primary`, `--destructive`, `--critical`, or chart tokens, every chart and barrier control updates without code changes."
+          }
+        ]
+      },
+      {
+        "id": "notifications",
+        "title": "14. Notifications and sign-on",
+        "blocks": [
+          {
+            "type": "markdown",
+            "id": "markdown-mt0f01io",
+            "content": "- `/notifications` for every role — Outlook-style list + reading pane.\n- Every outbound email creates a `notification` linked to `userId` when the recipient is a user.\n- Crew sign-on requests: vessel login approves/rejects at `/vessel/requests`; office/admin with group access can sign crew on directly.\n- Crew \"My Vessel\" shows signed-on context."
+          }
+        ]
+      },
+      {
+        "id": "admin",
+        "title": "15. Administration and roles",
+        "blocks": [
+          {
+            "type": "comparison",
+            "id": "comparison-mt0f01io",
+            "title": "Administration areas",
+            "rowHeader": "Area",
+            "columns": [
+              {
+                "id": "who",
+                "label": "Who",
+                "highlight": false
+              },
+              {
+                "id": "route",
+                "label": "Route",
+                "highlight": false
+              }
+            ],
+            "rows": [
+              {
+                "label": "User Management",
+                "cells": [
+                  {
+                    "type": "text",
+                    "value": "Admin only"
+                  },
+                  {
+                    "type": "text",
+                    "value": "`/office/users`"
+                  }
+                ]
+              },
+              {
+                "label": "Vessel Management",
+                "cells": [
+                  {
+                    "type": "text",
+                    "value": "Admin only"
+                  },
+                  {
+                    "type": "text",
+                    "value": "`/office/vessels`"
+                  }
+                ]
+              },
+              {
+                "label": "Organization Management",
+                "cells": [
+                  {
+                    "type": "text",
+                    "value": "Admin only"
+                  },
+                  {
+                    "type": "text",
+                    "value": "`/office/organizations`"
+                  }
+                ]
+              },
+              {
+                "label": "ICB Checklists",
+                "cells": [
+                  {
+                    "type": "text",
+                    "value": "Admin only"
+                  },
+                  {
+                    "type": "text",
+                    "value": "`/office/checklists`"
+                  }
+                ]
+              },
+              {
+                "label": "Crew Management",
+                "cells": [
+                  {
+                    "type": "text",
+                    "value": "All office members"
+                  },
+                  {
+                    "type": "text",
+                    "value": "`/office/crew`"
+                  }
+                ]
+              },
+              {
+                "label": "Dashboards",
+                "cells": [
+                  {
+                    "type": "text",
+                    "value": "Office (admin builds)"
+                  },
+                  {
+                    "type": "text",
+                    "value": "`/office/explore/dashboards`"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "markdown",
+            "id": "markdown-mt0f01ip",
+            "content": "Office members assigned to a vessel's group can sign crew on/off for vessels in that group without a sign-on request."
+          }
+        ]
+      },
+      {
+        "id": "errors",
+        "title": "16. Error handling",
+        "blocks": [
+          {
+            "type": "markdown",
+            "id": "markdown-mt0f01ip",
+            "content": "- Shared components: `src/components/errors/` — `StatusPage`, `RouteError`, not-found variants.\n- App root: `not-found.tsx`, `error.tsx`, `global-error.tsx` (self-contained inline styles — no `globals.css`).\n- Role shells keep sidebar: `office|crew|vessel/{error,not-found}.tsx`.\n- Server pages: `notFound()` for missing records; `forbidden()` / `unauthorized()` for auth errors. Use `unstable_rethrow(error)` — never catch `redirect` / `notFound` in try/catch."
+          }
+        ]
+      },
+      {
+        "id": "seed",
+        "title": "17. Local development and seed data",
+        "blocks": [
+          {
+            "type": "markdown",
+            "id": "markdown-mt0f01ip",
+            "content": "1. Copy `.env.example` to `.env.local`. Set `DATABASE_CONNECTION_STRING`, `AUTH_SECRET`, and optional adaptor keys.\n2. `pnpm install` then `pnpm dev`\n3. **Standard seed:** `pnpm seed` (or `POST /api/dev/seed` in dev). Idempotent — reuses records, rotates passwords to `local/seed-passwords.txt` (gitignored).\n4. **Intensive seed:** `pnpm seed:intensive` — **drops the entire database**, rebuilds Bahri BSM with ~18 vessels, 5 checklists, 80+ crew, 9 office users, ~3k+ observations over a full year, rebuilds `main_analytics`. Use for dashboard/analytics testing.\n5. Sign in at `/sign-in`. Passwords are in `local/seed-passwords.txt` after seed.\n6. OTP requires a working email adaptor; password works with MongoDB + `AUTH_SECRET` only.\n7. Analytics cron locally: `POST /api/cron/analytics` with `ANALYTICS_CRON_API_KEY`.\n\nSeed tenant: **Bahri BSM**. Organizations: **Bahri Ship Management (BSM)** and **Bahri Dry Ship Management (BDSM)**. Vessel logins seeded for Yanbu, Jeddah, and Abha."
+          }
+        ]
+      },
+      {
+        "id": "unfinished",
+        "title": "18. Intentionally unfinished or deferred",
+        "blocks": [
+          {
+            "type": "markdown",
+            "id": "markdown-mt0f01ip",
+            "content": "- Microsoft SSO adaptor (session slot and auth adaptor structure exist).\n- Action item creation from ICB row in observation form (toast placeholder).\n- Custom per-vessel-group / office question builder on observations.\n- Service queue / bus and Redis.\n- SQL database migration (schemas and repos are structured for portability).\n- Reports section under Explore Data (`/office/explore/reports`) — route exists; scope TBD."
+          },
+          {
+            "type": "callout",
+            "id": "callout-mt0f01ip",
+            "tone": "info",
+            "title": "Document history",
+            "body": "Originally written 14 Aug 2026 as \"BBS foundation and auth.\" Expanded 18 Aug 2026 to cover the full OASIS BBS platform: observations, ICB, red flag, analytics, dashboards, action items, chart theming, validation, and operational seed workflows. For day-to-day coding rules, always prefer `AGENTS.md`."
+          }
+        ]
+      }
+    ],
+    "title": "1-8-2026 snapshot",
+    "name": "OASIS BBS Platform Architecture",
+    "description": "OASIS BBS (Bahri — Behavior-Based Safety) platform architecture walkthrough: stack, domain model, auth, adaptors, observations, action items, dashboards, analytics, and seed workflows.",
+    "explains": [],
+    "questionnaires": [],
+    "variants": {
+      "sidebarNav": true,
+      "compactHero": true,
+      "showMeta": true
+    },
+    "updatedAt": "2026-08-19"
+  },
+  "overview": {
+    "sections": [
+      {
+        "id": "start",
+        "title": "Start",
+        "blocks": [
+          {
+            "type": "markdown",
+            "id": "markdown-mt0gz9mr-y0rt",
+            "content": "**Generated:** August 19, 2026  \n**Scope:** MOC, PCR, OOP, Users/Vessels, attachments, performance, and database design  \n**Source:** Codebase analysis (`src/models/`, `src/modules/`, `src/app/api/`)\n\nUse the sections below to navigate each topic. The **Summary Matrix** at the end provides a quick-reference answer to all seven core questions."
+          }
+        ]
+      },
+      {
+        "id": "vessel-user-changes",
+        "title": "1. Vessel / User Name & Email Changes",
+        "blocks": [
+          {
+            "type": "markdown",
+            "id": "markdown-mt0h1hlk-y8lw",
+            "content": "### Short answer\n\n**Assignments and access control are linked by MongoDB `ObjectId`, not by name or email.**  \nIf a vessel's name or email changes, MOC/PCR/OOP **assignments stay intact**. However, **denormalized copies** of names/emails embedded in forms, logs, and snapshots **will not update automatically** and can become stale.\n\n### How entities are linked\n\n| Entity | Link mechanism | Example fields |\n|--------|----------------|----------------|\n| **Vessels** | Stored as `User` documents with `type: 'vessel'` | `name`, `email`, `ssoEmail`, `imo`, `department` (fleet group) |\n| **MOC roles** | `ObjectId` refs on the MOC document | `originator_id`, `implementer_id`, `hseq_id`, `approver_id`, `verifier_id` |\n| **MOC membership** | `ObjectId` arrays | `all_users[]`, `viewers[]`, `planEditors[]` |\n| **MOC viewer grants** | `ObjectId` or string match | `viewerGrants.userId`, `viewerGrants.department`, `viewerGrants.vesselGroup` |\n| **PCR parties** | `ObjectId` on `originator_id`; embedded snapshots in `affectedParties[]` / `signatures[]` | `party.Name._id` used for access checks |\n| **OOP vessels** | `ObjectId` + denormalized string | `vesselId` (ref) + `vesselName` (snapshot) |\n| **MOC ↔ PCR** | **No direct link** | Independent collections sharing `User` and `Organization` |\n\n### What happens when name or email changes\n\n| Area | Behavior after change |\n|------|----------------------|\n| **Role assignments** (`originator_id`, `implementer_id`, etc.) | ✅ Unchanged — still points to same user/vessel by ID |\n| **Access control** (`all_users`, viewer grants by `userId`) | ✅ Unchanged |\n| **Login / SSO** | ⚠️ Login looks up by `email` (case-insensitive) or vessel `ssoEmail`. Changing primary `email` affects login |\n| **MOC form picker values** | ❌ Stale — forms store `{ _id, name, email }` at submit time; no cascade update |\n| **PCR `affectedParties` / `signatures`** | ❌ Stale — embedded `name`/`email` stay until PCR is re-saved |\n| **OOP list/search** | ❌ `vesselName` is denormalized — can show old name |\n| **Decline/audit log text** | ❌ Snapshots like `declinedByName` are frozen at event time |\n| **Viewer grant `label`** | ❌ Display-only string; may be stale |\n| **User update API** (`PUT /api/users`) | Updates only the `users` collection — **no propagation** to MOC/PCR/OOP |\n\n### Vessel group access (important nuance)\n\nVessel group viewer grants resolve by matching `viewerGrants.vesselGroup` against the vessel's `User.department` field — **not** by vessel name. Renaming a vessel does not break group-based access as long as `department` stays the same.\n\n### Recommended solutions\n\n| Priority | Solution | Effort |\n|----------|----------|--------|\n| **High** | On `PUT /api/users`, add a background job to update embedded name/email in active PCR `affectedParties`, OOP `vesselName`, and MOC form picker fields | Medium |\n| **High** | Stop relying on denormalized strings for display — resolve names at read time via `$lookup` / populate (like OOP summary already does for some fields) | Medium |\n| **Medium** | Add a `userProfileVersion` or `updatedAt` flag on User; show \"profile changed since submission\" warnings on stale form snapshots | Low |\n| **Low** | Document that audit logs intentionally snapshot names (correct for compliance) | Low |"
+          }
+        ]
+      },
+      {
+        "id": "moc-cloning",
+        "title": "2. MOC Cloning Workflow",
+        "blocks": [
+          {
+            "type": "markdown",
+            "id": "markdown-mt0h1hlk-p9sq",
+            "content": "### Entry point\n\n| Layer | Location |\n|-------|----------|\n| UI | MOC Logs table → row menu → **Clone MOC** (`src/features/mocTable/components/mocTableWrapper.tsx`) |\n| API | `POST /api/cloneMoc` (`src/app/api/cloneMoc/route.ts`) |\n| Service | `cloneMoc()` in `src/modules/moc/moc.service.ts` |\n\n**Who can clone:** Any authenticated user (no additional role check beyond session).\n\n### Step-by-step workflow\n\n```\nUser clicks \"Clone MOC\" on MOC Logs page\n        │\n        ▼\nPOST /api/cloneMoc  { old_moc: { _id } }\n        │\n        ▼\ncloneMoc(oldMocId, sessionUserId)\n        │\n        ├─ 1. Load original MOC (populate originator_form, implementer_form, implementation)\n        ├─ 2. Clone originator form  → new doc, originator_id = cloner\n        ├─ 3. Clone implementer form → new doc, implementer_id = cloner\n        ├─ 4. Clone implementation   → new doc (internal user refs unchanged)\n        ├─ 5. Generate new serial number (cloner's organization prefix + year sequence)\n        ├─ 6. Create fresh chat (cloner only, empty messages)\n        ├─ 7. Compute department_serial from cloned originator form\n        ├─ 8. Create new MOC document (status = 'b')\n        └─ 9. Return new MOC → redirect to Track MOC page\n```\n\n### What gets cloned\n\n| Data | Cloned? | Details |\n|------|---------|---------|\n| **Originator form** | ✅ Yes | Full field spread; `originator_id` → cloner |\n| **Implementer form** | ✅ Yes | Full field spread; `implementer_id` → cloner |\n| **Implementation form** | ✅ Yes | Full document (dates, status, deviation data) |\n| **Risk assessment** | ✅ Yes | Same URL references (not re-uploaded) |\n| **Impact assessment** | ✅ Yes | Copied by reference |\n| **Manual plan** | ✅ Yes | Copied |\n| **Action plan** | ✅ Yes | Copied |\n| **Form attachments** | ✅ Yes | URLs inside forms copied (same blob files) |\n| **Traceability** | ✅ New values | `cloned: true`, `prevForkedMoc`, `prevCloningSerialNum`, `prevOriginatorForm`, `prevImplementerForm` |\n\n### What does NOT get cloned\n\n| Data | Behavior |\n|------|----------|\n| **HSEQ form** | `null` on new MOC |\n| **Verifier form** | Not copied |\n| **Approver form** | Not copied |\n| **`hseq_id`, `verifier_id`, `approver_id`** | Not set — must be reassigned |\n| **Original users** | Replaced — only cloner in `all_users` |\n| **Viewers / plan editors** | Not copied (`viewers`, `viewerGrants`, `planEditors`, `planEditorGrants`) |\n| **Chat history** | Fresh empty chat |\n| **Audit logs** | Only one new log entry (`action: 'cloned'`) |\n| **Serial number** | New org-scoped serial generated |\n| **Organization** | Set to **cloning user's** organization (not original MOC's org) |\n| **Completion state** | New MOC starts in active workflow |\n| **Email notifications** | None sent on clone |\n\n### Workflow stage after clone\n\nMOC workflow stages:\n\n| Status | Stage |\n|--------|-------|\n| `a` | Originator |\n| `b` | Implementer |\n| `c` | HSEQ |\n| `d` | Approver |\n| `e` | Implementation |\n| `f` / `e-completed` | Verification |\n\n**Cloned MOC starts at status `b` (Implementer stage).**  \nOriginator work is treated as done via the copied form; the cloner proceeds as implementer and must assign HSEQ, approver, and verifier through Track MOC.\n\n### Roles assigned to the person who clones\n\n| Field | Value |\n|-------|-------|\n| `originator_id` | Cloning user's ID |\n| `implementer_id` | Cloning user's ID |\n| `all_users` | `[cloning user only]` |\n| Chat `users` | `[cloning user only]` |\n| `hseq_id` | **Not assigned** |\n| `verifier_id` | **Not assigned** |\n| `approver_id` | **Not assigned** |\n\n**Special permission:** On cloned MOCs, the implementer (cloner) can add users even without full admin access — allowing them to assign HSEQ, verifiers, and approvers.\n\n### Attachment behavior on clone\n\nBlob files are **not duplicated in storage**. The clone points to the **same underlying file URLs** as the original. Deleting a file from the original's blob storage would affect the clone.\n\n### Recommended improvements\n\n| Issue | Suggestion |\n|-------|------------|\n| No role check on clone | Restrict clone to org admins or users with MOC access to the source |\n| Org changes on clone | Consider preserving original `organizationId` or prompting user |\n| Shared blob URLs | Optionally re-upload attachments on clone for isolation |\n| HSEQ/approver not copied | Document clearly in UI (already partially done in confirmation dialog) |"
+          },
+          {
+            "type": "mermaid",
+            "id": "mermaid-mt0h299u-wzgp",
+            "title": "MOC Cloning — Visual Workflow",
+            "diagram": "flowchart TD\n    A[User clicks Clone MOC] -.-> B[POST /api/cloneMoc]\n    B --> C[cloneMoc service loads original MOC]\n    C --> D[Clone originator form]\n    C --> E[Clone implementer form]\n    C --> F[Clone implementation]\n    C --> G[Generate new serial number]\n    C --> H[Create fresh chat]\n    C --> I[Compute department_serial]\n    D --> J[Create new MOC status = b]\n    E --> J\n    F --> J\n    G --> J\n    H --> J\n    I --> J\n    J --> K[Return new MOC]\n    K --> L[Redirect to Track MOC]"
+          }
+        ]
+      },
+      {
+        "id": "performance",
+        "title": "3. Performance Optimization",
+        "blocks": [
+          {
+            "type": "markdown",
+            "id": "markdown-mt0h1hlk-0kgx",
+            "content": "### Current bottlenecks (ranked by impact)\n\n| # | Bottleneck | Impact |\n|---|------------|--------|\n| 1 | `GET /api/newmoc` loads **all** user MOCs with 9+ `.populate()` calls, no pagination | Critical — primary MOC list |\n| 2 | `GET /api/getAllMoc` with 13 populates; without `orgId` returns **entire collection** | Critical — archive/admin |\n| 3 | MOC list triple-fetch: `/api/newmoc` + `/api/users` (full directory) + `/api/myUser` | High |\n| 4 | `GET /api/getAllPcr?scope=logs` returns all PCRs cross-org, no limit | High |\n| 5 | Chat `messages[]` loaded wholesale for list previews | Medium |\n| 6 | `JSON.parse(JSON.stringify())` on every large API response | Medium |\n| 7 | No SWR/React Query — refetch on every navigation | Medium |\n\n### MOC vs PCR vs OOP loading comparison\n\n| Module | List endpoint | Pagination | Field projection |\n|--------|---------------|------------|------------------|\n| **MOC** | `/api/newmoc`, `/api/getAllMoc` | ❌ None | ❌ Full populate |\n| **PCR** | `/api/pcr/summary` | ✅ Yes (limit/offset) | ✅ Aggregation `$project` |\n| **OOP** | `/api/oop/summary` | ✅ Yes (default 25) | ✅ Aggregation pipeline |\n\nOOP and PCR already demonstrate the correct pattern. **MOC is the outlier.**\n\n### High-impact solutions\n\n#### 1. Add `GET /api/moc/summary` (mirror PCR/OOP)\n\n```\nAggregation pipeline:\n  - $match (user access query)\n  - $lookup originator User (name only)\n  - $project card-level fields: serial_num, status, createdAt, originator name,\n    implementer name, department, chat_id, completed, cloned\n  - $sort createdAt: -1\n  - $skip / $limit for pagination\n```\n\nUse `.lean()` throughout. Never populate forms on list views.\n\n#### 2. Split list from detail\n\n| Endpoint | Should return |\n|----------|---------------|\n| List (`/api/moc/summary`) | Card metadata only (~2–5 KB per MOC) |\n| Detail (`/api/singlemoc`) | Full populate chain (current behavior) |\n\n#### 3. Add missing database indexes\n\nSee [Section 5](#5-database-indexes-by-schema) for full list. Priority additions for MOC:\n\n```javascript\n{ all_users: 1, createdAt: -1 }\n{ viewers: 1 }\n{ 'viewerGrants.userId': 1 }\n{ chat_id: 1 }\n```\n\n#### 4. Scope user directory fetch\n\nMOC list currently calls `/api/users` without org filter. Pass `organizationId` (OOP already does this via `useOrgUsers`).\n\n#### 5. Introduce SWR or TanStack Query\n\n- Deduplicate concurrent requests\n- Stale-while-revalidate (30–60s TTL like PCR/OOP hooks)\n- Invalidate on mutation (form submit, status change)\n\n### Medium-impact solutions\n\n| Solution | Details |\n|----------|---------|\n| Replace `JSON.parse(JSON.stringify())` | Use `.lean()` + direct `NextResponse.json()` |\n| Fix N+1 in PCR clone | Batch `User.find({ _id: { $in: userIds } })` instead of loop |\n| Chat architecture | Store messages in separate collection; use `$slice` for previews |\n| Paginate archive endpoints | Route MOC Logs and PCR archive tables through summary endpoints |\n| Add `.sort({ createdAt: -1 }).lean()` | To all list queries |\n| Server-side search/filter | Move from client-side filtering in `useMocList.ts` to aggregation `$match` |\n\n### Lower-impact / hygiene\n\n- Configure Mongoose `maxPoolSize` in `dbConnection.ts`\n- Add `Cache-Control: private, max-age=30` on summary endpoints\n- Consolidate `/api/newmoc` and `/api/getAllMoc` behind one service with `scope` param (like PCR)\n- Lazy-load form data only when user opens a MOC card tab\n\n### Expected improvement\n\n| Change | Estimated impact |\n|--------|------------------|\n| MOC summary endpoint + pagination | **5–20× faster** initial load (depends on MOC count) |\n| Remove triple-fetch / scope users | **2–3× faster** network time |\n| Add indexes on `all_users`, `viewers` | **2–5× faster** query execution |\n| SWR caching | Near-instant repeat visits |"
+          }
+        ]
+      },
+      {
+        "id": "architecture-risks",
+        "title": "4. Architectural Loopholes & Risks",
+        "blocks": [
+          {
+            "type": "markdown",
+            "id": "markdown-mt0h1hlk-pn93",
+            "content": "### Database & connection\n\n| Risk | Details | Severity |\n|------|---------|----------|\n| **No connection pool config** | `dbConnection.ts` uses basic `mongoose.connect()` — no `maxPoolSize`, retry, or timeout tuning | Medium |\n| **`strict: false` on all major schemas** | Allows arbitrary fields; indexes may not match actual query shapes; schema drift over time | Medium |\n| **No referential integrity** | Mongoose `ref` fields exist but no cascading deletes; deleted users leave dangling references | High |\n\n### Denormalization & dual sources of truth\n\n| Location | Problem |\n|----------|---------|\n| MOC `viewers[]` vs `viewerGrants[]` | Two systems; stale `viewers` triggers reactive repair in `getMocsByUser` |\n| MOC `planEditors[]` vs `planEditorGrants[]` | Same dual-source pattern |\n| PCR `affectedParties[]` | `Mixed` type embeds full user objects; stale after profile changes |\n| PCR `workflow` | `Mixed` with nested `userId` strings + embedded snapshots; no FK enforcement |\n| OOP `vesselName` | Denormalized alongside `vesselId`; can drift |\n\n### Type inconsistencies\n\n| Field | MOC | PCR |\n|-------|-----|-----|\n| Chat reference | `chat_id` (ObjectId) | `chatId` (String) |\n\n`getChatSummaries` must query both `{ chatId }` and `{ _id }` to handle this.\n\n### Chat as embedded document\n\nMessages are stored in an unbounded `messages[]` array inside a single MongoDB document (`src/models/chat.ts`). This will:\n- Hit the 16 MB document size limit on active MOCs\n- Degrade list-preview performance (entire array loaded, then sliced in memory)\n\n### Security gaps\n\n| Endpoint | Issue |\n|----------|-------|\n| `DELETE /api/upload` | Auth only — any logged-in user can delete a blob if they know the URL; no MOC role/ownership check |\n| `POST /api/risk_assessment` | Auth only — no implementer/role check |\n| `POST /api/cloneMoc` | Any authenticated user can clone any MOC they can see |\n\n### Orphaned references\n\n- Deleted users remain in `all_users`, `viewers`, workflow members, grants\n- PCR clone silently skips missing users (`if (!user) continue`)\n- MOC viewer repair is reactive (`syncMocViewersAndChat`), not preventive\n- No DB-level `$lookup` validation on write\n\n### Recommended architectural fixes\n\n| Priority | Fix |\n|----------|-----|\n| **P0** | Add role/ownership checks to `DELETE /api/upload` and `POST /api/risk_assessment` |\n| **P0** | Extract chat messages to separate `chat_messages` collection |\n| **P1** | Normalize `chatId` type across MOC/PCR (migration) |\n| **P1** | Consolidate viewer system — use `viewerGrants` as single source, derive `viewers[]` on write |\n| **P1** | Add user-deletion handler that cleans references in MOC/PCR/OOP |\n| **P2** | Incrementally enable `strict: true` on schemas with migration |\n| **P2** | Replace `Mixed` types in PCR with typed sub-schemas |\n| **P3** | Add MongoDB schema validation rules at collection level |"
+          }
+        ]
+      },
+      {
+        "id": "db-indexes",
+        "title": "5. Database Indexes by Schema",
+        "blocks": [
+          {
+            "type": "markdown",
+            "id": "markdown-mt0h1hll-o2iv",
+            "content": "> All schemas use Mongoose. Indexes declared in schema files are auto-created on model init.  \n> Models with `strict: false` may have additional runtime fields not listed here.\n\n### User (`src/models/users.ts`)\n\n| Index | Type |\n|-------|------|\n| `email` | Unique (schema field) |\n| `{ role: 1 }` | Single |\n| `{ access: 1 }` | Single |\n| `{ type: 1 }` | Single |\n| `{ organizationId: 1 }` | Single |\n| `{ organizationId: 1, type: 1 }` | Compound |\n| `{ vesselType: 1 }` | Single |\n| `{ oop_close_out: 1 }` | Single |\n| `{ name: 'text', email: 'text' }` | Text |\n| `{ name: 1 }` | Single |\n| `{ ssoEmail: 1 }` | Unique, sparse |\n\n### MOC (`src/models/moc.ts`)\n\n| Index | Type |\n|-------|------|\n| `serial_num` | Unique (schema field) |\n| `{ originator_id: 1 }` | Single |\n| `{ completed: 1, createdAt: -1 }` | Compound |\n| `{ status: 1, createdAt: -1 }` | Compound |\n| `{ organizationId: 1, createdAt: -1 }` | Compound |\n| `{ isDeleted: 1, completed: 1 }` | Compound |\n\n**Missing (recommended):**\n\n| Index | Reason |\n|-------|--------|\n| `{ all_users: 1, createdAt: -1 }` | Every user-scoped MOC query |\n| `{ viewers: 1 }` | Viewer access queries |\n| `{ 'viewerGrants.userId': 1 }` | Grant resolution |\n| `{ chat_id: 1 }` | Chat summary batch lookup |\n| `{ serial_num: 'text' }` or text index | Search |\n\n### PCR (`src/models/pcr.ts`)\n\n| Index | Type |\n|-------|------|\n| `{ status: 1 }` | Single |\n| `{ originator_id: 1 }` | Single |\n| `{ serial_num: 1 }` | Unique |\n| `{ status: 1, originator_id: 1 }` | Compound |\n| `{ organizationId: 1 }` | Single |\n| `{ createdAt: -1 }` | Single |\n| `{ organizationId: 1, status: 1, createdAt: -1 }` | Compound |\n| `{ workflowVersion: 1, status: 1, createdAt: -1 }` | Compound |\n\n**Missing (recommended):**\n\n| Index | Reason |\n|-------|--------|\n| `{ viewers: 1 }` | Viewer access |\n| `{ 'workflow.approvalCommittee.members.userId': 1 }` | Workflow member queries |\n| `{ 'affectedParties.Name._id': 1 }` | Party access checks |\n\n### OOP (`src/models/oop.ts`) — most complete\n\n| Index | Type |\n|-------|------|\n| `{ status: 1 }` | Single |\n| `{ originator_id: 1 }` | Single |\n| `{ serial_num: 1 }` | Unique |\n| `{ organizationId: 1 }` | Single |\n| `{ createdAt: -1 }` | Single |\n| `{ organizationId: 1, status: 1, createdAt: -1 }` | Compound |\n| `{ organizationId: 1, title: 1 }` | Compound |\n| `{ organizationId: 1, vesselId: 1 }` | Compound |\n| `{ organizationId: 1, vesselName: 1 }` | Compound |\n| `{ title: 1 }` | Single |\n| `{ vesselName: 1 }` | Single |\n| `{ 'workflow.levels.userId': 1, status: 1 }` | Compound |\n| `{ 'workflow.levels.userId': 1, createdAt: -1 }` | Compound |\n| `{ viewers: 1 }` | Single |\n| `{ status: 1, currentStage: 1, createdAt: -1 }` | Compound |\n| `{ experience: 1 }` | Single |\n| `{ title: 'text', vesselName: 'text', serial_num: 'text' }` | Text |\n\n### Organization (`src/models/organization.ts`)\n\n| Index | Type |\n|-------|------|\n| `shorthand` | Unique (schema field) |\n| `{ shorthand: 1 }` | Unique (explicit) |\n\n### Chat (`src/models/chat.ts`)\n\n| Index | Type |\n|-------|------|\n| `{ chatId: 1 }` | Sparse |\n\n**Missing:** `{ users: 1 }` for participant lookups.\n\n### Workflow form models (no indexes declared)\n\n| Model | File |\n|-------|------|\n| `originator` | `src/models/originator.ts` |\n| `implementer` | `src/models/implementer.ts` |\n| `approver` | `src/models/approver.ts` |\n| `verifier` | `src/models/verifier.ts` |\n| `hseq` | `src/models/hseq.ts` |\n| `implementaion` | `src/models/implementaion.ts` |\n\nThese are accessed via MOC populate (by `_ id`), so they inherit lookup via the MOC's form ref fields.\n\n### Other models (no indexes)\n\n| Model | File |\n|-------|------|\n| `actions` | `src/models/actions.ts` |\n| `channels` | `src/models/channels.ts` |\n| `notifications` | `src/models/notifications.tsx` |\n| `oldMoc` | `src/models/oldMoc.ts` |\n| `oldPcr` | `src/models/oldPcr.ts` |\n| `EndYear` | `src/models/end_year.ts` |"
+          }
+        ]
+      },
+      {
+        "id": "attachment-deletion",
+        "title": "6. Attachment Deletion Permissions",
+        "blocks": [
+          {
+            "type": "markdown",
+            "id": "markdown-mt0h1hll-c8rc",
+            "content": "### Risk assessment attachments\n\n| Rule | Detail |\n|------|--------|\n| **Can be deleted?** | ❌ **No** — add-only in the entire application |\n| **Storage** | `moc.risk_assessment` array on MOC document |\n| **Add API** | `POST /api/risk_assessment` — uses `$push` only, no `$pull`/remove |\n| **UI** | Always `disabled={true}` on cards — no delete button |\n| **Who can add** | Any user from MOC status `b` onward (Risk tab) |\n| **Upload** | Tab allows adding more attachments after first upload |\n\n### Form-step attachments (originator, implementer, HSEQ, etc.)\n\n#### On MOC cards (Track MOC / list views)\n\n| Rule | Detail |\n|------|--------|\n| **Can be deleted?** | ❌ **No** — all card views pass `disabled={true}` with no `setState` |\n\n#### During form editing\n\nDeletion is controlled by `previewOrEdit()` in `src/features/moc_form/utilities/formHelpers.ts`.\n\n| User role / condition | Can delete form attachments? |\n|-----------------------|------------------------------|\n| MOC `completed` | ❌ No — always read-only |\n| Viewer / plan editor / responsible on plan | ❌ No |\n| **Primary step owner** at matching status | ✅ Yes — their active step |\n| **Privileged reviewer** (HSEQ, verifier, approver) | ✅ Yes — originator & implementer forms; implementaion form once implementaion phase is active |\n| **Approver** | ✅ Yes — originator, implementer, approver forms |\n| **Implementer / HSEQ / Verifier** | ✅ Yes — originator & implementer forms |\n| **Originator during initiation** | ✅ Yes — always `preview={false}` |\n\n**Primary step ownership mapping:**\n\n| Status | Stage | Owner |\n|--------|-------|-------|\n| `a` | Originator (form 0) | `originator_id` |\n| `b` | Implementer (form1) | `implementer_id` |\n| `c` | HSEQ (form2) | `hseq_id` |\n| `d` | Approver (form3) | `approver_id` |\n| `e` | Implementaion (form4) | `implementer_id` |\n| `f` / `e-completed` | Verification (form5) | verifier (`canVerifyMoc`) |\n\n### Whole MOC deletion (not individual attachments)\n\nOnly **org admins** can soft-delete an entire MOC (`MocDeleteCornerButton.tsx` → sets `isDeleted: true`).\n\n### API security gap\n\n`DELETE /api/upload` requires authentication but has **no MOC role or ownership check**. Any logged-in user who knows a blob URL can delete the file. The UI is the primary gate — this is a security risk.\n\n### Comparison with OOP\n\nOOP has an explicit `canDeleteAttachment` permission (`src/features/oop/utils/permissions.ts`). **MOC does not have an equivalent centralized permission function.**\n\n### Recommended solutions\n\n| Priority | Solution |\n|----------|----------|\n| **High** | Add ownership/role check to `DELETE /api/upload` — verify user has edit access to the MOC/PCR that owns the attachment |\n| **Medium** | Add risk assessment delete capability for implementer/HSEQ with audit log entry |\n| **Medium** | Create centralized `canDeleteMocAttachment(moc, user, attachmentType)` function (like OOP) |\n| **Low** | Add soft-delete for risk assessments (mark as removed, keep URL in audit log) |"
+          }
+        ]
+      },
+      {
+        "id": "moc-data-loading",
+        "title": "7. MOC Data Loading — What Gets Fetched",
+        "blocks": [
+          {
+            "type": "markdown",
+            "id": "markdown-mt0h1hll-demm",
+            "content": "### Overview of MOC API endpoints\n\n| Endpoint | Service function | Used by | Scope |\n|----------|-----------------|---------|-------|\n| `GET /api/newmoc?orgId=` | `getMocsByUser()` | Track MOC list, overview | User-scoped |\n| `GET /api/getAllMoc?orgId=` | `getAllMocs()` | MOC Logs / archive table | Admin / org-scoped |\n| `GET /api/singlemoc?moc_id=` | `getSingleMoc()` | MOC detail, print | Single MOC |\n\n### A. `GET /api/newmoc` — Track MOC list (primary)\n\n**Access query logic:**\n\n| User type | Query |\n|-----------|-------|\n| HSEQ email | All MOCs (`{}`) |\n| Regular user | `$or` of: `all_users` contains user ID, viewer grants, plan editor grants |\n| Org admin (with selected org) | Additionally all MOCs in that organization |\n| Non-admin | Excludes `isDeleted: true` |\n\n**Populated fields (9 populates):**\n\n| Path | Model | Notes |\n|------|-------|-------|\n| `originator_form` | originator | Full form document |\n| `all_users` | User | All enrolled users |\n| `originator_id` | User | |\n| `implementer_id` | User | |\n| `approver_id` | User | |\n| `verifier_id` | User | |\n| `hseq_id` | User | |\n| `logs.userId` | User | Log authors |\n| `implementer_form` | implementer | **Only** `target-timeline` field selected |\n\n**NOT populated on this endpoint:** `hseq_form`, `approver_form`, `verifier_form`, `implementaion`, `organizationId`\n\n**Post-processing:**\n1. Stale viewer repair (background `syncMocViewersAndChat` if grants empty but viewers populated)\n2. `getChatSummaries()` — attaches `chatPreview: { latestMessages, unreadCount, totalCount }` per MOC\n\n**Raw MOC document fields returned** (plus populated refs above):\n\n```\n_id, originator_id, implementer_id, approver_id, verifier_id, hseq_id,\nserial_num, originator_form, implementer_form, status, risk_assessment,\nimpact_assessment[], department, organizationId, viewers[], viewerGrants[],\nviewerExclusions[], planEditors[], planEditorGrants[], chat_id, all_users[],\nlogs[], completed, isDeleted, cloned, prevForkedMoc, prevCloningSerialNum,\ndepartment_serial, action_plan, manual_plan, createdAt, updatedAt\n+ chatPreview (enriched)\n```\n\n### B. `GET /api/getAllMoc` — Archive / admin list\n\n**Populated fields (13 populates) — heaviest endpoint:**\n\n| Path | Model |\n|------|-------|\n| `originator_form` | originator |\n| `all_users` | User |\n| `originator_id` | User |\n| `implementer_id` | User |\n| `approver_id` | User |\n| `verifier_id` | User |\n| `hseq_id` | User |\n| `logs.userId` | User |\n| `implementer_form` | implementer (full) |\n| `verifier_form` | verifier |\n| `implementaion` | implementaion |\n| `approver_form` | approver |\n| `hseq_form` | hseq |\n| `organizationId` | Organization |\n\nNo chat preview enrichment. No pagination.\n\n**Visibility logic** (with `orgId`):\n- Controlled by organization's `archive_visibility` setting: `ALL_ITEMS`, `ORG_ONLY`, `COMPLETED_GLOBAL_OWN_ACTIVE`, `OWN_ONLY`\n- HSEQ email / org admin / `access === 'full'` broaden visibility\n\n### C. `GET /api/singlemoc` — Detail view\n\nSame populate set as user list **plus** full `implementer_form`, `hseq_form`, `approver_form`, `verifier_form`, `implementaion`. No `organizationId` populate.\n\n### D. Client-side additional fetches (MOC list page)\n\nThe Track MOC list (`features_clean/list_moc/hooks/useMocList.ts`) makes **3 parallel API calls**:\n\n| Call | Endpoint | Data |\n|------|----------|------|\n| 1 | `/api/newmoc?orgId=` | All user MOCs (described above) |\n| 2 | `/api/myUser` | Current logged-in user |\n| 3 | `/api/users` | **Entire user directory** (no org filter) |\n\nClient-side sorting and filtering happens after all data is downloaded.\n\n### Payload size concern\n\nEach MOC in the list response includes:\n- Full `originator_form` document (all form fields + attachment URLs)\n- 6 populated User objects (role holders)\n- All `all_users` populated\n- All `logs` with populated authors\n- `risk_assessment`, `impact_assessment`, `action_plan`, `manual_plan` arrays\n\nFor 100 MOCs, this can easily be **5–20+ MB** of JSON.\n\n### What should be loaded vs what is loaded today\n\n| Data | Needed for list card? | Currently loaded? |\n|------|----------------------|-------------------|\n| `serial_num`, `status`, `createdAt` | ✅ Yes | ✅ Yes |\n| Originator/implementer **names** | ✅ Yes | ✅ Yes (via populate) |\n| `originator_form` (full) | ❌ No | ✅ Yes — wasteful |\n| `risk_assessment` | �️ Only for risk tab | ✅ Yes on list |\n| `action_plan`, `manual_plan` | ❌ No (detail only) | ✅ Yes on list |\n| All `logs` with authors | ❌ No | ✅ Yes on list |\n| `hseq_form`, `approver_form`, etc. | ❌ No | ❌ No (correct on newmoc) |\n| Chat preview | ✅ Yes | ✅ Yes (enriched) |"
+          }
+        ]
+      },
+      {
+        "id": "summary-matrix",
+        "title": "Summary Matrix",
+        "blocks": [
+          {
+            "type": "markdown",
+            "id": "markdown-mt0h2g5p-tsfs",
+            "content": "| Question | Key takeaway |\n|----------|-------------|\n| **1. Name/email changes** | IDs stay linked; embedded names/emails go stale |\n| **2. MOC cloning** | Cloner = originator + implementer; starts at status `b`; HSEQ/approver/verifier reset |\n| **3. Performance** | Add MOC summary endpoint + pagination; biggest win available |\n| **4. Architecture risks** | Dual viewer sources, unbounded chat messages, no FK enforcement, upload API gap |\n| **5. Indexes** | OOP best covered; MOC missing `all_users`, `viewers`, `chat_id` indexes |\n| **6. Attachment deletion** | Risk assessment = add-only; form attachments deletable during edit only; upload API unsecured |\n| **7. MOC loading** | Full documents with 9–13 populates, no pagination, triple client fetch |"
+          }
+        ]
+      },
+      {
+        "id": "source-files",
+        "title": "Key Source Files",
+        "blocks": [
+          {
+            "type": "markdown",
+            "id": "markdown-mt0h2g5p-vcyu",
+            "content": "| Topic | Files |\n|-------|-------|\n| Schemas & indexes | `src/models/moc.ts`, `pcr.ts`, `oop.ts`, `users.ts`, `organization.ts`, `chat.ts` |\n| MOC service | `src/modules/moc/moc.service.ts` |\n| MOC repository | `src/modules/moc/moc.repository.ts` |\n| MOC cloning | `src/app/api/cloneMoc/route.ts`, `moc.service.ts` → `cloneMoc()` |\n| MOC list client | `features_clean/list_moc/hooks/useMocList.ts` |\n| Attachment permissions | `src/features/moc_form/utilities/formHelpers.ts`, `src/components/display components/displayDocs.tsx` |\n| Risk assessment | `src/app/api/risk_assessment/route.ts`, `moc.service.ts` → `addRiskAssessment()` |\n| Viewer grants | `src/modules/moc/moc-viewers.service.ts` |\n| DB connection | `src/helpers/dbConnection.ts` |\n| PCR summary (reference pattern) | `src/app/api/pcr/summary/route.ts`, `src/modules/pcr/pcr.service.ts` |\n| OOP summary (reference pattern) | `src/app/api/oop/summary/route.ts`, `src/modules/oop/oop.service.ts` |"
+          }
+        ]
+      }
+    ],
+    "title": "Bahri MOC-PCR Platform — Architecture & Operations FAQ",
+    "name": "overview",
+    "description": "MOC, PCR, OOP, Users/Vessels, attachments, performance, and database design — compiled Aug 2026",
+    "explains": [],
+    "questionnaires": [],
+    "variants": {
+      "sidebarNav": true,
+      "compactHero": true,
+      "showMeta": true
+    },
+    "updatedAt": "2026-08-19"
   }
 }

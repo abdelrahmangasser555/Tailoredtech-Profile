@@ -72,18 +72,18 @@
   ],
   "proposals": [
     {
-      "id": "bbs-bahri-option-1-subscription",
-      "title": "BBS Platform Proposal - Model 1",
-      "subtitle": "Annual subscription · Behavior-Based Safety for Bahri Ship Management",
+      "id": "proposal-msy9n5t0-nely",
+      "title": "BBS Platform Proposal - lifetime license",
+      "subtitle": "Life time license · for Tailoredtech BBS",
       "clientName": "The National Shipping Company of Saudi Arabia",
       "brandId": "marafei",
       "format": "formal-features",
       "currency": "USD",
       "language": "bilingual",
-      "number": "01-12082026",
+      "number": "02-27082026",
       "numberLabelEn": "Proposal reference",
       "numberLabelAr": "مرجع العرض",
-      "date": "2026-08-12",
+      "date": "2026-08-27",
       "issuer": {
         "nameEn": "Marafe Almarefa Est For Information",
         "nameAr": "مؤسسة مرافق المعرفة للاتصالات وتقنية المعلومات",
@@ -99,12 +99,356 @@
         "otherId": "TRN: 100575192800003\nC/O Bahri Ship Management DMCC"
       },
       "icon": null,
-      "markdown": "### Overview\n\nMarafei proposes  **Tailoredtech BBS(BBS)** platform for Bahri Ship Management, delivered in partnership with TailoredTech.\n\n**Model 1** is Tailoredtech BBS third-party platform provided under an **annual subscription**. The solution is **hosted and owned by Marafei** . The product includes **data migration** and **ongoing maintenance** for the software under the subscription.\n\n### MIPS2 pathway (optional)\n\nFull MIPS2 implementation is quoted separately. An optional **MIPS2 credit** apply if Bahri proceeds with MIPS2 with the annual plan. MIPS2 is **optional** and is **not required** for Model 1 delivery.\n\n### Timeline\n\n| Milestone | Target date |\n|-----------|------------|\n| Development started | **20 July 2026** |\n| Target readiness | **15 October 2026** |\n| Small batch releases + UAT | Ongoing until go-live |\n| Ready for roll-out | **Before 1 November 2026** |\n\nWork has already started. Before final release there will be **regular small batch releases** for updates and UAT so the product is ready for rolling out before **1 November 2026**.\n",
+      "markdown": "### Overview\n\nMarafe Almarefa Est For Information proposes **Tailoredtech BBS** with a lifetime license under a one time payment model.\n\nThe commercial offer includes Bahri IP rights to the data and application branding. The solution can be hosted on Bahri infrastructure, with documentation and codebase handover at delivery. Marafei retains the right to sell the same service to other companies. This is not a Bahri exclusive product.\n\n### Timeline\n\n| Milestone | Target date |\n|-----------|------------|\n| Development started | **20 July 2026** |\n| Target timeline | **25 September 2026** |\n",
       "features": [
         {
-          "id": "f1",
-          "title": "Marafei-hosted ",
-          "description": "Cloud delivery and hosting by Marafei."
+          "id": "f-msy9tp8i-b631",
+          "title": "Tailoredtech BBS platform for Bahri OASIS",
+          "description": "Fully compatible with market standard capabilities including dedicated office, crew, and vessel modules with unlimited seats."
+        },
+        {
+          "id": "f-bbs-ip-bahri-001",
+          "title": "Bahri IP on data and branding",
+          "description": "Bahri holds IP rights to operational data and application branding delivered under this offer."
+        },
+        {
+          "id": "f-bbs-handover-001",
+          "title": "Documentation and codebase handover",
+          "description": "Full technical documentation and codebase handover included at delivery."
+        },
+        {
+          "id": "feat-msy9n5t0-t171",
+          "title": "Data migration included",
+          "description": "Migration of existing BBS records and historical observations as part of delivery."
+        },
+        {
+          "id": "feat-msy9n5t0-8aih",
+          "title": "Ongoing maintenance included",
+          "description": "First year of software maintenance and support included in the lifetime license. Annual maintenance thereafter at the listed rate."
+        },
+        {
+          "id": "feat-msy9n5t0-rqe7",
+          "title": "Unlimited seats",
+          "description": "All trained observers and vessel teams can use the platform without per-seat limits."
+        },
+        {
+          "id": "feat-msy9n5t0-0cks",
+          "title": "Mobile application",
+          "description": "Mobile application support for crew members."
+        },
+        {
+          "id": "feat-msy9n5t0-rj8g",
+          "title": "MIPS2 API integration",
+          "description": "Integrated with MIPS2 through API connectivity."
+        },
+        {
+          "id": "f-msy9z6bc-fu2n",
+          "title": "Hosting on Bahri infrastructure",
+          "description": "Hosted on Bahri infrastructure with documentation and codebase handover included."
+        },
+        {
+          "id": "f-msya0m4f-4880",
+          "title": "Under Bahri domain",
+          "description": "Application delivered under a Bahri domain name."
+        },
+        {
+          "id": "f-mszqv5il-fqc6",
+          "title": "Survey program",
+          "description": "Survey program tailored as required as a module in the software."
+        },
+        {
+          "id": "f-bbs-nonexclusive-001",
+          "title": "Non-exclusive commercial rights",
+          "description": "Marafei retains the right to sell the Tailoredtech BBS service to other companies. As it is a market product."
+        }
+      ],
+      "solutions": [
+        {
+          "id": "sol-msy9n5t0-fjdv",
+          "name": "Lifetime license",
+          "description": "One time payment. Lifetime license.",
+          "lineItems": [
+            {
+              "id": "line-msy9n5t0-lc9e",
+              "label": "Tailoredtech BBS lifetime license",
+              "amount": 28000,
+              "quantity": 1,
+              "note": "Includes first year maintenance, migration, Bahri IP on data and branding"
+            },
+            {
+              "id": "line-msy9n5t0-p4vj",
+              "label": "Data migration",
+              "amount": 0,
+              "quantity": 1,
+              "note": "Included"
+            },
+            {
+              "id": "line-bbs-doc-handover",
+              "label": "Documentation handover",
+              "amount": 0,
+              "quantity": 1,
+              "note": "Included"
+            },
+            {
+              "id": "line-bbs-code-handover",
+              "label": "Codebase handover",
+              "amount": 0,
+              "quantity": 1,
+              "note": "Included"
+            },
+            {
+              "id": "line-msy9n5t0-l5ai",
+              "label": "Ongoing software maintenance",
+              "amount": 0,
+              "quantity": 1,
+              "note": "First year included"
+            },
+            {
+              "id": "line-msy9n5t0-43ys",
+              "label": "Mobile application for crew members",
+              "amount": 0,
+              "quantity": 1
+            },
+            {
+              "id": "line-msy9n5t0-h7jf",
+              "label": "MIPS2 API integration",
+              "amount": 0,
+              "quantity": 1
+            },
+            {
+              "id": "li-msya88gw-9axv",
+              "label": "Hosting on Bahri Infrastructure",
+              "amount": 0,
+              "quantity": 1
+            },
+            {
+              "id": "li-mszqvwoj-flns",
+              "label": "Survey program",
+              "amount": 0,
+              "quantity": 1
+            }
+          ],
+          "prices": [
+            {
+              "id": "price-mszt6zu3-fru8",
+              "label": "Total for lifetime license",
+              "amount": 28000
+            }
+          ],
+          "discounts": [],
+          "totalMode": "manual",
+          "manualTotal": 28000,
+          "totalLabel": "Total for lifetime license"
+        }
+      ],
+      "comparison": {
+        "enabled": false,
+        "eyebrow": "Options",
+        "title": "Commercial model",
+        "columns": [],
+        "rows": []
+      },
+      "display": {
+        "showHeader": true,
+        "headerRepeat": "first",
+        "showProposalNumber": true,
+        "showDate": true,
+        "featuresLabel": "Scope and deliverables",
+        "offerLabel": "Commercial offer ",
+        "showFeatures": true,
+        "showBreakdown": true,
+        "showComparison": false,
+        "showMarkdown": true,
+        "showPrices": false,
+        "showPageNumbers": true,
+        "featuresStyle": "list",
+        "footer": {
+          "enabled": true,
+          "text": "Marafe Almarefa Est For Information . مؤسسة مرافق المعرفة للاتصالات وتقنية المعلومات"
+        }
+      },
+      "createdAt": "2026-08-18T06:12:42.660Z",
+      "updatedAt": "2026-08-26T20:06:32.018Z",
+      "enabled": true
+    },
+    {
+      "id": "bbs-bahri-mips2-native",
+      "title": "BBS Platform Proposal - MIPS2 native",
+      "subtitle": "MIPS2 native module · Tailoredtech BBS features",
+      "clientName": "The National Shipping Company of Saudi Arabia",
+      "brandId": "marafei",
+      "format": "formal-features",
+      "currency": "USD",
+      "language": "bilingual",
+      "number": "03-27082026",
+      "numberLabelEn": "Proposal reference",
+      "numberLabelAr": "مرجع العرض",
+      "date": "2026-08-27",
+      "issuer": {
+        "nameEn": "Marafe Almarefa Est For Information",
+        "nameAr": "مؤسسة مرافق المعرفة للاتصالات وتقنية المعلومات",
+        "addressEn": "Riyadh, Kingdom of Saudi Arabia",
+        "addressAr": "الرياض، المملكة العربية السعودية",
+        "vatNumber": "311953722000003",
+        "commercialNumber": "7003792888",
+        "logo": "/assets/uploads/finance/brand-marafei/logo-msma2gww.jpg"
+      },
+      "customer": {
+        "name": "The National Shipping Company of Saudi Arabia",
+        "address": "OneJLT-09-1A, One JLT Building, DMCC-EZ1-1A8, Jumeirah Lakes Towers, Dubai, 6653, UAE\nالإمارات العربية المتحدة",
+        "otherId": "TRN: 100575192800003\nC/O Bahri Ship Management DMCC"
+      },
+      "icon": null,
+      "markdown": "### Overview\n\nMarafe Almarefa Est For Information proposes **Bahri BBS**. The feature set matches the market products, implemented natively within MIPS2 .\n\nThe commercial offer includes Bahri IP rights to the data and application branding. Documentation and codebase handover are included within the MIPS2 delivery.\n\n### Timeline\n\n| Milestone | Target |\n|-----------|--------|\n| Development duration | **4 months** from project kickoff |\n| Dependencies | Subject to Bahri internal approval cycles |\n",
+      "features": [
+        {
+          "id": "f-mips2-native-001",
+          "title": "Native MIPS2 module",
+          "description": "Tailoredtech BBS features implemented inside the Bahri MIPS2 codebase as a native module."
+        },
+        {
+          "id": "f-mips2-ip-001",
+          "title": "Bahri IP on data and branding",
+          "description": "Bahri holds IP rights to operational data and application branding delivered under this offer."
+        },
+        {
+          "id": "f-mips2-handover-001",
+          "title": "Documentation and codebase handover",
+          "description": "Full technical documentation and codebase handover included within the MIPS2 delivery."
+        },
+        {
+          "id": "f-mips2-migration-001",
+          "title": "Data migration included",
+          "description": "Migration of existing BBS records and historical observations as part of delivery."
+        },
+        {
+          "id": "f-mips2-seats-001",
+          "title": "Unlimited seats",
+          "description": "All trained observers and vessel teams can use the platform without per-seat limits."
+        },
+        {
+          "id": "f-mips2-brand-001",
+          "title": "Bahri branding within MIPS2",
+          "description": "Application branding aligned with Bahri standards inside the MIPS2 environment."
+        },
+        {
+          "id": "f-mips2-nonexclusive-001",
+          "title": "Non-exclusive commercial rights",
+          "description": "Marafei retains the right to sell the Tailoredtech BBS service to other companies. "
+        }
+      ],
+      "solutions": [
+        {
+          "id": "sol-mips2-native",
+          "name": "MIPS2 native module",
+          "description": "One time payment. Native delivery inside Bahri MIPS2 codebase.",
+          "lineItems": [
+            {
+              "id": "line-mips2-native-core",
+              "label": "Tailoredtech BBS native MIPS2 module",
+              "amount": 30000,
+              "quantity": 1,
+              "note": "External Tailoredtech BBS product implemented inside MIPS2"
+            },
+            {
+              "id": "line-mips2-migration",
+              "label": "Data migration",
+              "amount": 0,
+              "quantity": 1,
+              "note": "Included"
+            },
+            {
+              "id": "line-mips2-doc",
+              "label": "Documentation handover",
+              "amount": 0,
+              "quantity": 1,
+              "note": "Included"
+            },
+            {
+              "id": "line-mips2-code",
+              "label": "Codebase handover",
+              "amount": 0,
+              "quantity": 1,
+              "note": "Included"
+            }
+          ],
+          "prices": [
+            {
+              "id": "price-mips2-total",
+              "label": "Total for MIPS2 native module",
+              "amount": 30000
+            }
+          ],
+          "discounts": [],
+          "totalMode": "manual",
+          "manualTotal": 30000,
+          "totalLabel": "Total for MIPS2 native module"
+        }
+      ],
+      "comparison": {
+        "enabled": false,
+        "eyebrow": "Options",
+        "title": "Commercial model",
+        "columns": [],
+        "rows": []
+      },
+      "display": {
+        "showHeader": true,
+        "headerRepeat": "first",
+        "showProposalNumber": true,
+        "showDate": true,
+        "featuresLabel": "Scope and deliverables",
+        "offerLabel": "Commercial offer ",
+        "showFeatures": true,
+        "showBreakdown": true,
+        "showComparison": false,
+        "showMarkdown": true,
+        "showPrices": true,
+        "showPageNumbers": true,
+        "featuresStyle": "list",
+        "footer": {
+          "enabled": true,
+          "text": "Marafe Almarefa Est For Information . مؤسسة مرافق المعرفة للاتصالات وتقنية المعلومات"
+        }
+      },
+      "createdAt": "2026-08-26T19:50:00.000Z",
+      "updatedAt": "2026-08-26T20:03:54.209Z",
+      "enabled": true
+    },
+    {
+      "id": "bbs-bahri-option-1-subscription",
+      "title": "BBS Platform Proposal - Annual subscription",
+      "subtitle": "Annual subscription · for Tailoredtech BBS",
+      "clientName": "The National Shipping Company of Saudi Arabia",
+      "brandId": "marafei",
+      "format": "formal-features",
+      "currency": "USD",
+      "language": "bilingual",
+      "number": "01-27082026",
+      "numberLabelEn": "Proposal reference",
+      "numberLabelAr": "مرجع العرض",
+      "date": "2026-08-27",
+      "issuer": {
+        "nameEn": "Marafe Almarefa Est For Information",
+        "nameAr": "مؤسسة مرافق المعرفة للاتصالات وتقنية المعلومات",
+        "addressEn": "Riyadh, Kingdom of Saudi Arabia",
+        "addressAr": "الرياض، المملكة العربية السعودية",
+        "vatNumber": "311953722000003",
+        "commercialNumber": "7003792888",
+        "logo": "/assets/uploads/finance/brand-marafei/logo-msma2gww.jpg"
+      },
+      "customer": {
+        "name": "The National Shipping Company of Saudi Arabia",
+        "address": "OneJLT-09-1A, One JLT Building, DMCC-EZ1-1A8, Jumeirah Lakes Towers, Dubai, 6653, UAE\nالإمارات العربية المتحدة",
+        "otherId": "TRN: 100575192800003\nC/O Bahri Ship Management DMCC"
+      },
+      "icon": null,
+      "markdown": "### Overview\n\nMarafei proposes  **Tailoredtech BBS** platform for Bahri Ship Management, delivered in partnership with TailoredTech.\n\n\n### Timeline\n\n| Milestone | Target date |\n|-----------|------------|\n| Development started | **20 July 2026** |\n| Target timeline | **25 September 2026** |\n",
+      "features": [
+        {
+          "id": "f-mszqmv9q-6t7f",
+          "title": "Subscription to Tailoredtech BBS platform as a tenant Bahri OASIS",
+          "description": "Fully compatible with market standard capabilities including dedicated office , crew  and vessel module with unlimited seats   "
         },
         {
           "id": "f2",
@@ -123,20 +467,35 @@
         },
         {
           "id": "f-mspfxqe5-fo5o",
-          "title": "Compatible Tech Stack with Bahri Infrastructure ",
-          "description": "For future hosting availability on Bahri infrastructure"
+          "title": "Compatible with future deployment ",
+          "description": "Compatible with future deployment on Bahri Infrastructure"
+        },
+        {
+          "id": "f-msy9jwmr-hy9s",
+          "title": "Mobile application ",
+          "description": "Support mobile application for crew members"
+        },
+        {
+          "id": "f-msy9ketm-e8pz",
+          "title": "MIPS2 API integration",
+          "description": "Can be integrated with MIPS2 through an API integration"
+        },
+        {
+          "id": "f-msy9lpr6-3nnr",
+          "title": "Bahri Branded",
+          "description": "Software is Bahri Branded "
         }
       ],
       "solutions": [
         {
           "id": "sol-subscription",
           "name": "Model 1 · Annual subscription",
-          "description": "Marafei-hosted. Not on Bahri infrastructure. Data migration and ongoing maintenance included.",
+          "description": "Tailoredtech BBS. Data migration and ongoing maintenance included.",
           "lineItems": [
             {
               "id": "li-sub-y1",
               "label": "BBS subscription - Year 1",
-              "amount": 14000,
+              "amount": 12000,
               "quantity": 1,
               "note": "First year (includes migration and maintenance)"
             },
@@ -148,33 +507,39 @@
               "note": "Included"
             },
             {
-              "id": "li-maint-sub",
-              "label": "Ongoing software maintenance",
+              "id": "li-msxgl562-hmrn",
+              "label": "Mobile application for crew members",
               "amount": 0,
-              "quantity": 1,
-              "note": "Included in subscription"
+              "quantity": 1
+            },
+            {
+              "id": "li-msy9mkcs-c697",
+              "label": "MIPS2 API integration",
+              "amount": 0,
+              "quantity": 1
+            },
+            {
+              "id": "li-mszqtu0b-t3k0",
+              "label": "Bahri Branding",
+              "amount": 0,
+              "quantity": 1
             }
           ],
           "prices": [
             {
               "id": "p-sub-y1",
               "label": "Year 1 subscription",
-              "amount": 14000
+              "amount": 12000
             },
             {
               "id": "p-sub-y2",
               "label": "Each subsequent year",
-              "amount": 10000
-            },
-            {
-              "id": "price-mspfztlv-0fxs",
-              "label": "(Optional) MIPS2 Native Development - $60,000 less $14,000 development credit = $46,000",
-              "amount": 46000
+              "amount": 8000
             }
           ],
           "discounts": [],
           "totalMode": "manual",
-          "manualTotal": 14000,
+          "manualTotal": 12000,
           "totalLabel": "Total first Year"
         }
       ],
@@ -201,167 +566,11 @@
         "featuresStyle": "list",
         "footer": {
           "enabled": true,
-          "text": "Marafe Almarefa Est · Model 1 Subscription · Bahri Ship Management"
+          "text": "Marafe Almarefa Est For Information . مؤسسة مرافق المعرفة للاتصالات وتقنية المعلومات"
         }
       },
       "createdAt": "2026-08-11T16:00:00.000Z",
-      "updatedAt": "2026-08-12T08:45:33.927Z",
-      "enabled": true
-    },
-    {
-      "id": "bbs-bahri-option-2-onetime",
-      "title": "BBS Platform Proposal - Model 2",
-      "subtitle": "One-time plan · Behavior-Based Safety for Bahri Ship Management",
-      "clientName": "The National Shipping Company of Saudi Arabia",
-      "brandId": "marafei",
-      "format": "formal-features",
-      "currency": "USD",
-      "language": "bilingual",
-      "number": "02-12082026",
-      "numberLabelEn": "Proposal reference",
-      "numberLabelAr": "مرجع العرض",
-      "date": "2026-08-12",
-      "issuer": {
-        "nameEn": "Marafe Almarefa Est For Information",
-        "nameAr": "مؤسسة مرافق المعرفة للاتصالات وتقنية المعلومات",
-        "addressEn": "Riyadh, Kingdom of Saudi Arabia",
-        "addressAr": "الرياض، المملكة العربية السعودية",
-        "vatNumber": "311953722000003",
-        "commercialNumber": "7003792888",
-        "logo": "/assets/uploads/finance/brand-marafei/logo-msma2gww.jpg"
-      },
-      "customer": {
-        "name": "The National Shipping Company of Saudi Arabia",
-        "address": "OneJLT-09-1A, One JLT Building, DMCC-EZ1-1A8, Jumeirah Lakes Towers, Dubai, 6653, UAE\nالإمارات العربية المتحدة",
-        "otherId": "TRN: 100575192800003\nC/O Bahri Ship Management DMCC"
-      },
-      "icon": null,
-      "markdown": "### Overview\n\nMarafei proposes **Bahri Behavior-Based Safety (BBS)** platform for Bahri Ship Management, delivered in partnership with TailoredTech.\n\n**Model 2** is an Inhouse **one-time implementation** on **Bahri infrastructure**, **Bahri branded**, with **data migration** and **ongoing maintenance** for the software. This solution is **not MIPS2 native**.\n\n\n### Stack and MIPS2 \n\nThe technical stack is **compatible** with the MIPS2 / Azure ecosystem .\n\n**API integration** can be provided for any integrations required with MIPS2 to deliver the **same operational capabilities** expected from native MIPS2 features.\n\n\n### SSO independence \n\nThe product will be **finished independently** of whether it is integrated with **MIPS SSO**. Once SSO integration is in place, **no transition or migration** of the product itself is required - the same release date remains valid.\n\n\n### MIPS2 pathway (optional) \n\nFull MIPS2 implementation is quoted separately. An optional **MIPS2 credit** apply if Bahri proceeds with MIPS2 if proceeded with this plan. MIPS2 is **optional** and is **not required** for Model 2 delivery.\n\n\n\n### Timeline \n\n| Milestone | Date |\n|-----------|------|\n| Development started | **20 July 2026** |\n| Target readiness | **15 October 2026** |\n| Regular small batch releases + UAT | Ongoing until go-live |\n| Ready for roll-out | **Before 1 November 2026** |\n\nWork has already started. Before final release there will be **regular small batch releases** for updates and UAT so the product is ready for rolling out before **1 November 2026**. Because delivery is independent of MIPS SSO timing, the product can be released on the **same release date** with or without SSO; SSO can follow without product re-migration.\n",
-      "features": [
-        {
-          "id": "f1",
-          "title": "Deployed on Bahri infrastructure",
-          "description": "One-time implementation hosted on Bahri infrastructure under Bahri control."
-        },
-        {
-          "id": "f2",
-          "title": "Bahri branded",
-          "description": "Full Bahri branding for the in-house BBS experience."
-        },
-        {
-          "id": "f3",
-          "title": "Data migration included",
-          "description": "Migration of existing BBS records and historical observations as part of delivery."
-        },
-        {
-          "id": "f4",
-          "title": "Ongoing maintenance",
-          "description": "Ongoing software maintenance included with the one-time implementation track."
-        },
-        {
-          "id": "f6",
-          "title": "Compatible stack ",
-          "description": "Compatible with the MIPS2 / Azure ecosystem - not identical to the MIPS2 native stack."
-        },
-        {
-          "id": "f7",
-          "title": "API integration for MIPS2 feature parity",
-          "description": "API integration can be provided for required MIPS2 integrations to deliver the same operational capabilities as native MIPS2 features."
-        },
-        {
-          "id": "f8",
-          "title": "Finished independently of MIPS SSO / Hosting",
-          "description": "Product completion does not depend on MIPS SSO / Hosting. Once SSO is added and hosting is hooked up, no product transition or re-migration is required."
-        }
-      ],
-      "solutions": [
-        {
-          "id": "sol-onetime",
-          "name": "Model 2 · One-time plan",
-          "description": "On Bahri infrastructure. Bahri branded. Not MIPS2 native. Data migration and ongoing maintenance included.",
-          "lineItems": [
-            {
-              "id": "li-impl",
-              "label": "BBS one-time plan",
-              "amount": 35000,
-              "quantity": 1
-            },
-            {
-              "id": "li-mig-ot",
-              "label": "Data migration",
-              "amount": 0,
-              "quantity": 1,
-              "note": "Included"
-            },
-            {
-              "id": "li-maint-ot",
-              "label": "Ongoing software maintenance",
-              "amount": 0,
-              "quantity": 1,
-              "note": "Included"
-            },
-            {
-              "id": "li-mspgsr54-htea",
-              "label": "Integration with SSO",
-              "amount": 0,
-              "quantity": 1
-            },
-            {
-              "id": "li-mspgt27x-p54g",
-              "label": "Hosting on Bahri Infrastructure",
-              "amount": 0,
-              "quantity": 1
-            },
-            {
-              "id": "li-mspgtj8k-b5pe",
-              "label": "API API integration with MIPS for any requested features",
-              "amount": 0,
-              "quantity": 1
-            }
-          ],
-          "prices": [
-            {
-              "id": "p-once",
-              "label": "One-time plan",
-              "amount": 35000
-            },
-            {
-              "id": "price-msph2pds-z4m6",
-              "label": "(Optional) MIPS2 Native Development - $60,000 less $25,000 development credit = $35,000",
-              "amount": 35000
-            }
-          ],
-          "discounts": []
-        }
-      ],
-      "comparison": {
-        "enabled": false,
-        "eyebrow": "Options",
-        "title": "Commercial model",
-        "columns": [],
-        "rows": []
-      },
-      "display": {
-        "showHeader": true,
-        "headerRepeat": "first",
-        "showProposalNumber": true,
-        "showDate": true,
-        "featuresLabel": "Scope and deliverables ",
-        "offerLabel": "Commercial offer ",
-        "showFeatures": true,
-        "showBreakdown": true,
-        "showComparison": false,
-        "showMarkdown": true,
-        "showPrices": true,
-        "showPageNumbers": true,
-        "featuresStyle": "list",
-        "footer": {
-          "enabled": true,
-          "text": "Marafe Almarefa Est ·Model 2 One-time · Bahri Ship Management"
-        }
-      },
-      "createdAt": "2026-08-11T16:00:00.000Z",
-      "updatedAt": "2026-08-12T08:46:57.715Z",
+      "updatedAt": "2026-08-26T20:03:39.064Z",
       "enabled": true
     }
   ],
@@ -373,10 +582,10 @@
       "status": "draft",
       "titleEn": "Commercial Quotation",
       "titleAr": "عرض سعر تجاري",
-      "number": "01-10082026",
+      "number": "01-24082026",
       "numberLabelEn": "Quotation No",
       "numberLabelAr": "رقم العرض",
-      "date": "2026-08-10",
+      "date": "2026-08-24",
       "currency": "SAR",
       "currencySymbol": "SAR",
       "vatPercent": 0,
@@ -416,7 +625,7 @@
         "customMoneyLines": []
       },
       "createdAt": "2026-01-21T10:00:00.000Z",
-      "updatedAt": "2026-08-10T05:03:00.719Z",
+      "updatedAt": "2026-08-23T19:47:47.009Z",
       "enabled": true
     }
   ]

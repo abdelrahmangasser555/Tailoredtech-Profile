@@ -19,7 +19,7 @@ import { buildNotesChatContext } from "@/lib/notes-chat/context"
 import {
   consecutiveEditFailures,
   createNotesEditTools,
-  EDIT_MODE_SYSTEM_RULES,
+  buildEditModeSystemRules,
 } from "@/lib/notes-chat/edit-tools"
 import {
   resolveModelForMessages,
@@ -46,6 +46,7 @@ type Body = {
   summary?: string
   activeSectionId?: string
   command?: NotesChatCommandId
+  extraReasoning?: boolean
 }
 
 function lastUserText(messages: UIMessage[]): string {
@@ -98,6 +99,7 @@ export async function POST(req: Request) {
     mode: requestedMode = "ask",
     activeSectionId,
     command: bodyCommand,
+    extraReasoning = false,
   } = body
   if (!noteId || !Array.isArray(body.messages)) {
     return Response.json({ error: "Invalid payload" }, { status: 400 })
@@ -191,7 +193,7 @@ export async function POST(req: Request) {
 
     if (mode === "edit") {
       systemParts.push(`
-${EDIT_MODE_SYSTEM_RULES}
+${buildEditModeSystemRules(extraReasoning)}
 ${command === "summarize-today" ? "- For /summarize-today you MUST call updateNote once with the full rewritten daily summary. Do not only reply in chat." : ""}
 
 Current note outline (ids only — call readNote for live content, never rewrite from this snapshot):
@@ -218,7 +220,7 @@ ${serializeNoteOutline(note)}
         stream: result.stream,
         originalMessages: messages,
         generateMessageId: generateId,
-        sendReasoning: true,
+        sendReasoning: mode === "edit" && extraReasoning,
       }),
     })
   } catch (err) {

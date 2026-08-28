@@ -36,7 +36,18 @@ export function ProposalsList({
     return (id: string) => map.get(id as FinanceBrand["id"]) ?? id
   }, [brands])
 
-  const selectedProposals = proposals.filter((p) => selected.includes(p.id))
+  const proposalById = useMemo(
+    () => new Map(proposals.map((p) => [p.id, p])),
+    [proposals]
+  )
+
+  const selectedProposals = useMemo(
+    () =>
+      selected
+        .map((id) => proposalById.get(id))
+        .filter((p): p is FinanceProposal => p != null),
+    [selected, proposalById]
+  )
 
   function toggle(id: string, checked: boolean) {
     setSelected((prev) =>
@@ -59,7 +70,8 @@ export function ProposalsList({
             Proposals
           </h1>
           <p className="mt-2 max-w-lg text-sm text-foreground/55">
-            One page per proposal. Select several to download as a single PDF.
+            One page per proposal. Select several in the order you want them
+            printed, then download as a single PDF.
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-2">

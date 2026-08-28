@@ -41,6 +41,7 @@ import {
 import {
   NOTES_CHAT_MODE_KEY,
   NOTES_CHAT_OPEN_KEY,
+  NOTES_CHAT_EXTRA_REASONING_KEY,
   sessionStorageKey,
   type NotesChatMode,
   type NotesChatSession,
@@ -317,6 +318,7 @@ export function NoteChatPanel({
   const [input, setInput] = useState("");
   const [model, setModel] = useState(DEFAULT_NOTES_CHAT_MODEL);
   const [mode, setMode] = useState<NotesChatMode>("ask");
+  const [extraReasoning, setExtraReasoning] = useState(false);
   const [referenceIds, setReferenceIds] = useState<string[]>([]);
   const [summary, setSummary] = useState("");
   const [hydrated, setHydrated] = useState(false);
@@ -341,12 +343,13 @@ export function NoteChatPanel({
           pathIds,
           model,
           mode,
+          extraReasoning: mode === "edit" ? extraReasoning : false,
           referenceIds,
           summary,
           activeSectionId,
         }),
       }),
-    [note.id, pathIds, model, mode, referenceIds, summary, activeSectionId],
+    [note.id, pathIds, model, mode, extraReasoning, referenceIds, summary, activeSectionId],
   );
 
   const persistSession = useCallback(
@@ -373,6 +376,7 @@ export function NoteChatPanel({
         summary,
         model,
         mode,
+        extraReasoning,
         updatedAt: new Date().toISOString(),
       };
       saveLocalSession(session);
@@ -388,7 +392,7 @@ export function NoteChatPanel({
         }
       }
     },
-    [note.id, summary, model, mode, localEdit],
+    [note.id, summary, model, mode, extraReasoning, localEdit],
   );
 
   const {
@@ -437,6 +441,11 @@ export function NoteChatPanel({
       NOTES_CHAT_MODE_KEY,
     ) as NotesChatMode;
     if (storedMode === "ask" || storedMode === "edit") setMode(storedMode);
+
+    const storedExtraReasoning = localStorage.getItem(
+      NOTES_CHAT_EXTRA_REASONING_KEY,
+    );
+    if (storedExtraReasoning === "true") setExtraReasoning(true);
   }, []);
 
   useEffect(() => {
@@ -471,9 +480,11 @@ export function NoteChatPanel({
         setSummary(session.summary ?? "");
         if (session.model) setModel(resolveNotesChatModel(session.model));
         if (session.mode) setMode(session.mode);
+        setExtraReasoning(Boolean(session.extraReasoning));
       } else {
         setMessages([]);
         setSummary("");
+        setExtraReasoning(false);
       }
 
       setHydrated(true);
@@ -526,6 +537,11 @@ export function NoteChatPanel({
   function handleModeChange(next: NotesChatMode) {
     setMode(next);
     localStorage.setItem(NOTES_CHAT_MODE_KEY, next);
+  }
+
+  function handleExtraReasoningChange(next: boolean) {
+    setExtraReasoning(next);
+    localStorage.setItem(NOTES_CHAT_EXTRA_REASONING_KEY, String(next));
   }
 
   async function addPendingImages(files: File[]) {
@@ -780,9 +796,25 @@ export function NoteChatPanel({
           </div>
 
           {mode === "edit" ? (
-            <p className="font-mono text-[9px] tracking-wide text-white/35">
-              Edit mode writes to the open note with no approval step.
-            </p>
+            <div className="flex flex-col gap-2">
+              <p className="font-mono text-[9px] tracking-wide text-white/35">
+                Edit mode writes to the open note with no approval step.
+              </p>
+              <label className="flex cursor-pointer items-center gap-2 font-mono text-[9px] tracking-wide text-white/40">
+                <input
+                  type="checkbox"
+                  checked={extraReasoning}
+                  onChange={(e) =>
+                    handleExtraReasoningChange(e.target.checked)
+                  }
+                  className="size-3 accent-accent"
+                />
+                <span className="inline-flex items-center gap-1">
+                  <Brain className="size-3 text-white/35" />
+                  Extra reasoning
+                </span>
+              </label>
+            </div>
           ) : null}
         </div>
 
