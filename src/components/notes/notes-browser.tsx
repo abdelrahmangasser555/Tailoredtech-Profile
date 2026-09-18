@@ -13,16 +13,23 @@ import {
   GripVertical,
   Pencil,
   Trash2,
+  Check,
 } from "lucide-react"
 import type { NotesTreeNode } from "@/lib/notes-types"
-import type { NotesBreadcrumb } from "@/lib/notes"
+import type { NotesBreadcrumb, NotesFolderListingProgress } from "@/lib/notes"
 import { formatNotesDate, getParentPath } from "@/lib/notes"
 import { isLocalEditEnabled } from "@/lib/local-edit"
 import {
-  GRAD_ROADMAP_ROOT_ID,
-  isGradRoadmapPath,
+  isManagedNotesPath,
+  isManagedNotesRootId,
 } from "@/lib/notes-managed"
 import { NotesMoveDialog } from "@/components/notes/notes-move-dialog"
+import {
+  NotesEntryProgress,
+  NotesFolderProgress,
+  NotesRootContinue,
+  useCompletedSet,
+} from "@/components/notes/notes-folder-progress"
 import { TrackNoteBrowser } from "@/components/analytics/track-note-browser"
 import { cn } from "@/lib/utils"
 import { toast } from "sonner"
@@ -32,6 +39,7 @@ type NotesBrowserProps = {
   breadcrumbs: NotesBreadcrumb[]
   entries: NotesTreeNode[]
   folderName: string | null
+  listingProgress: NotesFolderListingProgress
 }
 
 type ContextMenuState = {
@@ -45,12 +53,13 @@ export function NotesBrowser({
   breadcrumbs,
   entries,
   folderName,
+  listingProgress,
 }: NotesBrowserProps) {
   const router = useRouter()
   const localEdit = isLocalEditEnabled()
-  const canEditHere = localEdit && !isGradRoadmapPath(pathIds)
+  const canEditHere = localEdit && !isManagedNotesPath(pathIds)
   const canReorderNode = (nodeId: string) =>
-    canEditHere && !(pathIds.length === 0 && nodeId === GRAD_ROADMAP_ROOT_ID)
+    canEditHere && !(pathIds.length === 0 && isManagedNotesRootId(nodeId))
   const [items, setItems] = useState(entries)
   const [menu, setMenu] = useState<ContextMenuState | null>(null)
   const [moveTarget, setMoveTarget] = useState<NotesTreeNode | null>(null)
@@ -283,6 +292,8 @@ export function NotesBrowser({
   }
 
   const parentHref = getParentPath(pathIds)
+  const fileIds = items.filter((n) => n.type === "file").map((n) => n.id)
+  const completed = useCompletedSet(fileIds)
 
   return (
     <div className="min-h-svh bg-[#f7f7f2] text-foreground">
@@ -327,15 +338,30 @@ export function NotesBrowser({
                 : "Browse folders and open notes."}
             </p>
           </div>
-          {pathIds.length > 0 ? (
-            <Link
-              href={parentHref}
-              className="font-mono text-[10px] tracking-[0.16em] text-foreground/45 uppercase transition hover:text-foreground"
-            >
-              ↑ Parent
-            </Link>
-          ) : null}
+          <div className="flex flex-wrap items-center gap-3">
+            {pathIds.length === 0 ? (
+              <NotesRootContinue
+                lessonsByRoot={listingProgress.entryLessons}
+              />
+            ) : null}
+            {pathIds.length > 0 ? (
+              <Link
+                href={parentHref}
+                className="font-mono text-[10px] tracking-[0.16em] text-foreground/45 uppercase transition hover:text-foreground"
+              >
+                ↑ Parent
+              </Link>
+            ) : null}
+          </div>
         </div>
+
+        <NotesFolderProgress
+          trackProgress={listingProgress.trackProgress}
+          progressRootId={listingProgress.progressRootId}
+          currentLessons={listingProgress.currentLessons}
+          starters={listingProgress.starters}
+          folderName={folderName}
+        />
 
         <div
           className="mt-10"
@@ -355,7 +381,7 @@ export function NotesBrowser({
           {items.length === 0 ? (
             <p className="mt-10 text-sm text-muted-foreground">
               Empty folder
-              {canEditHere ? " — right-click to add something." : "."}
+              {canEditHere ? ". Right-click to add something." : "."}
             </p>
           ) : (
             <ul className="divide-y divide-foreground/8">
@@ -418,6 +444,8 @@ export function NotesBrowser({
                         <span className="flex min-w-0 items-center gap-3 transition group-hover:opacity-80">
                           {node.type === "folder" ? (
                             <Folder className="size-4 shrink-0 text-foreground/45" />
+                          ) : completed.has(node.id) ? (
+                            <Check className="size-4 shrink-0 text-foreground/70" />
                           ) : (
                             <FileText className="size-4 shrink-0 text-foreground/45" />
                           )}
@@ -431,9 +459,18 @@ export function NotesBrowser({
                         <span className="text-right font-mono text-[11px] text-foreground/40">
                           {formatNotesDate(node.updatedAt)}
                         </span>
-                        <span className="hidden text-right font-mono text-[10px] tracking-[0.14em] text-foreground/35 uppercase md:block">
-                          {node.type}
-                        </span>
+                        {node.type === "folder" &&
+                        listingProgress.entryLessons[node.id]?.length ? (
+                          <NotesEntryProgress
+                            lessonIds={listingProgress.entryLessons[node.id]!.map(
+                              (l) => l.id
+                            )}
+                          />
+                        ) : (
+                          <span className="hidden text-right font-mono text-[10px] tracking-[0.14em] text-foreground/35 uppercase md:block">
+                            {completed.has(node.id) ? "done" : node.type}
+                          </span>
+                        )}
                       </Link>
                     </div>
                   </li>

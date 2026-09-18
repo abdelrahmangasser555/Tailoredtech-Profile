@@ -13,6 +13,8 @@ type NoteMermaidBlockProps = {
   diagram: string
   title?: string
   caption?: string
+  nodeExplains?: Record<string, string>
+  onExplain?: (id: string) => void
 }
 
 export function NoteMermaidBlock({
@@ -22,6 +24,8 @@ export function NoteMermaidBlock({
   diagram,
   title,
   caption,
+  nodeExplains,
+  onExplain,
 }: NoteMermaidBlockProps) {
   const localEdit = isLocalEditEnabled()
 
@@ -83,6 +87,9 @@ export function NoteMermaidBlock({
         chart={diagram}
         title={title}
         caption={caption}
+        compact
+        nodeExplains={nodeExplains}
+        onExplain={onExplain}
         onReplaceWithText={
           localEdit && sectionId
             ? async (err) => {

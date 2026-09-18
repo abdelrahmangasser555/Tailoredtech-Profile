@@ -7,6 +7,26 @@ export type NotesTreeNode =
   | NotesFolderNode
   | NotesFileRef
 
+export type NotesStarter = {
+  id: string
+  label: string
+  href: string
+  description?: string
+}
+
+export type NotesFolderChat = {
+  /** Extra system prompt injected when ask-mode chat is inside this folder */
+  extraPrompt?: string
+  /** What this folder is trying to teach */
+  objective?: string
+  /** How to talk to the learner */
+  talkStyle?: string
+  /** What they should already know */
+  prerequisites?: string
+  /** Who the learner is */
+  learner?: string
+}
+
 export type NotesFolderNode = {
   type: "folder"
   id: string
@@ -14,6 +34,12 @@ export type NotesFolderNode = {
   createdAt: string
   updatedAt: string
   children: NotesTreeNode[]
+  /** Show continue + completion for this subtree (client localStorage) */
+  trackProgress?: boolean
+  /** Extra chatbot context while the open note is inside this folder */
+  chat?: NotesFolderChat
+  /** Starter zip downloads offered on the folder page */
+  starters?: NotesStarter[]
 }
 
 /** Reference in the tree — full content lives in `notes` map by id */
@@ -29,7 +55,10 @@ export type NoteExplainTerm = {
   id: string
   label: string
   title: string
+  /** Markdown body shown in the side sheet */
   body: string
+  /** Optional extra blocks in the sheet (video, code, callout, mermaid) */
+  blocks?: NoteBlock[]
 }
 
 export type NoteQuestionnaireOption = {
@@ -62,6 +91,8 @@ export type NoteStackItem = {
   /** simple-icons slug, e.g. "siReact", "siTypescript" */
   icon: string
   label: string
+  /** Opens the note explain sheet when the icon is clicked */
+  explainId?: string
 }
 
 /** One box in a stack diagram (e.g. Frontend, Backend) */
@@ -69,6 +100,8 @@ export type NoteStackLayer = {
   id: string
   label: string
   items: NoteStackItem[]
+  /** Opens the note explain sheet when the layer title is clicked */
+  explainId?: string
 }
 
 /** Connector between layers — drawn like mermaid edges */
@@ -86,6 +119,9 @@ export type NoteBlock =
       url: string
       title?: string
       caption?: string
+      /** Optional clip window (also parsed from t= / start= / end= in url) */
+      startSeconds?: number
+      endSeconds?: number
     }
   | {
       type: "stack"
@@ -106,6 +142,11 @@ export type NoteBlock =
       title?: string
       caption?: string
       diagram: string
+      /**
+       * Map mermaid node ids (the A in `A[Label]`) to explain term ids.
+       * Clicking that box opens the side sheet.
+       */
+      nodeExplains?: Record<string, string>
     }
   | {
       type: "illustration"
@@ -138,6 +179,8 @@ export type NoteBlock =
       tone?: "info" | "tip" | "warn"
       title?: string
       body: string
+      /** Opens the note explain sheet for more detail */
+      explainId?: string
     }
   | {
       type: "gallery"
@@ -180,6 +223,13 @@ export type NoteBlock =
       rowHeader?: string
       columns: NoteComparisonColumn[]
       rows: NoteComparisonRow[]
+    }
+  | {
+      type: "download"
+      id: string
+      title?: string
+      caption?: string
+      files: NotesStarter[]
     }
 
 export type NoteComparisonColumn = {
@@ -253,6 +303,8 @@ export type NoteDocument = {
   /** Inline explain terms — clickable labels open a side sheet */
   explains?: NoteExplainTerm[]
   questionnaires?: NoteQuestionnaire[]
+  /** Starter zip downloads offered on this note */
+  starters?: NotesStarter[]
   sections: NoteSection[]
 }
 

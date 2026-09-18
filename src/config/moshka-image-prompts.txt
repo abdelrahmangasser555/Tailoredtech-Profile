@@ -1,0 +1,183 @@
+Moshka notes: images for Abdelrahman to generate.
+Style: sharp, maritime/software teaching art. Readable labels, short words only. No purple AI slop. No joke mascots.
+Light notes browser UI must not use lime; images inside the dark note reader may use accent on dark panels only.
+
+Drop every file into: public/notes/moshka/images/
+Wire-up: lessons use figure() blocks; filenames below must match exactly (case sensitive).
+
+COUNT: 42 images
+
+---
+
+filename: moshka-welcome.png
+prompt: A 19-year-old at a desk, two monitors. Left: small cafe website. Right: dense navy ops table. Small ship model. Black, cream, sharp corners. No paragraphs of readable text.
+used in: moshka-start-here
+
+filename: moshka-page-loads.png
+prompt: Simple left-to-right diagram as illustration (not mermaid): a box index.html with two arrows to styles.css and app.js, then a third arrow to a browser window labeled Chrome. Cream background, black ink, compact, fits a narrow column.
+used in: moshka-cafe-files (replaces huge mermaid)
+
+filename: moshka-unzip.png
+prompt: Zip opening into three files: index.html, styles.css, app.js. Wood-adjacent maritime desk. Sharp.
+used in: moshka-cafe-unzip, moshka-harbor-unzip, moshka-score-unzip
+
+filename: moshka-three-files.png
+prompt: Three stacked sheets labeled HTML, CSS, JS. Arrow from HTML to the other two. Cream, black ink.
+used in: moshka-cafe-files
+
+filename: moshka-html-bones.png
+prompt: Wireframe page: header, list, button boxes. Black on cream. Instructional.
+used in: moshka-cafe-html
+
+filename: moshka-css-paint.png
+prompt: Wireframe cafe left, painted version right. Bucket labeled CSS. Sharp.
+used in: moshka-cafe-css
+
+filename: moshka-js-click.png
+prompt: Finger on Add button, total changing 0 to 18. Dark cafe counter. Sharp pixels.
+used in: moshka-cafe-js
+
+filename: moshka-harbor-paper.png
+prompt: Logbook page as browser window. Cream paper, dashed divider. Warm.
+used in: moshka-harbor-css
+
+filename: moshka-localstorage.png
+prompt: Browser window and a drawer labeled this computer only. Refresh icon. Notes stay in drawer.
+used in: moshka-harbor-persist
+
+filename: moshka-score-big.png
+prompt: Two huge pixel numbers on dark scoreboard. High contrast.
+used in: moshka-score-css
+
+filename: moshka-port-watch-dense.png
+prompt: Dense departure board, vessel names, navy grey, no hero whitespace.
+used in: moshka-port-layout, moshka-ux-density
+
+filename: moshka-table-columns.png
+prompt: Table with thead and tbody, one row highlighted. Ops screen style.
+used in: moshka-port-table
+
+filename: moshka-copy-row.png
+prompt: Same HTML table row duplicated three times with different vessel names. Shows copy-paste pain.
+used in: moshka-port-components
+
+filename: moshka-bare-icon.png
+prompt: Sharp ship glyph vs ship in rounded neon circle with X over neon.
+used in: moshka-port-icons
+
+filename: moshka-vite-react-start.png
+prompt: Terminal showing npm create vite, beside a browser with React Harbor title. Dark editor, sharp. Labels: Vite, React, TypeScript.
+used in: moshka-react-learn
+
+filename: moshka-vite-template-pick.png
+prompt: Two-step UI mock: Select framework React, Select variant TypeScript. Monospace labels, cream card on dark.
+used in: moshka-react-template
+
+filename: moshka-vite-folder-tour.png
+prompt: Folder tree illustration: index.html, src/main.tsx, src/App.tsx, src/App.css, public/. Arrows showing main loads App. Compact, readable.
+used in: moshka-react-tour
+
+filename: moshka-react-vessel-row.png
+prompt: One React component box VesselRow feeding two table rows with different names. Instructional, not cartoon.
+used in: moshka-react-component
+
+filename: moshka-react-use-state.png
+prompt: Search input above a table, one row greyed out filtered away. Label useState. Sharp dark UI.
+used in: moshka-react-state
+
+filename: moshka-client-hat.png
+prompt: Same dashboard three ways: crew, office, admin. Maritime enterprise.
+used in: moshka-ux-roles
+
+filename: moshka-drawer-not-modal.png
+prompt: Side drawer, table still visible. No modal balloon.
+used in: moshka-ux-drawers
+
+filename: moshka-app-router-folders.png
+prompt: Folder signs as URLs: /logs, /about, /api/health. Pixel city walk.
+used in: moshka-next-app-router
+
+filename: moshka-server-client.png
+prompt: Server box with database and key, client box with click and use client tag. Dark sharp.
+used in: moshka-next-server-client
+
+filename: moshka-query-vs-zustand.png
+prompt: Radio labeled server state (Query) vs sticky note on wheel labeled UI state (Zustand).
+used in: moshka-next-query, moshka-next-zustand
+
+filename: moshka-cache-stale.png
+prompt: Cache fridge serving old sandwich while user asks for live logs.
+used in: moshka-next-cache
+
+filename: moshka-db-disk.png
+prompt: Browser forgot logs, steel cabinet database still has them.
+used in: moshka-api-db-idea
+
+filename: moshka-mongo-document.png
+prompt: JSON card in drawer labeled logs. Fields text, tenantId, createdAt.
+used in: moshka-api-mongo
+
+filename: moshka-layers.png
+prompt: Four plates: app, service, repo, db. Arrow from route to Mongo. Navy.
+used in: moshka-repo-learn, moshka-bbs-folders
+
+filename: moshka-sql-grid.png
+prompt: Table logs with columns id, text, tenant_id, created_at. One row highlighted.
+used in: moshka-sql-what
+
+filename: moshka-postgres-box.png
+prompt: Postgres cylinder wired to Next folder, cable DATABASE_URL.
+used in: moshka-sql-connect
+
+filename: moshka-supabase-stack.png
+prompt: Postgres with Auth, Dashboard, RLS modules. Label Supabase.
+used in: moshka-sb-what
+
+filename: moshka-rls-wall.png
+prompt: RLS wall on logs table. Anon key bounces, service key through server door.
+used in: moshka-sb-rls
+
+filename: moshka-auth-doors.png
+prompt: Four sign-in doors plus tenant wall between buildings.
+used in: moshka-auth-ways, moshka-auth-tenant
+
+filename: moshka-cursor-install.png
+prompt: Editor with agent panel right. Lime accent only on dark panel.
+used in: moshka-cursor-install
+
+filename: moshka-four-line-prompt.png
+prompt: Long prompt in bin vs four-line note on monitor with file path and goal.
+used in: moshka-cursor-prompt
+
+filename: moshka-you-steer.png
+prompt: Hands on wheel-keyboard. Autopilot typing but human watching. Dark, calm.
+used in: moshka-cursor-learn
+
+filename: moshka-ai-two-boxes.png
+prompt: Chat bubble on Vercel mark vs LangGraph worker on AWS container.
+used in: moshka-ai-learn, moshka-ai-hosting
+
+filename: moshka-playwright-robot.png
+prompt: Robot clicks browser, red flag if heading missing.
+used in: moshka-test-playwright
+
+filename: moshka-aws-map.png
+prompt: Labeled map S3, CloudFront, Lambda, ECR, CloudWatch. Short labels.
+used in: moshka-ops-aws
+
+filename: moshka-azure-twins.png
+prompt: AWS and Azure warehouses as twins, Blob vs S3 signs.
+used in: moshka-ops-azure
+
+filename: moshka-good-question.png
+prompt: Bad message it does not work vs good message with file path and error code.
+used in: moshka-agency-delegate
+
+filename: moshka-bbs-cutaway.png
+prompt: Ship cutaway with four rooms labeled features, repo, db, app. Same as layers but BBS flavor.
+used in: moshka-bbs-learn
+
+SKIP (do not generate unless you want extras):
+- moshka-three-flavors.png
+- moshka-score-sofa.png
+- moshka-zod-bouncer.png

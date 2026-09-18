@@ -7,12 +7,13 @@ import {
   DialogContent,
   DialogTitle,
 } from "@/components/ui/dialog"
+import { cn } from "@/lib/utils"
 import { refreshSmoothScroll } from "@/components/motion/smooth-scroll"
 import {
   cleanupMermaidOrphans,
   removeMermaidTempNodes,
 } from "@/components/sections/mermaid-cleanup"
-import { cn } from "@/lib/utils"
+import { bindMermaidNodeExplains } from "@/components/sections/mermaid-node-explains"
 
 export { cleanupMermaidOrphans } from "@/components/sections/mermaid-cleanup"
 
@@ -88,6 +89,7 @@ type RenderOpts = {
   uid: string
   vertical: boolean
   expanded: boolean
+  compact: boolean
 }
 
 /** Mermaid is not safe for overlapping render() calls — serialize them. */
@@ -109,6 +111,7 @@ async function renderMermaidInto({
   uid,
   vertical,
   expanded,
+  compact,
 }: RenderOpts) {
   const accent = readCssVar(
     host,
@@ -117,7 +120,17 @@ async function renderMermaidInto({
   )
   const line = readCssVar(host, "--diagram-line", accent)
   const darkFg = readCssVar(host, "--section-dark-fg", "#F5F5F0")
-  const fontSize = expanded ? (vertical ? "15px" : "16px") : vertical ? "12px" : "13px"
+  const fontSize = expanded
+    ? vertical
+      ? "15px"
+      : "16px"
+    : compact
+      ? vertical
+        ? "10px"
+        : "11px"
+      : vertical
+        ? "12px"
+        : "13px"
   const mermaidTheme = buildMermaidTheme(host, fontSize)
   const source = chart.trim()
   if (!source) return
@@ -131,15 +144,45 @@ async function renderMermaidInto({
       suppressErrorRendering: true,
       flowchart: {
         curve: "basis",
-        padding: expanded ? (vertical ? 16 : 20) : vertical ? 10 : 14,
+        padding: expanded
+          ? vertical
+            ? 16
+            : 20
+          : compact
+            ? vertical
+              ? 6
+              : 8
+            : vertical
+              ? 10
+              : 14,
         htmlLabels: true,
-        nodeSpacing: expanded ? (vertical ? 40 : 48) : vertical ? 26 : 34,
-        rankSpacing: expanded ? (vertical ? 44 : 52) : vertical ? 30 : 40,
+        nodeSpacing: expanded
+          ? vertical
+            ? 40
+            : 48
+          : compact
+            ? vertical
+              ? 18
+              : 22
+            : vertical
+              ? 26
+              : 34,
+        rankSpacing: expanded
+          ? vertical
+            ? 44
+            : 52
+          : compact
+            ? vertical
+              ? 22
+              : 26
+            : vertical
+              ? 30
+              : 40,
         useMaxWidth: true,
       },
       sequence: {
-        actorMargin: expanded ? 64 : 48,
-        messageMargin: expanded ? 48 : 36,
+        actorMargin: expanded ? 64 : compact ? 36 : 48,
+        messageMargin: expanded ? 48 : compact ? 28 : 36,
         boxMargin: 10,
         bottomMarginAdj: expanded ? 48 : 40,
         mirrorActors: false,
@@ -180,11 +223,19 @@ async function renderMermaidInto({
     el.style.overflow = "visible"
     el.style.maxWidth = expanded
       ? "100%"
-      : vertical
-        ? "28rem"
-        : "100%"
+      : compact
+        ? vertical
+          ? "22rem"
+          : "26rem"
+        : vertical
+          ? "28rem"
+          : "100%"
     if (!expanded && vertical) {
-      el.style.maxHeight = "min(380px, 48vh)"
+      el.style.maxHeight = compact
+        ? "min(220px, 32vh)"
+        : "min(380px, 48vh)"
+    } else if (!expanded && compact) {
+      el.style.maxHeight = "min(160px, 24vh)"
     } else {
       el.style.maxHeight = expanded ? "min(78vh, 900px)" : ""
     }
@@ -231,6 +282,11 @@ type BrandedMermaidProps = {
   brandClass?: string
   /** Optional: replace broken diagram with markdown via local-edit */
   onReplaceWithText?: (errorMessage: string) => Promise<void> | void
+  /** Map mermaid node ids to explain-sheet ids */
+  nodeExplains?: Record<string, string>
+  onExplain?: (id: string) => void
+  /** Smaller inline diagram (notes reader) */
+  compact?: boolean
 }
 
 export function BrandedMermaid({
@@ -240,6 +296,9 @@ export function BrandedMermaid({
   caption,
   brandClass,
   onReplaceWithText,
+  nodeExplains,
+  onExplain,
+  compact = false,
 }: BrandedMermaidProps) {
   const uid = useId().replace(/:/g, "")
   const shellRef = useRef<HTMLDivElement>(null)
@@ -250,7 +309,13 @@ export function BrandedMermaid({
   const [ready, setReady] = useState(false)
   const [replacing, setReplacing] = useState(false)
   const vertical = useMemo(() => isVerticalFlowchart(chart), [chart])
-  const inlineMinH = vertical ? "min-h-[min(380px,48vh)]" : "min-h-28"
+  const inlineMinH = compact
+    ? vertical
+      ? "min-h-[min(200px,28vh)]"
+      : "min-h-[7rem]"
+    : vertical
+      ? "min-h-[min(380px,48vh)]"
+      : "min-h-28"
 
   const paint = useCallback(
     async (
@@ -268,10 +333,14 @@ export function BrandedMermaid({
           uid,
           vertical,
           expanded: isExpanded,
+          compact: compact && !isExpanded,
         })
         if (isCancelled?.() || !target.isConnected) return
         setError(null)
         setReady(true)
+        if (nodeExplains && onExplain) {
+          bindMermaidNodeExplains(target, nodeExplains, onExplain)
+        }
         refreshSmoothScroll()
       } catch (err) {
         if (isCancelled?.() || !target.isConnected) return
@@ -283,7 +352,7 @@ export function BrandedMermaid({
         cleanupMermaidOrphans()
       }
     },
-    [chart, uid, vertical]
+    [chart, uid, vertical, compact, nodeExplains, onExplain]
   )
 
   useEffect(() => {
@@ -341,7 +410,13 @@ export function BrandedMermaid({
   const heading = title?.trim() || "Diagram"
 
   return (
-    <figure className={cn("mt-10 [contain:layout]", className)}>
+    <figure
+      className={cn(
+        "mt-10 [contain:layout]",
+        compact && "mt-6 max-w-2xl",
+        className
+      )}
+    >
       <div
         ref={shellRef}
         className={cn(
@@ -398,16 +473,27 @@ export function BrandedMermaid({
               "mermaid-brand relative flex items-center justify-center overflow-hidden",
               inlineMinH,
               "[&_svg]:mx-auto",
-              vertical && "[&_svg]:max-h-[min(380px,48vh)] [&_svg]:max-w-md",
-              !ready && "animate-pulse bg-white/[0.03]"
+              compact &&
+                "[&_svg]:max-h-[min(160px,24vh)] [&_svg]:max-w-[26rem]",
+              !compact &&
+                vertical &&
+                "[&_svg]:max-h-[min(380px,48vh)] [&_svg]:max-w-md",
+              !ready && "animate-pulse bg-white/[0.03]",
+              nodeExplains &&
+                "[&_.mermaid-explain-node]:cursor-pointer [&_.mermaid-explain-node:hover_rect]:stroke-[var(--accent,#D4FF00)]"
             )}
           />
         )}
       </div>
 
-      {caption && (
+      {(caption || (nodeExplains && onExplain)) && (
         <figcaption className="mt-3 font-mono text-[11px] tracking-wide text-white/35">
           {caption}
+          {nodeExplains && onExplain ? (
+            <span className={caption ? " block mt-1" : ""}>
+              Click a box for more detail.
+            </span>
+          ) : null}
         </figcaption>
       )}
 
@@ -439,7 +525,7 @@ export function BrandedMermaid({
           >
             <div
               ref={expandedRef}
-              className="mermaid-brand flex min-h-full items-center justify-center [&_svg]:mx-auto [&_svg]:max-h-[min(78vh,860px)]"
+              className="mermaid-brand flex min-h-full items-center justify-center [&_svg]:mx-auto [&_svg]:max-h-[min(78vh,860px)] [&_.mermaid-explain-node]:cursor-pointer"
             />
           </div>
           {caption && (

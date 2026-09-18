@@ -18,6 +18,9 @@ const LANG_ALIASES: Record<string, BundledLanguage> = {
   jsx: "jsx",
   sh: "bash",
   shell: "bash",
+  zsh: "bash",
+  terminal: "bash",
+  console: "bash",
   yml: "yaml",
   md: "markdown",
   text: "plaintext",
@@ -25,9 +28,37 @@ const LANG_ALIASES: Record<string, BundledLanguage> = {
   plaintext: "plaintext",
 }
 
+const TERMINAL_LANGS = new Set([
+  "bash",
+  "sh",
+  "shell",
+  "zsh",
+  "terminal",
+  "console",
+])
+
+function parseCodeMeta(raw: string): { lang: string; filename?: string } {
+  const label = raw.replace(/^language-/, "").trim() || "plaintext"
+  const colon = label.indexOf(":")
+  if (colon > 0) {
+    const lang = label.slice(0, colon)
+    const filename = label.slice(colon + 1).trim()
+    if (filename.includes("/") || filename.includes(".")) {
+      return { lang, filename }
+    }
+  }
+  const space = label.indexOf(" ")
+  if (space > 0) {
+    return {
+      lang: label.slice(0, space),
+      filename: label.slice(space + 1).replace(/^filepath=/, "").trim(),
+    }
+  }
+  return { lang: label }
+}
+
 function resolveShikiLang(raw: string): BundledLanguage {
-  const label = raw.replace(/^language-/, "").toLowerCase() || "plaintext"
-  const aliased = LANG_ALIASES[label] ?? label
+  const aliased = LANG_ALIASES[raw.toLowerCase()] ?? raw.toLowerCase()
   if (aliased in bundledLanguages) return aliased
   return "plaintext"
 }
@@ -42,8 +73,10 @@ export function NoteCodeBlock({
 }: NoteCodeBlockProps) {
   const [html, setHtml] = useState<string | null>(null)
   const [copied, setCopied] = useState(false)
-  const shikiLang = resolveShikiLang(language)
-  const displayLang = language.replace(/^language-/, "") || "text"
+  const meta = parseCodeMeta(language)
+  const shikiLang = resolveShikiLang(meta.lang)
+  const isTerminal = TERMINAL_LANGS.has(meta.lang.toLowerCase())
+  const displayLang = isTerminal ? "terminal" : meta.lang || "text"
 
   useEffect(() => {
     let cancelled = false
@@ -82,10 +115,21 @@ export function NoteCodeBlock({
         className
       )}
     >
-      <div className="flex items-center justify-between border-b border-white/10 bg-white/3 px-3 py-1.5">
-        <span className="font-mono text-[10px] tracking-[0.16em] text-white/35 uppercase">
-          {displayLang}
-        </span>
+      <div className="flex items-center justify-between gap-3 border-b border-white/10 bg-white/3 px-3 py-1.5">
+        <div className="flex min-w-0 items-center gap-2">
+          <span className="font-mono text-[10px] tracking-[0.16em] text-white/35 uppercase">
+            {displayLang}
+          </span>
+          {isTerminal ? (
+            <span className="truncate font-mono text-[10px] tracking-[0.08em] text-white/55">
+              Run this in your terminal
+            </span>
+          ) : meta.filename ? (
+            <span className="truncate font-mono text-[10px] text-white/45">
+              {meta.filename}
+            </span>
+          ) : null}
+        </div>
         <button
           type="button"
           onClick={copy}

@@ -13,6 +13,7 @@ import { NotePlayground } from "@/components/notes/blocks/note-playground"
 import { NoteTasks } from "@/components/notes/blocks/note-tasks"
 import { NoteComparison } from "@/components/notes/blocks/note-comparison"
 import { NoteMermaidBlock } from "@/components/notes/blocks/note-mermaid-block"
+import { NoteDownload } from "@/components/notes/blocks/note-download"
 import { NoteIllustration } from "@/components/notes/illustrations/registry"
 
 type NoteBlockRendererProps = {
@@ -45,6 +46,8 @@ export function NoteBlockRenderer({
           url={block.url}
           title={block.title}
           caption={block.caption}
+          startSeconds={block.startSeconds}
+          endSeconds={block.endSeconds}
           noteId={noteId}
           sectionId={sectionId}
           blockId={block.id}
@@ -59,6 +62,7 @@ export function NoteBlockRenderer({
           layers={block.layers}
           edges={block.edges}
           direction={block.direction}
+          onExplain={onExplain}
         />
       )
     case "mermaid":
@@ -70,6 +74,8 @@ export function NoteBlockRenderer({
           diagram={block.diagram}
           title={block.title}
           caption={block.caption}
+          nodeExplains={block.nodeExplains}
+          onExplain={onExplain}
         />
       )
     case "illustration":
@@ -99,7 +105,13 @@ export function NoteBlockRenderer({
       )
     case "callout":
       return (
-        <NoteCallout tone={block.tone} title={block.title} body={block.body} />
+        <NoteCallout
+          tone={block.tone}
+          title={block.title}
+          body={block.body}
+          explainId={block.explainId}
+          onExplain={onExplain}
+        />
       )
     case "gallery":
       return (
@@ -145,6 +157,15 @@ export function NoteBlockRenderer({
           rowHeader={block.rowHeader}
           columns={block.columns}
           rows={block.rows}
+        />
+      )
+    case "download":
+      return (
+        <NoteDownload
+          title={block.title}
+          caption={block.caption}
+          files={block.files}
+          tone="dark"
         />
       )
     default:

@@ -1,9 +1,12 @@
 import type { Metadata } from "next"
 import { notFound, redirect } from "next/navigation"
 import {
+  collectStartersForPath,
   findNodePath,
+  getFolderListingProgress,
   getNoteById,
   listMentionItems,
+  listProgressRootIds,
   notes,
   resolveChatScopeRootId,
   resolveNotesPath,
@@ -94,6 +97,8 @@ export default async function NotesPathPage({ params }: PageProps) {
         breadcrumbs={resolved.breadcrumbs}
         pathIds={resolved.pathIds}
         mentionItems={mentionItems}
+        progressRootIds={listProgressRootIds(resolved.pathIds)}
+        starters={collectStartersForPath(resolved.pathIds, note)}
       />
     )
   }
@@ -104,6 +109,10 @@ export default async function NotesPathPage({ params }: PageProps) {
       breadcrumbs={resolved.breadcrumbs}
       entries={resolved.children}
       folderName={resolved.folder?.name ?? null}
+      listingProgress={getFolderListingProgress(
+        resolved.pathIds,
+        resolved.children
+      )}
     />
   )
 }

@@ -54,6 +54,7 @@ import {
 } from "@/lib/notes-chat/commands";
 import { isLocalEditEnabled } from "@/lib/local-edit";
 import { fetchAndPublishNote } from "@/lib/notes-live";
+import { learnerProgressPayload } from "@/lib/notes-progress";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
 import Image from "next/image";
@@ -347,6 +348,7 @@ export function NoteChatPanel({
           referenceIds,
           summary,
           activeSectionId,
+          learnerProgress: learnerProgressPayload(pathIds[0] ?? null),
         }),
       }),
     [note.id, pathIds, model, mode, extraReasoning, referenceIds, summary, activeSectionId],

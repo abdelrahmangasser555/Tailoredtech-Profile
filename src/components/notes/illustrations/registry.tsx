@@ -2,6 +2,10 @@
 
 import type { ComponentType } from "react"
 import { GitCommitFlow } from "@/components/notes/illustrations/git-commit-flow"
+import {
+  MoshkaCursorHands,
+  MoshkaFlavors,
+} from "@/components/notes/illustrations/moshka-flavors"
 import { cn } from "@/lib/utils"
 
 type IllusProps = { className?: string; mode?: "first-repo" | "branches" | "free" }
@@ -12,6 +16,10 @@ const REGISTRY: Record<string, ComponentType<IllusProps>> = {
   ),
   "git-branch-flow": (props) => (
     <GitCommitFlow {...props} mode={props.mode ?? "branches"} />
+  ),
+  "moshka-flavors": (props) => <MoshkaFlavors className={props.className} />,
+  "moshka-cursor-hands": (props) => (
+    <MoshkaCursorHands className={props.className} />
   ),
 }
 

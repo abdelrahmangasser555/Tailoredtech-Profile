@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pixel Scoreboard</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main>
+      <section>
+        <h1 id="home-name">Home</h1>
+        <p class="score" id="home">0</p>
+        <button type="button" data-team="home" data-delta="1">+</button>
+        <button type="button" data-team="home" data-delta="-1">-</button>
+      </section>
+      <section>
+        <h1 id="away-name">Away</h1>
+        <p class="score" id="away">0</p>
+        <button type="button" data-team="away" data-delta="1">+</button>
+        <button type="button" data-team="away" data-delta="-1">-</button>
+      </section>
+    </main>
+    <script src="app.js"></script>
+  </body>
+</html>

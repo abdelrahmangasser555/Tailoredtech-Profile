@@ -2,7 +2,7 @@ import { NextResponse } from "next/server"
 import { promises as fs } from "fs"
 import path from "path"
 import { isLocalEditEnabled } from "@/lib/local-edit"
-import { isGradRoadmapPath } from "@/lib/notes-managed"
+import { isManagedNotesPath } from "@/lib/notes-managed"
 import type {
   NoteDocument,
   NotesConfig,
@@ -85,9 +85,9 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid payload" }, { status: 400 })
   }
 
-  if (isGradRoadmapPath(body.pathIds)) {
+  if (isManagedNotesPath(body.pathIds)) {
     return NextResponse.json(
-      { error: "Grad project roadmap is managed in src/config/grad-roadmap/" },
+      { error: "This folder is managed in src/config (grad-roadmap or moshka-roadmap)" },
       { status: 403 }
     )
   }

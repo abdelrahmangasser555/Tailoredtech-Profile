@@ -1,11 +1,16 @@
 import {
+  collectAncestorFolderChat,
   findNodePath,
   getNoteById,
   notes,
 } from "@/lib/notes"
-import { GRAD_ROADMAP_ROOT_ID } from "@/lib/notes-managed"
+import {
+  GRAD_ROADMAP_ROOT_ID,
+  MOSHKA_ROOT_ID,
+} from "@/lib/notes-managed"
 import type { NoteDocument, NotesTreeNode } from "@/lib/notes-types"
 import { serializeNoteForContext } from "@/lib/notes-chat/serialize"
+import type { NotesLearnerProgressPayload } from "@/lib/notes-progress"
 
 export type NoteMentionItem = {
   id: string
@@ -38,6 +43,7 @@ export function resolveChatScopeRootId(
 ): string | null {
   if (note.chat?.scopeRootId) return note.chat.scopeRootId
   if (pathIds[0] === GRAD_ROADMAP_ROOT_ID) return GRAD_ROADMAP_ROOT_ID
+  if (pathIds[0] === MOSHKA_ROOT_ID) return MOSHKA_ROOT_ID
   return null
 }
 
@@ -133,10 +139,53 @@ export function expandReferenceIds(ids: string[]): string[] {
   return [...out]
 }
 
+function formatFolderChatContext(
+  pathIds: string[],
+  learnerProgress?: NotesLearnerProgressPayload
+): string {
+  const folders = collectAncestorFolderChat(pathIds)
+  if (!folders.length && !learnerProgress) return ""
+
+  const parts: string[] = ["FOLDER / LEARNER CONTEXT"]
+
+  for (const folder of folders) {
+    const lines = [`Folder: ${folder.name} (${folder.id})`]
+    if (folder.chat.learner) lines.push(`Learner: ${folder.chat.learner}`)
+    if (folder.chat.objective) lines.push(`Objective: ${folder.chat.objective}`)
+    if (folder.chat.prerequisites) {
+      lines.push(`Already learned before this folder: ${folder.chat.prerequisites}`)
+    }
+    if (folder.chat.talkStyle) lines.push(`How to talk: ${folder.chat.talkStyle}`)
+    if (folder.chat.extraPrompt) lines.push(folder.chat.extraPrompt)
+    parts.push(lines.join("\n"))
+  }
+
+  if (learnerProgress) {
+    const progressLines = [
+      "Where the learner is right now (client progress, localStorage):",
+      learnerProgress.lastTitle
+        ? `Last lesson: ${learnerProgress.lastTitle} (${learnerProgress.lastNoteId ?? ""})`
+        : "Last lesson: not recorded yet.",
+      `Completed lessons: ${learnerProgress.completedCount}${
+        learnerProgress.totalCount != null
+          ? ` of ${learnerProgress.totalCount}`
+          : ""
+      }.`,
+    ]
+    if (learnerProgress.lastHref) {
+      progressLines.push(`Resume href: ${learnerProgress.lastHref}`)
+    }
+    parts.push(progressLines.join("\n"))
+  }
+
+  return parts.join("\n\n")
+}
+
 export function buildNotesChatContext(opts: {
   note: NoteDocument
   pathIds: string[]
   referenceIds?: string[]
+  learnerProgress?: NotesLearnerProgressPayload
 }): { systemContext: string; scopeRootId: string | null } {
   const scopeRootId = resolveChatScopeRootId(opts.note, opts.pathIds)
   const siblingIds = getSiblingNoteIds(opts.pathIds)
@@ -161,6 +210,11 @@ export function buildNotesChatContext(opts: {
     ? `Reference scope is limited to the "${scopeRootId}" subtree. Only @-mention items inside that scope.`
     : "You may @-mention any note or folder in the notes tree."
 
+  const folderContext = formatFolderChatContext(
+    opts.pathIds,
+    opts.learnerProgress
+  )
+
   return {
     scopeRootId,
     systemContext: [
@@ -168,8 +222,12 @@ export function buildNotesChatContext(opts: {
       scopeLine,
       "The user is reading one note. Context below includes the current note, sibling notes in the same folder, and any @-referenced notes.",
       "Answer clearly and concisely. Use markdown in replies when helpful.",
+      "Never use em dashes or double hyphens as punctuation in replies.",
+      folderContext,
       "",
       parts.join("\n\n"),
-    ].join("\n"),
+    ]
+      .filter(Boolean)
+      .join("\n"),
   }
 }

@@ -144,6 +144,23 @@
           ]
         }
       ]
+    },
+    {
+      "type": "folder",
+      "id": "el-kateba",
+      "name": "el kateba",
+      "createdAt": "2026-09-17",
+      "updatedAt": "2026-09-17",
+      "children": [
+        {
+          "type": "folder",
+          "id": "moshka",
+          "name": "Moshka",
+          "createdAt": "2026-09-17",
+          "updatedAt": "2026-09-17",
+          "children": []
+        }
+      ]
     }
   ],
   "notes": {
@@ -386,6 +403,35 @@
       "description": "",
       "createdAt": "2026-08-19",
       "updatedAt": "2026-08-19",
+      "enabled": true,
+      "variants": {
+        "sidebarNav": true,
+        "compactHero": true,
+        "showMeta": true
+      },
+      "explains": [],
+      "questionnaires": [],
+      "sections": [
+        {
+          "id": "start",
+          "title": "Start",
+          "blocks": [
+            {
+              "type": "markdown",
+              "id": "start-md",
+              "content": "New note — replace this with your content."
+            }
+          ]
+        }
+      ]
+    },
+    "korbak": {
+      "id": "korbak",
+      "name": "korbak",
+      "title": "korbak",
+      "description": "",
+      "createdAt": "2026-09-17",
+      "updatedAt": "2026-09-17",
       "enabled": true,
       "variants": {
         "sidebarNav": true,

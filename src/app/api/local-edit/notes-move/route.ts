@@ -3,8 +3,8 @@ import { promises as fs } from "fs"
 import path from "path"
 import { isLocalEditEnabled } from "@/lib/local-edit"
 import {
-  GRAD_ROADMAP_ROOT_ID,
-  isGradRoadmapPath,
+  isManagedNotesPath,
+  isManagedNotesRootId,
 } from "@/lib/notes-managed"
 import type {
   NotesConfig,
@@ -77,12 +77,12 @@ export async function POST(request: Request) {
   }
 
   if (
-    body.nodeId === GRAD_ROADMAP_ROOT_ID ||
-    isGradRoadmapPath(body.fromPathIds) ||
-    isGradRoadmapPath(body.toPathIds)
+    isManagedNotesRootId(body.nodeId) ||
+    isManagedNotesPath(body.fromPathIds) ||
+    isManagedNotesPath(body.toPathIds)
   ) {
     return NextResponse.json(
-      { error: "Grad project roadmap is managed in src/config/grad-roadmap/" },
+      { error: "Managed notes folders cannot be moved" },
       { status: 403 }
     )
   }

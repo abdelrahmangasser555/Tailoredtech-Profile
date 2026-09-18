@@ -47,6 +47,14 @@ type Body = {
   activeSectionId?: string
   command?: NotesChatCommandId
   extraReasoning?: boolean
+  learnerProgress?: {
+    completedNoteIds: string[]
+    lastNoteId?: string
+    lastTitle?: string
+    lastHref?: string
+    completedCount: number
+    totalCount?: number
+  }
 }
 
 function lastUserText(messages: UIMessage[]): string {
@@ -100,6 +108,7 @@ export async function POST(req: Request) {
     activeSectionId,
     command: bodyCommand,
     extraReasoning = false,
+    learnerProgress,
   } = body
   if (!noteId || !Array.isArray(body.messages)) {
     return Response.json({ error: "Invalid payload" }, { status: 400 })
@@ -159,6 +168,7 @@ export async function POST(req: Request) {
       note,
       pathIds: pathIds ?? [],
       referenceIds,
+      learnerProgress,
     })
 
     const activeSection =

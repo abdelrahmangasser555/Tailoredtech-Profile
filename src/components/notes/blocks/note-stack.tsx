@@ -92,38 +92,82 @@ type NoteStackProps = {
   edges?: NoteStackEdge[]
   direction?: "vertical" | "horizontal"
   className?: string
+  onExplain?: (id: string) => void
 }
 
-function StackIcon({ item }: { item: NoteStackItem }) {
+function StackIcon({
+  item,
+  onExplain,
+}: {
+  item: NoteStackItem
+  onExplain?: (id: string) => void
+}) {
   const slug = resolveStackIconSlug(item.icon)
   const Icon = slug ? ICONS[slug] : undefined
+  const clickable = Boolean(item.explainId && onExplain)
   return (
-    <li className="flex flex-col items-center gap-2">
-      <span className="flex size-10 items-center justify-center border border-white/15 bg-black/30 text-white">
-        {Icon ? (
-          <Icon size={22} color="default" />
-        ) : (
-          <span className="font-mono text-[10px] text-white/40">?</span>
+    <li>
+      <button
+        type="button"
+        disabled={!clickable}
+        onClick={() => {
+          if (item.explainId) onExplain?.(item.explainId)
+        }}
+        className={cn(
+          "flex flex-col items-center gap-2",
+          clickable
+            ? "cursor-pointer transition hover:opacity-80"
+            : "cursor-default"
         )}
-      </span>
-      <span className="max-w-[4.5rem] text-center font-mono text-[9px] tracking-[0.12em] text-white/50 uppercase">
-        {item.label}
-      </span>
+      >
+        <span className="flex size-10 items-center justify-center border border-white/15 bg-black/30 text-white">
+          {Icon ? (
+            <Icon size={22} color="default" />
+          ) : (
+            <span className="font-mono text-[10px] text-white/40">?</span>
+          )}
+        </span>
+        <span className="max-w-[4.5rem] text-center font-mono text-[9px] tracking-[0.12em] text-white/50 uppercase">
+          {item.label}
+        </span>
+      </button>
     </li>
   )
 }
 
-function LayerBox({ layer }: { layer: NoteStackLayer }) {
+function LayerBox({
+  layer,
+  onExplain,
+}: {
+  layer: NoteStackLayer
+  onExplain?: (id: string) => void
+}) {
+  const clickable = Boolean(layer.explainId && onExplain)
   return (
     <div className="min-w-[12rem] flex-1 border border-white/15 bg-white/3">
       <div className="border-b border-white/10 px-3 py-2">
-        <p className="font-mono text-[10px] tracking-[0.2em] text-accent uppercase">
-          {layer.label}
-        </p>
+        {clickable ? (
+          <button
+            type="button"
+            onClick={() => onExplain?.(layer.explainId!)}
+            className="font-mono text-[10px] tracking-[0.2em] text-accent uppercase hover:underline"
+          >
+            {layer.label}
+            <span className="ml-2 text-white/25">More</span>
+          </button>
+        ) : (
+          <p className="font-mono text-[10px] tracking-[0.2em] text-accent uppercase">
+            {layer.label}
+          </p>
+        )}
       </div>
       <ul className="flex flex-wrap items-start justify-center gap-4 px-4 py-4">
         {layer.items.map((item) => (
-          <StackIcon key={`${layer.id}-${item.icon}-${item.label}`} item={item} />
+          <StackIcon
+            key={`${layer.id}-${item.icon}-${item.label}`}
+            item={item}
+            onExplain={onExplain}
+          />
         ))}
       </ul>
     </div>
@@ -178,6 +222,7 @@ export function NoteStack({
   edges,
   direction = "vertical",
   className,
+  onExplain,
 }: NoteStackProps) {
   const resolvedLayers: NoteStackLayer[] =
     layers && layers.length > 0
@@ -231,7 +276,7 @@ export function NoteStack({
                 horizontal ? "flex-row items-stretch" : "flex-col items-stretch"
               )}
             >
-              <LayerBox layer={layer} />
+              <LayerBox layer={layer} onExplain={onExplain} />
               {showEdge ? (
                 <EdgeConnector edge={edge} horizontal={horizontal} />
               ) : null}

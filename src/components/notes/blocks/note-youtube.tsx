@@ -18,13 +18,15 @@ type NoteYoutubeProps = {
   noteId?: string
   sectionId?: string
   blockId?: string
+  startSeconds?: number
+  endSeconds?: number
 }
 
 function parseYoutubeId(url: string): string | null {
   try {
     const u = new URL(url)
     if (u.hostname.includes("youtu.be")) {
-      return u.pathname.replace("/", "") || null
+      return u.pathname.replace("/", "").split("&")[0] || null
     }
     if (u.hostname.includes("youtube.com")) {
       const id = u.searchParams.get("v")
@@ -39,6 +41,33 @@ function parseYoutubeId(url: string): string | null {
   return null
 }
 
+function parseClock(raw: string): number | undefined {
+  if (!raw) return undefined
+  if (/^\d+$/.test(raw)) return Number(raw)
+  const h = raw.match(/(\d+)h/)
+  const m = raw.match(/(\d+)m/)
+  const s = raw.match(/(\d+)s/)
+  if (!h && !m && !s) return undefined
+  return (
+    Number(h?.[1] ?? 0) * 3600 +
+    Number(m?.[1] ?? 0) * 60 +
+    Number(s?.[1] ?? 0)
+  )
+}
+
+function parseYoutubeWindow(url: string): { start?: number; end?: number } {
+  try {
+    const u = new URL(url)
+    const start =
+      parseClock(u.searchParams.get("start") ?? "") ??
+      parseClock(u.searchParams.get("t") ?? "")
+    const end = parseClock(u.searchParams.get("end") ?? "")
+    return { start, end }
+  } catch {
+    return {}
+  }
+}
+
 /**
  * Click-to-play facade — avoids loading a heavy YouTube iframe until needed
  * (fixes Lenis / scroll jank near video sections).
@@ -51,6 +80,8 @@ export function NoteYoutube({
   noteId,
   sectionId,
   blockId,
+  startSeconds,
+  endSeconds,
 }: NoteYoutubeProps) {
   const localEdit = isLocalEditEnabled()
   const canEdit = Boolean(localEdit && noteId && sectionId && blockId)
@@ -58,8 +89,13 @@ export function NoteYoutube({
   const [busy, setBusy] = useState(false)
 
   const id = parseYoutubeId(url)
+  const fromUrl = parseYoutubeWindow(url)
+  const start = startSeconds ?? fromUrl.start
+  const end = endSeconds ?? fromUrl.end
   const embed = id
-    ? `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0`
+    ? `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0${
+        start != null ? `&start=${start}` : ""
+      }${end != null ? `&end=${end}` : ""}`
     : null
   const poster = id ? `https://i.ytimg.com/vi/${id}/hqdefault.jpg` : null
 

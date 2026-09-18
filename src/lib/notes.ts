@@ -4,18 +4,38 @@ import {
   gradRoadmapTree,
 } from "@/config/grad-roadmap"
 import {
-  stripGradRoadmapFromTree,
+  moshkaRoadmapNotes,
+  moshkaTree,
+} from "@/config/moshka-roadmap"
+import {
+  MOSHKA_ROOT_ID,
+  stripManagedRootsFromTree,
 } from "@/lib/notes-managed"
 import { mergeNoteWithOverride } from "@/lib/notes-chat/merge-overrides"
 import type {
   NoteDocument,
   NotesConfig,
+  NotesFolderChat,
   NotesFolderNode,
+  NotesStarter,
   NotesTreeNode,
 } from "@/lib/notes-types"
 
-export type { NoteDocument, NotesConfig, NotesTreeNode, NotesFolderNode }
-export { GRAD_ROADMAP_ROOT_ID, isGradRoadmapPath } from "@/lib/notes-managed"
+export type {
+  NoteDocument,
+  NotesConfig,
+  NotesTreeNode,
+  NotesFolderNode,
+  NotesFolderChat,
+  NotesStarter,
+}
+export {
+  GRAD_ROADMAP_ROOT_ID,
+  MOSHKA_ROOT_ID,
+  isGradRoadmapPath,
+  isMoshkaPath,
+  isManagedNotesPath,
+} from "@/lib/notes-managed"
 
 function buildGradNotesWithScope(): Record<string, NoteDocument> {
   const out: Record<string, NoteDocument> = {}
@@ -31,12 +51,27 @@ function buildGradNotesWithScope(): Record<string, NoteDocument> {
   return out
 }
 
+function buildMoshkaNotesWithScope(): Record<string, NoteDocument> {
+  const out: Record<string, NoteDocument> = {}
+  for (const [id, note] of Object.entries(moshkaRoadmapNotes)) {
+    out[id] = mergeNoteWithOverride({
+      ...note,
+      chat: {
+        scopeRootId: MOSHKA_ROOT_ID,
+        ...note.chat,
+      },
+    })
+  }
+  return out
+}
+
 function buildNotesTree(configTree: NotesTreeNode[]): NotesTreeNode[] {
-  const custom = stripGradRoadmapFromTree(configTree)
-  return [gradRoadmapTree, ...custom]
+  const custom = stripManagedRootsFromTree(configTree)
+  return [moshkaTree, gradRoadmapTree, ...custom]
 }
 
 const gradNotes = buildGradNotesWithScope()
+const moshkaNotes = buildMoshkaNotesWithScope()
 const jsonNotes = Object.fromEntries(
   Object.entries(notesConfig.notes as Record<string, NoteDocument>).map(
     ([id, note]) => [id, mergeNoteWithOverride(note)]
@@ -48,7 +83,7 @@ const configTree = notesConfig.tree as unknown as NotesTreeNode[]
 const mergedConfig: NotesConfig = {
   ...notesConfig,
   tree: buildNotesTree(configTree),
-  notes: { ...jsonNotes, ...gradNotes },
+  notes: { ...jsonNotes, ...gradNotes, ...moshkaNotes },
 }
 
 export const notes = mergedConfig
@@ -302,24 +337,16 @@ export function listMoveDestinations(opts: {
   return destinations.filter((d) => d.pathIds.join("/") !== currentKey)
 }
 
-export function getLessonNeighbors(noteId: string): {
-  prev: { id: string; name: string; href: string } | null
-  next: { id: string; name: string; href: string } | null
-} {
-  const path = findNodePath(noteId)
-  if (!path?.length) return { prev: null, next: null }
+export type NotesLessonRef = {
+  id: string
+  name: string
+  href: string
+}
 
-  const topId = path[0]
-  const topNode = notes.tree.find((n) => n.id === topId)
-  const subtree =
-    topNode?.type === "folder"
-      ? topNode.children
-      : notes.tree.filter((n) => n.type === "file")
-
-  const order: { id: string; name: string; href: string }[] = []
-
-  function walk(nodes: NotesTreeNode[]) {
-    for (const node of nodes) {
+function collectFileLessons(nodes: NotesTreeNode[]): NotesLessonRef[] {
+  const order: NotesLessonRef[] = []
+  function walk(list: NotesTreeNode[]) {
+    for (const node of list) {
       if (node.type === "file") {
         if (getNoteById(node.id)) {
           order.push({
@@ -333,9 +360,121 @@ export function getLessonNeighbors(noteId: string): {
       }
     }
   }
+  walk(nodes)
+  return order
+}
 
-  walk(subtree)
+export function listSubtreeLessons(pathIds: string[]): NotesLessonRef[] {
+  if (pathIds.length === 0) return collectFileLessons(notes.tree)
+  const folder = findFolderNode(pathIds)
+  if (!folder) return []
+  return collectFileLessons(folder.children)
+}
 
+export function listProgressRootIds(pathIds: string[]): string[] {
+  const roots: string[] = []
+  for (let i = 1; i <= pathIds.length; i++) {
+    const folder = findFolderNode(pathIds.slice(0, i))
+    if (folder?.trackProgress) roots.push(folder.id)
+  }
+  return roots
+}
+
+export function collectAncestorFolderChat(
+  pathIds: string[]
+): { id: string; name: string; chat: NotesFolderChat }[] {
+  const out: { id: string; name: string; chat: NotesFolderChat }[] = []
+  for (let i = 1; i <= pathIds.length; i++) {
+    const folder = findFolderNode(pathIds.slice(0, i))
+    if (!folder?.chat) continue
+    const chat = folder.chat
+    if (
+      !chat.extraPrompt &&
+      !chat.objective &&
+      !chat.talkStyle &&
+      !chat.prerequisites &&
+      !chat.learner
+    ) {
+      continue
+    }
+    out.push({ id: folder.id, name: folder.name, chat })
+  }
+  return out
+}
+
+export function collectStartersForPath(
+  pathIds: string[],
+  note?: NoteDocument
+): NotesStarter[] {
+  const files: NotesStarter[] = []
+  const seen = new Set<string>()
+  for (let i = 1; i <= pathIds.length; i++) {
+    const folder = findFolderNode(pathIds.slice(0, i))
+    for (const starter of folder?.starters ?? []) {
+      if (seen.has(starter.id)) continue
+      seen.add(starter.id)
+      files.push(starter)
+    }
+  }
+  for (const starter of note?.starters ?? []) {
+    if (seen.has(starter.id)) continue
+    seen.add(starter.id)
+    files.push(starter)
+  }
+  return files
+}
+
+export type NotesFolderListingProgress = {
+  trackProgress: boolean
+  progressRootId: string | null
+  currentLessons: NotesLessonRef[]
+  entryLessons: Record<string, NotesLessonRef[]>
+  starters: NotesStarter[]
+}
+
+export function getFolderListingProgress(
+  pathIds: string[],
+  entries: NotesTreeNode[]
+): NotesFolderListingProgress {
+  const folder = pathIds.length ? findFolderNode(pathIds) : null
+  const ancestorRoots = listProgressRootIds(pathIds)
+  const trackProgress = Boolean(folder?.trackProgress)
+  const progressRootId = folder?.trackProgress
+    ? folder.id
+    : (ancestorRoots[ancestorRoots.length - 1] ?? null)
+
+  const entryLessons: Record<string, NotesLessonRef[]> = {}
+  for (const entry of entries) {
+    if (entry.type !== "folder") continue
+    if (entry.trackProgress || trackProgress) {
+      entryLessons[entry.id] = listSubtreeLessons([...pathIds, entry.id])
+    }
+  }
+
+  return {
+    trackProgress,
+    progressRootId,
+    currentLessons: trackProgress ? listSubtreeLessons(pathIds) : [],
+    entryLessons,
+    starters: folder?.starters ?? [],
+  }
+}
+
+export function getLessonNeighbors(noteId: string): {
+  prev: NotesLessonRef | null
+  next: NotesLessonRef | null
+} {
+  const path = findNodePath(noteId)
+  if (!path?.length) return { prev: null, next: null }
+
+  const topId = path[0]
+  const topNode = notes.tree.find((n) => n.id === topId)
+  const subtree =
+    topNode?.type === "folder"
+      ? topNode.children
+      : notes.tree.filter((n) => n.type === "file")
+
+  const order = collectFileLessons(subtree)
   const idx = order.findIndex((n) => n.id === noteId)
   if (idx === -1) return { prev: null, next: null }
 

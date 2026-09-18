@@ -55,6 +55,10 @@ function blockToText(block: NoteBlock): string {
         .join("\n")
       return `[Comparison] ${block.title ?? ""}\n${header}\n${body}`
     }
+    case "download":
+      return `[Download] ${block.title ?? "Starter"}\n${block.files
+        .map((f) => `- ${f.label}: ${f.href}`)
+        .join("\n")}`
     default:
       return `[Block ${(block as NoteBlock).type}]`
     }

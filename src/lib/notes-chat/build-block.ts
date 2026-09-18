@@ -99,6 +99,10 @@ export function buildNoteBlock(
         url: url.trim(),
         title: asString(data.title),
         caption: asString(data.caption),
+        startSeconds:
+          typeof data.startSeconds === "number" ? data.startSeconds : undefined,
+        endSeconds:
+          typeof data.endSeconds === "number" ? data.endSeconds : undefined,
       }
     }
     case "stack":
@@ -125,6 +129,10 @@ export function buildNoteBlock(
           .replace(/^```(?:mermaid)?\s*/i, "")
           .replace(/```\s*$/i, "")
           .trim(),
+        nodeExplains:
+          data.nodeExplains && typeof data.nodeExplains === "object"
+            ? (data.nodeExplains as Record<string, string>)
+            : undefined,
       }
     }
     case "illustration": {
@@ -177,6 +185,7 @@ export function buildNoteBlock(
             : "info",
         title: asString(data.title),
         body,
+        explainId: asString(data.explainId),
       }
     }
     case "gallery": {
@@ -229,6 +238,34 @@ export function buildNoteBlock(
       if (!normalized) return null
       return { type: "comparison", id, ...normalized }
     }
+    case "download": {
+      const filesRaw = data.files
+      if (!Array.isArray(filesRaw) || filesRaw.length === 0) return null
+      const files = filesRaw
+        .map((raw) => {
+          if (!raw || typeof raw !== "object") return null
+          const f = raw as Record<string, unknown>
+          const fid = asString(f.id)
+          const href = asString(f.href)
+          const label = asString(f.label)
+          if (!fid || !href || !label) return null
+          return {
+            id: fid,
+            href,
+            label,
+            description: asString(f.description),
+          }
+        })
+        .filter((f): f is NonNullable<typeof f> => Boolean(f))
+      if (!files.length) return null
+      return {
+        type: "download",
+        id,
+        title: asString(data.title),
+        caption: asString(data.caption),
+        files,
+      }
+    }
     default:
       return null
   }
@@ -248,4 +285,5 @@ export const NOTE_BLOCK_TYPES: NoteBlock["type"][] = [
   "playground",
   "tasks",
   "comparison",
+  "download",
 ]

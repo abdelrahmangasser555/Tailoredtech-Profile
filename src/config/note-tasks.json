@@ -366,5 +366,17 @@
         }
       ]
     }
+  ],
+  "notes-tasks:moshka-cafe-unzip:t": [
+    {
+      "id": "see",
+      "label": "You see the cafe page in a browser",
+      "done": false,
+      "completedAt": null
+    },
+    {
+      "id": "files",
+      "label": "You can point at index.html, styles.css, app.js"
+    }
   ]
 }

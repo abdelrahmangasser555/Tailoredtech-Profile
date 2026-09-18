@@ -10,6 +10,7 @@ import type {
   NoteQuestionnaire,
 } from "@/lib/notes-types"
 import type { NotesBreadcrumb } from "@/lib/notes"
+import type { NotesStarter } from "@/lib/notes-types"
 import { formatNotesDate } from "@/lib/notes"
 import type { NoteMentionItem } from "@/lib/notes-chat/context"
 import { subscribeNoteUpdates } from "@/lib/notes-live"
@@ -21,6 +22,7 @@ import { NoteSectionActions } from "@/components/notes/note-section-actions"
 import { NoteExplainSheet } from "@/components/notes/note-explain-sheet"
 import { NoteQuestionnaireModal } from "@/components/notes/note-questionnaire-modal"
 import { NoteLessonNav } from "@/components/notes/note-lesson-nav"
+import { NoteProgressActions } from "@/components/notes/note-progress-actions"
 import { TrackNote } from "@/components/analytics/track-note"
 import { scrollToId } from "@/components/motion/smooth-scroll"
 import { cleanupMermaidOrphans } from "@/components/sections/mermaid-cleanup"
@@ -31,6 +33,8 @@ type NoteDetailProps = {
   breadcrumbs: NotesBreadcrumb[]
   pathIds: string[]
   mentionItems: NoteMentionItem[]
+  progressRootIds: string[]
+  starters: NotesStarter[]
 }
 
 export function NoteDetail({
@@ -38,6 +42,8 @@ export function NoteDetail({
   breadcrumbs,
   pathIds,
   mentionItems,
+  progressRootIds,
+  starters,
 }: NoteDetailProps) {
   const [note, setNote] = useState(serverNote)
 
@@ -219,6 +225,17 @@ export function NoteDetail({
             </p>
           ) : null}
 
+          <NoteProgressActions
+            noteId={note.id}
+            title={note.title}
+            pathIds={pathIds}
+            href={
+              breadcrumbs[breadcrumbs.length - 1]?.href ?? `/notes/${note.id}`
+            }
+            progressRootIds={progressRootIds}
+            starters={starters}
+          />
+
           {variants.showMeta ? (
             <div className="mt-5 flex flex-wrap items-center gap-3">
               <p className="font-mono text-[10px] tracking-[0.16em] text-white/30 uppercase">
@@ -328,6 +345,9 @@ export function NoteDetail({
       <NoteExplainSheet
         term={explainId ? explainsById[explainId] ?? null : null}
         open={Boolean(explainId && explainsById[explainId])}
+        noteId={note.id}
+        explainsById={explainsById}
+        onExplain={setExplainId}
         onOpenChange={(open) => {
           if (!open) setExplainId(null)
         }}
