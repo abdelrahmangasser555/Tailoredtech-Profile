@@ -9,6 +9,7 @@ import {
   mermaid,
   tasks,
   tip,
+  beforeYouStart,
 } from "@/config/moshka-roadmap/helpers"
 import type { NoteDocument } from "@/lib/notes-types"
 
@@ -23,6 +24,12 @@ export const moshkaUxNotes: Record<string, NoteDocument> = {
         id: "goal",
         title: "The client is not you",
         blocks: [
+          beforeYouStart(
+            "plan",
+            "Judge UI like a fleet office user: dense data, clear roles, no poster layouts.",
+            "You can say why big empty cards fail on ops screens.",
+            []
+          ),
           ...figureN(
             1,
             "ux-roles",

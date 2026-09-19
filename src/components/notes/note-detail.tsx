@@ -169,7 +169,10 @@ export function NoteDetail({
   }, [note.id, sectionKey])
 
   return (
-    <div className="min-h-svh bg-[#050505] text-white">
+    <div
+      data-notes-surface="dark"
+      className="min-h-svh overflow-x-clip bg-[#050505] text-white"
+    >
       <TrackNote
         noteId={note.id}
         noteTitle={note.title}
@@ -257,7 +260,7 @@ export function NoteDetail({
         </div>
       </header>
 
-      <div className="mx-auto flex max-w-5xl gap-10 px-5 py-12 md:px-8 md:py-16">
+      <div className="mx-auto flex max-w-5xl gap-10 px-5 pt-12 pb-4 md:px-8 md:pt-16 md:pb-6">
         {variants.sidebarNav && note.sections.length > 1 ? (
           <aside className="sticky top-8 hidden h-fit w-44 shrink-0 lg:block">
             <p className="font-mono text-[10px] tracking-[0.2em] text-white/30 uppercase">
@@ -300,7 +303,7 @@ export function NoteDetail({
               <section
                 key={section.id}
                 id={section.id}
-                className="scroll-mt-8 border-t border-white/10 py-10 first:border-t-0 first:pt-0 md:py-12"
+                className="scroll-mt-8 border-t border-white/10 py-10 first:border-t-0 first:pt-0 last:pb-0 md:py-12 md:last:pb-0"
               >
                 <h2 className="font-pixel-circle text-2xl text-white md:text-3xl">
                   {section.title}

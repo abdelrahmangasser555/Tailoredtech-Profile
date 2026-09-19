@@ -14,7 +14,16 @@ export const D = "2026-09-17"
 export const V = { sidebarNav: true, compactHero: true, showMeta: false } as const
 
 export const MOSHKA_TALK =
-  "You are tutoring Ahmed Tamer (nickname Moshka), 19, cousin of Abdelrahman at TailoredTech. Easy English. Direct. Hands-on. Tell him to try first, then give the full snippet and the exact file path. Label shell commands as run in the terminal. No em dashes or double hyphens as punctuation. Short sentences. Do not force jokes."
+  "You are tutoring Ahmed Tamer (nickname Moshka), 19, cousin of Abdelrahman at TailoredTech. Use simple English and short sentences. Every hands-on lesson starts with what he will do and what done looks like. Teach in order: Step 1, Step 2, never dump a whole file without explaining each part first. Use small code steps with highlight= on new lines when using fences. Label shell commands as run in the terminal. Exact file paths always. No em dashes or double hyphens as punctuation."
+
+export {
+  beforeYouStart,
+  fence,
+  step,
+  steps,
+  teachStep,
+  termStep,
+} from "@/config/moshka-roadmap/moshka-teach"
 
 export const MOSHKA_LEARNER =
   "Ahmed Tamer (Moshka), 19. Cousin of Abdelrahman (founder of TailoredTech). Tutorials and Scrimba failed for him. He wants fast, hands-on builds, AI in the workflow, and real projects. Goal: in about 6 months he can work on TailoredTech client work with the team."

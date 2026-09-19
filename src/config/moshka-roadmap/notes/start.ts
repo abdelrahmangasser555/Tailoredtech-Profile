@@ -34,10 +34,11 @@ This notes folder is your home. Progress saves on this browser. You can close th
 
 How each lesson works:
 
-1. Read the short why.
-2. **Try the change yourself first.**
-3. If you get stuck, copy the full snippet into the named file.
-4. Commands in a **terminal** block run in your terminal, not in the browser, not in chat.
+1. Read **Before you start** (what you will do, what done looks like).
+2. Follow **Step 1, Step 2, …** in order. Do not skip to the last code block.
+3. Lime bar on a code line = new or changed line. **Copy all** still gives you the full file.
+4. **Try the change yourself first** when the lesson says try first.
+5. Terminal blocks: run in your terminal, not in the browser, not in chat.
 
 Videos come in pairs: a short Fireship clip, then a longer sit-down (Bro Code, Traversy, Net Ninja, Web Dev Simplified). The caption always says **Watch from X to Y**. Click a box on a diagram, or a word like [[pick-build]], for more detail.
 
@@ -48,7 +49,8 @@ Videos come in pairs: a short Fireship clip, then a longer sit-down (Bro Code, T
             "why-flow",
             `flowchart LR
   P[Pick a first build] --> F[Frontend that looks real]
-  F --> G[Ship with Git]
+  F --> J[JavaScript lab]
+  J --> G[Ship with Git]
   G --> R[React plus Vite]
   R --> U[UX like a client]
   U --> N[Next.js]
@@ -67,6 +69,7 @@ Videos come in pairs: a short Fireship clip, then a longer sit-down (Bro Code, T
             {
               P: "pick-build",
               F: "frontend",
+              J: "js-lab",
               G: "git-ship",
               R: "react-vite",
               U: "ux",
@@ -105,7 +108,7 @@ Videos come in pairs: a short Fireship clip, then a longer sit-down (Bro Code, T
 
 They teach the same thing: files on disk, a page in the browser, a click that changes the page.
 
-After that first build, do **01d Ship with Git** so your cafe folder lives on GitHub. Then Port Watch. Do not stay in 01 forever.`
+After that first build, do **JavaScript lab** (language, Node vs browser, loops, map). Then **01d Ship with Git**. Then Port Watch. Do not stay in 01 forever.`
           ),
           download(
             "pick-zips",
@@ -165,9 +168,15 @@ They all teach HTML, CSS, and JS. Different story. Unzip, open \`index.html\`, c
         "frontend",
         "Frontend",
         "Frontend that looks real",
-        `Cafe or Harbor or Score, then **01d Ship with Git**, then **Port Watch**.
+        `Cafe or Harbor or Score, then **JavaScript lab** (language, Node vs browser), then **01d Ship with Git**, then **Port Watch**.
 
 Port Watch is a dense table. That is closer to client work than a cute menu.`
+      ),
+      explain(
+        "js-lab",
+        "JavaScript",
+        "JavaScript lab",
+        `A list of notes, not a zip. Runtime (Chrome vs Node), how to run \`node hello.js\`, then functions, loops, arrays, \`.map\`, objects, classes.`
       ),
       explain(
         "git-ship",

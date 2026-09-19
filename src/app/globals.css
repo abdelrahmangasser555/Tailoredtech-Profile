@@ -371,3 +371,141 @@
   -webkit-text-fill-color: transparent;
   caret-color: #d4ff00;
 }
+
+/* Mermaid mounts temp SVG/hosts on body — hide so they don't add page height */
+body > svg[id^="mermaid"],
+body > [id^="dmermaid"],
+body > [id^="d"][id*="mermaid"] {
+  position: absolute !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0);
+  pointer-events: none;
+}
+
+/* Notes pages: keep html/body the same color as the shell so leftover overflow
+   is never the cream marketing background. */
+html:has([data-notes-surface="dark"]),
+html:has([data-notes-surface="dark"]) body {
+  background-color: #050505;
+}
+html:has([data-notes-surface="light"]),
+html:has([data-notes-surface="light"]) body {
+  background-color: #f7f7f2;
+}
+
+/* Thin modern scrollbars inside notes (code, tables, panels) */
+.notes-thin-scroll,
+.notes-panel-scroll,
+.note-code pre,
+[data-notes-surface] .overflow-x-auto,
+[data-notes-surface] .overflow-y-auto,
+[data-notes-surface] .overflow-auto {
+  scrollbar-width: thin;
+}
+
+[data-notes-surface="dark"] .notes-thin-scroll,
+[data-notes-surface="dark"] .notes-panel-scroll,
+[data-notes-surface="dark"] .note-code pre,
+[data-notes-surface="dark"] .overflow-x-auto,
+[data-notes-surface="dark"] .overflow-y-auto,
+[data-notes-surface="dark"] .overflow-auto,
+.notes-panel-scroll {
+  scrollbar-color: color-mix(in oklab, #d4ff00 38%, #555) transparent;
+}
+
+[data-notes-surface="light"] .notes-thin-scroll,
+[data-notes-surface="light"] .overflow-x-auto,
+[data-notes-surface="light"] .overflow-y-auto,
+[data-notes-surface="light"] .overflow-auto {
+  scrollbar-color: rgba(10, 10, 10, 0.28) transparent;
+}
+
+.notes-thin-scroll::-webkit-scrollbar,
+.notes-panel-scroll::-webkit-scrollbar,
+.note-code pre::-webkit-scrollbar,
+[data-notes-surface] .overflow-x-auto::-webkit-scrollbar,
+[data-notes-surface] .overflow-y-auto::-webkit-scrollbar,
+[data-notes-surface] .overflow-auto::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+.notes-thin-scroll::-webkit-scrollbar-track,
+.notes-panel-scroll::-webkit-scrollbar-track,
+.note-code pre::-webkit-scrollbar-track,
+[data-notes-surface] .overflow-x-auto::-webkit-scrollbar-track,
+[data-notes-surface] .overflow-y-auto::-webkit-scrollbar-track,
+[data-notes-surface] .overflow-auto::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+[data-notes-surface="dark"] .notes-thin-scroll::-webkit-scrollbar-thumb,
+[data-notes-surface="dark"] .note-code pre::-webkit-scrollbar-thumb,
+[data-notes-surface="dark"] .overflow-x-auto::-webkit-scrollbar-thumb,
+[data-notes-surface="dark"] .overflow-y-auto::-webkit-scrollbar-thumb,
+[data-notes-surface="dark"] .overflow-auto::-webkit-scrollbar-thumb,
+.notes-panel-scroll::-webkit-scrollbar-thumb {
+  background: color-mix(in oklab, #d4ff00 32%, #555);
+}
+
+[data-notes-surface="light"] .notes-thin-scroll::-webkit-scrollbar-thumb,
+[data-notes-surface="light"] .overflow-x-auto::-webkit-scrollbar-thumb,
+[data-notes-surface="light"] .overflow-y-auto::-webkit-scrollbar-thumb,
+[data-notes-surface="light"] .overflow-auto::-webkit-scrollbar-thumb {
+  background: rgba(10, 10, 10, 0.22);
+}
+
+.notes-thin-scroll::-webkit-scrollbar-thumb:hover,
+.notes-panel-scroll::-webkit-scrollbar-thumb:hover,
+.note-code pre::-webkit-scrollbar-thumb:hover {
+  background: #d4ff00;
+}
+
+[data-notes-surface="light"] .notes-thin-scroll::-webkit-scrollbar-thumb:hover,
+[data-notes-surface="light"] .overflow-x-auto::-webkit-scrollbar-thumb:hover {
+  background: rgba(10, 10, 10, 0.4);
+}
+
+/* Note code diffs: added (accent on dark) / removed. No negative margin (that created extra page gap). */
+.note-code .has-diff .line,
+.note-code-pre.has-diff .line {
+  display: block;
+  position: relative;
+  padding: 0.05rem 1rem 0.05rem 2.35rem;
+}
+.note-code .line:last-child:empty {
+  display: none;
+}
+.note-code .has-diff .line::before,
+.note-code-pre.has-diff .line::before {
+  position: absolute;
+  left: 0.7rem;
+  font-family: ui-monospace, monospace;
+  font-size: 11px;
+  content: " ";
+}
+.note-code .line.diff.add,
+.note-code-pre .line.diff.add {
+  background: color-mix(in oklab, var(--accent) 14%, transparent);
+  box-shadow: inset 2px 0 0 var(--accent);
+}
+.note-code .line.diff.add::before,
+.note-code-pre .line.diff.add::before {
+  content: "+";
+  color: var(--accent);
+}
+.note-code .line.diff.remove,
+.note-code-pre .line.diff.remove {
+  background: color-mix(in oklab, #ff6b6b 16%, transparent);
+  box-shadow: inset 2px 0 0 #ff6b6b;
+  color: color-mix(in oklab, #fff 45%, transparent);
+  text-decoration: line-through;
+  text-decoration-color: color-mix(in oklab, #ff6b6b 70%, transparent);
+}
+.note-code .line.diff.remove::before,
+.note-code-pre .line.diff.remove::before {
+  content: "−";
+  color: #ff6b6b;
+}

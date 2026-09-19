@@ -10,6 +10,7 @@ import {
   VID,
   yt,
   ytWatch,
+  beforeYouStart,
 } from "@/config/moshka-roadmap/helpers"
 import type { NoteDocument } from "@/lib/notes-types"
 
@@ -23,6 +24,12 @@ export const moshkaScoreNotes: Record<string, NoteDocument> = {
         id: "goal",
         title: "The thing you will show",
         blocks: [
+          beforeYouStart(
+            "plan",
+            "Build a two-team scoreboard: big numbers, plus and minus, optional reset.",
+            "Home and Away scores change when you click buttons.",
+            ["index.html", "styles.css", "app.js"]
+          ),
           ...figureN(
             1,
             "score-goal",
@@ -219,7 +226,13 @@ button {
             "JavaScript crash course (Traversy Media)",
             "55:00",
             "1:15:00",
-            "Events. Each button fires one click. Stop at 1:15:00."
+            "Events. Each button fires one click. Stop at 1:15:00. Loops and map are in JavaScript lab."
+          ),
+          link(
+            "js-lab",
+            "/notes/moshka/moshka-roadmap/moshka-p-js-lab/moshka-js-learn",
+            "JavaScript lab",
+            "Language notes. This scoreboard lesson is only plus and minus clicks."
           ),
           md(
             "m",

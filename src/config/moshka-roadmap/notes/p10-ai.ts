@@ -11,6 +11,7 @@ import {
   tip,
   VID,
   ytWatch,
+  beforeYouStart,
 } from "@/config/moshka-roadmap/helpers"
 import type { NoteDocument } from "@/lib/notes-types"
 
@@ -25,6 +26,12 @@ export const moshkaAiNotes: Record<string, NoteDocument> = {
         id: "goal",
         title: "Two tools, two jobs",
         blocks: [
+          beforeYouStart(
+            "plan",
+            "Learn chat UI (AI SDK) vs long jobs on AWS, and when each fits.",
+            "You can name which box handles a quick chat vs a heavy worker.",
+            []
+          ),
           ...figureN(
             1,
             "ai-boxes",

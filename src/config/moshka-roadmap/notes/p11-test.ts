@@ -6,6 +6,7 @@ import {
   md,
   tasks,
   tip,
+  beforeYouStart,
 } from "@/config/moshka-roadmap/helpers"
 import type { NoteDocument } from "@/lib/notes-types"
 
@@ -19,6 +20,12 @@ export const moshkaTestNotes: Record<string, NoteDocument> = {
         id: "goal",
         title: "A robot user",
         blocks: [
+          beforeYouStart(
+            "plan",
+            "Write one Playwright test that opens the app and clicks like a real user.",
+            "Test passes locally twice in a row.",
+            []
+          ),
           ...figureN(
             1,
             "playwright",

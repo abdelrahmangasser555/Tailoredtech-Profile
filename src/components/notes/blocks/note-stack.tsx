@@ -256,7 +256,7 @@ export function NoteStack({
 
       <div
         className={cn(
-          "overflow-x-auto border border-white/10 bg-black/20 p-4 md:p-5",
+          "overflow-x-auto overflow-y-hidden border border-white/10 bg-black/20 p-4 md:p-5",
           horizontal
             ? "flex min-w-max flex-row items-stretch"
             : "flex flex-col items-stretch"

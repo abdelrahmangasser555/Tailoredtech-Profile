@@ -72,7 +72,7 @@ export function NoteMarkdown({
   return (
     <div
       className={cn(
-        "note-md mt-5 max-w-2xl text-base leading-relaxed text-white/45 md:text-[1.05rem]",
+        "note-md mt-5 max-w-2xl text-base leading-relaxed text-white/45 md:text-[1.05rem] [&>:last-child]:mb-0",
         className
       )}
     >
@@ -130,7 +130,7 @@ export function NoteMarkdown({
             </blockquote>
           ),
           table: ({ children }) => (
-            <div className="mt-5 overflow-x-auto border border-white/10 first:mt-0">
+            <div className="notes-thin-scroll mt-5 overflow-x-auto overflow-y-hidden border border-white/10 first:mt-0">
               <table className="w-full min-w-[20rem] border-collapse text-left text-sm">
                 {children}
               </table>

@@ -296,7 +296,10 @@ export function NotesBrowser({
   const completed = useCompletedSet(fileIds)
 
   return (
-    <div className="min-h-svh bg-[#f7f7f2] text-foreground">
+    <div
+      data-notes-surface="light"
+      className="min-h-svh bg-[#f7f7f2] text-foreground"
+    >
       <TrackNoteBrowser
         folderPath={
           pathIds.length ? `/notes/${pathIds.join("/")}` : "/notes"

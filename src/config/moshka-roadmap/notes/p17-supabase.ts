@@ -12,6 +12,7 @@ import {
   VID,
   yt,
   ytWatch,
+  beforeYouStart,
 } from "@/config/moshka-roadmap/helpers"
 import type { NoteDocument } from "@/lib/notes-types"
 
@@ -26,6 +27,12 @@ export const moshkaSbNotes: Record<string, NoteDocument> = {
         id: "goal",
         title: "Not a new language",
         blocks: [
+          beforeYouStart(
+            "plan",
+            "Use Supabase for hosted Postgres, auth, dashboard, and row-level security.",
+            "You can say what RLS protects and why the anon key is not enough alone.",
+            []
+          ),
           ...figureN(
             1,
             "sb-stack",

@@ -12,6 +12,7 @@ import {
   VID,
   yt,
   ytWatch,
+  beforeYouStart,
 } from "@/config/moshka-roadmap/helpers"
 import type { NoteDocument } from "@/lib/notes-types"
 
@@ -26,6 +27,12 @@ export const moshkaNextNotes: Record<string, NoteDocument> = {
         id: "goal",
         title: "Same product, real stack",
         blocks: [
+          beforeYouStart(
+            "plan",
+            "Rebuild Harbor with Next.js: routes, server vs client, API, data fetching.",
+            "You can open the app locally and point at the app folder structure.",
+            ["src/app"]
+          ),
           ...figureN(
             1,
             "next-router",

@@ -12,6 +12,7 @@ import {
   VID,
   yt,
   ytWatch,
+  beforeYouStart,
 } from "@/config/moshka-roadmap/helpers"
 import type { NoteDocument } from "@/lib/notes-types"
 
@@ -26,6 +27,12 @@ export const moshkaOpsNotes: Record<string, NoteDocument> = {
         id: "goal",
         title: "Where Harbor can live",
         blocks: [
+          beforeYouStart(
+            "plan",
+            "Learn where apps run: Linux, Docker, AWS pieces, Azure names.",
+            "You can point at S3, Lambda, and CloudFront on a simple map.",
+            []
+          ),
           ...figureN(
             1,
             "aws-map",

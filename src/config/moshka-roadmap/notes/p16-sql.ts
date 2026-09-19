@@ -12,6 +12,7 @@ import {
   VID,
   yt,
   ytWatch,
+  beforeYouStart,
 } from "@/config/moshka-roadmap/helpers"
 import type { NoteDocument } from "@/lib/notes-types"
 
@@ -26,6 +27,12 @@ export const moshkaSqlNotes: Record<string, NoteDocument> = {
         id: "goal",
         title: "Same Harbor, tables",
         blocks: [
+          beforeYouStart(
+            "plan",
+            "Store Harbor logs in Postgres tables and query them from Next.js.",
+            "You can describe one row as columns instead of one JSON document.",
+            []
+          ),
           ...figureN(
             1,
             "sql-grid",

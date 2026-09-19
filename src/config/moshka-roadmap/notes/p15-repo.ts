@@ -9,6 +9,7 @@ import {
   stack,
   tasks,
   tip,
+  beforeYouStart,
 } from "@/config/moshka-roadmap/helpers"
 import type { NoteDocument } from "@/lib/notes-types"
 
@@ -23,6 +24,12 @@ export const moshkaRepoNotes: Record<string, NoteDocument> = {
         id: "goal",
         title: "Same product, better folders",
         blocks: [
+          beforeYouStart(
+            "plan",
+            "Split Harbor into route, service, repo, and db folders like production code.",
+            "API routes stay thin and Mongo access lives in repo files.",
+            ["src/app", "src/repo", "src/service"]
+          ),
           ...figureN(
             1,
             "layers",

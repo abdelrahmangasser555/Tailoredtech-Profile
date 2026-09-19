@@ -212,7 +212,7 @@ async function renderMermaidInto({
     if (vb && vb.length === 4 && vb.every((n) => Number.isFinite(n))) {
       const [x, y, w, h] = vb
       // Small bottom pad only — large pads caused empty scroll traps with Lenis
-      const padBottom = expanded ? 24 : 16
+      const padBottom = expanded ? 16 : compact ? 4 : 10
       el.setAttribute("viewBox", `${x} ${y} ${w} ${h + padBottom}`)
     }
     el.setAttribute("width", "100%")
@@ -421,7 +421,7 @@ export function BrandedMermaid({
         ref={shellRef}
         className={cn(
           "overflow-hidden border border-white/10 bg-[var(--section-dark,#0A0A0A)] p-4 md:p-5",
-          vertical ? "pb-5 md:pb-6" : "pb-5 md:pb-6"
+          compact ? "pb-4 md:pb-4" : "pb-5 md:pb-5"
         )}
       >
         <div className="mb-3 flex items-center justify-between gap-3">

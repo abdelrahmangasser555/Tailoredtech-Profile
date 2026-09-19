@@ -10,6 +10,7 @@ import {
   mermaid,
   tasks,
   tip,
+  beforeYouStart,
 } from "@/config/moshka-roadmap/helpers"
 import type { NoteDocument } from "@/lib/notes-types"
 
@@ -23,6 +24,12 @@ export const moshkaCursorNotes: Record<string, NoteDocument> = {
         id: "goal",
         title: "AI is a junior pair, not a boss",
         blocks: [
+          beforeYouStart(
+            "plan",
+            "Install Cursor, write tight prompts, and review every change before you keep it.",
+            "You ran the app after an agent edit and understood the diff.",
+            []
+          ),
           ...figureN(
             1,
             "cursor-ui",

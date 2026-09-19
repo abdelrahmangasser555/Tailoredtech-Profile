@@ -12,6 +12,7 @@ import {
   VID,
   yt,
   ytWatch,
+  beforeYouStart,
 } from "@/config/moshka-roadmap/helpers"
 import type { NoteDocument } from "@/lib/notes-types"
 
@@ -26,6 +27,12 @@ export const moshkaApiNotes: Record<string, NoteDocument> = {
         id: "goal",
         title: "Refresh and it is still there",
         blocks: [
+          beforeYouStart(
+            "plan",
+            "Connect Mongo to Next.js so logs survive refresh and other users can read them.",
+            "You post a log in the app and see it after reload.",
+            ["src/app/api"]
+          ),
           ...figureN(
             1,
             "db-disk",
@@ -135,6 +142,12 @@ You will:
         id: "idea",
         title: "Why the page is not enough",
         blocks: [
+          beforeYouStart(
+            "db-plan",
+            "Learn what a database is and why Harbor localStorage is not enough for a real product.",
+            "You can name four places data can live and say which one shared teams use.",
+            []
+          ),
           ...figureN(
             1,
             "persistence-ladder",

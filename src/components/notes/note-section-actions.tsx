@@ -355,7 +355,7 @@ export function NoteSectionActions({
             )}
           </ActionIcon>
           {markdownBlocks.length > 1 ? (
-            <div className="invisible absolute left-0 top-full z-20 mt-1 w-56 border border-white/15 bg-[#0a0a0a] opacity-0 shadow-2xl transition group-hover:visible group-hover:opacity-100">
+            <div className="absolute bottom-full left-0 z-20 mb-1 hidden w-56 border border-white/15 bg-[#0a0a0a] shadow-2xl group-hover:block">
               <button
                 type="button"
                 onClick={openMarkdownNew}

@@ -9,6 +9,7 @@ import {
   stack,
   tasks,
   tip,
+  beforeYouStart,
 } from "@/config/moshka-roadmap/helpers"
 import type { NoteDocument } from "@/lib/notes-types"
 
@@ -23,6 +24,12 @@ export const moshkaBbsNotes: Record<string, NoteDocument> = {
         id: "goal",
         title: "A real TailoredTech repo",
         blocks: [
+          beforeYouStart(
+            "plan",
+            "Walk a real Bahri BBS repo: folders, flow, roles, AGENTS.md.",
+            "You can name the four layers and how a request moves through them.",
+            []
+          ),
           ...figureN(
             1,
             "bbs-cutaway",

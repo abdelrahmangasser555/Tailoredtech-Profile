@@ -14,6 +14,9 @@ import {
   VID,
   yt,
   ytWatch,
+  beforeYouStart,
+  teachStep,
+  termStep,
 } from "@/config/moshka-roadmap/helpers"
 import type { NoteDocument } from "@/lib/notes-types"
 
@@ -28,6 +31,12 @@ export const moshkaCafeNotes: Record<string, NoteDocument> = {
         id: "goal",
         title: "The thing you will show",
         blocks: [
+          beforeYouStart(
+            "plan",
+            "Build a small cafe menu in three files: HTML structure, CSS look, JS clicks.",
+            "Add drinks, see the total go up, clear it with a button.",
+            ["index.html", "styles.css", "app.js"]
+          ),
           ...figureN(
             1,
             "cafe-goal",
@@ -110,36 +119,30 @@ It loads CSS with \`<link rel="stylesheet" href="styles.css" />\` and JS with \`
         id: "do",
         title: "Download and unzip",
         blocks: [
-          ill("unzip", "moshka-unzip.png", "Unzip = three files"),
-          md(
-            "d",
-            `1. Download **Pixel Cafe zip** from the folder page (or the download block on this project).
-2. Put it on your Desktop so you can find it.
-3. Unzip it. You should get a folder with \`index.html\`, \`styles.css\`, \`app.js\`, and \`README.md\`.
-
-If you like the terminal, run this after the zip is in Downloads:`
+          beforeYouStart(
+            "unzip-plan",
+            "Download the zip, unzip it on your Desktop, and check that the three code files exist.",
+            "You have a folder with index.html, styles.css, and app.js inside.",
+            ["index.html", "styles.css", "app.js"]
           ),
-          md(
-            "term",
-            `Run this in the terminal:
-
-\`\`\`bash
-cd ~/Desktop
+          ill("unzip", "moshka-unzip.png", "Unzip = three files"),
+          ...termStep(
+            1,
+            "Unzip on Mac or Linux",
+            "Open the terminal. Go to Desktop. Unzip from Downloads. Enter the folder. List files.",
+            `cd ~/Desktop
 unzip ~/Downloads/pixel-cafe.zip
 cd pixel-cafe
-ls
-\`\`\`
-
-On Windows PowerShell:
-
-\`\`\`bash
-cd $HOME\\Desktop
+ls`
+          ),
+          ...termStep(
+            2,
+            "Unzip on Windows",
+            "Same idea in PowerShell. Path uses backslashes.",
+            `cd $HOME\\Desktop
 Expand-Archive $HOME\\Downloads\\pixel-cafe.zip -DestinationPath .\\pixel-cafe
 cd pixel-cafe
-dir
-\`\`\`
-
-You should see \`index.html\`, \`styles.css\`, \`app.js\`.`
+dir`
           ),
         ],
       },
@@ -304,14 +307,56 @@ Do that before you paste anything. If the new row has no button, the JS will ign
       },
       {
         id: "paste",
-        title: "If you get stuck, paste this",
+        title: "Build the menu list",
         blocks: [
-          md(
-            "p",
-            `Replace the whole \`<ul id="menu">...</ul>\` block in \`index.html\` with this. Keep the rest of the file.
-
-\`\`\`html:index.html
-      <ul id="menu">
+          beforeYouStart(
+            "html-plan",
+            "Edit the drink list in index.html. Each row is name, price, Add button.",
+            "Three drinks show on the page. Each Add button has data-price for JS later.",
+            ["index.html"]
+          ),
+          ...teachStep(
+            1,
+            "Start the menu list",
+            `Find \`<ul id="menu">\` in \`index.html\`. Replace the inner part with one drink row first.`,
+            "html",
+            "index.html",
+            `      <ul id="menu">
+        <li>
+          <span>Espresso</span>
+          <span>18</span>
+          <button type="button" data-price="18">Add</button>
+        </li>
+      </ul>`,
+            "1-6"
+          ),
+          ...teachStep(
+            2,
+            "Add a second drink",
+            `Copy the same \`<li>\` shape. Change the name, price, and data-price on the button.`,
+            "html",
+            "index.html",
+            `      <ul id="menu">
+        <li>
+          <span>Espresso</span>
+          <span>18</span>
+          <button type="button" data-price="18">Add</button>
+        </li>
+        <li>
+          <span>Qahwa</span>
+          <span>12</span>
+          <button type="button" data-price="12">Add</button>
+        </li>
+      </ul>`,
+            "7-11"
+          ),
+          ...teachStep(
+            3,
+            "Add a third drink",
+            `Same pattern again. HTML does not style. It only declares what is on the page.`,
+            "html",
+            "index.html",
+            `      <ul id="menu">
         <li>
           <span>Espresso</span>
           <span>18</span>
@@ -327,10 +372,8 @@ Do that before you paste anything. If the new row has no button, the JS will ign
           <span>10</span>
           <button type="button" data-price="10">Add</button>
         </li>
-      </ul>
-\`\`\`
-
-HTML does not style. It only says what exists: heading, list, button.`
+      </ul>`,
+            "12-16"
           ),
           tasks("t", "Hands-on", [
             { id: "rename", label: "Rename one drink in index.html" },
@@ -551,13 +594,11 @@ Refresh. Hover a row. Hover a button. That is enough motion for this page.`
             "JavaScript in 100 Seconds (Fireship)",
             "Watch from 0:00 to the end. About 2 minutes."
           ),
-          ytWatch(
-            "v-long",
-            VID.jsTraversy,
-            "JavaScript crash course (Traversy Media)",
-            "0:00",
-            "25:00",
-            "Variables and functions. Stop at 25:00. DOM and events come in Harbor and Score."
+          link(
+            "js-lab",
+            "/notes/moshka/moshka-roadmap/moshka-p-js-lab/moshka-js-learn",
+            "JavaScript lab",
+            "Language, Node vs browser, loops, map, classes. Do that folder after this cafe. This lesson is only the click that updates the total."
           ),
         ],
       },
@@ -583,14 +624,42 @@ Try: add \`console.log("clicked", btn.dataset.price)\` inside the click listener
       },
       {
         id: "paste",
-        title: "Working app.js",
+        title: "Build app.js step by step",
         blocks: [
-          md(
-            "p",
-            `If clicks do nothing, replace all of \`app.js\` with this.
-
-\`\`\`js:app.js
-let total = 0
+          beforeYouStart(
+            "js-plan",
+            "Make every Add button increase the total on the page.",
+            "Click Espresso (+18) then Qahwa (+12). Total shows 30.",
+            ["app.js"]
+          ),
+          ...teachStep(
+            1,
+            "Remember the total",
+            `\`total\` is a number in memory. It starts at 0 every time you refresh the page.`,
+            "js",
+            "app.js",
+            `let total = 0
+`,
+            "1"
+          ),
+          ...teachStep(
+            2,
+            "Find the total on the page",
+            `Grab the \`<strong id="total">\` element so you can change its text later.`,
+            "js",
+            "app.js",
+            `let total = 0
+const label = document.getElementById("total")
+`,
+            "2"
+          ),
+          ...teachStep(
+            3,
+            "Wire every Add button",
+            `Each Add button has \`data-price="18"\` in HTML. Loop those buttons and listen for clicks.`,
+            "js",
+            "app.js",
+            `let total = 0
 const label = document.getElementById("total")
 
 document.querySelectorAll("button[data-price]").forEach((btn) => {
@@ -599,15 +668,14 @@ document.querySelectorAll("button[data-price]").forEach((btn) => {
     label.textContent = String(total)
   })
 })
-\`\`\`
+`,
+            "4-9"
+          ),
+          md(
+            "check",
+            `**Check:** Espresso adds 18. Qahwa adds 12. Total 30.
 
-What this does:
-
-1. \`total\` lives in memory. Refresh sets it back to 0. That is normal for now.
-2. \`querySelectorAll("button[data-price]")\` finds every Add button.
-3. \`Number(...)\` turns \`"18"\` into \`18\`. Without it, you get \`"018"\` string concat.
-
-Open the page. Add espresso. Total should become 18. Add qahwa. Total 30.`
+**Why \`Number(...)\`?** Without it, JavaScript treats prices as text and you get \`"018"\` instead of math.`
           ),
           tasks("t", "Hands-on", [
             { id: "click", label: "Clicking a drink changes the total on the page" },
@@ -639,27 +707,46 @@ Try that yourself. If you put \`data-price\` on Clear, it will add a drink inste
       },
       {
         id: "paste",
-        title: "HTML plus JS",
+        title: "Clear button",
         blocks: [
-          md(
-            "p",
-            `In \`index.html\`, right after the total paragraph, add:
+          beforeYouStart(
+            "clear-plan",
+            "Add a Clear button in HTML, then reset total in app.js when it is clicked.",
+            "Add drinks, click Clear, total goes back to 0.",
+            ["index.html", "app.js"]
+          ),
+          ...teachStep(
+            1,
+            "Add the Clear button in HTML",
+            `Put this under the total. **No** \`data-price\` on Clear, or it will act like an Add button.`,
+            "html",
+            "index.html",
+            `      <p class="total">Total: <strong id="total">0</strong></p>
+      <button type="button" id="clear">Clear</button>`,
+            "1-2"
+          ),
+          ...teachStep(
+            2,
+            "Reset total in app.js",
+            `Append at the bottom of \`app.js\`. Keep your Add-button code above this.`,
+            "js",
+            "app.js",
+            `let total = 0
+const label = document.getElementById("total")
 
-\`\`\`html:index.html
-      <p class="total">Total: <strong id="total">0</strong></p>
-      <button type="button" id="clear">Clear</button>
-\`\`\`
+document.querySelectorAll("button[data-price]").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    total += Number(btn.dataset.price)
+    label.textContent = String(total)
+  })
+})
 
-Then append this at the bottom of \`app.js\` (keep the add-to-total code above it):
-
-\`\`\`js:app.js
 document.getElementById("clear").addEventListener("click", () => {
   total = 0
   label.textContent = "0"
 })
-\`\`\`
-
-Add two drinks. Click Clear. Total is 0.`
+`,
+            "11-14"
           ),
           tasks("t", "Hands-on", [
             { id: "clear", label: "Clear sets the total back to 0" },

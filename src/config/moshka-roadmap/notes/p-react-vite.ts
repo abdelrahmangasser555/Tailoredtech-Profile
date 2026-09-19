@@ -9,6 +9,8 @@ import {
   link,
   md,
   meme,
+  beforeYouStart,
+  teachStep,
   mermaid,
   tasks,
   tip,
@@ -29,6 +31,12 @@ export const moshkaReactNotes: Record<string, NoteDocument> = {
         id: "goal",
         title: "Why this folder exists",
         blocks: [
+          beforeYouStart(
+            "plan",
+            "Create a Vite + React + TypeScript app and build a reusable vessel row with props and state.",
+            "Table filters when you type in search. Components live in separate files.",
+            ["src/App.tsx", "src/VesselRow.tsx"]
+          ),
           figure("ill", "moshka-vite-react-start.png", "React Harbor"),
           meme("copy", "moshka-meme-copy-paste.png", "Why React exists"),
           md(
@@ -448,18 +456,32 @@ Inside JSX, \`{v.name}\` prints a variable. \`{2 + 2}\` prints 4. You will use t
         id: "do",
         title: "Read, then replace",
         blocks: [
-          md(
-            "m",
-            `Try first: change the import from \`./App.css\` comment only. Save. The dev server should hot-reload.
-
-**main.tsx** does three jobs: import React, import your App, call \`createRoot\` on \`#root\`.`
+          beforeYouStart(
+            "main-plan",
+            "Edit main.tsx so React mounts your App into the #root div in index.html.",
+            "The dev server shows your App with no red errors in the Console.",
+            ["src/main.tsx"]
           ),
-          md(
-            "p",
-            `Replace all of \`src/main.tsx\` with:
-
-\`\`\`tsx:src/main.tsx
-import { StrictMode } from "react"
+          ...teachStep(
+            1,
+            "Imports",
+            `These lines load React, the DOM helper, global CSS, and your App component.`,
+            "tsx",
+            "src/main.tsx",
+            `import { StrictMode } from "react"
+import { createRoot } from "react-dom/client"
+import "./index.css"
+import App from "./App.tsx"
+`,
+            "1-4"
+          ),
+          ...teachStep(
+            2,
+            "Mount App on #root",
+            `\`createRoot\` finds \`#root\` in \`index.html\` and renders \`<App />\` inside \`StrictMode\` (extra dev checks).`,
+            "tsx",
+            "src/main.tsx",
+            `import { StrictMode } from "react"
 import { createRoot } from "react-dom/client"
 import "./index.css"
 import App from "./App.tsx"
@@ -469,9 +491,12 @@ createRoot(document.getElementById("root")!).render(
     <App />
   </StrictMode>
 )
-\`\`\`
-
-\`document.getElementById("root")!\` means "find #root". The \`!\` tells TypeScript it exists. If you rename the id in HTML, update this line.`
+`,
+            "6-10"
+          ),
+          md(
+            "root-note",
+            `The \`!\` after \`getElementById("root")\` tells TypeScript the element exists. If you rename the id in HTML, change this line too.`
           ),
           md(
             "strict",
@@ -499,18 +524,19 @@ If the screen is blank after paste:
         id: "do",
         title: "Harbor shell",
         blocks: [
-          md(
-            "m",
-            `Try first: delete the Vite logos in \`App.tsx\` and print only \`<h1>Harbor</h1>\`.
-
-Then paste the full file below so you start from a clean layout.`
+          beforeYouStart(
+            "app-plan",
+            "Replace the Vite demo with a simple harbor header and a placeholder main area.",
+            "Page title React Harbor, sharp layout, room for the vessel table next lesson.",
+            ["src/App.tsx", "src/App.css"]
           ),
-          md(
-            "p",
-            `Replace all of \`src/App.tsx\`:
-
-\`\`\`tsx:src/App.tsx
-import "./App.css"
+          ...teachStep(
+            1,
+            "App shell in App.tsx",
+            `One parent \`div\`, header with eyebrow + title, main for table later.`,
+            "tsx",
+            "src/App.tsx",
+            `import "./App.css"
 
 export default function App() {
   return (
@@ -525,7 +551,8 @@ export default function App() {
     </div>
   )
 }
-\`\`\``
+`,
+            "1-16"
           ),
           md(
             "css",

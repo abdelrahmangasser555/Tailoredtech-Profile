@@ -9,6 +9,7 @@ import {
   mermaid,
   tasks,
   tip,
+  beforeYouStart,
 } from "@/config/moshka-roadmap/helpers"
 import type { NoteDocument } from "@/lib/notes-types"
 
@@ -22,6 +23,12 @@ export const moshkaAuthNotes: Record<string, NoteDocument> = {
         id: "goal",
         title: "Identity is a product",
         blocks: [
+          beforeYouStart(
+            "plan",
+            "Learn who the user is, which company they belong to, and what they may access.",
+            "You can explain session, tenant, and role in plain words.",
+            []
+          ),
           ...figureN(
             1,
             "auth-doors",

@@ -13,6 +13,8 @@ import {
   VID,
   yt,
   ytWatch,
+  beforeYouStart,
+  teachStep,
 } from "@/config/moshka-roadmap/helpers"
 import type { NoteDocument } from "@/lib/notes-types"
 
@@ -27,6 +29,12 @@ export const moshkaHarborNotes: Record<string, NoteDocument> = {
         id: "goal",
         title: "The thing you will show",
         blocks: [
+          beforeYouStart(
+            "plan",
+            "Build a captain log: type a note, save it, keep it after refresh with localStorage.",
+            "Notes stay on this browser. Later you will use a real database for shared logs.",
+            ["index.html", "styles.css", "app.js"]
+          ),
           ...figureN(
             1,
             "harbor-goal",
@@ -263,6 +271,12 @@ li { padding: 0.6rem 0; border-bottom: 1px dashed #d4c4a8; }
         id: "do",
         title: "Type, save, see",
         blocks: [
+          beforeYouStart(
+            "plan",
+            "Wire the form so Save adds a line to the list without reloading the page.",
+            "You type text, click Save, see a new line at the top, and the input clears.",
+            ["app.js"]
+          ),
           yt(
             "v",
             VID.js,
@@ -275,7 +289,13 @@ li { padding: 0.6rem 0; border-bottom: 1px dashed #d4c4a8; }
             "JavaScript crash course (Traversy Media)",
             "45:00",
             "1:05:00",
-            "DOM and events. This is the form submit. Stop at 1:05:00."
+            "Events. This is the form submit. Stop at 1:05:00. Language (loops, map, Node) lives in JavaScript lab, not here."
+          ),
+          link(
+            "js-lab",
+            "/notes/moshka/moshka-roadmap/moshka-p-js-lab/moshka-js-learn",
+            "JavaScript lab",
+            "If functions or arrays still feel new, do that notes list next. This Harbor lesson is only the form."
           ),
           ...figureN(
             1,
@@ -292,29 +312,73 @@ Open the Console. Log \`input.value\` inside the submit handler.
 
 Save two notes, then refresh. **They disappear.** That is not a bug. You have no persistence yet.`
           ),
-          md(
-            "p",
-            `Replace all of \`app.js\` if save does not work:
-
-\`\`\`js:app.js
-const form = document.getElementById("form")
+          ...teachStep(
+            1,
+            "Grab the three HTML pieces",
+            `Open \`app.js\`. At the top, store references to the form, the text box, and the list. These ids must match \`index.html\` exactly.`,
+            "js",
+            "app.js",
+            `const form = document.getElementById("form")
+const input = document.getElementById("text")
+const list = document.getElementById("list")
+`,
+            "1-3"
+          ),
+          ...teachStep(
+            2,
+            "Listen for Save (submit)",
+            `When the user clicks Save, the form tries to reload the page. **Step 2** adds a listener that stops that reload and runs your code instead.`,
+            "js",
+            "app.js",
+            `const form = document.getElementById("form")
 const input = document.getElementById("text")
 const list = document.getElementById("list")
 
 form.addEventListener("submit", (event) => {
-  // Stop the browser from reloading the whole page
+  event.preventDefault()
+})
+`,
+            "5-7"
+          ),
+          ...teachStep(
+            3,
+            "Read the text and skip empty saves",
+            `Inside the listener: read \`input.value\`, trim spaces, and return early if the user saved nothing.`,
+            "js",
+            "app.js",
+            `const form = document.getElementById("form")
+const input = document.getElementById("text")
+const list = document.getElementById("list")
+
+form.addEventListener("submit", (event) => {
+  event.preventDefault()
+  const text = input.value.trim()
+  if (!text) return
+})
+`,
+            "8-9"
+          ),
+          ...teachStep(
+            4,
+            "Put the line on the page",
+            `Create a new \`<li>\`, set its text, prepend it to the list, then clear the input so you can type the next note.`,
+            "js",
+            "app.js",
+            `const form = document.getElementById("form")
+const input = document.getElementById("text")
+const list = document.getElementById("list")
+
+form.addEventListener("submit", (event) => {
   event.preventDefault()
   const text = input.value.trim()
   if (!text) return
   const li = document.createElement("li")
   li.textContent = text
-  // Only in memory — refresh will clear this list until localStorage lesson
   list.prepend(li)
   input.value = ""
 })
-\`\`\`
-
-Empty save should do nothing. A real line should appear at the top of the list.`
+`,
+            "10-14"
           ),
           tasks("t", "Hands-on", [
             { id: "save", label: "Typing a line and saving shows it on the page" },
@@ -380,21 +444,40 @@ Refresh. Run \`getItem\` again. The string is still there.`
       },
       {
         id: "paste",
-        title: "Full app.js with persist",
+        title: "Build app.js with localStorage",
         blocks: [
-          md(
-            "p",
-            `Replace \`app.js\`:
-
-\`\`\`js:app.js
-const form = document.getElementById("form")
+          beforeYouStart(
+            "persist-plan",
+            "Save notes as JSON in localStorage, then redraw the list on load and after every save.",
+            "Refresh keeps your notes on this browser. Another browser still will not see them.",
+            ["app.js"]
+          ),
+          ...teachStep(
+            1,
+            "Name the storage key",
+            `Keep the form code from the last lesson. Add one constant \`KEY\` so every read/write uses the same drawer name.`,
+            "js",
+            "app.js",
+            `const form = document.getElementById("form")
+const input = document.getElementById("text")
+const list = document.getElementById("list")
+const KEY = "harbor-notes"
+`,
+            "4"
+          ),
+          ...teachStep(
+            2,
+            "readNotes and writeNotes",
+            `\`readNotes\` pulls a JSON string from the drawer and turns it into an array. \`writeNotes\` does the reverse. If JSON is broken, return an empty array instead of crashing.`,
+            "js",
+            "app.js",
+            `const form = document.getElementById("form")
 const input = document.getElementById("text")
 const list = document.getElementById("list")
 const KEY = "harbor-notes"
 
 function readNotes() {
   try {
-    // Drawer read: string in, array out
     const raw = localStorage.getItem(KEY)
     return raw ? JSON.parse(raw) : []
   } catch {
@@ -403,7 +486,112 @@ function readNotes() {
 }
 
 function writeNotes(notes) {
-  // Always store JSON text, not the array object directly
+  localStorage.setItem(KEY, JSON.stringify(notes))
+}
+`,
+            "6-17"
+          ),
+          ...teachStep(
+            3,
+            "render() redraws the list",
+            `Clear the \`<ul>\`, loop the saved strings, and append one \`<li>\` per note. You will call this on page load and after each save.`,
+            "js",
+            "app.js",
+            `const form = document.getElementById("form")
+const input = document.getElementById("text")
+const list = document.getElementById("list")
+const KEY = "harbor-notes"
+
+function readNotes() {
+  try {
+    const raw = localStorage.getItem(KEY)
+    return raw ? JSON.parse(raw) : []
+  } catch {
+    return []
+  }
+}
+
+function writeNotes(notes) {
+  localStorage.setItem(KEY, JSON.stringify(notes))
+}
+
+function render() {
+  list.innerHTML = ""
+  for (const text of readNotes()) {
+    const li = document.createElement("li")
+    li.textContent = text
+    list.append(li)
+  }
+}
+`,
+            "19-26"
+          ),
+          ...teachStep(
+            4,
+            "Save to storage, then render",
+            `On submit: prepend the new text to the array, write the array to localStorage, clear the input, call \`render()\`.`,
+            "js",
+            "app.js",
+            `const form = document.getElementById("form")
+const input = document.getElementById("text")
+const list = document.getElementById("list")
+const KEY = "harbor-notes"
+
+function readNotes() {
+  try {
+    const raw = localStorage.getItem(KEY)
+    return raw ? JSON.parse(raw) : []
+  } catch {
+    return []
+  }
+}
+
+function writeNotes(notes) {
+  localStorage.setItem(KEY, JSON.stringify(notes))
+}
+
+function render() {
+  list.innerHTML = ""
+  for (const text of readNotes()) {
+    const li = document.createElement("li")
+    li.textContent = text
+    list.append(li)
+  }
+}
+
+form.addEventListener("submit", (event) => {
+  event.preventDefault()
+  const text = input.value.trim()
+  if (!text) return
+  const notes = [text, ...readNotes()]
+  writeNotes(notes)
+  input.value = ""
+  render()
+})
+`,
+            "28-36"
+          ),
+          ...teachStep(
+            5,
+            "Draw notes when the page opens",
+            `Last line: call \`render()\` once at the bottom so old notes show up before you type anything.`,
+            "js",
+            "app.js",
+            `const form = document.getElementById("form")
+const input = document.getElementById("text")
+const list = document.getElementById("list")
+const KEY = "harbor-notes"
+
+function readNotes() {
+  try {
+    const raw = localStorage.getItem(KEY)
+    return raw ? JSON.parse(raw) : []
+  } catch {
+    return []
+  }
+}
+
+function writeNotes(notes) {
   localStorage.setItem(KEY, JSON.stringify(notes))
 }
 
@@ -427,9 +615,8 @@ form.addEventListener("submit", (event) => {
 })
 
 render()
-\`\`\`
-
-Save two lines. Refresh. They should still be there.`
+`,
+            "38"
           ),
           info(
             "limit",

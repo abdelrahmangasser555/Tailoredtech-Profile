@@ -7,6 +7,7 @@ import {
   mermaid,
   tasks,
   tip,
+  beforeYouStart,
 } from "@/config/moshka-roadmap/helpers"
 import type { NoteDocument } from "@/lib/notes-types"
 
@@ -20,6 +21,12 @@ export const moshkaAgencyNotes: Record<string, NoteDocument> = {
         id: "goal",
         title: "You are not a ticket machine",
         blocks: [
+          beforeYouStart(
+            "plan",
+            "Practice agency habits: clear asks, small slices, good messages when stuck.",
+            "You sent a help message with file path, command, and error text.",
+            []
+          ),
           ...figureN(
             1,
             "good-question",

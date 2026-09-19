@@ -79,6 +79,34 @@ export const moshkaTree: NotesFolderNode = folder(
           }
         ),
         folder(
+          "moshka-p-js-lab",
+          "JavaScript lab",
+          [
+            file("moshka-js-learn", "What this folder is"),
+            file("moshka-js-what", "What JavaScript is"),
+            file("moshka-js-runtime", "What a runtime is"),
+            file("moshka-js-browser", "JS in the browser"),
+            file("moshka-js-node", "Install Node and run a file"),
+            file("moshka-js-values", "Values, let, and const"),
+            file("moshka-js-functions", "Functions"),
+            file("moshka-js-if", "if and else"),
+            file("moshka-js-loops", "Loops"),
+            file("moshka-js-arrays", "Arrays"),
+            file("moshka-js-map", "map, filter, find"),
+            file("moshka-js-objects", "Objects"),
+            file("moshka-js-classes", "Classes"),
+            file("moshka-js-errors", "Errors and try/catch"),
+            file("moshka-js-async", "async in one page"),
+          ],
+          {
+            trackProgress: true,
+            chat: projectChat(
+              "JavaScript language lab. Not a zip project. Browser vs Node, functions, loops, map, classes. Type files in js-lab and run with node.",
+              "Finished at least one first-build so JS in a page is not a mystery."
+            ),
+          }
+        ),
+        folder(
           "moshka-p-git-ship",
           "01d Ship with Git",
           [

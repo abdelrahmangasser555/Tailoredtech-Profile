@@ -271,3 +271,15 @@ used in: moshka-agency-delegate
 filename: moshka-bbs-cutaway.png
 prompt: Ship rooms features repo db app. GLOBAL STYLE.
 used in: moshka-bbs-learn
+
+filename: moshka-js-runtime.png
+prompt: DIAGRAM two boxes browser vs Node, JS language feeds both. GLOBAL STYLE.
+used in: moshka-js-runtime
+
+filename: moshka-js-node-run.png
+prompt: DIAGRAM terminal node hello.js output Hello. GLOBAL STYLE.
+used in: moshka-js-node
+
+filename: moshka-js-map.png
+prompt: DIAGRAM array 2 4 6 map x2 to 4 8 12. GLOBAL STYLE.
+used in: moshka-js-map

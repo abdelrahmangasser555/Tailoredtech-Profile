@@ -117,7 +117,7 @@ export function TerminalPlayground({
         </div>
 
         <div
-          className="max-h-56 overflow-y-auto px-4 py-3 font-mono text-xs leading-relaxed"
+          className="notes-thin-scroll max-h-56 overflow-y-auto overflow-x-hidden px-4 py-3 font-mono text-xs leading-relaxed"
           onClick={() => inputRef.current?.focus()}
         >
           {lines.map((line, i) => (

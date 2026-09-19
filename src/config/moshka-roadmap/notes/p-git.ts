@@ -13,6 +13,8 @@ import {
   VID,
   yt,
   ytWatch,
+  beforeYouStart,
+  termStep,
 } from "@/config/moshka-roadmap/helpers"
 import type { NoteDocument } from "@/lib/notes-types"
 
@@ -21,12 +23,18 @@ export const moshkaGitNotes: Record<string, NoteDocument> = {
     id: "moshka-git-learn",
     name: "What you will learn",
     description:
-      "Save history, push to GitHub, branch, open a PR, use gh. After HTML, CSS, and JS on disk.",
+      "Save history, push to GitHub, branch, open a PR, use gh. After a first-build and JavaScript lab.",
     sections: [
       {
         id: "goal",
         title: "Why Git comes now",
         blocks: [
+          beforeYouStart(
+            "plan",
+            "Learn Git on your machine, GitHub as remote, branches, pull requests, and gh CLI.",
+            "Pixel Cafe lives in a repo on GitHub with at least one commit and one PR opened.",
+            []
+          ),
           md(
             "g",
             `You can already change \`index.html\` and refresh. Git answers the next questions:
@@ -273,36 +281,30 @@ Choose GitHub.com, HTTPS, and login via browser when asked.`
         id: "local",
         title: "Practice repo",
         blocks: [
-          md(
-            "m",
-            `Create a throwaway folder so mistakes are cheap:
-
-\`\`\`bash
-mkdir -p ~/Desktop/git-practice
+          beforeYouStart(
+            "fc-plan",
+            "Make a practice folder, run git init, then create your first commit.",
+            "git log shows one commit. git status is clean.",
+            ["README.md"]
+          ),
+          ...termStep(
+            1,
+            "Create the folder",
+            "Use a throwaway folder on Desktop so mistakes are cheap.",
+            `mkdir -p ~/Desktop/git-practice
 cd ~/Desktop/git-practice
 echo "# Practice" > README.md
 git init
-git status
-\`\`\`
-
-\`git status\` should show README as **untracked**.`
+git status`
           ),
-          md(
-            "commit",
-            `Stage everything and commit:
-
-\`\`\`bash
-# Stage all files in this folder
-git add .
-
-# Snapshot with a message (present tense, short)
+          ...termStep(
+            2,
+            "Stage and commit",
+            "git add moves files into staging. git commit saves a snapshot with a message.",
+            `git add .
 git commit -m "add readme"
-
-# Read history
 git log --oneline
-\`\`\`
-
-After commit, \`git status\` should say **nothing to commit, working tree clean**.`
+git status`
           ),
           illustration(
             "play",

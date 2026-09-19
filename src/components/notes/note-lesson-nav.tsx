@@ -29,7 +29,7 @@ export function NoteLessonNav({
     <nav
       aria-label="Lesson navigation"
       className={cn(
-        "mx-auto max-w-5xl border-t border-white/10 px-5 py-10 md:px-8 md:py-12",
+        "mx-auto max-w-5xl border-t border-white/10 px-5 py-6 md:px-8 md:py-8",
         className
       )}
     >

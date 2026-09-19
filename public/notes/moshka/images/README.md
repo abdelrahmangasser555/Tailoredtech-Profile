@@ -15,9 +15,11 @@ Drop PNG files here. Names must match `src/config/moshka-image-prompts.txt`.
 - moshka-css-paint.png
 - moshka-js-click.png
 
-**Port Watch**
-- moshka-port-watch-dense.png
-- moshka-table-columns.png
+**JavaScript lab**
+- moshka-js-runtime.png
+- moshka-js-node-run.png
+- moshka-js-map.png
+
 
 **React Harbor**
 - moshka-vite-react-start.png

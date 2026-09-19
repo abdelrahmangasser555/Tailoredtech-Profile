@@ -20,6 +20,7 @@
     "@react-pdf/renderer": "^4.6.0",
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.6.1",
+    "@shikijs/transformers": "^4.4.2",
     "ai": "^7.0.58",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",

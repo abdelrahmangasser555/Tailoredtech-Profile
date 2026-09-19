@@ -166,7 +166,7 @@ export function NotePlayground({
         </div>
 
         {output.length ? (
-          <pre className="max-h-36 overflow-auto border-t border-white/10 bg-black/50 px-4 py-3 font-mono text-xs leading-relaxed text-white/60 whitespace-pre-wrap">
+          <pre className="notes-thin-scroll max-h-36 overflow-auto border-t border-white/10 bg-black/50 px-4 py-3 font-mono text-xs leading-relaxed text-white/60 whitespace-pre-wrap">
             {output.join("\n")}
           </pre>
         ) : null}

@@ -3,6 +3,7 @@ import { moshkaStartNotes } from "@/config/moshka-roadmap/notes/start"
 import { moshkaCafeNotes } from "@/config/moshka-roadmap/notes/p01-cafe"
 import { moshkaHarborNotes } from "@/config/moshka-roadmap/notes/p02-harbor"
 import { moshkaScoreNotes } from "@/config/moshka-roadmap/notes/p03-score"
+import { moshkaJsNotes } from "@/config/moshka-roadmap/notes/p-js"
 import { moshkaGitNotes } from "@/config/moshka-roadmap/notes/p-git"
 import { moshkaPortNotes } from "@/config/moshka-roadmap/notes/p04-port"
 import { moshkaReactNotes } from "@/config/moshka-roadmap/notes/p-react-vite"
@@ -28,6 +29,7 @@ export const moshkaRoadmapNotes: Record<string, NoteDocument> = {
   ...moshkaCafeNotes,
   ...moshkaHarborNotes,
   ...moshkaScoreNotes,
+  ...moshkaJsNotes,
   ...moshkaGitNotes,
   ...moshkaPortNotes,
   ...moshkaReactNotes,

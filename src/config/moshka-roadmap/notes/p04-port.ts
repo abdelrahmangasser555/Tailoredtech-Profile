@@ -9,6 +9,7 @@ import {
   link,
   md,
   meme,
+  beforeYouStart,
   mermaid,
   tasks,
   tip,
@@ -29,6 +30,12 @@ export const moshkaPortNotes: Record<string, NoteDocument> = {
         id: "goal",
         title: "Looks like work, not a toy",
         blocks: [
+          beforeYouStart(
+            "plan",
+            "Turn the harbor table into a dense ops-style dashboard with CSS and small JS touches.",
+            "A tight header, a full table, icons and status colors that mean something.",
+            ["index.html", "styles.css", "app.js"]
+          ),
           ...figureN(
             1,
             "port-goal",
