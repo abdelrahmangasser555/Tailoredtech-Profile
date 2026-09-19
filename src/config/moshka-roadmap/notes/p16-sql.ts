@@ -1,5 +1,7 @@
 import {
   explain,
+  figLink,
+  figureN,
   info,
   lesson,
   link,
@@ -24,6 +26,13 @@ export const moshkaSqlNotes: Record<string, NoteDocument> = {
         id: "goal",
         title: "Same Harbor, tables",
         blocks: [
+          ...figureN(
+            1,
+            "sql-grid",
+            "moshka-sql-grid.png",
+            "Rows and columns",
+            `Each log row is one line in a table with fixed columns. ${figLink(1, "sql-grid")} is the grid mental model.`
+          ),
           md(
             "g",
             `Mongo was documents. SQL is rows in tables. TailoredTech still meets SQL on clients (reports, finance, some Azure shops).

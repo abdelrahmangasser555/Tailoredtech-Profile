@@ -1,5 +1,7 @@
 import {
   explain,
+  figLink,
+  figureN,
   info,
   lesson,
   link,
@@ -24,6 +26,13 @@ export const moshkaSbNotes: Record<string, NoteDocument> = {
         id: "goal",
         title: "Not a new language",
         blocks: [
+          ...figureN(
+            1,
+            "sb-stack",
+            "moshka-supabase-stack.png",
+            "Supabase stack",
+            `Postgres plus auth, dashboard, and RLS in one product. ${figLink(1, "sb-stack")} is how pieces stack.`
+          ),
           md(
             "g",
             `Supabase is Postgres you do not host, plus a dashboard, plus auth, plus auto APIs.

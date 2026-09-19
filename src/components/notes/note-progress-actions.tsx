@@ -85,7 +85,7 @@ export function NoteProgressActions({
             </button>
           ) : (
             <p className="text-sm text-white/35">
-              Tick this when the hands-on bit works on your machine.
+              Next lesson auto-marks done, or tick here when the hands-on works.
             </p>
           )}
         </div>

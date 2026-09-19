@@ -1,5 +1,7 @@
 import {
   explain,
+  figLink,
+  figureN,
   info,
   lesson,
   link,
@@ -24,6 +26,13 @@ export const moshkaOpsNotes: Record<string, NoteDocument> = {
         id: "goal",
         title: "Where Harbor can live",
         blocks: [
+          ...figureN(
+            1,
+            "aws-map",
+            "moshka-aws-map.png",
+            "AWS pieces",
+            `S3 stores files, Lambda runs code, CloudFront serves fast. ${figLink(1, "aws-map")} is the map you will hear on calls.`
+          ),
           md(
             "g",
             `TailoredTech hosting is not one cloud:

@@ -1,183 +1,273 @@
-Moshka notes: images for Abdelrahman to generate.
-Style: sharp, maritime/software teaching art. Readable labels, short words only. No purple AI slop. No joke mascots.
-Light notes browser UI must not use lime; images inside the dark note reader may use accent on dark panels only.
+Moshka notes: image prompts for Abdelrahman or any provider.
+Drop PNGs into: public/notes/moshka/images/
+Filenames are case-sensitive. Lessons use figure(), ill(), or meme() helpers.
 
-Drop every file into: public/notes/moshka/images/
-Wire-up: lessons use figure() blocks; filenames below must match exactly (case sensitive).
+=== GLOBAL STYLE (append to every prompt) ===
+Minimal black line art on cream off-white #F6F4EF. No photo realism. No gradients.
+No purple, no neon green, no lime on white. Optional one cool grey or navy #2a3544 accent only.
+Sharp corners. Lots of whitespace. Labels 1-4 words max. Self-explanatory at a glance.
 
-COUNT: 42 images
+=== MEME STYLE (for moshka-meme-*.png only) ===
+Same GLOBAL colors. Simple 2-panel OR classic top text / bottom text meme layout.
+Stick figures or minimal icons OK. Educational joke, not mean. Text baked into image, large readable sans-serif, black on cream.
+
+=== DIAGRAM STYLE (for moshka-ill-*.png and loaders) ===
+Same GLOBAL colors. Flow arrows, boxes, icons. Like a textbook figure, not a dashboard screenshot.
+
+COUNT: 55 images (see SHIPPED + MEMES + ILL below)
+
+SHIPPED (regenerate anytime; keep filename):
+- moshka-page-loads.png
+- moshka-three-files.png
+- moshka-vite-react-start.png
+- moshka-vite-template-pick.png
+- moshka-vite-folder-tour.png
+- moshka-react-vessel-row.png
+- moshka-react-use-state.png
+- moshka-react-jsx.png
+- moshka-react-package-json.png
+- moshka-react-events.png
+
+MEMES (educational, GLOBAL + MEME STYLE):
+- moshka-meme-copy-paste.png
+- moshka-meme-props.png
+- moshka-meme-usestate.png
+- moshka-meme-white-screen.png
+- moshka-meme-key.png
+- moshka-meme-jsx-class.png
+- moshka-meme-vite-not-next.png
+- moshka-meme-controlled-input.png
 
 ---
 
 filename: moshka-welcome.png
-prompt: A 19-year-old at a desk, two monitors. Left: small cafe website. Right: dense navy ops table. Small ship model. Black, cream, sharp corners. No paragraphs of readable text.
+prompt: Simple desk, two small monitor wireframes cafe vs ops table. GLOBAL STYLE.
 used in: moshka-start-here
 
 filename: moshka-page-loads.png
-prompt: Simple left-to-right diagram as illustration (not mermaid): a box index.html with two arrows to styles.css and app.js, then a third arrow to a browser window labeled Chrome. Cream background, black ink, compact, fits a narrow column.
-used in: moshka-cafe-files (replaces huge mermaid)
+prompt: DIAGRAM: index.html box, arrows to styles.css and app.js, arrow to browser Chrome. GLOBAL STYLE.
+used in: moshka-cafe-files
 
 filename: moshka-unzip.png
-prompt: Zip opening into three files: index.html, styles.css, app.js. Wood-adjacent maritime desk. Sharp.
-used in: moshka-cafe-unzip, moshka-harbor-unzip, moshka-score-unzip
+prompt: Zip icon opening to three file icons HTML CSS JS. GLOBAL STYLE.
+used in: moshka-cafe-unzip, harbor-unzip, score-unzip
 
 filename: moshka-three-files.png
-prompt: Three stacked sheets labeled HTML, CSS, JS. Arrow from HTML to the other two. Cream, black ink.
+prompt: Three stacked papers HTML CSS JS, arrow from HTML. GLOBAL STYLE.
 used in: moshka-cafe-files
 
 filename: moshka-html-bones.png
-prompt: Wireframe page: header, list, button boxes. Black on cream. Instructional.
+prompt: Wireframe boxes header list button. GLOBAL STYLE.
 used in: moshka-cafe-html
 
 filename: moshka-css-paint.png
-prompt: Wireframe cafe left, painted version right. Bucket labeled CSS. Sharp.
+prompt: Left wireframe page, right same page filled grey, arrow label CSS. GLOBAL STYLE.
 used in: moshka-cafe-css
 
 filename: moshka-js-click.png
-prompt: Finger on Add button, total changing 0 to 18. Dark cafe counter. Sharp pixels.
+prompt: Button Add, number 0 to 18 arrow. GLOBAL STYLE.
 used in: moshka-cafe-js
 
+filename: moshka-meme-copy-paste.png
+prompt: MEME top text COPY ROW THREE TIMES bottom text THERE HAS TO BE A BETTER WAY showing three duplicate table rows. GLOBAL + MEME STYLE.
+used in: moshka-port-components, moshka-react-learn
+
+filename: moshka-meme-props.png
+prompt: MEME parent stick figure hands paper labeled name status to child figure top PROPS GO DOWN ONLY bottom NOT BACK UP. GLOBAL + MEME STYLE.
+used in: moshka-react-props
+
+filename: moshka-meme-usestate.png
+prompt: MEME two panels search empty vs search red all rows hidden top BEFORE useState bottom AFTER useState. GLOBAL + MEME STYLE.
+used in: moshka-react-state
+
+filename: moshka-meme-white-screen.png
+prompt: MEME top WHITE SCREEN bottom DID YOU READ THE CONSOLE with tiny console icon. GLOBAL + MEME STYLE.
+used in: moshka-react-errors
+
+filename: moshka-meme-key.png
+prompt: MEME React logo confused top FORGOT KEY bottom LIST REBELS. GLOBAL + MEME STYLE.
+used in: moshka-react-list-keys
+
+filename: moshka-meme-jsx-class.png
+prompt: MEME top HTML class bottom JSX className with red X on class. GLOBAL + MEME STYLE.
+used in: moshka-react-jsx
+
+filename: moshka-meme-vite-not-next.png
+prompt: MEME top VITE TODAY bottom NEXT LATER two boxes. GLOBAL + MEME STYLE.
+used in: moshka-react-why-vite
+
+filename: moshka-meme-controlled-input.png
+prompt: MEME value and onChange holding hands top CONTROLLED INPUT bottom NEVER BREAK THE PAIR. GLOBAL + MEME STYLE.
+used in: moshka-react-events
+
 filename: moshka-harbor-paper.png
-prompt: Logbook page as browser window. Cream paper, dashed divider. Warm.
+prompt: Notebook page in browser frame dashed line. GLOBAL STYLE.
 used in: moshka-harbor-css
 
 filename: moshka-localstorage.png
-prompt: Browser window and a drawer labeled this computer only. Refresh icon. Notes stay in drawer.
+prompt: DIAGRAM browser window and labeled drawer this computer only refresh arrow notes stay in drawer. GLOBAL STYLE.
 used in: moshka-harbor-persist
 
+filename: moshka-refresh-wipes-list.png
+prompt: DIAGRAM before refresh list has items after refresh empty list X. Label RAM only. GLOBAL STYLE.
+used in: moshka-harbor-js
+
+filename: moshka-persistence-ladder.png
+prompt: DIAGRAM four rungs labeled 1 DOM 2 localStorage 3 server memory 4 database arrows up. GLOBAL STYLE educational.
+used in: moshka-harbor-persist, moshka-api-db-idea
+
+filename: moshka-react-state-refresh.png
+prompt: DIAGRAM React useState in memory refresh clears vs localStorage drawer vs database cloud. GLOBAL STYLE.
+used in: moshka-react-state
+
+filename: moshka-memory-server.png
+prompt: DIAGRAM server box array in RAM deploy restart array empty. GLOBAL STYLE.
+used in: moshka-api-db-idea
+
 filename: moshka-score-big.png
-prompt: Two huge pixel numbers on dark scoreboard. High contrast.
+prompt: Two large numbers on simple scoreboard wireframe. GLOBAL STYLE grey only no lime.
 used in: moshka-score-css
 
 filename: moshka-port-watch-dense.png
-prompt: Dense departure board, vessel names, navy grey, no hero whitespace.
-used in: moshka-port-layout, moshka-ux-density
+prompt: Tight table many rows small header. GLOBAL STYLE grey ink.
+used in: moshka-port-layout
 
 filename: moshka-table-columns.png
-prompt: Table with thead and tbody, one row highlighted. Ops screen style.
+prompt: Table thead tbody one row highlighted. GLOBAL STYLE.
 used in: moshka-port-table
 
 filename: moshka-copy-row.png
-prompt: Same HTML table row duplicated three times with different vessel names. Shows copy-paste pain.
-used in: moshka-port-components
+prompt: Three duplicate tr rows different names. GLOBAL STYLE diagram not meme.
+used in: moshka-port-components (optional; meme preferred)
 
 filename: moshka-bare-icon.png
-prompt: Sharp ship glyph vs ship in rounded neon circle with X over neon.
+prompt: Plain ship icon vs ship in circle with X. GLOBAL STYLE.
 used in: moshka-port-icons
 
 filename: moshka-vite-react-start.png
-prompt: Terminal showing npm create vite, beside a browser with React Harbor title. Dark editor, sharp. Labels: Vite, React, TypeScript.
+prompt: DIAGRAM terminal npm create vite arrow browser React Harbor. GLOBAL STYLE no dark UI.
 used in: moshka-react-learn
 
 filename: moshka-vite-template-pick.png
-prompt: Two-step UI mock: Select framework React, Select variant TypeScript. Monospace labels, cream card on dark.
+prompt: Two steps Framework React Variant TypeScript checked. GLOBAL STYLE.
 used in: moshka-react-template
 
 filename: moshka-vite-folder-tour.png
-prompt: Folder tree illustration: index.html, src/main.tsx, src/App.tsx, src/App.css, public/. Arrows showing main loads App. Compact, readable.
+prompt: Tree index.html src main App public. GLOBAL STYLE.
 used in: moshka-react-tour
 
 filename: moshka-react-vessel-row.png
-prompt: One React component box VesselRow feeding two table rows with different names. Instructional, not cartoon.
+prompt: DIAGRAM one VesselRow box splits to two table rows. GLOBAL STYLE.
 used in: moshka-react-component
 
 filename: moshka-react-use-state.png
-prompt: Search input above a table, one row greyed out filtered away. Label useState. Sharp dark UI.
+prompt: DIAGRAM search field filters table rows one greyed. Label filter. GLOBAL STYLE.
 used in: moshka-react-state
 
+filename: moshka-react-jsx.png
+prompt: DIAGRAM two columns class vs className one parent rule. GLOBAL STYLE.
+used in: moshka-react-jsx
+
+filename: moshka-react-package-json.png
+prompt: package.json icon scripts dev build highlighted. GLOBAL STYLE.
+used in: moshka-react-create
+
+filename: moshka-react-events.png
+prompt: DIAGRAM click arrow onClick arrow setState arrow UI update. GLOBAL STYLE.
+used in: moshka-react-events
+
+filename: moshka-react-status-badge.png
+prompt: DIAGRAM three small badges Alongside Inbound Departed grey tints only. GLOBAL STYLE.
+used in: moshka-react-status
+
 filename: moshka-client-hat.png
-prompt: Same dashboard three ways: crew, office, admin. Maritime enterprise.
+prompt: Three mini screens crew office admin. GLOBAL STYLE.
 used in: moshka-ux-roles
 
 filename: moshka-drawer-not-modal.png
-prompt: Side drawer, table still visible. No modal balloon.
+prompt: Table plus side drawer, table still visible. GLOBAL STYLE.
 used in: moshka-ux-drawers
 
 filename: moshka-app-router-folders.png
-prompt: Folder signs as URLs: /logs, /about, /api/health. Pixel city walk.
+prompt: Folders as signs /logs /about. GLOBAL STYLE.
 used in: moshka-next-app-router
 
 filename: moshka-server-client.png
-prompt: Server box with database and key, client box with click and use client tag. Dark sharp.
+prompt: Server box db key, client box click. GLOBAL STYLE.
 used in: moshka-next-server-client
 
 filename: moshka-query-vs-zustand.png
-prompt: Radio labeled server state (Query) vs sticky note on wheel labeled UI state (Zustand).
-used in: moshka-next-query, moshka-next-zustand
+prompt: Server radio Query vs wheel note Zustand. GLOBAL STYLE.
+used in: moshka-next-query
 
 filename: moshka-cache-stale.png
-prompt: Cache fridge serving old sandwich while user asks for live logs.
+prompt: Fridge old data vs fresh request. GLOBAL STYLE.
 used in: moshka-next-cache
 
 filename: moshka-db-disk.png
-prompt: Browser forgot logs, steel cabinet database still has them.
+prompt: Browser empty vs cabinet database full. GLOBAL STYLE.
 used in: moshka-api-db-idea
 
 filename: moshka-mongo-document.png
-prompt: JSON card in drawer labeled logs. Fields text, tenantId, createdAt.
+prompt: JSON card in tray logs. GLOBAL STYLE.
 used in: moshka-api-mongo
 
 filename: moshka-layers.png
-prompt: Four plates: app, service, repo, db. Arrow from route to Mongo. Navy.
-used in: moshka-repo-learn, moshka-bbs-folders
+prompt: Stack app service repo db. GLOBAL STYLE.
+used in: moshka-repo-learn
 
 filename: moshka-sql-grid.png
-prompt: Table logs with columns id, text, tenant_id, created_at. One row highlighted.
+prompt: Spreadsheet logs table one row highlight. GLOBAL STYLE.
 used in: moshka-sql-what
 
 filename: moshka-postgres-box.png
-prompt: Postgres cylinder wired to Next folder, cable DATABASE_URL.
+prompt: Cylinder Postgres wire to folder. GLOBAL STYLE.
 used in: moshka-sql-connect
 
 filename: moshka-supabase-stack.png
-prompt: Postgres with Auth, Dashboard, RLS modules. Label Supabase.
+prompt: Postgres plus three small modules Auth Dashboard RLS. GLOBAL STYLE.
 used in: moshka-sb-what
 
 filename: moshka-rls-wall.png
-prompt: RLS wall on logs table. Anon key bounces, service key through server door.
+prompt: Wall RLS on table keys bounce. GLOBAL STYLE.
 used in: moshka-sb-rls
 
 filename: moshka-auth-doors.png
-prompt: Four sign-in doors plus tenant wall between buildings.
-used in: moshka-auth-ways, moshka-auth-tenant
+prompt: Four doors sign-in tenant wall. GLOBAL STYLE.
+used in: moshka-auth-ways
 
 filename: moshka-cursor-install.png
-prompt: Editor with agent panel right. Lime accent only on dark panel.
+prompt: Editor with side panel agent. GLOBAL STYLE grey only no lime.
 used in: moshka-cursor-install
 
 filename: moshka-four-line-prompt.png
-prompt: Long prompt in bin vs four-line note on monitor with file path and goal.
+prompt: Long text bin vs short four line note. GLOBAL STYLE.
 used in: moshka-cursor-prompt
 
 filename: moshka-you-steer.png
-prompt: Hands on wheel-keyboard. Autopilot typing but human watching. Dark, calm.
+prompt: Hands on wheel keyboard. GLOBAL STYLE.
 used in: moshka-cursor-learn
 
 filename: moshka-ai-two-boxes.png
-prompt: Chat bubble on Vercel mark vs LangGraph worker on AWS container.
-used in: moshka-ai-learn, moshka-ai-hosting
+prompt: Chat box vs worker box labels. GLOBAL STYLE.
+used in: moshka-ai-learn
 
 filename: moshka-playwright-robot.png
-prompt: Robot clicks browser, red flag if heading missing.
+prompt: Robot clicks browser flag missing. GLOBAL STYLE.
 used in: moshka-test-playwright
 
 filename: moshka-aws-map.png
-prompt: Labeled map S3, CloudFront, Lambda, ECR, CloudWatch. Short labels.
+prompt: Simple map S3 Lambda CloudFront labels. GLOBAL STYLE.
 used in: moshka-ops-aws
 
 filename: moshka-azure-twins.png
-prompt: AWS and Azure warehouses as twins, Blob vs S3 signs.
+prompt: Two warehouses AWS Azure labels. GLOBAL STYLE.
 used in: moshka-ops-azure
 
 filename: moshka-good-question.png
-prompt: Bad message it does not work vs good message with file path and error code.
+prompt: Bad vs good support message comparison. GLOBAL STYLE.
 used in: moshka-agency-delegate
 
 filename: moshka-bbs-cutaway.png
-prompt: Ship cutaway with four rooms labeled features, repo, db, app. Same as layers but BBS flavor.
+prompt: Ship rooms features repo db app. GLOBAL STYLE.
 used in: moshka-bbs-learn
-
-SKIP (do not generate unless you want extras):
-- moshka-three-flavors.png
-- moshka-score-sofa.png
-- moshka-zod-bouncer.png

@@ -1,5 +1,7 @@
 import {
   explain,
+  figLink,
+  figureN,
   info,
   lesson,
   link,
@@ -21,6 +23,13 @@ export const moshkaUxNotes: Record<string, NoteDocument> = {
         id: "goal",
         title: "The client is not you",
         blocks: [
+          ...figureN(
+            1,
+            "ux-roles",
+            "moshka-client-hat.png",
+            "Who is looking",
+            `Crew, office, and admin need different defaults on the same data. ${figLink(1, "ux-roles")} is three hats on one product.`
+          ),
           md(
             "g",
             `A Bahri office user opens this 80 times a day. They want density, search, and no cute empty space.

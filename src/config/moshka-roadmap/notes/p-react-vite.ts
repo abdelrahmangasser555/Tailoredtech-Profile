@@ -1,10 +1,14 @@
 import {
   explain,
+  figLink,
   figure,
+  figureN,
+  ill,
   info,
   lesson,
   link,
   md,
+  meme,
   mermaid,
   tasks,
   tip,
@@ -25,12 +29,8 @@ export const moshkaReactNotes: Record<string, NoteDocument> = {
         id: "goal",
         title: "Why this folder exists",
         blocks: [
-          figure(
-            "ill",
-            "moshka-vite-react-start.png",
-            "React Harbor",
-            "Generate this image (see moshka-image-prompts.txt). Placeholder until the PNG is in public/notes/moshka/images/."
-          ),
+          figure("ill", "moshka-vite-react-start.png", "React Harbor"),
+          meme("copy", "moshka-meme-copy-paste.png", "Why React exists"),
           md(
             "g",
             `Port Watch showed you why copying HTML rows hurts. **React Harbor** is where you learn the fix for real.
@@ -110,6 +110,7 @@ Every lesson has:
         id: "why",
         title: "Pick one toolchain",
         blocks: [
+          meme("vite", "moshka-meme-vite-not-next.png", "Vite now, Next later"),
           md(
             "m",
             `**Vite** = dev server + build tool. **React** = UI library. **TypeScript** = types so you catch typos early.
@@ -131,6 +132,17 @@ TailoredTech ships Next in production. Vite teaches React without routing, serve
             "0:00",
             "12:00",
             "Components and JSX only. Stop at 12:00. You will write the rest in this folder."
+          ),
+          md(
+            "compare",
+            `| Tool | What it does | When Moshka uses it |
+|------|----------------|---------------------|
+| Vite | Dev server + build | This folder |
+| React | UI components | This folder + Next Harbor |
+| Next.js | Framework on top of React | Project 04 |
+| npm | Installs packages | Every Node project |
+
+**JSX** looks like HTML inside JavaScript. The browser does not understand JSX. Vite compiles it to JavaScript before the browser runs it.`
           ),
           tasks("t", "Check", [
             { id: "say", label: "You can say: Vite runs the app, React draws the UI" },
@@ -189,6 +201,58 @@ Open the URL it prints (usually http://localhost:5173). You should see the Vite 
             { id: "dev", label: "npm run dev runs without an error" },
             { id: "see", label: "A page loads in the browser" },
           ]),
+        ],
+      },
+      {
+        id: "pkg",
+        title: "What got created",
+        blocks: [
+          figure(
+            "pkg-fig",
+            "moshka-react-package-json.png",
+            "package.json",
+            "Scripts you will run every day."
+          ),
+          md(
+            "pkg",
+            `Open \`package.json\`. The important parts today:
+
+\`\`\`json:package.json
+{
+  "name": "react-harbor",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@vitejs/plugin-react": "^4.0.0",
+    "typescript": "~5.7.0",
+    "vite": "^6.0.0"
+  }
+}
+\`\`\`
+
+Version numbers on your machine may differ. That is fine.
+
+- \`npm run dev\` → \`vite\` → local URL
+- \`npm run build\` → typecheck + production bundle (run before you ship)
+- \`npm run preview\` → serves the built folder to see production output`
+          ),
+          tip(
+            "node-modules",
+            "node_modules",
+            "Never edit files inside node_modules. Never commit that folder. If install breaks, delete node_modules and package-lock.json, then npm install again."
+          ),
         ],
       },
     ],
@@ -290,9 +354,85 @@ Do **not** add React Router in the create step. You will add routing in Next Har
 
 The only line React cares about is \`id="root"\`. The script tag points at \`main.tsx\`.`
           ),
+          md(
+            "vite",
+            `Default \`vite.config.ts\` (you do not need to edit yet):
+
+\`\`\`ts:vite.config.ts
+import { defineConfig } from "vite"
+import react from "@vitejs/plugin-react"
+
+export default defineConfig({
+  plugins: [react()],
+})
+\`\`\`
+
+The React plugin is what compiles JSX. Without it, \`.tsx\` files would not run.`
+          ),
           tasks("t", "Hands-on", [
             { id: "open", label: "You opened each file above once" },
             { id: "root", label: "You found div#root in index.html" },
+          ]),
+        ],
+      },
+    ],
+  }),
+
+  "moshka-react-jsx": lesson({
+    id: "moshka-react-jsx",
+    name: "JSX rules",
+    description: "className, one parent, fragments, and why JSX is not HTML.",
+    sections: [
+      {
+        id: "rules",
+        title: "HTML habits that break in React",
+        blocks: [
+          figure("jsx-fig", "moshka-react-jsx.png", "JSX vs HTML"),
+          meme("jsx-meme", "moshka-meme-jsx-class.png", "Not class"),
+          md(
+            "m",
+            `JSX **looks** like HTML. It is **JavaScript**. The rules below save you hours of red screens.
+
+| HTML habit | In React JSX |
+|------------|----------------|
+| \`class="foo"\` | \`className="foo"\` |
+| \`for="x"\` on label | \`htmlFor="x"\` |
+| Self-closing optional | \`<img />\` and \`<input />\` must close |
+| Multiple roots | **One** parent per \`return\` (use a \`<div>\` or \`<>\`) |`
+          ),
+          md(
+            "ex",
+            `Try first: in \`App.tsx\`, wrap everything in an extra \`<div>\` and remove it. See the error when you return two siblings without a wrapper.
+
+**Fragment** (no extra div on the page):
+
+\`\`\`tsx
+export default function App() {
+  return (
+    <>
+      <header>React Harbor</header>
+      <main>Table here</main>
+    </>
+  )
+}
+\`\`\`
+
+\`<>\` is shorthand for \`React.Fragment\`. Use it when you need two top-level tags without a wrapper box.`
+          ),
+          md(
+            "curlies",
+            `Curly braces \`{ }\` mean "JavaScript goes here":
+
+\`\`\`tsx
+const name = "MV Red Sea"
+return <h1>{name}</h1>
+\`\`\`
+
+Inside JSX, \`{v.name}\` prints a variable. \`{2 + 2}\` prints 4. You will use this for props and lists.`
+          ),
+          tasks("t", "Check", [
+            { id: "class", label: "You used className at least once" },
+            { id: "frag", label: "You know what <> is for" },
           ]),
         ],
       },
@@ -332,6 +472,15 @@ createRoot(document.getElementById("root")!).render(
 \`\`\`
 
 \`document.getElementById("root")!\` means "find #root". The \`!\` tells TypeScript it exists. If you rename the id in HTML, update this line.`
+          ),
+          md(
+            "strict",
+            `\`StrictMode\` runs extra checks in development. It does not change production builds. Leave it on while learning.
+
+If the screen is blank after paste:
+1. Open DevTools → Console
+2. Read the first red error
+3. Often it is a typo in \`App.tsx\` or a missing import`
           ),
           tasks("t", "Done when", [
             { id: "run", label: "App still loads after you pasted main.tsx" },
@@ -407,8 +556,37 @@ h1 {
 }
 \`\`\``
           ),
+          md(
+            "global",
+            `Set a clean base in \`src/index.css\` (global):
+
+\`\`\`css:src/index.css
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  background: #f6f4ef;
+  color: #0a0a0a;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th,
+td {
+  text-align: left;
+  padding: 0.35rem 0.5rem;
+  border-bottom: 1px solid #ccc;
+}
+\`\`\`
+
+Global = every component sees these rules. \`App.css\` = only classes you use in App.`
+          ),
           tasks("t", "Hands-on", [
             { id: "title", label: "You see React Harbor in the browser" },
+            { id: "css", label: "index.css and App.css both exist" },
           ]),
         ],
       },
@@ -482,7 +660,13 @@ export default function App() {
 }
 \`\`\`
 
-Two rows, one component. That is the Port Watch lesson in React form.`
+Two rows, one component. That is the Port Watch lesson in React form.
+
+**Export styles you will see:**
+- \`export function VesselRow\` → import as \`import { VesselRow } from "./VesselRow"\`
+- \`export default function App\` → import as \`import App from "./App"\`
+
+Default export = one main thing per file (App). Named export = many helpers per file (VesselRow, StatusBadge later).`
           ),
           figure(
             "row",
@@ -508,6 +692,7 @@ Two rows, one component. That is the Port Watch lesson in React form.`
         id: "do",
         title: "Add ETA",
         blocks: [
+          meme("props", "moshka-meme-props.png", "Props go down"),
           md(
             "m",
             `**Props** are like function arguments. \`name\` and \`status\` are props on \`VesselRow\`.
@@ -536,10 +721,245 @@ export function VesselRow({ name, status, eta }: VesselRowProps) {
 }
 \`\`\`
 
-Update each \`VesselRow\` in App with an \`eta\` prop. If you forget \`eta\` on one row, TypeScript should complain. That is the point of TS.`
+Update each \`VesselRow\` in App with an \`eta\` prop. If you forget \`eta\` on one row, TypeScript should complain. That is the point of TS.
+
+Example rows in App:
+
+\`\`\`tsx:src/App.tsx
+<VesselRow name="MV Red Sea" status="Alongside" eta="06:00" />
+<VesselRow name="MV Newbuild" status="Inbound" eta="14:30" />
+\`\`\`
+
+**Rule:** props flow **down** only. \`VesselRow\` must not change \`name\` by reassigning props. If the child needs to edit data, lift state up (next lessons).`
+          ),
+          info(
+            "readonly",
+            "Props are read-only",
+            "Treat props like function arguments. Parent owns the truth. Child displays it."
           ),
           tasks("t", "Hands-on", [
             { id: "eta", label: "Every row has an ETA column" },
+            { id: "ts-err", label: "You saw a TS error when eta was missing on one row" },
+          ]),
+        ],
+      },
+    ],
+  }),
+
+  "moshka-react-events": lesson({
+    id: "moshka-react-events",
+    name: "Events and handlers",
+    description: "onClick, onChange, and controlled inputs.",
+    sections: [
+      {
+        id: "do",
+        title: "Clicks that do work",
+        blocks: [
+          figure("ev", "moshka-react-events.png", "Event flow"),
+          meme("controlled", "moshka-meme-controlled-input.png", "Controlled input"),
+          md(
+            "m",
+            `In HTML you wrote \`button.addEventListener("click", ...)\`. In React you write \`onClick\` on the element.
+
+Handler names are **camelCase**: \`onClick\`, \`onChange\`, \`onSubmit\`. Pass a **function**, not a string.`
+          ),
+          md(
+            "ex",
+            `Add a Clear search button next to your input in \`App.tsx\`:
+
+\`\`\`tsx:src/App.tsx
+<button type="button" onClick={() => setSearch("")}>
+  Clear
+</button>
+\`\`\`
+
+Put it inside the \`.search\` label block after the input.
+
+**Controlled input** (you already use this for search):
+
+\`\`\`tsx
+<input
+  value={search}
+  onChange={(e) => setSearch(e.target.value)}
+/>
+\`\`\`
+
+React owns \`value\`. The browser does not own it. That is why \`value\` + \`onChange\` must stay paired.`
+          ),
+          md(
+            "css-btn",
+            `Style the button in \`App.css\`:
+
+\`\`\`css:src/App.css
+.search button {
+  margin-top: 0.35rem;
+  align-self: flex-start;
+  border: 1px solid #333;
+  background: #0a0a0a;
+  color: #f6f4ef;
+  padding: 0.35rem 0.6rem;
+  cursor: pointer;
+}
+\`\`\``
+          ),
+          tasks("t", "Hands-on", [
+            { id: "clear", label: "Clear empties the search and shows all rows again" },
+          ]),
+        ],
+      },
+    ],
+  }),
+
+  "moshka-react-list-keys": lesson({
+    id: "moshka-react-list-keys",
+    name: "Lists and keys",
+    description: "map() over data. Why key matters.",
+    sections: [
+      {
+        id: "do",
+        title: "From three copy-pastes to one map",
+        blocks: [
+          meme("key", "moshka-meme-key.png", "Do not forget key"),
+          md(
+            "m",
+            `You already wrote:
+
+\`\`\`tsx
+{filtered.map((v) => (
+  <VesselRow key={v.name} {...v} />
+))}
+\`\`\`
+
+**map** turns an array into JSX. **key** tells React which row is which when the list changes.
+
+Try first: reorder \`VESSELS\` in the array. Save. Order on screen should match.
+
+Bad key: \`key={Math.random()}\` on every render. React forgets which row is which. Use a stable id (vessel name is ok for this demo).`
+          ),
+          md(
+            "type",
+            `Shared type for vessel data. Create \`src/types.ts\`:
+
+\`\`\`ts:src/types.ts
+export type Vessel = {
+  name: string
+  status: string
+  eta: string
+}
+\`\`\`
+
+Update \`VesselRow.tsx\` to import the type:
+
+\`\`\`tsx:src/VesselRow.tsx
+import type { Vessel } from "./types"
+
+type VesselRowProps = Vessel
+
+export function VesselRow({ name, status, eta }: VesselRowProps) {
+  return (
+    <tr>
+      <td>{name}</td>
+      <td>{status}</td>
+      <td>{eta}</td>
+    </tr>
+  )
+}
+\`\`\`
+
+In App:
+
+\`\`\`tsx:src/App.tsx
+import type { Vessel } from "./types"
+
+const VESSELS: Vessel[] = [
+  { name: "MV Red Sea", status: "Alongside", eta: "06:00" },
+  ...
+]
+\`\`\`
+
+Types live in one file so Next Harbor later can reuse the same shape.`
+          ),
+          tasks("t", "Check", [
+            { id: "types", label: "types.ts exists" },
+            { id: "map", label: "You can explain what key= does in one sentence" },
+          ]),
+        ],
+      },
+    ],
+  }),
+
+  "moshka-react-status": lesson({
+    id: "moshka-react-status",
+    name: "StatusBadge component",
+    description: "Small component for Alongside / Inbound / Departed colors.",
+    sections: [
+      {
+        id: "do",
+        title: "Color with meaning",
+        blocks: [
+          ill("badges", "moshka-react-status-badge.png", "Status badges"),
+          md(
+            "m",
+            `Port Watch used status colors. Extract a **StatusBadge** so \`VesselRow\` stays a row, not a color chart.
+
+Try first: add a \`<span className="badge">\` in the status cell before you paste the full component.`
+          ),
+          md(
+            "badge",
+            `Create \`src/StatusBadge.tsx\`:
+
+\`\`\`tsx:src/StatusBadge.tsx
+type StatusBadgeProps = {
+  status: string
+}
+
+export function StatusBadge({ status }: StatusBadgeProps) {
+  const tone =
+    status === "Alongside"
+      ? "alongside"
+      : status === "Inbound"
+        ? "inbound"
+        : "other"
+
+  return <span className={\`badge badge-\${tone}\`}>{status}</span>
+}
+\`\`\`
+
+Update \`VesselRow.tsx\` status cell:
+
+\`\`\`tsx:src/VesselRow.tsx
+import { StatusBadge } from "./StatusBadge"
+
+// inside return:
+<td><StatusBadge status={status} /></td>
+\`\`\`
+
+Add to \`App.css\`:
+
+\`\`\`css:src/App.css
+.badge {
+  font-family: ui-monospace, monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.15rem 0.35rem;
+  border: 1px solid #333;
+}
+.badge-alongside {
+  background: #e8f0e8;
+}
+.badge-inbound {
+  background: #e8ecf4;
+}
+.badge-other {
+  background: #eee;
+}
+\`\`\`
+
+No lime on white. Grey and navy-friendly tints only.`
+          ),
+          tasks("t", "Hands-on", [
+            { id: "badge", label: "Status shows inside a badge span" },
           ]),
         ],
       },
@@ -555,13 +975,29 @@ Update each \`VesselRow\` in App with an \`eta\` prop. If you forget \`eta\` on 
         id: "do",
         title: "Search filters rows",
         blocks: [
+          meme("state", "moshka-meme-usestate.png", "Before and after useState"),
+          figure("state-fig", "moshka-react-use-state.png", "Filter with search"),
+          ...figureN(
+            1,
+            "state-refresh",
+            "moshka-react-state-refresh.png",
+            "useState vs refresh",
+            `\`useState\` lives in memory while the app runs. Full page refresh clears it, same as Harbor before \`localStorage\`. Saved logs need \`localStorage\`, a server, or a database. ${figLink(1, "state-refresh")} connects the dots.`
+          ),
           md(
             "m",
             `**State** is data that can change. \`useState\` returns a value and a setter.
 
 The list of vessels can live in App as an array. \`search\` state filters which rows render.
 
+**Persist later:** UI state (open drawer, search text) can stay in React. **Server data** (logs, vessels from API) belongs in the database and flows through fetch or TanStack Query in Next Harbor.
+
 Try first: add an \`<input>\` and log \`search\` on every keystroke with \`console.log\`.`
+          ),
+          info(
+            "persist-hint",
+            "Harbor flashback",
+            "You fixed refresh with localStorage in Harbor Log. React state is the same RAM problem until you load from an API backed by Mongo."
           ),
           md(
             "p",
@@ -636,14 +1072,98 @@ Add to \`App.css\`:
 }
 \`\`\``
           ),
-          figure(
-            "state",
-            "moshka-react-use-state.png",
-            "Search and state",
-            "Input at top, table below, one row hidden when search does not match."
+          md(
+            "lift",
+            `**Lifting state** preview: search lives in App because App owns the table and the input. If search lived inside \`VesselRow\`, each row would have its own box. Wrong.
+
+Later in Next Harbor you will lift fetch logic the same way: page owns data, child components display it.`
           ),
           tasks("t", "Done when", [
             { id: "filter", label: "Typing hides rows that do not match" },
+            { id: "lift", label: "You can say why search state is in App not VesselRow" },
+          ]),
+        ],
+      },
+    ],
+  }),
+
+  "moshka-react-errors": lesson({
+    id: "moshka-react-errors",
+    name: "When the screen goes white",
+    description: "Read the Console. Fix the first error only.",
+    sections: [
+      {
+        id: "do",
+        title: "Common mistakes",
+        blocks: [
+          meme("white", "moshka-meme-white-screen.png", "Read the console"),
+          md(
+            "m",
+            `Open DevTools → **Console** (Chrome: right click → Inspect → Console).
+
+| Error vibe | Usual fix |
+|------------|-----------|
+| Cannot find module | Wrong import path. Check \`./VesselRow\` vs \`./VesselRow.tsx\` |
+| X is not defined | Missing import or typo in name |
+| Objects are not valid as a React child | You tried to render an object. Render \`v.name\`, not \`v\` |
+| Each child in a list should have a unique key | Add \`key=\` to mapped rows |
+| Too many re-renders | You called setState during render. Move it to onClick/onChange |
+
+Fix **one** error. Save. Read the next. Do not panic-refresh.`
+          ),
+          md(
+            "term",
+            `Run a production check before you demo:
+
+\`\`\`bash
+cd ~/Desktop/react-harbor
+npm run build
+\`\`\`
+
+If build fails, TypeScript is telling you something the dev server hid. Read the file path in the error.`
+          ),
+          tasks("t", "Hands-on", [
+            { id: "break", label: "You broke App on purpose, read Console, fixed it" },
+          ]),
+        ],
+      },
+    ],
+  }),
+
+  "moshka-react-devtools": lesson({
+    id: "moshka-react-devtools",
+    name: "React DevTools",
+    description: "See the component tree like the DOM tree.",
+    sections: [
+      {
+        id: "do",
+        title: "Install once",
+        blocks: [
+          md(
+            "m",
+            `Install **React Developer Tools** extension for Chrome or Firefox.
+
+With \`npm run dev\` running, open DevTools → **Components** tab.
+
+You should see:
+- \`App\`
+  - \`header\`
+  - \`main\`
+    - \`input\`
+    - \`table\`
+      - \`VesselRow\` (one per row)
+
+Click a \`VesselRow\`. Right panel shows **props**: name, status, eta.
+
+Try first: change a prop in DevTools (temporary). It resets on reload. This proves props are inputs.`
+          ),
+          tip(
+            "dt",
+            "Use it on TailoredTech",
+            "On a real repo, DevTools shows which component re-rendered. You will use this when a button does nothing."
+          ),
+          tasks("t", "Done when", [
+            { id: "see", label: "You found VesselRow in the Components tree" },
           ]),
         ],
       },
@@ -663,13 +1183,32 @@ Add to \`App.css\`:
             "m",
             `Run \`npm run build\` once. It should finish without errors. That proves TypeScript and the bundler are happy.
 
-Show Abdelrahman:
+Show Abdelrahman your **react-harbor** folder:
 
-1. \`VesselRow.tsx\` (one row, many uses)
-2. \`useState\` search in App
-3. How this maps to Port Watch HTML you copied three times
+1. \`package.json\` scripts
+2. \`src/types.ts\`, \`VesselRow.tsx\`, \`StatusBadge.tsx\`, \`App.tsx\`
+3. Search + Clear button + filtered map
+4. \`npm run build\` success
+5. How this maps to Port Watch HTML you copied three times
 
-Next folder: **03 Client Eyes** (UX on the static Port Watch) or jump ahead to **04 Next Harbor** when he says you are ready.`
+**File tree you should have:**
+
+\`\`\`text
+react-harbor/
+  index.html
+  package.json
+  vite.config.ts
+  src/
+    main.tsx
+    App.tsx
+    App.css
+    index.css
+    types.ts
+    VesselRow.tsx
+    StatusBadge.tsx
+\`\`\`
+
+Next folder: **03 Client Eyes** (UX on the static Port Watch) or **04 Next Harbor** when he says you are ready.`
           ),
           link(
             "next",

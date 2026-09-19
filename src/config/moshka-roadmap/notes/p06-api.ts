@@ -1,5 +1,7 @@
 import {
   explain,
+  figLink,
+  figureN,
   info,
   lesson,
   link,
@@ -24,6 +26,13 @@ export const moshkaApiNotes: Record<string, NoteDocument> = {
         id: "goal",
         title: "Refresh and it is still there",
         blocks: [
+          ...figureN(
+            1,
+            "db-disk",
+            "moshka-db-disk.png",
+            "Browser vs database",
+            `The page is temporary. The database keeps rows after refresh. ${figLink(1, "db-disk")} shows who remembers what.`
+          ),
           md(
             "g",
             `Until now the page forgets when the server restarts. Mongo remembers.
@@ -126,17 +135,49 @@ You will:
         id: "idea",
         title: "Why the page is not enough",
         blocks: [
+          ...figureN(
+            1,
+            "persistence-ladder",
+            "moshka-persistence-ladder.png",
+            "You climbed this ladder",
+            `Harbor Log taught steps 1 and 2: DOM memory, then \`localStorage\`. This project is step 4. ${figLink(1, "persistence-ladder")} shows what each step can and cannot do.`
+          ),
           md(
             "m",
             `The browser dies. The laptop sleeps. A second user needs the same logs.
 
-**localStorage**: one browser, one computer. Good for a toy.
+| Layer | Survives refresh? | Other people? | TailoredTech use |
+|-------|-------------------|---------------|------------------|
+| DOM / JS variables | No | No | Cafe click total |
+| \`localStorage\` | Yes, this browser | No | Harbor Log toy |
+| Array in \`route.ts\` | Until server restart | Only while server up | Demo only |
+| **Database** | Yes | Yes | Harbor API, BBS |
 
-**Memory array in route.ts**: gone when the server restarts.
+**localStorage** was the right lesson for Harbor. It is the wrong place for fleet logs that Bahri office and crew both read.
 
-**Database**: a process that keeps documents (or rows) on disk, answers queries, handles many users.
+**Database**: a program that keeps documents (or rows) on disk, answers queries, handles many users.
 
 SQL: tables and joins. Mongo: documents in collections. TailoredTech uses Mongo a lot because an observation is nested (ICB items, comments). You will still learn SQL. Both exist on real clients.`
+          ),
+          ...figureN(
+            2,
+            "db-shared",
+            "moshka-db-disk.png",
+            "Browser vs database",
+            `The page is a window. The database is the filing cabinet everyone shares. ${figLink(2, "db-shared")} is the split you felt when Harbor notes did not appear on another computer.`
+          ),
+          ...figureN(
+            3,
+            "server-memory",
+            "moshka-memory-server.png",
+            "Server RAM is not a database",
+            `A \`let logs = []\` in \`route.ts\` survives until the process restarts or you deploy. ${figLink(3, "server-memory")} is why demos lie and databases exist.`
+          ),
+          link(
+            "harbor-back",
+            "/notes/moshka/moshka-roadmap/moshka-p02-harbor-log/moshka-harbor-persist",
+            "Back: Harbor localStorage",
+            "If persist still feels fuzzy, redo that lesson, then return here."
           ),
           mermaid(
             "cmp",
@@ -184,6 +225,13 @@ SQL: tables and joins. Mongo: documents in collections. TailoredTech uses Mongo 
         id: "do",
         title: "The shape",
         blocks: [
+          ...figureN(
+            1,
+            "mongo-doc",
+            "moshka-mongo-document.png",
+            "Document in a collection",
+            `Same JSON shape you stored in \`localStorage\`, but on a server with a name and query rules. ${figLink(1, "mongo-doc")} is one log document in a \`logs\` collection.`
+          ),
           yt(
             "v",
             VID.mongo,

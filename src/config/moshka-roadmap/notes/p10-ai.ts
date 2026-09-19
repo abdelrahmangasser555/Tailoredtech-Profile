@@ -1,5 +1,7 @@
 import {
   explain,
+  figLink,
+  figureN,
   info,
   lesson,
   link,
@@ -23,6 +25,13 @@ export const moshkaAiNotes: Record<string, NoteDocument> = {
         id: "goal",
         title: "Two tools, two jobs",
         blocks: [
+          ...figureN(
+            1,
+            "ai-boxes",
+            "moshka-ai-two-boxes.png",
+            "Chat vs worker",
+            `Vercel AI SDK handles chat UI. LangGraph-style workers run longer jobs on AWS. ${figLink(1, "ai-boxes")} splits the two boxes.`
+          ),
           md(
             "g",
             `TailoredTech split:

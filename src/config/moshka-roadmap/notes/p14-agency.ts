@@ -1,5 +1,7 @@
 import {
   explain,
+  figLink,
+  figureN,
   lesson,
   md,
   mermaid,
@@ -18,6 +20,13 @@ export const moshkaAgencyNotes: Record<string, NoteDocument> = {
         id: "goal",
         title: "You are not a ticket machine",
         blocks: [
+          ...figureN(
+            1,
+            "good-question",
+            "moshka-good-question.png",
+            "Ask well",
+            `Bad asks waste everyone's time. Good asks name the file, command, and error. ${figLink(1, "good-question")} is the contrast.`
+          ),
           md(
             "g",
             `TailoredTech is an agency. Clients pay for outcomes. You will join as a technical contributor.

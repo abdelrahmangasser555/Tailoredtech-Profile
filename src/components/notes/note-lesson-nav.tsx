@@ -1,17 +1,29 @@
+"use client"
+
 import Link from "next/link"
 import { ArrowLeft, ArrowRight } from "lucide-react"
-import { getLessonNeighbors } from "@/lib/notes"
+import type { NotesLessonRef } from "@/lib/notes"
+import { setNoteCompleted } from "@/lib/notes-progress"
 import { cn } from "@/lib/utils"
 
 type NoteLessonNavProps = {
   noteId: string
+  prev: NotesLessonRef | null
+  next: NotesLessonRef | null
   className?: string
 }
 
-export function NoteLessonNav({ noteId, className }: NoteLessonNavProps) {
-  const { prev, next } = getLessonNeighbors(noteId)
-
+export function NoteLessonNav({
+  noteId,
+  prev,
+  next,
+  className,
+}: NoteLessonNavProps) {
   if (!prev && !next) return null
+
+  function markCurrentDone() {
+    setNoteCompleted(noteId, true)
+  }
 
   return (
     <nav
@@ -42,6 +54,7 @@ export function NoteLessonNav({ noteId, className }: NoteLessonNavProps) {
         {next ? (
           <Link
             href={next.href}
+            onClick={markCurrentDone}
             className="group flex min-w-0 flex-1 flex-col border border-white/10 bg-white/[0.02] px-5 py-4 text-right transition hover:border-accent/40 hover:bg-white/[0.04] sm:items-end"
           >
             <span className="flex items-center justify-end gap-1.5 font-mono text-[10px] tracking-[0.16em] text-white/35 uppercase">
@@ -54,6 +67,12 @@ export function NoteLessonNav({ noteId, className }: NoteLessonNavProps) {
           </Link>
         ) : null}
       </div>
+      {next ? (
+        <p className="mt-3 text-right text-xs text-white/30">
+          Clicking Next marks this lesson done. Use Undo on the button above if
+          you skipped the hands-on part.
+        </p>
+      ) : null}
     </nav>
   )
 }

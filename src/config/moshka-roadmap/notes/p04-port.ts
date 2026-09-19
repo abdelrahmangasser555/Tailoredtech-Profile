@@ -1,9 +1,14 @@
 import {
   explain,
+  figLink,
+  figure,
+  figureN,
+  ill,
   info,
   lesson,
   link,
   md,
+  meme,
   mermaid,
   tasks,
   tip,
@@ -24,6 +29,13 @@ export const moshkaPortNotes: Record<string, NoteDocument> = {
         id: "goal",
         title: "Looks like work, not a toy",
         blocks: [
+          ...figureN(
+            1,
+            "port-goal",
+            "moshka-port-watch-dense.png",
+            "Dense ops board",
+            `No hero poster. Header short, table tall. ${figLink(1, "port-goal")} is what office software looks like.`
+          ),
           md(
             "g",
             `Port Watch is a fake harbor board: vessels, status, a table.
@@ -120,6 +132,7 @@ Libraries you will actually use (from Freesets, not a dump):
         id: "do",
         title: "Do this now",
         blocks: [
+          ill("unzip", "moshka-unzip.png", "Same unzip habit"),
           md(
             "m",
             `Download **Port Watch zip**. Unzip. Open \`index.html\`.
@@ -154,6 +167,7 @@ ls
         id: "do",
         title: "Fill the screen with data",
         blocks: [
+          figure("layout", "moshka-port-watch-dense.png", "Short header, big table"),
           md(
             "m",
             `Try first: open \`styles.css\`. Make the header short. Cut padding on \`th, td\`. The table should use the rest of the height.
@@ -199,6 +213,7 @@ th, td {
         id: "do",
         title: "Read the markup",
         blocks: [
+          ill("cols", "moshka-table-columns.png", "thead vs tbody"),
           md(
             "m",
             `A table is not a pile of divs. Screen readers and Excel-brained office users expect columns.
@@ -238,6 +253,7 @@ Try first: add a column **ETA**. Put a \`<th>\` and a \`<td>\` on every row. If 
         id: "do",
         title: "Copy, then notice the pain",
         blocks: [
+          meme("pain", "moshka-meme-copy-paste.png", "Copy-paste rows"),
           md(
             "m",
             `Try first: in \`index.html\`, duplicate a vessel \`<tr>\`. Change the name.

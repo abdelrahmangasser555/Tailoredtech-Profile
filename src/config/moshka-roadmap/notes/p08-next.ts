@@ -1,5 +1,7 @@
 import {
   explain,
+  figLink,
+  figureN,
   info,
   lesson,
   link,
@@ -24,6 +26,13 @@ export const moshkaNextNotes: Record<string, NoteDocument> = {
         id: "goal",
         title: "Same product, real stack",
         blocks: [
+          ...figureN(
+            1,
+            "next-router",
+            "moshka-app-router-folders.png",
+            "Folders are URLs",
+            `In the App Router, folder names become routes. ${figLink(1, "next-router")} maps \`/logs\` to a folder under \`app/\`.`
+          ),
           md(
             "g",
             `This is TailoredTech's main frontend stack.

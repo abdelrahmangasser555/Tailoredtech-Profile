@@ -1,6 +1,11 @@
 import {
   explain,
+  figLink,
+  figureN,
+  ill,
+  info,
   lesson,
+  link,
   md,
   mermaid,
   tasks,
@@ -22,11 +27,20 @@ export const moshkaHarborNotes: Record<string, NoteDocument> = {
         id: "goal",
         title: "The thing you will show",
         blocks: [
+          ...figureN(
+            1,
+            "harbor-goal",
+            "moshka-harbor-paper.png",
+            "Logbook page",
+            `The UI should feel like paper in a browser: form on top, list below. ${figLink(1, "harbor-goal")} is the layout target before you write HTML.`
+          ),
           md(
             "g",
             `A page that looks like a logbook. You type a line. You hit save. The line appears in the list. Refresh still shows the lines after you add localStorage.
 
-This is the same muscle as the cafe. Pick this if cafe felt too cute.`
+This is the same muscle as the cafe. Pick this if cafe felt too cute.
+
+**Arc:** save lines in the page (JS) → survive refresh (\`localStorage\`) → later a **real database** so other people and servers see the same logs (Mongo project).`
           ),
           mermaid(
             "flow",
@@ -85,6 +99,7 @@ This is the same muscle as the cafe. Pick this if cafe felt too cute.`
         id: "do",
         title: "Do this now",
         blocks: [
+          ill("unzip", "moshka-unzip.png", "Unzip habit"),
           md(
             "d",
             `Download **Harbor Log zip**. Unzip. Open \`README.md\`. Open \`index.html\` in Chrome.
@@ -262,11 +277,20 @@ li { padding: 0.6rem 0; border-bottom: 1px dashed #d4c4a8; }
             "1:05:00",
             "DOM and events. This is the form submit. Stop at 1:05:00."
           ),
+          ...figureN(
+            1,
+            "memory-only",
+            "moshka-refresh-wipes-list.png",
+            "Refresh wipes the list",
+            `Notes live only in RAM until you save them somewhere. Refresh rebuilds the page from HTML, so your \`<li>\` elements vanish. ${figLink(1, "memory-only")} is why the next lesson adds \`localStorage\`.`
+          ),
           md(
             "m",
             `Try first: submit the form. If the page reloads, you are missing \`event.preventDefault()\`. That is the whole trick. A form submit reloads unless you stop it.
 
-Open the Console. Log \`input.value\` inside the submit handler.`
+Open the Console. Log \`input.value\` inside the submit handler.
+
+Save two notes, then refresh. **They disappear.** That is not a bug. You have no persistence yet.`
           ),
           md(
             "p",
@@ -278,11 +302,13 @@ const input = document.getElementById("text")
 const list = document.getElementById("list")
 
 form.addEventListener("submit", (event) => {
+  // Stop the browser from reloading the whole page
   event.preventDefault()
   const text = input.value.trim()
   if (!text) return
   const li = document.createElement("li")
   li.textContent = text
+  // Only in memory — refresh will clear this list until localStorage lesson
   list.prepend(li)
   input.value = ""
 })
@@ -307,11 +333,31 @@ Empty save should do nothing. A real line should appear at the top of the list.`
         id: "why",
         title: "Why refresh kills the list",
         blocks: [
+          ...figureN(
+            1,
+            "localstorage-drawer",
+            "moshka-localstorage.png",
+            "localStorage on this computer",
+            `\`localStorage\` is a small key-value drawer inside **this browser on this machine**. Refresh can reload the page and still read the drawer. It does **not** share data with your phone, your cousin, or a server. ${figLink(1, "localstorage-drawer")} shows the limit.`
+          ),
           md(
             "m",
-            `The \`<ul>\` is empty in HTML. JS only adds \`<li>\` in memory. Refresh rebuilds the page from HTML. The lines are gone.
+            `The \`<ul>\` is empty in HTML. JS only adds \`<li>\` in memory until you call \`localStorage.setItem\`. Refresh rebuilds the page from HTML unless you **rehydrate** the list from that drawer on load.
 
-\`localStorage\` saves a string on this computer, this browser. It is good for a toy log. It is not Mongo. Other people cannot see it.`
+**Not a database:** no queries, no other users, no backup if you clear site data. Mongo Harbor (project 06) fixes the "everyone needs the same logs" problem.`
+          ),
+          ...figureN(
+            2,
+            "persistence-ladder",
+            "moshka-persistence-ladder.png",
+            "Where data can live",
+            `Step 1: DOM only (refresh loses it). Step 2: \`localStorage\` (this browser). Step 3: server memory (dies on deploy). Step 4: database (shared, durable). You are on step 2 now. ${figLink(2, "persistence-ladder")} is the whole roadmap.`
+          ),
+          link(
+            "db-later",
+            "/notes/moshka/moshka-roadmap/moshka-p06-harbor-api/moshka-api-db-idea",
+            "Preview: what a database is",
+            "Read this after persist works. Same Harbor story, but logs survive for the whole team."
           ),
         ],
       },
@@ -348,6 +394,7 @@ const KEY = "harbor-notes"
 
 function readNotes() {
   try {
+    // Drawer read: string in, array out
     const raw = localStorage.getItem(KEY)
     return raw ? JSON.parse(raw) : []
   } catch {
@@ -356,6 +403,7 @@ function readNotes() {
 }
 
 function writeNotes(notes) {
+  // Always store JSON text, not the array object directly
   localStorage.setItem(KEY, JSON.stringify(notes))
 }
 
@@ -383,11 +431,31 @@ render()
 
 Save two lines. Refresh. They should still be there.`
           ),
+          info(
+            "limit",
+            "Still not Mongo",
+            "Open the site in another browser profile. Your notes will not be there. That gap is why TailoredTech uses databases on Harbor API and BBS."
+          ),
           tasks("t", "Hands-on", [
             { id: "keep", label: "Refresh keeps the log lines" },
+            { id: "other-browser", label: "You checked another browser and saw notes do not sync" },
           ]),
         ],
       },
+    ],
+    explains: [
+      explain(
+        "localstorage",
+        "localStorage",
+        "Browser drawer",
+        `Key-value strings per origin. \`setItem\` / \`getItem\`. Cleared when user wipes site data. Not shared across devices.`
+      ),
+      explain(
+        "database-next",
+        "Database",
+        "What comes later",
+        `A separate program (Mongo, Postgres) keeps rows or documents on disk. Your API reads and writes so every user sees the same data.`
+      ),
     ],
   }),
   "moshka-harbor-time": lesson({

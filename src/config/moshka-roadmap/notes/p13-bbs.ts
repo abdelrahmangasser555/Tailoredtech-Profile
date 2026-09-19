@@ -1,5 +1,7 @@
 import {
   explain,
+  figLink,
+  figureN,
   info,
   lesson,
   md,
@@ -21,6 +23,13 @@ export const moshkaBbsNotes: Record<string, NoteDocument> = {
         id: "goal",
         title: "A real TailoredTech repo",
         blocks: [
+          ...figureN(
+            1,
+            "bbs-cutaway",
+            "moshka-bbs-cutaway.png",
+            "BBS rooms",
+            `Features, repo, database, and app layers show up in every Bahri BBS repo. ${figLink(1, "bbs-cutaway")} is the cutaway.`
+          ),
           md(
             "g",
             `You have already seen TailoredTech projects. Now we name the pattern.

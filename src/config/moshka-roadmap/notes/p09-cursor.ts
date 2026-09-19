@@ -1,5 +1,7 @@
 import {
   explain,
+  figLink,
+  figureN,
   illustration,
   info,
   lesson,
@@ -21,6 +23,13 @@ export const moshkaCursorNotes: Record<string, NoteDocument> = {
         id: "goal",
         title: "AI is a junior pair, not a boss",
         blocks: [
+          ...figureN(
+            1,
+            "cursor-ui",
+            "moshka-cursor-install.png",
+            "Editor plus agent",
+            `Code on the left, agent on the right. You still approve every edit. ${figLink(1, "cursor-ui")} is the layout to learn.`
+          ),
           md(
             "g",
             `Abdelrahman ships with Cursor. You will too.

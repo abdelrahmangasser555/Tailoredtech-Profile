@@ -11,7 +11,7 @@ import type {
 } from "@/lib/notes-types"
 import type { NotesBreadcrumb } from "@/lib/notes"
 import type { NotesStarter } from "@/lib/notes-types"
-import { formatNotesDate } from "@/lib/notes"
+import { formatNotesDate, getLessonNeighbors } from "@/lib/notes"
 import type { NoteMentionItem } from "@/lib/notes-chat/context"
 import { subscribeNoteUpdates } from "@/lib/notes-live"
 import { NoteBlockRenderer } from "@/components/notes/note-block-renderer"
@@ -46,6 +46,10 @@ export function NoteDetail({
   starters,
 }: NoteDetailProps) {
   const [note, setNote] = useState(serverNote)
+  const lessonNeighbors = useMemo(
+    () => getLessonNeighbors(note.id),
+    [note.id]
+  )
 
   useEffect(() => {
     setNote(serverNote)
@@ -340,7 +344,11 @@ export function NoteDetail({
         </div>
       </div>
 
-      <NoteLessonNav noteId={note.id} />
+      <NoteLessonNav
+        noteId={note.id}
+        prev={lessonNeighbors.prev}
+        next={lessonNeighbors.next}
+      />
 
       <NoteExplainSheet
         term={explainId ? explainsById[explainId] ?? null : null}

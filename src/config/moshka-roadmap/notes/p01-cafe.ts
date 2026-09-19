@@ -1,6 +1,9 @@
 import {
   explain,
+  figLink,
   figure,
+  figureN,
+  ill,
   info,
   lesson,
   link,
@@ -25,6 +28,13 @@ export const moshkaCafeNotes: Record<string, NoteDocument> = {
         id: "goal",
         title: "The thing you will show",
         blocks: [
+          ...figureN(
+            1,
+            "cafe-goal",
+            "moshka-three-files.png",
+            "Three files",
+            `You will ship HTML, CSS, and JS as separate files. ${figLink(1, "cafe-goal")} is the split you will live in all week.`
+          ),
           md(
             "g",
             `By the last lesson you have a page with drinks, a total, and a click that adds a drink. You can also clear the total.
@@ -100,6 +110,7 @@ It loads CSS with \`<link rel="stylesheet" href="styles.css" />\` and JS with \`
         id: "do",
         title: "Download and unzip",
         blocks: [
+          ill("unzip", "moshka-unzip.png", "Unzip = three files"),
           md(
             "d",
             `1. Download **Pixel Cafe zip** from the folder page (or the download block on this project).
@@ -167,11 +178,12 @@ You do **not** run \`npm install\` here. There is no \`package.json\`.`
         id: "map",
         title: "Three jobs",
         blocks: [
-          figure(
-            "fig-three",
+          ...figureN(
+            1,
+            "three-files",
             "moshka-three-files.png",
             "Three files",
-            "HTML, CSS, JS. Add this PNG under public/notes/moshka/images/ when ready."
+            `Each file has one job. HTML lists what exists, CSS paints it, JS reacts to clicks. ${figLink(1, "three-files")} shows the split.`
           ),
           md(
             "m",
@@ -208,11 +220,12 @@ You do **not** run \`npm install\` here. There is no \`package.json\`.`
 - \`<script src="app.js"></script>\` runs your click logic after the HTML exists.
 - The script at the **bottom** of \`<body>\` is on purpose: buttons exist before JS runs.`
           ),
-          figure(
-            "fig-loads",
+          ...figureN(
+            2,
+            "page-loads",
             "moshka-page-loads.png",
             "How the page loads",
-            "index.html links to styles.css and app.js, then Chrome shows the page."
+            `The browser reads \`index.html\` first, then downloads CSS and JS in order. If a path is wrong, one layer goes missing. ${figLink(2, "page-loads")} is the load order.`
           ),
           tasks("t", "Hands-on", [
             { id: "break", label: "Rename styles.css, refresh, see it break, rename it back" },
@@ -278,6 +291,7 @@ You do **not** run \`npm install\` here. There is no \`package.json\`.`
         id: "try",
         title: "Try first",
         blocks: [
+          ill("bones", "moshka-html-bones.png", "HTML = boxes"),
           md(
             "m",
             `Open \`index.html\`. Find a drink name. Change **Espresso** to something you drink. Save. Refresh the browser.
@@ -400,6 +414,7 @@ If you only change the visible span, the button still adds 18. That is the lesso
         id: "watch",
         title: "Paint the boxes",
         blocks: [
+          ill("paint", "moshka-css-paint.png", "CSS paints HTML"),
           yt(
             "v",
             VID.css,
@@ -529,6 +544,7 @@ Refresh. Hover a row. Hover a button. That is enough motion for this page.`
         id: "watch",
         title: "Make a click do work",
         blocks: [
+          ill("click", "moshka-js-click.png", "Click updates total"),
           yt(
             "v",
             VID.js,

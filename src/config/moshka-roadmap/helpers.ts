@@ -256,20 +256,66 @@ export function illustration(
   id: string,
   component: string,
   title?: string,
-  caption?: string
+  caption?: string,
+  props?: Record<string, unknown>
 ): NoteBlock {
-  return { type: "illustration", id, component, title, caption }
+  return { type: "illustration", id, component, title, caption, props }
 }
 
 const MOSHKA_IMG = "/notes/moshka/images"
+
+/** Shown under figures; full spec in src/config/moshka-image-prompts.txt */
+export const MOSHKA_IMG_CAPTION =
+  "Cream + black ink style. Replace PNG in public/notes/moshka/images/ using the prompt file if you want different art."
+
+export type FigureMeta = {
+  figureNumber?: number
+  figureAnchor?: string
+}
 
 export function gallery(
   id: string,
   images: { src: string; label: string }[],
   title?: string,
-  caption?: string
+  caption?: string,
+  meta?: FigureMeta
 ): NoteBlock {
-  return { type: "gallery", id, images, title, caption }
+  return {
+    type: "gallery",
+    id,
+    images,
+    title,
+    caption,
+    figureNumber: meta?.figureNumber,
+    figureAnchor:
+      meta?.figureAnchor ?? (meta?.figureNumber !== undefined ? id : undefined),
+  }
+}
+
+/** Markdown link to a numbered figure in the same note */
+export function figLink(n: number, anchor: string) {
+  return `[Figure ${n}](#note-fig-${anchor})`
+}
+
+/** Explanation paragraph first, then numbered figure (use figLink in lead text) */
+export function figureN(
+  n: number,
+  anchor: string,
+  filename: string,
+  label: string,
+  lead: string,
+  caption?: string
+): NoteBlock[] {
+  return [
+    md(`fig-lead-${anchor}`, lead),
+    gallery(
+      anchor,
+      [{ src: `${MOSHKA_IMG}/${filename}`, label }],
+      label,
+      caption ?? MOSHKA_IMG_CAPTION,
+      { figureNumber: n, figureAnchor: anchor }
+    ),
+  ]
 }
 
 /** Single image from public/notes/moshka/images/ */
@@ -277,9 +323,41 @@ export function figure(
   id: string,
   filename: string,
   label: string,
+  caption?: string,
+  meta?: FigureMeta
+): NoteBlock {
+  return gallery(
+    id,
+    [{ src: `${MOSHKA_IMG}/${filename}`, label }],
+    label,
+    caption ?? MOSHKA_IMG_CAPTION,
+    meta
+  )
+}
+
+/** Line diagram / infographic (same folder + style as figure) */
+export function ill(
+  id: string,
+  filename: string,
+  label: string,
   caption?: string
 ): NoteBlock {
-  return gallery(id, [{ src: `${MOSHKA_IMG}/${filename}`, label }], label, caption)
+  return figure(id, filename, label, caption)
+}
+
+/** Top/bottom or two-panel explainers (same visual system) */
+export function meme(
+  id: string,
+  filename: string,
+  label: string,
+  caption?: string
+): NoteBlock {
+  return figure(
+    id,
+    filename,
+    label,
+    caption ?? "Meme-style explainer. Same cream + ink look as the other pictures."
+  )
 }
 
 export function stack(
@@ -355,4 +433,7 @@ export const VID = {
   dockerNana: "https://www.youtube.com/watch?v=3c-iBn73dDE",
   tailwindTraversy: "https://www.youtube.com/watch?v=dFgzHOX84xQ",
   nextNinja: "https://www.youtube.com/watch?v=A63UxsQsEbU",
+  git: "https://www.youtube.com/watch?v=hwP7WQkmECE",
+  gitFcc: "https://www.youtube.com/watch?v=RGOj5yH7evk",
+  ghCli: "https://www.youtube.com/watch?v=vt7doLGHzOk",
 }

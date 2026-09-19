@@ -1,6 +1,7 @@
 import {
   download,
   explain,
+  figure,
   lesson,
   link,
   md,
@@ -38,13 +39,17 @@ How each lesson works:
 3. If you get stuck, copy the full snippet into the named file.
 4. Commands in a **terminal** block run in your terminal, not in the browser, not in chat.
 
-Videos come in pairs: a short Fireship clip, then a longer sit-down (Bro Code, Traversy, Net Ninja, Web Dev Simplified). The caption always says **Watch from X to Y**. Click a box on a diagram, or a word like [[pick-build]], for more detail.`
+Videos come in pairs: a short Fireship clip, then a longer sit-down (Bro Code, Traversy, Net Ninja, Web Dev Simplified). The caption always says **Watch from X to Y**. Click a box on a diagram, or a word like [[pick-build]], for more detail.
+
+**Pictures:** line art and memes on cream paper. Same look everywhere so your brain reads the idea, not the colors. Diagrams (mermaid) stay small; big ideas get an image when one glance helps.`
           ),
+          figure("welcome", "moshka-welcome.png", "Two builds, one path"),
           mermaid(
             "why-flow",
             `flowchart LR
   P[Pick a first build] --> F[Frontend that looks real]
-  F --> R[React plus Vite]
+  F --> G[Ship with Git]
+  G --> R[React plus Vite]
   R --> U[UX like a client]
   U --> N[Next.js]
   N --> M[Mongo]
@@ -62,6 +67,7 @@ Videos come in pairs: a short Fireship clip, then a longer sit-down (Bro Code, T
             {
               P: "pick-build",
               F: "frontend",
+              G: "git-ship",
               R: "react-vite",
               U: "ux",
               N: "nextjs",
@@ -99,7 +105,7 @@ Videos come in pairs: a short Fireship clip, then a longer sit-down (Bro Code, T
 
 They teach the same thing: files on disk, a page in the browser, a click that changes the page.
 
-After that first build you go to Port Watch. Do not stay in 01 forever.`
+After that first build, do **01d Ship with Git** so your cafe folder lives on GitHub. Then Port Watch. Do not stay in 01 forever.`
           ),
           download(
             "pick-zips",
@@ -122,7 +128,7 @@ After that first build you go to Port Watch. Do not stay in 01 forever.`
             "tools-md",
             `**Continue** on a folder jumps to the last lesson you opened.
 
-**Mark as done** on a lesson is how progress fills up. It lives in this browser only. No login.
+**Next** at the bottom marks the lesson done automatically. You can **Undo** if you skipped the hands-on part. Progress lives in this browser only. No login.
 
 The chat on the right is ask mode. Ask "what do I type next" and name the file you have open.`
           ),
@@ -159,9 +165,15 @@ They all teach HTML, CSS, and JS. Different story. Unzip, open \`index.html\`, c
         "frontend",
         "Frontend",
         "Frontend that looks real",
-        `Cafe or Harbor or Score, then **Port Watch**.
+        `Cafe or Harbor or Score, then **01d Ship with Git**, then **Port Watch**.
 
 Port Watch is a dense table. That is closer to client work than a cute menu.`
+      ),
+      explain(
+        "git-ship",
+        "Git",
+        "Ship with Git",
+        `Folder **01d Ship with Git**. GitHub account, \`git commit\`, push, branches, pull requests, \`gh\`, rebase basics. Put your cafe folder in a real repo.`
       ),
       explain(
         "react-vite",

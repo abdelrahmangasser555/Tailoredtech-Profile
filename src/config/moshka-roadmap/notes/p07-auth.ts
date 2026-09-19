@@ -1,5 +1,7 @@
 import {
   explain,
+  figLink,
+  figureN,
   info,
   lesson,
   link,
@@ -20,6 +22,13 @@ export const moshkaAuthNotes: Record<string, NoteDocument> = {
         id: "goal",
         title: "Identity is a product",
         blocks: [
+          ...figureN(
+            1,
+            "auth-doors",
+            "moshka-auth-doors.png",
+            "Sign-in and tenant",
+            `Different clients sign in different ways, then hit a tenant wall on data. ${figLink(1, "auth-doors")} is the mental model.`
+          ),
           md(
             "g",
             `Auth is not a login form. It is:

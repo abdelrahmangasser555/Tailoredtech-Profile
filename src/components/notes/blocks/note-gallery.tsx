@@ -12,6 +12,8 @@ type NoteGalleryProps = {
   title?: string
   caption?: string
   images: NoteGalleryImage[]
+  figureNumber?: number
+  figureAnchor?: string
   className?: string
 }
 
@@ -22,13 +24,25 @@ export function NoteGallery({
   title,
   caption,
   images,
+  figureNumber,
+  figureAnchor,
   className,
 }: NoteGalleryProps) {
   if (!images.length) return null
 
+  const anchorId = figureAnchor ? `note-fig-${figureAnchor}` : undefined
+
   return (
-    <div className={cn("mt-6 first:mt-0", className)}>
-      {title ? (
+    <div
+      id={anchorId}
+      className={cn("mt-6 scroll-mt-28 first:mt-0", className)}
+    >
+      {figureNumber ? (
+        <p className="mb-3 font-mono text-[10px] tracking-[0.16em] text-white/50 uppercase">
+          <span className="text-white/70">Figure {figureNumber}.</span>
+          {title ? ` ${title}` : null}
+        </p>
+      ) : title ? (
         <p className="mb-3 font-mono text-[10px] tracking-[0.2em] text-white/40 uppercase">
           {title}
         </p>

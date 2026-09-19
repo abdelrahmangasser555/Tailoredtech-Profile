@@ -119,6 +119,8 @@ export function NoteBlockRenderer({
           title={block.title}
           caption={block.caption}
           images={block.images}
+          figureNumber={block.figureNumber}
+          figureAnchor={block.figureAnchor}
         />
       )
     case "terminal":

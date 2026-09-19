@@ -1,5 +1,7 @@
 import {
   explain,
+  figLink,
+  figureN,
   info,
   lesson,
   md,
@@ -21,6 +23,13 @@ export const moshkaRepoNotes: Record<string, NoteDocument> = {
         id: "goal",
         title: "Same product, better folders",
         blocks: [
+          ...figureN(
+            1,
+            "layers",
+            "moshka-layers.png",
+            "Layer stack",
+            `Routes stay thin. Service and repo own the rules and queries. ${figLink(1, "layers")} is the stack you will copy on client repos.`
+          ),
           md(
             "g",
             `Right now \`route.ts\` talks to Mongo. That works for a demo. It does not work when you have observations, users, tenants, and three roles.

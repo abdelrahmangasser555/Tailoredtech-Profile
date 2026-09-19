@@ -79,6 +79,32 @@ export const moshkaTree: NotesFolderNode = folder(
           }
         ),
         folder(
+          "moshka-p-git-ship",
+          "01d Ship with Git",
+          [
+            file("moshka-git-learn", "What you will learn"),
+            file("moshka-git-account", "GitHub account"),
+            file("moshka-git-install", "Install Git and gh"),
+            file("moshka-git-snapshots", "Snapshots mental model"),
+            file("moshka-git-first-commit", "First commit hands-on"),
+            file("moshka-git-cafe-repo", "Put Pixel Cafe in Git"),
+            file("moshka-git-push", "Push to GitHub"),
+            file("moshka-git-branch", "Branches and merge"),
+            file("moshka-git-pr", "What is a pull request"),
+            file("moshka-git-gh-pr", "Open a PR with gh"),
+            file("moshka-git-rebase", "Rebase vs merge"),
+            file("moshka-git-workflow", "Daily workflow"),
+            file("moshka-git-fix", "Fix common problems"),
+          ],
+          {
+            trackProgress: true,
+            chat: projectChat(
+              "Learn Git and GitHub after HTML/CSS/JS. Account, commits, push, branches, PRs, rebase, gh CLI.",
+              "Finished at least one first-build (Cafe, Harbor, or Scoreboard) so you have a folder to version."
+            ),
+          }
+        ),
+        folder(
           "moshka-p04-port-watch",
           "02 Port Watch",
           [
@@ -109,17 +135,23 @@ export const moshkaTree: NotesFolderNode = folder(
             file("moshka-react-create", "Create the project"),
             file("moshka-react-template", "Which template to pick"),
             file("moshka-react-tour", "Folder tour"),
+            file("moshka-react-jsx", "JSX rules"),
             file("moshka-react-main", "main.tsx entry"),
             file("moshka-react-app", "App.tsx first screen"),
             file("moshka-react-component", "Your first component"),
             file("moshka-react-props", "Props are inputs"),
+            file("moshka-react-events", "Events and handlers"),
+            file("moshka-react-list-keys", "Lists and keys"),
+            file("moshka-react-status", "StatusBadge component"),
             file("moshka-react-state", "useState"),
+            file("moshka-react-errors", "When the screen goes white"),
+            file("moshka-react-devtools", "React DevTools"),
             file("moshka-react-ship", "Show someone"),
           ],
           {
             trackProgress: true,
             chat: projectChat(
-              "React + Vite + TypeScript: create the app, tour folders, components, props, useState. Port Watch row as VesselRow.",
+              "React + Vite + TypeScript: create app, JSX, package.json, components (VesselRow, StatusBadge), props, events, lists/keys, useState, errors, DevTools. Full copy-paste files.",
               "Port Watch exists. He felt the pain of copying table rows."
             ),
           }

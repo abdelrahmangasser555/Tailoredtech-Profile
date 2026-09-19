@@ -1,4 +1,6 @@
 import {
+  figLink,
+  figureN,
   lesson,
   link,
   md,
@@ -17,6 +19,13 @@ export const moshkaTestNotes: Record<string, NoteDocument> = {
         id: "goal",
         title: "A robot user",
         blocks: [
+          ...figureN(
+            1,
+            "playwright",
+            "moshka-playwright-robot.png",
+            "Robot clicks UI",
+            `Playwright drives a real browser and fails when the page lies. ${figLink(1, "playwright")} is the idea.`
+          ),
           md(
             "g",
             `Unit tests poke functions. E2E tests open the browser.

@@ -1,4 +1,7 @@
 import {
+  figLink,
+  figureN,
+  ill,
   lesson,
   link,
   md,
@@ -20,6 +23,13 @@ export const moshkaScoreNotes: Record<string, NoteDocument> = {
         id: "goal",
         title: "The thing you will show",
         blocks: [
+          ...figureN(
+            1,
+            "score-goal",
+            "moshka-score-big.png",
+            "Big score numbers",
+            `The scoreboard is two huge numbers and clear buttons. ${figLink(1, "score-goal")} is the visual priority before you touch CSS.`
+          ),
           md(
             "g",
             `Home and Away. Plus and minus. Big numbers. Reset. Keyboard shortcuts if you want them.

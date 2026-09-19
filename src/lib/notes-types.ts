@@ -188,6 +188,9 @@ export type NoteBlock =
       title?: string
       caption?: string
       images: { src: string; label: string }[]
+      /** Renders as "Figure N." and sets id note-fig-{figureAnchor} for in-text links */
+      figureNumber?: number
+      figureAnchor?: string
     }
   | {
       type: "terminal"
