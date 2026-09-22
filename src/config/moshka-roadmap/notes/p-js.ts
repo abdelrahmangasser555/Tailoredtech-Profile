@@ -1,5 +1,6 @@
 import {
   beforeYouStart,
+  concept,
   explain,
   figLink,
   figureN,
@@ -357,6 +358,15 @@ node hello.js`
 | undefined | (empty) | Forgot to set |
 | null | \`null\` | Empty on purpose |`
           ),
+          concept(
+            "let-const",
+            "let vs const",
+            `**const** = the name will always point at the same value (for strings and numbers you do not reassign).
+
+**let** = the value inside the name may change (cafe total going up).
+
+Use \`const\` unless you need to reassign. Never use \`var\` in new code.`
+          ),
           ...teachStep(
             1,
             "const for things that stay",
@@ -367,12 +377,15 @@ node hello.js`
 const price = 18
 console.log(drink, price)
 `,
-            "1-3"
+            "1-3",
+            `- \`"Espresso"\` is a **string** (text in quotes).
+- \`18\` is a **number** (no quotes).
+- \`console.log(drink, price)\` prints both, separated by a space in the terminal.`
           ),
           ...teachStep(
             2,
             "let when the number will change",
-            `Cafe total changes. That is \`let\`. Do not use \`var\` (old).`,
+            `Cafe total changes. That is \`let\`. The line \`total = total + price\` **reassigns** the variable.`,
             "js",
             "values.js",
             `const drink = "Espresso"
@@ -381,7 +394,10 @@ let total = 0
 total = total + price
 console.log(drink, total)
 `,
-            "3-5"
+            "3-5",
+            `- \`let total = 0\` starts the bill at zero.
+- \`total = total + price\` means: read old total, add price, store back in \`total\`.
+- Final \`console.log\` should show Espresso and 18.`
           ),
           md(
             "run",
@@ -435,10 +451,35 @@ console.log(total)`,
 **Parameter** = the name inside the recipe (\`price\`).
 **Argument** = the real value you pass (\`18\`).`
           ),
+          concept(
+            "fn-idea",
+            "What is a function?",
+            `A **function** is a small named machine. You give it inputs. It can give you an output back.
+
+You **call** it by writing its name with parentheses: \`addPrice(total, 18)\`.
+
+Without functions you would copy the same math everywhere. One typo breaks everything.`
+          ),
           ...teachStep(
             1,
-            "A function that returns",
-            `\`return\` sends a value back. The caller stores it. \`console.log\` only prints. It does not give a value to use later.`,
+            "Write the recipe (function declaration)",
+            `Start with only the function. Do not run anything yet. Read the names inside the parentheses.`,
+            "js",
+            "fn.js",
+            `function addPrice(total, price) {
+  return total + price
+}
+`,
+            "1-3",
+            `- \`function addPrice\` creates a machine named **addPrice**.
+- \`(total, price)\` are **parameters**: placeholder names for numbers you will pass later.
+- \`return total + price\` means: add them, then **send that number back** to whoever called the function.
+- \`return\` stops the function right there. Lines after \`return\` in the same block do not run.`
+          ),
+          ...teachStep(
+            2,
+            "Call it twice",
+            `Now use the function. \`total\` is a **variable** that holds the running sum, like the cafe total.`,
             "js",
             "fn.js",
             `function addPrice(total, price) {
@@ -450,12 +491,16 @@ total = addPrice(total, 18)
 total = addPrice(total, 12)
 console.log(total)
 `,
-            "1-8"
+            "5-8",
+            `- \`let total = 0\` starts the cafe bill at zero.
+- \`addPrice(total, 18)\` passes **arguments** \`0\` and \`18\`. The function returns \`18\`. You store that in \`total\`.
+- Second call: \`addPrice(18, 12)\` returns \`30\`.
+- \`console.log(total)\` prints \`30\` in the terminal. It does **not** change \`total\`; it only shows it.`
           ),
           ...teachStep(
-            2,
-            "Arrow function (same idea)",
-            `You will see this in React. Same as function, shorter. One line can skip \`return\` and braces.`,
+            3,
+            "Arrow function (same idea, shorter spelling)",
+            `React code uses this shape a lot. It is still a function. The name is \`addPriceArrow\`.`,
             "js",
             "fn.js",
             `function addPrice(total, price) {
@@ -469,12 +514,15 @@ total = addPrice(total, 18)
 total = addPriceArrow(total, 12)
 console.log(total)
 `,
-            "5"
+            "5",
+            `- \`const addPriceArrow = ...\` stores the function in a name (like a variable, but the value is a function).
+- \`(total, price) => total + price\` is shorthand: when the body is one expression, JS returns it automatically.
+- Line 9 calls the arrow the same way you called \`addPrice\`.`
           ),
           ...teachStep(
-            3,
-            "A function as an argument",
-            `\`map\` and buttons need this. You pass a function. The other function calls it later. That is a **callback**.`,
+            4,
+            "Pass a function into another function (callback)",
+            `This feels weird at first. You are not calling \`shout\` yourself inside \`twice\`. You hand \`shout\` to \`twice\`, and \`twice\` calls it.`,
             "js",
             "fn.js",
             `function addPrice(total, price) {
@@ -498,7 +546,13 @@ function twice(fn, value) {
 
 console.log(twice(shout, "ok"))
 `,
-            "12-21"
+            "12-21",
+            `- \`shout\` turns text into UPPERCASE.
+- \`twice(fn, value)\`: \`fn\` is a **parameter that holds a function** (not a number).
+- Inside \`twice\`, \`fn(value)\` runs \`shout("ok")\` → \`"OK"\`.
+- Then \`fn(...)\` runs again on \`"OK"\` → still \`"OK"\`.
+- \`twice(shout, "ok")\` passes the function **without** \`()\` after \`shout\`. You pass the recipe, not the result.
+- Button \`addEventListener\` and \`.map()\` use this same idea: you pass a function, something else calls it later. That passed function is called a **callback**.`
           ),
           md(
             "cb",
@@ -821,10 +875,37 @@ console.log(labels)`,
             "You used dot notation and you know JSON looks like this.",
             ["~/Desktop/js-lab/obj.js"]
           ),
+          concept(
+            "obj-idea",
+            "What is an object?",
+            `An **object** groups related facts under one name.
+
+Instead of three separate variables (\`vesselName\`, \`vesselStatus\`, \`vesselEta\`), you keep one **vessel** with **properties** (fields): \`name\`, \`status\`, \`eta\`.
+
+You read a property with a dot: \`vessel.name\`.`
+          ),
           ...teachStep(
             1,
-            "One vessel",
-            `Curly braces. Keys on the left. Harbor timestamps used \`{ text, at }\` the same way.`,
+            "Create one vessel object",
+            `Curly braces \`{ }\` mean "object". Each line is \`key: value\`. Keys are names you pick. Values can be strings, numbers, or more objects later.`,
+            "js",
+            "obj.js",
+            `const vessel = {
+  name: "MV Red Sea",
+  status: "Alongside",
+  eta: "06:00",
+}
+`,
+            "1-5",
+            `- \`const vessel\` = one object stored in the name **vessel**.
+- \`name:\` is a **property name** (also called a key).
+- \`"MV Red Sea"\` is the **value** (a string).
+- Commas between properties. No comma after the last one (both styles work; stay consistent).`
+          ),
+          ...teachStep(
+            2,
+            "Read properties with dot and brackets",
+            `Two ways to read the same field. Dot is normal. Brackets help when the key name is in a variable (later).`,
             "js",
             "obj.js",
             `const vessel = {
@@ -836,12 +917,15 @@ console.log(labels)`,
 console.log(vessel.name)
 console.log(vessel["status"])
 `,
-            "1-8"
+            "7-8",
+            `- \`vessel.name\` means: go into \`vessel\`, get the \`name\` field.
+- \`vessel["status"]\` does the same for \`status\`. The quotes are required inside \`[]\`.
+- Harbor notes used \`{ text, at }\` objects the same way for each saved note.`
           ),
           ...teachStep(
-            2,
-            "Array of objects",
-            `This is the shape React Harbor maps over. Each row is one object.`,
+            3,
+            "List of objects (a fleet)",
+            `An **array** can hold objects. Each item is one row in a table. React Harbor will \`.map()\` over an array like this.`,
             "js",
             "obj.js",
             `const vessel = {
@@ -862,12 +946,17 @@ for (const v of fleet) {
   console.log(v.name, v.status)
 }
 `,
-            "10-18"
+            "10-18",
+            `- \`fleet\` is an array \`[ ... ]\` with two objects inside.
+- First item is the **same** \`vessel\` object from above (not a copy).
+- Second item is a **new** object written inline.
+- \`for (const v of fleet)\` loops each object. \`v\` is one vessel per round.
+- \`console.log(v.name, v.status)\` prints two columns of text per ship.`
           ),
           ...teachStep(
-            3,
+            4,
             "Pull fields out (destructure)",
-            `Same as \`v.name\`, shorter. You will see this in React props: \`function VesselRow({ name, status })\`.`,
+            `Shorthand for "copy these properties into their own variables". Same values as \`vessel.name\`, less typing.`,
             "js",
             "obj.js",
             `const vessel = {
@@ -879,7 +968,10 @@ for (const v of fleet) {
 const { name, status } = vessel
 console.log(name, status)
 `,
-            "7-8"
+            "7-8",
+            `- \`const { name, status } = vessel\` creates variables \`name\` and \`status\` from the object.
+- You can now use \`name\` instead of \`vessel.name\`.
+- React components often write \`function VesselRow({ name, status })\` in the parameter list. That is destructuring in the function head.`
           ),
           tasks("t", "Hands-on", [
             { id: "run", label: "node obj.js prints two vessel lines then name and status" },
@@ -904,16 +996,112 @@ console.log(name, status)
             "You can say class vs one object literal, and what this means.",
             ["~/Desktop/js-lab/class.js", "~/Desktop/js-lab/vessel.js"]
           ),
-          md(
-            "why",
-            `An **object** is one vessel. A **class** is the stamp: every vessel has name and status, and maybe a method \`describe()\`.
+          concept(
+            "oop-words",
+            "OOP words (read once)",
+            `**OOP** means Object-Oriented Programming. You bundle **data** and **behavior** together.
 
-React Harbor uses **functions** for components. Still learn classes. Node libraries and some TailoredTech services use them.`
+| Word | Plain meaning |
+|------|----------------|
+| **class** | Blueprint / stamp (the recipe) |
+| **instance** | One real object built from that stamp |
+| **property** | Data on the instance (\`total\`, \`name\`) |
+| **method** | A function on the instance (\`add\`, \`describe\`) |
+| **constructor** | Special method that runs when you write \`new ClassName()\` |
+| **this** | "This specific instance I am building right now" |
+
+An **object literal** \`{ name: "MV Red Sea" }\` is one bag you write by hand. A **class** helps you make many similar bags with shared methods.
+
+React UI uses **function components**, not classes. You still meet classes in Node, APIs, and older code. Learn the words here so nothing sounds like magic later.`
+          ),
+          concept(
+            "this-word",
+            "What does this mean?",
+            `\`this\` always points at **the current instance**.
+
+When \`cafe.add(18)\` runs, inside \`add\`, \`this\` is the **cafe** counter object. So \`this.total\` is **cafe's** total, not some global number.
+
+If you had two counters, \`this\` keeps each one's data separate.`
           ),
           ...teachStep(
             1,
-            "constructor stores data",
-            `\`new Counter()\` runs constructor. \`this\` means this instance.`,
+            "Declare an empty class shell",
+            `The word \`class\` starts a blueprint. \`Counter\` is the name you choose. The body is empty for now.`,
+            "js",
+            "class.js",
+            `class Counter {
+}
+`,
+            "1-2",
+            `- \`class Counter\` does not create an object yet. It only defines a template.
+- You will add constructor and methods inside the braces in the next steps.`
+          ),
+          ...teachStep(
+            2,
+            "constructor sets starting data",
+            `\`constructor\` runs automatically when you write \`new Counter()\`.`,
+            "js",
+            "class.js",
+            `class Counter {
+  constructor() {
+    this.total = 0
+  }
+}
+`,
+            "2-4",
+            `- \`constructor()\` is a special method name. JS looks for it on \`new\`.
+- \`this.total = 0\` creates a **property** named \`total\` on **this** instance and sets it to \`0\`.
+- Every new counter will start at zero.`
+          ),
+          ...teachStep(
+            3,
+            "add method (behavior)",
+            `Methods look like functions inside the class. They use \`this\` to touch this instance's data.`,
+            "js",
+            "class.js",
+            `class Counter {
+  constructor() {
+    this.total = 0
+  }
+
+  add(price) {
+    this.total = this.total + price
+  }
+}
+`,
+            "6-8",
+            `- \`add(price)\` is a **method**: a function on each counter.
+- \`price\` is a parameter (the drink price you pass in).
+- \`this.total = this.total + price\` reads the old total, adds \`price\`, saves back on **this** counter only.`
+          ),
+          ...teachStep(
+            4,
+            "reset method",
+            `Same pattern: a method that changes \`this.total\`.`,
+            "js",
+            "class.js",
+            `class Counter {
+  constructor() {
+    this.total = 0
+  }
+
+  add(price) {
+    this.total = this.total + price
+  }
+
+  reset() {
+    this.total = 0
+  }
+}
+`,
+            "10-12",
+            `- \`reset()\` takes no parameters.
+- It sets \`this.total\` back to \`0\`, like the cafe Clear button.`
+          ),
+          ...teachStep(
+            5,
+            "new creates an instance",
+            `\`new Counter()\` builds one real counter. You call methods with a dot.`,
             "js",
             "class.js",
             `class Counter {
@@ -937,12 +1125,58 @@ console.log(cafe.total)
 cafe.reset()
 console.log(cafe.total)
 `,
-            "1-21"
+            "14-21",
+            `- \`new Counter()\` runs \`constructor\`, then gives you an **instance** stored in \`cafe\`.
+- \`cafe.add(18)\` calls the method on **that** instance.
+- \`console.log(cafe.total)\` reads the property (prints \`30\`).
+- \`cafe.reset()\` then \`console.log\` again should print \`0\`.
+- Save this file as \`class.js\` and run \`node class.js\` in the terminal.`
           ),
           ...teachStep(
-            2,
-            "constructor with arguments",
-            `Pass data in at \`new\`. Each instance keeps its own \`this.name\`.`,
+            6,
+            "Vessel class with constructor arguments",
+            `Open a **new** file \`vessel.js\`. The constructor can take values so each ship has its own name.`,
+            "js",
+            "vessel.js",
+            `class Vessel {
+  constructor(name, status) {
+    this.name = name
+    this.status = status
+  }
+}
+`,
+            "1-6",
+            `- \`constructor(name, status)\` receives two arguments when you call \`new Vessel("...", "...")\`.
+- \`this.name = name\` stores the first argument on the instance.
+- \`this.status = status\` stores the second.
+- \`name\` on the right is the parameter. \`this.name\` is the property on the object.`
+          ),
+          ...teachStep(
+            7,
+            "describe method returns text",
+            `Methods can \`return\` a string, like a function.`,
+            "js",
+            "vessel.js",
+            `class Vessel {
+  constructor(name, status) {
+    this.name = name
+    this.status = status
+  }
+
+  describe() {
+    return this.name + " is " + this.status
+  }
+}
+`,
+            "8-10",
+            `- \`describe()\` builds one sentence from \`this.name\` and \`this.status\`.
+- \`+\` joins strings. Spaces in \`" is "\` keep it readable.
+- Callers will use \`a.describe()\` to get the string back.`
+          ),
+          ...teachStep(
+            8,
+            "Two instances, same class",
+            `One blueprint, two ships. Each has its own \`this.name\`.`,
             "js",
             "vessel.js",
             `class Vessel {
@@ -961,13 +1195,17 @@ const b = new Vessel("MV Newbuild", "Inbound")
 console.log(a.describe())
 console.log(b.describe())
 `,
-            "1-15"
+            "12-17",
+            `- \`new Vessel(...)\` twice makes **two instances**: \`a\` and \`b\`.
+- Same class, different data inside each.
+- \`a.describe()\` and \`b.describe()\` print two different lines.
+- Run \`node vessel.js\` when done.`
           ),
           md(
             "vs-obj",
-            `**Object literal** (\`{ name: "MV Red Sea" }\`) is one bag. **Class** is a stamp for many bags that share methods.
+            `**Recap:** object literal = one-off bag. **class** = stamp + \`new\` for many bags with shared methods.
 
-For React UI you will mostly write **functions**. For this lab, Counter is cafe total. Vessel is a table row.`
+**React:** you will write \`function VesselRow(props)\` instead of \`class Vessel\`. Props are like constructor arguments passed from the parent. The mental model (data + display) is the same.`
           ),
           tasks("t", "Hands-on", [
             { id: "counter", label: "node class.js prints 30 then 0" },
@@ -1063,10 +1301,19 @@ async function load() {
 
 \`fetch\` exists in modern Node and in the browser. You will use it in Next Harbor for APIs.`
           ),
+          concept(
+            "async-idea",
+            "Sync vs later",
+            `**Synchronous** code runs top to bottom, one line at a time, right now.
+
+**Asynchronous** code schedules work for later (network, timer). JS keeps going while it waits.
+
+That is why fetch and timers do not freeze the whole page.`
+          ),
           ...teachStep(
             1,
             "setTimeout is later",
-            `This prints A, then C, then B. B is delayed. That is the idea of async: order in the file is not always order on screen.`,
+            `Run \`node async.js\`. Watch the order: A, C, then B after a short pause.`,
             "js",
             "async.js",
             `console.log("A")
@@ -1075,7 +1322,12 @@ setTimeout(() => {
 }, 200)
 console.log("C")
 `,
-            "1-5"
+            "1-5",
+            `- Line 1 runs immediately: prints \`A\`.
+- \`setTimeout\` **schedules** a function for 200 ms later. It does not wait here.
+- Line 5 runs immediately: prints \`C\`.
+- Then the timer fires and prints \`B later\`.
+- Order on screen: A, C, B. Order in the file: A, setTimeout, C.`
           ),
           tip(
             "later",

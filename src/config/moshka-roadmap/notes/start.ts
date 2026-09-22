@@ -35,10 +35,14 @@ This notes folder is your home. Progress saves on this browser. You can close th
 How each lesson works:
 
 1. Read **Before you start** (what you will do, what done looks like).
-2. Follow **Step 1, Step 2, …** in order. Do not skip to the last code block.
-3. Lime bar on a code line = new or changed line. **Copy all** still gives you the full file.
-4. **Try the change yourself first** when the lesson says try first.
-5. Terminal blocks: run in your terminal, not in the browser, not in chat.
+2. Read any blue **concept** box before code. It defines words (object, class, runtime, etc.).
+3. Follow **Step 1, Step 2, …** in order. Do not skip to the last code block.
+4. After each step, read **What the new lines mean**. That section explains every new line in plain English.
+5. Lime bar on a code line = new or changed line. **Copy all** still gives you the full file.
+6. **Try the change yourself first** when the lesson says try first.
+7. Terminal blocks: run in your terminal, not in the browser, not in chat.
+
+If a topic feels fast (functions, objects, classes): stop on that step, type the file yourself, run it, then read the line explanations again. One step per sitting is fine.
 
 Videos come in pairs: a short Fireship clip, then a longer sit-down (Bro Code, Traversy, Net Ninja, Web Dev Simplified). The caption always says **Watch from X to Y**. Click a box on a diagram, or a word like [[pick-build]], for more detail.
 

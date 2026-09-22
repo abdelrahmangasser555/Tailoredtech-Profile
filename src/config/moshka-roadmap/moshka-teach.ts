@@ -48,7 +48,12 @@ export function fence(
   return `\`\`\`${lang}:${filename}${hl}\n${code.replace(/\n$/, "")}\n\`\`\``
 }
 
-/** Step intro + code block in one shot */
+/** Plain-English concept box before code (absolute-beginner topics). */
+export function concept(id: string, title: string, body: string): NoteBlock {
+  return info(id, title, body)
+}
+
+/** Step intro + code block. Optional afterCode: line-by-line read of the highlighted part. */
 export function teachStep(
   n: number,
   title: string,
@@ -56,12 +61,22 @@ export function teachStep(
   lang: string,
   filename: string,
   code: string,
-  highlight?: string
+  highlight?: string,
+  afterCode?: string
 ): NoteBlock[] {
-  return [
+  const blocks: NoteBlock[] = [
     step(n, title, explain),
     md(`code-${n}-${filename}`, fence(lang, filename, code, highlight)),
   ]
+  if (afterCode) {
+    blocks.push(
+      md(
+        `after-${n}-${filename.replace(/\./g, "-")}`,
+        `**What the new lines mean (read slowly):**\n\n${afterCode}`
+      )
+    )
+  }
+  return blocks
 }
 
 /** Short plain-English line for terminal commands */

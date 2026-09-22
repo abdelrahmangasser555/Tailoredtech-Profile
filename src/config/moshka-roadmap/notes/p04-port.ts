@@ -10,7 +10,10 @@ import {
   md,
   meme,
   beforeYouStart,
+  concept,
   mermaid,
+  teachStep,
+  termStep,
   tasks,
   tip,
   VID,
@@ -146,16 +149,14 @@ Libraries you will actually use (from Freesets, not a dump):
 
 You should see a header and a table of vessels. Click a row. The Console should log the name.`
           ),
-          md(
-            "term",
-            `Run this in the terminal:
-
-\`\`\`bash
-cd ~/Desktop
+          ...termStep(
+            1,
+            "Unzip in the terminal",
+            "Same habit as Cafe and Scoreboard.",
+            `cd ~/Desktop
 unzip ~/Downloads/port-watch.zip
 cd port-watch
-ls
-\`\`\``
+ls`
           ),
           tasks("t", "Done when", [
             { id: "see", label: "Table is visible in the browser" },
@@ -174,19 +175,44 @@ ls
         id: "do",
         title: "Fill the screen with data",
         blocks: [
-          figure("layout", "moshka-port-watch-dense.png", "Short header, big table"),
-          md(
-            "m",
-            `Try first: open \`styles.css\`. Make the header short. Cut padding on \`th, td\`. The table should use the rest of the height.
-
-This is how BBS office screens feel: compact, all the numbers on one view.`
+          beforeYouStart(
+            "plan",
+            "Tighten the header and table cells so more vessel rows fit on one screen.",
+            "Header is a slim bar. Table rows feel like a spreadsheet, not a poster.",
+            ["styles.css"]
           ),
-          md(
-            "p",
-            `If you want a tight header, paste this block into \`styles.css\` (keep the rest):
+          figure("layout", "moshka-port-watch-dense.png", "Short header, big table"),
+          concept(
+            "dense",
+            "Why dense layout?",
+            `Office users want **many rows visible** without scrolling.
 
-\`\`\`css:styles.css
-header {
+Big padding and giant titles look like marketing sites. Port Watch should feel like a tool on a desk.`
+          ),
+          ...teachStep(
+            1,
+            "Shrink the header",
+            `Open \`styles.css\`. Add or update these rules. Refresh after saving.`,
+            "css",
+            "styles.css",
+            `header {
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid #ccc;
+}
+h1 { margin: 0.1rem 0 0; font-size: 1.1rem; }`,
+            "1-5",
+            `- \`header\` is the top bar with the title.
+- Smaller \`padding\` = less wasted vertical space.
+- \`h1\` font size \`1.1rem\` keeps the title readable but not loud.
+- \`border-bottom\` separates header from the table.`
+          ),
+          ...teachStep(
+            2,
+            "Tighter table cells",
+            `Append below your header rules. \`th\` is header cells, \`td\` is data cells.`,
+            "css",
+            "styles.css",
+            `header {
   padding: 0.5rem 1rem;
   border-bottom: 1px solid #ccc;
 }
@@ -195,8 +221,11 @@ th, td {
   text-align: left;
   padding: 0.35rem 0.85rem;
   border-bottom: 1px solid #ddd;
-}
-\`\`\``
+}`,
+            "6-10",
+            `- \`text-align: left\` lines labels up like Excel.
+- Small \`padding\` on \`th, td\` fits more rows on screen.
+- Row borders help the eye scan across columns.`
           ),
           info(
             "bbs",
@@ -220,13 +249,34 @@ th, td {
         id: "do",
         title: "Read the markup",
         blocks: [
+          beforeYouStart(
+            "plan",
+            "Read how a table is built, then add an ETA column on every row.",
+            "A new column lines up on header and every vessel row.",
+            ["index.html"]
+          ),
           ill("cols", "moshka-table-columns.png", "thead vs tbody"),
-          md(
-            "m",
-            `A table is not a pile of divs. Screen readers and Excel-brained office users expect columns.
+          concept(
+            "table-parts",
+            "Table vocabulary",
+            `| Tag | Role |
+|-----|------|
+| \`<table>\` | The whole grid |
+| \`<thead>\` | Label row(s) at the top |
+| \`<tbody>\` | Data rows |
+| \`<tr>\` | One row |
+| \`<th>\` | Header cell (column title) |
+| \`<td>\` | Data cell |
 
-\`\`\`html
-<table>
+If you add a \`<th>\` but forget \`<td>\` on one row, every column after it shifts. That is the most common table bug.`
+          ),
+          ...teachStep(
+            1,
+            "Minimal table shape",
+            `This is the skeleton. Your zip has more columns; the idea is the same.`,
+            "html",
+            "index.html",
+            `<table>
   <thead>
     <tr>
       <th>Vessel</th>
@@ -239,10 +289,15 @@ th, td {
       <td>Alongside</td>
     </tr>
   </tbody>
-</table>
-\`\`\`
-
-Try first: add a column **ETA**. Put a \`<th>\` and a \`<td>\` on every row. If you skip a cell, the columns shift. That is the bug.`
+</table>`,
+            "1-14",
+            `- \`<thead>\` holds column titles (\`Vessel\`, \`Status\`).
+- \`<tbody id="rows">\` holds one \`<tr>\` per vessel.
+- Each \`<tr>\` must have the **same number** of \`<td>\` cells as there are \`<th>\` headers.`
+          ),
+          md(
+            "m",
+            `**Hands-on:** add a column **ETA**. Add one \`<th>ETA</th>\` in the header row. Add one \`<td>\` on **every** vessel row. Refresh and check alignment.`
           ),
           tasks("t", "Hands-on", [
             { id: "col", label: "A new column exists on every row" },
@@ -260,23 +315,44 @@ Try first: add a column **ETA**. Put a \`<th>\` and a \`<td>\` on every row. If 
         id: "do",
         title: "Copy, then notice the pain",
         blocks: [
+          beforeYouStart(
+            "plan",
+            "Duplicate one vessel row by hand and change the name.",
+            "A second ship appears in the table. You feel why copy-paste hurts.",
+            ["index.html"]
+          ),
           meme("pain", "moshka-meme-copy-paste.png", "Copy-paste rows"),
+          concept(
+            "row-copy",
+            "Why this hurts",
+            `Each \`<tr>\` repeats the same structure. Change the column order once, and you must edit **every** row.
+
+React **components** fix that: write the row once, reuse it with different data. Today you earn the pain so components make sense later.`
+          ),
           md(
             "m",
-            `Try first: in \`index.html\`, duplicate a vessel \`<tr>\`. Change the name.
+            `**Step 1:** in \`index.html\`, find one vessel \`<tr>\` inside \`<tbody>\`.
 
-Pain means you are ready for React later. Today you feel why components exist.
+**Step 2:** copy the whole \`<tr>...</tr>\` block.
 
-A row you can paste:
-
-\`\`\`html:index.html
-        <tr>
+**Step 3:** paste it below the original. Change the vessel name and cells.`
+          ),
+          ...teachStep(
+            1,
+            "Example row to copy",
+            `Match the number of \`<td>\` cells to your table headers. Adjust text, keep the structure.`,
+            "html",
+            "index.html",
+            `        <tr>
           <td>MV Newbuild</td>
           <td>Inbound</td>
           <td>-</td>
           <td>Watch</td>
-        </tr>
-\`\`\``
+        </tr>`,
+            "1-6",
+            `- One \`<tr>\` = one vessel.
+- Each \`<td>\` is one column (name, status, ETA, action, etc.).
+- Indentation is for humans; the browser ignores extra spaces.`
           ),
           link(
             "react-folder",
