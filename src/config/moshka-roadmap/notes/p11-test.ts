@@ -7,6 +7,9 @@ import {
   tasks,
   tip,
   beforeYouStart,
+  VID,
+  watchPair,
+  ytWatch,
 } from "@/config/moshka-roadmap/helpers"
 import type { NoteDocument } from "@/lib/notes-types"
 
@@ -45,6 +48,28 @@ TailoredTech cares about the path a client actually clicks.`
             "Playwright intro",
             "Official install. Short."
           ),
+          ...watchPair(
+            {
+              blockId: "v-pw",
+              url: VID.playwrightWds,
+              title: "Software testing with Playwright (Web Dev Simplified)",
+              caption: "Long course. Treat it like a series, not one sitting.",
+            },
+            {
+              blockId: "v-pw-long",
+              url: VID.playwrightWds,
+              title: "Software testing with Playwright (Web Dev Simplified)",
+              from: "0:00",
+              to: "45:00",
+              why: "Install, first test, locators, and assertions. Stop and write your Harbor test before continuing.",
+            }
+          ),
+          link(
+            "wds",
+            "https://www.youtube.com/@WebDevSimplified",
+            "Web Dev Simplified on YouTube",
+            "Full Playwright course lives on this channel."
+          ),
           tasks("t", "Start", [{ id: "docs", label: "Open the Playwright intro tab" }]),
         ],
       },
@@ -59,6 +84,14 @@ TailoredTech cares about the path a client actually clicks.`
         id: "idea",
         title: "A scripted person",
         blocks: [
+          ytWatch(
+            "v-pw-idea",
+            VID.playwrightWds,
+            "Software testing with Playwright (Web Dev Simplified)",
+            "45:00",
+            "1:00:00",
+            "What E2E means in the course. Optional if you already watched the first 45 minutes."
+          ),
           md(
             "m",
             `Playwright starts Chrome. It goes to your URL. It looks for a heading. It clicks Save.

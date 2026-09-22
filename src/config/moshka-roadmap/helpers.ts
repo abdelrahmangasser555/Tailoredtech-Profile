@@ -198,6 +198,41 @@ export function ytWatch(
   )
 }
 
+/** Short overview clip + longer sit-down with a stated watch range. */
+export function watchPair(
+  short: {
+    blockId: string
+    url: string
+    title: string
+    caption?: string
+  },
+  long: {
+    blockId: string
+    url: string
+    title: string
+    from: string
+    to: string
+    why: string
+  }
+): NoteBlock[] {
+  return [
+    yt(
+      short.blockId,
+      short.url,
+      short.title,
+      short.caption ?? "Watch from 0:00 to the end. About 2 to 20 minutes."
+    ),
+    ytWatch(
+      long.blockId,
+      long.url,
+      long.title,
+      long.from,
+      long.to,
+      long.why
+    ),
+  ]
+}
+
 export function mermaid(
   id: string,
   diagram: string,
@@ -446,4 +481,20 @@ export const VID = {
   git: "https://www.youtube.com/watch?v=hwP7WQkmECE",
   gitFcc: "https://www.youtube.com/watch?v=RGOj5yH7evk",
   ghCli: "https://www.youtube.com/watch?v=vt7doLGHzOk",
+  /** Web Dev Simplified (curated for Moshka) */
+  jsRoadmapWds: "https://www.youtube.com/watch?v=7L2RLBmEJmE",
+  jsDomWds: "https://www.youtube.com/watch?v=y17RuWkWdn8",
+  jsDomTraverseWds: "https://www.youtube.com/watch?v=v7rSSy8CaYE",
+  jsEventsWds: "https://www.youtube.com/watch?v=XF1_MlZ5l6M",
+  jsArraysWds: "https://www.youtube.com/watch?v=R8rmfD9Y5-c",
+  jsRefValueWds: "https://www.youtube.com/watch?v=-hBJz2PPIVE",
+  jsPromisesWds: "https://www.youtube.com/watch?v=DHvZLI7Db8E",
+  jsAsyncWds: "https://www.youtube.com/watch?v=V_Kr9OSfDeU",
+  jsFetchWds: "https://www.youtube.com/watch?v=cuEtnrL9-H0",
+  jsCalculatorWds: "https://www.youtube.com/watch?v=j59qQ7YWLxw",
+  reactUseStateWds: "https://www.youtube.com/watch?v=O6P86uwfdR0",
+  reactUseEffectWds: "https://www.youtube.com/watch?v=0ZJgIjIuY7U",
+  playwrightWds: "https://www.youtube.com/watch?v=jydYq7oAtD8",
+  /** Short class syntax (not WDS; pairs with calculator project) */
+  jsClassesShort: "https://www.youtube.com/watch?v=U2vxAEiaVRY",
 }

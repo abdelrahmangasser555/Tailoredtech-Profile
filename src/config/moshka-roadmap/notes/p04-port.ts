@@ -255,6 +255,14 @@ th, td {
             "A new column lines up on header and every vessel row.",
             ["index.html"]
           ),
+          ytWatch(
+            "v-html-table",
+            VID.htmlBro,
+            "HTML full course (Bro Code)",
+            "51:06",
+            "58:00",
+            "Tables in HTML. Short clip after the scoreboard HTML lessons."
+          ),
           ill("cols", "moshka-table-columns.png", "thead vs tbody"),
           concept(
             "table-parts",

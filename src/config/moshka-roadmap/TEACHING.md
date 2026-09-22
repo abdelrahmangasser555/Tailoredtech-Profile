@@ -14,3 +14,14 @@ Helpers live in `moshka-teach.ts`, re-exported from `helpers.ts`.
 UI: `note-code-block.tsx` parses `highlight=` on ```lang:file highlight=1-3 fences.
 
 Voice: simple English, short sentences. Treat Moshka as an absolute beginner until the lesson proves otherwise. See `MOSHKA_TALK` in `helpers.ts`.
+
+## Videos
+
+Most lessons should have **two** clips when the topic maps to YouTube:
+
+1. Short overview: `VID.html`, `VID.js`, `VID.react`, etc. (Fireship 100 Seconds), via `yt()` or `watchPair()`.
+2. Long sit-down: Bro Code, Traversy, Net Ninja, or **Web Dev Simplified** (`VID.jsDomWds`, `VID.reactUseStateWds`, …), via `ytWatch()` with **Watch from X to Y** in the caption.
+
+Prefer WDS for DOM, events, array methods, promises, fetch, React hooks, and Playwright. Add `link()` to [WDS channel](https://www.youtube.com/@WebDevSimplified) or an MDN page when there is no perfect clip.
+
+Use `watchPair(short, long)` from `moshka-teach.ts` when both clips belong at the top of a section.

@@ -15,6 +15,7 @@ import {
   tasks,
   tip,
   VID,
+  watchPair,
   yt,
   ytWatch,
 } from "@/config/moshka-roadmap/helpers"
@@ -67,6 +68,27 @@ Every lesson has:
               C: "components",
               S: "state",
             }
+          ),
+          ...watchPair(
+            {
+              blockId: "v-learn",
+              url: VID.react,
+              title: "React in 100 Seconds (Fireship)",
+            },
+            {
+              blockId: "v-learn-wds",
+              url: VID.reactWds,
+              title: "Learn React (Web Dev Simplified)",
+              from: "0:00",
+              to: "15:00",
+              why: "Components and JSX. Stop before hooks if this is your first pass.",
+            }
+          ),
+          link(
+            "wds",
+            "https://www.youtube.com/@WebDevSimplified",
+            "Web Dev Simplified on YouTube",
+            "Use his hooks videos when you hit useState and useEffect in this folder."
           ),
           tasks("t", "Start", [
             { id: "port", label: "You finished Port Watch (or at least opened the table)" },
@@ -395,6 +417,21 @@ The React plugin is what compiles JSX. Without it, \`.tsx\` files would not run.
         id: "rules",
         title: "HTML habits that break in React",
         blocks: [
+          ...watchPair(
+            {
+              blockId: "v-jsx",
+              url: VID.react,
+              title: "React in 100 Seconds (Fireship)",
+            },
+            {
+              blockId: "v-jsx-wds",
+              url: VID.reactWds,
+              title: "Learn React (Web Dev Simplified)",
+              from: "8:00",
+              to: "18:00",
+              why: "JSX rules and className. Stop when he starts a new big topic.",
+            }
+          ),
           figure("jsx-fig", "moshka-react-jsx.png", "JSX vs HTML"),
           meme("jsx-meme", "moshka-meme-jsx-class.png", "Not class"),
           md(
@@ -719,6 +756,21 @@ Default export = one main thing per file (App). Named export = many helpers per 
         id: "do",
         title: "Add ETA",
         blocks: [
+          ...watchPair(
+            {
+              blockId: "v-props",
+              url: VID.react,
+              title: "React in 100 Seconds (Fireship)",
+            },
+            {
+              blockId: "v-props-wds",
+              url: VID.reactWds,
+              title: "Learn React (Web Dev Simplified)",
+              from: "15:00",
+              to: "28:00",
+              why: "Props and passing data into components. Stop when he starts state.",
+            }
+          ),
           meme("props", "moshka-meme-props.png", "Props go down"),
           md(
             "m",
@@ -782,6 +834,22 @@ Example rows in App:
         id: "do",
         title: "Clicks that do work",
         blocks: [
+          ...watchPair(
+            {
+              blockId: "v-ev",
+              url: VID.jsEventsWds,
+              title: "Learn JavaScript event listeners (Web Dev Simplified)",
+              caption: "DOM events first. React onClick is the same idea with different spelling.",
+            },
+            {
+              blockId: "v-ev-react",
+              url: VID.reactWds,
+              title: "Learn React (Web Dev Simplified)",
+              from: "28:00",
+              to: "38:00",
+              why: "React event handlers. Stop if he jumps to a new project.",
+            }
+          ),
           figure("ev", "moshka-react-events.png", "Event flow"),
           meme("controlled", "moshka-meme-controlled-input.png", "Controlled input"),
           md(
@@ -846,6 +914,28 @@ React owns \`value\`. The browser does not own it. That is why \`value\` + \`onC
         id: "do",
         title: "From three copy-pastes to one map",
         blocks: [
+          ...watchPair(
+            {
+              blockId: "v-map",
+              url: VID.jsArraysWds,
+              title: "8 JavaScript array methods (Web Dev Simplified)",
+              caption: "Focus on map. Same tool you use for vessel rows.",
+            },
+            {
+              blockId: "v-map-react",
+              url: VID.reactWds,
+              title: "Learn React (Web Dev Simplified)",
+              from: "50:00",
+              to: "1:00:00",
+              why: "Lists in React if he covers map and keys in this range. Skip if tired.",
+            }
+          ),
+          link(
+            "js-map-note",
+            "/notes/moshka/moshka-roadmap/moshka-p-js-lab/moshka-js-map",
+            "JavaScript lab: map",
+            "Language lesson if map still feels like magic."
+          ),
           meme("key", "moshka-meme-key.png", "Do not forget key"),
           md(
             "m",
@@ -1002,6 +1092,27 @@ No lime on white. Grey and navy-friendly tints only.`
         id: "do",
         title: "Search filters rows",
         blocks: [
+          ...watchPair(
+            {
+              blockId: "v-state",
+              url: VID.reactUseStateWds,
+              title: "Learn useState in 15 minutes (Web Dev Simplified)",
+            },
+            {
+              blockId: "v-state-long",
+              url: VID.reactWds,
+              title: "Learn React (Web Dev Simplified)",
+              from: "38:00",
+              to: "50:00",
+              why: "State in a bigger example. Optional second pass.",
+            }
+          ),
+          yt(
+            "v-effect-later",
+            VID.reactUseEffectWds,
+            "Learn useEffect in 13 minutes (Web Dev Simplified)",
+            "Watch later when Next Harbor loads data from an API. Not required for search filter today."
+          ),
           meme("state", "moshka-meme-usestate.png", "Before and after useState"),
           figure("state-fig", "moshka-react-use-state.png", "Filter with search"),
           ...figureN(

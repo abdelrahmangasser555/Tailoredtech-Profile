@@ -12,6 +12,7 @@ import {
   termStep,
   tip,
   VID,
+  watchPair,
   yt,
   ytWatch,
 } from "@/config/moshka-roadmap/helpers"
@@ -357,6 +358,22 @@ button {
             "/notes/moshka/moshka-roadmap/moshka-p-js-lab/moshka-js-learn",
             "JavaScript lab",
             "Language notes. This scoreboard lesson is only plus and minus clicks."
+          ),
+          ...watchPair(
+            {
+              blockId: "v-ev",
+              url: VID.jsEventsWds,
+              title: "Learn JavaScript event listeners (Web Dev Simplified)",
+              caption: "About 18 minutes. Matches addEventListener in app.js.",
+            },
+            {
+              blockId: "v-ev-long",
+              url: VID.jsTraversy,
+              title: "JavaScript crash course (Traversy Media)",
+              from: "55:00",
+              to: "1:05:00",
+              why: "DOM events and listeners again from another angle.",
+            }
           ),
           concept(
             "scores-obj",

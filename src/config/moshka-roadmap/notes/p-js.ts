@@ -15,6 +15,7 @@ import {
   termStep,
   tip,
   VID,
+  watchPair,
   yt,
   ytWatch,
 } from "@/config/moshka-roadmap/helpers"
@@ -74,6 +75,27 @@ This folder is notes only. No zip. Projects stay about the page you are building
             "Back to cafe clicks",
             "If you have not wired Pixel Cafe yet, do that first. This folder is the language, not the page."
           ),
+          link(
+            "wds",
+            "https://www.youtube.com/@WebDevSimplified",
+            "Web Dev Simplified (YouTube)",
+            "Kyle Cook. Best long clips for DOM, events, arrays, promises, React hooks, and Playwright in this roadmap."
+          ),
+          ...watchPair(
+            {
+              blockId: "v-road",
+              url: VID.js,
+              title: "JavaScript in 100 Seconds (Fireship)",
+            },
+            {
+              blockId: "v-road-wds",
+              url: VID.jsRoadmapWds,
+              title: "How to learn JavaScript (Web Dev Simplified)",
+              from: "0:00",
+              to: "8:00",
+              why: "What order to learn topics in. Stop after the variables and types section.",
+            }
+          ),
         ],
       },
     ],
@@ -88,11 +110,20 @@ This folder is notes only. No zip. Projects stay about the page you are building
         id: "idea",
         title: "The idea",
         blocks: [
-          yt(
-            "v",
-            VID.js,
-            "JavaScript in 100 Seconds (Fireship)",
-            "Watch from 0:00 to the end. About 2 minutes."
+          ...watchPair(
+            {
+              blockId: "v",
+              url: VID.js,
+              title: "JavaScript in 100 Seconds (Fireship)",
+            },
+            {
+              blockId: "v-wds",
+              url: VID.jsRoadmapWds,
+              title: "How to learn JavaScript (Web Dev Simplified)",
+              from: "0:00",
+              to: "5:00",
+              why: "Why JS exists on the web. Stop when he opens the code editor.",
+            }
           ),
           md(
             "m",
@@ -177,6 +208,22 @@ When a note says runtime, it means meaning 1.`
               ND: "v8",
             }
           ),
+          ...watchPair(
+            {
+              blockId: "v-rt",
+              url: VID.js,
+              title: "JavaScript in 100 Seconds (Fireship)",
+              caption: "Quick reminder of what JS does. Watch from 0:00 to the end.",
+            },
+            {
+              blockId: "v-rt-wds",
+              url: VID.jsRoadmapWds,
+              title: "How to learn JavaScript (Web Dev Simplified)",
+              from: "5:00",
+              to: "9:00",
+              why: "Browser vs editor. Same language, different places it runs.",
+            }
+          ),
           tasks("t", "Check", [
             { id: "say", label: "You can say: JS is the language, Node and Chrome are runtimes" },
           ]),
@@ -207,6 +254,22 @@ When a note says runtime, it means meaning 1.`
             "Open Chrome DevTools Console and run one line of JS with no files.",
             "You see hi printed. You know F12 / right click Inspect.",
             []
+          ),
+          ...watchPair(
+            {
+              blockId: "v-dom",
+              url: VID.jsDomWds,
+              title: "Learn DOM manipulation (Web Dev Simplified)",
+              caption: "About 18 minutes. Watch from 0:00 to the end if you have time.",
+            },
+            {
+              blockId: "v-dom-long",
+              url: VID.jsDomTraverseWds,
+              title: "Learn DOM traversal (Web Dev Simplified)",
+              from: "0:00",
+              to: "10:00",
+              why: "getElementById and moving in the tree. Pairs with cafe and scoreboard.",
+            }
           ),
           ...figureN(
             1,
@@ -263,6 +326,20 @@ The page changes. Node cannot do this. There is no \`document\` in Node.`
             "Check node --version. If missing, install Node LTS. Then run a hello.js file from the terminal.",
             "The terminal prints Hello from Node.",
             ["~/Desktop/js-lab/hello.js"]
+          ),
+          ytWatch(
+            "v-node",
+            VID.jsTraversy,
+            "JavaScript crash course (Traversy Media)",
+            "0:00",
+            "8:00",
+            "What Node is and running a file. Stop when he leaves setup."
+          ),
+          link(
+            "node",
+            "https://nodejs.org/en/learn/getting-started/introduction-to-nodejs",
+            "Node.js: introduction",
+            "Official short read if video feels fast."
           ),
           ...figureN(
             1,
@@ -345,6 +422,21 @@ node hello.js`
             "Write a tiny file that stores a number and a string, then print them.",
             "You know let vs const, and string vs number.",
             ["~/Desktop/js-lab/values.js"]
+          ),
+          ...watchPair(
+            {
+              blockId: "v-val",
+              url: VID.js,
+              title: "JavaScript in 100 Seconds (Fireship)",
+            },
+            {
+              blockId: "v-val-wds",
+              url: VID.jsRoadmapWds,
+              title: "How to learn JavaScript (Web Dev Simplified)",
+              from: "6:00",
+              to: "11:00",
+              why: "Variables, let, const, and types. Stop after the types overview.",
+            }
           ),
           md(
             "m",
@@ -568,6 +660,14 @@ When you write \`prices.map((price) => price * 2)\`, the arrow is the callback. 
             "25:00",
             "Variables and functions. Stop at 25:00."
           ),
+          ytWatch(
+            "v-cb",
+            VID.jsEventsWds,
+            "Learn JavaScript event listeners (Web Dev Simplified)",
+            "0:00",
+            "12:00",
+            "Callbacks and functions passed around. Same idea as button listeners in Cafe."
+          ),
           tasks("t", "Hands-on", [
             { id: "run", label: "node fn.js prints 30 then OK" },
             { id: "say", label: "You can say what return does, and what a callback is" },
@@ -591,6 +691,14 @@ When you write \`prices.map((price) => price * 2)\`, the arrow is the callback. 
             "Write a status check: if Alongside print one thing, else print another.",
             "You used === and you know = assigns, === compares.",
             ["~/Desktop/js-lab/if.js"]
+          ),
+          ytWatch(
+            "v-if",
+            VID.jsTraversy,
+            "JavaScript crash course (Traversy Media)",
+            "40:00",
+            "48:00",
+            "if, else, and comparisons. Stop after the if/else examples."
           ),
           ...teachStep(
             1,
@@ -726,6 +834,14 @@ while (n > 0) {
             "You know [0] is the first item, not [1].",
             ["~/Desktop/js-lab/arrays.js"]
           ),
+          ytWatch(
+            "v-arr",
+            VID.jsTraversy,
+            "JavaScript crash course (Traversy Media)",
+            "25:00",
+            "35:00",
+            "Arrays, push, and length. Stop before map if you are tired."
+          ),
           ...teachStep(
             1,
             "Create and read",
@@ -781,6 +897,22 @@ console.log(notes)
             "moshka-js-map.png",
             "map in, map out",
             `Each item goes through a function. You get a new array. The old array stays. ${figLink(1, "map")} is the picture.`
+          ),
+          ...watchPair(
+            {
+              blockId: "v-map",
+              url: VID.jsArraysWds,
+              title: "8 JavaScript array methods (Web Dev Simplified)",
+              caption: "Full video is fine. map, filter, and reduce are the stars for React Harbor.",
+            },
+            {
+              blockId: "v-map-long",
+              url: VID.jsTraversy,
+              title: "JavaScript crash course (Traversy Media)",
+              from: "35:00",
+              to: "45:00",
+              why: "Second pass on map and filter with different examples.",
+            }
           ),
           ...teachStep(
             1,
@@ -874,6 +1006,22 @@ console.log(labels)`,
             "Make a vessel object, read .name, nest it in an array.",
             "You used dot notation and you know JSON looks like this.",
             ["~/Desktop/js-lab/obj.js"]
+          ),
+          ...watchPair(
+            {
+              blockId: "v-obj",
+              url: VID.jsRefValueWds,
+              title: "Reference vs value (Web Dev Simplified)",
+              caption: "Watch from 0:00 to the end. Explains why objects behave differently from numbers.",
+            },
+            {
+              blockId: "v-obj-long",
+              url: VID.jsTraversy,
+              title: "JavaScript crash course (Traversy Media)",
+              from: "48:00",
+              to: "55:00",
+              why: "Objects and JSON-shaped data. Stop at 55:00.",
+            }
           ),
           concept(
             "obj-idea",
@@ -995,6 +1143,28 @@ console.log(name, status)
             "Write a tiny Counter class, then a Vessel class with constructor arguments.",
             "You can say class vs one object literal, and what this means.",
             ["~/Desktop/js-lab/class.js", "~/Desktop/js-lab/vessel.js"]
+          ),
+          ...watchPair(
+            {
+              blockId: "v-cls",
+              url: VID.jsClassesShort,
+              title: "Learn JavaScript classes in 6 minutes",
+              caption: "Fast syntax tour. Watch from 0:00 to the end.",
+            },
+            {
+              blockId: "v-cls-wds",
+              url: VID.jsCalculatorWds,
+              title: "Build a calculator with JavaScript (Web Dev Simplified)",
+              from: "0:00",
+              to: "20:00",
+              why: "Real project that uses ES6 classes. Stop after the class is introduced if you only want OOP vocabulary today.",
+            }
+          ),
+          link(
+            "mdn-class",
+            "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_classes",
+            "MDN: Using classes",
+            "Official reference after the videos."
           ),
           concept(
             "oop-words",
@@ -1225,6 +1395,14 @@ console.log(b.describe())
         id: "do",
         title: "When it blows up",
         blocks: [
+          ytWatch(
+            "v-err",
+            VID.jsTraversy,
+            "JavaScript crash course (Traversy Media)",
+            "1:15:00",
+            "1:25:00",
+            "Common errors and debugging mindset. Stop when he moves to a new topic."
+          ),
           ...figureN(
             1,
             "console",
@@ -1284,6 +1462,27 @@ console.log(readNotes("not json"))
             "Read this so fetch in Next Harbor is not a surprise. Run a tiny timeout example in Node.",
             "You can say async means we wait without freezing the whole program.",
             ["~/Desktop/js-lab/async.js"]
+          ),
+          ...watchPair(
+            {
+              blockId: "v-prom",
+              url: VID.jsPromisesWds,
+              title: "JavaScript promises in 10 minutes (Web Dev Simplified)",
+            },
+            {
+              blockId: "v-async-wds",
+              url: VID.jsAsyncWds,
+              title: "JavaScript async await (Web Dev Simplified)",
+              from: "0:00",
+              to: "12:00",
+              why: "Readable waiting. Stop after the first async function example.",
+            }
+          ),
+          yt(
+            "v-fetch",
+            VID.jsFetchWds,
+            "Learn fetch API in 6 minutes (Web Dev Simplified)",
+            "Watch from 0:00 to the end. Save for Next Harbor APIs."
           ),
           md(
             "m",

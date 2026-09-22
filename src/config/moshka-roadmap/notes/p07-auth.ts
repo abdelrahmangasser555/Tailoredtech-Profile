@@ -10,6 +10,9 @@ import {
   tasks,
   tip,
   beforeYouStart,
+  VID,
+  watchPair,
+  ytWatch,
 } from "@/config/moshka-roadmap/helpers"
 import type { NoteDocument } from "@/lib/notes-types"
 
@@ -47,6 +50,36 @@ export const moshkaAuthNotes: Record<string, NoteDocument> = {
 TailoredTech mixes custom auth and SaaS (Clerk, WorkOS) depending on the client.
 
 You already have a database. Auth sits in front of GET/POST.`
+          ),
+          ...watchPair(
+            {
+              blockId: "v-auth",
+              url: VID.js,
+              title: "JavaScript in 100 Seconds (Fireship)",
+              caption: "Refresh: auth routes are still JavaScript on the server.",
+            },
+            {
+              blockId: "v-auth-api",
+              url: VID.jsFetchWds,
+              title: "Learn fetch API (Web Dev Simplified)",
+              from: "0:00",
+              to: "6:00",
+              why: "Login and session cookies often ride on fetch. Quick primer before API lessons.",
+            }
+          ),
+          link(
+            "owasp",
+            "https://owasp.org/www-project-top-ten/",
+            "OWASP Top 10",
+            "What security reviewers worry about. Skim the list, do not memorize."
+          ),
+          ytWatch(
+            "v-next-auth",
+            VID.nextNinja,
+            "Next.js course (Net Ninja)",
+            "0:00",
+            "25:00",
+            "Auth patterns in Next when you reach Next Harbor. Optional preview only."
           ),
           mermaid(
             "f",

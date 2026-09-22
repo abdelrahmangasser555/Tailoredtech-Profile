@@ -10,6 +10,9 @@ import {
   tasks,
   tip,
   beforeYouStart,
+  VID,
+  watchPair,
+  ytWatch,
 } from "@/config/moshka-roadmap/helpers"
 import type { NoteDocument } from "@/lib/notes-types"
 
@@ -42,6 +45,27 @@ export const moshkaUxNotes: Record<string, NoteDocument> = {
             `A Bahri office user opens this 80 times a day. They want density, search, and no cute empty space.
 
 You will change Port Watch to match that. Library from Freesets this week: [Vaul](https://vaul.emilkowal.ski) (drawers), same idea BBS uses on mobile.`
+          ),
+          ...watchPair(
+            {
+              blockId: "v-ux",
+              url: VID.tailwind,
+              title: "Tailwind in 100 Seconds (Fireship)",
+            },
+            {
+              blockId: "v-ux-long",
+              url: VID.tailwindTraversy,
+              title: "Tailwind crash course (Traversy Media)",
+              from: "20:00",
+              to: "35:00",
+              why: "Layout and spacing for dense UIs. You can stay on plain CSS in Port Watch too.",
+            }
+          ),
+          link(
+            "laws",
+            "https://lawsofux.com/",
+            "Laws of UX",
+            "Short read. Hick's law and cognitive load explain why dense tables beat hero posters."
           ),
           mermaid(
             "f",

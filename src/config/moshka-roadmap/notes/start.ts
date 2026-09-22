@@ -44,7 +44,9 @@ How each lesson works:
 
 If a topic feels fast (functions, objects, classes): stop on that step, type the file yourself, run it, then read the line explanations again. One step per sitting is fine.
 
-Videos come in pairs: a short Fireship clip, then a longer sit-down (Bro Code, Traversy, Net Ninja, Web Dev Simplified). The caption always says **Watch from X to Y**. Click a box on a diagram, or a word like [[pick-build]], for more detail.
+Videos come in pairs: a short clip (often Fireship 100 Seconds), then a longer sit-down. **Web Dev Simplified** is the default long teacher for DOM, events, arrays, promises, React hooks, and Playwright. Bro Code, Traversy, and Net Ninja fill other topics. The caption always says **Watch from X to Y**. Do not binge: one range per study block, then type code.
+
+Bookmark [Web Dev Simplified on YouTube](https://www.youtube.com/@WebDevSimplified). Click a box on a diagram, or a word like [[pick-build]], for more detail.
 
 **Pictures:** line art and memes on cream paper. Same look everywhere so your brain reads the idea, not the colors. Diagrams (mermaid) stay small; big ideas get an image when one glance helps.`
           ),
