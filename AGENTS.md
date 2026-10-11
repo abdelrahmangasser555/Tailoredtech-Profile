@@ -85,16 +85,16 @@ Icons for the layer nav are mapped in `src/components/sections/section-layer-nav
 | `/services/[slug]` | `src/app/services/[slug]/page.tsx` — solution detail |
 | `/presentations` | `src/app/presentations/page.tsx` — direct-URL list (noindex, no nav/footer) |
 | `/presentations/[slug]` | `src/app/presentations/[slug]/page.tsx` — presentation detail |
-| `/finance` | Password-gated finance hub (proposals + invoices); noindex |
+| `/finance` | Local-only finance hub (proposals + invoices); noindex |
 | `/finance/proposals` · `/finance/proposals/[id]` | Proposal list + editor; PDF via `finance-pdf` |
 | `/finance/invoices` · `/finance/invoices/[id]` | Invoice list + editor; proforma PDF (EN/AR) |
 | `/notes` · `/notes/[[...path]]` | Nested folder browser + note reader (noindex, bare chrome) |
 
-Sitemap includes all enabled solution slugs (`src/app/sitemap.ts`). Presentations, **notes**, and **finance** are **not** in the sitemap / robots (direct URL only). Finance is PIN-gated (`FINANCE_PASSWORD_HASH` + session cookie).
+Sitemap includes all enabled solution slugs (`src/app/sitemap.ts`). Presentations, **notes**, and **finance** are **not** in the sitemap / robots (direct URL only). Finance is **local-only** (`isFinanceAvailable()` in `src/lib/finance/auth.ts`: dev server or `FINANCE_LOCAL=true`; blocked on Vercel).
 
 ### Finance (`src/config/finance.json`)
 
-Internal proposals / invoices. Bare chrome, `noindex`, PIN unlock via `/api/finance/auth`.
+Internal proposals / invoices. Bare chrome, `noindex`, available only when running locally (not on deployed hosts).
 
 | Piece | Notes |
 |--------|--------|

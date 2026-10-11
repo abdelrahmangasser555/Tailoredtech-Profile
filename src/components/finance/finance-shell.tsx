@@ -1,8 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { usePathname, useRouter } from "next/navigation"
-import { LogOut } from "lucide-react"
+import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
 
 const NAV = [
@@ -13,12 +12,6 @@ const NAV = [
 
 export function FinanceShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
-  const router = useRouter()
-
-  async function logout() {
-    await fetch("/api/finance/logout", { method: "POST" })
-    router.refresh()
-  }
 
   return (
     <div className="min-h-svh bg-[var(--section-light,#f7f7f2)] text-foreground">
@@ -54,14 +47,6 @@ export function FinanceShell({ children }: { children: React.ReactNode }) {
               })}
             </nav>
           </div>
-          <button
-            type="button"
-            onClick={() => void logout()}
-            className="inline-flex cursor-pointer items-center gap-2 font-mono text-[10px] tracking-[0.16em] uppercase text-foreground/45 transition hover:text-foreground"
-          >
-            <LogOut className="size-3.5" />
-            Lock
-          </button>
         </div>
       </header>
       <div className="mx-auto w-full max-w-6xl px-5 py-10 md:px-8 md:py-14">

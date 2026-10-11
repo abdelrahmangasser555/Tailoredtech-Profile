@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
-import { isFinanceAuthenticated } from "@/lib/finance/auth"
-import { FinancePasswordGate } from "@/components/finance/password-gate"
+import { notFound } from "next/navigation"
+import { isFinanceAvailable } from "@/lib/finance/auth"
 import { FinanceShell } from "@/components/finance/finance-shell"
 
 export const metadata: Metadata = {
@@ -12,14 +12,13 @@ export const metadata: Metadata = {
   },
 }
 
-export default async function FinanceLayout({
+export default function FinanceLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  const ok = await isFinanceAuthenticated()
-  if (!ok) {
-    return <FinancePasswordGate />
+  if (!isFinanceAvailable()) {
+    notFound()
   }
 
   return <FinanceShell>{children}</FinanceShell>

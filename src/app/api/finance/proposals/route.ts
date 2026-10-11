@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server"
 import { promises as fs } from "fs"
 import path from "path"
-import { isFinanceAuthenticated } from "@/lib/finance/auth"
+import { isFinanceAvailable } from "@/lib/finance/auth"
 import type { FinanceConfig, FinanceProposal } from "@/lib/finance/types"
 
 const CONFIG_PATH = path.join(process.cwd(), "src", "config", "finance.json")
@@ -16,8 +16,8 @@ async function writeConfig(config: FinanceConfig) {
 }
 
 export async function GET() {
-  if (!(await isFinanceAuthenticated())) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+  if (!isFinanceAvailable()) {
+    return NextResponse.json({ error: "Not found" }, { status: 404 })
   }
   const config = await readConfig()
   return NextResponse.json({
@@ -29,8 +29,8 @@ export async function GET() {
 }
 
 export async function PUT(request: Request) {
-  if (!(await isFinanceAuthenticated())) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+  if (!isFinanceAvailable()) {
+    return NextResponse.json({ error: "Not found" }, { status: 404 })
   }
 
   try {
