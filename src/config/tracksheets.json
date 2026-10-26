@@ -1,0 +1,79 @@
+{
+  "tracksheets": [
+    {
+      "id": "tracksheet-sample-bbs",
+      "projectName": "Fleet safety platform",
+      "title": "Behaviour based safety module",
+      "description": "Client tracking sheet for the behaviour based safety module: what is enrolled, what is in build, and what is ready for user assessment test.",
+      "refNumber": "TS-001",
+      "clientName": "Sample operator",
+      "clientLogo": null,
+      "vendorLogo": "/logo.svg",
+      "paletteId": "tailoredtech",
+      "numbering": { "enabled": true },
+      "columns": { "status": true, "type": true, "images": true },
+      "categories": [
+        {
+          "id": "cat-observe",
+          "title": "Observation capture",
+          "items": [
+            {
+              "id": "item-form",
+              "title": "Observer form",
+              "description": "Build the onboard observation form with categories the shore office can edit.",
+              "status": "under-development",
+              "type": "feature",
+              "customTypeLabel": "",
+              "customTypeColor": "#0A0A0A",
+              "images": [],
+              "children": [
+                {
+                  "id": "item-offline",
+                  "title": "Offline sync",
+                  "description": "Queue observations on the vessel and send them when the link returns.",
+                  "status": "enrolled",
+                  "type": "additional-module",
+                  "customTypeLabel": "",
+                  "customTypeColor": "#0A0A0A",
+                  "images": [],
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "cat-report",
+          "title": "Shore reporting",
+          "items": [
+            {
+              "id": "item-dashboard",
+              "title": "Fleet dashboard",
+              "description": "Shore view of open observations, red flags, and weekly counts.",
+              "status": "uat",
+              "type": "feature",
+              "customTypeLabel": "",
+              "customTypeColor": "#0A0A0A",
+              "images": [],
+              "children": []
+            },
+            {
+              "id": "item-export",
+              "title": "Remove duplicate export",
+              "description": "The weekly pack currently exports the same vessel twice.",
+              "status": "under-vendor-testing",
+              "type": "bug",
+              "customTypeLabel": "",
+              "customTypeColor": "#0A0A0A",
+              "images": [],
+              "children": []
+            }
+          ]
+        }
+      ],
+      "createdAt": "2026-10-26T00:00:00.000Z",
+      "updatedAt": "2026-10-26T00:00:00.000Z",
+      "enabled": true
+    }
+  ]
+}
