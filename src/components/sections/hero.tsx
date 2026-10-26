@@ -4,9 +4,8 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
-import { Globe3D } from "@/components/ui/3d-globe";
 import { GlyphMatrix } from "@/components/ui/glyph-matrix";
-import { NumberTicker } from "@/components/ui/number-ticker";
+import { SolutionHeroVisual } from "@/components/sections/solution-hero-visual";
 import { site, type HeroConfig } from "@/lib/content";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -69,13 +68,13 @@ function BrandMorph({ config }: { config: HeroConfig["brandMorph"] }) {
 
   return (
     <h1
-      className="flex min-h-[1.1em] w-full flex-col items-center gap-2 text-center font-pixel-circle text-[clamp(3.75rem,18vw,6rem)] font-medium leading-[0.92] tracking-[-0.04em] lg:w-auto lg:flex-row lg:flex-nowrap lg:items-center lg:gap-0 lg:text-left lg:whitespace-nowrap lg:text-[clamp(2.4rem,8.4vw,7.25rem)]"
+      className="flex min-h-[1.1em] w-full max-w-full flex-col items-center gap-1 text-center font-pixel-circle text-[clamp(2.8rem,14vw,5.5rem)] font-medium leading-[0.92] tracking-[-0.04em] lg:w-auto lg:flex-row lg:flex-nowrap lg:items-center lg:justify-center lg:gap-0 lg:whitespace-nowrap lg:text-[clamp(2.5rem,6.4vw,6rem)]"
       aria-label={`${prefix}${words[0] ?? ""}`}
     >
       <span className="text-white">{prefix}</span>
 
       <span
-        className={`relative inline-flex h-[1em] min-w-[2.1em] shrink-0 items-center justify-center text-accent lg:ml-[0.02em] lg:justify-start ${
+        className={`relative inline-flex h-[1em] min-w-[2.1em] shrink-0 items-center justify-center text-accent lg:ml-[0.02em] lg:justify-center ${
           variant === "overflow" ? "overflow-hidden" : ""
         }`}
       >
@@ -502,23 +501,24 @@ function VesselMark() {
   );
 }
 
-function glyphColor(mode: HeroConfig["glyphMatrix"]["color"]) {
+function glyphColor(mode: string) {
   return mode === "grey" ? GREY_COLOR : BRAND_COLOR;
+}
+
+function EngineMark({ reduce }: { reduce: boolean }) {
+  return (
+    <SolutionHeroVisual
+      kind="engine"
+      reduce={reduce}
+      className="relative h-full w-full"
+    />
+  );
 }
 
 export function Hero() {
   const { company, hero } = site;
   const reduce = useReducedMotion();
-  const { glyphMatrix, brandMorph, globe, description } = hero;
-
-  const glyphMask = glyphMatrix.fadeCenter
-    ? {
-        maskImage:
-          "radial-gradient(ellipse 52% 48% at 36% 44%, transparent 0%, rgba(0,0,0,0.35) 42%, black 72%)",
-        WebkitMaskImage:
-          "radial-gradient(ellipse 52% 48% at 36% 44%, transparent 0%, rgba(0,0,0,0.35) 42%, black 72%)",
-      }
-    : undefined;
+  const { glyphMatrix, brandMorph, description } = hero;
 
   const ctaPrimary = (
     <Link
@@ -549,7 +549,6 @@ export function Hero() {
           style={{
             opacity: glyphMatrix.opacity,
             filter: `brightness(${glyphMatrix.brightness}) contrast(${glyphMatrix.contrast})`,
-            ...glyphMask,
           }}
         >
           <GlyphMatrix
@@ -564,8 +563,8 @@ export function Hero() {
         </div>
       )}
 
-      <div className="relative z-20 flex min-h-0 flex-1 flex-col px-5 pt-24 md:px-8 lg:absolute lg:inset-0 lg:grid lg:h-full lg:w-full lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:items-center lg:gap-2 lg:overflow-visible lg:px-10 lg:pt-14 lg:pb-16">
-        <div className="relative z-20 flex flex-col items-center lg:items-start lg:-translate-y-10 xl:-translate-y-12">
+      <div className="relative z-20 flex min-h-0 flex-1 flex-col px-5 pt-24 md:px-8 lg:absolute lg:inset-0 lg:grid lg:h-full lg:w-full lg:grid-cols-[minmax(0,1.08fr)_minmax(0,0.92fr)] lg:items-center lg:gap-6 lg:overflow-visible lg:px-12 lg:pt-16 lg:pb-16">
+        <div className="relative z-20 flex w-full min-w-0 flex-col items-center px-1 text-center lg:translate-x-8 lg:justify-self-center lg:px-4">
           <motion.div
             initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
@@ -579,36 +578,25 @@ export function Hero() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.65, delay: 0.22, ease: EASE }}
-              className="mt-4 max-w-sm mx-auto text-center text-sm font-mono font-normal leading-relaxed tracking-[0.01em] lg:mt-5 lg:mx-0 lg:block lg:w-fit lg:text-left lg:text-nowrap lg:text-[1.05rem]"
+              className="font-flash mx-auto mt-4 w-full min-w-0 max-w-xl text-center text-xl leading-snug font-semibold tracking-[-0.03em] text-balance text-white sm:text-[1.55rem] lg:mt-5"
             >
-              <span className="text-white/45">{description.before}</span>
-              <motion.span
-                initial={reduce ? false : { opacity: 0, scale: 0.82, y: 8 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                transition={{
-                  delay: 0.48,
-                  type: "spring",
-                  stiffness: 320,
-                  damping: 16,
-                }}
-                className="mx-0.5 inline-block text-accent [text-shadow:0_0_18px_rgba(212,255,0,0.35)]"
-              >
-                <NumberTicker
-                  to={description.count}
-                  mode="direct"
-                  suffix={description.countSuffix}
-                  duration={3.2}
-                  ease="power1.out"
-                  className="font-pixel-circle text-[1.15em] font-medium tracking-tight text-accent"
-                />
-              </motion.span>
-              <span className="text-white/45">{description.middle}</span>
-              <span className="font-pixel-circle font-medium text-accent">
-                {description.word}
+              <span className="text-white/80">{description.before}</span>
+              <span className="text-accent [text-shadow:0_0_22px_rgba(212,255,0,0.28)]">
+                {description.emphasis}
               </span>
+              <span className="text-white/80">{description.after}</span>
             </motion.p>
           )}
         </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 28 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.18, ease: EASE }}
+          className="relative z-10 mx-auto mt-4 aspect-square w-[min(46vw,200px)] lg:mt-0 lg:w-full lg:max-w-[min(46vw,560px)] lg:justify-self-end"
+        >
+          <EngineMark reduce={!!reduce} />
+        </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 12 }}
@@ -619,77 +607,7 @@ export function Hero() {
           {ctaPrimary}
           {ctaSecondary}
         </motion.div>
-
-        {globe.enabled && (
-          <motion.div
-            initial={{ opacity: 0, y: 36 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.22, ease: EASE }}
-            className="relative z-10 hidden lg:block lg:justify-self-end lg:overflow-visible"
-            style={{
-              width: globe.desktop.width,
-              height: globe.desktop.height,
-            }}
-          >
-            <div
-              className="h-full w-full origin-center"
-              style={{
-                transform: `translate(${globe.desktop.x}, ${globe.desktop.y}) scale(${globe.desktop.scale})`,
-              }}
-            >
-              <div
-                aria-hidden
-                className="pointer-events-none absolute inset-0 z-20"
-              >
-                <div className="absolute inset-y-0 left-0 w-[48%] bg-linear-to-r from-black/55 via-black/18 to-transparent" />
-                <div className="absolute inset-y-0 right-0 w-[18%] bg-linear-to-l from-black/35 to-transparent" />
-                <div className="absolute inset-x-0 top-0 h-[22%] bg-linear-to-b from-black/25 to-transparent" />
-                <div className="absolute inset-x-0 bottom-0 h-[24%] bg-linear-to-t from-black/30 to-transparent" />
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_58%_50%,transparent_48%,rgba(0,0,0,0.12)_72%,rgba(0,0,0,0.28)_100%)]" />
-              </div>
-
-              <div className="h-full w-full">
-                <Globe3D
-                  markers={globe.markers}
-                  className="h-full w-full"
-                  config={{
-                    showAtmosphere: globe.showAtmosphere,
-                    bumpScale: globe.bumpScale,
-                    autoRotateSpeed: reduce ? 0 : globe.autoRotateSpeed,
-                    ambientIntensity: globe.ambientIntensity,
-                    pointLightIntensity: globe.pointLightIntensity,
-                    backgroundColor: null,
-                  }}
-                />
-              </div>
-            </div>
-          </motion.div>
-        )}
       </div>
-
-      {globe.enabled && (
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 0.2, ease: EASE }}
-          className="relative z-10 h-[34%] min-h-[200px] w-full shrink-0 overflow-hidden lg:hidden"
-        >
-          <div className="absolute left-1/2 top-0 w-[130%] max-w-none -translate-x-1/2">
-            <Globe3D
-              markers={globe.markers}
-              className="h-[min(95vw,520px)] w-full"
-              config={{
-                showAtmosphere: globe.showAtmosphere,
-                bumpScale: globe.bumpScale,
-                autoRotateSpeed: reduce ? 0 : globe.autoRotateSpeed,
-                ambientIntensity: globe.ambientIntensity,
-                pointLightIntensity: globe.pointLightIntensity,
-                backgroundColor: null,
-              }}
-            />
-          </div>
-        </motion.div>
-      )}
 
       <motion.div
         initial={{ opacity: 0, y: 12 }}
