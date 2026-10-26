@@ -88,6 +88,7 @@ Icons for the layer nav are mapped in `src/components/sections/section-layer-nav
 | `/finance` | Local-only finance hub (proposals + invoices); noindex |
 | `/finance/proposals` · `/finance/proposals/[id]` | Proposal list + editor; PDF via `finance-pdf` |
 | `/finance/invoices` · `/finance/invoices/[id]` | Invoice list + editor; proforma PDF (EN/AR) |
+| `/finance/tracksheets` · `/finance/tracksheets/[id]` | Client tracksheets; Excel + PDF; local only |
 | `/notes` · `/notes/[[...path]]` | Nested folder browser + note reader (noindex, bare chrome) |
 
 Sitemap includes all enabled solution slugs (`src/app/sitemap.ts`). Presentations, **notes**, and **finance** are **not** in the sitemap / robots (direct URL only). Finance is **local-only** (`isFinanceAvailable()` in `src/lib/finance/auth.ts`: dev server or `FINANCE_LOCAL=true`; blocked on Vercel).
@@ -102,6 +103,7 @@ Internal proposals / invoices. Bare chrome, `noindex`, available only when runni
 | Formats | `formal-breakdown`, `formal-features`, `formal-compact` |
 | Proposals | Markdown, features, multi-solution pricing, discounts, comparison, footer, page numbers |
 | PDF | One A4 page per proposal; multi-select stacks pages in one file (`finance-pdf`) |
+| Tracksheets | `src/config/tracksheets.json`. Categories and nested items, numbering, status, type, images. Palettes: TailoredTech, Bahri, Graphite. Export Excel or PDF. Logos upload locally. |
 | Invoices | Proforma format `proforma-bilingual` (EN/AR or EN); white printout; VAT, discount, currency, custom money lines |
 
 ### Notes (`src/config/notes.json`)

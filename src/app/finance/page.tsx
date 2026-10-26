@@ -1,10 +1,12 @@
 import Link from "next/link"
-import { FileText, Receipt } from "lucide-react"
+import { FileText, Receipt, Sheet } from "lucide-react"
 import { getInvoices, getProposals } from "@/lib/finance/content"
+import { getTracksheets } from "@/lib/tracksheets/content"
 
 export default function FinanceHomePage() {
   const proposals = getProposals()
   const invoices = getInvoices()
+  const tracksheets = getTracksheets()
 
   return (
     <div>
@@ -15,10 +17,10 @@ export default function FinanceHomePage() {
         Finance
       </h1>
       <p className="mt-2 max-w-xl text-sm text-foreground/55">
-        Internal proposals and invoices. Password-gated. Not indexed.
+        Internal proposals, invoices, and client tracksheets. Local only. Not indexed.
       </p>
 
-      <div className="mt-10 grid gap-4 sm:grid-cols-2">
+      <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         <Link
           href="/finance/proposals"
           className="group border border-foreground/10 bg-white p-6 transition hover:border-foreground/25"
@@ -44,6 +46,20 @@ export default function FinanceHomePage() {
           </p>
           <p className="mt-4 font-mono text-[11px] tracking-[0.14em] uppercase text-foreground/35">
             {invoices.length} active
+          </p>
+        </Link>
+
+        <Link
+          href="/finance/tracksheets"
+          className="group border border-foreground/10 bg-white p-6 transition hover:border-foreground/25"
+        >
+          <Sheet className="mb-4 size-6 text-foreground/40 transition group-hover:text-foreground" />
+          <h2 className="font-pixel-circle text-xl tracking-tight">Tracksheets</h2>
+          <p className="mt-2 text-sm text-foreground/50">
+            Client project trackers. Export as Excel or PDF.
+          </p>
+          <p className="mt-4 font-mono text-[11px] tracking-[0.14em] uppercase text-foreground/35">
+            {tracksheets.length} active
           </p>
         </Link>
       </div>
