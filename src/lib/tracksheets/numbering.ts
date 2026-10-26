@@ -46,11 +46,17 @@ function walk(
   })
 }
 
-export function columnCount(sheet: Tracksheet): number {
+export function tableColumnCount(sheet: Tracksheet): number {
   return (
     (sheet.numbering.enabled ? 1 : 0) +
     1 +
+    (sheet.columns.targetDate ? 1 : 0) +
     (sheet.columns.status ? 1 : 0) +
     (sheet.columns.type ? 1 : 0)
   )
+}
+
+/** @deprecated use tableColumnCount */
+export function columnCount(sheet: Tracksheet): number {
+  return tableColumnCount(sheet)
 }

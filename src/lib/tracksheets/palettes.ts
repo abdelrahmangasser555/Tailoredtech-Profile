@@ -7,6 +7,9 @@ import { TRACKSHEET_STATUSES, TRACKSHEET_TYPES } from "@/lib/tracksheets/types"
 
 export type Swatch = { bg: string; fg: string }
 
+/** Bug type is always red for quick recognition on every palette. */
+export const BUG_TYPE_SWATCH: Swatch = { bg: "#DC2626", fg: "#FFFFFF" }
+
 export type TracksheetPalette = {
   id: TracksheetPaletteId
   name: string
@@ -44,6 +47,7 @@ export const TRACKSHEET_PALETTES: TracksheetPalette[] = [
     accentText: "#0A0A0A",
     status: {
       enrolled: { bg: "#F4F4F1", fg: "#0A0A0A" },
+      "in-progress": { bg: "#D4FF00", fg: "#0A0A0A" },
       "under-development": { bg: "#D4FF00", fg: "#0A0A0A" },
       "under-vendor-testing": { bg: "#0A0A0A", fg: "#FFFFFF" },
       uat: { bg: "#1F1F1F", fg: "#D4FF00" },
@@ -55,7 +59,7 @@ export const TRACKSHEET_PALETTES: TracksheetPalette[] = [
       feature: { bg: "#D4FF00", fg: "#0A0A0A" },
       "remove-feature": { bg: "#E7E7E2", fg: "#0A0A0A" },
       "workflow-change": { bg: "#2C2C2C", fg: "#FFFFFF" },
-      bug: { bg: "#0A0A0A", fg: "#D4FF00" },
+      bug: BUG_TYPE_SWATCH,
     },
   },
   {
@@ -69,10 +73,11 @@ export const TRACKSHEET_PALETTES: TracksheetPalette[] = [
     primary: "#003C71",
     primaryText: "#FFFFFF",
     accent: "#FF681D",
-    accentText: "#1A1208",
+    accentText: "#FFFFFF",
     status: {
       enrolled: { bg: "#E7EEF5", fg: "#003C71" },
-      "under-development": { bg: "#FF681D", fg: "#1A1208" },
+      "in-progress": { bg: "#FF681D", fg: "#FFFFFF" },
+      "under-development": { bg: "#FF681D", fg: "#FFFFFF" },
       "under-vendor-testing": { bg: "#003C71", fg: "#FFFFFF" },
       uat: { bg: "#FFE4D6", fg: "#003C71" },
       removed: { bg: "#EEEEF0", fg: "#5C6168" },
@@ -83,7 +88,7 @@ export const TRACKSHEET_PALETTES: TracksheetPalette[] = [
       feature: { bg: "#FFE4D6", fg: "#003C71" },
       "remove-feature": { bg: "#A8A8AA", fg: "#102033" },
       "workflow-change": { bg: "#001F3D", fg: "#FFFFFF" },
-      bug: { bg: "#FF681D", fg: "#1A1208" },
+      bug: BUG_TYPE_SWATCH,
     },
   },
   {
@@ -100,6 +105,7 @@ export const TRACKSHEET_PALETTES: TracksheetPalette[] = [
     accentText: "#FFFFFF",
     status: {
       enrolled: { bg: "#F3F3F3", fg: "#1C1C1C" },
+      "in-progress": { bg: "#2B2B2B", fg: "#FFFFFF" },
       "under-development": { bg: "#2B2B2B", fg: "#FFFFFF" },
       "under-vendor-testing": { bg: "#4A4A4A", fg: "#FFFFFF" },
       uat: { bg: "#E4E4E4", fg: "#1C1C1C" },
@@ -111,10 +117,18 @@ export const TRACKSHEET_PALETTES: TracksheetPalette[] = [
       feature: { bg: "#E8E8E8", fg: "#1C1C1C" },
       "remove-feature": { bg: "#F3F3F3", fg: "#5F5F5F" },
       "workflow-change": { bg: "#4A4A4A", fg: "#FFFFFF" },
-      bug: { bg: "#2B2B2B", fg: "#FFFFFF" },
+      bug: BUG_TYPE_SWATCH,
     },
   },
 ]
+
+export function printFontFamily(paletteId: TracksheetPaletteId): string {
+  return paletteId === "bahri" ? "Times-Roman" : "Helvetica"
+}
+
+export function printFontFamilyBold(paletteId: TracksheetPaletteId): string {
+  return paletteId === "bahri" ? "Times-Bold" : "Helvetica-Bold"
+}
 
 export function getPalette(id: TracksheetPaletteId): TracksheetPalette {
   return TRACKSHEET_PALETTES.find((palette) => palette.id === id) ?? TRACKSHEET_PALETTES[0]!
@@ -144,6 +158,7 @@ export function typeSwatch(
   id: TracksheetItemType,
   customColor?: string
 ): Swatch {
+  if (id === "bug") return BUG_TYPE_SWATCH
   if (id === "custom") {
     const bg = customColor?.trim() || palette.primary
     return { bg, fg: readableInk(bg) }

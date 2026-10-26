@@ -14,6 +14,11 @@ export function cloneTracksheet(source: Tracksheet): Tracksheet {
     refNumber: ref,
     numbering: { ...source.numbering },
     columns: { ...source.columns },
+    display: {
+      ...source.display,
+      footnote: { ...source.display.footnote },
+      decor: { ...source.display.decor },
+    },
     categories: source.categories.map((category) => ({
       ...category,
       id: tracksheetUid("cat"),

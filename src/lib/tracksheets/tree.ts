@@ -91,6 +91,7 @@ export function rekeyItem(item: TracksheetItem): TracksheetItem {
   return {
     ...item,
     id: tracksheetUid("item"),
+    targetDate: item.targetDate,
     images: [...item.images],
     children: item.children.map(rekeyItem),
   }

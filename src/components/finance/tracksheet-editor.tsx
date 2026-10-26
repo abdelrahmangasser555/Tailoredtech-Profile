@@ -221,7 +221,138 @@ export function TracksheetEditor({
             checked={sheet.columns.images}
             onChange={(images) => patch({ columns: { ...sheet.columns, images } })}
           />
+          <Toggle
+            label="Target date"
+            checked={sheet.columns.targetDate}
+            onChange={(targetDate) => patch({ columns: { ...sheet.columns, targetDate } })}
+          />
         </div>
+      </section>
+
+      <section className="border border-foreground/10 bg-white p-5">
+        <p className="font-mono text-[10px] tracking-[0.16em] uppercase text-foreground/40">Sheet layout</p>
+        <div className="mt-3 grid gap-4 md:grid-cols-2">
+          <Field label="Items column heading">
+            <Input
+              value={sheet.display.itemColumnLabel}
+              onChange={(e) =>
+                patch({ display: { ...sheet.display, itemColumnLabel: e.target.value } })
+              }
+              placeholder="Action items"
+              className="rounded-none"
+            />
+          </Field>
+          <Field label="Footnote position">
+            <select
+              value={sheet.display.footnote.position}
+              onChange={(e) =>
+                patch({
+                  display: {
+                    ...sheet.display,
+                    footnote: {
+                      ...sheet.display.footnote,
+                      position: e.target.value === "before" ? "before" : "after",
+                    },
+                  },
+                })
+              }
+              className="mt-1 h-9 w-full border border-foreground/15 bg-white px-2 text-sm"
+            >
+              <option value="before">Before table</option>
+              <option value="after">After table</option>
+            </select>
+          </Field>
+        </div>
+        <div className="mt-3 flex flex-wrap gap-5">
+          <Toggle
+            label="Footnote"
+            checked={sheet.display.footnote.enabled}
+            onChange={(enabled) =>
+              patch({
+                display: {
+                  ...sheet.display,
+                  footnote: { ...sheet.display.footnote, enabled },
+                },
+              })
+            }
+          />
+          <Toggle
+            label="Background accent"
+            checked={sheet.display.decor.enabled}
+            onChange={(enabled) =>
+              patch({
+                display: { ...sheet.display, decor: { ...sheet.display.decor, enabled } },
+              })
+            }
+          />
+          <Toggle
+            label="Table cell borders"
+            checked={sheet.display.tableBorders}
+            onChange={(tableBorders) =>
+              patch({
+                display: { ...sheet.display, tableBorders },
+              })
+            }
+          />
+        </div>
+        {sheet.display.footnote.enabled ? (
+          <Field label="Footnote (markdown)" className="mt-4">
+            <Textarea
+              value={sheet.display.footnote.markdown}
+              onChange={(e) =>
+                patch({
+                  display: {
+                    ...sheet.display,
+                    footnote: { ...sheet.display.footnote, markdown: e.target.value },
+                  },
+                })
+              }
+              rows={4}
+              className="rounded-none font-mono text-xs"
+            />
+          </Field>
+        ) : null}
+        {sheet.display.decor.enabled ? (
+          <div className="mt-4 grid gap-3 md:grid-cols-2">
+            <Field label="Accent style">
+              <select
+                value={sheet.display.decor.variant}
+                onChange={(e) =>
+                  patch({
+                    display: {
+                      ...sheet.display,
+                      decor: {
+                        ...sheet.display.decor,
+                        variant: e.target.value as typeof sheet.display.decor.variant,
+                      },
+                    },
+                  })
+                }
+                className="mt-1 h-9 w-full border border-foreground/15 bg-white px-2 text-sm"
+              >
+                <option value="dotted-ring-tl">Dotted ring (top left)</option>
+                <option value="corner-cut-tr">Corner cut (top right)</option>
+                <option value="corner-cut-bl">Corner cut (bottom left)</option>
+                <option value="none">None</option>
+              </select>
+            </Field>
+            <Field label="Accent color">
+              <input
+                type="color"
+                value={sheet.display.decor.color}
+                onChange={(e) =>
+                  patch({
+                    display: {
+                      ...sheet.display,
+                      decor: { ...sheet.display.decor, color: e.target.value },
+                    },
+                  })
+                }
+                className="mt-1 h-9 w-full border border-foreground/15 bg-white p-1"
+              />
+            </Field>
+          </div>
+        ) : null}
       </section>
 
       <section className="grid gap-4 border border-foreground/10 bg-white p-5 md:grid-cols-2">
@@ -305,6 +436,7 @@ export function TracksheetEditor({
                   showStatus={sheet.columns.status}
                   showType={sheet.columns.type}
                   showImages={sheet.columns.images}
+                  showTargetDate={sheet.columns.targetDate}
                   slug={`tracksheet-${sheet.id}`}
                   onPatchItem={patchItem}
                   onChange={(next) =>
@@ -388,6 +520,7 @@ function ItemEditor({
   showStatus,
   showType,
   showImages,
+  showTargetDate,
   slug,
   onPatchItem,
   onChange,
@@ -403,6 +536,7 @@ function ItemEditor({
   showStatus: boolean
   showType: boolean
   showImages: boolean
+  showTargetDate: boolean
   slug: string
   onPatchItem: (id: string, fn: (item: TracksheetItem) => TracksheetItem) => void
   onChange: (item: TracksheetItem) => void
@@ -441,6 +575,17 @@ function ItemEditor({
         rows={2}
         className="mt-2 rounded-none"
       />
+      {showTargetDate ? (
+        <label className="mt-2 block text-xs text-foreground/50">
+          Target date
+          <Input
+            type="date"
+            value={item.targetDate ? item.targetDate.slice(0, 10) : ""}
+            onChange={(e) => onChange({ ...item, targetDate: e.target.value })}
+            className="mt-1 rounded-none"
+          />
+        </label>
+      ) : null}
       <div className="mt-2 grid gap-2 sm:grid-cols-2">
         {showStatus ? (
           <label className="block text-xs text-foreground/50">
@@ -522,6 +667,7 @@ function ItemEditor({
             showStatus={showStatus}
             showType={showType}
             showImages={showImages}
+            showTargetDate={showTargetDate}
             slug={slug}
             onPatchItem={onPatchItem}
             onChange={(next) => onChange({ ...item, children: updateItem(item.children, child.id, next) })}

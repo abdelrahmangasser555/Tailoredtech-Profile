@@ -1,148 +1,200 @@
 import { Document, Image, Page, StyleSheet, Text, View } from "@react-pdf/renderer"
 import type { Tracksheet } from "@/lib/tracksheets/types"
 import { flattenTracksheet } from "@/lib/tracksheets/numbering"
+import { footnotePlainLines, formatTargetDate } from "@/lib/tracksheets/format"
 import {
   getPalette,
+  printFontFamily,
+  printFontFamilyBold,
   statusLabel,
   statusSwatch,
   typeLabel,
-  typeSwatch,
 } from "@/lib/tracksheets/palettes"
+import { scalePt, tracksheetPdfScale } from "@/lib/tracksheets/pdf-fit"
 
-const styles = StyleSheet.create({
-  page: {
-    paddingTop: 28,
-    paddingBottom: 32,
-    paddingHorizontal: 28,
-    fontFamily: "Helvetica",
-  },
-  partners: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 12,
-    marginBottom: 12,
-  },
-  logo: {
-    width: 84,
-    height: 36,
-    objectFit: "contain",
-  },
-  partnerMark: {
-    fontSize: 12,
-    color: "#8A8A8A",
-  },
-  meta: {
-    marginLeft: "auto",
-    alignItems: "flex-end",
-    gap: 2,
-  },
-  metaLabel: {
-    fontSize: 8,
-    letterSpacing: 1,
-    textTransform: "uppercase",
-    color: "#6A6A6A",
-  },
-  metaValue: {
-    fontSize: 10,
-    fontFamily: "Helvetica-Bold",
-  },
-  project: {
-    fontSize: 18,
-    fontFamily: "Helvetica-Bold",
-    marginBottom: 2,
-  },
-  title: {
-    fontSize: 12,
-    fontFamily: "Helvetica-Bold",
-    marginBottom: 4,
-  },
-  description: {
-    fontSize: 9,
-    lineHeight: 1.4,
-    marginBottom: 12,
-  },
-  tableHead: {
-    flexDirection: "row",
-    minHeight: 18,
-  },
-  headCell: {
-    fontSize: 8,
-    fontFamily: "Helvetica-Bold",
-    letterSpacing: 0.6,
-    textTransform: "uppercase",
-    paddingHorizontal: 6,
-    paddingVertical: 4,
-  },
-  row: {
-    flexDirection: "row",
-    alignItems: "stretch",
-  },
-  category: {
-    paddingHorizontal: 8,
-    paddingVertical: 6,
-    marginTop: 6,
-  },
-  categoryText: {
-    fontSize: 11,
-    fontFamily: "Helvetica-Bold",
-  },
-  numCell: {
-    width: 52,
-    paddingHorizontal: 4,
-    paddingVertical: 6,
-    justifyContent: "flex-start",
-    alignItems: "center",
-  },
-  numText: {
-    fontSize: 9,
-    fontFamily: "Helvetica-Bold",
-  },
-  itemCell: {
-    flex: 1,
-    paddingHorizontal: 8,
-    paddingVertical: 6,
-  },
-  itemTitle: {
-    fontSize: 10,
-    fontFamily: "Helvetica-Bold",
-  },
-  itemBody: {
-    fontSize: 8,
-    lineHeight: 1.35,
-    marginTop: 2,
-  },
-  badgeCell: {
-    width: 108,
-    justifyContent: "center",
-    alignItems: "center",
-    paddingHorizontal: 6,
-    paddingVertical: 6,
-  },
-  badgeText: {
-    fontSize: 8,
-    fontFamily: "Helvetica-Bold",
-    textAlign: "center",
-  },
-  shots: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    gap: 4,
-    marginTop: 6,
-  },
-  shot: {
-    width: 78,
-    height: 48,
-    objectFit: "cover",
-  },
-  footer: {
-    position: "absolute",
-    left: 28,
-    right: 28,
-    bottom: 12,
-    fontSize: 8,
-    color: "#8A8A8A",
-  },
-})
+function buildStyles(bodyFont: string, boldFont: string, scale: number) {
+  const s = (n: number) => scalePt(n, scale)
+  return StyleSheet.create({
+    page: {
+      paddingTop: s(22),
+      paddingBottom: s(26),
+      paddingHorizontal: s(24),
+      fontFamily: bodyFont,
+    },
+    decorRing: {
+      position: "absolute",
+      top: 18,
+      left: 18,
+      width: 72,
+      height: 72,
+      borderRadius: 36,
+      borderWidth: 1.5,
+      borderStyle: "dashed",
+      opacity: 0.35,
+    },
+    headerBar: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+      width: "100%",
+      marginBottom: s(8),
+    },
+    logo: {
+      width: s(108),
+      height: s(44),
+      objectFit: "contain",
+    },
+    metaRow: {
+      flexDirection: "row",
+      justifyContent: "flex-end",
+      marginBottom: s(6),
+      gap: s(8),
+    },
+    metaLabel: {
+      fontSize: s(7.5),
+      letterSpacing: 0.8,
+      textTransform: "uppercase",
+      color: "#6A6A6A",
+    },
+    metaValue: {
+      fontSize: s(9),
+      fontFamily: boldFont,
+    },
+    project: {
+      fontSize: s(15),
+      fontFamily: boldFont,
+      marginBottom: s(1),
+    },
+    title: {
+      fontSize: s(10.5),
+      fontFamily: boldFont,
+      marginBottom: s(2),
+    },
+    description: {
+      fontSize: s(8),
+      lineHeight: 1.3,
+      marginBottom: s(8),
+    },
+    footnote: {
+      fontSize: s(7),
+      lineHeight: 1.28,
+      marginBottom: s(5),
+      marginTop: s(2),
+    },
+    tableHead: {
+      flexDirection: "row",
+      minHeight: s(16),
+    },
+    headCell: {
+      fontSize: s(7.5),
+      fontFamily: boldFont,
+      letterSpacing: 0.5,
+      textTransform: "uppercase",
+      paddingHorizontal: s(5),
+      paddingVertical: s(3),
+    },
+    row: {
+      flexDirection: "row",
+      alignItems: "stretch",
+    },
+    category: {
+      paddingHorizontal: s(6),
+      paddingVertical: s(4),
+      marginTop: s(2),
+    },
+    categoryText: {
+      fontSize: s(9.5),
+      fontFamily: boldFont,
+    },
+    numCell: {
+      width: s(46),
+      paddingHorizontal: s(3),
+      paddingVertical: s(4),
+      justifyContent: "flex-start",
+      alignItems: "center",
+    },
+    numText: {
+      fontSize: s(8),
+      fontFamily: boldFont,
+    },
+    itemCell: {
+      flex: 1,
+      paddingHorizontal: s(6),
+      paddingVertical: s(4),
+    },
+    dateCell: {
+      width: s(66),
+      paddingHorizontal: s(3),
+      paddingVertical: s(4),
+      justifyContent: "center",
+      alignItems: "center",
+    },
+    dateText: {
+      fontSize: s(7.5),
+      textAlign: "center",
+    },
+    itemTitle: {
+      fontSize: s(8.5),
+      fontFamily: boldFont,
+    },
+    itemBody: {
+      fontSize: s(7),
+      lineHeight: 1.28,
+      marginTop: s(1),
+    },
+    badgeCell: {
+      width: s(96),
+      justifyContent: "center",
+      alignItems: "center",
+      paddingHorizontal: s(4),
+      paddingVertical: s(4),
+    },
+    badgeText: {
+      fontSize: s(7),
+      fontFamily: boldFont,
+      textAlign: "center",
+    },
+    shots: {
+      flexDirection: "row",
+      flexWrap: "wrap",
+      gap: 4,
+      marginTop: 6,
+    },
+    shot: {
+      width: 78,
+      height: 48,
+      objectFit: "cover",
+    },
+    footer: {
+      position: "absolute",
+      left: s(24),
+      right: s(24),
+      bottom: s(10),
+      fontSize: s(7),
+      color: "#8A8A8A",
+    },
+  })
+}
+
+function FootnoteBlock({
+  markdown,
+  muted,
+  styles,
+}: {
+  markdown: string
+  muted: string
+  styles: ReturnType<typeof buildStyles>
+}) {
+  const lines = footnotePlainLines(markdown)
+  if (!lines.length) return null
+  return (
+    <View>
+      {lines.map((line) => (
+        <Text key={line} style={[styles.footnote, { color: muted }]}>{line}</Text>
+      ))}
+    </View>
+  )
+}
 
 export function TracksheetPdfDocument({
   sheet,
@@ -152,21 +204,40 @@ export function TracksheetPdfDocument({
   images: Record<string, string>
 }) {
   const palette = getPalette(sheet.paletteId)
+  const bodyFont = printFontFamily(sheet.paletteId)
+  const boldFont = printFontFamilyBold(sheet.paletteId)
+  const scale = tracksheetPdfScale(sheet)
+  const styles = buildStyles(bodyFont, boldFont, scale)
   const showNo = sheet.numbering.enabled
   const showStatus = sheet.columns.status
   const showType = sheet.columns.type
   const showImages = sheet.columns.images
+  const showTarget = sheet.columns.targetDate
+  const itemLabel = sheet.display.itemColumnLabel || "Items"
   const vendor = sheet.vendorLogo ? images[sheet.vendorLogo] : undefined
   const client = sheet.clientLogo ? images[sheet.clientLogo] : undefined
+  const decor = sheet.display.decor
+  const footnote = sheet.display.footnote
+  const tableBorders = sheet.display.tableBorders
 
   return (
     <Document title={sheet.title || sheet.projectName || "Tracksheet"}>
-      <Page size="A4" orientation="landscape" style={[styles.page, { backgroundColor: palette.paper }]}>
-        <View style={styles.partners}>
-          {vendor ? <Image src={vendor} style={styles.logo} /> : null}
-          {vendor && client ? <Text style={styles.partnerMark}>×</Text> : null}
-          {client ? <Image src={client} style={styles.logo} /> : null}
-          <View style={styles.meta}>
+      <Page
+        size="A4"
+        orientation="landscape"
+        wrap={false}
+        style={[styles.page, { backgroundColor: palette.paper }]}
+      >
+        {decor.enabled && decor.variant === "dotted-ring-tl" ? (
+          <View style={[styles.decorRing, { borderColor: decor.color }]} />
+        ) : null}
+
+        <View style={styles.headerBar}>
+          {client ? <Image src={client} style={styles.logo} /> : <View />}
+          {vendor ? <Image src={vendor} style={styles.logo} /> : <View />}
+        </View>
+        {sheet.refNumber || sheet.clientName ? (
+          <View style={styles.metaRow}>
             {sheet.refNumber ? (
               <Text style={[styles.metaLabel, { color: palette.muted }]}>Ref {sheet.refNumber}</Text>
             ) : null}
@@ -174,7 +245,7 @@ export function TracksheetPdfDocument({
               <Text style={[styles.metaValue, { color: palette.ink }]}>{sheet.clientName}</Text>
             ) : null}
           </View>
-        </View>
+        ) : null}
 
         <Text style={[styles.project, { color: palette.primary }]}>
           {sheet.projectName || "Project"}
@@ -184,13 +255,22 @@ export function TracksheetPdfDocument({
           <Text style={[styles.description, { color: palette.muted }]}>{sheet.description}</Text>
         ) : null}
 
+        {footnote.enabled && footnote.position === "before" ? (
+          <FootnoteBlock markdown={footnote.markdown} muted={palette.muted} styles={styles} />
+        ) : null}
+
         <View style={[styles.tableHead, { backgroundColor: palette.primary }]}>
           {showNo ? (
             <Text style={[styles.headCell, styles.numCell, { color: palette.primaryText, width: 52 }]}>
               No.
             </Text>
           ) : null}
-          <Text style={[styles.headCell, { color: palette.primaryText, flex: 1 }]}>Item</Text>
+          <Text style={[styles.headCell, { color: palette.primaryText, flex: 1 }]}>{itemLabel}</Text>
+          {showTarget ? (
+            <Text style={[styles.headCell, styles.dateCell, { color: palette.primaryText }]}>
+              Target date
+            </Text>
+          ) : null}
           {showStatus ? (
             <Text style={[styles.headCell, styles.badgeCell, { color: palette.primaryText }]}>
               Status
@@ -215,7 +295,6 @@ export function TracksheetPdfDocument({
           }
 
           const status = statusSwatch(palette, row.item.status)
-          const type = typeSwatch(palette, row.item.type, row.item.customTypeColor)
           const shots = showImages
             ? row.item.images.map((path) => images[path]).filter((src): src is string => !!src)
             : []
@@ -227,8 +306,12 @@ export function TracksheetPdfDocument({
                 styles.row,
                 {
                   backgroundColor: index % 2 === 0 ? palette.paper : palette.soft,
-                  borderBottomWidth: 0.6,
-                  borderBottomColor: palette.line,
+                  ...(tableBorders
+                    ? {
+                        borderBottomWidth: 0.6,
+                        borderBottomColor: palette.line,
+                      }
+                    : {}),
                 },
               ]}
             >
@@ -254,14 +337,21 @@ export function TracksheetPdfDocument({
                   </View>
                 ) : null}
               </View>
+              {showTarget ? (
+                <View style={styles.dateCell}>
+                  <Text style={[styles.dateText, { color: palette.ink }]}>
+                    {formatTargetDate(row.item.targetDate) || "—"}
+                  </Text>
+                </View>
+              ) : null}
               {showStatus ? (
                 <View style={[styles.badgeCell, { backgroundColor: status.bg }]}>
                   <Text style={[styles.badgeText, { color: status.fg }]}>{statusLabel(row.item.status)}</Text>
                 </View>
               ) : null}
               {showType ? (
-                <View style={[styles.badgeCell, { backgroundColor: type.bg }]}>
-                  <Text style={[styles.badgeText, { color: type.fg }]}>
+                <View style={styles.badgeCell}>
+                  <Text style={[styles.badgeText, styles.dateText, { color: palette.ink, fontFamily: bodyFont }]}>
                     {typeLabel(row.item.type, row.item.customTypeLabel)}
                   </Text>
                 </View>
@@ -269,6 +359,10 @@ export function TracksheetPdfDocument({
             </View>
           )
         })}
+
+        {footnote.enabled && footnote.position === "after" ? (
+          <FootnoteBlock markdown={footnote.markdown} muted={palette.muted} styles={styles} />
+        ) : null}
 
         <Text
           style={styles.footer}
