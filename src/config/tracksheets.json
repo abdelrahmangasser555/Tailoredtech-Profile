@@ -1,0 +1,268 @@
+{
+  "tracksheets": [
+    {
+      "id": "tracksheet-bahri-sprint-2026-10-26",
+      "projectName": "MOC & PCR",
+      "title": "Requested enhancements and features",
+      "description": "Delivery tracking sheet for agreed enhancements and features. Status: in progress.",
+      "refNumber": "TS-2026-10-26",
+      "clientName": "Bahri",
+      "clientLogo": "/assets/uploads/finance/tracksheet-tracksheet-bahri-sprint-2026-10-26-client/bahri-logo-mvppl1za.png",
+      "vendorLogo": "/logo.svg",
+      "paletteId": "bahri",
+      "numbering": {
+        "enabled": true
+      },
+      "columns": {
+        "status": true,
+        "type": true,
+        "images": false,
+        "targetDate": true
+      },
+      "display": {
+        "itemColumnLabel": "Action items",
+        "tableBorders": true,
+        "footnote": {
+          "enabled": true,
+          "position": "after",
+          "markdown": "All action items listed below are **in progress** and will be batched in one enrollment with target date of **3 Nov 2026**."
+        },
+        "decor": {
+          "enabled": true,
+          "variant": "none",
+          "color": "#003C71"
+        }
+      },
+      "categories": [
+        {
+          "id": "cat-moc",
+          "title": "MOC",
+          "items": [
+            {
+              "id": "moc-decline-routing",
+              "title": "MOC decline workflow change",
+              "description": "When a MOC is declined, the record returns to the originator or implementer. Each party may update their section and resubmit. Originator changes are routed to the implementer for re-approval before HSEQ review.",
+              "status": "in-progress",
+              "type": "workflow-change",
+              "customTypeLabel": "",
+              "customTypeColor": "#0A0A0A",
+              "targetDate": "2026-11-03",
+              "images": [],
+              "children": []
+            },
+            {
+              "id": "moc-delete-rbac",
+              "title": "Authority to delete MOC records",
+              "description": "Introduce a dedicated authority level  allowing authorized users to delete a MOC.",
+              "status": "in-progress",
+              "type": "feature",
+              "customTypeLabel": "",
+              "customTypeColor": "#0A0A0A",
+              "targetDate": "2026-11-03",
+              "images": [],
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "cat-pcr",
+          "title": "PCR",
+          "items": [
+            {
+              "id": "pcr-decline",
+              "title": "PCR decline status",
+              "description": "Support a Decline action on PCR with justification and a Declined status indicator.",
+              "status": "in-progress",
+              "type": "workflow-change",
+              "customTypeLabel": "",
+              "customTypeColor": "#0A0A0A",
+              "targetDate": "2026-11-03",
+              "images": [],
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "cat-oop",
+          "title": "OOP",
+          "items": [
+            {
+              "id": "oop-attachment-dates",
+              "title": "Risk assessments and file attachments log",
+              "description": "Display the upload date for each file in attachments.",
+              "status": "in-progress",
+              "type": "feature",
+              "customTypeLabel": "",
+              "customTypeColor": "#0A0A0A",
+              "targetDate": "2026-11-03",
+              "images": [],
+              "children": []
+            },
+            {
+              "id": "oop-audit-chat",
+              "title": "Audit log inside OOP card",
+              "description": "Present the OOP audit log inside the preview card.",
+              "status": "in-progress",
+              "type": "feature",
+              "customTypeLabel": "",
+              "customTypeColor": "#0A0A0A",
+              "targetDate": "2026-11-03",
+              "images": [],
+              "children": []
+            },
+            {
+              "id": "oop-follow-up",
+              "title": "Follow-up access",
+              "description": "Restrict follow-up to the originator, vessel, and administrator roles.",
+              "status": "in-progress",
+              "type": "workflow-change",
+              "customTypeLabel": "",
+              "customTypeColor": "#0A0A0A",
+              "targetDate": "2026-11-03",
+              "images": [],
+              "children": []
+            },
+            {
+              "id": "oop-closeout",
+              "title": "Originator close-out",
+              "description": "Allow the originator authority level to close out an OOP.",
+              "status": "in-progress",
+              "type": "feature",
+              "customTypeLabel": "",
+              "customTypeColor": "#0A0A0A",
+              "targetDate": "2026-11-03",
+              "images": [],
+              "children": []
+            },
+            {
+              "id": "oop-notify-approvers",
+              "title": "Notifications to prior approvers",
+              "description": "Notify users who have already approved when OOP details change.",
+              "status": "in-progress",
+              "type": "feature",
+              "customTypeLabel": "",
+              "customTypeColor": "#0A0A0A",
+              "targetDate": "2026-11-03",
+              "images": [],
+              "children": []
+            },
+            {
+              "id": "oop-manual-reminder",
+              "title": "Manual reminder trigger",
+              "description": "Provide manual reminder triggers for administrators for OOP and Administrative Approval.",
+              "status": "in-progress",
+              "type": "feature",
+              "customTypeLabel": "",
+              "customTypeColor": "#0A0A0A",
+              "targetDate": "2026-11-03",
+              "images": [],
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "cat-dashboard",
+          "title": "Dashboard sidebar",
+          "items": [
+            {
+              "id": "dash-pending-badge",
+              "title": "Pending tasks indicator inside sidebar (Dashboard button)",
+              "description": "Display a sidebar indicator showing the total count of pending tasks.",
+              "status": "in-progress",
+              "type": "feature",
+              "customTypeLabel": "",
+              "customTypeColor": "#0A0A0A",
+              "targetDate": "2026-11-03",
+              "images": [],
+              "children": []
+            }
+          ]
+        }
+      ],
+      "createdAt": "2026-10-26T12:00:00.000Z",
+      "updatedAt": "2026-10-26T21:39:35.141Z",
+      "enabled": true
+    },
+    {
+      "id": "tracksheet-sample-bbs",
+      "projectName": "Fleet safety platform",
+      "title": "Behaviour based safety module",
+      "description": "Client tracking sheet for the behaviour based safety module: what is enrolled, what is in build, and what is ready for user assessment test.",
+      "refNumber": "TS-001",
+      "clientName": "Sample operator",
+      "clientLogo": null,
+      "vendorLogo": "/logo.svg",
+      "paletteId": "tailoredtech",
+      "numbering": {
+        "enabled": true
+      },
+      "columns": {
+        "status": true,
+        "type": true,
+        "images": true
+      },
+      "categories": [
+        {
+          "id": "cat-observe",
+          "title": "Observation capture",
+          "items": [
+            {
+              "id": "item-form",
+              "title": "Observer form",
+              "description": "Build the onboard observation form with categories the shore office can edit.",
+              "status": "under-development",
+              "type": "feature",
+              "customTypeLabel": "",
+              "customTypeColor": "#0A0A0A",
+              "images": [],
+              "children": [
+                {
+                  "id": "item-offline",
+                  "title": "Offline sync",
+                  "description": "Queue observations on the vessel and send them when the link returns.",
+                  "status": "enrolled",
+                  "type": "additional-module",
+                  "customTypeLabel": "",
+                  "customTypeColor": "#0A0A0A",
+                  "images": [],
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "cat-report",
+          "title": "Shore reporting",
+          "items": [
+            {
+              "id": "item-dashboard",
+              "title": "Fleet dashboard",
+              "description": "Shore view of open observations, red flags, and weekly counts.",
+              "status": "uat",
+              "type": "feature",
+              "customTypeLabel": "",
+              "customTypeColor": "#0A0A0A",
+              "images": [],
+              "children": []
+            },
+            {
+              "id": "item-export",
+              "title": "Remove duplicate export",
+              "description": "The weekly pack currently exports the same vessel twice.",
+              "status": "under-vendor-testing",
+              "type": "bug",
+              "customTypeLabel": "",
+              "customTypeColor": "#0A0A0A",
+              "images": [],
+              "children": []
+            }
+          ]
+        }
+      ],
+      "createdAt": "2026-10-26T00:00:00.000Z",
+      "updatedAt": "2026-10-26T00:00:00.000Z",
+      "enabled": true
+    }
+  ]
+}

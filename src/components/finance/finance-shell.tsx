@@ -8,6 +8,7 @@ const NAV = [
   { href: "/finance", label: "Overview", exact: true },
   { href: "/finance/proposals", label: "Proposals" },
   { href: "/finance/invoices", label: "Invoices" },
+  { href: "/finance/tracksheets", label: "Tracksheets" },
 ] as const
 
 export function FinanceShell({ children }: { children: React.ReactNode }) {
@@ -16,7 +17,7 @@ export function FinanceShell({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-svh bg-[var(--section-light,#f7f7f2)] text-foreground">
       <header className="border-b border-foreground/10 bg-white">
-        <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-4 px-5 py-4 md:px-8">
+        <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-5 py-4 md:px-8">
           <div className="flex items-center gap-6 md:gap-8">
             <Link href="/finance" className="shrink-0">
               <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-foreground/40">
@@ -26,10 +27,11 @@ export function FinanceShell({ children }: { children: React.ReactNode }) {
             </Link>
             <nav className="flex items-center gap-1">
               {NAV.map((item) => {
-                const active = item.exact
-                  ? pathname === item.href
-                  : pathname === item.href ||
-                    pathname.startsWith(`${item.href}/`)
+                const active =
+                  "exact" in item && item.exact
+                    ? pathname === item.href
+                    : pathname === item.href ||
+                      pathname.startsWith(`${item.href}/`)
                 return (
                   <Link
                     key={item.href}
@@ -49,7 +51,7 @@ export function FinanceShell({ children }: { children: React.ReactNode }) {
           </div>
         </div>
       </header>
-      <div className="mx-auto w-full max-w-6xl px-5 py-10 md:px-8 md:py-14">
+      <div className="mx-auto w-full max-w-7xl px-5 py-10 md:px-8 md:py-14">
         {children}
       </div>
     </div>

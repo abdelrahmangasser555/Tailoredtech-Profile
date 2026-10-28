@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next"
 import { Suspense } from "react"
-import { Geist, Geist_Mono } from "next/font/google"
+import { Geist, Geist_Mono, Syne } from "next/font/google"
 import { GeistPixelCircle } from "geist/font/pixel"
 import { Toaster } from "@/components/ui/sonner"
 import { SiteChrome } from "@/components/layout/site-chrome"
@@ -24,6 +24,12 @@ const geist = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+})
+
+const syne = Syne({
+  variable: "--font-syne",
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
 })
 
 const { company } = site
@@ -107,7 +113,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geist.variable} ${geistMono.variable} ${GeistPixelCircle.variable} h-full`}
+      className={`${geist.variable} ${geistMono.variable} ${GeistPixelCircle.variable} ${syne.variable} h-full`}
       style={
         {
           "--font-display": "var(--font-geist)",

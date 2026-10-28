@@ -1,13 +1,12 @@
 {
   "glyphMatrix": {
     "enabled": true,
-    "opacity": 0.6,
+    "opacity": 0.62,
     "color": "brand",
-    "fadeCenter": false,
     "cellSize": 18,
     "mutationRate": 0.035,
     "interval": 100,
-    "fadeBottom": 0.85,
+    "fadeBottom": 0.2,
     "glyphs": "01·•<>/=+*",
     "brightness": 1.0,
     "contrast": 1.15
@@ -22,111 +21,8 @@
   },
   "description": {
     "enabled": true,
-    "before": "Enterprise softwares on ",
-    "count": 107,
-    "countSuffix": "+",
-    "middle": " vessels around the ",
-    "word": "globe"
-  },
-  "globe": {
-    "enabled": true,
-    "autoRotateSpeed": 0.28,
-    "showAtmosphere": false,
-    "bumpScale": 5,
-    "ambientIntensity": 0.7,
-    "pointLightIntensity": 1.6,
-    "desktop": {
-      "scale": 1.18,
-      "x": "28%",
-      "y": "0%",
-      "width": "min(60vw, 720px)",
-      "height": "min(72vh, 620px)"
-    },
-    "markers": [
-      {
-        "lat": 42.0,
-        "lng": -38.0,
-        "src": "https://assets.aceternity.com/avatars/1.webp",
-        "label": "North Atlantic"
-      },
-      {
-        "lat": 14.0,
-        "lng": -32.0,
-        "src": "https://assets.aceternity.com/avatars/12.webp",
-        "label": "Mid-Atlantic"
-      },
-      {
-        "lat": -22.0,
-        "lng": -18.0,
-        "src": "https://assets.aceternity.com/avatars/10.webp",
-        "label": "South Atlantic"
-      },
-      {
-        "lat": 35.5,
-        "lng": 18.5,
-        "src": "https://assets.aceternity.com/avatars/9.webp",
-        "label": "Mediterranean"
-      },
-      {
-        "lat": 16.0,
-        "lng": 62.0,
-        "src": "https://assets.aceternity.com/avatars/2.webp",
-        "label": "Arabian Sea"
-      },
-      {
-        "lat": 11.0,
-        "lng": 88.0,
-        "src": "https://assets.aceternity.com/avatars/4.webp",
-        "label": "Bay of Bengal"
-      },
-      {
-        "lat": 12.5,
-        "lng": 114.0,
-        "src": "https://assets.aceternity.com/avatars/13.webp",
-        "label": "South China Sea"
-      },
-      {
-        "lat": 5.5,
-        "lng": 98.5,
-        "src": "https://assets.aceternity.com/avatars/5.webp",
-        "label": "Andaman Sea"
-      },
-      {
-        "lat": 32.0,
-        "lng": -148.0,
-        "src": "https://assets.aceternity.com/avatars/4.webp",
-        "label": "North Pacific"
-      },
-      {
-        "lat": 8.0,
-        "lng": -155.0,
-        "src": "https://assets.aceternity.com/avatars/1.webp",
-        "label": "Central Pacific"
-      },
-      {
-        "lat": -25.0,
-        "lng": 72.0,
-        "src": "https://assets.aceternity.com/avatars/8.webp",
-        "label": "Indian Ocean"
-      },
-      {
-        "lat": -36.0,
-        "lng": 156.0,
-        "src": "https://assets.aceternity.com/avatars/2.webp",
-        "label": "Tasman Sea"
-      },
-      {
-        "lat": 15.5,
-        "lng": -72.0,
-        "src": "https://assets.aceternity.com/avatars/3.webp",
-        "label": "Caribbean Sea"
-      },
-      {
-        "lat": 56.5,
-        "lng": 3.5,
-        "src": "https://assets.aceternity.com/avatars/7.webp",
-        "label": "North Sea"
-      }
-    ]
+    "before": "A ",
+    "emphasis": "maritime solutions company",
+    "after": " for shipping operators."
   }
 }
