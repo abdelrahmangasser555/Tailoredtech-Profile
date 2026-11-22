@@ -997,39 +997,39 @@
     {
       "id": "bahri-logistics",
       "title": "Bahri Logistics Module",
-      "short": "Walkthrough for Vendor & Logistics: parties, tracking, the MIPS handoff, QR handovers, and open questions.",
-      "description": "Orientation for Bahri Vendor & Logistics on the Logistics Module: a cloud web platform and a mobile application for shipments from supplier to vessel.",
+      "short": "Walkthrough for Vendor and Logistics: the web platform, the mobile application, and the movement from supplier to vessel.",
+      "description": "Orientation for Bahri Vendor and Logistics on the Logistics Module: a cloud-based web platform and a mobile application.",
       "createdAt": "2026-11-22",
       "updatedAt": "2026-11-22",
       "brandClass": "brand-bahri",
-      "clientLogo": "/clients/bahri-no-background.png",
+      "clientLogo": "/presentations/bahri-logistics/bahri-lockup.png",
       "clientName": "Bahri",
       "href": "/presentations/bahri-logistics",
       "page": {
         "enabled": true,
-        "eyebrow": "Vendor & Logistics",
-        "headline": "Logistics",
+        "eyebrow": "Vendor and Logistics",
+        "headline": "Bahri Logistics",
         "headlineAccent": "Module",
-        "tagline": "Walkthrough and orientation for the Bahri Logistics Module. A cloud-based web platform and a mobile application.",
-        "heroVisual": "glyph",
+        "tagline": "A cloud-based web platform, plus a mobile application. For the movement of spares from the supplier to the vessel.",
+        "heroVisual": "engine",
         "showExplore": false,
         "glyphBackdrop": false,
         "galleryEnhanced": true,
         "outcomes": [
           {
             "value": "Web",
-            "label": "cloud platform for the office",
-            "icon": "Desktop"
+            "label": "cloud platform for the Bahri office",
+            "icon": "Layout"
           },
           {
             "value": "Mobile",
-            "label": "scans, updates, notifications",
-            "icon": "DeviceMobile"
+            "label": "scans, updates, and notifications",
+            "icon": "Broadcast"
           },
           {
             "value": "LX",
-            "label": "shipment opens at readiness",
-            "icon": "Boat"
+            "label": "shipment opens when the supplier is ready",
+            "icon": "Path"
           }
         ],
         "comparison": {
@@ -1057,20 +1057,7 @@
                 },
                 {
                   "type": "text",
-                  "value": "Opens when the order is ready"
-                }
-              ]
-            },
-            {
-              "label": "Movement",
-              "cells": [
-                {
-                  "type": "text",
-                  "value": "Status updates"
-                },
-                {
-                  "type": "text",
-                  "value": "Packing, freight, handovers, costs"
+                  "value": "Opens at LX"
                 }
               ]
             }
@@ -1078,11 +1065,301 @@
         },
         "sections": [
           {
-            "id": "walkthrough",
-            "title": "Walkthrough",
-            "icon": "Boat",
-            "body": "Slide walkthrough for Bahri Vendor & Logistics. Rendered on the presentation page.",
-            "bullets": [],
+            "id": "platform",
+            "title": "A web platform and a mobile application",
+            "icon": "LayoutGrid",
+            "body": "The Logistics Module is a **cloud-based web platform**, plus a **mobile application**.\n\nThe web platform is for the Bahri office. The mobile application is for vessels, agents, and freight forwarders.",
+            "bullets": [
+              "Web platform: shipments, quotations, approvals, costs, documents, chat, and reports",
+              "Mobile application: QR scans, updates, and notifications",
+              "One shipment can group many purchase orders and many vessels"
+            ],
+            "video": null,
+            "images": [
+              {
+                "src": "/presentations/bahri-logistics/assets/mock-dashboard.png",
+                "label": "Sample screen: shipments"
+              }
+            ],
+            "mermaid": "flowchart LR\n  Office[\"Web platform: Bahri office\"] --> Module[\"Logistics Module\"]\n  Mobile[\"Mobile application: vessels, agents, freight forwarders\"] --> Module",
+            "mermaidTitle": "Two ways in",
+            "mermaidCaption": "Office on the web. Vessels, agents, and freight forwarders on the mobile application.",
+            "chart": null,
+            "charts": null
+          },
+          {
+            "id": "parties",
+            "title": "Who uses the module, and for what",
+            "icon": "Users",
+            "body": "Each party has a clear job on the shipment. The Purchase Officer stays the owner of the purchase order in MIPS.",
+            "bullets": [
+              "Purchase Officer (Bahri office): owns the purchase order in MIPS, receives the pre-alert, and is notified to close or update the PO. Asked when other fleets can ship together.",
+              "Vendor and Logistics: chooses mode, route, and consolidation. Runs quotations, approval, and award. Follows collection through to delivery. Holds documents, costs, and the pre-alert.",
+              "Suppliers: confirm readiness and packing details, send dimensions, weight, and the collection address, report a lead-time change, and print the QR label.",
+              "Freight forwarders (pre-registered): submit a quotation, or receive a direct instruction when a contract rate applies. Collect from the supplier, scan the QR code, and upload the AWB.",
+              "Agents and the hub: store and consolidate, clear import, record local charges, scan on receipt from the freight forwarder, and hand the goods to the vessel.",
+              "Vessel (Master and crew): sees incoming shipments, scans the QR code when goods come on board, and reports damage or a short delivery.",
+              "Vessel Superintendent: views shipments for the fleet, can request air freight, and confirms the destination when needed.",
+              "Finance: uses proof of delivery to settle invoices, and sees the final actual cost.",
+              "Management: goods with an agent for 60 days go to the Head of O&M Purchasing, 90 days to the Director of O&M Procurement, and 150 days to the President. They decide the mode and update the planned port and date."
+            ],
+            "video": null,
+            "images": [],
+            "mermaid": null,
+            "mermaidTitle": null,
+            "mermaidCaption": null,
+            "chart": null,
+            "charts": null
+          },
+          {
+            "id": "tracking",
+            "title": "What each shipment keeps",
+            "icon": "Ship",
+            "body": "A shipment can group **many purchase orders** and **many vessels**. The sample screens below use vessels such as BAHRI ABHA, BAHRI JAZAN, and BAHRI HOFUF, purchase order 662-04155, and ports such as Singapore and Jeddah.",
+            "bullets": [
+              "Purchase order and vessel",
+              "Supplier readiness (LX)",
+              "Packing details, dimensions, and weight",
+              "Lead time and changes",
+              "Freight forwarder quotations",
+              "Transport mode: sea, air, courier, or road",
+              "Route: door-to-door, door-to-port, to an agent, or via a hub",
+              "Planned port and date, and the vessel's next ports",
+              "Each custody handover",
+              "Costs: freight forwarder, agent, customs and import or export, then the final actuals",
+              "Documents: AWB and proof of delivery",
+              "Status history, reminders, and an audit trail",
+              "Chat on the shipment"
+            ],
+            "video": null,
+            "images": [
+              {
+                "src": "/presentations/bahri-logistics/assets/mock-shipment-detail.png",
+                "label": "Sample screen: shipment"
+              },
+              {
+                "src": "/presentations/bahri-logistics/assets/mock-packing-form.png",
+                "label": "Sample screen: packing details"
+              },
+              {
+                "src": "/presentations/bahri-logistics/assets/mock-quote-comparison.png",
+                "label": "Sample screen: freight quotations"
+              },
+              {
+                "src": "/presentations/bahri-logistics/assets/mock-chat-notifications.png",
+                "label": "Sample screen: chat and notifications"
+              }
+            ],
+            "mermaid": null,
+            "mermaidTitle": null,
+            "mermaidCaption": null,
+            "chart": null,
+            "charts": null
+          },
+          {
+            "id": "requirements",
+            "title": "Requirements that will be met",
+            "icon": "ClipboardList",
+            "body": "What the module provides for Vendor and Logistics.",
+            "bullets": [
+              "Courier when the shipment is 75 kg or under",
+              "Consolidation with other fleets on the same route",
+              "A contract rate skips freight forwarder quotations",
+              "Approval is recorded before the award",
+              "Pre-alert to the destination agent and the Purchase Officer",
+              "Final cost is taken from the actual invoices",
+              "Reminders when a follow-up is due",
+              "Escalation when goods stay with an agent past 60, 90, and 150 days",
+              "An audit record of changes, scans, approvals, and messages",
+              "A chat room on every shipment",
+              "Reports and dashboards for the open movements",
+              "A mobile application for scans, updates, and notifications",
+              "Email and in-app notifications",
+              "Access set by role"
+            ],
+            "video": null,
+            "images": [],
+            "mermaid": null,
+            "mermaidTitle": null,
+            "mermaidCaption": null,
+            "chart": null,
+            "charts": null
+          },
+          {
+            "id": "boundary",
+            "title": "Where the work sits",
+            "icon": "ArrowLeftRight",
+            "body": "MIPS keeps the purchase order: requisition, enquiry, supplier quotations, supplier selection, the purchase order, and order confirmation.\n\n**Integration** happens when the purchase order reaches **LX**, ready with supplier. The shipment then appears in the Logistics Module automatically.\n\nThe Logistics Module keeps packing details, freight forwarder quotations and the award, collection, handovers, delivery, and costs.\n\nBack to MIPS, these statuses update automatically: **LA** (collection by the freight forwarder), **PD** (partly delivered), and **RV** (received). The Purchase Officer is notified to close or update the purchase order.",
+            "bullets": [
+              "MIPS: requisition through order confirmation",
+              "Integration at LX: the shipment appears automatically",
+              "Logistics Module: packing, quotations, collection, handovers, delivery, and costs",
+              "LA, PD, and RV update in MIPS automatically",
+              "The Purchase Officer is notified to close or update the PO"
+            ],
+            "video": null,
+            "images": [
+              {
+                "src": "/presentations/bahri-logistics/assets/diagram-mips-boundary.png",
+                "label": "MIPS, integration, and the Logistics Module"
+              }
+            ],
+            "mermaid": "flowchart LR\n  MIPS[\"MIPS: requisition to order confirmation\"] --> LX[\"LX: ready with supplier\"]\n  LX --> Module[\"Logistics Module: packing, freight, handovers, costs\"]\n  Module --> Back[\"LA, PD, RV back to MIPS\"]\n  Back --> Officer[\"Purchase Officer notified\"]",
+            "mermaidTitle": "Handoff",
+            "mermaidCaption": "The shipment opens at LX. Collection, partial delivery, and receipt go back to MIPS.",
+            "chart": null,
+            "charts": null
+          },
+          {
+            "id": "qr",
+            "title": "QR labels on every package",
+            "icon": "ScanEye",
+            "body": "Each package gets a QR label. The freight forwarder, the agent, and the vessel each scan at their handover. Every scan records time, place, person, photo, and notes. Damage and a short delivery are flagged.",
+            "bullets": [
+              "Freight forwarder scans on collection from the supplier. Status becomes LA.",
+              "Agent scans on receipt from the freight forwarder.",
+              "Vessel scans when goods come on board. Status becomes RV, or PD when delivery is partial."
+            ],
+            "video": null,
+            "images": [
+              {
+                "src": "/presentations/bahri-logistics/assets/diagram-qr-chain.png",
+                "label": "QR handover chain"
+              },
+              {
+                "src": "/presentations/bahri-logistics/assets/mock-qr-collection.png",
+                "label": "Sample screen: collection scan"
+              },
+              {
+                "src": "/presentations/bahri-logistics/assets/mock-qr-vessel.png",
+                "label": "Sample screen: on-board scan"
+              }
+            ],
+            "mermaid": "flowchart LR\n  Label[\"QR label\"] --> FF[\"Freight forwarder scan: LA\"]\n  FF --> Agent[\"Agent scan\"]\n  Agent --> Vessel[\"Vessel scan: RV or PD\"]",
+            "mermaidTitle": "Three scans",
+            "mermaidCaption": "Collection, agent receipt, then receipt on board.",
+            "chart": null,
+            "charts": null
+          },
+          {
+            "id": "questions",
+            "title": "Questions we need answered",
+            "icon": "HelpCircle",
+            "body": "Plain questions for Bahri, before build-out of the details.",
+            "bullets": [
+              "What do the statuses LT, LF, and PO mean, and who sets each one?",
+              "Please confirm what O, OX, and DA mean, and who sets each one.",
+              "Does logistics start automatically when a purchase order reaches LX (ready with supplier)?",
+              "Should the Logistics Module update statuses in MIPS automatically?",
+              "Which hubs and agents are in use, and which freight forwarders have a contract rate?",
+              "Who approves logistics spend, and what are the limits?",
+              "Where do the vessel's next ports come from?",
+              "Can the crew scan QR codes on board?",
+              "How should suppliers sign in? Is vendor.bahri.sa the right place?",
+              "What are the requirements for hosting, security, and sign-in?"
+            ],
+            "video": null,
+            "images": [],
+            "mermaid": null,
+            "mermaidTitle": null,
+            "mermaidCaption": null,
+            "chart": null,
+            "charts": null
+          },
+          {
+            "id": "rules",
+            "title": "How the module decides",
+            "icon": "Route",
+            "body": "The module follows the operating rules Vendor and Logistics already use. Service purchase orders are left out. Only purchase orders that need logistics are included.",
+            "bullets": [
+              "75 kg or under, or the shipment is urgent: use courier. At 75 kg or under, courier is preferred.",
+              "A contract rate is already in place: skip quotations and instruct that freight forwarder.",
+              "Other fleets have orders on the same route: group them into one shipment.",
+              "Routes: door-to-door (supplier to vessel), door-to-port, to an agent, or via a hub.",
+              "The supplier changes the lead time: re-plan the shipment and notify the people involved.",
+              "Only part of the order is received on board: mark PD, partly delivered, and keep the balance open.",
+              "A supplier quote carries a conflict-zone clause: re-route, for example around Hormuz, the Red Sea, or Suez.",
+              "Quotations are in: record approval first, then award.",
+              "Goods remain with an agent: escalate at 60, 90, and 150 days, and update the planned port and date."
+            ],
+            "video": null,
+            "images": [
+              {
+                "src": "/presentations/bahri-logistics/assets/diagram-routes.png",
+                "label": "Routes"
+              },
+              {
+                "src": "/presentations/bahri-logistics/assets/diagram-escalation.png",
+                "label": "Goods still with an agent"
+              },
+              {
+                "src": "/presentations/bahri-logistics/assets/diagram-rule-courier.png",
+                "label": "Courier"
+              },
+              {
+                "src": "/presentations/bahri-logistics/assets/diagram-rule-contract.png",
+                "label": "Contract rate"
+              },
+              {
+                "src": "/presentations/bahri-logistics/assets/diagram-rule-consolidate.png",
+                "label": "Consolidation"
+              },
+              {
+                "src": "/presentations/bahri-logistics/assets/diagram-rule-approval.png",
+                "label": "Approval before award"
+              },
+              {
+                "src": "/presentations/bahri-logistics/assets/diagram-rule-reroute.png",
+                "label": "Re-routing"
+              },
+              {
+                "src": "/presentations/bahri-logistics/assets/diagram-rule-partial.png",
+                "label": "Partial delivery"
+              },
+              {
+                "src": "/presentations/bahri-logistics/assets/diagram-rule-lead.png",
+                "label": "Lead time"
+              },
+              {
+                "src": "/presentations/bahri-logistics/assets/diagram-rule-scope.png",
+                "label": "Which orders"
+              }
+            ],
+            "mermaid": "flowchart TD\n  Weight{\"75 kg or under, or urgent?\"} -->|yes| Courier[\"Courier\"]\n  Weight -->|no| Mode[\"Sea, air, or road\"]\n  Rate{\"Contract rate?\"} -->|yes| Direct[\"Instruct the freight forwarder\"]\n  Rate -->|no| Quotes[\"Quotations, then approval, then award\"]",
+            "mermaidTitle": "Two common decisions",
+            "mermaidCaption": "Courier when the shipment is light or urgent. A contract rate skips quotations.",
+            "chart": null,
+            "charts": null
+          },
+          {
+            "id": "together",
+            "title": "How we will build this",
+            "icon": "UsersRound",
+            "body": "This is how TailoredTech will work with Bahri.",
+            "bullets": [
+              "Side-by-side development, in close collaboration with the Bahri team.",
+              "Extensive, iterative development, with regular reviews.",
+              "Bahri can request any requirement or change during development, without any commitment.",
+              "Our main goal is Bahri's satisfaction, and a product that meets Bahri's operational requirements."
+            ],
+            "video": null,
+            "images": [],
+            "mermaid": null,
+            "mermaidTitle": null,
+            "mermaidCaption": null,
+            "chart": null,
+            "charts": null
+          },
+          {
+            "id": "next",
+            "title": "Next steps",
+            "icon": "Megaphone",
+            "body": "Prepared for Hanan Amoudi and Noor Mohideen, Bahri Vendor and Logistics. Prepared by TailoredTech.",
+            "bullets": [
+              "Review this walkthrough with the Vendor and Logistics team.",
+              "Share comments, corrections, and anything to add.",
+              "Meet to discuss the details and start development."
+            ],
             "video": null,
             "images": [],
             "mermaid": null,
