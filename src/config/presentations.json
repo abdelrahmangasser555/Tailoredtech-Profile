@@ -1007,10 +1007,10 @@
       "href": "/presentations/bahri-logistics",
       "page": {
         "enabled": true,
-        "eyebrow": "Vendor and Logistics",
-        "headline": "Bahri Logistics",
+        "eyebrow": "For freight forwarders, agents, and vessels",
+        "headline": "Logistics",
         "headlineAccent": "Module",
-        "tagline": "A cloud-based web platform, plus a mobile application. For the movement of spares from the supplier to the vessel.",
+        "tagline": "A cloud-based web platform for the Bahri office, a mobile application, and integration with MIPS. Prepared for the Bahri Vendor & Logistics team. Prepared by TailoredTech.",
         "heroVisual": "engine",
         "showExplore": false,
         "glyphBackdrop": false,
@@ -1432,11 +1432,16 @@
             "id": "platform",
             "title": "A web platform and a mobile application",
             "icon": "LayoutGrid",
-            "body": "The Logistics Module is a **cloud-based web platform**, plus a **mobile application**.\n\nThe web platform is for the Bahri office. The mobile application is for vessels, agents, and freight forwarders.",
+            "body": "The Logistics Module is a **cloud-based web platform** and a **mobile application**, with **integration with MIPS**.",
             "bullets": [
-              "Web platform: shipments, quotations, approvals, costs, documents, chat, and reports",
-              "Mobile application: QR scans, updates, and notifications",
-              "One shipment can group many purchase orders and many vessels"
+              "Web platform: manage shipments, quotations, approvals, costs, documents, chat, and reminders.",
+              "Mobile application: capture QR scans, photos, add notes, and receive notifications.",
+              "Cloud-based: connected to MIPS, no installation needed, and role-based access.",
+              "Create a shipment or request a quotation.",
+              "Review and approve.",
+              "Execute and capture updates.",
+              "Monitor costs and documents.",
+              "Stay informed with reminders and notifications."
             ],
             "video": null,
             "images": [
@@ -1445,9 +1450,9 @@
                 "label": "Sample screen: shipments"
               }
             ],
-            "mermaid": "flowchart LR\n  Office[\"Web platform: Bahri office\"] --> Module[\"Logistics Module\"]\n  Mobile[\"Mobile application: vessels, agents, freight forwarders\"] --> Module",
-            "mermaidTitle": "Two ways in",
-            "mermaidCaption": "Office on the web. Vessels, agents, and freight forwarders on the mobile application.",
+            "mermaid": "flowchart TD\n  A[\"01 Create shipment or request quotation\"] --> B[\"02 Review and approve\"]\n  B --> C[\"03 Execute and capture updates\"]\n  C --> D[\"04 Monitor costs and documents\"]\n  D --> E[\"05 Stay informed with reminders and notifications\"]",
+            "mermaidTitle": "Key workflow",
+            "mermaidCaption": "From the request through reminders and notifications.",
             "chart": null,
             "charts": null
           },
@@ -1475,17 +1480,17 @@
             "id": "parties",
             "title": "Who uses the module, and for what",
             "icon": "Users",
-            "body": "Each party has a clear job on the shipment. The Purchase Officer stays the owner of the purchase order in MIPS.",
+            "body": "Each user sees only their shipments and tasks, with access aligned to their role.",
             "bullets": [
-              "Purchase Officer (Bahri office): owns the purchase order in MIPS, receives the pre-alert, and is notified to close or update the PO. Asked when other fleets can ship together.",
-              "Vendor and Logistics: chooses mode, route, and consolidation. Runs quotations, approval, and award. Follows collection through to delivery. Holds documents, costs, and the pre-alert.",
-              "Suppliers: confirm readiness and packing details, send dimensions, weight, and the collection address, report a lead-time change, and print the QR label.",
-              "Freight forwarders (pre-registered): submit a quotation, or receive a direct instruction when a contract rate applies. Collect from the supplier, scan the QR code, and upload the AWB.",
-              "Agents and the hub: store and consolidate, clear import, record local charges, scan on receipt from the freight forwarder, and hand the goods to the vessel.",
-              "Vessel (Master and crew): sees incoming shipments, scans the QR code when goods come on board, and reports damage or a short delivery.",
-              "Vessel Superintendent: views shipments for the fleet, can request air freight, and confirms the destination when needed.",
-              "Finance: uses proof of delivery to settle invoices, and sees the final actual cost.",
-              "Management: goods with an agent for 60 days go to the Head of O&M Purchasing, 90 days to the Director of O&M Procurement, and 150 days to the President. They decide the mode and update the planned port and date."
+              "Purchase Officer: Bahri office.",
+              "Vendor & Logistics: Bahri logistics team.",
+              "Suppliers: pre-registered vendors.",
+              "Freight forwarders: pre-registered.",
+              "Agents and hub: origin, destination, and hub.",
+              "Vessel: Master and crew.",
+              "Vessel Superintendent: fleet.",
+              "Finance.",
+              "Management: escalation process at 60, 90, and 150 days."
             ],
             "video": null,
             "images": [],
@@ -1523,21 +1528,22 @@
             "id": "tracking",
             "title": "What each shipment keeps",
             "icon": "Ship",
-            "body": "A shipment can group **many purchase orders** and **many vessels**. The sample screens below use vessels such as BAHRI ABHA, BAHRI JAZAN, and BAHRI HOFUF, purchase order 662-04155, and ports such as Singapore and Jeddah.",
+            "body": "One record per shipment that groups multiple purchase orders and vessels into a single, complete tracking view.\n\nAll orders and vessels are linked in a single shipment view. Live updates run across every stage of the journey. Handover logs, proof of delivery, and the audit trail are captured. Automated reminders and chat keep everyone aligned.",
             "bullets": [
-              "Purchase order and vessel",
-              "Supplier readiness (LX)",
-              "Packing details, dimensions, and weight",
-              "Lead time and changes",
-              "Freight forwarder quotations",
-              "Transport mode: sea, air, courier, or road",
-              "Route: door-to-door, door-to-port, to an agent, or via a hub",
-              "Planned port and date, and the vessel's next ports",
-              "Each custody handover",
-              "Costs: freight forwarder, agent, customs and import or export, then the final actuals",
-              "Documents: AWB and proof of delivery",
-              "Status history, reminders, and an audit trail",
-              "Chat on the shipment"
+              "Supplier readiness",
+              "Packing details",
+              "Quotations",
+              "Mode of transport",
+              "Route and schedule",
+              "Ports and terminals",
+              "Handover events",
+              "Costs and charges",
+              "Status history",
+              "Reminders",
+              "Audit trail and chat",
+              "Proof of delivery",
+              "Purchase order",
+              "Lead time"
             ],
             "video": null,
             "images": [
@@ -1601,22 +1607,12 @@
             "id": "requirements",
             "title": "Requirements that will be met",
             "icon": "ClipboardList",
-            "body": "What the module provides for Vendor and Logistics.",
+            "body": "Chat rooms keep all communication in one place. Reminders and notifications keep you on track.",
             "bullets": [
-              "Courier when the shipment is 75 kg or under",
-              "Consolidation with other fleets on the same route",
-              "A contract rate skips freight forwarder quotations",
-              "Approval is recorded before the award",
-              "Pre-alert to the destination agent and the Purchase Officer",
-              "Final cost is taken from the actual invoices",
-              "Reminders when a follow-up is due",
-              "Escalation when goods stay with an agent past 60, 90, and 150 days",
-              "An audit record of changes, scans, approvals, and messages",
-              "A chat room on every shipment",
-              "Reports and dashboards for the open movements",
-              "A mobile application for scans, updates, and notifications",
-              "Email and in-app notifications",
-              "Access set by role"
+              "Decisions and approvals: courier rules, consolidation, contract rates, approvals, and pre-alerts.",
+              "Costs and follow-up: final costs from invoices, reminders, and escalations.",
+              "Access and mobile: mobile app for scans, notifications, and role-based access.",
+              "Records and communication: audit trail, chat rooms, reports, and dashboards."
             ],
             "video": null,
             "images": [],
@@ -1630,13 +1626,15 @@
             "id": "boundary",
             "title": "Where the work sits",
             "icon": "ArrowLeftRight",
-            "body": "MIPS keeps the purchase order: requisition, enquiry, supplier quotations, supplier selection, the purchase order, and order confirmation.\n\n**Integration** happens when the purchase order reaches **LX**, ready with supplier. The shipment then appears in the Logistics Module automatically.\n\nThe Logistics Module keeps packing details, freight forwarder quotations and the award, collection, handovers, delivery, and costs.\n\nBack to MIPS, these statuses update automatically: **LA** (collection by the freight forwarder), **PD** (partly delivered), and **RV** (received). The Purchase Officer is notified to close or update the purchase order.",
+            "body": "**Stays in MIPS:** requisition, quotations, purchase order, closing the PO, invoices, and finance.\n\n**Logistics Module:** packing, quotations, collection, delivery, costs, reminders, and chat.\n\n**Integration with MIPS:** the shipment opens in the Logistics Module at LX. The collection scan updates LA in MIPS. The on-board scan updates RV or PD. Handover documents are kept on the shipment. On delivery, there is a notification to close or update the PO.",
             "bullets": [
-              "MIPS: requisition through order confirmation",
-              "Integration at LX: the shipment appears automatically",
-              "Logistics Module: packing, quotations, collection, handovers, delivery, and costs",
-              "LA, PD, and RV update in MIPS automatically",
-              "The Purchase Officer is notified to close or update the PO"
+              "Stays in MIPS: requisition, quotations, purchase order, closing the PO, invoices, and finance.",
+              "Logistics Module: packing, quotations, collection, delivery, costs, reminders, and chat.",
+              "Shipment opens in the Logistics Module at LX.",
+              "Collection scan updates LA in MIPS.",
+              "On-board scan updates RV or PD.",
+              "Handover documents are kept on the shipment.",
+              "Notification to close or update the PO on delivery."
             ],
             "video": null,
             "images": [
@@ -1645,9 +1643,38 @@
                 "label": "MIPS, integration, and the Logistics Module"
               }
             ],
-            "mermaid": "flowchart TD\n  LA[\"LA: collection by the freight forwarder\"] --> MIPS[\"Status updated in MIPS\"]\n  PD[\"PD: partly delivered\"] --> MIPS\n  RV[\"RV: received\"] --> MIPS\n  MIPS --> Officer[\"Purchase Officer notified\"]\n  Officer --> Close[\"Close or update the purchase order\"]",
-            "mermaidTitle": "Back to MIPS",
-            "mermaidCaption": "LA, PD, and RV update automatically. The Purchase Officer is notified.",
+            "mermaid": "flowchart LR\n  LX[\"Shipment opens in the Logistics Module at LX\"] --> LA[\"Collection scan updates LA in MIPS\"]\n  LA --> RV[\"On-board scan updates RV or PD\"]\n  RV --> Docs[\"Handover documents kept on the shipment\"]\n  Docs --> Note[\"Notification to close or update the PO\"]",
+            "mermaidTitle": "Integration with MIPS",
+            "mermaidCaption": "From LX, through the scans, to the notice to close or update the purchase order.",
+            "chart": null,
+            "charts": null
+          },
+          {
+            "id": "how-it-works",
+            "title": "How it works from LX",
+            "icon": "GitBranch",
+            "body": "From the moment a purchase order is ready with the supplier (LX) in MIPS, to the purchase order update.",
+            "bullets": [
+              "01 Purchase order reaches LX in MIPS.",
+              "02 Shipment opens automatically in the Logistics Module.",
+              "03 Vendor & Logistics team is notified.",
+              "04 Supplier enters packing details, dimensions, and lead time.",
+              "05 Request forwarder quotations, or use a contract rate.",
+              "06 Forwarders submit price, transport mode, and timing.",
+              "07 Compare quotations and approve.",
+              "08 Award the shipment to the forwarder.",
+              "09 Collection scan at the supplier. MIPS shows LA.",
+              "10 Agent or hub receives and scans.",
+              "11 Vessel receives and scans. MIPS shows RV or PD.",
+              "12 Final costs taken from the actual invoices.",
+              "13 Purchase Officer is notified.",
+              "14 Purchase order updated or closed in MIPS."
+            ],
+            "video": null,
+            "images": [],
+            "mermaid": "flowchart TD\n  S01[\"01 Purchase order reaches LX in MIPS\"] --> S02[\"02 Shipment opens automatically in the Logistics Module\"]\n  S02 --> S03[\"03 Vendor and Logistics team is notified\"]\n  S03 --> S04[\"04 Supplier enters packing details, dimensions, and lead time\"]\n  S04 --> S05[\"05 Request forwarder quotations, or use a contract rate\"]\n  S05 --> S06[\"06 Forwarders submit price, transport mode, and timing\"]\n  S06 --> S07[\"07 Compare quotations and approve\"]\n  S07 --> S08[\"08 Award the shipment to the forwarder\"]\n  S08 --> S09[\"09 Collection scan at the supplier. MIPS shows LA\"]\n  S09 --> S10[\"10 Agent or hub receives and scans\"]\n  S10 --> S11[\"11 Vessel receives and scans. MIPS shows RV or PD\"]\n  S11 --> S12[\"12 Final costs taken from the actual invoices\"]\n  S12 --> S13[\"13 Purchase Officer is notified\"]\n  S13 --> S14[\"14 Purchase order updated or closed in MIPS\"]",
+            "mermaidTitle": "How it works from LX",
+            "mermaidCaption": "Fourteen steps from LX in MIPS to the purchase order update.",
             "chart": null,
             "charts": null
           },
@@ -1688,14 +1715,20 @@
             "id": "qr",
             "title": "QR labels on every package",
             "icon": "ScanEye",
-            "body": "Each package gets a QR label. The freight forwarder, the agent, and the vessel each scan at their handover. Every scan records time, place, person, photo, and notes. Damage and a short delivery are flagged.",
+            "body": "Each package gets a QR label. The freight forwarder scans at collection (status LA). The agent scans on receipt. The vessel scans on board (status RV or PD).\n\nEach scan records time, place, person, photo, notes, and damage. Scan statuses are captured in MIPS at every handover point. This creates a verifiable chain of proof for every delivery.",
             "bullets": [
-              "Freight forwarder scans on collection from the supplier. Status becomes LA.",
-              "Agent scans on receipt from the freight forwarder.",
-              "Vessel scans when goods come on board. Status becomes RV, or PD when delivery is partial."
+              "QR label: package labeling details.",
+              "Freight forwarder: scan at collection (status LA).",
+              "Agent: scan on receipt.",
+              "Vessel: scan on board (status RV or PD).",
+              "Each scan records time, place, person, photo, notes, and damage."
             ],
             "video": null,
             "images": [
+              {
+                "src": "/presentations/bahri-logistics/assets/qr-handover-photo.jpg",
+                "label": "QR handover"
+              },
               {
                 "src": "/presentations/bahri-logistics/assets/diagram-qr-chain.png",
                 "label": "QR handover chain"
@@ -1710,8 +1743,8 @@
               }
             ],
             "mermaid": "flowchart TD\n  Label[\"QR label on each package\"] --> Collect[\"Freight forwarder collects from the supplier\"]\n  Collect --> LA[\"Status LA\"]\n  LA --> Agent[\"Agent receives the goods and scans\"]\n  Agent --> Vessel[\"Vessel receives the goods and scans\"]\n  Vessel --> RV[\"Full receipt: RV\"]\n  Vessel --> PD[\"Part received: PD\"]\n  Collect --> Record[\"Each scan records time, place, person, photo, and notes\"]",
-            "mermaidTitle": "Custody chain",
-            "mermaidCaption": "Collection sets LA. Receipt on board sets RV or PD.",
+            "mermaidTitle": "QR labels on every package",
+            "mermaidCaption": "Collection sets LA. Receipt on board sets RV or PD. Every scan is kept in MIPS.",
             "chart": null,
             "charts": null
           },
@@ -1796,18 +1829,18 @@
             "id": "questions",
             "title": "Questions we need answered",
             "icon": "HelpCircle",
-            "body": "Plain questions for Bahri, before build-out of the details.",
+            "body": "**Already confirmed**\n\n- **LX:** Ready with supplier (ready for collection)\n- **LA:** Collection by freight forwarder\n- **PD:** Partly delivered\n- **RV:** Received",
             "bullets": [
-              "What do the statuses LT, LF, and PO mean, and who sets each one?",
-              "Please confirm what O, OX, and DA mean, and who sets each one.",
-              "Does logistics start automatically when a purchase order reaches LX (ready with supplier)?",
-              "Should the Logistics Module update statuses in MIPS automatically?",
-              "Which hubs and agents are in use, and which freight forwarders have a contract rate?",
-              "Who approves logistics spend, and what are the limits?",
+              "What do the statuses LT, LF and \"PO\" mean, and who sets each one?",
+              "What do O, OX and DA mean, and who sets each one?",
+              "Should logistics start automatically when a purchase order reaches LX?",
+              "Should the module update statuses in MIPS automatically?",
+              "Which hubs and agents are used, and which forwarders have contract rates?",
+              "Who approves logistics costs, and what are the limits?",
               "Where do the vessel's next ports come from?",
               "Can the crew scan QR codes on board?",
               "How should suppliers sign in? Is vendor.bahri.sa the right place?",
-              "What are the requirements for hosting, security, and sign-in?"
+              "What are the hosting, security and sign-in requirements?"
             ],
             "video": null,
             "images": [],
@@ -1819,17 +1852,26 @@
           },
           {
             "id": "together",
-            "title": "How we will build this",
+            "title": "How we will build this, and next steps",
             "icon": "UsersRound",
-            "body": "This is how TailoredTech will work with Bahri.",
+            "body": "Build, review, and refine together. The loop repeats until the final product meets Bahri's needs.\n\n**No commitments. Request any requirement, at any time.**\n\nTailoredTech development team and the Bahri Vendor & Logistics team.",
             "bullets": [
-              "Side-by-side development, in close collaboration with the Bahri team.",
-              "Extensive, iterative development, with regular reviews.",
-              "Bahri can request any requirement or change during development, without any commitment.",
-              "Our main goal is Bahri's satisfaction, and a product that meets Bahri's operational requirements."
+              "Side by side: we develop together with the Bahri team, in close collaboration.",
+              "No commitments: Bahri can request any requirement or change during development.",
+              "Validate together: we test and refine together until it meets your needs.",
+              "Bahri's satisfaction: our main goal is a product that fully meets Bahri's needs.",
+              "Deliverables: web platform, mobile application, integration with MIPS, QR labels, and reports and documents.",
+              "Review this walkthrough.",
+              "Share feedback and answers.",
+              "Meet to agree next steps and start."
             ],
             "video": null,
-            "images": [],
+            "images": [
+              {
+                "src": "/presentations/bahri-logistics/assets/loop.png",
+                "label": "Build, review, and refine together"
+              }
+            ],
             "mermaid": null,
             "mermaidTitle": null,
             "mermaidCaption": null,
@@ -1840,11 +1882,11 @@
             "id": "next",
             "title": "Next steps",
             "icon": "Megaphone",
-            "body": "Prepared for Hanan Amoudi and Noor Mohideen, Bahri Vendor and Logistics. Prepared by TailoredTech.",
+            "body": "Prepared for the Bahri Vendor & Logistics team. Prepared by TailoredTech.",
             "bullets": [
-              "Review this walkthrough with the Vendor and Logistics team.",
-              "Share comments, corrections, and anything to add.",
-              "Meet to discuss the details and start development."
+              "Review this walkthrough.",
+              "Share feedback and answers.",
+              "Meet to agree next steps and start."
             ],
             "video": null,
             "images": [],
