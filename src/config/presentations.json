@@ -1033,31 +1033,395 @@
           }
         ],
         "comparison": {
-          "enabled": false,
-          "eyebrow": "Scope",
-          "title": "MIPS and the Logistics Module",
+          "enabled": true,
+          "eyebrow": "Coverage",
+          "title": "What the module covers",
           "columns": [
             {
-              "id": "mips",
-              "label": "MIPS"
+              "id": "description",
+              "label": "Description"
             },
             {
-              "id": "module",
-              "label": "Logistics Module",
+              "id": "included",
+              "label": "Included",
               "highlight": true
             }
           ],
           "rows": [
             {
-              "label": "Purchase order",
+              "label": "Shipment tracking, end to end",
               "cells": [
                 {
                   "type": "text",
-                  "value": "Requisition through confirmation"
+                  "value": "Tracking. From the supplier to the vessel."
                 },
                 {
+                  "type": "check",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "label": "Visual tracking and stage view",
+              "cells": [
+                {
                   "type": "text",
-                  "value": "Opens at LX"
+                  "value": "Tracking. The stage of the movement on the shipment."
+                },
+                {
+                  "type": "check",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "label": "Logistics dashboard",
+              "cells": [
+                {
+                  "type": "text",
+                  "value": "Tracking. Open shipments and their stage."
+                },
+                {
+                  "type": "check",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "label": "Multi-PO and multi-vessel shipments",
+              "cells": [
+                {
+                  "type": "text",
+                  "value": "Tracking. One shipment can hold many purchase orders and vessels."
+                },
+                {
+                  "type": "check",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "label": "Supplier packing details and dimensions",
+              "cells": [
+                {
+                  "type": "text",
+                  "value": "Supplier. Count, size, weight, and collection address."
+                },
+                {
+                  "type": "check",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "label": "Lead-time tracking and changes",
+              "cells": [
+                {
+                  "type": "text",
+                  "value": "Supplier. A change is recorded and the team is notified."
+                },
+                {
+                  "type": "check",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "label": "Freight forwarder quotations and award",
+              "cells": [
+                {
+                  "type": "text",
+                  "value": "Freight. Price, mode, and timing, then approval, then award."
+                },
+                {
+                  "type": "check",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "label": "Contract-rate handling",
+              "cells": [
+                {
+                  "type": "text",
+                  "value": "Freight. A contract rate skips quotations."
+                },
+                {
+                  "type": "check",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "label": "Transport modes",
+              "cells": [
+                {
+                  "type": "text",
+                  "value": "Freight. Sea, air, courier, and road."
+                },
+                {
+                  "type": "check",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "label": "Approvals before award",
+              "cells": [
+                {
+                  "type": "text",
+                  "value": "Freight. No award before approval is recorded."
+                },
+                {
+                  "type": "check",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "label": "Delivery routes",
+              "cells": [
+                {
+                  "type": "text",
+                  "value": "Routes. Door to door, door to port, to an agent, or via a hub."
+                },
+                {
+                  "type": "check",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "label": "Consolidation",
+              "cells": [
+                {
+                  "type": "text",
+                  "value": "Routes. Orders from other fleets on the same route."
+                },
+                {
+                  "type": "check",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "label": "QR code labels",
+              "cells": [
+                {
+                  "type": "text",
+                  "value": "Custody. A label on each package."
+                },
+                {
+                  "type": "check",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "label": "QR scanning on collection and receipt",
+              "cells": [
+                {
+                  "type": "text",
+                  "value": "Custody. Freight forwarder, agent, and vessel, on the mobile application."
+                },
+                {
+                  "type": "check",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "label": "Chain of custody",
+              "cells": [
+                {
+                  "type": "text",
+                  "value": "Custody. Time, place, person, and photo at each handover."
+                },
+                {
+                  "type": "check",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "label": "Damage and short-delivery reporting",
+              "cells": [
+                {
+                  "type": "text",
+                  "value": "Custody. Flagged on the scan."
+                },
+                {
+                  "type": "check",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "label": "Partial delivery",
+              "cells": [
+                {
+                  "type": "text",
+                  "value": "Custody. PD when only part of the order is on board."
+                },
+                {
+                  "type": "check",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "label": "Pre-alerts",
+              "cells": [
+                {
+                  "type": "text",
+                  "value": "Custody. To the destination agent and the Purchase Officer."
+                },
+                {
+                  "type": "check",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "label": "Cost tracking and final actual cost",
+              "cells": [
+                {
+                  "type": "text",
+                  "value": "Cost. Freight forwarder, agent, customs, then the actual invoice."
+                },
+                {
+                  "type": "check",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "label": "Documents",
+              "cells": [
+                {
+                  "type": "text",
+                  "value": "Cost. AWB and proof of delivery."
+                },
+                {
+                  "type": "check",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "label": "Reminders and notifications",
+              "cells": [
+                {
+                  "type": "text",
+                  "value": "Follow-up. Email and the mobile application."
+                },
+                {
+                  "type": "check",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "label": "Escalations",
+              "cells": [
+                {
+                  "type": "text",
+                  "value": "Follow-up. 60, 90, and 150 days with an agent."
+                },
+                {
+                  "type": "check",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "label": "Chat rooms per shipment",
+              "cells": [
+                {
+                  "type": "text",
+                  "value": "Follow-up. The people on that shipment."
+                },
+                {
+                  "type": "check",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "label": "Audit trail",
+              "cells": [
+                {
+                  "type": "text",
+                  "value": "Follow-up. Changes, scans, approvals, and messages."
+                },
+                {
+                  "type": "check",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "label": "Reports and export",
+              "cells": [
+                {
+                  "type": "text",
+                  "value": "Follow-up. Open movements for the office."
+                },
+                {
+                  "type": "check",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "label": "Integration with MIPS",
+              "cells": [
+                {
+                  "type": "text",
+                  "value": "MIPS. Statuses update automatically, and the Purchase Officer is notified."
+                },
+                {
+                  "type": "check",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "label": "Role-based access per party",
+              "cells": [
+                {
+                  "type": "text",
+                  "value": "Access. Each party sees their own work."
+                },
+                {
+                  "type": "check",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "label": "Mobile application",
+              "cells": [
+                {
+                  "type": "text",
+                  "value": "Access. Scans, updates, and notifications."
+                },
+                {
+                  "type": "check",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "label": "Cloud-based platform",
+              "cells": [
+                {
+                  "type": "text",
+                  "value": "Access. The workspace for the Bahri office."
+                },
+                {
+                  "type": "check",
+                  "value": true
                 }
               ]
             }
@@ -1088,6 +1452,26 @@
             "charts": null
           },
           {
+            "id": "journey",
+            "title": "From requisition to a closed purchase order",
+            "icon": "GitBranch",
+            "body": "The movement starts in MIPS and finishes when the Purchase Officer closes the purchase order.",
+            "bullets": [
+              "The vessel raises a requisition in MIPS",
+              "The Purchase Officer runs the enquiry, supplier quotations, and supplier selection",
+              "The purchase order is issued, then reaches LX when it is ready with the supplier",
+              "The shipment opens in the Logistics Module and runs through to delivery",
+              "The Purchase Officer closes the purchase order in MIPS"
+            ],
+            "video": null,
+            "images": [],
+            "mermaid": "flowchart TD\n  Req[\"Vessel raises a requisition in MIPS\"] --> Enquiry[\"Purchase Officer: enquiry and supplier quotations\"]\n  Enquiry --> Select[\"Supplier selection\"]\n  Select --> PO[\"Purchase order issued\"]\n  PO --> LX[\"LX: ready with supplier\"]\n  LX --> Open[\"Shipment opens in the Logistics Module\"]\n  Open --> Pack[\"Supplier packing details\"]\n  Pack --> Freight[\"Freight forwarder quotations and award\"]\n  Freight --> Move[\"Collection, handovers, and delivery\"]\n  Move --> Back[\"LA, PD, or RV updated in MIPS\"]\n  Back --> Close[\"Purchase Officer closes the purchase order\"]",
+            "mermaidTitle": "End to end",
+            "mermaidCaption": "Requisition in MIPS, then the Logistics Module, then the purchase order is closed.",
+            "chart": null,
+            "charts": null
+          },
+          {
             "id": "parties",
             "title": "Who uses the module, and for what",
             "icon": "Users",
@@ -1108,6 +1492,30 @@
             "mermaid": null,
             "mermaidTitle": null,
             "mermaidCaption": null,
+            "chart": null,
+            "charts": null
+          },
+          {
+            "id": "supplier",
+            "title": "What the supplier does",
+            "icon": "Building2",
+            "body": "The supplier is told the purchase order is ready for packing details, then signs in and sends the facts the shipment needs.",
+            "bullets": [
+              "An email or notification asks the supplier to sign in",
+              "Packing details: number of packages, dimensions, and weight",
+              "Collection address and lead time",
+              "A lead-time change is recorded, and the team is notified"
+            ],
+            "video": null,
+            "images": [
+              {
+                "src": "/presentations/bahri-logistics/assets/mock-packing-form.png",
+                "label": "Sample screen: packing details"
+              }
+            ],
+            "mermaid": "flowchart TD\n  Note[\"Email or notification\"] --> Sign[\"Supplier signs in\"]\n  Sign --> Pack[\"Packing details\"]\n  Pack --> Size[\"Dimensions and weight\"]\n  Pack --> Lead[\"Lead time\"]\n  Lead --> Change{\"Lead time changes?\"}\n  Change -->|Yes| Replan[\"Record the change and notify the team\"]\n  Change -->|No| Ready[\"Ready for collection\"]\n  Replan --> Ready",
+            "mermaidTitle": "Supplier",
+            "mermaidCaption": "Sign in, send packing details, and report a lead-time change.",
             "chart": null,
             "charts": null
           },
@@ -1142,10 +1550,6 @@
                 "label": "Sample screen: packing details"
               },
               {
-                "src": "/presentations/bahri-logistics/assets/mock-quote-comparison.png",
-                "label": "Sample screen: freight quotations"
-              },
-              {
                 "src": "/presentations/bahri-logistics/assets/mock-chat-notifications.png",
                 "label": "Sample screen: chat and notifications"
               }
@@ -1153,6 +1557,43 @@
             "mermaid": null,
             "mermaidTitle": null,
             "mermaidCaption": null,
+            "chart": null,
+            "charts": null
+          },
+          {
+            "id": "quotations",
+            "title": "Freight forwarder quotations and award",
+            "icon": "Receipt",
+            "body": "Pre-registered freight forwarders quote when there is no contract rate. A contract rate skips quotations and the instruction goes straight to that freight forwarder. Award waits for approval.",
+            "bullets": [
+              "Request quotations, unless a contract rate already applies",
+              "Each quotation has a price, a mode, and timing",
+              "Mode is sea, air, courier, or road",
+              "Compare the quotations, record approval, then award",
+              "At 75 kg or under, or when the shipment is urgent, courier is preferred"
+            ],
+            "video": null,
+            "images": [
+              {
+                "src": "/presentations/bahri-logistics/assets/mock-quote-comparison.png",
+                "label": "Sample screen: freight quotations"
+              },
+              {
+                "src": "/presentations/bahri-logistics/assets/diagram-rule-contract.png",
+                "label": "Contract rate"
+              },
+              {
+                "src": "/presentations/bahri-logistics/assets/diagram-rule-approval.png",
+                "label": "Approval before award"
+              },
+              {
+                "src": "/presentations/bahri-logistics/assets/diagram-rule-courier.png",
+                "label": "Courier"
+              }
+            ],
+            "mermaid": "flowchart TD\n  Gate{\"Contract rate in place?\"} -->|Yes| Direct[\"Instruct that freight forwarder\"]\n  Gate -->|No| Ask[\"Request quotations\"]\n  Ask --> Bid[\"Forwarders submit price, mode, and timing\"]\n  Bid --> Mode[\"Mode: sea, air, courier, or road\"]\n  Mode --> Compare[\"Compare\"]\n  Compare --> Approve[\"Approval\"]\n  Approve --> Award[\"Award\"]\n  Direct --> Award",
+            "mermaidTitle": "Quotations",
+            "mermaidCaption": "A contract rate skips quotations. Otherwise compare, approve, then award.",
             "chart": null,
             "charts": null
           },
@@ -1204,9 +1645,42 @@
                 "label": "MIPS, integration, and the Logistics Module"
               }
             ],
-            "mermaid": "flowchart LR\n  MIPS[\"MIPS: requisition to order confirmation\"] --> LX[\"LX: ready with supplier\"]\n  LX --> Module[\"Logistics Module: packing, freight, handovers, costs\"]\n  Module --> Back[\"LA, PD, RV back to MIPS\"]\n  Back --> Officer[\"Purchase Officer notified\"]",
-            "mermaidTitle": "Handoff",
-            "mermaidCaption": "The shipment opens at LX. Collection, partial delivery, and receipt go back to MIPS.",
+            "mermaid": "flowchart TD\n  LA[\"LA: collection by the freight forwarder\"] --> MIPS[\"Status updated in MIPS\"]\n  PD[\"PD: partly delivered\"] --> MIPS\n  RV[\"RV: received\"] --> MIPS\n  MIPS --> Officer[\"Purchase Officer notified\"]\n  Officer --> Close[\"Close or update the purchase order\"]",
+            "mermaidTitle": "Back to MIPS",
+            "mermaidCaption": "LA, PD, and RV update automatically. The Purchase Officer is notified.",
+            "chart": null,
+            "charts": null
+          },
+          {
+            "id": "routes",
+            "title": "How the goods can travel",
+            "icon": "Route",
+            "body": "The route is chosen for the shipment. Orders from other fleets on the same route can travel together. Service purchase orders are left out. Only purchase orders that need logistics are included.",
+            "bullets": [
+              "Door to door: supplier to the vessel",
+              "Door to port: supplier to the port, then the destination agent, then the vessel",
+              "To an agent, then to the vessel",
+              "Via a hub: store and consolidate, then onward to the vessel",
+              "Consolidation with other fleets on the same route"
+            ],
+            "video": null,
+            "images": [
+              {
+                "src": "/presentations/bahri-logistics/assets/diagram-routes.png",
+                "label": "Routes"
+              },
+              {
+                "src": "/presentations/bahri-logistics/assets/diagram-rule-consolidate.png",
+                "label": "Consolidation"
+              },
+              {
+                "src": "/presentations/bahri-logistics/assets/diagram-rule-scope.png",
+                "label": "Which orders"
+              }
+            ],
+            "mermaid": "flowchart LR\n  subgraph door[\"Door to door\"]\n    direction TB\n    D1[\"Supplier\"] --> D2[\"Freight forwarder\"] --> D3[\"Vessel\"]\n  end\n  subgraph port[\"Door to port\"]\n    direction TB\n    P1[\"Supplier\"] --> P2[\"Port\"] --> P3[\"Destination agent\"] --> P4[\"Vessel\"]\n  end\n  subgraph agent[\"To an agent\"]\n    direction TB\n    A1[\"Supplier\"] --> A2[\"Agent\"] --> A3[\"Vessel\"]\n  end\n  subgraph hub[\"Via a hub\"]\n    direction TB\n    H1[\"Supplier\"] --> H2[\"Hub: store and consolidate\"] --> H3[\"Onward\"] --> H4[\"Vessel\"]\n  end",
+            "mermaidTitle": "Routes",
+            "mermaidCaption": "Door to door, door to port, to an agent, or via a hub.",
             "chart": null,
             "charts": null
           },
@@ -1235,9 +1709,86 @@
                 "label": "Sample screen: on-board scan"
               }
             ],
-            "mermaid": "flowchart LR\n  Label[\"QR label\"] --> FF[\"Freight forwarder scan: LA\"]\n  FF --> Agent[\"Agent scan\"]\n  Agent --> Vessel[\"Vessel scan: RV or PD\"]",
-            "mermaidTitle": "Three scans",
-            "mermaidCaption": "Collection, agent receipt, then receipt on board.",
+            "mermaid": "flowchart TD\n  Label[\"QR label on each package\"] --> Collect[\"Freight forwarder collects from the supplier\"]\n  Collect --> LA[\"Status LA\"]\n  LA --> Agent[\"Agent receives the goods and scans\"]\n  Agent --> Vessel[\"Vessel receives the goods and scans\"]\n  Vessel --> RV[\"Full receipt: RV\"]\n  Vessel --> PD[\"Part received: PD\"]\n  Collect --> Record[\"Each scan records time, place, person, photo, and notes\"]",
+            "mermaidTitle": "Custody chain",
+            "mermaidCaption": "Collection sets LA. Receipt on board sets RV or PD.",
+            "chart": null,
+            "charts": null
+          },
+          {
+            "id": "exceptions",
+            "title": "When the plan changes",
+            "icon": "Shield",
+            "body": "The shipment keeps a record when the plan changes, and the people involved are notified.",
+            "bullets": [
+              "A lead-time change: re-plan the shipment and notify the people involved",
+              "Damage or a short delivery: flagged on the scan, with photo and notes",
+              "Partial delivery: status PD, and the balance stays open",
+              "A conflict-zone clause on a supplier quote: re-route, for example around Hormuz, the Red Sea, or Suez"
+            ],
+            "video": null,
+            "images": [
+              {
+                "src": "/presentations/bahri-logistics/assets/diagram-rule-lead.png",
+                "label": "Lead time"
+              },
+              {
+                "src": "/presentations/bahri-logistics/assets/diagram-rule-partial.png",
+                "label": "Partial delivery"
+              },
+              {
+                "src": "/presentations/bahri-logistics/assets/diagram-rule-reroute.png",
+                "label": "Re-routing"
+              }
+            ],
+            "mermaid": "flowchart TD\n  LT[\"Lead time changes\"] --> RP[\"Re-plan and notify\"]\n  DM[\"Damage or short delivery\"] --> Flag[\"Flag on the scan, with photo and notes\"]\n  Part[\"Only part of the order is on board\"] --> PD[\"Status PD, balance stays open\"]\n  Zone[\"Conflict-zone clause on a supplier quote\"] --> RR[\"Re-route\"]",
+            "mermaidTitle": "Exceptions",
+            "mermaidCaption": "Lead time, damage or short delivery, partial delivery, and re-routing.",
+            "chart": null,
+            "charts": null
+          },
+          {
+            "id": "escalation",
+            "title": "Reminders and escalation",
+            "icon": "Radio",
+            "body": "Reminders go out when a follow-up is due. If goods stay with an agent, the escalation follows the Bahri thresholds.",
+            "bullets": [
+              "Reminders by email and on the mobile application",
+              "60 days with an agent: Head of O&M Purchasing",
+              "90 days: Director of O&M Procurement",
+              "150 days: President",
+              "They decide the freight mode and update the planned port and date"
+            ],
+            "video": null,
+            "images": [
+              {
+                "src": "/presentations/bahri-logistics/assets/diagram-escalation.png",
+                "label": "Goods still with an agent"
+              }
+            ],
+            "mermaid": "flowchart TD\n  Sit[\"Goods still with an agent\"] --> D60[\"60 days: Head of O&M Purchasing\"]\n  Sit --> D90[\"90 days: Director of O&M Procurement\"]\n  Sit --> D150[\"150 days: President\"]\n  D60 --> Act[\"Decide the mode and update planned port and date\"]\n  D90 --> Act\n  D150 --> Act\n  Due[\"Follow-up is due\"] --> Rem[\"Reminder by email and on the mobile application\"]",
+            "mermaidTitle": "Escalation",
+            "mermaidCaption": "60, 90, and 150 days with an agent, and reminders when a follow-up is due.",
+            "chart": null,
+            "charts": null
+          },
+          {
+            "id": "costs",
+            "title": "Costs and proof of delivery",
+            "icon": "BarChart3",
+            "body": "The shipment holds the freight forwarder cost, the agent cost, and customs at origin and destination. The final figure is the actual invoice. Finance uses the proof of delivery.",
+            "bullets": [
+              "Freight forwarder cost",
+              "Agent cost",
+              "Customs and import or export",
+              "Final actual cost from the invoice",
+              "Finance receives the proof of delivery with that cost"
+            ],
+            "video": null,
+            "images": [],
+            "mermaid": "flowchart LR\n  FF[\"Freight forwarder\"] --> Sum[\"Shipment cost\"]\n  AG[\"Agent\"] --> Sum\n  CU[\"Customs and import or export\"] --> Sum\n  Sum --> Actual[\"Final actual cost\"]\n  Actual --> Fin[\"Finance, with proof of delivery\"]",
+            "mermaidTitle": "Costs",
+            "mermaidCaption": "Forwarder, agent, and customs, then the final actual cost for Finance.",
             "chart": null,
             "charts": null
           },
@@ -1263,71 +1814,6 @@
             "mermaid": null,
             "mermaidTitle": null,
             "mermaidCaption": null,
-            "chart": null,
-            "charts": null
-          },
-          {
-            "id": "rules",
-            "title": "How the module decides",
-            "icon": "Route",
-            "body": "The module follows the operating rules Vendor and Logistics already use. Service purchase orders are left out. Only purchase orders that need logistics are included.",
-            "bullets": [
-              "75 kg or under, or the shipment is urgent: use courier. At 75 kg or under, courier is preferred.",
-              "A contract rate is already in place: skip quotations and instruct that freight forwarder.",
-              "Other fleets have orders on the same route: group them into one shipment.",
-              "Routes: door-to-door (supplier to vessel), door-to-port, to an agent, or via a hub.",
-              "The supplier changes the lead time: re-plan the shipment and notify the people involved.",
-              "Only part of the order is received on board: mark PD, partly delivered, and keep the balance open.",
-              "A supplier quote carries a conflict-zone clause: re-route, for example around Hormuz, the Red Sea, or Suez.",
-              "Quotations are in: record approval first, then award.",
-              "Goods remain with an agent: escalate at 60, 90, and 150 days, and update the planned port and date."
-            ],
-            "video": null,
-            "images": [
-              {
-                "src": "/presentations/bahri-logistics/assets/diagram-routes.png",
-                "label": "Routes"
-              },
-              {
-                "src": "/presentations/bahri-logistics/assets/diagram-escalation.png",
-                "label": "Goods still with an agent"
-              },
-              {
-                "src": "/presentations/bahri-logistics/assets/diagram-rule-courier.png",
-                "label": "Courier"
-              },
-              {
-                "src": "/presentations/bahri-logistics/assets/diagram-rule-contract.png",
-                "label": "Contract rate"
-              },
-              {
-                "src": "/presentations/bahri-logistics/assets/diagram-rule-consolidate.png",
-                "label": "Consolidation"
-              },
-              {
-                "src": "/presentations/bahri-logistics/assets/diagram-rule-approval.png",
-                "label": "Approval before award"
-              },
-              {
-                "src": "/presentations/bahri-logistics/assets/diagram-rule-reroute.png",
-                "label": "Re-routing"
-              },
-              {
-                "src": "/presentations/bahri-logistics/assets/diagram-rule-partial.png",
-                "label": "Partial delivery"
-              },
-              {
-                "src": "/presentations/bahri-logistics/assets/diagram-rule-lead.png",
-                "label": "Lead time"
-              },
-              {
-                "src": "/presentations/bahri-logistics/assets/diagram-rule-scope.png",
-                "label": "Which orders"
-              }
-            ],
-            "mermaid": "flowchart TD\n  Weight{\"75 kg or under, or urgent?\"} -->|yes| Courier[\"Courier\"]\n  Weight -->|no| Mode[\"Sea, air, or road\"]\n  Rate{\"Contract rate?\"} -->|yes| Direct[\"Instruct the freight forwarder\"]\n  Rate -->|no| Quotes[\"Quotations, then approval, then award\"]",
-            "mermaidTitle": "Two common decisions",
-            "mermaidCaption": "Courier when the shipment is light or urgent. A contract rate skips quotations.",
             "chart": null,
             "charts": null
           },
