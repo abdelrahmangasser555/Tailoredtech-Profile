@@ -5,6 +5,7 @@ import {
   getPresentationSlugs,
 } from "@/lib/content"
 import { PresentationDetail } from "@/components/sections/presentation-detail"
+import { BahriLogisticsDeck } from "@/components/presentations/bahri-logistics/deck"
 import { LocalEditLink } from "@/components/editor/local-edit-link"
 import { isLocalEditEnabled } from "@/lib/local-edit"
 
@@ -45,6 +46,10 @@ export default async function PresentationPage({ params }: PageProps) {
 
   if (!presentation) {
     notFound()
+  }
+
+  if (presentation.id === "bahri-logistics") {
+    return <BahriLogisticsDeck />
   }
 
   const localEdit = isLocalEditEnabled()
