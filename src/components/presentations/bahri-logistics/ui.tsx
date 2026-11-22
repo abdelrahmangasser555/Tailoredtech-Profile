@@ -2,6 +2,26 @@ import { Check } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { INK, MUTED, NAVY, ORANGE, displayFace } from "./theme"
 
+export function BahriMark({
+  className,
+  plate = false,
+}: {
+  className?: string
+  plate?: boolean
+}) {
+  const mark = (
+    // Official Bahri mark (navy V, grey pillar). SVG is not run through next/image.
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src="/presentations/bahri-logistics/bahri-mark.svg"
+      alt=""
+      className={cn("h-6 w-6 object-contain", className)}
+    />
+  )
+  if (!plate) return mark
+  return <span className="inline-flex w-fit shrink-0 self-start bg-white p-1">{mark}</span>
+}
+
 export function SampleBadge({ className }: { className?: string }) {
   return (
     <span

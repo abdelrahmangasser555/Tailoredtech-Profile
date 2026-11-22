@@ -22,7 +22,7 @@ import {
   trackedItems,
 } from "./sample-data"
 import { displayFace } from "./theme"
-import { CheckMark } from "./ui"
+import { BahriMark, CheckMark } from "./ui"
 
 export type Mode = "deck" | "doc"
 
@@ -116,7 +116,7 @@ function Cover({ mode }: { mode: Mode }) {
     return (
       <article className="min-h-svh bg-[#F4F6F8] text-[#003C71]">
         <div className="bg-[#003C71] px-5 py-8 text-white">
-          <Logo mark invert className="h-14" />
+          <BahriMark plate className="h-14 w-14" />
           <p className={cn(displayFace, "mt-8 text-[12px] tracking-[0.16em] text-[#FF681D] uppercase")}>
             Vendor & Logistics
           </p>
@@ -140,7 +140,7 @@ function Cover({ mode }: { mode: Mode }) {
   return (
     <article className="grid h-full grid-cols-[460px_1fr] bg-white text-[#003C71]">
       <div className="flex flex-col justify-between bg-[#003C71] px-10 py-10 text-white">
-        <Logo mark invert className="h-20" />
+        <BahriMark plate className="h-20 w-20" />
         <div>
           <p className={cn(displayFace, "text-[12px] tracking-[0.18em] text-[#FF681D] uppercase")}>
             Vendor & Logistics

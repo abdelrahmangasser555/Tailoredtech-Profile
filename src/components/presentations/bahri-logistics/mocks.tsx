@@ -2,15 +2,13 @@ import { Bell, MessageSquare } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { quotes, shipments } from "./sample-data"
 import { displayFace } from "./theme"
-import { NoteBar, PriorityDot, SampleBadge, StagePill } from "./ui"
+import { BahriMark, NoteBar, PriorityDot, SampleBadge, StagePill } from "./ui"
 
 function AppBar({ title, person }: { title: string; person: string }) {
   return (
     <div className="flex items-center justify-between bg-[#003C71] px-3 py-2 text-white">
       <div className="flex items-center gap-2">
-        <span className="grid size-5 place-items-center bg-[#FF681D] text-[10px] font-bold text-[#003C71]">
-          B
-        </span>
+        <BahriMark plate className="h-5 w-5" />
         <span className={cn(displayFace, "text-[12px]")}>{title}</span>
       </div>
       <span className="text-[11px] text-white/80">{person}</span>
@@ -328,8 +326,11 @@ export function QrPhoneMock({
     <figure className="relative mx-auto w-full max-w-[280px]">
       <div className="overflow-hidden border-[6px] border-[#001F3D] bg-white">
         <div className="flex items-center justify-between bg-[#003C71] px-3 py-2 text-white">
-          <span className={cn(displayFace, "text-[12px]")}>
-            {collection ? "Collection scan" : "On-board scan"}
+          <span className="inline-flex items-center gap-2">
+            <BahriMark plate className="h-4 w-4" />
+            <span className={cn(displayFace, "text-[12px]")}>
+              {collection ? "Collection scan" : "On-board scan"}
+            </span>
           </span>
           <span className="text-[10px] text-white/75">Mobile</span>
         </div>
