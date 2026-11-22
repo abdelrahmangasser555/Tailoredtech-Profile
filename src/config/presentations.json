@@ -993,6 +993,106 @@
           }
         ]
       }
+    },
+    {
+      "id": "bahri-logistics",
+      "title": "Bahri Logistics Module",
+      "short": "Walkthrough for Vendor & Logistics: parties, tracking, the MIPS handoff, QR handovers, and open questions.",
+      "description": "Orientation for Bahri Vendor & Logistics on the Logistics Module: a cloud web platform and a mobile application for shipments from supplier to vessel.",
+      "createdAt": "2026-11-22",
+      "updatedAt": "2026-11-22",
+      "brandClass": "brand-bahri",
+      "clientLogo": "/clients/bahri-no-background.png",
+      "clientName": "Bahri",
+      "href": "/presentations/bahri-logistics",
+      "page": {
+        "enabled": true,
+        "eyebrow": "Vendor & Logistics",
+        "headline": "Logistics",
+        "headlineAccent": "Module",
+        "tagline": "Walkthrough and orientation for the Bahri Logistics Module. A cloud-based web platform and a mobile application.",
+        "heroVisual": "glyph",
+        "showExplore": false,
+        "glyphBackdrop": false,
+        "galleryEnhanced": true,
+        "outcomes": [
+          {
+            "value": "Web",
+            "label": "cloud platform for the office",
+            "icon": "Desktop"
+          },
+          {
+            "value": "Mobile",
+            "label": "scans, updates, notifications",
+            "icon": "DeviceMobile"
+          },
+          {
+            "value": "LX",
+            "label": "shipment opens at readiness",
+            "icon": "Boat"
+          }
+        ],
+        "comparison": {
+          "enabled": false,
+          "eyebrow": "Scope",
+          "title": "MIPS and the Logistics Module",
+          "columns": [
+            {
+              "id": "mips",
+              "label": "MIPS"
+            },
+            {
+              "id": "module",
+              "label": "Logistics Module",
+              "highlight": true
+            }
+          ],
+          "rows": [
+            {
+              "label": "Purchase order",
+              "cells": [
+                {
+                  "type": "text",
+                  "value": "Requisition through confirmation"
+                },
+                {
+                  "type": "text",
+                  "value": "Opens when the order is ready"
+                }
+              ]
+            },
+            {
+              "label": "Movement",
+              "cells": [
+                {
+                  "type": "text",
+                  "value": "Status updates"
+                },
+                {
+                  "type": "text",
+                  "value": "Packing, freight, handovers, costs"
+                }
+              ]
+            }
+          ]
+        },
+        "sections": [
+          {
+            "id": "walkthrough",
+            "title": "Walkthrough",
+            "icon": "Boat",
+            "body": "Slide walkthrough for Bahri Vendor & Logistics. Rendered on the presentation page.",
+            "bullets": [],
+            "video": null,
+            "images": [],
+            "mermaid": null,
+            "mermaidTitle": null,
+            "mermaidCaption": null,
+            "chart": null,
+            "charts": null
+          }
+        ]
+      }
     }
   ]
 }
