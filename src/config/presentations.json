@@ -1010,7 +1010,7 @@
         "eyebrow": "For freight forwarders, agents, and vessels",
         "headline": "Logistics",
         "headlineAccent": "Module",
-        "tagline": "A cloud-based web platform for the Bahri office, a mobile application, and integration with MIPS. Prepared for the Bahri Vendor & Logistics team. Prepared by TailoredTech.",
+        "tagline": "A cloud-based web platform for the Bahri office, a mobile application, and integration with MIPS. Prepared for the Bahri Logistics Team. Prepared by TailoredTech.",
         "heroVisual": "engine",
         "showExplore": false,
         "glyphBackdrop": false,
@@ -1205,11 +1205,11 @@
               ]
             },
             {
-              "label": "QR code labels",
+              "label": "QR on the holder's phone",
               "cells": [
                 {
                   "type": "text",
-                  "value": "Custody. A label on each package."
+                  "value": "Custody. Shown on the current holder's phone, scanned by the receiving party."
                 },
                 {
                   "type": "check",
@@ -1222,7 +1222,7 @@
               "cells": [
                 {
                   "type": "text",
-                  "value": "Custody. Freight forwarder, agent, and vessel, on the mobile application."
+                  "value": "Custody. The receiving party scans the phone of the person holding the package."
                 },
                 {
                   "type": "check",
@@ -1605,7 +1605,7 @@
           },
           {
             "id": "requirements",
-            "title": "Requirements that will be met",
+            "title": "What the module provides",
             "icon": "ClipboardList",
             "body": "Chat rooms keep all communication in one place. Reminders and notifications keep you on track.",
             "bullets": [
@@ -1713,38 +1713,35 @@
           },
           {
             "id": "qr",
-            "title": "QR labels on every package",
+            "title": "QR handover on the holder's phone",
             "icon": "ScanEye",
-            "body": "Each package gets a QR label. The freight forwarder scans at collection (status LA). The agent scans on receipt. The vessel scans on board (status RV or PD).\n\nEach scan records time, place, person, photo, notes, and damage. Scan statuses are captured in MIPS at every handover point. This creates a verifiable chain of proof for every delivery.",
+            "body": "The QR is shown on the phone of the person who currently holds the package. The receiving party scans that screen. It is not a sticker on the package.\n\nThe freight forwarder shows the QR and the collecting party scans it (status LA). The agent shows it on receipt. The vessel shows it on board (status RV or PD).\n\nEach scan records time, place, person, photo, notes, and damage. Scan statuses are captured in MIPS at every handover. This is the proof of delivery.",
             "bullets": [
-              "QR label: package labeling details.",
-              "Freight forwarder: scan at collection (status LA).",
-              "Agent: scan on receipt.",
-              "Vessel: scan on board (status RV or PD).",
+              "The QR appears on the current holder's phone.",
+              "The receiving party scans that phone.",
+              "Collection scan: status LA.",
+              "Agent receipt: the agent scans the holder's phone.",
+              "On board: the vessel scans the holder's phone. Status RV, or PD when only part arrives.",
               "Each scan records time, place, person, photo, notes, and damage."
             ],
             "video": null,
             "images": [
               {
                 "src": "/presentations/bahri-logistics/assets/qr-handover-photo.jpg",
-                "label": "QR handover"
-              },
-              {
-                "src": "/presentations/bahri-logistics/assets/diagram-qr-chain.png",
-                "label": "QR handover chain"
+                "label": "The receiving party scans the QR on the holder's phone"
               },
               {
                 "src": "/presentations/bahri-logistics/assets/mock-qr-collection.png",
-                "label": "Sample screen: collection scan"
+                "label": "Sample screen: scan from the holder's phone at collection"
               },
               {
                 "src": "/presentations/bahri-logistics/assets/mock-qr-vessel.png",
-                "label": "Sample screen: on-board scan"
+                "label": "Sample screen: scan from the holder's phone on board"
               }
             ],
-            "mermaid": "flowchart TD\n  Label[\"QR label on each package\"] --> Collect[\"Freight forwarder collects from the supplier\"]\n  Collect --> LA[\"Status LA\"]\n  LA --> Agent[\"Agent receives the goods and scans\"]\n  Agent --> Vessel[\"Vessel receives the goods and scans\"]\n  Vessel --> RV[\"Full receipt: RV\"]\n  Vessel --> PD[\"Part received: PD\"]\n  Collect --> Record[\"Each scan records time, place, person, photo, and notes\"]",
-            "mermaidTitle": "QR labels on every package",
-            "mermaidCaption": "Collection sets LA. Receipt on board sets RV or PD. Every scan is kept in MIPS.",
+            "mermaid": "flowchart TD\n  Hold[\"QR on the current holder's phone\"] --> Scan[\"Receiving party scans that screen\"]\n  Scan --> LA[\"At collection: status LA\"]\n  LA --> Agent[\"Agent scans the holder's phone on receipt\"]\n  Agent --> Vessel[\"Vessel scans the holder's phone on board\"]\n  Vessel --> RV[\"Full receipt: RV\"]\n  Vessel --> PD[\"Part received: PD\"]\n  Scan --> Record[\"Time, place, person, photo, notes, and damage\"]",
+            "mermaidTitle": "QR handover",
+            "mermaidCaption": "The code stays on the holder's phone. The next party scans it.",
             "chart": null,
             "charts": null
           },
@@ -1777,6 +1774,63 @@
             "mermaid": "flowchart TD\n  LT[\"Lead time changes\"] --> RP[\"Re-plan and notify\"]\n  DM[\"Damage or short delivery\"] --> Flag[\"Flag on the scan, with photo and notes\"]\n  Part[\"Only part of the order is on board\"] --> PD[\"Status PD, balance stays open\"]\n  Zone[\"Conflict-zone clause on a supplier quote\"] --> RR[\"Re-route\"]",
             "mermaidTitle": "Exceptions",
             "mermaidCaption": "Lead time, damage or short delivery, partial delivery, and re-routing.",
+            "chart": null,
+            "charts": null
+          },
+          {
+            "id": "constraints",
+            "title": "System constraints and conditional flows",
+            "icon": "Route",
+            "body": "Each rule is one condition and one result. The cards below use the same order: the condition, then the result.",
+            "bullets": [
+              "Courier. If the shipment is 75 kg or under, or it is urgent, then courier is preferred.",
+              "Contract rate. If a contract rate is already in place, then skip quotations and instruct that freight forwarder.",
+              "Consolidation. If other fleets have orders on the same route, then group them into one shipment.",
+              "Lead time. If the lead time changes, then re-plan the shipment and notify the people involved.",
+              "Partial delivery. If only part of the order is received on board, then mark PD and keep the balance open.",
+              "Re-routing. If a supplier quote has a conflict-zone clause, then re-route and record the change.",
+              "Approval. If a quotation is selected, then record approval before the award.",
+              "With an agent. If goods remain with an agent, then escalate at 60, 90, and 150 days.",
+              "Which orders. If the purchase order does not need logistics, then leave it out of this module."
+            ],
+            "video": null,
+            "images": [
+              {
+                "src": "/presentations/bahri-logistics/assets/diagram-rule-courier.png",
+                "label": "Courier"
+              },
+              {
+                "src": "/presentations/bahri-logistics/assets/diagram-rule-contract.png",
+                "label": "Contract rate"
+              },
+              {
+                "src": "/presentations/bahri-logistics/assets/diagram-rule-consolidate.png",
+                "label": "Consolidation"
+              },
+              {
+                "src": "/presentations/bahri-logistics/assets/diagram-rule-lead.png",
+                "label": "Lead time"
+              },
+              {
+                "src": "/presentations/bahri-logistics/assets/diagram-rule-partial.png",
+                "label": "Partial delivery"
+              },
+              {
+                "src": "/presentations/bahri-logistics/assets/diagram-rule-reroute.png",
+                "label": "Re-routing"
+              },
+              {
+                "src": "/presentations/bahri-logistics/assets/diagram-rule-approval.png",
+                "label": "Approval"
+              },
+              {
+                "src": "/presentations/bahri-logistics/assets/diagram-rule-scope.png",
+                "label": "Which orders"
+              }
+            ],
+            "mermaid": null,
+            "mermaidTitle": null,
+            "mermaidCaption": null,
             "chart": null,
             "charts": null
           },
@@ -1827,9 +1881,9 @@
           },
           {
             "id": "questions",
-            "title": "Questions we need answered",
+            "title": "Points requiring clarification",
             "icon": "HelpCircle",
-            "body": "**Already confirmed**\n\n- **LX:** Ready with supplier (ready for collection)\n- **LA:** Collection by freight forwarder\n- **PD:** Partly delivered\n- **RV:** Received",
+            "body": "These points are listed here for Bahri to confirm.\n\n**Already confirmed**\n\n- **LX:** Ready with supplier (ready for collection)\n- **LA:** Collection by freight forwarder\n- **PD:** Partly delivered\n- **RV:** Received",
             "bullets": [
               "What do the statuses LT, LF and \"PO\" mean, and who sets each one?",
               "What do O, OX and DA mean, and who sets each one?",
@@ -1852,29 +1906,27 @@
           },
           {
             "id": "together",
-            "title": "How we will build this, and next steps",
+            "title": "How we work together",
             "icon": "UsersRound",
-            "body": "Build, review, and refine together. The loop repeats until the final product meets Bahri's needs.\n\n**No commitments. Request any requirement, at any time.**\n\nTailoredTech development team and the Bahri Vendor & Logistics team.",
+            "body": "The work moves in a circle between the TailoredTech development team and the Bahri Logistics Team: review, feedback, refine, then review again. It repeats until the result meets Bahri's needs.\n\nNo commitments. Bahri may request any requirement, at any time.\n\nPrepared for the Bahri Logistics Team. Prepared by TailoredTech.",
             "bullets": [
-              "Side by side: we develop together with the Bahri team, in close collaboration.",
-              "No commitments: Bahri can request any requirement or change during development.",
-              "Validate together: we test and refine together until it meets your needs.",
-              "Bahri's satisfaction: our main goal is a product that fully meets Bahri's needs.",
-              "Deliverables: web platform, mobile application, integration with MIPS, QR labels, and reports and documents.",
-              "Review this walkthrough.",
-              "Share feedback and answers.",
-              "Meet to agree next steps and start."
+              "Review: the Bahri Logistics Team looks at the work.",
+              "Feedback: comments and new requests are welcome.",
+              "Refine: the TailoredTech development team updates the work.",
+              "Review again: the same circle continues until it meets Bahri's needs.",
+              "Side by side, with the Bahri team.",
+              "Deliverables: web platform, mobile application, integration with MIPS, QR handover, and reports and documents."
             ],
             "video": null,
             "images": [
               {
-                "src": "/presentations/bahri-logistics/assets/loop.png",
-                "label": "Build, review, and refine together"
+                "src": "/presentations/bahri-logistics/assets/collaboration-loop.png",
+                "label": "Review, feedback, refine, and review again"
               }
             ],
-            "mermaid": null,
-            "mermaidTitle": null,
-            "mermaidCaption": null,
+            "mermaid": "flowchart LR\n  Review[\"Review\nBahri Logistics Team\"] --> Feedback[\"Feedback\"]\n  Feedback --> Refine[\"Refine\nTailoredTech team\"]\n  Refine --> Again[\"Review again\"]\n  Again --> Review",
+            "mermaidTitle": "Working loop",
+            "mermaidCaption": "Review, feedback, refine, and review again, until it meets Bahri's needs.",
             "chart": null,
             "charts": null
           },
@@ -1882,7 +1934,7 @@
             "id": "next",
             "title": "Next steps",
             "icon": "Megaphone",
-            "body": "Prepared for the Bahri Vendor & Logistics team. Prepared by TailoredTech.",
+            "body": "Prepared for the Bahri Logistics Team. Prepared by TailoredTech.",
             "bullets": [
               "Review this walkthrough.",
               "Share feedback and answers.",
